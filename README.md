@@ -45,9 +45,19 @@ Every concept on the right maps to a concrete artifact in the project — a temp
 
 </details>
 
-## Claim Verification: The Foundation
+## Verification Registry: The Foundation
 
-Every factual statement in the paper is a **claim** that needs a source. Claims have three properties:
+The registry tracks three unit types:
+
+| Type | What it is | Where it appears | Verification |
+|------|-----------|-----------------|--------------|
+| **CLAIM** (default) | Factual statement with a source | All sections | Does the source exist and say this? |
+| **ARGUMENT** | Reasoning chain combining evidence + inference | Discussion, Conclusion | Warrant valid? Evidence sufficient? Counter-arguments addressed? |
+| **PROPOSITION** | Novel recommendation or contribution | Conclusion, Recommendations | Premises verified? Reasoning valid? Boundaries stated? |
+
+Most entries are CLAIMs. ARGUMENTs and PROPOSITIONs appear in Discussion and Conclusion sections — the parts reviewers scrutinize most. All three share the same priority, confidence, and language calibration system.
+
+### Priority (what breaks if this is wrong?)
 
 ### Priority (what breaks if this is wrong?)
 
@@ -77,7 +87,7 @@ Every factual statement in the paper is a **claim** that needs a source. Claims 
 | E | Own unpublished work (under review) | 0.6 |
 | F | Logical inference | 0.2 |
 
-The **claim registry** tracks all of this in one place — a living table of every claim, its priority, confidence tier, source, and verification status. See [`templates/claim-registry.md`](templates/claim-registry.md).
+The **registry** tracks all of this in one place — a living table of every claim, argument, and proposition with its type, priority, confidence tier, source, and verification status. See [`templates/claim-registry.md`](templates/claim-registry.md).
 
 ### Cross-reference rules
 

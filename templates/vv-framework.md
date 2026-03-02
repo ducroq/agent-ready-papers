@@ -10,7 +10,7 @@
 
 ## 1. Core Principle
 
-Academic papers written with AI assistance require systematic verification to ensure correctness and credibility. Claims are the atomic units; each needs a verified source, an appropriate confidence tier, and language that matches the evidence strength.
+Academic papers written with AI assistance require systematic verification to ensure correctness and credibility. The registry tracks three unit types: **CLAIMs** (factual statements with sources), **ARGUMENTs** (reasoning chains in Discussion/Conclusion), and **PROPOSITIONs** (novel contributions and recommendations). Each needs appropriate verification and language that matches its confidence tier.
 
 ---
 
@@ -50,9 +50,9 @@ Academic papers written with AI assistance require systematic verification to en
 
 ## 4. Test Types
 
-### 4.1 Unit Tests (Claim-Level)
+### 4.1 Unit Tests (per registry entry)
 
-Each claim verified independently:
+**CLAIM** — each factual claim verified independently:
 
 ```markdown
 CLAIM: "[Exact statement from paper]"
@@ -73,6 +73,42 @@ CLAIM: "[Exact statement from paper]"
 └── Status: [OWN DATA]
 ```
 
+**ARGUMENT** — each reasoning chain verified using Toulmin checklist:
+
+```markdown
+ARGUMENT: "[Interpretive conclusion from Discussion/Conclusion]"
+├── Grounds: [CLAIMs that serve as evidence — list registry IDs]
+├── Warrant: [Why the evidence supports this conclusion]
+├── Qualifier: [Confidence tier — how strongly stated?]
+├── Counter-arguments: [Strongest objections addressed?]
+└── Status: [VERIFIED / NEEDS CHECK]
+```
+
+Verification questions (adapted from Toulmin 1958, Walton 2008):
+1. Is the claim clearly stated?
+2. Are the grounds (evidence) verified CLAIMs in the registry?
+3. Is the warrant explicit and valid for the target audience?
+4. Is the qualifier calibrated to evidence strength?
+5. Are the strongest counter-arguments addressed (not strawmen)?
+
+**PROPOSITION** — each novel contribution verified using Whetten checklist:
+
+```markdown
+PROPOSITION: "[Recommendation or novel contribution]"
+├── Constructs: [Key terms defined?]
+├── Relationship: [What is being proposed?]
+├── Reasoning: [Why this holds — logical warrant]
+├── Boundary conditions: [Where does this apply? Where not?]
+└── Status: [VERIFIED / NEEDS CHECK]
+```
+
+Verification questions (adapted from Whetten 1989):
+1. Are all key constructs defined?
+2. Is the relationship clearly stated?
+3. Is the reasoning (warrant) explicit and valid?
+4. Are boundary conditions specified?
+5. Does it engage with alternative explanations?
+
 ### 4.2 Static Analysis (Automated Checks)
 
 | Check | Method | Pass Criteria |
@@ -86,9 +122,10 @@ CLAIM: "[Exact statement from paper]"
 
 ### 4.3 Integration Tests (Argument Flow)
 
-- Claims connect logically between sections
+- CLAIMs connect logically between sections
 - No contradictions between sections
-- Evidence supports conclusions drawn
+- ARGUMENTs in Discussion are grounded in CLAIMs from Results
+- PROPOSITIONs in Conclusion follow from ARGUMENTs in Discussion
 - Core argument flow is coherent end-to-end
 
 ### 4.4 System Tests (Full Paper)
@@ -146,13 +183,13 @@ Status (Pass / Fail)
 
 ### Gate 1: Draft Complete
 - [ ] All sections drafted to page budget
-- [ ] Claim registry populated
-- [ ] P0 claims identified
+- [ ] Registry populated (CLAIMs, ARGUMENTs, PROPOSITIONs identified)
+- [ ] P0 entries identified
 - [ ] Data files organized
 
 ### Gate 2: Verification Complete
-- [ ] P0 claims 100% verified
-- [ ] P1 claims 90% verified
+- [ ] P0 entries 100% verified (CLAIMs source-checked; ARGUMENTs Toulmin-checked; PROPOSITIONs Whetten-checked)
+- [ ] P1 entries 90% verified
 - [ ] Coverage report generated
 - [ ] Static checks pass
 - [ ] Anti-hallucination checklist complete
@@ -194,4 +231,4 @@ vv/
 
 ---
 
-*Version: 1.0*
+*Version: 2.0 — updated with ARGUMENT and PROPOSITION unit types (DR-004)*

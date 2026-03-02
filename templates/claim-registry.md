@@ -1,6 +1,9 @@
 # Claim Registry
 
-<!-- The paper's test suite. Every factual statement tracked here.
+<!-- The paper's verification registry. Every factual claim, argument,
+     and proposition tracked here. Most entries are CLAIMs (default).
+     Use ARGUMENT for Discussion/Conclusion reasoning chains.
+     Use PROPOSITION for novel contributions and recommendations.
      Update this living document throughout the writing process. -->
 
 **Paper:** [Title]
@@ -39,22 +42,27 @@
 
 ---
 
-## Claims by Section
+## Registry by Section
 
 ### Section 1: [Section Name]
 
-| ID | Claim | Priority | Confidence | Source | Source Tier | Status |
-|----|-------|----------|------------|--------|-------------|--------|
-| S1-1 | [factual statement] | P0 | ESTABLISHED | [Author Year] | A | [ ] |
-| S1-2 | [factual statement] | P1 | EMERGING | [OWN WORK] | E | [ ] |
+| ID | Statement | Type | Priority | Confidence | Source | Source Tier | Status |
+|----|-----------|------|----------|------------|--------|-------------|--------|
+| S1-1 | [factual statement] | CLAIM | P0 | ESTABLISHED | [Author Year] | A | [ ] |
+| S1-2 | [factual statement] | CLAIM | P1 | EMERGING | [OWN WORK] | E | [ ] |
 
 <!-- Repeat for each section -->
 
-### Section 2: [Section Name]
+### Section N: Discussion
 
-| ID | Claim | Priority | Confidence | Source | Source Tier | Status |
-|----|-------|----------|------------|--------|-------------|--------|
-| S2-1 | [factual statement] | P0 | SUPPORTED | [Author Year] | A | [ ] |
+<!-- Discussion and Conclusion sections typically contain ARGUMENTs and PROPOSITIONs
+     alongside standard CLAIMs. Use the verification guides below. -->
+
+| ID | Statement | Type | Priority | Confidence | Source / Warrant | Source Tier | Status |
+|----|-----------|------|----------|------------|-----------------|-------------|--------|
+| SN-1 | [interpretive conclusion] | ARGUMENT | P0 | SUPPORTED | Warrant: [inferential bridge] | -- | [ ] |
+| SN-2 | [recommendation] | PROPOSITION | P1 | EMERGING | Reasoning: [logical basis] | -- | [ ] |
+| SN-3 | [factual comparison] | CLAIM | P1 | SUPPORTED | [Author Year] | A | [ ] |
 
 ---
 
@@ -90,14 +98,40 @@
 
 ---
 
+## Unit Type Reference
+
+| Type | When to use | Verification | Typical sections |
+|------|------------|--------------|-----------------|
+| **CLAIM** (default) | Factual statement with a source | Does the source exist and say this? | All sections |
+| **ARGUMENT** | Interpretive conclusion combining evidence + reasoning | Warrant valid? Evidence sufficient? Counter-arguments addressed? | Discussion, Conclusion |
+| **PROPOSITION** | Novel recommendation or contribution | Premises verified? Reasoning valid? Boundary conditions stated? | Conclusion, Recommendations |
+
+### Verifying ARGUMENTs (Toulmin checklist)
+
+1. Is the claim clearly stated?
+2. Are the grounds (evidence) verified? (These should be CLAIMs in this registry)
+3. Is the warrant (inferential bridge) explicit and valid for the target audience?
+4. Is the qualifier calibrated to evidence strength? (Maps to confidence tiers)
+5. Are the strongest counter-arguments addressed? (Not strawmen)
+
+### Verifying PROPOSITIONs (Whetten checklist)
+
+1. Are all key constructs defined?
+2. Is the relationship clearly stated?
+3. Is the reasoning (warrant) explicit and valid?
+4. Are boundary conditions specified?
+5. Does it engage with alternative explanations?
+
+---
+
 ## Confidence Tier Reference
 
 | Tier | Assign when... | Language |
 |------|---------------|----------|
-| **ESTABLISHED** | Multiple independent sources confirm; no credible dispute; textbook-level | "demonstrates", "shows", "confirms" |
-| **SUPPORTED** | At least 2–3 peer-reviewed sources agree; some open questions remain | "indicates", "supports", "evidence suggests" |
-| **EMERGING** | 1–2 sources, or preliminary/pilot data; plausible but not yet replicated | "may", "preliminary evidence", "initial findings suggest" |
-| **SPECULATIVE** | Logical inference, hypothesis, single non-peer-reviewed source, or extrapolation | "warrants investigation", "remains unclear", "we hypothesize" |
+| **ESTABLISHED** | CLAIM: multiple independent sources. ARGUMENT: complete Toulmin + fair engagement. PROPOSITION: premises verified + logic valid + tested | "demonstrates", "shows", "confirms" |
+| **SUPPORTED** | CLAIM: 2-3 sources agree. ARGUMENT: warrant valid + evidence sufficient. PROPOSITION: premises verified + logic valid | "indicates", "supports", "evidence suggests" |
+| **EMERGING** | CLAIM: 1-2 sources. ARGUMENT: evidence partial or warrant debatable. PROPOSITION: premises plausible + logic sound | "may", "preliminary evidence", "initial findings suggest" |
+| **SPECULATIVE** | CLAIM: inference only. ARGUMENT: position stated, logic incomplete. PROPOSITION: conjectural | "warrants investigation", "remains unclear", "we hypothesize" |
 
 ## Source Tier Reference
 
