@@ -14,14 +14,15 @@
 
 ## Coverage Summary
 
-| Priority | Total | Verified | Needs Evidence | Coverage |
-|----------|-------|----------|----------------|----------|
-| P0 | 0 | 0 | 0 | 0% |
-| P1 | 0 | 0 | 0 | 0% |
-| P2 | 0 | 0 | 0 | 0% |
-| **Total** | **0** | **0** | **0** | **0%** |
+| Priority | Total | Verified | Pending Data | Needs Evidence | Coverage |
+|----------|-------|----------|--------------|----------------|----------|
+| P0 | 0 | 0 | 0 | 0 | 0% |
+| P1 | 0 | 0 | 0 | 0 | 0% |
+| P2 | 0 | 0 | 0 | 0 | 0% |
+| **Total** | **0** | **0** | **0** | **0** | **0%** |
 
 **Targets:** ≥85% overall, 100% P0, 90% P1, 70% P2
+**Note (DR-008):** Coverage = Verified / (Total - Pending Data). See "Claim Lifecycle" section for stage definitions.
 
 ---
 
@@ -153,8 +154,17 @@
 | B | Peer-reviewed review article | 0.8 |
 | C | Textbook / established reference | 0.9 |
 | D | Guidelines / industry standards | 0.7 |
-| E | Own unpublished work (under review) | 0.6 |
+| E | Own unpublished work (under review) | 0.6* |
 | F | Logical inference | 0.2 |
+
+\* **Own data vs. own work (DR-008):** The 0.6 weight applies to own work cited from
+papers under review elsewhere. For **own-data claims** — results from experiments reported
+in the current paper — confidence should reflect methodological rigor (sample size,
+statistical power, reproducibility, calibration), not source count. Assign confidence
+based on the evidence quality:
+- Large sample, adequate power, validated method → ESTABLISHED or SUPPORTED
+- Small sample, exploratory, single-site → EMERGING
+- Pilot data, proof-of-concept → SPECULATIVE
 
 ### Special Cases: Reference Claims
 
@@ -169,6 +179,27 @@ Use ESTABLISHED for reference claims when:
 - The statement is a direct reference to what the document says (not an interpretation)
 - Verification requires only checking the document, not evaluating evidence strength
 
+### Special Cases: Methodological Facts
+
+<!-- DR-008: Results from applying a published standard method (e.g., GUM uncertainty
+     budgets, ISO statistical tests, validated analytical procedures) are not
+     evidence-strength claims — they are calculations with documented inputs. -->
+
+Results from applying a published standard method are **ESTABLISHED** when:
+- The calculation follows a published standard (e.g., GUM, ISO 5725, ASTM method)
+- All inputs are documented (raw data, parameters, assumptions)
+- The result is reproducible (another analyst with the same inputs gets the same answer)
+
+These are methodological facts — the confidence comes from the method's validity, not from
+independent replication of the result itself.
+
+**Key distinction:**
+| Statement | Type | Why |
+|-----------|------|-----|
+| "Expanded uncertainty is ±2.29% (k=2, GUM)" | Methodological fact → ESTABLISHED | Calculation follows published standard with documented inputs |
+| "This uncertainty is acceptable for clinical use" | ARGUMENT → needs Toulmin | Interprets the result against a threshold — warrant can be challenged |
+| "GUM requires combining Type A and Type B uncertainties" | Reference claim → ESTABLISHED | Direct statement about what the standard says |
+
 ## Status Legend
 
 | Status | Meaning |
@@ -180,9 +211,69 @@ Use ESTABLISHED for reference claims when:
 
 ---
 
+## Migrating from Status-Based Tags
+
+<!-- DR-008: Projects using ad-hoc tags ([VERIFIED], [HIGH CONF], [OWN DATA]) can
+     use this guide to migrate to the framework's structured system. The key insight
+     is that verification, confidence, and source type are independent dimensions. -->
+
+### Concept Mapping
+
+Ad-hoc tags often conflate three independent dimensions:
+
+| Dimension | What it tracks | Framework field | Values |
+|-----------|---------------|-----------------|--------|
+| Verification status | Has someone checked this? | Status | [ ] / [~] / [x] / [!] |
+| Evidence strength | How well-supported is this? | Confidence Tier | ESTABLISHED / SUPPORTED / EMERGING / SPECULATIVE |
+| Source origin | Where does the evidence come from? | Source Tier | A–F |
+
+### Common Migration Patterns
+
+| Legacy Tag | Status | Confidence | Source Tier | Notes |
+|-----------|--------|------------|-------------|-------|
+| [VERIFIED] | [x] | (assess separately) | (assess separately) | Verified = checked, not necessarily strong |
+| [HIGH CONF] | (assess separately) | SUPPORTED or ESTABLISHED | (assess separately) | Confidence ≠ verification |
+| [LOW CONF] | (assess separately) | EMERGING or SPECULATIVE | (assess separately) | May still be verified |
+| [OWN DATA] | (assess separately) | (assess by rigor) | E* | *See own-data guidance above |
+| [NEEDS SOURCE] | [ ] | SPECULATIVE | F | No source yet = logical inference at best |
+| [TEXTBOOK] | [x] | ESTABLISHED | C | Textbook consensus |
+| [UNDER REVIEW] | [~] | (assess separately) | E | Own work not yet peer-reviewed |
+
+**Key principle:** A claim can be [x] Verified and EMERGING (you checked the source — it's a single study). A claim can be [ ] Unverified and ESTABLISHED (it's textbook consensus — you just haven't checked the page number yet). Don't conflate the dimensions.
+
+---
+
+## Claim Lifecycle (Empirical Papers)
+
+<!-- DR-008: In empirical papers, claims progress through stages as experiments
+     are conducted and analyzed. This lifecycle tracks where each claim stands
+     so coverage metrics reflect actual progress, not missing evidence. -->
+
+| Stage | Description | Status | Confidence | Example |
+|-------|------------|--------|------------|---------|
+| **Hypothesis** | Claim stated but experiment not yet run | [ ] | SPECULATIVE | "We expect force error >10%" |
+| **Data collection** | Experiment running or complete, not yet analyzed | [~] | SPECULATIVE | Data files collected, analysis pending |
+| **Analysis complete** | Results available, not yet independently checked | [~] | EMERGING–SUPPORTED | "Mean force error was 14.3% (SD=2.1)" |
+| **Verified** | Results checked, analysis reproducible | [x] | EMERGING–ESTABLISHED | Verified by re-running analysis script |
+
+### Phase-Aware Coverage
+
+Claims in the Hypothesis or Data collection stages are **pending data** — they should not
+count against coverage targets. Track them separately:
+
+- **Coverage** = Verified / (Total - Pending Data)
+- **Pending Data** = claims at Hypothesis or Data collection stage
+
+This prevents misleading coverage numbers during the writing process. A paper at the
+analysis stage might show 40% naive coverage but 85% adjusted coverage — the remaining
+claims are pending data, not missing evidence.
+
+---
+
 ## Cross-Reference Rules
 
 - No claim accepted on a single non-textbook source
+  - **Exception (DR-008):** Own-data claims with documented methodology (data files, analysis scripts, reproducible pipeline) are accepted on the strength of the methodology, not source count
 - Contradictory sources must be acknowledged in the text
 - Claims >10 years old need a recency check
 - Own work under review must be explicitly flagged
