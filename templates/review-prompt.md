@@ -13,12 +13,22 @@
 
 Review the manuscript section(s) pasted below for submission readiness. Evaluate along these dimensions:
 
-### 1. Scientific Rigor
+### 1. Rigor
+<!-- For empirical papers: scientific rigor. For non-empirical: argument rigor. Choose the appropriate variant. -->
+
+**Variant A — Empirical papers:**
 - Are all quantitative claims properly supported with statistics?
 - Are p-values, confidence intervals, and sample sizes reported appropriately?
 - Is the experimental design clear and defensible?
 - Are figures and tables referenced appropriately?
 - Are any claims overstated or under-supported?
+
+**Variant B — Non-empirical papers (perspective, design science, theoretical, review):**
+- Are all claims grounded in cited evidence or explicit reasoning?
+- Are warrants (why the evidence supports the conclusion) stated explicitly?
+- Are the strongest counter-arguments addressed, not ignored or strawmanned?
+- Is the confidence language calibrated to evidence strength? (No "demonstrates" for speculative claims)
+- Are boundary conditions stated for all propositions and recommendations?
 
 ### 2. Terminology Compliance
 <!-- Adapt to your field's standards -->
@@ -46,18 +56,37 @@ Review the manuscript section(s) pasted below for submission readiness. Evaluate
 - Is the main narrative self-contained?
 
 ### 6. Technical Accuracy
+
+**Variant A — Empirical papers:**
 - Do statistical tests match the experimental design?
 - Are domain-specific methods correctly described?
 - Are guidelines and standards cited correctly?
+
+**Variant B — Non-empirical papers:**
+- Are all key constructs defined (not assumed)?
+- Are cited frameworks and models accurately represented?
+- Is the relationship between constructs clearly stated?
 
 ### 7. Evidence-Language Alignment
 - Does hedging language match evidence strength?
 - Are speculative claims properly flagged?
 - Is own unpublished work distinguished from established findings?
 
+### 8. Argument Quality (Non-empirical papers only)
+<!-- Skip this section for empirical papers. For perspective, theoretical, design science, and review papers, this replaces statistical rigor as the primary quality signal. -->
+- **Toulmin completeness:** Does each major argument have identifiable grounds, warrant, qualifier, and rebuttal?
+- **Warrant validity:** Are the inferential bridges appropriate for the target audience? Would a skeptical expert accept them?
+- **Counter-argument engagement:** Are the strongest objections addressed substantively (not dismissed)?
+- **Logical coherence:** Do the arguments build on each other without circular reasoning?
+- **Contribution clarity:** Is it clear what is new — and what is not — relative to existing literature?
+
 ---
 
 ## Scoring Rubric
+
+<!-- Choose the rubric that matches your paper type. -->
+
+### Rubric A — Empirical Papers
 
 | Criterion | Weight | Score /5 |
 |-----------|--------|----------|
@@ -70,6 +99,20 @@ Review the manuscript section(s) pasted below for submission readiness. Evaluate
 | Clarity and organization | 10% | |
 | Presentation quality | 10% | |
 | Reproducibility | 5% | |
+
+### Rubric B — Non-Empirical Papers (Perspective, Design Science, Theoretical, Review)
+
+| Criterion | Weight | Score /5 |
+|-----------|--------|----------|
+| Contribution to field | 15% | |
+| Scope alignment with journal | 10% | |
+| Argument quality (warrant validity, Toulmin completeness) | 20% | |
+| Evidence-language alignment | 10% | |
+| Counter-argument engagement | 10% | |
+| Originality | 10% | |
+| Clarity and organization | 10% | |
+| Presentation quality | 10% | |
+| Boundary conditions and limitations | 5% | |
 
 **Weighted Overall Score:** __ / 5.0
 
