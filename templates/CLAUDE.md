@@ -45,7 +45,7 @@
 <!-- Non-negotiables for this paper project -->
 
 - Never cite a paper without verifying it exists (DOI check or Google Scholar)
-- Never use confident language ("demonstrates", "shows") for claims below 0.7 confidence
+- Never use confident language ("demonstrates", "shows") for claims below SUPPORTED tier
 - Never claim own unpublished work as established — always note "under review" status
 - Never exceed page budget without explicit decision record
 - Never skip the anti-hallucination checklist for AI-introduced citations
@@ -99,9 +99,9 @@ pdflatex [paper].tex
 
 ## Methodology
 
-This project uses a V&V framework adapted from systems engineering:
+This project uses a verification framework adapted from systems engineering:
 - **Claims** registered and tracked with priority levels (P0/P1/P2)
-- **Confidence tags** on a 0.0–1.0 scale
+- **Confidence tiers** (ESTABLISHED / SUPPORTED / EMERGING / SPECULATIVE) mapped to language
 - **Anti-hallucination checklist** for all AI-introduced citations
 - **Quality gates** before each phase transition
 - **Decision records** for all scope/methodology choices

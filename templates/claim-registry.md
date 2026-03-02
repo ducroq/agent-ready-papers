@@ -43,18 +43,18 @@
 
 ### Section 1: [Section Name]
 
-| ID | Claim | Priority | Confidence | Source | Tier | Status |
-|----|-------|----------|------------|--------|------|--------|
-| S1-1 | [factual statement] | P0 | 0.0 | [Author Year] | A | [ ] |
-| S1-2 | [factual statement] | P1 | 0.0 | [OWN WORK] | E | [ ] |
+| ID | Claim | Priority | Confidence | Source | Source Tier | Status |
+|----|-------|----------|------------|--------|-------------|--------|
+| S1-1 | [factual statement] | P0 | ESTABLISHED | [Author Year] | A | [ ] |
+| S1-2 | [factual statement] | P1 | EMERGING | [OWN WORK] | E | [ ] |
 
 <!-- Repeat for each section -->
 
 ### Section 2: [Section Name]
 
-| ID | Claim | Priority | Confidence | Source | Tier | Status |
-|----|-------|----------|------------|--------|------|--------|
-| S2-1 | [factual statement] | P0 | 0.0 | [Author Year] | A | [ ] |
+| ID | Claim | Priority | Confidence | Source | Source Tier | Status |
+|----|-------|----------|------------|--------|-------------|--------|
+| S2-1 | [factual statement] | P0 | SUPPORTED | [Author Year] | A | [ ] |
 
 ---
 
@@ -90,16 +90,14 @@
 
 ---
 
-## Confidence Scale Reference
+## Confidence Tier Reference
 
-| Score | Level | Criteria |
-|-------|-------|----------|
-| 0.9–1.0 | ESTABLISHED | 3+ independent primary sources, textbook consensus |
-| 0.7–0.9 | STRONG | 2+ primary sources, directly stated |
-| 0.5–0.7 | SUPPORTED | 1 primary + reviews, mostly direct |
-| 0.3–0.5 | WEAK | Single source, or inferred from data |
-| 0.1–0.3 | SPECULATIVE | Logical argument, no direct support |
-| 0.0–0.1 | CONJECTURE | Novel claim, requires explicit framing |
+| Tier | Assign when... | Language |
+|------|---------------|----------|
+| **ESTABLISHED** | Multiple independent sources confirm; no credible dispute; textbook-level | "demonstrates", "shows", "confirms" |
+| **SUPPORTED** | At least 2–3 peer-reviewed sources agree; some open questions remain | "indicates", "supports", "evidence suggests" |
+| **EMERGING** | 1–2 sources, or preliminary/pilot data; plausible but not yet replicated | "may", "preliminary evidence", "initial findings suggest" |
+| **SPECULATIVE** | Logical inference, hypothesis, single non-peer-reviewed source, or extrapolation | "warrants investigation", "remains unclear", "we hypothesize" |
 
 ## Source Tier Reference
 

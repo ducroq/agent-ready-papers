@@ -1,8 +1,10 @@
 # Working With AI Agents: Academic & Technical Writing
 
-How to set up paper projects so AI agents can assist effectively with research writing — from literature verification to peer review simulation. Patterns extracted from three real paper projects across two journals (IEEE TIM, MST), pressure-tested over 50+ agent sessions.
+Verification infrastructure for AI-augmented academic writing — templates, quality gates, and session continuity that catch the failure modes automated tools miss. Patterns extracted from three real paper projects across two journals (IEEE TIM, MST), pressure-tested over 50+ agent sessions.
 
-This is the companion to [agent-ready-projects](https://github.com/ducroq/agent-ready-projects) (for code). That guide covers project infrastructure for coding agents. This one covers **paper infrastructure** — the files, conventions, and verification systems that make the difference between an agent that hallucinates citations and one that produces submission-ready prose.
+Automated citation checkers (RefChecker, scite.ai) and model-level solutions (RAG, grounded generation) address part of the problem. This guide operates at the **process level** — the workflow templates, decision records, and verification systems that make the difference between an agent that hallucinates citations and one that produces submission-ready prose.
+
+Companion to [agent-ready-projects](https://github.com/ducroq/agent-ready-projects) (for code).
 
 > **Want to get started fast?** Grab templates from [`templates/`](templates/) and adapt them to your paper project.
 
@@ -18,9 +20,12 @@ AI agents are remarkably useful for academic writing — literature synthesis, a
 
 The fix isn't avoiding AI assistance. It's building **verification infrastructure** — systematic processes that catch these failure modes before submission.
 
-## The Paper-as-System Model
+## The Approach
 
-The central insight from our projects: **treat a paper like an engineered system.**
+The fix borrows a vocabulary from systems engineering: if claims are the paper's components, then sources are tests, coverage is measurable, and quality gates can prevent defective work from shipping.
+
+<details>
+<summary><strong>Mental model: the SE mapping</strong></summary>
 
 | Engineered System | Paper |
 |-------------------|-------|
@@ -36,7 +41,9 @@ The central insight from our projects: **treat a paper like an engineered system
 | Stakeholder validation | Peer review simulation |
 | Traceability matrix | Claim → Evidence → Audit trail |
 
-This isn't a metaphor. It's a working framework. Every concept on the right maps to a concrete artifact in the project — a template, a checklist, a registry entry. The rest of this guide explains each one.
+Every concept on the right maps to a concrete artifact in the project — a template, a checklist, a registry entry. The rest of this guide explains each one.
+
+</details>
 
 ## Claim Verification: The Foundation
 
@@ -52,14 +59,12 @@ Every factual statement in the paper is a **claim** that needs a source. Claims 
 
 ### Confidence (how sure are we?)
 
-| Score | Level | Criteria |
-|-------|-------|----------|
-| 0.9–1.0 | ESTABLISHED | 3+ independent primary sources, textbook consensus |
-| 0.7–0.9 | STRONG | 2+ primary sources, directly stated |
-| 0.5–0.7 | SUPPORTED | 1 primary + reviews, mostly direct |
-| 0.3–0.5 | WEAK | Single source, or inferred from data |
-| 0.1–0.3 | SPECULATIVE | Logical argument, no direct support |
-| 0.0–0.1 | CONJECTURE | Novel claim, requires explicit framing |
+| Tier | Assign when... |
+|------|---------------|
+| **ESTABLISHED** | Multiple independent sources confirm; no credible dispute; textbook-level |
+| **SUPPORTED** | At least 2–3 peer-reviewed sources agree; some open questions remain |
+| **EMERGING** | 1–2 sources, or preliminary/pilot data; plausible but not yet replicated |
+| **SPECULATIVE** | Logical inference, hypothesis, single non-peer-reviewed source, or extrapolation |
 
 ### Source tier (how trustworthy is the evidence?)
 
@@ -72,7 +77,7 @@ Every factual statement in the paper is a **claim** that needs a source. Claims 
 | E | Own unpublished work (under review) | 0.6 |
 | F | Logical inference | 0.2 |
 
-The **claim registry** tracks all of this in one place — a living table of every claim, its priority, confidence score, source, and verification status. This is the paper's equivalent of a test suite. See [`templates/claim-registry.md`](templates/claim-registry.md).
+The **claim registry** tracks all of this in one place — a living table of every claim, its priority, confidence tier, source, and verification status. See [`templates/claim-registry.md`](templates/claim-registry.md).
 
 ### Cross-reference rules
 
@@ -82,16 +87,16 @@ The **claim registry** tracks all of this in one place — a living table of eve
 
 ## Confidence-to-Language Mapping
 
-This is the bridge between verification and writing. The confidence score determines what language is appropriate:
+This is the bridge between verification and writing. The confidence tier determines what language is appropriate:
 
-| Confidence | Language |
-|------------|----------|
-| ≥0.8 (STRONG) | "demonstrates", "shows", "confirms", "established" |
-| 0.7–0.8 | "indicates", "supports", "evidence suggests" |
-| 0.5–0.7 | "may", "preliminary evidence", "suggests" |
-| <0.5 | "hypothesis", "warrants investigation", "remains unclear" |
+| Tier | Language |
+|------|----------|
+| ESTABLISHED | "demonstrates", "shows", "confirms", "established" |
+| SUPPORTED | "indicates", "supports", "evidence suggests" |
+| EMERGING | "may", "preliminary evidence", "initial findings suggest" |
+| SPECULATIVE | "warrants investigation", "remains unclear", "we hypothesize" |
 
-Without this mapping, agents default to confident language for everything. A 0.3-confidence claim stated as "demonstrates" is a credibility risk that reviewers will catch. The writing guide template maps every claim to its section, confidence score, and appropriate language. See [`templates/writing-guide.md`](templates/writing-guide.md).
+Without this mapping, agents default to confident language for everything. A SPECULATIVE claim stated as "demonstrates" is a credibility risk that reviewers will catch. The writing guide template maps every claim to its section, confidence tier, and appropriate language. See [`templates/writing-guide.md`](templates/writing-guide.md).
 
 **Own work under review** requires special framing: "we observed" (not "it was found"), with explicit status ("under review at IEEE TIM"). Don't let agents present under-review work as established.
 
@@ -172,7 +177,7 @@ See [`templates/glossary.md`](templates/glossary.md).
 
 ## Quality Gates
 
-Adapt the quality gate pattern from systems engineering. Each gate must pass before proceeding:
+Each gate must pass before proceeding:
 
 ### Gate 1: Draft Complete
 - [ ] All sections drafted to page budget
@@ -324,7 +329,7 @@ Without page budgets, agents expand every section. A 4-page paper becomes 8 page
 In interdisciplinary work, letting agents use terms freely creates a paper that confuses every reviewer. A glossary isn't overhead — it's a prerequisite for clarity.
 
 ### Confident language for weak claims
-"Our results demonstrate" for a 0.3-confidence inference is a credibility risk. The confidence-to-language mapping is mechanical but essential — it prevents the most subtle form of academic dishonesty.
+"Our results demonstrate" for a SPECULATIVE inference is a credibility risk. The confidence-to-language mapping is mechanical but essential — it prevents the most subtle form of academic dishonesty.
 
 ## Measuring Success
 
@@ -351,7 +356,7 @@ Ready-to-use starter files in [`templates/`](templates/):
 
 - **[`CLAUDE.md`](templates/CLAUDE.md)** — Paper project identity, session continuity, Before You Start table
 - **[`claim-registry.md`](templates/claim-registry.md)** — Claim tracking with priority, confidence, source tiers
-- **[`vv-framework.md`](templates/vv-framework.md)** — Paper-as-system verification and validation
+- **[`vv-framework.md`](templates/vv-framework.md)** — Verification and validation framework
 - **[`writing-guide.md`](templates/writing-guide.md)** — Confidence-to-language mapping, section-claim assignment
 - **[`review-prompt.md`](templates/review-prompt.md)** — Structured AI peer review with scoring rubric
 - **[`decision-record.md`](templates/decision-record.md)** — Lightweight ADR for scope and methodology decisions

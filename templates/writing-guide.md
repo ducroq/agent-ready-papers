@@ -19,12 +19,12 @@
 
 ## Language Calibration
 
-| Confidence | Language Examples |
-|------------|-------------------|
-| ≥0.8 (STRONG) | "demonstrates", "shows", "confirms", "established" |
-| 0.7–0.8 | "indicates", "supports", "evidence suggests" |
-| 0.5–0.7 | "may", "preliminary evidence", "suggests" |
-| <0.5 | "hypothesis", "warrants investigation", "remains unclear" |
+| Confidence Tier | Language |
+|-----------------|----------|
+| ESTABLISHED | "demonstrates", "shows", "confirms", "established" |
+| SUPPORTED | "indicates", "supports", "evidence suggests" |
+| EMERGING | "may", "preliminary evidence", "initial findings suggest" |
+| SPECULATIVE | "warrants investigation", "remains unclear", "we hypothesize" |
 
 ### Special Cases
 
@@ -48,9 +48,9 @@
 
 **Claims to use:**
 
-| ID | Claim | Confidence | Appropriate Language |
-|----|-------|------------|---------------------|
-| [ID] | [statement] | [score] | [calibrated phrasing] |
+| ID | Claim | Tier | Appropriate Language |
+|----|-------|------|---------------------|
+| [ID] | [statement] | [tier] | [calibrated phrasing] |
 
 **Key quotes ready:**
 - [Author Year]: "[exact quote]" (p. [N])
@@ -63,9 +63,9 @@
 
 **Claims to use:**
 
-| ID | Claim | Confidence | Appropriate Language |
-|----|-------|------------|---------------------|
-| [ID] | [statement] | [score] | [calibrated phrasing] |
+| ID | Claim | Tier | Appropriate Language |
+|----|-------|------|---------------------|
+| [ID] | [statement] | [tier] | [calibrated phrasing] |
 
 **Data to cite:**
 ```
@@ -78,37 +78,37 @@
 
 <!-- Repeat for each section -->
 
-## Quick Reference: All Claims by Confidence
+## Quick Reference: All Claims by Tier
 
-### Ready for Strong Statements (≥0.7)
+### ESTABLISHED / SUPPORTED — Ready for Strong Statements
 
-| ID | Claim | Confidence | Best Source |
-|----|-------|------------|------------|
-| [ID] | [claim] | [score] | [Author Year] |
+| ID | Claim | Tier | Best Source |
+|----|-------|------|------------|
+| [ID] | [claim] | [tier] | [Author Year] |
 
-### Appropriately Hedged (0.5–0.7)
+### EMERGING — Appropriately Hedged
 
-| ID | Claim | Confidence | Hedging Language |
-|----|-------|------------|------------------|
-| [ID] | [claim] | [score] | [suggested phrasing] |
+| ID | Claim | Tier | Hedging Language |
+|----|-------|------|------------------|
+| [ID] | [claim] | EMERGING | [suggested phrasing] |
 
-### Requires Careful Framing (<0.5)
+### SPECULATIVE — Requires Careful Framing
 
-| ID | Claim | Confidence | How to Frame |
-|----|-------|------------|--------------|
-| [ID] | [claim] | [score] | [framing approach] |
+| ID | Claim | Tier | How to Frame |
+|----|-------|------|--------------|
+| [ID] | [claim] | SPECULATIVE | [framing approach] |
 
 ---
 
 ## Pre-Submission Checklist
 
-- [ ] All P0 claims at ≥0.7 or explicitly framed as hypothesis
-- [ ] Language matches confidence levels throughout
+- [ ] All P0 claims at SUPPORTED or ESTABLISHED (or explicitly framed as hypothesis)
+- [ ] Language matches confidence tiers throughout
 - [ ] All quotes verified against source
 - [ ] "Own work" claims clearly marked with status
 - [ ] Hypotheses distinguished from verified claims
 - [ ] Nuances and contradictions acknowledged
-- [ ] No "demonstrates" or "shows" for claims below 0.7
+- [ ] No "demonstrates" or "shows" for EMERGING or SPECULATIVE claims
 
 ---
 

@@ -1,7 +1,7 @@
 # Paper Verification & Validation Framework
 
-<!-- Adapted from systems engineering V&V methodology.
-     Treat the paper as a system requiring systematic validation. -->
+<!-- Verification & validation methodology adapted from systems engineering.
+     Systematic verification of claims, sources, and argument flow. -->
 
 **Paper:** [Title]
 **Adapted from:** SU2049 Cyberphysical Systems V&V Methodology
@@ -10,28 +10,22 @@
 
 ## 1. Core Principle
 
-> A paper is a system. Claims are components. Sources are tests. Reviewers are stakeholders.
-
-Just as engineered systems require systematic V&V to ensure reliability, academic papers require systematic verification to ensure correctness and credibility.
+Academic papers written with AI assistance require systematic verification to ensure correctness and credibility. Claims are the atomic units; each needs a verified source, an appropriate confidence tier, and language that matches the evidence strength.
 
 ---
 
-## 2. V&V Mapping
+## 2. V&V Structure
 
-| Systems Engineering V&V | Paper V&V |
-|------------------------|-----------|
-| System requirements | Paper goals (what must the paper demonstrate?) |
-| Components | Claims (individual statements of fact/data) |
-| Unit tests | Claim verification (source exists, data supports claim) |
-| Test coverage | % of claims with verified sources |
-| SIL classification | Claim priority (P0 / P1 / P2) |
+| Verification Layer | What It Checks |
+|-------------------|----------------|
+| Claim verification | Each claim has a verified source and appropriate confidence tier |
+| Coverage | % of claims with verified sources, by priority |
 | Static analysis | Automated checks (BibTeX, word count, structure) |
-| Integration tests | Argument flow (logical coherence, no contradictions) |
-| HIL testing | Expert review (co-author, domain expert) |
-| Digital twin oracle | Reference documents (author guidelines, exemplar papers) |
-| CI/CD pipeline | Build automation (LaTeX compile, checks) |
-| Stakeholder validation | Peer review simulation |
-| Traceability matrix | Claim → Evidence → Audit trail |
+| Argument flow | Logical coherence, no contradictions between sections |
+| Expert review | Co-author and domain expert feedback |
+| Oracle comparison | Alignment with author guidelines and exemplar papers |
+| Peer review simulation | Structured review in a fresh session |
+| Traceability | Claim → Evidence → Audit trail |
 
 ---
 
@@ -39,16 +33,16 @@ Just as engineered systems require systematic V&V to ensure reliability, academi
 
 | Priority | Meaning | Verification Required |
 |----------|---------|----------------------|
-| **P0** | Core argument — paper fails without it | Must have verified source OR own data with exact location |
-| **P1** | Supporting — strengthens argument | Should have ≥0.6 confidence |
-| **P2** | Context/background — nice to have | ≥0.5 confidence acceptable |
+| **P0** | Core argument — paper fails without it | Must have verified source OR own data with exact location; SUPPORTED or ESTABLISHED |
+| **P1** | Supporting — strengthens argument | Should be EMERGING or above |
+| **P2** | Context/background — nice to have | SPECULATIVE acceptable, but flag for reader |
 
 ### Coverage Targets
 
 | Priority | Target |
 |----------|--------|
-| P0 | 100% verified |
-| P1 | 90% verified |
+| P0 | 100% verified, all SUPPORTED or ESTABLISHED |
+| P1 | 90% verified, ≥90% at EMERGING or above |
 | P2 | 70% verified |
 | **Overall** | **≥85%** |
 
