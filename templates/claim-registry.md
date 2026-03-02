@@ -133,6 +133,18 @@
 | **EMERGING** | CLAIM: 1-2 sources. ARGUMENT: evidence partial or warrant debatable. PROPOSITION: premises plausible + logic sound | "may", "preliminary evidence", "initial findings suggest" |
 | **SPECULATIVE** | CLAIM: inference only. ARGUMENT: position stated, logic incomplete. PROPOSITION: conjectural | "warrants investigation", "remains unclear", "we hypothesize" |
 
+### Typed Confidence Assessment
+
+<!-- How many verification checks correspond to each tier, by unit type.
+     For CLAIMs, confidence tracks source strength. For ARGUMENTs and
+     PROPOSITIONs, confidence tracks checklist completeness + premise quality. -->
+
+| Type | ESTABLISHED | SUPPORTED | EMERGING | SPECULATIVE |
+|------|-------------|-----------|----------|-------------|
+| CLAIM | 3+ independent sources, textbook consensus | 2–3 sources agree, open questions | 1–2 sources, not replicated | Logical inference, no data |
+| ARGUMENT | 5/5 Toulmin, premises ESTABLISHED | 4/5 Toulmin, premises SUPPORTED+ | 3/5 Toulmin, premises verified but conclusion untested | <3/5 Toulmin, or premises unverified |
+| PROPOSITION | 5/5 Whetten, tested in practice | 4/5 Whetten, premises verified | 3/5 Whetten, reasoning valid but untested | <3/5 Whetten, or missing boundary conditions |
+
 ## Source Tier Reference
 
 | Tier | Type | Weight |
@@ -143,6 +155,19 @@
 | D | Guidelines / industry standards | 0.7 |
 | E | Own unpublished work (under review) | 0.6 |
 | F | Logical inference | 0.2 |
+
+### Special Cases: Reference Claims
+
+CLAIMs that are verifiable facts about external documents — e.g., "AHA recommends X
+with Class I evidence" or "ISO 17025 requires Y" — should use **ESTABLISHED** when the
+source is publicly accessible and the statement is a direct, verifiable reference. These
+are not evidence-dependent claims requiring confidence assessment; they are facts about
+what a document says. If the document exists and says this, the claim is verified.
+
+Use ESTABLISHED for reference claims when:
+- The source document is publicly accessible (published guideline, standard, or regulation)
+- The statement is a direct reference to what the document says (not an interpretation)
+- Verification requires only checking the document, not evaluating evidence strength
 
 ## Status Legend
 

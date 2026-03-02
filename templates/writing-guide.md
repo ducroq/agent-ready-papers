@@ -61,7 +61,33 @@ Example: "Given the systematic feedback errors documented above, we propose that
 
 ## Section → Registry Mapping
 
-<!-- Fill in for each section of your paper -->
+### Worked Example (from a Proposition paper's Introduction)
+
+<!-- This shows what a completed section mapping looks like. The example uses
+     real data from a CPR manikin fidelity paper to illustrate how registry
+     entries, confidence tiers, calibrated language, and key quotes come
+     together in a section mapping. Adapt the pattern; don't copy the content. -->
+
+**Purpose:** Establish that manikin measurement fidelity is under-examined, setting up the paper's core argument.
+
+**Entries to use:**
+
+| ID | Statement | Type | Tier | Appropriate Language |
+|----|-----------|------|------|---------------------|
+| H1 | 5.6% calibration shift in-phantoma | CLAIM | SUPPORTED | "we observed" (own work under review) |
+| H2 | 120–130× datasheet deviation | CLAIM | SUPPORTED | "manufacturer specifications may not align" |
+| H5 | Manikin chest compliance exceeds human tissue stiffness | CLAIM | SUPPORTED | "commercial manikins may not faithfully replicate" |
+| F1 | Skill transfer depends on functional alignment, not visual resemblance | CLAIM | SUPPORTED | "Norman et al. argued" (attribution) |
+
+**Key quotes ready:**
+- Norman 2012: "nearly all the studies showed no significant advantage of HFS over LFS, with average differences ranging from 1% to 2%" (p. 636)
+- Lim 2024: "no information on these properties is provided" (supporting H2)
+
+**Caution:** H1 and H2 are N=1 findings from own work under review. Use "preliminary", "one device", and flag review status.
+
+---
+
+<!-- Now fill in the actual sections for your paper below -->
 
 ### 1. Introduction
 

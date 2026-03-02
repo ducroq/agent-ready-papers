@@ -1,8 +1,9 @@
 # DR-001: Core Framing — "Verification Infrastructure" over "Paper-as-System"
 
 ---
-status: Accepted
+status: Partially superseded
 date: 2026-03-02
+superseded_by: DR-007 (SE mapping upgraded from metaphor to identity; structure and process-level positioning unchanged)
 ---
 
 ## Context

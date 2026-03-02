@@ -190,7 +190,7 @@ Status (Pass / Fail)
 ### Gate 2: Verification Complete
 - [ ] P0 entries 100% verified (CLAIMs source-checked; ARGUMENTs Toulmin-checked; PROPOSITIONs Whetten-checked)
 - [ ] P1 entries 90% verified
-- [ ] Coverage report generated
+- [ ] Coverage report generated from registry dashboard (timestamped snapshot for co-author review)
 - [ ] Static checks pass
 - [ ] Anti-hallucination checklist complete
 
@@ -217,7 +217,7 @@ vv/
 │   └── claim_registry.md    <- All claims with priority & status
 ├── audits/
 │   ├── section_X_audit.md   <- Per-section claim audits
-│   └── coverage_report.md   <- Overall verification coverage
+│   └── coverage_report.md   <- Timestamped verification snapshot (see note below)
 ├── oracles/
 │   ├── author_guidelines.md <- Journal requirements
 │   └── exemplar_papers.md   <- Reference successful papers
@@ -228,6 +228,8 @@ vv/
     ├── coauthor_review.md   <- Co-author feedback
     └── reviewer_checklist.md<- Simulated peer review results
 ```
+
+**Coverage report vs. registry dashboard:** The coverage report (`coverage_report.md`) is a timestamped snapshot for co-author review and submission audit. The claim registry dashboard is the living working document. Generate the coverage report from the registry dashboard before each quality gate review. The registry dashboard changes daily; the coverage report captures a specific point-in-time verification state.
 
 ---
 
