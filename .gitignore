@@ -1,3 +1,11 @@
 .claude/
 .DS_Store
 Thumbs.db
+
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.synctex.gz

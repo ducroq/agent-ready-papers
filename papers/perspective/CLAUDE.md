@@ -1,6 +1,6 @@
 # The Verification Gap: Why AI-Augmented Academic Writing Needs Reporting Guidelines Beyond Citation Checking
 
-This paper argues that the scholarly community lacks verification infrastructure for non-empirical papers written with AI assistance. Citation checkers and grounded generation address factual accuracy, but argument quality — warrant validity, confidence calibration, boundary conditions — has no structured reporting framework. EQUATOR covers empirical papers (~500 guidelines); nothing covers the rest.
+This paper argues that the scholarly community lacks verification infrastructure for non-empirical papers written with AI assistance. Citation checkers and grounded generation address factual accuracy, but argument quality — warrant validity, confidence calibration, boundary conditions — has no structured reporting framework. EQUATOR covers empirical papers (~700 guidelines); nothing covers the rest.
 
 **Core Argument:** AI writing tools are proliferating and citation checkers exist, but the scholarly infrastructure for verifying *argument quality* — not just factual accuracy — is missing. We propose typed verification (CLAIM/ARGUMENT/PROPOSITION) with per-type checklists adapted from Toulmin and Whetten.
 
@@ -10,7 +10,7 @@ This paper argues that the scholarly community lacks verification infrastructure
 
 ## Core Concept
 
-EQUATOR Network maintains ~500 reporting guidelines for empirical health research (CONSORT, STROBE, PRISMA, etc.). Essentially zero guidelines exist for non-empirical paper types — theoretical, design science, perspective, methodological. Gregor's (2006) five theory types include two (Type I: analytic, Type V: design) that are fundamentally non-empirical. For these papers, *argument quality* — not factual accuracy — is the primary verification challenge.
+EQUATOR Network maintains ~700 reporting guidelines for empirical health research (CONSORT, STROBE, PRISMA, etc.). Essentially zero guidelines exist for non-empirical paper types — theoretical, design science, perspective, methodological. Gregor's (2006) five theory types include two (Type I: analytic, Type V: design) that are fundamentally non-empirical. For these papers, *argument quality* — not factual accuracy — is the primary verification challenge.
 
 We propose a typed verification model: CLAIMs (source-verifiable facts), ARGUMENTs (Toulmin-verified reasoning chains), and PROPOSITIONs (Whetten-verified recommendations with boundary conditions). Each type has distinct verification procedures and confidence criteria. This paper uses the framework it describes.
 
@@ -101,19 +101,41 @@ This is the framework eating its own dog food. Any friction, gaps, or false fail
 
 ## Current Status
 
-**Phase:** 3 — Writing (first draft complete)
+**Phase:** 3 — Writing (revised draft, verification complete)
 
 **Completed:**
 - Scaffold (CLAUDE.md, claim registry, writing guide, review prompt, anti-hallucination checklist)
 - First draft of manuscript.tex (~3,450 words incl. abstract, 5 sections)
-- references.bib (9 entries, all DOIs verified)
+- references.bib (14 entries, all DOIs verified)
+- P0 verification: 8/8 verified (100%)
+- P1 verification: 9/9 verified (100%)
+- P2 verification: 1/1 verified (100%)
+- Overall: 18/18 (100% coverage — all targets exceeded)
+- Anti-hallucination checklist: 14/14 references pass
+- Peer review simulation: scored 3.95/5.0 (upper "Minor revision")
+- Manuscript revisions based on review findings
+- DOI verification for all references
+- Abstract trimmed to <200 words (Learned Publishing limit)
+- Key Points section added (LP requirement: 2-6 bullets)
+- Added 4 references: Liang 2025 (Nat Hum Behav), Turner 2012 (Cochrane), Glasziou 2014 (Lancet), Peffers 2007 (JMIS)
+
+**Corrections applied during verification:**
+- EQUATOR count updated from ~500 to ~700 (699 verified from equator-network.org, 2026-03-03)
+- Added Mugaanyi et al. 2024 (JMIR) for citation hallucination evidence (S1-1 had no source)
+- Fixed retyping count from 15/2/4 to 16/2/3 (matched audit table)
+- Labelled "confidence inflation" as own term
+- Added RAG explanation for Learned Publishing audience
+- Acknowledged Gregor Type V empirical evaluation nuance
+- Acknowledged Toulmin 6→5 operationalization
+- Added counter-argument for the three-type model
+- Added engineering fidelity audit specifics (third audit)
+- Removed RefChecker/scite.ai names (uncitable tools)
+- Added DOIs for gregor2006 and peerarg2024
 
 **Next priorities:**
-1. Verify P0 claims in registry (EQUATOR count, Gregor types, audit data)
-2. Run anti-hallucination checklist on all citations
-3. Run review prompt (peer review simulation)
-4. Revise manuscript based on review
-5. Verify DOIs for all references.bib entries
+1. Co-author review (Gate 3)
+2. Decide submission article type: "Original Article" or "Opinion" (LP uses "Opinion" for perspective-type pieces)
+3. Pre-submission enquiry to LP editor (optional)
 
 **Reference corrections found during writing:**
 - equator-gap.md attributes GoodReports to "Butcher et al. 2021" — actual first author is Struthers (DOI verified: 10.1186/s12874-021-01402-x)

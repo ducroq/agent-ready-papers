@@ -33,40 +33,40 @@
 % ===============================================================
 \begin{abstract}
 Large language models are increasingly used to assist with academic
-writing, from literature synthesis to argument structuring.  While
-citation hallucination---the fabrication of plausible-sounding
-references---has received considerable attention, it represents only one
-failure mode among several.  AI writing assistants may also inflate the
-confidence of speculative claims, expand arguments beyond available
-evidence, and produce fluent prose that obscures gaps in reasoning.
-Existing solutions, including citation verification tools and
-retrieval-augmented generation, operate at the model or tool level; to
-our knowledge, no process-level verification infrastructure addresses
-the writing workflow itself.  This gap is compounded by a structural
-absence in reporting guidelines: the EQUATOR Network maintains
-approximately 500 guidelines for empirical health research, yet
-essentially no equivalent frameworks exist for non-empirical paper
-types---theoretical, design science, perspective, and methodological
-contributions.  Drawing on Gregor's (2006) theory-type taxonomy, we
-identify two theory types (analytic and design) that are fundamentally
-non-empirical and for which argument quality, rather than factual
-accuracy, is the primary verification challenge.  We propose a typed
-verification model that distinguishes three unit types---claims
+writing.  While citation hallucination has received considerable
+attention, AI writing assistants create additional verification
+challenges---confidence inflation, scope creep, and fluent prose that
+obscures reasoning gaps---that existing tools do not address.  This gap
+is compounded by a structural absence in reporting guidelines: the
+EQUATOR Network maintains nearly 700 guidelines for empirical health
+research, yet no equivalent exists for non-empirical paper types.
+Drawing on Gregor's (2006) theory-type taxonomy, we identify two
+fundamentally non-empirical theory types for which argument quality,
+rather than factual accuracy, is the primary verification challenge.  We
+propose a typed verification model distinguishing claims
 (source-verifiable facts), arguments (Toulmin-verified reasoning
 chains), and propositions (Whetten-verified recommendations with
-boundary conditions)---each requiring distinct verification procedures.
-Preliminary evidence from three retrospective audits suggests that typed
-verification may reveal actionable issues invisible to conventional
-approaches, including false failures caused by applying the wrong
-verification procedure to the wrong unit type.  We propose that the
-scholarly community begin developing verification infrastructure for
-non-empirical papers analogous to what EQUATOR provides for empirical
-research.
+boundary conditions), each requiring distinct procedures.  Preliminary
+evidence from three retrospective audits suggests that typed
+verification reveals actionable issues invisible to conventional
+approaches, including false failures from type misclassification.  We
+propose that the scholarly community develop verification infrastructure
+for non-empirical papers analogous to what EQUATOR provides for
+empirical research.
 
 \medskip\noindent
 \textbf{Keywords:} academic writing, artificial intelligence, reporting
 guidelines, verification, argumentation, non-empirical research
 \end{abstract}
+
+\medskip\noindent
+\textbf{Key Points:}
+\begin{itemize}
+\item AI writing tools create verification challenges beyond citation hallucination, including confidence inflation and argument degradation.
+\item EQUATOR provides nearly 700 guidelines for empirical research; non-empirical papers have no equivalent infrastructure.
+\item We propose typed verification distinguishing claims, arguments, and propositions, each with distinct procedures.
+\item Retrospective audits show that wrong-type verification produces false failures invisible to conventional approaches.
+\end{itemize}
 
 \clearpage
 
@@ -77,9 +77,11 @@ guidelines, verification, argumentation, non-empirical research
 \section{Introduction: The Problem}
 
 The rapid adoption of large language models (LLMs) as writing assistants
-is transforming how academic papers are produced.  These tools can
-synthesise literature, structure arguments, generate prose, and format
-references with remarkable fluency.  Yet this fluency introduces risks
+is transforming how academic papers are produced.  \citet{liang2025}
+found that up to 22\% of computer science papers now show evidence of
+LLM modification, with detectable usage across all major disciplines.
+These tools can synthesise literature, structure arguments, generate
+prose, and format references with remarkable fluency.  Yet this fluency introduces risks
 that are distinct from---and in some ways more subtle than---the
 challenges of traditional academic writing.  Where a human author's
 limitations are typically visible in the text (awkward phrasing, gaps in
@@ -90,17 +92,20 @@ invisible to casual inspection.
 % S1-1: Citation hallucination (CLAIM, P0, EMERGING)
 The most widely discussed risk is citation hallucination.  LLMs can
 invent plausible-sounding papers, complete with fabricated authors,
-journal names, and digital object identifiers.  Unlike factual errors
-that contradict known evidence, hallucinated citations create a
-distinctive category of falsehood: references that cannot be falsified
-through domain knowledge alone because they refer to works that do not
-exist.  Citation hallucination has received considerable attention, and
-tools designed to detect it are emerging.
+journal names, and digital object identifiers.  \citet{mugaanyi2024}
+found that 62--89\% of DOIs generated by large language models across
+natural sciences and humanities topics were fabricated, with DOI accuracy
+as low as 8.5\% in some disciplines.  Unlike factual errors that
+contradict known evidence, hallucinated citations create a distinctive
+category of falsehood: references that cannot be falsified through domain
+knowledge alone because they refer to works that do not exist.  Citation
+hallucination has received considerable attention, and tools designed to
+detect it are emerging.
 
 % S1-2: Confidence inflation (CLAIM, P0, EMERGING)
 However, citation hallucination may be only the most visible failure
-mode.  A second, potentially more insidious risk is confidence
-inflation: AI writing assistants may state speculative claims with the
+mode.  A second, potentially more insidious risk is what we term
+\emph{confidence inflation}: AI writing assistants may state speculative claims with the
 same certainty as well-established findings, using language such as
 ``demonstrates'' or ``confirms'' where ``suggests'' or ``may indicate''
 would be more appropriate.  In academic writing, the distinction between
@@ -128,8 +133,10 @@ expansion the path of least resistance.
 % S1-4: Existing solutions at model/tool level (CLAIM, P0, EMERGING)
 These failure modes share a common characteristic: they cannot be
 detected by checking whether citations are real.  Citation verification
-tools such as RefChecker and scite.ai, along with model-level approaches
-including retrieval-augmented generation and grounded generation, address
+tools that automatically check whether references exist, along with
+model-level approaches such as retrieval-augmented generation (in which
+the model is given access to source documents during text generation),
+address
 the factual accuracy dimension of AI-assisted writing.  These are
 valuable contributions, but they operate at the model or tool
 level---they improve what the AI generates or verify whether specific
@@ -155,25 +162,27 @@ foundation for building it.
 % ===============================================================
 \section{The Landscape Gap}
 
-% S2-1: EQUATOR ~500 guidelines (CLAIM, P0, EMERGING)
+% S2-1: EQUATOR ~700 guidelines (CLAIM, P0, ESTABLISHED)
 To assess the current state of verification infrastructure for academic
 writing, it is useful to examine the most comprehensive effort to date:
 the EQUATOR Network.  EQUATOR (Enhancing the QUAlity and Transparency Of
-health Research) maintains a database of approximately 500 reporting
+health Research) maintains a database of nearly 700 reporting
 guidelines for health research \citep{equator}.  These
 guidelines---including CONSORT for randomised controlled trials, STROBE
 for observational studies, and PRISMA for systematic reviews
 \citep{page2021}---provide structured checklists that authors complete
 during manuscript preparation.  The GoodReports tool
 \citep{struthers2021} automates guideline selection based on study type,
-further reducing the barrier to adoption.  The impact of these guidelines
-on the quality and transparency of empirical research reporting is widely
-recognised; they represent the most mature infrastructure for structured
+further reducing the barrier to adoption.  A Cochrane review found that journals endorsing CONSORT showed improved
+reporting completeness across the majority of checklist items
+\citep{turner2012}, and incomplete reporting has been identified as a
+major contributor to research waste \citep{glasziou2014}.  These
+guidelines represent the most mature infrastructure for structured
 verification in academic publishing.
 
 % S2-2: No guidelines for non-empirical papers (CLAIM, P0, EMERGING)
 However, an examination of the EQUATOR database reveals a structural
-gap.  Virtually all of its approximately 500 guidelines address empirical
+gap.  Virtually all of its nearly 700 guidelines address empirical
 research: studies that collect, analyse, and report data.  Systematic
 reviews, covered by PRISMA \citep{page2021}, represent a partial
 exception---they are structured and methodical but synthesise rather than
@@ -189,16 +198,23 @@ identified five theory types in information systems research based on
 four goals: analysis, explanation, prediction, and prescription.  Two of
 these types---Type~I (analytic theories, including taxonomies and
 frameworks) and Type~V (design and action theories, including design
-principles and methods)---are fundamentally non-empirical.  Their
-contributions are not data points that can be verified against
-measurements or observations; they are conceptual structures whose value
-lies in their clarity, coherence, and utility.  The remaining types
+principles and methods)---are fundamentally non-empirical in their
+primary contribution, though Type~V papers may include empirical
+evaluation of the designed artefact.  Their core contributions are not
+data points that can be verified against measurements or observations;
+they are conceptual structures whose value lies in their clarity,
+coherence, and utility.  The remaining types
 (Type~II: explanatory, Type~III: predictive, Type~IV: explanatory and
 predictive) align more naturally with empirical verification approaches,
 as they make claims about observable phenomena.
 
 While Gregor's taxonomy was developed for information systems, the
-underlying distinction applies broadly.  Perspective articles,
+underlying distinction applies broadly.  The IS community has developed
+structured methodologies for non-empirical work---notably
+\citeauthor{peffers2007}'s (\citeyear{peffers2007}) widely adopted
+design science research process model---yet these methodological
+frameworks have not been translated into reporting guidelines analogous
+to EQUATOR.  More broadly, perspective articles,
 commentaries, theoretical syntheses, and methodological proposals all
 share the characteristic that their primary contribution is an argument
 or a framework rather than empirical evidence.  These paper types appear
@@ -280,7 +296,10 @@ which the argument does not hold).  This framework may provide a basis
 for operationalising argument verification in academic writing: an
 argument can be evaluated by checking whether its grounds are
 established, its warrant is explicit and valid for the target audience,
-and its qualifier is calibrated to the strength of the evidence.  Recent
+and its qualifier is calibrated to the strength of the evidence.  (Our
+operationalisation focuses on five of these six components, treating
+backing as implicit when the warrant itself is accepted by the target
+audience.)  Recent
 work by \citet{gupta2024} found that LLMs can extract Toulmin-style
 argument structures through zero-shot prompting, suggesting that
 automated support for argument-level verification may be technically
@@ -344,9 +363,16 @@ inappropriate for the unit type.  This argument rests on the premise that
 different epistemic contributions (facts, inferences, recommendations)
 have different validity criteria; if this premise holds, then a unified
 verification procedure will systematically misclassify some entries.
-Preliminary evidence from the retrospective audits described in the
-following section suggests that this type of misclassification may occur
-in practice.
+One might question whether a three-type model is necessary---whether a
+simpler binary distinction between empirical and non-empirical
+verification would suffice.  However, the distinction between arguments
+and propositions matters because they fail differently: an argument with
+a weak warrant needs better reasoning, while a proposition with missing
+boundary conditions needs better scoping.  Conflating the two under a
+single ``non-empirical'' category obscures which corrective action is
+appropriate.  Preliminary evidence from the retrospective audits
+described in the following section suggests that this type of
+misclassification may occur in practice.
 
 
 % ===============================================================
@@ -370,7 +396,7 @@ effectiveness.  This paper had been developed with a conventional claim
 registry that tracked twenty-one entries, achieving 76\% overall
 coverage and 100\% coverage of critical claims.  A retrospective audit
 reclassified all entries using the three-type model, revealing that
-fifteen were indeed claims, but two were arguments and four were
+sixteen were indeed claims, but two were arguments and three were
 propositions that had been misclassified as claims.
 
 The consequences of this misclassification were most apparent for one
@@ -408,11 +434,18 @@ confident than the evidence warranted---for instance, using
 ``demonstrates'' for findings from a single validation study with a
 limited sample size.
 
+A third audit applied the typed verification framework to an engineering
+characterisation paper targeting a measurement science journal.  This
+project used a tag-based system that conflated verification status
+(``checked'' versus ``unchecked'') with confidence assessment (``how
+strong is the evidence?'').  Retyping its twenty-one entries identified
+two arguments and three propositions that had been treated as claims, and
+the discussion section contained at least six substantive arguments that
+were not tracked in the registry at all.
+
 % S4-4: Cross-project applicability (ARGUMENT, P1, EMERGING)
-Across all three retrospective audits---the proposition paper, the
-technology paper, and an engineering characterisation paper targeting a
-measurement science journal---the typed verification framework revealed
-actionable issues in each project.  These issues included mistyped
+Across all three retrospective audits, the typed verification framework
+revealed actionable issues in each project.  These issues included mistyped
 entries producing false failures, over-confident language, missing
 boundary conditions on propositions, and unregistered arguments in
 discussion sections.  While the specific issues varied by paper type, the
@@ -454,8 +487,8 @@ open question.
 The preceding sections have traced a chain of reasoning.  AI writing
 assistance creates failure modes beyond citation hallucination, including
 confidence inflation and argument-level degradation (Section~1).  The
-most comprehensive verification infrastructure, EQUATOR's approximately
-500 reporting guidelines, addresses empirical research exclusively;
+most comprehensive verification infrastructure, EQUATOR's nearly
+700 reporting guidelines, addresses empirical research exclusively;
 non-empirical paper types---which include two of Gregor's five theory
 types---have no equivalent verification framework (Section~2).
 Established frameworks from argumentation theory (Toulmin) and
@@ -519,10 +552,10 @@ papers written with and without typed verification infrastructure would
 provide the evidence base needed to move the proposal from preliminary to
 supported.
 
-The EQUATOR Network has spent two decades building approximately 500
+The EQUATOR Network has spent two decades building nearly 700
 reporting guidelines for empirical health research.  These guidelines
 have measurably improved the quality and transparency of published
-research.  To our knowledge, essentially no equivalent guidelines exist
+research \citep{turner2012, glasziou2014}.  To our knowledge, essentially no equivalent guidelines exist
 for non-empirical papers---theoretical contributions, design science
 research, perspective articles, and methodological proposals.  As AI
 writing tools make it easier to produce fluent academic prose, the gap

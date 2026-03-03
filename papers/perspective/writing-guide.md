@@ -5,7 +5,7 @@
      editing any section. -->
 
 **Paper:** The Verification Gap: Why AI-Augmented Academic Writing Needs Reporting Guidelines Beyond Citation Checking
-**Last Updated:** 2026-03-03
+**Last Updated:** 2026-03-03 (post-verification update: tiers, references, and counts corrected)
 
 ---
 
@@ -45,7 +45,7 @@ Example: "The Proposition paper audit classified all 21 entries as CLAIMs, but r
 **PROPOSITION prose pattern:**
 > [Reasoning — why this recommendation follows from the arguments]. [Proposition — the recommendation itself]. [Boundary conditions — where it applies and where it doesn't].
 
-Example: "Given the ~500 EQUATOR guidelines for empirical research and zero for non-empirical types (S2-1, S2-2), combined with the growing use of AI writing tools that amplify argument-level verification challenges, we propose that the scholarly community develop verification infrastructure for non-empirical papers. This applies to academic papers intended for peer-reviewed publication in fields where argument quality is a primary contribution; informal writing, journalism, and very short opinion pieces fall outside this recommendation."
+Example: "Given the ~700 EQUATOR guidelines for empirical research and zero for non-empirical types (S2-1, S2-2), combined with the growing use of AI writing tools that amplify argument-level verification challenges, we propose that the scholarly community develop verification infrastructure for non-empirical papers. This applies to academic papers intended for peer-reviewed publication in fields where argument quality is a primary contribution; informal writing, journalism, and very short opinion pieces fall outside this recommendation."
 
 ### Special Cases
 
@@ -86,7 +86,7 @@ Example: "Given the ~500 EQUATOR guidelines for empirical research and zero for 
 - Do NOT frame this as "AI is bad for writing" — frame as "AI writing assistance creates *new* failure modes that require *new* infrastructure"
 - S1-1 through S1-3 are all at EMERGING — use hedged language throughout
 - The claim that "no process-level infrastructure exists" (S1-4) is a strong universal negative — verify carefully and consider softening to "we are not aware of process-level infrastructure"
-- Cite specific tools (RefChecker, scite.ai) as examples of model/tool level solutions, not as strawmen
+- Reference model/tool level solutions generically (citation checkers, RAG) — specific tool names were removed as uncitable
 
 ---
 
@@ -100,7 +100,7 @@ Example: "Given the ~500 EQUATOR guidelines for empirical research and zero for 
 
 | ID | Statement | Type | Tier | Appropriate Language |
 |----|-----------|------|------|---------------------|
-| S2-1 | EQUATOR maintains ~500 reporting guidelines | CLAIM | EMERGING | "The EQUATOR Network maintains approximately 500 reporting guidelines" — verify exact count; will likely become ESTABLISHED after verification |
+| S2-1 | EQUATOR maintains ~700 reporting guidelines | CLAIM | ESTABLISHED | "The EQUATOR Network maintains nearly 700 reporting guidelines" — verified: 699 guidelines (2026-03-03) |
 | S2-2 | No guidelines for non-empirical papers | CLAIM | EMERGING | "To our knowledge, no equivalent guidelines exist for non-empirical paper types" — hedge the universal negative |
 | S2-3 | Gregor's Type I and V are non-empirical | CLAIM | EMERGING | "Gregor (2006) identified five theory types, two of which — analytic (Type I) and design (Type V) — are fundamentally non-empirical" |
 | S2-4 | Argument quality is the primary verification challenge | CLAIM | EMERGING | "For non-empirical papers, the primary verification challenge may be argument quality rather than factual accuracy" |
@@ -111,7 +111,7 @@ Example: "Given the ~500 EQUATOR guidelines for empirical research and zero for 
 - EQUATOR Network website (https://www.equator-network.org/) — verify current count
 
 **Cautions:**
-- S2-1 count ("~500") needs verification against the EQUATOR website's current listing — this is the paper's most verifiable claim and most likely to be challenged
+- S2-1 count verified: 699 guidelines (2026-03-03); rounded to "nearly 700" in manuscript
 - S2-2 is a universal negative — PRISMA covers systematic reviews (structured but arguably non-empirical); acknowledge this partial exception
 - S2-3 is a published taxonomy from 2006 — check for any updates or critiques; Gregor is well-cited in IS but may be unfamiliar to the Learned Publishing audience
 - Frame the gap as an *opportunity*, not a criticism of EQUATOR
@@ -224,7 +224,15 @@ Example: "Given the ~500 EQUATOR guidelines for empirical research and zero for 
 
 | ID | Statement | Type | Tier | Best Source |
 |----|-----------|------|------|------------|
-| — | — | — | — | No entries at ESTABLISHED or SUPPORTED yet — all require verification |
+| S1-1 | AI citation hallucination | CLAIM | SUPPORTED | Mugaanyi et al. 2024 (JMIR) |
+| S1-2 | Confidence inflation | CLAIM | SUPPORTED | Liang et al. 2024 (NEJM AI) + technology audit |
+| S2-1 | EQUATOR ~700 guidelines | CLAIM | ESTABLISHED | EQUATOR website (699, 2026-03-03) |
+| S2-2 | No non-empirical guidelines | CLAIM | ESTABLISHED | EQUATOR database search |
+| S2-3 | Gregor Type I and V non-empirical | CLAIM | ESTABLISHED | Gregor 2006 (MIS Quarterly) |
+| S2-4 | Argument quality primary challenge | CLAIM | SUPPORTED | Toulmin 2003 + Whetten 1989 |
+| S3-1 | Toulmin operationalizable | CLAIM | SUPPORTED | Toulmin 2003 + Gupta 2024 (ACL) |
+| S3-2 | Whetten operationalizable | CLAIM | SUPPORTED | Whetten 1989 + own checklists |
+| S4-3 | Structure + LLM > LLM alone | CLAIM | SUPPORTED | PeerArg 2024 + Gupta 2024 |
 
 ### EMERGING — Appropriately Hedged
 
@@ -234,7 +242,7 @@ Example: "Given the ~500 EQUATOR guidelines for empirical research and zero for 
 | S1-2 | Confidence inflation | CLAIM | EMERGING | "may state", "tend to use" |
 | S1-3 | Scope creep | CLAIM | EMERGING | "may expand", "without constraints" |
 | S1-4 | No process-level solutions | CLAIM | EMERGING | "we are not aware of", "current approaches address [tool] but not [process]" |
-| S2-1 | EQUATOR ~500 guidelines | CLAIM | EMERGING | "maintains approximately 500" — will likely upgrade after verification |
+| S2-1 | EQUATOR ~700 guidelines | CLAIM | EMERGING | "maintains approximately 500" — will likely upgrade after verification |
 | S2-2 | No non-empirical guidelines | CLAIM | EMERGING | "to our knowledge, no equivalent" |
 | S2-3 | Gregor Type I and V non-empirical | CLAIM | EMERGING | "identified five types, two of which" |
 | S2-4 | Argument quality is primary challenge | CLAIM | EMERGING | "may be the primary challenge" |
