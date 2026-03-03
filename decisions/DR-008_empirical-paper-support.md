@@ -22,11 +22,11 @@ Five specific gaps were identified across the audits:
 | Reference claims confirmed as issue | EngineeringFidelity | 7.5 |
 | Reference claims don't fit tiers | Proposition | 7.2 |
 
-The reference claims issue was already addressed by DR-004's "Special Cases: Reference Claims" addition. This DR addresses the remaining five gaps.
+The reference claims issue was already addressed by DR-004's "Special Cases: Reference Claims" addition. This DR addresses two of the remaining five gaps — the ones that fix real design flaws in the framework. The other three are deferred as process guidance (see below).
 
 ## Decision
 
-Five targeted additions to the existing templates, bundled into a single DR because they share a common cause (empirical paper support) and are interdependent.
+Two targeted additions to `claim-registry.md` that fix design flaws where the framework incorrectly penalizes valid empirical evidence.
 
 ### 1. Methodological Facts as Special Case
 
@@ -42,37 +42,38 @@ Five targeted additions to the existing templates, bundled into a single DR beca
 
 **Decision:** Add guidance to the Source Tier Reference distinguishing own-data claims (results from experiments reported in the current paper) from own-work claims (results cited from papers under review elsewhere). For own-data claims, confidence reflects methodological rigor — sample size, statistical power, reproducibility — not source count. The 0.6 weight applies to own work cited from papers under review elsewhere. Also add an exception to the Cross-Reference Rules for own-data claims with documented methodology.
 
-### 3. Tag-to-Tier Migration Guide
+## Considered but Deferred
 
-**Problem:** The EngineeringFidelity audit found that projects using ad-hoc status tags ([VERIFIED], [HIGH CONF], [OWN DATA]) have no documented path for migrating to the framework's structured system (Status + Confidence Tier + Source Tier). The concepts are conflated — verification status, confidence level, and source type are three independent dimensions, but tags blend them.
+Three additional items were identified in the audits but deferred because they add process guidance rather than fixing design flaws in the framework:
 
-**Decision:** Add a "Migrating from Status-Based Tags" section to `claim-registry.md` with a concept mapping table (what each tag actually encodes) and a common migration patterns table. Key principle: verification and confidence are independent dimensions.
+### Tag-to-Tier Migration Guide
 
-### 4. Claim Lifecycle for Pending Experiments
+**Gap:** Projects using ad-hoc status tags ([VERIFIED], [HIGH CONF], [OWN DATA]) have no documented path for migrating to the framework's structured system. The key insight is that verification, confidence, and source type are independent dimensions.
 
-**Problem:** In empirical papers, claims have a lifecycle — they start as hypotheses, move through data collection, analysis, and finally verification. The current registry treats all claims as static. This means coverage metrics are misleading during the writing process: a paper at the analysis stage might show 40% coverage, but that's expected — the remaining claims are pending data, not missing evidence.
+**Why deferred:** Convenience documentation for onboarding, not a template concern. Individual projects can document their own migration in project-specific notes.
 
-**Decision:** Add a "Claim Lifecycle (Empirical Papers)" section to `claim-registry.md` with a 4-stage table mapping lifecycle stages to Status and Confidence. Update the Coverage Summary to include a "Pending Data" column, with coverage calculated as Verified / (Total - Pending Data). Also add phase-aware coverage guidance and Gate 2 checklist items to `vv-framework.md`.
+### Claim Lifecycle + Phase-Aware Coverage
 
-### 5. Empirical Pre-Submission Checklist
+**Gap:** In empirical papers, claims progress through stages (hypothesis → data collection → analysis → verified). Coverage metrics can be misleading during writing — a paper at the analysis stage might show 40% naive coverage but 85% adjusted coverage. This included a "Pending Data" column in the Coverage Summary and phase-aware gate items.
 
-**Problem:** The pre-submission checklist in `writing-guide.md` covers CLAIMs, ARGUMENTs, and PROPOSITIONs — all verification-focused items. Empirical papers have additional requirements that fall outside argument verification: data availability, statistical completeness, measurement documentation, figure quality, and empirical claim traceability.
+**Why deferred:** Coverage calculation methodology is a workflow concern. The framework's coverage targets are correct; how a project counts pending claims is project-specific.
 
-**Decision:** Add an "Empirical Paper Supplement" section after the General checklist in `writing-guide.md` with five subsections: Data & Reproducibility, Statistical Completeness, Measurement & Equipment, Figures & Tables, and Empirical Claim Verification.
+### Empirical Pre-Submission Checklist
+
+**Gap:** The pre-submission checklist lacks empirical-specific items: data availability, statistical completeness, measurement documentation, figure traceability.
+
+**Why deferred:** These are journal-specific requirements (often covered by CONSORT, STROBE, or similar reporting guidelines) rather than framework-level template additions.
 
 ## Consequences
 
 | File | Changes |
 |------|---------|
-| `templates/claim-registry.md` | 4 section additions (Methodological Facts, Own Data guidance, Migration Guide, Claim Lifecycle) + 2 minor edits (Source Tier asterisk, Cross-Reference exception) |
-| `templates/writing-guide.md` | 1 section addition (Empirical Paper Supplement) |
-| `templates/vv-framework.md` | 1 note addition (phase-aware coverage) + 2 Gate 2 items |
+| `templates/claim-registry.md` | 2 section additions (Methodological Facts, Own Data guidance) + 1 minor edit (Cross-Reference exception) |
 
-The changes are additive — no existing content is removed or restructured. Empirical-specific sections are clearly marked so non-empirical paper projects can skip them.
+The changes are additive — no existing content is removed or restructured.
 
 ## Revisit If
 
 - Field testing reveals the own-data vs. own-work distinction creates confusion — may need clearer naming
-- A paper project encounters a lifecycle stage not covered by the 4-stage model
-- The migration guide proves insufficient for a real project's tag inventory — may need project-specific migration tooling
+- A project needs the deferred items badly enough to justify the template complexity
 - Empirical checklist items overlap significantly with journal-specific checklists (e.g., CONSORT, STROBE) — may need to integrate rather than supplement

@@ -46,8 +46,6 @@ Academic papers written with AI assistance require systematic verification to en
 | P2 | 70% verified |
 | **Overall** | **≥85%** |
 
-**Phase-aware coverage (DR-008):** For empirical papers with pending experiments, coverage = Verified / (Total - Pending Data). Claims at the Hypothesis or Data collection lifecycle stage are excluded from the denominator until data is available. See `claim-registry.md` "Claim Lifecycle" section for stage definitions.
-
 ---
 
 ## 4. Test Types
@@ -193,8 +191,6 @@ Status (Pass / Fail)
 - [ ] P0 entries 100% verified (CLAIMs source-checked; ARGUMENTs Toulmin-checked; PROPOSITIONs Whetten-checked)
 - [ ] P1 entries 90% verified
 - [ ] Coverage report generated from registry dashboard (timestamped snapshot for co-author review)
-- [ ] Pending-data claims identified and lifecycle stages assigned (empirical papers — DR-008)
-- [ ] Phase-aware coverage calculated: Verified / (Total - Pending Data) (empirical papers — DR-008)
 - [ ] Static checks pass
 - [ ] Anti-hallucination checklist complete
 
@@ -237,4 +233,4 @@ vv/
 
 ---
 
-*Version: 2.1 — added empirical paper support: phase-aware coverage, lifecycle gate items (DR-008)*
+*Version: 2.0 — updated with ARGUMENT and PROPOSITION unit types (DR-004)*

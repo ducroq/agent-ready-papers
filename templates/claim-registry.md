@@ -14,15 +14,14 @@
 
 ## Coverage Summary
 
-| Priority | Total | Verified | Pending Data | Needs Evidence | Coverage |
-|----------|-------|----------|--------------|----------------|----------|
-| P0 | 0 | 0 | 0 | 0 | 0% |
-| P1 | 0 | 0 | 0 | 0 | 0% |
-| P2 | 0 | 0 | 0 | 0 | 0% |
-| **Total** | **0** | **0** | **0** | **0** | **0%** |
+| Priority | Total | Verified | Needs Evidence | Coverage |
+|----------|-------|----------|----------------|----------|
+| P0 | 0 | 0 | 0 | 0% |
+| P1 | 0 | 0 | 0 | 0% |
+| P2 | 0 | 0 | 0 | 0% |
+| **Total** | **0** | **0** | **0** | **0%** |
 
 **Targets:** ≥85% overall, 100% P0, 90% P1, 70% P2
-**Note (DR-008):** Coverage = Verified / (Total - Pending Data). See "Claim Lifecycle" section for stage definitions.
 
 ---
 
@@ -208,65 +207,6 @@ independent replication of the result itself.
 | [~] | In progress |
 | [x] | Verified |
 | [!] | Problem — needs attention |
-
----
-
-## Migrating from Status-Based Tags
-
-<!-- DR-008: Projects using ad-hoc tags ([VERIFIED], [HIGH CONF], [OWN DATA]) can
-     use this guide to migrate to the framework's structured system. The key insight
-     is that verification, confidence, and source type are independent dimensions. -->
-
-### Concept Mapping
-
-Ad-hoc tags often conflate three independent dimensions:
-
-| Dimension | What it tracks | Framework field | Values |
-|-----------|---------------|-----------------|--------|
-| Verification status | Has someone checked this? | Status | [ ] / [~] / [x] / [!] |
-| Evidence strength | How well-supported is this? | Confidence Tier | ESTABLISHED / SUPPORTED / EMERGING / SPECULATIVE |
-| Source origin | Where does the evidence come from? | Source Tier | A–F |
-
-### Common Migration Patterns
-
-| Legacy Tag | Status | Confidence | Source Tier | Notes |
-|-----------|--------|------------|-------------|-------|
-| [VERIFIED] | [x] | (assess separately) | (assess separately) | Verified = checked, not necessarily strong |
-| [HIGH CONF] | (assess separately) | SUPPORTED or ESTABLISHED | (assess separately) | Confidence ≠ verification |
-| [LOW CONF] | (assess separately) | EMERGING or SPECULATIVE | (assess separately) | May still be verified |
-| [OWN DATA] | (assess separately) | (assess by rigor) | E* | *See own-data guidance above |
-| [NEEDS SOURCE] | [ ] | SPECULATIVE | F | No source yet = logical inference at best |
-| [TEXTBOOK] | [x] | ESTABLISHED | C | Textbook consensus |
-| [UNDER REVIEW] | [~] | (assess separately) | E | Own work not yet peer-reviewed |
-
-**Key principle:** A claim can be [x] Verified and EMERGING (you checked the source — it's a single study). A claim can be [ ] Unverified and ESTABLISHED (it's textbook consensus — you just haven't checked the page number yet). Don't conflate the dimensions.
-
----
-
-## Claim Lifecycle (Empirical Papers)
-
-<!-- DR-008: In empirical papers, claims progress through stages as experiments
-     are conducted and analyzed. This lifecycle tracks where each claim stands
-     so coverage metrics reflect actual progress, not missing evidence. -->
-
-| Stage | Description | Status | Confidence | Example |
-|-------|------------|--------|------------|---------|
-| **Hypothesis** | Claim stated but experiment not yet run | [ ] | SPECULATIVE | "We expect force error >10%" |
-| **Data collection** | Experiment running or complete, not yet analyzed | [~] | SPECULATIVE | Data files collected, analysis pending |
-| **Analysis complete** | Results available, not yet independently checked | [~] | EMERGING–SUPPORTED | "Mean force error was 14.3% (SD=2.1)" |
-| **Verified** | Results checked, analysis reproducible | [x] | EMERGING–ESTABLISHED | Verified by re-running analysis script |
-
-### Phase-Aware Coverage
-
-Claims in the Hypothesis or Data collection stages are **pending data** — they should not
-count against coverage targets. Track them separately:
-
-- **Coverage** = Verified / (Total - Pending Data)
-- **Pending Data** = claims at Hypothesis or Data collection stage
-
-This prevents misleading coverage numbers during the writing process. A paper at the
-analysis stage might show 40% naive coverage but 85% adjusted coverage — the remaining
-claims are pending data, not missing evidence.
 
 ---
 
