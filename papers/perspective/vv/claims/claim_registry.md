@@ -129,7 +129,7 @@
 | Toulmin 1958/2003 | S3-1 | Verify 6 components; confirm operationalizability claims | [ ] |
 | Whetten 1989 (AMR) | S3-2 | Verify What/How/Why/When framework | [ ] |
 | Gupta et al. 2024 (ACL) | S3-1, S4-3 | Verify Toulmin-based LLM prompting outperforms generic | [ ] |
-| PeerArg 2024 (LREC-COLING) | S4-3 | Verify structured + LLM > LLM alone finding | [ ] |
+| PeerArg 2024 (NeLaMKRR@KR) | S4-3 | Verify structured + LLM > LLM alone finding | [ ] |
 | Liang et al. 2024 | S1-1 | Verify AI citation hallucination evidence | [ ] |
 
 ### Own Data

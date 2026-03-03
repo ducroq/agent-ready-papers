@@ -381,7 +381,7 @@ Papers written using this framework live in [`papers/`](papers/). Each paper pro
 
 | Paper | Directory | Status | Target |
 |-------|-----------|--------|--------|
-| Paper 1: The Verification Gap (Perspective) | [`papers/perspective/`](papers/perspective/) | Phase 1 — Scaffold complete, ready to write | Learned Publishing |
+| Paper 1: The Verification Gap (Perspective) | [`papers/perspective/`](papers/perspective/) | Phase 3 — First draft complete (~3,450 words) | Learned Publishing |
 | Paper 2: Verification Infrastructure (DSR) | — | Not yet started | JAIS |
 
 See [`decisions/DR-006_publication-roadmap.md`](decisions/DR-006_publication-roadmap.md) for the publication strategy and sequencing.

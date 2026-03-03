@@ -20,4 +20,4 @@ Compared GPT-4 feedback with human peer reviewer feedback from 15 Nature family 
 Establishes that LLM-based paper review is viable but needs infrastructure. LLMs alone match human reviewers on surface feedback but miss deeper argument issues. This supports the project's core thesis: verification infrastructure (templates, registries, checklists) + LLM capability > LLM capability alone.
 
 ## Related
-- PeerArg (2024). "Argumentative Peer Review with LLMs." LREC-COLING 2024. arXiv:2409.16813. Finding: formal argumentation structure + LLM > LLM alone.
+- Sukpanichnant, Rapberger & Toni (2024). "PeerArg: Argumentative Peer Review with LLMs." NeLaMKRR@KR 2024. arXiv:2409.16813. Finding: formal argumentation structure + LLM > LLM alone.

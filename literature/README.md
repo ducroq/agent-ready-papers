@@ -69,7 +69,7 @@ Sources consulted during the development of this project, particularly for DR-00
 | ID | Author(s) | Year | Title | Venue | File |
 |----|-----------|------|-------|-------|------|
 | L39 | Liang et al. | 2024 | Can LLMs Provide Useful Feedback on Research Papers? | NEJM AI | [liang-2024](sources/liang-2024.md) |
-| L40 | PeerArg | 2024 | Argumentative Peer Review with LLMs | LREC-COLING | [peerarg-2024](sources/peerarg-2024.md) |
+| L40 | Sukpanichnant, Rapberger & Toni | 2024 | PeerArg: Argumentative Peer Review with LLMs | NeLaMKRR@KR | [peerarg-2024](sources/peerarg-2024.md) |
 | L41 | Li et al. | 2024 | LLMs-as-Judges: A Comprehensive Survey | arXiv | -- |
 | L42 | Yeh, Wan & Huang | 2024 | CoCoLoFa: Logical Fallacy Dataset | EMNLP | -- |
 
