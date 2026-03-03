@@ -375,6 +375,17 @@ Ready-to-use starter files in [`templates/`](templates/):
 
 Copy what you need, delete the comments, fill in your specifics.
 
+## Paper Projects
+
+Papers written using this framework live in [`papers/`](papers/). Each paper project has its own CLAUDE.md, claim registry, writing guide, and verification infrastructure — instantiated from the templates above.
+
+| Paper | Directory | Status | Target |
+|-------|-----------|--------|--------|
+| Paper 1: The Verification Gap (Perspective) | [`papers/perspective/`](papers/perspective/) | Phase 1 — Scaffold complete, ready to write | Learned Publishing |
+| Paper 2: Verification Infrastructure (DSR) | — | Not yet started | JAIS |
+
+See [`decisions/DR-006_publication-roadmap.md`](decisions/DR-006_publication-roadmap.md) for the publication strategy and sequencing.
+
 ## Further Reading
 
 - **[`docs/METHODOLOGY.md`](docs/METHODOLOGY.md)** — How these patterns were developed from three real paper projects, including the concrete failures that shaped them
