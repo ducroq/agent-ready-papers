@@ -6,7 +6,7 @@ This paper argues that the scholarly community lacks verification infrastructure
 
 - **Target:** Learned Publishing (primary), Research Integrity and Peer Review (backup)
 - **Deadline:** TBD
-- **Status:** Phase 1 — Framing (scaffold created, registry populated, ready to write)
+- **Status:** Phase 3 — Writing (first draft complete)
 
 ## Core Concept
 
@@ -52,7 +52,8 @@ We propose a typed verification model: CLAIMs (source-verifiable facts), ARGUMEN
 
 | File | Purpose |
 |------|---------|
-| `manuscript.md` | Manuscript source (created during writing) |
+| `manuscript.tex` | LaTeX manuscript source |
+| `references.bib` | BibTeX references |
 | `vv/claims/claim_registry.md` | All claims with verification status |
 | `writing-guide.md` | Section-to-registry mapping with language calibration |
 | `review-prompt.md` | Peer review simulation (Variant B — non-empirical) |
@@ -65,7 +66,8 @@ We propose a typed verification model: CLAIMs (source-verifiable facts), ARGUMEN
 ```
 papers/perspective/
 ├── CLAUDE.md                    <- This file (READ FIRST)
-├── manuscript.md                <- Manuscript (created during writing)
+├── manuscript.tex               <- LaTeX manuscript source
+├── references.bib               <- BibTeX references
 ├── writing-guide.md             <- Section-to-registry mapping
 ├── review-prompt.md             <- Peer review simulation
 ├── anti-hallucination.md        <- Citation verification checklist
@@ -99,12 +101,23 @@ This is the framework eating its own dog food. Any friction, gaps, or false fail
 
 ## Current Status
 
-**Phase:** 1 — Framing
+**Phase:** 3 — Writing (first draft complete)
+
+**Completed:**
+- Scaffold (CLAUDE.md, claim registry, writing guide, review prompt, anti-hallucination checklist)
+- First draft of manuscript.tex (~3,450 words incl. abstract, 5 sections)
+- references.bib (9 entries, all DOIs verified)
 
 **Next priorities:**
-1. Create backlog for first writing session
-2. Begin Section 1 draft (The Problem)
-3. Verify P0 claims in registry before writing
+1. Verify P0 claims in registry (EQUATOR count, Gregor types, audit data)
+2. Run anti-hallucination checklist on all citations
+3. Run review prompt (peer review simulation)
+4. Revise manuscript based on review
+5. Verify DOIs for all references.bib entries
+
+**Reference corrections found during writing:**
+- equator-gap.md attributes GoodReports to "Butcher et al. 2021" — actual first author is Struthers (DOI verified: 10.1186/s12874-021-01402-x)
+- peerarg-2024.md lists venue as "LREC-COLING 2024" — actual venue is NeLaMKRR@KR 2024 (verified via arXiv:2409.16813)
 
 ---
 

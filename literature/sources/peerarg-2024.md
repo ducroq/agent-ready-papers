@@ -1,11 +1,12 @@
 # PeerArg 2024
 
 ## Bibliographic Info
-- **Authors:** (multiple authors)
+- **Authors:** Purin Sukpanichnant, Anna Rapberger, Francesca Toni
 - **Year:** 2024
 - **Title:** PeerArg: Argumentative Peer Review with LLMs
-- **Venue:** Proceedings of LREC-COLING 2024
+- **Venue:** Proceedings of NeLaMKRR@KR 2024
 - **URL:** https://arxiv.org/abs/2409.16813
+- **Note:** Previously listed as LREC-COLING 2024; corrected to NeLaMKRR@KR 2024 after arXiv verification (2026-03-03)
 
 ## Summary
 Framework that represents each peer review as a bipolar argumentation framework (support and attack relations), combines multiple reviews, and aggregates to predict paper acceptance. Uses symbolic AI methods from computational argumentation to enhance LLM-based review understanding. Outperforms end-to-end LLMs on review aggregation.
