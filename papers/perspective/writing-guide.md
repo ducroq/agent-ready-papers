@@ -4,7 +4,7 @@
      paper sections with language calibration. Consult before writing or
      editing any section. -->
 
-**Paper:** The Verification Gap: Why AI-Augmented Academic Writing Needs Reporting Guidelines Beyond Citation Checking
+**Paper:** The Verification Gap: Why AI-Augmented Academic Writing Needs Reporting Guidelines for Reasoning
 **Last Updated:** 2026-03-03 (post-verification update: tiers, references, and counts corrected)
 
 ---

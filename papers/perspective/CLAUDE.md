@@ -1,4 +1,4 @@
-# The Verification Gap: Why AI-Augmented Academic Writing Needs Reporting Guidelines Beyond Citation Checking
+# The Verification Gap: Why AI-Augmented Academic Writing Needs Reporting Guidelines for Reasoning
 
 This paper argues that the scholarly community lacks verification infrastructure for non-empirical papers written with AI assistance. Citation checkers and grounded generation address factual accuracy, but argument quality — warrant validity, confidence calibration, boundary conditions — has no structured reporting framework. EQUATOR covers empirical papers (~700 guidelines); nothing covers the rest.
 
@@ -131,11 +131,19 @@ This is the framework eating its own dog food. Any friction, gaps, or false fail
 - Added engineering fidelity audit specifics (third audit)
 - Removed RefChecker/scite.ai names (uncitable tools)
 - Added DOIs for gregor2006 and peerarg2024
+- Title broadened: "Reporting Guidelines for Reasoning" (was "Beyond Citation Checking")
+- Added Appendix A: self-demonstrating typed verification (registry table, 3 worked examples, corrections)
+- Added forward reference to Appendix A in Section 4 limitations paragraph
+- Added Discussion-section bridging sentence in Section 2 (reasoning gap applies to empirical papers too)
+- Added fourth future direction in Section 5 (Discussion sections of empirical papers)
+- Re-audited Engineering Fidelity paper with updated framework (audits/engineering-fidelity-audit-2.md)
+- Created revision instructions for Engineering Fidelity author (REVISION_INSTRUCTIONS.md)
 
 **Next priorities:**
-1. Co-author review (Gate 3)
+1. Co-author review (Gate 3) — title change + Appendix A are significant additions to discuss
 2. Decide submission article type: "Original Article" or "Opinion" (LP uses "Opinion" for perspective-type pieces)
 3. Pre-submission enquiry to LP editor (optional)
+4. Consider feeding Engineering Fidelity Discussion-coverage pattern (100% facts vs 25% reasoning) into Paper 1 evidence
 
 **Reference corrections found during writing:**
 - equator-gap.md attributes GoodReports to "Butcher et al. 2021" — actual first author is Struthers (DOI verified: 10.1186/s12874-021-01402-x)
@@ -143,4 +151,4 @@ This is the framework eating its own dog food. Any friction, gaps, or false fail
 
 ---
 
-*Last updated: 2026-03-03*
+*Last updated: 2026-03-04*

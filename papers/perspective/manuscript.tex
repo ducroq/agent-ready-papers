@@ -16,7 +16,7 @@
 
 % ---------------------------------------------------------------
 \title{The Verification Gap: Why AI-Augmented Academic Writing\\
-       Needs Reporting Guidelines Beyond Citation Checking}
+       Needs Reporting Guidelines for Reasoning}
 
 \author{[Author Name]\textsuperscript{1}\\[4pt]
         \small\textsuperscript{1}[Affiliation]\\
@@ -235,10 +235,13 @@ collection, analysis, and reporting---domains for which structured
 checklists are well-suited.  Non-empirical papers need verification of
 argument quality: warrant validity, reasoning coherence, confidence
 calibration, and boundary specification.  These are different
-verification tasks that may require different infrastructure.  The
-question is whether established frameworks from argumentation theory and
-theory-building methodology can provide a foundation for this
-infrastructure.
+verification tasks that may require different infrastructure.  While this
+gap is most acute in purely non-empirical papers, it represents a
+systemic risk wherever authors move from data-driven claims to
+interpretive reasoning---including the discussion sections of empirical
+research.  The question is whether established frameworks from
+argumentation theory and theory-building methodology can provide a
+foundation for this infrastructure.
 
 
 % ===============================================================
@@ -468,7 +471,10 @@ approach proposed here.
 
 Several important limitations apply to these preliminary findings.  All
 three audits were retrospective---the framework was applied after the
-papers were drafted, not during writing.  All three projects share the
+papers were drafted, not during writing.  (Appendix~\ref{app:self}
+presents a complementary data point: the verification registry
+maintained during the writing of this paper, showing the framework
+applied prospectively.)  All three projects share the
 same author team and fall within a related domain cluster (medical
 simulation and measurement science).  The audits were conducted by the
 framework's developers, introducing potential confirmation bias.  These
@@ -550,7 +556,10 @@ and confidence calibration criteria as prompting infrastructure for
 writing assistants.  Third, empirical validation comparing the quality of
 papers written with and without typed verification infrastructure would
 provide the evidence base needed to move the proposal from preliminary to
-supported.
+supported.  Fourth, while this paper focuses on non-empirical paper
+types, the discussion sections of empirical papers involve the same
+argumentative move from data to interpretation---and may benefit from the
+same typed verification procedures applied to that transition.
 
 The EQUATOR Network has spent two decades building nearly 700
 reporting guidelines for empirical health research.  These guidelines
@@ -570,6 +579,135 @@ the rest.
 \section*{Acknowledgements}
 
 [To be added.]
+
+
+% ===============================================================
+% APPENDIX A — SELF-APPLICATION
+% ===============================================================
+\appendix
+\section{Self-Application of the Typed Verification Framework}
+\label{app:self}
+
+This paper uses the framework it describes.  Unlike the three
+retrospective audits in Section~4, the claim registry for this
+manuscript was maintained during writing---entries were registered,
+typed, and verified as the paper was drafted.  This appendix summarises
+that registry to provide a prospective data point that reviewers can
+independently verify.
+
+\subsection*{Registry summary}
+
+Table~\ref{tab:registry} presents all 18 registered entries.  The
+distribution across types---15 claims, 2 arguments, 1
+proposition---reflects the paper's structure: a perspective article
+grounded primarily in verifiable facts and reasoning chains, culminating
+in a single recommendation.
+
+\begin{table}[htbp]
+\centering
+\caption{Complete verification registry for this manuscript (18 entries).}
+\label{tab:registry}
+\footnotesize
+\begin{tabular}{@{}lllll@{}}
+\toprule
+\textbf{ID} & \textbf{Type} & \textbf{Priority} & \textbf{Confidence} & \textbf{Status} \\
+\midrule
+S1-1 & Claim      & P0 & Supported   & Verified \\
+S1-2 & Claim      & P0 & Supported   & Verified \\
+S1-3 & Claim      & P1 & Emerging    & Verified \\
+S1-4 & Claim      & P0 & Emerging    & Verified \\
+S2-1 & Claim      & P0 & Established & Verified \\
+S2-2 & Claim      & P0 & Established & Verified \\
+S2-3 & Claim      & P1 & Established & Verified \\
+S2-4 & Claim      & P1 & Supported   & Verified \\
+S3-1 & Claim      & P1 & Supported   & Verified \\
+S3-2 & Claim      & P1 & Supported   & Verified \\
+S3-3 & Claim      & P1 & Emerging    & Verified \\
+S3-4 & Argument   & P0 & Emerging    & Verified \\
+S4-1 & Claim      & P0 & Emerging    & Verified \\
+S4-2 & Claim      & P1 & Emerging    & Verified \\
+S4-3 & Claim      & P1 & Supported   & Verified \\
+S4-4 & Argument   & P1 & Emerging    & Verified \\
+S5-1 & Proposition & P0 & Emerging   & Verified \\
+S5-2 & Claim      & P2 & Speculative & Verified \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection*{Worked examples by type}
+
+\paragraph{Claim (S2-1).}
+``The EQUATOR Network maintains nearly 700 reporting guidelines.''  This
+entry was initially drafted as ``approximately 500 guidelines'' based on
+a secondary source.  Verification against the EQUATOR website (accessed
+3~March 2026) returned 699 guidelines, prompting a correction to
+``nearly 700.''  The original figure would have understated the
+landscape by approximately 30\%, illustrating how even a straightforward
+factual claim benefits from structured source checking.
+
+\paragraph{Argument (S3-4).}
+``Claims, arguments, and propositions require fundamentally different
+verification procedures.''  This is the paper's central argument.
+Table~\ref{tab:toulmin} shows the Toulmin decomposition as applied
+during verification.
+
+\begin{table}[htbp]
+\centering
+\caption{Toulmin decomposition of the central argument (S3-4).}
+\label{tab:toulmin}
+\small
+\begin{tabular}{@{}lp{10cm}@{}}
+\toprule
+\textbf{Component} & \textbf{Content} \\
+\midrule
+Claim     & Different unit types require different verification
+            procedures. \\
+Grounds   & Proposition audit entry H4 was scored speculative (0.25)
+            under claim-level verification but earned emerging under
+            Toulmin analysis (4/5 criteria met, premises independently
+            verified). \\
+Warrant   & If applying the wrong verification procedure to a correctly
+            reasoned entry produces a false failure, then type-specific
+            procedures are necessary to avoid systematic
+            misclassification. \\
+Qualifier & Emerging---demonstrated in one retrospective audit; not
+            independently validated. \\
+Rebuttal  & The evidence rests on a single worked example; a larger
+            sample across domains would be needed to establish
+            generalisability. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Proposition (S5-1).}
+``The scholarly community should develop verification infrastructure for
+non-empirical papers.''  This is the paper's single proposition.  Its
+Whetten decomposition: \emph{What}---typed verification infrastructure
+distinguishing claims, arguments, and propositions.
+\emph{How}---per-type checklists adapted from Toulmin (arguments) and
+Whetten (propositions), with confidence-to-language mapping.
+\emph{Why}---EQUATOR provides nearly 700 guidelines for empirical
+research (S2-1) while non-empirical papers have none (S2-2), and AI
+writing amplifies the verification challenge.  \emph{Boundary
+conditions}---applies to academic papers intended for peer-reviewed
+publication; excludes informal writing, journalism, and creative
+writing; the proposed checklists are grounded in Western argumentation
+traditions and may need adaptation for other scholarly conventions.
+
+\subsection*{Corrections discovered during verification}
+
+The verification process caught four categories of issue before
+submission: (1)~the EQUATOR guideline count was corrected from
+approximately 500 to nearly 700 (S2-1); (2)~the citation hallucination
+claim (S1-1) initially lacked a source, prompting a literature search
+that identified \citet{mugaanyi2024}; (3)~the retyping count for the
+proposition audit was corrected from 15/2/4 to 16/2/3 to match the
+audit source table (S4-1); and (4)~six confidence calibration issues
+were identified in the technology audit (S4-2), where manuscript
+language was more confident than the evidence warranted.  These
+corrections---ranging from a factual error to missing evidence to
+miscalibrated language---are the kinds of issues the framework is
+designed to catch.
 
 
 % ===============================================================
