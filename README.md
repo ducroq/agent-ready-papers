@@ -57,6 +57,14 @@ The registry tracks three unit types:
 
 Most entries are CLAIMs. ARGUMENTs and PROPOSITIONs appear in Discussion and Conclusion sections — the parts reviewers scrutinize most. All three share the same priority, confidence, and language calibration system.
 
+For papers with quantitative content (equations, derived values, numerical tables), a fourth verification procedure applies:
+
+| Type | What it is | Where it appears | Verification |
+|------|-----------|-----------------|--------------|
+| **CALCULATION** | Derived numerical value from a stated formula | Methods, Results, technical appendices | Does the stated result follow from stated inputs? |
+
+Calculation verification uses **mechanical reproduction** — substituting values into formulas and computing step by step — rather than plausibility assessment. In testing, an LLM prompted to "review for soundness" missed 3/3 arithmetic errors in a 68-equation document, while an LLM prompted to "numerically reproduce every calculation" caught all three. The errors survived because they produced plausible-looking numbers. See [`audits/equation-verification-journey.md`](audits/equation-verification-journey.md) for the full case study and [`audits/driven-pendulum-retrofit.md`](audits/driven-pendulum-retrofit.md) §9 for the evidence.
+
 ### Priority (what breaks if this is wrong?)
 
 ### Priority (what breaks if this is wrong?)
@@ -338,6 +346,9 @@ Without page budgets, agents expand every section. A 4-page paper becomes 8 page
 ### Mixing terminology across domains
 In interdisciplinary work, letting agents use terms freely creates a paper that confuses every reviewer. A glossary isn't overhead — it's a prerequisite for clarity.
 
+### Reviewing equations for "soundness" instead of reproducing them
+AI-generated equations can contain errors that look right. A formula with correct units, reasonable magnitude, and coherent surrounding prose will pass both human and AI review if the reviewer assesses plausibility rather than computing. The fix: for every derived value in a technical paper, substitute the stated inputs into the stated formula and verify the result matches. This mechanical check catches errors that expert assessment misses. An equation-checker prompt template is available in the [driven-pendulum project](https://github.com/ducroq/driven-pendulum/tree/main/tools/equation-checker).
+
 ### Confident language for weak claims
 "Our results demonstrate" for a SPECULATIVE inference is a credibility risk. The confidence-to-language mapping is mechanical but essential — it prevents the most subtle form of academic dishonesty.
 
@@ -372,6 +383,7 @@ Ready-to-use starter files in [`templates/`](templates/):
 - **[`decision-record.md`](templates/decision-record.md)** — Lightweight ADR for scope and methodology decisions
 - **[`anti-hallucination.md`](templates/anti-hallucination.md)** — Citation verification checklist
 - **[`glossary.md`](templates/glossary.md)** — Cross-domain terminology reference
+- **[`equation-checker.md`](templates/equation-checker.md)** — System prompt for mechanical verification of equations and derived values
 
 Copy what you need, delete the comments, fill in your specifics.
 
@@ -381,8 +393,9 @@ Papers written using this framework live in [`papers/`](papers/). Each paper pro
 
 | Paper | Directory | Status | Target |
 |-------|-----------|--------|--------|
-| Paper 1: The Verification Gap (Perspective) | [`papers/perspective/`](papers/perspective/) | Phase 3 — First draft complete (~3,450 words) | Learned Publishing |
+| Paper 1: The Verification Gap (Perspective) | [`papers/perspective/`](papers/perspective/) | Phase 3 — Draft complete, Gate 3 (co-author review) | Learned Publishing |
 | Paper 2: Verification Infrastructure (DSR) | — | Not yet started | JAIS |
+| Paper 3: SE-Inspired Verification Pipeline | — | Not yet started (equation-checker is proof of concept) | TBD |
 
 See [`decisions/DR-006_publication-roadmap.md`](decisions/DR-006_publication-roadmap.md) for the publication strategy and sequencing.
 

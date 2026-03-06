@@ -1,6 +1,6 @@
 # Paper 1 — Backlog
 
-Last updated: 2026-03-04
+Last updated: 2026-03-06
 
 ## Done
 
@@ -15,6 +15,12 @@ Last updated: 2026-03-04
 - [x] Add fourth future direction (Discussion sections of empirical papers) in Section 5
 - [x] Re-audit Engineering Fidelity paper with updated framework (audit-2)
 - [x] Create revision instructions for Engineering Fidelity author
+- [x] Add calculation verification as failure mode (S1-5) — driven-pendulum evidence (Gemini 0/3 vs Sonnet 3/3)
+- [x] Add fifth future direction (calculation verification as distinct procedure) in Section 5
+- [x] Create equation-verification-journey.md (discovery log)
+- [x] Update driven-pendulum audit with §9 (equation verification blind spot)
+- [x] Integrate calculation verification into framework README
+- [x] Update claim registry (S1-5, coverage 19/19)
 
 ## Active (Paper 1)
 

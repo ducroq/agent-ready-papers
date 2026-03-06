@@ -17,11 +17,11 @@
 | Priority | Total | Drafted | Verified | Needs Evidence | Coverage |
 |----------|-------|---------|----------|----------------|----------|
 | P0 | 8 | 8 | 8 | 0 | 100% |
-| P1 | 9 | 9 | 9 | 0 | 100% |
+| P1 | 10 | 10 | 10 | 0 | 100% |
 | P2 | 1 | 1 | 1 | 0 | 100% |
-| **Total** | **18** | **18** | **18** | **0** | **100%** |
+| **Total** | **19** | **19** | **19** | **0** | **100%** |
 
-**Type distribution:** 15 CLAIMs, 2 ARGUMENTs, 1 PROPOSITION
+**Type distribution:** 16 CLAIMs, 2 ARGUMENTs, 1 PROPOSITION
 **Targets:** ≥85% overall, 100% P0, 90% P1, 70% P2
 
 ---
@@ -46,6 +46,7 @@
 | ID | Claim | Risk if Wrong |
 |----|-------|---------------|
 | S1-3 | Scope creep without architectural constraints | Weakens problem framing |
+| S1-5 | AI-generated equations contain arithmetic errors surviving plausibility review | Weakens breadth of problem framing beyond non-empirical |
 | S2-3 | Gregor's 5 theory types include 2 that are fundamentally non-empirical | Weakens theoretical grounding |
 | S2-4 | Argument quality is the primary verification challenge for non-empirical papers | Weakens the pivot from facts to arguments |
 | S3-1 | Toulmin framework provides operationalizable argument verification | Weakens proposal's theoretical basis |
@@ -73,6 +74,7 @@
 | S1-2 | AI agents exhibit confidence inflation — stating speculative claims with the same certainty as verified facts, using "demonstrates" where "suggests" is appropriate | CLAIM | P0 | SUPPORTED | Liang et al. 2024 (NEJM AI): LLMs catch surface issues, struggle with deep argument analysis; audits/technology-paper-retrofit.md §4 Language Calibration Impact: 6/22 entries need significant recalibration (T15, T16, T17, T18, T19, T21) | A + E | [x] |
 | S1-3 | Without architectural constraints (page budgets, section specifications), AI agents expand arguments beyond evidence, add unnecessary sections, and exceed page budgets | CLAIM | P1 | EMERGING | README.md "Architecture Blueprints"; technology audit G2 (no writing guide → unregistered discussion claims); hedged with "may" | E + F | [x] |
 | S1-4 | Existing solutions (citation checkers like RefChecker/scite.ai, model-level RAG/grounded generation) operate at model or tool level; no process-level verification infrastructure exists for academic writing | CLAIM | P0 | EMERGING | Negative claim qualified with "to our knowledge" in manuscript; EQUATOR gap analysis confirms no process-level frameworks | F | [x] |
+| S1-5 | AI-generated equations can contain arithmetic errors that survive plausibility review but are caught by mechanical numerical reproduction | CLAIM | P1 | EMERGING | Driven Pendulum project: Gemini review (0/3 errors found assessing "soundness") vs Sonnet 4.5 review (3/3 found via numerical reproduction). See audits/driven-pendulum-retrofit.md §9; audits/equation-verification-journey.md | E | [x] |
 
 ### Section 2: The Landscape Gap
 

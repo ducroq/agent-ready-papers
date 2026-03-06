@@ -75,6 +75,7 @@ Example: "Given the ~700 EQUATOR guidelines for empirical research and zero for 
 | S1-1 | AI citation hallucination as distinct failure mode | CLAIM | EMERGING | "AI agents can invent plausible-sounding papers" — frame as documented risk, not speculation |
 | S1-2 | Confidence inflation — "demonstrates" vs "suggests" | CLAIM | EMERGING | "AI agents may state speculative claims with the same certainty as verified facts" |
 | S1-3 | Scope creep without architectural constraints | CLAIM | EMERGING | "Without structural constraints, AI-assisted drafts may expand beyond what evidence supports" |
+| S1-5 | AI-generated equations contain arithmetic errors surviving plausibility review | CLAIM | EMERGING | "AI-generated equations can contain arithmetic errors that survive review because they produce plausible-looking results" |
 | S1-4 | Existing solutions operate at model/tool level, not process level | CLAIM | EMERGING | "Current approaches address [specific tools] but do not provide process-level verification" |
 
 **Key sources:**
@@ -241,6 +242,7 @@ Example: "Given the ~700 EQUATOR guidelines for empirical research and zero for 
 | S1-1 | AI citation hallucination | CLAIM | EMERGING | "can invent", "documented cases" |
 | S1-2 | Confidence inflation | CLAIM | EMERGING | "may state", "tend to use" |
 | S1-3 | Scope creep | CLAIM | EMERGING | "may expand", "without constraints" |
+| S1-5 | Calculation errors in AI-generated equations | CLAIM | EMERGING | "can contain", "survive plausibility review" |
 | S1-4 | No process-level solutions | CLAIM | EMERGING | "we are not aware of", "current approaches address [tool] but not [process]" |
 | S2-1 | EQUATOR ~700 guidelines | CLAIM | EMERGING | "maintains approximately 500" — will likely upgrade after verification |
 | S2-2 | No non-empirical guidelines | CLAIM | EMERGING | "to our knowledge, no equivalent" |

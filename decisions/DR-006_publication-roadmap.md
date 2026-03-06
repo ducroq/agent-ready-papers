@@ -82,17 +82,36 @@ Two papers, sequenced to build on each other:
 
 **Timeline:** After Paper 1 is submitted. Requires gathering additional evaluation metrics from the three source projects.
 
+### Paper 3: SE-Inspired Verification Pipeline (Methods/Tools)
+
+**Added:** 2026-03-06. Motivated by the discovery that the equation-checker prompt (a single SE-inspired verification agent) caught 3/3 arithmetic errors that a general-purpose review missed. If one specialised agent works this well, a modular suite of them — each targeting a different defect class — could provide comprehensive verification coverage for empirical and technical papers.
+
+**Working title:** TBD — "Verification Agents for AI-Augmented Academic Writing: An SE-Inspired Pipeline" or similar
+
+**Core argument:** Systems engineering verification types (unit testing, integration testing, regression testing, static analysis, FMEA) can be mapped to paper-verification subagents. Each agent is a prompt, not a program — specialised instructions that force an LLM into a specific verification mode. The equation-checker is the proof of concept; the paper presents a suite tested on real papers.
+
+**Target venues:** TBD — depends on results. Could be software engineering (EMSE, JSS), scholarly communication (Learned Publishing), or AI tools (similar venues to Paper 2).
+
+**Depends on:** Building and testing 2-3 more subagents beyond the equation-checker.
+
+**Evidence:** `audits/equation-verification-journey.md`, `papers/perspective/backlog-paper2.md` (candidate subagent table)
+
 ## Sequencing
 
 ```
-Paper 1 (perspective)              Paper 2 (DSR)
-├── Establishes the gap            ├── Cites Paper 1
-├── Proposes the model             ├── Full artifact description
-├── Quick to publish               ├── Rigorous evaluation
-└── Plants the flag                └── Design theory contribution
+Paper 1 (perspective)     Paper 2 (DSR)              Paper 3 (methods/tools)
+├── Establishes gap       ├── Cites Paper 1          ├── Cites Papers 1 & 2
+├── Proposes model        ├── Full artifact           ├── Specialised agents
+├── Quick to publish      ├── Rigorous evaluation     ├── Empirical + technical focus
+└── Plants the flag       └── Design theory           └── Operational SE mapping
 ```
 
-Paper 1 establishes the territory (Swales Move 1) and the niche (Move 2). Paper 2 occupies the niche (Move 3) with the full artifact and evaluation. Paper 1 can be cited by Paper 2 as prior work that identified the gap.
+Paper 1 establishes the territory (Swales Move 1) and the niche (Move 2). Paper 2 occupies the niche (Move 3) with the typed verification artifact. Paper 3 extends the SE mapping from metaphor to operational tooling, focused on quantitative and empirical content where Paper 2's argument-level verification is necessary but insufficient.
+
+**Separation of concerns:**
+- Paper 1: the *problem* (verification gap)
+- Paper 2: the *solution for reasoning* (typed verification)
+- Paper 3: the *solution for quantitative content* (modular verification agents)
 
 ## Meta: Using the Framework
 
@@ -120,4 +139,5 @@ This serves as both methodology and additional evaluation evidence ("the framewo
 - Paper 1 is rejected — reconsider venue selection or reframe the argument
 - A competing publication addresses the EQUATOR gap before Paper 1 is submitted — pivot to differentiation
 - The DSR paper (Paper 2) needs more evaluation evidence — consider adding a fourth paper project as a prospective case study
-- The podcast/creative writing pivot happens — consider a third paper on extending verification to non-academic structured content
+- The podcast/creative writing pivot happens — consider extending verification to non-academic structured content
+- Paper 3 subagent testing shows low signal-to-noise — fold best results into Paper 2 instead of a separate paper

@@ -72,7 +72,7 @@ guidelines, verification, argumentation, non-empirical research
 
 % ===============================================================
 % SECTION 1 — THE PROBLEM
-% Registry entries: S1-1, S1-2, S1-3, S1-4
+% Registry entries: S1-1, S1-2, S1-5, S1-3, S1-4
 % ===============================================================
 \section{Introduction: The Problem}
 
@@ -121,8 +121,25 @@ technology paper under review at an IEEE journal identified six of
 twenty-two verifiable entries where the manuscript language was more
 confident than the underlying evidence warranted.
 
+% S1-5: Calculation errors (CLAIM, P1, EMERGING)
+A third risk applies specifically to technical and empirical papers:
+AI-generated equations and derived values can contain arithmetic errors
+that survive review because they produce plausible-looking results.  In
+one instructive case, a theory document containing 68 equations was
+reviewed by two different LLMs.  One, prompted to assess physical
+soundness, found no errors.  The other, prompted to numerically
+reproduce every calculation, found three genuine errors---a label
+mismatch (values computed at a different input than stated), a formula
+with a spurious coefficient, and an internal inconsistency between a
+per-unit result and its aggregate.  All three produced numbers in
+physically reasonable ranges, which is precisely why they survived
+plausibility review.  This suggests that for quantitative content,
+\emph{mechanical reproduction} (substituting values and computing)
+catches errors that \emph{expert assessment} (evaluating whether the
+physics looks right) does not.
+
 % S1-3: Scope creep (CLAIM, P1, EMERGING)
-A third risk is scope creep.  Without structural constraints such as
+A fourth risk is scope creep.  Without structural constraints such as
 section specifications and word budgets, AI-assisted drafts may expand
 arguments beyond what the available evidence supports, introduce
 tangential sections, and exceed format requirements.  While scope
@@ -490,31 +507,29 @@ open question.
 % ===============================================================
 \section{Call to Action}
 
-The preceding sections have traced a chain of reasoning.  AI writing
-assistance creates failure modes beyond citation hallucination, including
-confidence inflation and argument-level degradation (Section~1).  The
-most comprehensive verification infrastructure, EQUATOR's nearly
-700 reporting guidelines, addresses empirical research exclusively;
-non-empirical paper types---which include two of Gregor's five theory
-types---have no equivalent verification framework (Section~2).
-Established frameworks from argumentation theory (Toulmin) and
-theory-building methodology (Whetten) may provide a foundation for typed
-verification that distinguishes claims, arguments, and propositions
-(Section~3).  Preliminary evidence from retrospective audits suggests
-that this approach can reveal actionable issues, including false failures
-caused by type misclassification (Section~4).
-
 % S5-1: The proposition (PROPOSITION, P0, EMERGING)
-On the basis of this reasoning, we propose that the scholarly community
-develop verification infrastructure for non-empirical papers.  Such
-infrastructure would extend the principle underlying
-EQUATOR---that structured reporting improves research quality---to paper
-types that currently have no systematic verification support.
-Specifically, we propose that verification procedures be differentiated
-by unit type: source verification for claims, Toulmin-based analysis for
-arguments, and Whetten-based analysis for propositions.  Each type would
-have associated checklists, confidence calibration criteria, and language
-guidelines that authors can apply during manuscript preparation.
+AI writing assistance creates verification challenges that extend beyond
+citation hallucination (Section~1), yet EQUATOR's nearly 700 reporting
+guidelines address empirical research exclusively---leaving non-empirical
+paper types without systematic verification support (Section~2).  On the
+basis of this gap, and preliminary evidence that typed verification
+reveals actionable issues invisible to conventional approaches
+(Section~4), we propose that the scholarly community develop verification
+infrastructure for non-empirical papers.  Specifically, we propose that
+verification procedures be differentiated by unit type:
+
+\begin{itemize}
+\item \textbf{Source verification} for claims (does the cited source say
+  this?);
+\item \textbf{Toulmin-based analysis} for arguments (is the reasoning
+  valid, are the premises established, is the qualifier calibrated?);
+\item \textbf{Whetten-based analysis} for propositions (are the boundary
+  conditions specified, is the underlying logic explicit?).
+\end{itemize}
+
+\noindent Each type would have associated checklists, confidence
+calibration criteria, and language guidelines that authors can apply
+during manuscript preparation.
 
 This proposal has specific boundary conditions.  It applies to academic
 papers intended for peer-reviewed publication in fields where argument
@@ -559,7 +574,13 @@ provide the evidence base needed to move the proposal from preliminary to
 supported.  Fourth, while this paper focuses on non-empirical paper
 types, the discussion sections of empirical papers involve the same
 argumentative move from data to interpretation---and may benefit from the
-same typed verification procedures applied to that transition.
+same typed verification procedures applied to that transition.  Fifth,
+the calculation errors described in Section~1---where AI-generated
+equations produce plausible but incorrect results---suggest that
+numerical reproduction (mechanically recomputing derived values from
+stated inputs) may warrant recognition as a distinct verification
+procedure alongside source checking, argument analysis, and proposition
+evaluation.
 
 The EQUATOR Network has spent two decades building nearly 700
 reporting guidelines for empirical health research.  These guidelines
@@ -597,15 +618,15 @@ independently verify.
 
 \subsection*{Registry summary}
 
-Table~\ref{tab:registry} presents all 18 registered entries.  The
-distribution across types---15 claims, 2 arguments, 1
+Table~\ref{tab:registry} presents all 19 registered entries.  The
+distribution across types---16 claims, 2 arguments, 1
 proposition---reflects the paper's structure: a perspective article
 grounded primarily in verifiable facts and reasoning chains, culminating
 in a single recommendation.
 
 \begin{table}[htbp]
 \centering
-\caption{Complete verification registry for this manuscript (18 entries).}
+\caption{Complete verification registry for this manuscript (19 entries).}
 \label{tab:registry}
 \footnotesize
 \begin{tabular}{@{}lllll@{}}
@@ -616,6 +637,7 @@ S1-1 & Claim      & P0 & Supported   & Verified \\
 S1-2 & Claim      & P0 & Supported   & Verified \\
 S1-3 & Claim      & P1 & Emerging    & Verified \\
 S1-4 & Claim      & P0 & Emerging    & Verified \\
+S1-5 & Claim      & P1 & Emerging    & Verified \\
 S2-1 & Claim      & P0 & Established & Verified \\
 S2-2 & Claim      & P0 & Established & Verified \\
 S2-3 & Claim      & P1 & Established & Verified \\

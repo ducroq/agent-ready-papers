@@ -108,9 +108,9 @@ This is the framework eating its own dog food. Any friction, gaps, or false fail
 - First draft of manuscript.tex (~3,450 words incl. abstract, 5 sections)
 - references.bib (14 entries, all DOIs verified)
 - P0 verification: 8/8 verified (100%)
-- P1 verification: 9/9 verified (100%)
+- P1 verification: 10/10 verified (100%)
 - P2 verification: 1/1 verified (100%)
-- Overall: 18/18 (100% coverage — all targets exceeded)
+- Overall: 19/19 (100% coverage — all targets exceeded)
 - Anti-hallucination checklist: 14/14 references pass
 - Peer review simulation: scored 3.95/5.0 (upper "Minor revision")
 - Manuscript revisions based on review findings
@@ -138,9 +138,15 @@ This is the framework eating its own dog food. Any friction, gaps, or false fail
 - Added fourth future direction in Section 5 (Discussion sections of empirical papers)
 - Re-audited Engineering Fidelity paper with updated framework (audits/engineering-fidelity-audit-2.md)
 - Created revision instructions for Engineering Fidelity author (REVISION_INSTRUCTIONS.md)
+- Added S1-5: calculation verification as failure mode (driven-pendulum Gemini-vs-Sonnet evidence)
+- Added fifth future direction in Section 5 (numerical reproduction as distinct verification procedure)
+- Created audits/equation-verification-journey.md (discovery log)
+- Updated driven-pendulum audit with §9 (equation verification blind spot)
+- Integrated calculation verification into framework README
+- Registry updated: 19/19 entries, 16 CLAIMs, 2 ARGUMENTs, 1 PROPOSITION
 
 **Next priorities:**
-1. Co-author review (Gate 3) — title change + Appendix A are significant additions to discuss
+1. Co-author review (Gate 3) — title change + Appendix A + S1-5 are significant additions to discuss
 2. Decide submission article type: "Original Article" or "Opinion" (LP uses "Opinion" for perspective-type pieces)
 3. Pre-submission enquiry to LP editor (optional)
 4. Consider feeding Engineering Fidelity Discussion-coverage pattern (100% facts vs 25% reasoning) into Paper 1 evidence
@@ -151,4 +157,4 @@ This is the framework eating its own dog food. Any friction, gaps, or false fail
 
 ---
 
-*Last updated: 2026-03-04*
+*Last updated: 2026-03-06*
