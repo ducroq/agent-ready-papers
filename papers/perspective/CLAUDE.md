@@ -36,8 +36,10 @@ We propose a typed verification model: CLAIMs (source-verifiable facts), ARGUMEN
 | Making scope or methodology decisions | Latest `DR-*.md` — decision records |
 | Reviewing before submission | `review-prompt.md` — structured peer review simulation |
 | Stuck or unsure about a claim | `anti-hallucination.md` — citation verification checklist |
+| Adding or verifying literature sources | `../../literature/README.md` — 47 indexed sources by topic |
 | Understanding the framework repo | `../../README.md` — the framework this paper describes |
 | Checking audit data | `../../audits/*.md` — retrofit audits of source projects |
+| Stuck or debugging something weird | `../../memory/gotcha-log.md` — problem-fix archive |
 
 ## Hard Constraints
 

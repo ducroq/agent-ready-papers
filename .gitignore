@@ -1,6 +1,7 @@
 .claude/
 .DS_Store
 Thumbs.db
+memory/
 
 # LaTeX build artifacts
 *.aux
