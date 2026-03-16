@@ -177,7 +177,10 @@
 ### Verifying ARGUMENTs (Toulmin checklist)
 
 1. Is the claim clearly stated?
-2. Are the grounds (evidence) verified? (These should be CLAIMs in this registry)
+2. Are the grounds (evidence) verified CLAIMs in this registry?
+   - **Grounds traceability:** List the registry IDs that serve as grounds (e.g., S1-5, S1-7, S1-8)
+   - Each ground must be marked [x] verified in the registry
+   - SPECULATIVE grounds cannot support SUPPORTED or ESTABLISHED arguments
 3. Is the warrant (inferential bridge) explicit and valid for the target audience?
 4. Is the qualifier calibrated to evidence strength? (Maps to confidence tiers)
 5. Are the strongest counter-arguments addressed? (Not strawmen)
@@ -187,8 +190,17 @@
 1. Are all key constructs defined?
 2. Is the relationship clearly stated?
 3. Is the reasoning (warrant) explicit and valid?
-4. Are boundary conditions specified?
+4. Are boundary conditions specified? Check quality:
+   - [ ] Not **tautological** — boundary condition is specific, not restating the proposition
+   - [ ] Not a **moving target** — boundary condition is stable, not unfalsifiable
+   - [ ] Not **overgeneralized** — boundary condition is bounded, not open-ended
 5. Does it engage with alternative explanations?
+
+After completing the Whetten checklist, evaluate falsifiability:
+- [ ] Criterion is testable (not "if we decide it's false")
+- [ ] Criterion is independent of the proposition (not circular)
+- [ ] Criterion is specific enough to be measurable
+- [ ] Criterion is not a moving target
 
 ---
 

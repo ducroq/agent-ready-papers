@@ -39,7 +39,7 @@
 | Checking terminology | `glossary.md` — cross-domain term definitions |
 | Reviewing before submission | `review-prompt.md` — structured peer review simulation |
 | Stuck or unsure about a claim | `anti-hallucination.md` — citation verification checklist |
-| Ending a session | `backlog.md` — update progress; gotcha log — review, promote patterns, retire stale entries |
+| Ending a session | `backlog.md` — update progress; `../../memory/gotcha-log.md` — review, promote patterns, retire stale entries |
 
 ## Hard Constraints
 
@@ -50,6 +50,7 @@
 - Never claim own unpublished work as established — always note "under review" status
 - Never exceed page budget without explicit decision record
 - Never skip the anti-hallucination checklist for AI-introduced citations
+- If this paper describes a framework it also uses, add: **This paper uses the framework it describes** — all claims must be registered and verified using the infrastructure presented as the contribution (self-demonstration constraint)
 
 ## Key Files
 

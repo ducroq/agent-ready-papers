@@ -10,7 +10,9 @@
 
 ## 1. Core Principle
 
-Academic papers written with AI assistance require systematic verification to ensure correctness and credibility. The registry tracks three unit types: **CLAIMs** (factual statements with sources), **ARGUMENTs** (reasoning chains in Discussion/Conclusion), and **PROPOSITIONs** (novel contributions and recommendations). Each needs appropriate verification and language that matches its confidence tier.
+Academic papers written with AI assistance require systematic verification to ensure correctness and credibility. The registry tracks three unit types: **CLAIMs** (factual statements with sources), **ARGUMENTs** (reasoning chains in Discussion/Conclusion), and **PROPOSITIONs** (novel contributions and recommendations). Each needs appropriate verification and language that matches its confidence tier. For papers with quantitative content, a fourth verification procedure — **CALCULATION** (numerical reproduction) — applies alongside the registry but is tracked separately via the equation-checker tool.
+
+**Scope:** This framework applies to any outbound technical content — formal papers, but also informal technical communication (emails, messages, reports) containing quantitative claims, equations, or domain-specific terminology. The verification procedures scale down: a 3-equation WhatsApp message to a stakeholder benefits from equation-checker methodology just as a 68-equation theory document does.
 
 ---
 
@@ -45,6 +47,16 @@ Academic papers written with AI assistance require systematic verification to en
 | P1 | 90% verified, ≥90% at EMERGING or above |
 | P2 | 70% verified |
 | **Overall** | **≥85%** |
+
+### Section-Level Coverage Analysis
+
+Overall coverage can mask dramatic section-level variation. In audited projects, Discussion sections typically had 25–35% coverage while Methods/Results had 100%. This happens because Discussion sections contain ARGUMENTs and PROPOSITIONs that go unregistered when only CLAIMs are tracked.
+
+**At Gate 2, check coverage by section type:**
+- **Factual sections** (Introduction, Methods, Results): expect high CLAIM coverage
+- **Interpretive sections** (Discussion, Conclusion): expect ARGUMENTs and PROPOSITIONs — if these sections show only CLAIMs, check for unregistered reasoning chains
+
+See `claim-registry.md` "Detecting Mistyped Entries" for how to identify misclassified entries.
 
 ---
 
@@ -86,7 +98,7 @@ ARGUMENT: "[Interpretive conclusion from Discussion/Conclusion]"
 
 Verification questions (adapted from Toulmin 1958, Walton 2008):
 1. Is the claim clearly stated?
-2. Are the grounds (evidence) verified CLAIMs in the registry?
+2. Are the grounds (evidence) verified CLAIMs in the registry? (SPECULATIVE grounds cannot support SUPPORTED or ESTABLISHED arguments)
 3. Is the warrant explicit and valid for the target audience?
 4. Is the qualifier calibrated to evidence strength?
 5. Are the strongest counter-arguments addressed (not strawmen)?
@@ -106,13 +118,13 @@ Verification questions (adapted from Whetten 1989):
 1. Are all key constructs defined?
 2. Is the relationship clearly stated?
 3. Is the reasoning (warrant) explicit and valid?
-4. Are boundary conditions specified? Check quality:
-   - [ ] Boundary condition is specific (not tautological — "applies when applicable")
-   - [ ] Boundary condition is stable (not a moving target — "unless future evidence...")
-   - [ ] Boundary condition is bounded (not overgeneralized — "applies to all X")
+4. Are boundary conditions specified? Check quality (see `claim-registry.md` for annotated examples):
+   - [ ] Not **tautological** — boundary condition is specific, not restating the proposition ("applies when applicable")
+   - [ ] Not a **moving target** — boundary condition is stable, not unfalsifiable ("unless future evidence...")
+   - [ ] Not **overgeneralized** — boundary condition is bounded, not open-ended ("applies to all X")
 5. Does it engage with alternative explanations?
 
-Falsification criteria quality checklist (for each PROPOSITION):
+After completing the Whetten checklist, evaluate falsifiability:
 - [ ] Criterion is testable (not "if we decide it's false")
 - [ ] Criterion is independent of the proposition (not circular)
 - [ ] Criterion is specific enough to be measurable
@@ -199,6 +211,8 @@ Status (Pass / Fail)
 ### Gate 2: Verification Complete
 - [ ] P0 entries 100% verified (CLAIMs source-checked; ARGUMENTs Toulmin-checked; PROPOSITIONs Whetten-checked)
 - [ ] P1 entries 90% verified
+- [ ] Coverage checked by section type (see Section 3 — Section-Level Coverage Analysis)
+- [ ] Entry types re-checked (see `claim-registry.md` — Detecting Mistyped Entries)
 - [ ] Coverage report generated from registry dashboard (timestamped snapshot for co-author review)
 - [ ] Static checks pass
 - [ ] Anti-hallucination checklist complete
@@ -248,4 +262,4 @@ vv/
 
 ---
 
-*Version: 2.0 — updated with ARGUMENT and PROPOSITION unit types (DR-004)*
+*Version: 2.2 — v2.1: Gate 2.5, PROPOSITION boundary condition quality criteria, falsification checklist, Toulmin grounds tier constraint (DR-004 Issues #1–#4). v2.2: scope note (informal technical communication), section-level coverage analysis, mistype re-check in Gate 2, full reflection pass (2026-03-16)*

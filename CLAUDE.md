@@ -12,13 +12,13 @@ Verification infrastructure for AI-augmented academic writing. Templates, qualit
 | When | Read |
 |------|------|
 | Working on Paper 1 (Perspective) | `papers/perspective/CLAUDE.md` — paper identity, constraints, status, verification state |
-| Making scope or methodology decisions | `decisions/` — 8 decision records (DR-001 through DR-008) |
+| Making scope or methodology decisions | `decisions/` — 9 decision records (DR-001 through DR-009) |
 | Adding or verifying literature sources | `literature/README.md` — 47 indexed sources organized by topic |
 | Understanding how the framework was built | `docs/METHODOLOGY.md` — derived from 3 real paper projects |
 | Reviewing audit evidence from source projects | `audits/` — 8 retrofit audits with worked examples |
 | Stuck or debugging something weird | `memory/gotcha-log.md` — problem-fix archive |
 | Creating a new paper project | `templates/CLAUDE.md` — paper project template |
-| Ending a session | `memory/gotcha-log.md` — review, promote patterns, retire stale entries |
+| Ending a session | Update current paper's `backlog.md`; `memory/gotcha-log.md` — review, promote patterns, retire stale entries |
 
 ## Hard Constraints
 
@@ -40,12 +40,12 @@ agent-ready-papers/
 │   ├── vv-framework.md        <- Verification & validation framework
 │   ├── writing-guide.md       <- Confidence tier to language mapping
 │   ├── review-prompt.md       <- Structured peer review simulation
-│   ├── anti-hallucination.md  <- 6-step citation verification checklist
+│   ├── anti-hallucination.md  <- Step 0 + 6-step citation verification checklist
 │   ├── equation-checker.md    <- Mechanical equation verification prompt
 │   ├── glossary.md            <- Cross-domain terminology
 │   ├── decision-record.md     <- DR template
 │   └── key-quotes.md          <- Reference quotes
-├── decisions/                 <- Architecture decision records (DR-001 to DR-008)
+├── decisions/                 <- Architecture decision records (DR-001 to DR-009)
 ├── literature/                <- Source registry (47 sources, 17 detailed summaries)
 ├── audits/                    <- Retrofit audits of 3 source projects + equation verification
 ├── docs/                      <- Methodology and development history
@@ -85,7 +85,7 @@ cd papers/perspective && pdflatex manuscript && bibtex manuscript && pdflatex ma
 # Manual: open papers/perspective/vv/claims/claim_registry.md and check P0/P1/P2 percentages
 
 # Verify a citation (anti-hallucination)
-# Follow the 6-step checklist in papers/perspective/anti-hallucination.md
+# Follow the Step 0 + 6-step checklist in papers/perspective/anti-hallucination.md
 
 # Run peer review simulation
 # Use papers/perspective/review-prompt.md with a different model than the one that wrote the paper
@@ -93,14 +93,21 @@ cd papers/perspective && pdflatex manuscript && bibtex manuscript && pdflatex ma
 
 ## The Framework in Brief
 
-Four verification types, each with a structured procedure:
+Three registry unit types, each with a structured verification procedure:
 
 | Type | Question | Framework |
 |------|----------|-----------|
 | CLAIM | Does the source say this? | Citation checking + anti-hallucination |
 | ARGUMENT | Is the reasoning valid? | Toulmin (claim, grounds, warrant, backing, qualifier, rebuttal) |
 | PROPOSITION | Are conditions specified? | Whetten (What/How/Why/Who-Where-When, boundary conditions) |
+
+For papers with quantitative content, a fourth verification procedure applies (not a registry unit type):
+
+| Type | Question | Framework |
+|------|----------|-----------|
 | CALCULATION | Does the result follow from the formula? | Numerical reproduction (equation-checker) |
+
+Quality gates: Gate 1 (Draft Complete) → Gate 2 (Verification Complete) → Gate 2.5 (Internal Consistency) → Gate 3 (Review Complete) → Gate 4 (Submission Ready).
 
 Four confidence tiers mapped to language:
 

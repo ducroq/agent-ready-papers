@@ -5,7 +5,7 @@
      editing any section. -->
 
 **Paper:** The Verification Gap: Why AI-Augmented Academic Writing Needs Reporting Guidelines for Reasoning
-**Last Updated:** 2026-03-03 (post-verification update: tiers, references, and counts corrected)
+**Last Updated:** 2026-03-16 (added Framework Component Language special case, PROPOSITION pre-submission items, negative claim hedging)
 
 ---
 
@@ -47,6 +47,24 @@ Example: "The Proposition paper audit classified all 21 entries as CLAIMs, but r
 
 Example: "Given the ~700 EQUATOR guidelines for empirical research and zero for non-empirical types (S2-1, S2-2), combined with the growing use of AI writing tools that amplify argument-level verification challenges, we propose that the scholarly community develop verification infrastructure for non-empirical papers. This applies to academic papers intended for peer-reviewed publication in fields where argument quality is a primary contribution; informal writing, journalism, and very short opinion pieces fall outside this recommendation."
 
+### Framework Component Language — Special Case
+
+This paper **proposes** the typed verification framework. The framework components are EMERGING until empirically validated — even when the supporting evidence is strong. The framework itself is an interpretation of evidence, not the evidence.
+
+| Anti-pattern | Correct pattern |
+|-------------|----------------|
+| "Our framework demonstrates..." | "We propose..." |
+| "The model shows..." | "The framework posits..." |
+| "The three types ARE necessary" | "The framework assumes three types are necessary" |
+
+Confidence progression for framework components:
+- **SPECULATIVE** → conjectural, no supporting evidence
+- **EMERGING** → novel contribution, supporting evidence but no empirical validation of the framework itself
+- **SUPPORTED** → initial validation (pilot studies, case studies)
+- **ESTABLISHED** → independent replication
+
+**Key rule:** Capability claims ("teachable," "assessable," "measurable") require evidence of teaching/assessment, not just logical inference from the framework.
+
 ### Special Cases
 
 | Situation | Language |
@@ -56,6 +74,7 @@ Example: "Given the ~700 EQUATOR guidelines for empirical research and zero for 
 | Logical inference | "If [premises], then [conclusion]" — mark as inference |
 | Single study | "In a study of N=X, [Author] found..." — note sample size |
 | Contradictory evidence | "While [Author1] reported X, [Author2] found Y" — acknowledge both |
+| Negative claims | "to our knowledge, no X exists" — search and document the null result |
 | Audit data (own projects) | "A retrospective audit of [project] revealed..." — frame as preliminary |
 
 ---
@@ -289,6 +308,8 @@ Example: "Given the ~700 EQUATOR guidelines for empirical research and zero for 
 - [ ] Reasoning is explicit (not "it follows that..." without warrant)
 - [ ] Alternative explanations engaged with
 - [ ] Scope not overgeneralized beyond what the arguments support
+- [ ] Novel framework components written at EMERGING or lower (not ESTABLISHED/SUPPORTED unless validated)
+- [ ] No capability claims ("teachable", "assessable", "measurable") without empirical evidence
 
 ### General
 - [ ] Nuances and contradictions acknowledged

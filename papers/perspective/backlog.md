@@ -1,6 +1,6 @@
 # Paper 1 — Backlog
 
-Last updated: 2026-03-06
+Last updated: 2026-03-16
 
 ## Done
 
@@ -21,6 +21,7 @@ Last updated: 2026-03-06
 - [x] Update driven-pendulum audit with §9 (equation verification blind spot)
 - [x] Integrate calculation verification into framework README
 - [x] Update claim registry (S1-5, coverage 19/19)
+- [x] Full framework reflection (2026-03-16): 5-agent audit, sync Paper 1 files with templates, DR-009, gotcha log cleanup
 
 ## Active (Paper 1)
 

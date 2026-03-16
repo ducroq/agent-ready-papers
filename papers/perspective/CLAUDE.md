@@ -40,6 +40,7 @@ We propose a typed verification model: CLAIMs (source-verifiable facts), ARGUMEN
 | Understanding the framework repo | `../../README.md` — the framework this paper describes |
 | Checking audit data | `../../audits/*.md` — retrofit audits of source projects |
 | Stuck or debugging something weird | `../../memory/gotcha-log.md` — problem-fix archive |
+| Ending a session | `backlog.md` — update progress; `../../memory/gotcha-log.md` — review, promote patterns, retire stale entries |
 
 ## Hard Constraints
 
@@ -147,6 +148,8 @@ This is the framework eating its own dog food. Any friction, gaps, or false fail
 - Integrated calculation verification into framework README
 - Registry updated: 19/19 entries, 16 CLAIMs, 2 ARGUMENTs, 1 PROPOSITION
 
+**Note:** Gate 2.5 (Internal Consistency) was introduced after Paper 1 passed Gate 2. Appendix A values were manually cross-checked against main text during the Appendix A addition (2026-03-06), which satisfies the Gate 2.5 intent retroactively.
+
 **Next priorities:**
 1. Co-author review (Gate 3) — title change + Appendix A + S1-5 are significant additions to discuss
 2. Decide submission article type: "Original Article" or "Opinion" (LP uses "Opinion" for perspective-type pieces)
@@ -159,4 +162,4 @@ This is the framework eating its own dog food. Any friction, gaps, or false fail
 
 ---
 
-*Last updated: 2026-03-06*
+*Last updated: 2026-03-16*

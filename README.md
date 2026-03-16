@@ -67,8 +67,6 @@ Calculation verification uses **mechanical reproduction** — substituting value
 
 ### Priority (what breaks if this is wrong?)
 
-### Priority (what breaks if this is wrong?)
-
 | Priority | Meaning | Coverage Target |
 |----------|---------|-----------------|
 | **P0** | Core argument — paper fails without it | 100% verified |
@@ -122,14 +120,15 @@ Without this mapping, agents default to confident language for everything. A SPE
 
 Before accepting any literature claim from an AI agent:
 
-1. **Is the paper real?** (Google Scholar / DOI check)
+0. **Quick web verification** — search Google Scholar + resolve DOI; if neither confirms the source, it's high risk
+1. **Confirm the canonical citation** — pin down exact DOI, title, year before checking content
 2. **Is the author real?** (institutional affiliation page)
 3. **Is the journal real?** (publisher website, not a predatory clone)
 4. **Does the claim match the paper's scope?** (abstract check)
 5. **Is the exact location cited?** (page / table / figure number)
 6. **Have I read the relevant section?** (not just the abstract)
 
-This is non-negotiable. Run it for every new citation the agent introduces. Agents can and will invent plausible-sounding papers with real-sounding author names. The checklist takes 2 minutes per citation. Catching a hallucinated citation in review takes 2 weeks.
+This is non-negotiable. Run it for every new citation the agent introduces. Agents can and will invent plausible-sounding papers with real-sounding author names. Step 0 catches fabrications in seconds; the full checklist takes 2 minutes per citation. Catching a hallucinated citation in review takes 2 weeks.
 
 See [`templates/anti-hallucination.md`](templates/anti-hallucination.md) for the full checklist with worked examples.
 
@@ -206,8 +205,19 @@ Each gate must pass before proceeding:
 - [ ] P0 claims 100% verified
 - [ ] P1 claims 90% verified
 - [ ] Overall coverage ≥85%
+- [ ] Coverage checked by section type (Factual sections vs Discussion/Conclusion) — Discussion sections typically have lower coverage and need ARGUMENTs/PROPOSITIONs, not just CLAIMs
+- [ ] Entry types re-checked (see `templates/claim-registry.md` — Detecting Mistyped Entries)
+- [ ] Coverage report generated (timestamped snapshot for co-author review)
 - [ ] Static checks pass (LaTeX compiles, BibTeX valid, DOIs resolve)
 - [ ] Anti-hallucination checklist run on all AI-introduced citations
+
+### Gate 2.5: Internal Consistency
+- [ ] All statistics in appendices cross-checked against main text values
+- [ ] Date citations consistent (same year for same source throughout)
+- [ ] Numerical values in tables match claims in prose
+- [ ] No data present only in appendix without main text reference (or vice versa)
+
+These are manual cross-checks not covered by the automated static checks in Gate 2.
 
 ### Gate 3: Review Complete
 - [ ] Simulated peer review scored ≥3.5/5.0
@@ -339,6 +349,9 @@ Prose written without a claim registry is prose that will need to be rewritten. 
 
 ### Reviewing in the building session
 An agent that spent an hour helping write Section 3 will not catch its own errors in Section 3. Use a fresh session for review — or a different model entirely.
+
+### Skipping verification for informal technical communication
+The framework applies to any outbound technical content — not just formal papers. WhatsApp messages, emails, and Slack discussions with quantitative claims have the same error classes (unit confusion, property overestimates, wrong formulas) but no verification trigger. If it contains numbers, equations, or technical terminology going to a stakeholder, run the relevant checks before sending.
 
 ### Skipping the architecture blueprint
 Without page budgets, agents expand every section. A 4-page paper becomes 8 pages. A focused argument becomes a literature review. The blueprint is constraint that enables quality.

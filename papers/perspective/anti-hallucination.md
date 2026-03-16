@@ -3,14 +3,27 @@
 <!-- Run this for EVERY citation introduced by an AI agent.
      Takes ~2 minutes per citation. Catching a fake citation in review takes weeks. -->
 
+## Step 0: Quick Web Verification
+
+Before running the full checklist, do a quick web search to catch obvious hallucinations in seconds:
+
+1. Search Google Scholar for `[Author Year Title]`
+2. Check if a DOI resolves at `https://doi.org/[DOI]`
+3. If both return the source → proceed to full checklist for exact claims
+4. If the source cannot be confirmed via both signals → **HIGH RISK** of hallucination; investigate before proceeding
+
+This catches fabricated citations in seconds. The full 6-step checklist below remains necessary for verifying exact claims against the source content.
+
+---
+
 ## The Checklist
 
 For each new citation, verify ALL six points:
 
-- [ ] **1. Is the paper real?**
-  - Search Google Scholar or DOI.org
-  - If DOI provided: resolve at `https://doi.org/[DOI]`
-  - If no DOI: search exact title in quotes on Google Scholar
+- [ ] **1. Confirm and record the canonical citation**
+  - If Step 0 passed: record the exact DOI, canonical title, and publication year for use in Steps 2–6
+  - If Step 0 was skipped: search Google Scholar or resolve at `https://doi.org/[DOI]`
+  - This step ensures the exact source identity is pinned down before checking author, journal, and content
 
 - [ ] **2. Is the author real?**
   - Check institutional affiliation page
@@ -58,7 +71,8 @@ For each new citation, verify ALL six points:
 
 | Check | Action | Result |
 |-------|--------|--------|
-| 1. Paper real? | DOI: 10.1109/JTEHM.2024.3410652 → resolves | PASS |
+| 0. Quick web check | Google Scholar + DOI: 10.1109/JTEHM.2024.3410652 → both resolve | PASS |
+| 1. Canonical citation | DOI confirmed, title and year recorded | PASS |
 | 2. Author real? | Lim at university affiliation page | PASS |
 | 3. Journal real? | IEEE JTEHM on IEEE Xplore | PASS |
 | 4. Scope match? | Abstract mentions chest mechanical properties | PASS |
@@ -69,23 +83,37 @@ For each new citation, verify ALL six points:
 
 ---
 
+## Verifying Negative Claims ("No X Exists")
+
+Claims that something *doesn't* exist require a different verification strategy:
+
+1. **Define the search scope** — what databases/registries would contain X if it existed?
+2. **Search systematically** — search each database using relevant terms
+3. **Document the null result** — record search date, terms used, and databases checked
+4. **Hedge the universal negative** — use "to our knowledge" or "we are not aware of"
+
+**Paper 1 example:**
+> "No EQUATOR guidelines exist for non-empirical papers" → Verified by searching EQUATOR Network database (equator-network.org, accessed 2026-03-03): all 699 guidelines address empirical research types; search for "theoretical," "design science," and "perspective" returned no results. Hedged in manuscript as "to our knowledge, no equivalent guidelines exist."
+
+---
+
 ## When to Run This Checklist
 
-- **Always:** For every new citation introduced by an AI agent
-- **Spot-check:** For citations you provided that the agent reformulated
-- **Re-verify:** When an agent changes the claim wording for an existing citation
+- **Always:** Step 0 + full checklist for every new citation introduced by an AI agent
+- **Spot-check:** Step 0 as initial filter; if it passes, continue with Steps 4–6 at minimum
+- **Re-verify:** When an agent changes the claim wording for an existing citation — Steps 4–6
 - **Skip only:** For citations you personally retrieved from the source paper
 
 ---
 
 ## Quick Version (for spot-checks)
 
-If pressed for time, at minimum verify:
-1. DOI resolves (catches fabrications)
-2. Abstract matches claim scope (catches attribution errors)
-3. Specific location exists (catches vague citations)
+If Step 0 passed and you cannot run the full checklist, at minimum verify the content-level checks:
+1. Does the claim match the paper's scope? — Step 4 (catches attribution errors)
+2. Is the exact location cited? — Step 5 (catches vague citations)
+3. Have I read the relevant section? — Step 6 (catches paraphrasing errors)
 
-The full 6-point check is always preferred.
+Step 0 already covers existence; the Quick Version focuses on whether the source *says what we claim it says*. The full 6-point check is always preferred.
 
 ---
 

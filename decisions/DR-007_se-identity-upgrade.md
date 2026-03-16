@@ -3,6 +3,7 @@
 ---
 status: Accepted
 date: 2026-03-02
+supersedes: DR-001 (partially — SE mapping characterization only; DR-001 structure remains valid)
 superseded_by:
 ---
 

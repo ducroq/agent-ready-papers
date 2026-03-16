@@ -67,6 +67,18 @@ Confidence progression for framework components:
 
 **Key rule:** "Teachable" or "assessable" claims require evidence of teaching/assessment, not just logical inference from the framework.
 
+### Overclaiming by Category
+
+Certain claim categories are systematically overclaimed. Watch for these patterns:
+
+| Category | Anti-pattern | Correct pattern |
+|----------|-------------|----------------|
+| **Novelty** | "the first", "the only", "no prior work" | "to our knowledge, the first" — protects against missed citations |
+| **Generalization** | "extends to all", "applies universally" | "may extend to", "applies within [stated boundary]" |
+| **Forward-looking** | "should adopt", "must implement" | "warrants investigation", "we recommend" with boundary conditions |
+| **Framework/metric definitions** | "the X IS Y" (definitive) | "we model X as Y" or "we define X as Y" (acknowledges it's a construct) |
+| **Negative claims** | "no X exists" (unqualified) | "to our knowledge, no X exists" — hedge universal negatives |
+
 ### Special Cases
 
 | Situation | Language |
@@ -76,6 +88,8 @@ Confidence progression for framework components:
 | Logical inference | "If [premises], then [conclusion]" — mark as inference |
 | Single study | "In a study of N=X, [Author] found..." — note sample size |
 | Contradictory evidence | "While [Author1] reported X, [Author2] found Y" — acknowledge both |
+| Negative claims | "to our knowledge, no X exists" — search and document the null result (see anti-hallucination.md) |
+| Audit data (own projects) | "A retrospective audit of [project] revealed..." — frame as preliminary |
 
 ---
 
@@ -211,6 +225,8 @@ Confidence progression for framework components:
 - [ ] Reasoning is explicit (not "it follows that..." without warrant)
 - [ ] Alternative explanations engaged with
 - [ ] Scope not overgeneralized beyond what the arguments support
+- [ ] Novel framework components written at EMERGING or lower (not ESTABLISHED/SUPPORTED unless validated)
+- [ ] No capability claims ("teachable", "assessable", "measurable") without empirical evidence
 
 ### General
 - [ ] Nuances and contradictions acknowledged

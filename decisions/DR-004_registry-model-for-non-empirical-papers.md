@@ -94,11 +94,13 @@ The registry gets a `Type` column (default: CLAIM). Two additional types are ava
 
 ## Consequences
 
-- `claim-registry.md` template: add `Type` column (default CLAIM), update reference section
-- `vv-framework.md` template: add ARGUMENT and PROPOSITION verification as subsections
-- `writing-guide.md` template: no change needed (tiers map to language regardless of unit type)
-- README: brief mention of unit types in the Claim Verification section
-- `CLAUDE.md` template: no change needed (hard constraints already cover language calibration)
+- `claim-registry.md` template: add `Type` column (default CLAIM), update reference section; boundary conditions as required PROPOSITION field with quality criteria and anti-patterns; framework component confidence progression; falsification criteria checklist; Toulmin grounds traceability (Issue #1, #2, #3)
+- `vv-framework.md` template: add ARGUMENT and PROPOSITION verification as subsections; Whetten Q4 expanded with inline boundary condition quality checklist; falsification criteria block; Gate 2.5 (internal consistency) added (Issue #1, #3)
+- `writing-guide.md` template: framework component language special case added (Issue #2); pre-submission checklist items for framework components
+- `anti-hallucination.md` template: Step 0 web-search-first procedure added; Quick Version repositioned to content-level checks (Issue #4)
+- README: brief mention of unit types in the Claim Verification section; Gate 2.5 added to quality gates
+- `CLAUDE.md` template: format support table added (Issue #4); "Ending a session" row added (v1.1.0); self-demonstrating framework variant note added
+- Full reflection pass (2026-03-16): mistype decision tree added to `claim-registry.md`; section-level coverage analysis added to `vv-framework.md`; overclaiming-by-category and negative claim hedging added to `writing-guide.md`; negative claim verification added to `anti-hallucination.md`; scope expanded to informal technical communication; DR-009 created for calculation verification; 3 gotcha entries added, 3 marked [RESOLVED]
 
 ## Evidence Base
 
@@ -115,7 +117,7 @@ The registry gets a `Type` column (default: CLAIM). Two additional types are ava
 
 ## Boundary Condition Quality Criteria
 
-Added 2026-03-16 based on Digital Engineers verification exercise (Issue #1).
+Added 2026-03-16 based on Digital Engineers verification exercise (Issue #1). Full implementation with annotated examples in `templates/claim-registry.md` (Verifying PROPOSITIONs section) and `templates/vv-framework.md` (Section 4.1).
 
 PROPOSITION entries systematically lacked boundary conditions (Whetten Q4 was the most commonly missed criterion, average Whetten score 3.2/5). Boundary conditions are now a required, prominent field rather than one of five checklist items.
 

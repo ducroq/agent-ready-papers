@@ -106,6 +106,24 @@
 | **ARGUMENT** | Interpretive conclusion combining evidence + reasoning | Warrant valid? Evidence sufficient? Counter-arguments addressed? | Discussion, Conclusion |
 | **PROPOSITION** | Novel recommendation or contribution | Premises verified? Reasoning valid? Boundary conditions stated? | Conclusion, Recommendations |
 
+### Detecting Mistyped Entries
+
+Every audit found 3–6 entries initially typed as CLAIMs that were actually ARGUMENTs or PROPOSITIONs. Run this decision tree on each entry after initial registration:
+
+1. **Does it cite a specific external source?** → Likely CLAIM
+2. **Does it draw a conclusion from multiple pieces of evidence?** → Likely ARGUMENT
+3. **Does it recommend, propose, or prescribe?** → Likely PROPOSITION
+4. **Does it interpret data rather than report it?** → Likely ARGUMENT (even if it cites the data source)
+5. **Does it state a relationship between constructs?** → Likely PROPOSITION if novel, CLAIM if citing existing work
+
+**Red flags for mistyped CLAIMs:**
+- Entry has no single source (it synthesizes multiple sources → ARGUMENT)
+- Entry appears in Discussion/Conclusion (often ARGUMENT or PROPOSITION, not CLAIM)
+- Entry was scored low on source verification but "feels" well-supported (may be a well-grounded ARGUMENT evaluated with the wrong procedure)
+- Entry states "should", "needs", or "we propose" (→ PROPOSITION)
+
+**When to re-check types:** After initial registration (Gate 1), and again after verification (Gate 2) if any entries scored unexpectedly low.
+
 ### Verifying ARGUMENTs (Toulmin checklist)
 
 1. Is the claim clearly stated?
@@ -136,12 +154,21 @@ Good boundary conditions are specific and testable:
 - **Good:** "Holds when team size < 10 and iteration cycles are weekly or shorter"
 - **Bad (tautological):** "Applies when applicable" / "Holds when conditions are met"
 - **Bad (moving target):** "Applies unless future evidence suggests otherwise"
+- **Bad (overgeneralized):** "Applies to all engineering domains" — no upper bound on scope
 - **Bad (missing):** No boundary conditions stated — every proposition has limits
 
 Anti-patterns to check:
 - **Tautological** — boundary condition restates the proposition
 - **Moving target** — boundary condition can never be falsified
 - **Overgeneralized** — "applies to all X" without specifying where it breaks down
+
+**Falsification criteria quality** (for each PROPOSITION):
+- [ ] Criterion is testable (not "if we decide it's false")
+- [ ] Criterion is independent of the proposition (not circular)
+- [ ] Criterion is specific enough to be measurable
+- [ ] Criterion is not a moving target
+
+See `vv-framework.md` Section 4.1 for the full Whetten verification procedure.
 
 ---
 
@@ -164,6 +191,8 @@ Anti-patterns to check:
 |------|-------------|-----------|----------|-------------|
 | CLAIM | 3+ independent sources, textbook consensus | 2–3 sources agree, open questions | 1–2 sources, not replicated | Logical inference, no data |
 | ARGUMENT | 5/5 Toulmin, premises ESTABLISHED | 4/5 Toulmin, premises SUPPORTED+ | 3/5 Toulmin, premises verified but conclusion untested | <3/5 Toulmin, or premises unverified |
+<!-- Note: "5/5 Toulmin" refers to the 5-item operationalized checklist (claim, grounds, warrant, qualifier, rebuttal),
+     not Toulmin's original 6 components (which include backing as a separate element). See DR-004 for the operationalization rationale. -->
 | PROPOSITION | 5/5 Whetten, tested in practice | 4/5 Whetten, premises verified | 3/5 Whetten, reasoning valid but untested | <3/5 Whetten, or missing boundary conditions |
 
 ## Source Tier Reference
@@ -201,16 +230,18 @@ Use ESTABLISHED for reference claims when:
 
 ### Special Cases: Framework Components
 
-<!-- Issue #2: Novel frameworks get written in ESTABLISHED language when they're
-     actually EMERGING/SPECULATIVE. This is the most common language calibration error. -->
+<!-- DR-004: Novel frameworks get written in ESTABLISHED language when they're
+     actually EMERGING/SPECULATIVE. This is the most common language calibration error.
+     See also writing-guide.md — Framework Component Language special case. -->
 
-When a paper proposes a new framework, the framework components start at EMERGING regardless
-of the evidence that motivated them. The framework is an interpretation of evidence, not the
-evidence itself.
+When a paper proposes a new framework, the framework components start at EMERGING or lower
+regardless of the evidence that motivated them. The framework is an interpretation of
+evidence, not the evidence itself.
 
 | Stage | Confidence | Example |
 |-------|-----------|---------|
-| Novel contribution, no validation | EMERGING | "We propose a multiplicative relationship" |
+| Conjectural, no supporting evidence | SPECULATIVE | "We hypothesize a multiplicative relationship" |
+| Novel contribution, supporting evidence but no validation | EMERGING | "We propose a multiplicative relationship" |
 | Initial validation (pilot, case study) | SUPPORTED | "Pilot data supports the multiplicative model" |
 | Independent replication | ESTABLISHED | "Multiple studies confirm the multiplicative relationship" |
 
