@@ -5,7 +5,7 @@ Verification infrastructure for AI-augmented academic writing. Templates, qualit
 - **Type**: Guide + templates + active paper projects
 - **Companion**: [agent-ready-projects](https://github.com/ducroq/agent-ready-projects) (for code)
 - **Status**: Paper 1 (Perspective) at Gate 3 (co-author review). Paper 2 (DSR) not yet started.
-- **agent-ready-projects**: v1.0.0
+- **agent-ready-projects**: v1.1.0
 
 ## Before You Start
 
@@ -18,6 +18,7 @@ Verification infrastructure for AI-augmented academic writing. Templates, qualit
 | Reviewing audit evidence from source projects | `audits/` — 8 retrofit audits with worked examples |
 | Stuck or debugging something weird | `memory/gotcha-log.md` — problem-fix archive |
 | Creating a new paper project | `templates/CLAUDE.md` — paper project template |
+| Ending a session | `memory/gotcha-log.md` — review, promote patterns, retire stale entries |
 
 ## Hard Constraints
 

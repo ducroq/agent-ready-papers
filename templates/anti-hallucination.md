@@ -3,6 +3,19 @@
 <!-- Run this for EVERY citation introduced by an AI agent.
      Takes ~2 minutes per citation. Catching a fake citation in review takes weeks. -->
 
+## Step 0: Quick Web Verification
+
+Before running the full checklist, do a quick web search to catch obvious hallucinations in seconds:
+
+1. Search Google Scholar for `[Author Year Title]`
+2. Check if a DOI resolves at `https://doi.org/[DOI]`
+3. If both return the source → proceed to full checklist for exact claims
+4. If neither returns the source → **HIGH RISK** of hallucination; investigate before proceeding
+
+This catches fabricated citations in seconds. The full 6-step checklist below remains necessary for verifying exact claims against the source content.
+
+---
+
 ## The Checklist
 
 For each new citation, verify ALL six points:

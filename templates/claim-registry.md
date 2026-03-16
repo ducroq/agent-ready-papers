@@ -110,6 +110,9 @@
 
 1. Is the claim clearly stated?
 2. Are the grounds (evidence) verified? (These should be CLAIMs in this registry)
+   - **Grounds traceability:** List the registry IDs that serve as grounds (e.g., S1-5, S1-7, S1-8)
+   - Each ground must be marked [x] verified in the registry
+   - SPECULATIVE grounds cannot support SUPPORTED or ESTABLISHED arguments
 3. Is the warrant (inferential bridge) explicit and valid for the target audience?
 4. Is the qualifier calibrated to evidence strength? (Maps to confidence tiers)
 5. Are the strongest counter-arguments addressed? (Not strawmen)
@@ -119,8 +122,26 @@
 1. Are all key constructs defined?
 2. Is the relationship clearly stated?
 3. Is the reasoning (warrant) explicit and valid?
-4. Are boundary conditions specified?
+4. Are boundary conditions specified? (See quality criteria below)
 5. Does it engage with alternative explanations?
+
+**Boundary conditions** — required field for every PROPOSITION:
+
+```markdown
+Boundary conditions: [Where does this apply? Where doesn't it?]
+```
+
+Good boundary conditions are specific and testable:
+- **Good:** "Applies to engineering domains requiring judgment; may not hold for routine, well-defined tasks"
+- **Good:** "Holds when team size < 10 and iteration cycles are weekly or shorter"
+- **Bad (tautological):** "Applies when applicable" / "Holds when conditions are met"
+- **Bad (moving target):** "Applies unless future evidence suggests otherwise"
+- **Bad (missing):** No boundary conditions stated — every proposition has limits
+
+Anti-patterns to check:
+- **Tautological** — boundary condition restates the proposition
+- **Moving target** — boundary condition can never be falsified
+- **Overgeneralized** — "applies to all X" without specifying where it breaks down
 
 ---
 
@@ -177,6 +198,25 @@ Use ESTABLISHED for reference claims when:
 - The source document is publicly accessible (published guideline, standard, or regulation)
 - The statement is a direct reference to what the document says (not an interpretation)
 - Verification requires only checking the document, not evaluating evidence strength
+
+### Special Cases: Framework Components
+
+<!-- Issue #2: Novel frameworks get written in ESTABLISHED language when they're
+     actually EMERGING/SPECULATIVE. This is the most common language calibration error. -->
+
+When a paper proposes a new framework, the framework components start at EMERGING regardless
+of the evidence that motivated them. The framework is an interpretation of evidence, not the
+evidence itself.
+
+| Stage | Confidence | Example |
+|-------|-----------|---------|
+| Novel contribution, no validation | EMERGING | "We propose a multiplicative relationship" |
+| Initial validation (pilot, case study) | SUPPORTED | "Pilot data supports the multiplicative model" |
+| Independent replication | ESTABLISHED | "Multiple studies confirm the multiplicative relationship" |
+
+This applies even when the evidence *supporting* the framework is strong — the evidence
+supports the framework's premises, but the framework's structure and claims are untested
+interpretations until validated.
 
 ### Special Cases: Methodological Facts
 

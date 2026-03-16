@@ -113,6 +113,23 @@ The registry gets a `Type` column (default: CLAIM). Two additional types are ava
 | Liang et al. (2024) | LLM feedback useful but shallow without infrastructure | L39 |
 | EQUATOR Network | ~500 empirical checklists; zero non-empirical | L47 |
 
+## Boundary Condition Quality Criteria
+
+Added 2026-03-16 based on Digital Engineers verification exercise (Issue #1).
+
+PROPOSITION entries systematically lacked boundary conditions (Whetten Q4 was the most commonly missed criterion, average Whetten score 3.2/5). Boundary conditions are now a required, prominent field rather than one of five checklist items.
+
+Anti-patterns:
+- **Tautological** — boundary condition restates the proposition ("applies when applicable")
+- **Moving target** — boundary condition can never be falsified ("unless future evidence suggests otherwise")
+- **Overgeneralized** — no upper bound on scope ("applies to all domains")
+
+Quality criteria for falsification:
+- Testable (not "if we decide it's false")
+- Independent of the proposition (not circular)
+- Specific enough to be measurable
+- Not a moving target
+
 ## Revisit If
 
 - Project pivots to podcast generation, creative writing, or non-empirical paper types — activate the reserved unit types from `literature/`

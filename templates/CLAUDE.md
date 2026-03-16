@@ -39,6 +39,7 @@
 | Checking terminology | `glossary.md` — cross-domain term definitions |
 | Reviewing before submission | `review-prompt.md` — structured peer review simulation |
 | Stuck or unsure about a claim | `anti-hallucination.md` — citation verification checklist |
+| Ending a session | `backlog.md` — update progress; gotcha log — review, promote patterns, retire stale entries |
 
 ## Hard Constraints
 
@@ -87,6 +88,16 @@
 └── figures/                     <- Figures
 ```
 
+## Supported Paper Formats
+
+| Format | Build command | Citation management | Typical use |
+|--------|-------------|---------------------|-------------|
+| LaTeX + BibTeX | `pdflatex` + `biber` | `.bib` file | Academic journals |
+| Markdown + pandoc | `pandoc` with citeproc | `.bib` or inline | Internal reports, technical docs |
+| Word / docx | Manual or pandoc export | Zotero / Mendeley / inline | Institutional reports, policy briefs |
+
+The verification framework (claim registry, writing guide, quality gates) applies identically regardless of format. Adapt build commands and static checks per format.
+
 ## Build Commands
 
 ```bash
@@ -95,6 +106,9 @@ pdflatex [paper].tex
 biber [paper]
 pdflatex [paper].tex
 pdflatex [paper].tex
+
+# Markdown compilation (alternative)
+# pandoc [paper].md --citeproc --bibliography=references.bib -o [paper].pdf
 ```
 
 ## Methodology

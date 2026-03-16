@@ -47,6 +47,26 @@ Example: "Manikin A produced force errors exceeding 15% across all test conditio
 
 Example: "Given the systematic feedback errors documented above, we propose that CPR training programs should prioritize manikin feedback accuracy over anatomical realism when selecting training equipment. This applies to competency-based programs targeting measurable skill outcomes; instructor-led demonstration contexts, where visual realism may support engagement, fall outside this recommendation."
 
+### Framework Component Language — Special Case
+
+When a paper **proposes** a novel framework, the framework components are EMERGING or SPECULATIVE until empirically validated — even when the evidence *supporting* the framework is strong. The framework itself is an interpretation of evidence, not the evidence.
+
+| Anti-pattern | Correct pattern |
+|-------------|----------------|
+| "Our framework demonstrates..." | "We propose..." |
+| "The model shows..." | "The framework posits..." |
+| "The relationship IS multiplicative" | "We model the relationship as multiplicative" |
+| "All three ARE necessary" | "The framework assumes all three are necessary" |
+| "It IS teachable" | "It should in principle be teachable" (requires teaching evidence) |
+
+Confidence progression for framework components:
+- **SPECULATIVE** → conjectural, no supporting evidence
+- **EMERGING** → novel contribution, supporting evidence but no empirical validation of the framework itself
+- **SUPPORTED** → initial validation (pilot studies, case studies)
+- **ESTABLISHED** → independent replication
+
+**Key rule:** "Teachable" or "assessable" claims require evidence of teaching/assessment, not just logical inference from the framework.
+
 ### Special Cases
 
 | Situation | Language |

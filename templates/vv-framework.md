@@ -106,8 +106,17 @@ Verification questions (adapted from Whetten 1989):
 1. Are all key constructs defined?
 2. Is the relationship clearly stated?
 3. Is the reasoning (warrant) explicit and valid?
-4. Are boundary conditions specified?
+4. Are boundary conditions specified? Check quality:
+   - [ ] Boundary condition is specific (not tautological — "applies when applicable")
+   - [ ] Boundary condition is stable (not a moving target — "unless future evidence...")
+   - [ ] Boundary condition is bounded (not overgeneralized — "applies to all X")
 5. Does it engage with alternative explanations?
+
+Falsification criteria quality checklist (for each PROPOSITION):
+- [ ] Criterion is testable (not "if we decide it's false")
+- [ ] Criterion is independent of the proposition (not circular)
+- [ ] Criterion is specific enough to be measurable
+- [ ] Criterion is not a moving target
 
 ### 4.2 Static Analysis (Automated Checks)
 
@@ -193,6 +202,12 @@ Status (Pass / Fail)
 - [ ] Coverage report generated from registry dashboard (timestamped snapshot for co-author review)
 - [ ] Static checks pass
 - [ ] Anti-hallucination checklist complete
+
+### Gate 2.5: Internal Consistency
+- [ ] All statistics in appendices cross-checked against main text values
+- [ ] Date citations consistent (same year for same source throughout)
+- [ ] Numerical values in tables match claims in prose
+- [ ] No data present only in appendix without main text reference (or vice versa)
 
 ### Gate 3: Review Complete
 - [ ] Co-author signoff
