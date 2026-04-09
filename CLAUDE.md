@@ -5,7 +5,7 @@ Verification infrastructure for AI-augmented academic writing. Templates, qualit
 - **Type**: Guide + templates + active paper projects
 - **Companion**: [agent-ready-projects](https://github.com/ducroq/agent-ready-projects) (for code)
 - **Status**: Paper 1 (Perspective) at Gate 3 (co-author review). Paper 2 (DSR) not yet started.
-- **agent-ready-projects**: v1.1.0
+- **agent-ready-projects**: v1.7.0
 
 ## Before You Start
 
@@ -18,7 +18,8 @@ Verification infrastructure for AI-augmented academic writing. Templates, qualit
 | Reviewing audit evidence from source projects | `audits/` — 8 retrofit audits with worked examples |
 | Stuck or debugging something weird | `memory/gotcha-log.md` — problem-fix archive |
 | Creating a new paper project | `templates/CLAUDE.md` — paper project template |
-| Ending a session | Update current paper's `backlog.md`; `memory/gotcha-log.md` — review, promote patterns, retire stale entries |
+| Ending a session | Run `/curate` — updates gotcha log, promotes patterns, syncs docs, checks freshness |
+| Monthly or after major restructuring | Run `/audit-context` — structural health check for duplication, bloat, broken references |
 
 ## Hard Constraints
 
@@ -32,6 +33,7 @@ Verification infrastructure for AI-augmented academic writing. Templates, qualit
 
 ```
 agent-ready-papers/
+├── .claude/skills/            <- Agent skills (/curate, /audit-context)
 ├── README.md                  <- The guide (public-facing)
 ├── CLAUDE.md                  <- This file (agent orientation)
 ├── templates/                 <- Reusable templates for new paper projects
@@ -117,3 +119,7 @@ Four confidence tiers mapped to language:
 | SUPPORTED | "indicates", "supports", "evidence suggests" |
 | EMERGING | "may", "preliminary evidence", "initial findings suggest" |
 | SPECULATIVE | "warrants investigation", "remains unclear", "we hypothesize" |
+
+## Cross-Repo Evidence
+
+This project is a source project for [agentic-engineering](https://github.com/ducroq/agentic-engineering) — a proposition about what's new when engineers work with AI agents. When you discover evidence relevant to the four patterns (verification findings, context architecture lessons, reproduce-don't-assess examples, LLM behavioral properties), file an issue at `ducroq/agentic-engineering` with the pattern name, quantified results, and which claims it supports.
