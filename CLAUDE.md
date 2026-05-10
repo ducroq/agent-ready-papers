@@ -4,9 +4,9 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 
 - **Type**: Guide + templates + active paper projects (non-fiction projects supported via DR-010 but currently external — e.g., FSD)
 - **Companion**: [agent-ready-projects](https://github.com/ducroq/agent-ready-projects) (for code)
-- **Status**: Paper 1 (Perspective) at Gate 3 (co-author review). Paper 2 (DSR) not yet started.
 - **agent-ready-projects**: v1.7.0
-- **Repo name note**: "papers" understates the current scope; rename deferred until a second non-empirical project provides Tier 2 evidence (per `audits/feedback-from-fsd.md`)
+
+> Live project state (current paper status, recent decisions, deferred items) lives in `memory/MEMORY.md`. Repo-name caveat and FSD-rename deferral are tracked in `audits/feedback-from-fsd.md`.
 
 ## Before You Start
 
@@ -18,6 +18,7 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 | Adding or verifying literature sources | `literature/README.md` — 47 indexed sources organized by topic |
 | Understanding how the framework was built | `docs/METHODOLOGY.md` — derived from 3 real paper projects |
 | Reviewing audit evidence from source projects | `audits/` — 8 retrofit audits with worked examples |
+| Working with claims, gates, or confidence calibration | `docs/framework-summary.md` — unit types, gates, tier-to-language mapping at a glance (templates remain normative) |
 | Stuck or debugging something weird | `memory/gotcha-log.md` — problem-fix archive |
 | Creating a new paper project | `templates/CLAUDE.md` — paper project template |
 | Ending a session | Run `/curate` — updates gotcha log, promotes patterns, syncs docs, checks freshness |
@@ -49,7 +50,7 @@ agent-ready-papers/
 │   ├── glossary.md            <- Cross-domain terminology
 │   ├── decision-record.md     <- DR template
 │   └── key-quotes.md          <- Reference quotes
-├── decisions/                 <- Architecture decision records (DR-001 to DR-009)
+├── decisions/                 <- Architecture decision records (DR-001 to DR-010)
 ├── literature/                <- Source registry (47 sources, 17 detailed summaries)
 ├── audits/                    <- Retrofit audits of 3 source projects + equation verification
 ├── docs/                      <- Methodology and development history
@@ -94,39 +95,6 @@ cd papers/perspective && pdflatex manuscript && bibtex manuscript && pdflatex ma
 # Run peer review simulation
 # Use papers/perspective/review-prompt.md with a different model than the one that wrote the paper
 ```
-
-## The Framework in Brief
-
-Three default registry unit types, each with a structured verification procedure:
-
-| Type | Question | Framework |
-|------|----------|-----------|
-| CLAIM | Does the source say this? | Citation checking + anti-hallucination |
-| ARGUMENT | Is the reasoning valid? | Toulmin (claim, grounds, warrant, backing, qualifier, rebuttal) |
-| PROPOSITION | Are conditions specified? | Whetten (What/How/Why/Who-Where-When, boundary conditions) |
-
-For papers with quantitative content, a fourth verification procedure applies (not a registry unit type):
-
-| Type | Question | Framework |
-|------|----------|-----------|
-| CALCULATION | Does the result follow from the formula? | Numerical reproduction (equation-checker) |
-
-For speculative-design / design-fiction / diegetic-prototype work, an opt-in fifth registry unit type applies (see DR-010):
-
-| Type | Question | Framework |
-|------|----------|-----------|
-| PROVOCATION | Plausible, generative, reflexive, ethically held? | Auger 2013 four criteria; separate confidence axis (GROUNDED / EXTRAPOLATED / PROVOCATIVE / CRITICAL) with required prose markers |
-
-Quality gates: Gate 1 (Draft Complete) → Gate 2 (Verification Complete) → Gate 2.5 (Internal Consistency) → Gate 3 (Review Complete) → Gate 4 (Submission Ready). Three project-conditional gates sit between 2.5 and 3 and only activate on trigger: 2.6 (Reflexivity, when PROVOCATIONs are present), 2.7 (Ethical Review, for contested topics), 2.8 (Voice Consistency, for voice-driven work). See `templates/vv-framework.md` §7.
-
-Four confidence tiers mapped to language:
-
-| Tier | Language examples |
-|------|-----------------|
-| ESTABLISHED | "demonstrates", "shows", "confirms" |
-| SUPPORTED | "indicates", "supports", "evidence suggests" |
-| EMERGING | "may", "preliminary evidence", "initial findings suggest" |
-| SPECULATIVE | "warrants investigation", "remains unclear", "we hypothesize" |
 
 ## Cross-Repo Evidence
 
