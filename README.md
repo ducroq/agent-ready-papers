@@ -140,6 +140,8 @@ Before accepting any literature claim from an AI agent:
 
 This is non-negotiable. Run it for every new citation the agent introduces. Agents can and will invent plausible-sounding papers with real-sounding author names. Step 0 catches fabrications in seconds; the full checklist takes 2 minutes per citation. Catching a hallucinated citation in review takes 2 weeks.
 
+**Inverse hallucination — Step Z.** For projects with PROVOCATION entries (speculative-design, design-fiction, diegetic-prototype work), an agent can present a *speculation* as if it had a citable source — the inverse of standard fabrication. Steps 0–6 will fail to catch this because no source exists to verify. Step Z reclassifies such entries as PROVOCATIONs rather than chasing missing sources. See [`templates/anti-hallucination.md`](templates/anti-hallucination.md) → Step Z and [DR-010](decisions/DR-010_provocation-unit-type.md).
+
 See [`templates/anti-hallucination.md`](templates/anti-hallucination.md) for the full checklist with worked examples.
 
 ## Architecture Blueprints

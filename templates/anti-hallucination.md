@@ -62,6 +62,7 @@ For each new citation, verify ALL six points:
 | **Journal confusion** | Paper exists but in a different journal than cited | Verify publication venue |
 | **Author swapping** | Correct finding but attributed to wrong author | Check author list |
 | **Recency fabrication** | "Recent study (2024)" — paper is actually from 2018 | Verify publication year |
+| **Inverse fabrication** *(speculative-design only)* | Fictional artefact presented with a citation as if sourced (e.g., a diegetic DSM entry attributed to a real journal) | Run Step Z — reclassify as PROVOCATION, not source-hunt |
 
 ---
 
@@ -94,12 +95,58 @@ Claims that something *doesn't* exist (e.g., "no guidelines exist for non-empiri
 **Worked example:**
 > "No EQUATOR guidelines exist for non-empirical papers" → Verified by searching EQUATOR Network database (equator-network.org, accessed 2026-03-03): all 699 guidelines address empirical research types; search for "theoretical," "design science," and "perspective" returned no results. Hedged in manuscript as "to our knowledge, no equivalent guidelines exist."
 
+## Step Z: Inverse Hallucination Check (PROVOCATION-specific)
+
+*Applies only to projects that contain PROVOCATION entries — speculative-design, design-fiction, diegetic-prototype work. See [DR-010](../decisions/DR-010_provocation-unit-type.md). Standard empirical and methodological projects can skip this section.*
+
+The Steps 0–6 checklist guards against the standard hallucination: an agent invents a source for a real-sounding statement. PROVOCATIONs surface the *inverse* failure mode: an agent presents a speculation *as if* it had a citable source. A fictional FSD criterion ending in `[Author, Year]` is a hallucination *into fictional territory* — the exact opposite move from standard fabrication.
+
+The check has to run in both directions:
+
+- **Forward (Steps 0–6):** is the cited source real, and does it say this?
+- **Inverse (Step Z):** is the entry behaving as a citation when no source can apply?
+
+Inverse hallucinations are dangerous because Steps 0–6 will *fail to fail* on them — the source plausibly does not exist (the agent invented it), and the entry will look like a verifiable CLAIM that simply needs more sourcing. The fix is type re-classification, not source-hunting.
+
+### Workflow
+
+For every entry in a project with PROVOCATION enabled, before running Steps 0–6:
+
+1. **Is the source real?** Run Steps 0–6 of the checklist.
+   - If the source verifies → entry is a **CLAIM**; Steps 0–6 are sufficient.
+   - If the source cannot be verified → continue.
+2. **Could a source apply at all?** Inspect the entry against the unit-type decision tree (`templates/claim-registry.md` → "Detecting Mistyped Entries").
+   - If a source *should* apply but is fabricated → standard hallucination; remove the citation, search literature, replace with a verified source or downgrade tier.
+   - If no source can apply (the entry is a designed/fictional artefact) → reclassify as **PROVOCATION**; continue.
+3. **Assign a PROVOCATION tier** (GROUNDED / EXTRAPOLATED / PROVOCATIVE / CRITICAL — see `templates/claim-registry.md` → "PROVOCATION Confidence — Separate Axis").
+4. **Add the tier-required reflexive marker** to the prose. Without the marker, the entry remains indistinguishable from a fabricated CLAIM and must be rewritten or downgraded to EMERGING CLAIM with additional sources.
+
+### Worked Example
+
+**Agent output (in an FSD-style speculative-design book):**
+> "Criterion A.1 — Strong preference for in-group members and activities (DSM-FSD §301.42, American Psychiatric Association, 2025)."
+
+| Check | Action | Result |
+|-------|--------|--------|
+| Step 0 (DOI / Scholar) | Search "DSM-FSD §301.42 American Psychiatric Association 2025" | FAIL — no such reference |
+| Step Z.1 | Source not verified — continue Step Z | — |
+| Step Z.2 | Project is speculative-design; the FSD diagnostic entry is a diegetic prototype by design (DR-010, Auger 2013) | No source can apply |
+| Step Z.3 | Tier: **CRITICAL** — the fiction critiques DSM diagnostic reification by imitating its form | — |
+| Step Z.4 | Required prose marker for CRITICAL: *"By imitating this DSM form we ask…"* | Add to manuscript |
+
+**Result:** the citation is removed, the entry is reclassified as PROVOCATION (CRITICAL), and the chapter prose is rewritten so the diagnostic form is held seriously *inside the fiction* while the reflexive marker signals fictionality to the reader at every load-bearing moment.
+
+A naive Steps 0–6 audit would have flagged this as a missing source and prompted a literature search. Step Z catches that the entry is a category error, not a sourcing error.
+
+---
+
 ## When to Run This Checklist
 
 - **Always:** Step 0 + full checklist for every new citation introduced by an AI agent
 - **Spot-check:** Step 0 as initial filter; if it passes, continue with Steps 4–6 at minimum
 - **Re-verify:** When an agent changes the claim wording for an existing citation — Steps 4–6
 - **Skip only:** For citations you personally retrieved from the source paper
+- **Step Z:** Run on every entry in projects with PROVOCATION enabled, before Steps 0–6 — to catch the inverse failure mode (speculation presented as if sourced)
 
 ---
 
