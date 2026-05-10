@@ -11,6 +11,7 @@ Verification infrastructure for AI-augmented academic writing. Templates, qualit
 
 | When | Read |
 |------|------|
+| Starting any session | Compare the `agent-ready-projects: vX.Y.Z` line in this file's header against `C:/local_dev/agent-ready-projects/CHANGELOG.md` (local clone) or https://github.com/ducroq/agent-ready-projects/blob/master/CHANGELOG.md. If the project is behind the latest released version, briefly surface the drift to the user before starting work. Don't auto-update — adopting changes is the engineer's call. |
 | Working on Paper 1 (Perspective) | `papers/perspective/CLAUDE.md` — paper identity, constraints, status, verification state |
 | Making scope or methodology decisions | `decisions/` — 10 decision records (DR-001 through DR-010) |
 | Adding or verifying literature sources | `literature/README.md` — 47 indexed sources organized by topic |
