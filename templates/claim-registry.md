@@ -105,6 +105,7 @@
 | **CLAIM** (default) | Factual statement with a source | Does the source exist and say this? | All sections |
 | **ARGUMENT** | Interpretive conclusion combining evidence + reasoning | Warrant valid? Evidence sufficient? Counter-arguments addressed? | Discussion, Conclusion |
 | **PROPOSITION** | Novel recommendation or contribution | Premises verified? Reasoning valid? Boundary conditions stated? | Conclusion, Recommendations |
+| **PROVOCATION** (opt-in) | Designed artefact making no truth claim — diegetic prototype, reflexive Ask, paradox box | Plausible? Generative? Reflexive marker present? Ethically held? | Speculative-design / design-fiction work only (see DR-010) |
 
 ### Detecting Mistyped Entries
 
@@ -115,12 +116,15 @@ Every audit found 3–6 entries initially typed as CLAIMs that were actually ARG
 3. **Does it recommend, propose, or prescribe?** → Likely PROPOSITION
 4. **Does it interpret data rather than report it?** → Likely ARGUMENT (even if it cites the data source)
 5. **Does it state a relationship between constructs?** → Likely PROPOSITION if novel, CLAIM if citing existing work
+6. **Does it make no truth claim — a designed/fictional artefact in a speculative-design work?** → PROVOCATION (opt-in; see DR-010)
+7. **Does it look like a truth claim but is actually a design choice (e.g., a fictional category imitating an authoritative form)?** → PROVOCATION; require an explicit reflexive marker in the prose
 
 **Red flags for mistyped CLAIMs:**
 - Entry has no single source (it synthesizes multiple sources → ARGUMENT)
 - Entry appears in Discussion/Conclusion (often ARGUMENT or PROPOSITION, not CLAIM)
 - Entry was scored low on source verification but "feels" well-supported (may be a well-grounded ARGUMENT evaluated with the wrong procedure)
 - Entry states "should", "needs", or "we propose" (→ PROPOSITION)
+- Entry is a fictional category, diegetic prototype, or reflexive construction with no real source (→ PROVOCATION, not SPECULATIVE CLAIM — see DR-010). Marking such an entry as a CLAIM with a fabricated source is the inverse of standard hallucination and equally dangerous
 
 **When to re-check types:** After initial registration (Gate 1), and again after verification (Gate 2) if any entries scored unexpectedly low.
 
@@ -170,6 +174,27 @@ Anti-patterns to check:
 
 See `vv-framework.md` Section 4.1 for the full Whetten verification procedure.
 
+### Verifying PROVOCATIONs (Auger checklist — opt-in, see DR-010)
+
+Applies only to projects that contain designed artefacts making no truth claim (speculative-design, design-fiction, diegetic-prototype work). Standard empirical and methodological papers do not need this section.
+
+Verification questions (adapted from Auger 2013, *Digital Creativity* 24:1):
+
+1. **Plausible** — Could this exist in some adjacent world consistent enough that a reader holds it seriously inside the fiction?
+2. **Generative** — Does the surrounding prose reach into the artefact (taking it as material to develop) rather than around it?
+3. **Reflexive** — Is a marker visible *in the prose* (not only in the registry) at every load-bearing moment, signalling fictionality?
+4. **Ethically held** — Has potential for harm been considered, with a DR-level pre-commitment binding for chapter writing?
+
+**Reflexive marker** — required field for every PROVOCATION:
+
+```markdown
+Reflexive marker: [Quote the exact prose phrasing that signals fictionality]
+```
+
+If no marker is present in the prose: rewrite to add it, or downgrade the entry to EMERGING CLAIM with additional sources. PROVOCATIONs without reflexive markers are indistinguishable from authoritative-toned hallucinations and undermine the whole speculative-design contract with the reader.
+
+**The inverse-hallucination risk:** a CLAIM hallucination invents a source for a real-sounding statement. A PROVOCATION risks the reverse — being read as a CLAIM with a citable source when no source applies. An agent presenting a fictional FSD criterion ending in `[Author, Year]` has hallucinated *into* fictional territory. See `anti-hallucination.md` Step Z.
+
 ---
 
 ## Confidence Tier Reference
@@ -194,6 +219,19 @@ See `vv-framework.md` Section 4.1 for the full Whetten verification procedure.
 <!-- Note: "5/5 Toulmin" refers to the 5-item operationalized checklist (claim, grounds, warrant, qualifier, rebuttal),
      not Toulmin's original 6 components (which include backing as a separate element). See DR-004 for the operationalization rationale. -->
 | PROPOSITION | 5/5 Whetten, tested in practice | 4/5 Whetten, premises verified | 3/5 Whetten, reasoning valid but untested | <3/5 Whetten, or missing boundary conditions |
+
+### PROVOCATION Confidence — Separate Axis
+
+PROVOCATIONs do not measure evidence strength; they measure quality of speculation. The tiers below replace ESTABLISHED/SUPPORTED/EMERGING/SPECULATIVE for PROVOCATION entries only. Each tier carries a *required prose marker* — a phrasing that must appear in the manuscript itself, not only in the registry. See DR-010.
+
+| Tier | Assign when… | Required prose marker |
+|------|--------------|------------------------|
+| **GROUNDED** | Speculation explicitly anchored in cited research; mechanism named; warrant visible | *"If X (source Y), then a speculative manifestation might look like…"* |
+| **EXTRAPOLATED** | Extension of an existing pattern (e.g., DSM dimensional approach) into fictional territory; warrant visible but underpinning partial | *"By analogy with X, we propose a fictional Y…"* |
+| **PROVOCATIVE** | Deliberately uncomfortable, rhetorical; ethical hedge explicit; no empirical pretension | *"Deliberately uncomfortable: what if…"* |
+| **CRITICAL** | The fiction itself critiques an existing system (e.g., DSM form imitated to surface diagnostic reification) | *"By imitating this DSM form we ask…"* |
+
+No marker = indefensible PROVOCATION. Remediation: rewrite to add the marker, or downgrade the entry to EMERGING CLAIM with additional sources.
 
 ## Source Tier Reference
 

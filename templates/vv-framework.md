@@ -10,7 +10,9 @@
 
 ## 1. Core Principle
 
-Academic papers written with AI assistance require systematic verification to ensure correctness and credibility. The registry tracks three unit types: **CLAIMs** (factual statements with sources), **ARGUMENTs** (reasoning chains in Discussion/Conclusion), and **PROPOSITIONs** (novel contributions and recommendations). Each needs appropriate verification and language that matches its confidence tier. For papers with quantitative content, a fourth verification procedure — **CALCULATION** (numerical reproduction) — applies alongside the registry but is tracked separately via the equation-checker tool.
+Academic papers written with AI assistance require systematic verification to ensure correctness and credibility. The registry tracks three default unit types: **CLAIMs** (factual statements with sources), **ARGUMENTs** (reasoning chains in Discussion/Conclusion), and **PROPOSITIONs** (novel contributions and recommendations). Each needs appropriate verification and language that matches its confidence tier. For papers with quantitative content, a fourth verification procedure — **CALCULATION** (numerical reproduction) — applies alongside the registry but is tracked separately via the equation-checker tool.
+
+For speculative-design / design-fiction / diegetic-prototype work, an opt-in fifth unit type — **PROVOCATION** (designed artefact making no truth claim) — uses Auger's four-criteria verification on a separate confidence axis (see DR-010, §4.1).
 
 **Scope:** This framework applies to any outbound technical content — formal papers, but also informal technical communication (emails, messages, reports) containing quantitative claims, equations, or domain-specific terminology. The verification procedures scale down: a 3-equation WhatsApp message to a stakeholder benefits from equation-checker methodology just as a 68-equation theory document does.
 
@@ -129,6 +131,27 @@ After completing the Whetten checklist, evaluate falsifiability:
 - [ ] Criterion is independent of the proposition (not circular)
 - [ ] Criterion is specific enough to be measurable
 - [ ] Criterion is not a moving target
+
+**PROVOCATION** (opt-in for speculative-design / design-fiction / diegetic-prototype work; see DR-010) — each designed artefact verified using Auger's four criteria:
+
+```markdown
+PROVOCATION: "[Artefact — diegetic prototype, reflexive Ask, paradox box, etc.]"
+├── Plausible: [Why a reader could hold this seriously inside the fiction]
+├── Generative: [What new questions or interpretive moves it opens]
+├── Reflexive: [Where the prose marker signals fictionality]
+├── Ethically held: [DR-level pre-commitment; harm consideration]
+├── Tier: [GROUNDED / EXTRAPOLATED / PROVOCATIVE / CRITICAL]
+└── Status: [VERIFIED / NEEDS CHECK]
+```
+
+Verification questions (adapted from Auger 2013, *Digital Creativity* 24:1):
+1. Is the artefact internally consistent — could it exist in some adjacent world such that a reader holds it seriously?
+2. Does subsequent prose reach into the artefact (generative) rather than around it?
+3. Is a reflexive marker visible in the prose at every load-bearing moment, not only in the registry?
+4. Has potential for harm been considered, with mitigations binding for chapter writing?
+5. Is the tier (GROUNDED / EXTRAPOLATED / PROVOCATIVE / CRITICAL) assigned, with the required prose marker present?
+
+If the marker is absent: rewrite to add it, or downgrade to EMERGING CLAIM with additional sources. PROVOCATIONs without reflexive markers are indistinguishable from authoritative-toned hallucinations.
 
 ### 4.2 Static Analysis (Automated Checks)
 
@@ -262,4 +285,4 @@ vv/
 
 ---
 
-*Version: 2.2 — v2.1: Gate 2.5, PROPOSITION boundary condition quality criteria, falsification checklist, Toulmin grounds tier constraint (DR-004 Issues #1–#4). v2.2: scope note (informal technical communication), section-level coverage analysis, mistype re-check in Gate 2, full reflection pass (2026-03-16)*
+*Version: 2.3 — v2.1: Gate 2.5, PROPOSITION boundary condition quality criteria, falsification checklist, Toulmin grounds tier constraint (DR-004 Issues #1–#4). v2.2: scope note (informal technical communication), section-level coverage analysis, mistype re-check in Gate 2, full reflection pass (2026-03-16). v2.3: PROVOCATION as opt-in fifth unit type for speculative-design work (DR-010, 2026-05-10).*

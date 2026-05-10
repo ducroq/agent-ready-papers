@@ -65,6 +65,14 @@ For papers with quantitative content (equations, derived values, numerical table
 
 Calculation verification uses **mechanical reproduction** — substituting values into formulas and computing step by step — rather than plausibility assessment. In testing, an LLM prompted to "review for soundness" missed 3/3 arithmetic errors in a 68-equation document, while an LLM prompted to "numerically reproduce every calculation" caught all three. The errors survived because they produced plausible-looking numbers. See [`audits/equation-verification-journey.md`](audits/equation-verification-journey.md) for the full case study and [`audits/driven-pendulum-retrofit.md`](audits/driven-pendulum-retrofit.md) §9 for the evidence.
 
+For speculative-design / design-fiction / diegetic-prototype work, an opt-in fifth unit type applies:
+
+| Type | What it is | Where it appears | Verification |
+|------|-----------|-----------------|--------------|
+| **PROVOCATION** | Designed artefact making no truth claim — diegetic prototype, reflexive Ask, paradox box, fictional category | Speculative-design works only | Plausible? Generative? Reflexive marker present? Ethically held? (Auger 2013) |
+
+PROVOCATIONs use a separate confidence axis (GROUNDED / EXTRAPOLATED / PROVOCATIVE / CRITICAL) measuring quality of speculation rather than strength of evidence, with required prose markers binding for each tier. See [DR-010](decisions/DR-010_provocation-unit-type.md) and [`audits/feedback-from-fsd.md`](audits/feedback-from-fsd.md) for the activation rationale.
+
 ### Priority (what breaks if this is wrong?)
 
 | Priority | Meaning | Coverage Target |
@@ -113,6 +121,8 @@ This is the bridge between verification and writing. The confidence tier determi
 | SPECULATIVE | "warrants investigation", "remains unclear", "we hypothesize" |
 
 Without this mapping, agents default to confident language for everything. A SPECULATIVE claim stated as "demonstrates" is a credibility risk that reviewers will catch. The writing guide template maps every claim to its section, confidence tier, and appropriate language. See [`templates/writing-guide.md`](templates/writing-guide.md).
+
+**PROVOCATIONs use a separate axis.** When the registry contains PROVOCATION entries, the table above does not apply to them — they take GROUNDED / EXTRAPOLATED / PROVOCATIVE / CRITICAL with their own required prose markers (see [DR-010](decisions/DR-010_provocation-unit-type.md) and [`templates/claim-registry.md`](templates/claim-registry.md) → "PROVOCATION Confidence — Separate Axis").
 
 **Own work under review** requires special framing: "we observed" (not "it was found"), with explicit status ("under review at IEEE TIM"). Don't let agents present under-review work as established.
 

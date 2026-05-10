@@ -12,7 +12,7 @@ Verification infrastructure for AI-augmented academic writing. Templates, qualit
 | When | Read |
 |------|------|
 | Working on Paper 1 (Perspective) | `papers/perspective/CLAUDE.md` — paper identity, constraints, status, verification state |
-| Making scope or methodology decisions | `decisions/` — 9 decision records (DR-001 through DR-009) |
+| Making scope or methodology decisions | `decisions/` — 10 decision records (DR-001 through DR-010) |
 | Adding or verifying literature sources | `literature/README.md` — 47 indexed sources organized by topic |
 | Understanding how the framework was built | `docs/METHODOLOGY.md` — derived from 3 real paper projects |
 | Reviewing audit evidence from source projects | `audits/` — 8 retrofit audits with worked examples |
@@ -95,7 +95,7 @@ cd papers/perspective && pdflatex manuscript && bibtex manuscript && pdflatex ma
 
 ## The Framework in Brief
 
-Three registry unit types, each with a structured verification procedure:
+Three default registry unit types, each with a structured verification procedure:
 
 | Type | Question | Framework |
 |------|----------|-----------|
@@ -108,6 +108,12 @@ For papers with quantitative content, a fourth verification procedure applies (n
 | Type | Question | Framework |
 |------|----------|-----------|
 | CALCULATION | Does the result follow from the formula? | Numerical reproduction (equation-checker) |
+
+For speculative-design / design-fiction / diegetic-prototype work, an opt-in fifth registry unit type applies (see DR-010):
+
+| Type | Question | Framework |
+|------|----------|-----------|
+| PROVOCATION | Plausible, generative, reflexive, ethically held? | Auger 2013 four criteria; separate confidence axis (GROUNDED / EXTRAPOLATED / PROVOCATIVE / CRITICAL) with required prose markers |
 
 Quality gates: Gate 1 (Draft Complete) → Gate 2 (Verification Complete) → Gate 2.5 (Internal Consistency) → Gate 3 (Review Complete) → Gate 4 (Submission Ready).
 
