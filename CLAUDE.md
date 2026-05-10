@@ -1,11 +1,12 @@
 # Agent-Ready Papers
 
-Verification infrastructure for AI-augmented academic writing. Templates, quality gates, and session continuity that catch the failure modes automated tools miss — hallucinated citations, confidence inflation, argument quality gaps, and calculation errors.
+Verification infrastructure for AI-augmented academic and structured non-fiction writing. Templates, quality gates, and session continuity that catch the failure modes automated tools miss — hallucinated citations, confidence inflation, argument quality gaps, and calculation errors. Originally developed for academic papers; extended in 2026-05 to cover speculative-design and voice-driven non-fiction work (DR-010).
 
-- **Type**: Guide + templates + active paper projects
+- **Type**: Guide + templates + active paper projects (non-fiction projects supported via DR-010 but currently external — e.g., FSD)
 - **Companion**: [agent-ready-projects](https://github.com/ducroq/agent-ready-projects) (for code)
 - **Status**: Paper 1 (Perspective) at Gate 3 (co-author review). Paper 2 (DSR) not yet started.
 - **agent-ready-projects**: v1.7.0
+- **Repo name note**: "papers" understates the current scope; rename deferred until a second non-empirical project provides Tier 2 evidence (per `audits/feedback-from-fsd.md`)
 
 ## Before You Start
 
