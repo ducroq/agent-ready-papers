@@ -229,6 +229,18 @@ Each gate must pass before proceeding:
 
 These are manual cross-checks not covered by the automated static checks in Gate 2.
 
+### Gate 2.6: Reflexivity *(conditional — only when PROVOCATIONs are present)*
+
+For projects with PROVOCATION entries (see [DR-010](decisions/DR-010_provocation-unit-type.md)). Walk every PROVOCATION; confirm the required prose marker for its tier (GROUNDED / EXTRAPOLATED / PROVOCATIVE / CRITICAL) is visible in the manuscript itself, at every load-bearing moment — not only in the registry. Without the marker, authoritative-toned speculation can be misread as a claim. Entries failing this audit are rewritten or downgraded to EMERGING CLAIM with additional sources.
+
+### Gate 2.7: Ethical Review *(conditional — only for contested topics)*
+
+For projects engaging actively contested ethical territory. No real-world group is pathologised in the author's voice; harm consideration is documented in a DR; treatment is symmetric across the contested traditions in the work; reviewer composition matches those traditions; project-specific operational rules from the contested-topic DR are applied chapter by chapter.
+
+### Gate 2.8: Voice Consistency *(conditional — only for voice-driven work)*
+
+For voice-driven work where the manuscript's register is part of the contribution. The project has a voice manifest binding for every chapter; no drift into excluded modes (academic hedging, snark, righteousness); a read-aloud test passes; drift is logged and resolved before Gate 3.
+
 ### Gate 3: Review Complete
 - [ ] Simulated peer review scored ≥3.5/5.0
 - [ ] Co-author signoff

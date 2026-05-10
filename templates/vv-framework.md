@@ -246,6 +246,38 @@ Status (Pass / Fail)
 - [ ] Numerical values in tables match claims in prose
 - [ ] No data present only in appendix without main text reference (or vice versa)
 
+### Gate 2.6: Reflexivity (conditional — applies when PROVOCATIONs are present)
+
+For projects with PROVOCATION entries (see DR-010). Skip entirely if the registry contains none.
+
+- [ ] Walk every PROVOCATION in the registry
+- [ ] For each one, locate the required prose marker for its tier (GROUNDED / EXTRAPOLATED / PROVOCATIVE / CRITICAL) in the manuscript itself, not only in the registry
+- [ ] Marker is present at every load-bearing moment, not only on first introduction
+- [ ] No authoritative-toned speculation slides silently into apparent claim
+- [ ] Entries failing this audit are rewritten (marker added) or downgraded to EMERGING CLAIM with additional sources
+
+### Gate 2.7: Ethical Review (conditional — applies when the project engages contested topics)
+
+For projects engaging actively contested ethical territory — political, religious, identity-based, or otherwise. Skip if the work does not engage such cases.
+
+- [ ] No real-world group is pathologised in the author's voice
+- [ ] Harm consideration is documented in a DR or equivalent pre-commitment
+- [ ] Treatment is symmetric across the contested traditions in the work (no asymmetric scrutiny)
+- [ ] Reviewer composition for the contested chapters matches the traditions discussed (the work is reviewed by readers from each)
+- [ ] Project-specific operational rules from the contested-topic DR (e.g., paired-mirror rules, vocabulary substitution policies) are applied chapter by chapter
+
+See `audits/feedback-from-fsd.md` Tier 1 item 3 for the source pattern; project-specific operational rules belong in a DR per the project's `decision-record.md` template.
+
+### Gate 2.8: Voice Consistency (conditional — applies when the work has a voice-driven register)
+
+For voice-driven work — books, essays, perspective pieces, or any work where the manuscript's register is itself part of the contribution. Standard academic-prose papers can skip this gate.
+
+- [ ] The project has a defined voice manifest (e.g., a voice-policy DR or section in the project CLAUDE.md)
+- [ ] The manifest is binding for every chapter, not only the opening
+- [ ] No drift into modes the manifest excludes (e.g., academic hedging, tweet-thread snark, righteous register)
+- [ ] Read-aloud test passes — the manuscript reads coherently in the manifest's register
+- [ ] Drift detected during the read-aloud is logged and resolved before proceeding to Gate 3
+
 ### Gate 3: Review Complete
 - [ ] Co-author signoff
 - [ ] Simulated peer review ≥3.5/5.0
@@ -285,4 +317,4 @@ vv/
 
 ---
 
-*Version: 2.3 — v2.1: Gate 2.5, PROPOSITION boundary condition quality criteria, falsification checklist, Toulmin grounds tier constraint (DR-004 Issues #1–#4). v2.2: scope note (informal technical communication), section-level coverage analysis, mistype re-check in Gate 2, full reflection pass (2026-03-16). v2.3: PROVOCATION as opt-in fifth unit type for speculative-design work (DR-010, 2026-05-10).*
+*Version: 2.4 — v2.1: Gate 2.5, PROPOSITION boundary condition quality criteria, falsification checklist, Toulmin grounds tier constraint (DR-004 Issues #1–#4). v2.2: scope note (informal technical communication), section-level coverage analysis, mistype re-check in Gate 2, full reflection pass (2026-03-16). v2.3: PROVOCATION as opt-in fifth unit type for speculative-design work (DR-010, 2026-05-10). v2.4: project-conditional Gates 2.6 (Reflexivity), 2.7 (Ethical Review), 2.8 (Voice Consistency) added (2026-05-10, FSD audit Tier 1 items 3+4).*

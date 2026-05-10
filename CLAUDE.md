@@ -115,7 +115,7 @@ For speculative-design / design-fiction / diegetic-prototype work, an opt-in fif
 |------|----------|-----------|
 | PROVOCATION | Plausible, generative, reflexive, ethically held? | Auger 2013 four criteria; separate confidence axis (GROUNDED / EXTRAPOLATED / PROVOCATIVE / CRITICAL) with required prose markers |
 
-Quality gates: Gate 1 (Draft Complete) → Gate 2 (Verification Complete) → Gate 2.5 (Internal Consistency) → Gate 3 (Review Complete) → Gate 4 (Submission Ready).
+Quality gates: Gate 1 (Draft Complete) → Gate 2 (Verification Complete) → Gate 2.5 (Internal Consistency) → Gate 3 (Review Complete) → Gate 4 (Submission Ready). Three project-conditional gates sit between 2.5 and 3 and only activate on trigger: 2.6 (Reflexivity, when PROVOCATIONs are present), 2.7 (Ethical Review, for contested topics), 2.8 (Voice Consistency, for voice-driven work). See `templates/vv-framework.md` §7.
 
 Four confidence tiers mapped to language:
 
