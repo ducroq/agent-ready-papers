@@ -140,6 +140,26 @@ A naive Steps 0–6 audit would have flagged this as a missing source and prompt
 
 ---
 
+## Step 7: Multi-Pass Review Across Model Families
+
+*See [DR-011](../decisions/DR-011_multi-model-review-pattern.md) for the full pattern, evidence, and revisit conditions.*
+
+Steps 0–6 verify that **citations exist and say what we claim**. Step Z catches the inverse failure mode (speculation presented as if sourced). Step 7 addresses a third failure mode: that **the drafting model and a same-family reviewer share biases neither can escape on their own**.
+
+Use up to three passes, each escaping a specific bias:
+
+| Pass | Reviewer | Bias escaped | When |
+|------|----------|--------------|------|
+| **Pass 1** | Intra-family small (e.g., Haiku-class), fresh session | Sunk-cost-from-the-drafting-session | Every publish |
+| **Pass 2** | Intra-family large (e.g., Opus-class), fresh session | Sunk-cost-from-the-drafting-session; different review character (argument-shape critique vs. checklist rigour) | Blog-scale: every publish. Paper-scale: every major revision / before each phase gate. |
+| **Pass 3** | Cross-vendor (e.g., Gemini, GPT) | Training-data and stylistic priors shared by the entire family | High-stakes content only, **with mandatory style/voice filter** specified in `templates/review-prompt.md` |
+
+Passes 1 and 2 are complementary, not redundant — in the triggering observation, different model sizes within the same family caught essentially disjoint issues. Pass 3 is opt-in for high-stakes content; without the style/voice filter, most cross-vendor suggestions will be style violations the human has to manually discard.
+
+**Evidence base:** N=1 session at blog scale (2026-05-11, dev.jeroenveen.nl). The three-pass structure and style-filter requirement are stable; specific cost-tier defaults are provisional pending paper-scale application. See DR-011 *Revisit If* for falsifiable demotion paths.
+
+---
+
 ## When to Run This Checklist
 
 - **Always:** Step 0 + full checklist for every new citation introduced by an AI agent
@@ -147,6 +167,7 @@ A naive Steps 0–6 audit would have flagged this as a missing source and prompt
 - **Re-verify:** When an agent changes the claim wording for an existing citation — Steps 4–6
 - **Skip only:** For citations you personally retrieved from the source paper
 - **Step Z:** Run on every entry in projects with PROVOCATION enabled, before Steps 0–6 — to catch the inverse failure mode (speculation presented as if sourced)
+- **Step 7:** Run before publish / submission. Pass 1 every publish; Pass 2 per the scale guidance above; Pass 3 only for high-stakes content with the style filter active
 
 ---
 

@@ -1,11 +1,16 @@
 # Peer Review Simulation Prompt
 
 <!-- Use this in a FRESH session (not the one that helped write the paper).
+     For the full multi-pass pattern (Pass 1 intra-family small, Pass 2
+     intra-family large, Pass 3 cross-vendor), see DR-011. This template is
+     run once per pass; the Pass field below records which pass this is.
      Paste the relevant section(s) after the prompt. Adapt dimensions and
      weights to your target journal. -->
 
 **Target Journal:** [Journal name]
 **Paper:** [Title]
+**Pass:** [Pass 1 (intra-family small) / Pass 2 (intra-family large) / Pass 3 (cross-vendor)]
+**Style/voice rules to filter against (required):** [Default for academic work: target journal's style conventions. Default for non-fiction / blog work: the project's voice rules. Replace this default with the actual rule list — examples: "no coined labels, no subheadings within the body, no slogan-style copy, register matches author's existing published prose."]
 
 ---
 
@@ -135,6 +140,12 @@ Review the manuscript section(s) pasted below for submission readiness. Evaluate
 7. **Suggestions for improvement** with reasoning
 
 Be thorough but constructive. The goal is submission-ready quality.
+
+### Pre-delivery style/voice filter (required)
+
+Before delivering output, check every suggestion in points 4–7 against the **Style/voice rules** specified in the header. Discard or rephrase suggestions that would violate those rules. Most critical for Pass 3 (cross-vendor reviewers), where suggestions are most likely to drift from the project's style conventions; applies to all passes.
+
+If a suggestion has substantive value but only a style problem, deliver the substantive content with an explicit note that the suggested phrasing was filtered for style. Do not silently drop substantive findings.
 
 ---
 

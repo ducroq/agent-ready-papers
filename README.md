@@ -187,7 +187,7 @@ A good review prompt evaluates along multiple dimensions:
 
 The review produces **scored assessments** — not just prose feedback. A weighted rubric (e.g., contribution 15%, methodology 15%, uncertainty quantification 15%, clarity 10%) gives you a concrete quality signal. If the simulated review scores below your threshold (e.g., 3.5/5.0), address the weaknesses before submitting.
 
-**Critical**: Run the review in a fresh session, not the one that helped write the paper. An agent reviewing its own work has sunk-cost bias in its context — it's unlikely to catch its own mistakes.
+**Critical**: Never review in the building session — an agent reviewing its own work has sunk-cost bias in its context and is unlikely to catch its own mistakes. For the strongest version, use the three-pass pattern that escapes distinct biases at each pass: Pass 1 (intra-family small, sunk-cost-from-session escape, every publish), Pass 2 (intra-family large, different review character, every major revision), Pass 3 (cross-vendor, training/stylistic-prior escape, high-stakes only with mandatory style filter). See [`decisions/DR-011_multi-model-review-pattern.md`](decisions/DR-011_multi-model-review-pattern.md) and Step 7 in [`templates/anti-hallucination.md`](templates/anti-hallucination.md).
 
 See [`templates/review-prompt.md`](templates/review-prompt.md) for a structured review prompt template.
 
@@ -372,7 +372,7 @@ Agents hallucinate citations. Not occasionally — routinely. Every citation nee
 Prose written without a claim registry is prose that will need to be rewritten. The registry forces you to identify what you're claiming and whether you can support it *before* you invest in beautiful sentences.
 
 ### Reviewing in the building session
-An agent that spent an hour helping write Section 3 will not catch its own errors in Section 3. Use a fresh session for review — or a different model entirely.
+An agent that spent an hour helping write Section 3 will not catch its own errors in Section 3. Use a fresh session for review — or, for the strongest version, the three-pass pattern across model families ([DR-011](decisions/DR-011_multi-model-review-pattern.md)).
 
 ### Skipping verification for informal technical communication
 The framework applies to any outbound technical content — not just formal papers. WhatsApp messages, emails, and Slack discussions with quantitative claims have the same error classes (unit confusion, property overestimates, wrong formulas) but no verification trigger. If it contains numbers, equations, or technical terminology going to a stakeholder, run the relevant checks before sending.
