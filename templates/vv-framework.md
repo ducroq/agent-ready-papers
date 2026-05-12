@@ -28,7 +28,7 @@ For speculative-design / design-fiction / diegetic-prototype work, an opt-in fif
 | Argument flow | Logical coherence, no contradictions between sections |
 | Expert review | Co-author and domain expert feedback |
 | Oracle comparison | Alignment with author guidelines and exemplar papers |
-| Peer review simulation | Structured review in a fresh session |
+| Peer review simulation | Multi-pass structured review across model families (see [DR-011](../decisions/DR-011_multi-model-review-pattern.md)) |
 | Traceability | Claim → Evidence → Audit trail |
 
 ---
@@ -185,7 +185,7 @@ If the marker is absent: rewrite to add it, or downgrade to EMERGING CLAIM with 
 |-------------|------|
 | Co-author | Review and signoff |
 | Domain expert | Technical accuracy check |
-| Simulated reviewer | Structured peer review (fresh session) |
+| Simulated reviewer | Multi-pass peer review across model families (see DR-011) |
 
 ---
 

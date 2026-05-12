@@ -14,7 +14,7 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 |------|------|
 | Starting any session | Compare the `agent-ready-projects: vX.Y.Z` line in this file's header against `C:/local_dev/agent-ready-projects/CHANGELOG.md` (local clone) or https://github.com/ducroq/agent-ready-projects/blob/master/CHANGELOG.md. If the project is behind the latest released version, briefly surface the drift to the user before starting work. Don't auto-update — adopting changes is the engineer's call. |
 | Working on Paper 1 (Perspective) | `papers/perspective/CLAUDE.md` — paper identity, constraints, status, verification state |
-| Making scope or methodology decisions | `decisions/` — 10 decision records (DR-001 through DR-010) |
+| Making scope or methodology decisions | `decisions/` — 11 decision records (DR-001 through DR-011) |
 | Adding or verifying literature sources | `literature/README.md` — 47 indexed sources organized by topic |
 | Understanding how the framework was built | `docs/METHODOLOGY.md` — derived from 3 real paper projects |
 | Reviewing audit evidence from source projects | `audits/` — 8 retrofit audits with worked examples |
@@ -50,7 +50,7 @@ agent-ready-papers/
 │   ├── glossary.md            <- Cross-domain terminology
 │   ├── decision-record.md     <- DR template
 │   └── key-quotes.md          <- Reference quotes
-├── decisions/                 <- Architecture decision records (DR-001 to DR-010)
+├── decisions/                 <- Architecture decision records (DR-001 to DR-011)
 ├── literature/                <- Source registry (47 sources, 17 detailed summaries)
 ├── audits/                    <- Retrofit audits of 3 source projects + equation verification
 ├── docs/                      <- Methodology and development history
@@ -93,7 +93,7 @@ cd papers/perspective && pdflatex manuscript && bibtex manuscript && pdflatex ma
 # Follow the Step 0 + 6-step checklist in papers/perspective/anti-hallucination.md
 
 # Run peer review simulation
-# Use papers/perspective/review-prompt.md with a different model than the one that wrote the paper
+# Use papers/perspective/review-prompt.md with the three-pass pattern (DR-011): Pass 1 intra-family small, Pass 2 intra-family large, Pass 3 cross-vendor (high-stakes only, with style filter)
 ```
 
 ## Cross-Repo Evidence
