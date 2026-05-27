@@ -21,6 +21,7 @@ These are different design problems:
 
 Related work in this space:
 - **Nanopublications** — minimal publishable units (assertion + provenance + publication info) in RDF
+- **Nanoarguments** (NLnet NGI Zero portfolio) — federated linked-data graph of scientific claims via signed nanopublications, extending nanopub from assertion-layer to argument-layer
 - **Open Research Knowledge Graph (ORKG)** — structured, machine-readable research contributions
 - **FAIR principles** — Findable, Accessible, Interoperable, Reusable data
 - **Semantic publishing** — enriching papers with machine-readable metadata
@@ -56,3 +57,4 @@ The current scope (verification for human authors) is not yet field-tested. Addi
 - A paper project requires structured knowledge output (e.g., contributing to a knowledge graph)
 - Academic publishing shifts meaningfully toward machine-readable formats
 - An opportunity arises to test the export layer on a real paper project
+- Paper 1 is published and a concrete peer project (e.g., Nanoarguments) is available to interoperate with — its 19 verified typed claims are a tractable corpus for a first export experiment
