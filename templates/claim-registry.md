@@ -44,25 +44,88 @@
 
 ## Registry by Section
 
+Each section may contain up to four sub-tables — one per unit type — and includes only the ones it needs. Most sections are CLAIM-only; Discussion / Conclusion sections typically add ARGUMENT and PROPOSITION sub-tables; speculative-design work adds PROVOCATION (see DR-010). Each sub-table's columns match its verification checklist, so every required field has a structural home (no orbiting prose blocks below the table).
+
+**ID convention.** IDs are `S<section>-<number>` (e.g. `S3-2`) and are **unique within a section across all four sub-tables** — `S3-2` exists in at most one of the CLAIM / ARGUMENT / PROPOSITION / PROVOCATION sub-tables for Section 3. A `Grounds`/`Premises` reference like `S3-2` is therefore resolvable by `Ctrl-F` within the section; the sub-table header (`**ARGUMENTs**`, etc.) tells the verifier what type the target is.
+
+**List delimiter convention (`;`).** The semicolon is the **list delimiter throughout the registry**, used wherever a cell carries more than one value:
+
+- `Source` + `Source Tier` — sources and their tiers in **parallel order** (position *i* in `Source Tier` corresponds to position *i* in `Source`). Example: `Author1 Year; Author2 Year` → `A; C`.
+- `Grounds`, `Premises`, `Rebuttal`, `Alternatives engaged` — lists of registry IDs or short phrases. Example: `S1-2; S2-1`.
+
+Edge cases:
+- **Source with no tier yet** (e.g. own work in preparation, status unclear): use `[TBD]` in the corresponding `Source Tier` position and mark the row `[~]` (in progress) until tier is assigned.
+- **`;` collision with markdown tables**: safe inside `|`-delimited cells in CommonMark, GFM, and pandoc. The real hazard is `|` itself inside cells — escape as `\|` if needed.
+
 ### Section 1: [Section Name]
 
-| ID | Statement | Type | Priority | Confidence | Source | Source Tier | Status |
-|----|-----------|------|----------|------------|--------|-------------|--------|
-| S1-1 | [factual statement] | CLAIM | P0 | ESTABLISHED | [Author Year] | A | [ ] |
-| S1-2 | [factual statement] | CLAIM | P1 | EMERGING | [OWN WORK] | E | [ ] |
+**CLAIMs:**
 
-<!-- Repeat for each section -->
+| ID | Statement | Priority | Confidence | Source | Source Tier | Status |
+|----|-----------|----------|------------|--------|-------------|--------|
+| S1-1 | [factual statement] | P0 | ESTABLISHED | [Author Year] | A | [ ] |
+| S1-2 | [factual statement] | P1 | EMERGING | [OWN WORK] | E | [ ] |
+| S1-3 | [factual statement supported by two sources] | P1 | SUPPORTED | [Author1 Year]; [Author2 Year] | A; A | [ ] |
+
+<!-- Repeat for each section. Add ARGUMENT / PROPOSITION / PROVOCATION sub-tables
+     below when the section contains those unit types. -->
 
 ### Section N: Discussion
 
 <!-- Discussion and Conclusion sections typically contain ARGUMENTs and PROPOSITIONs
-     alongside standard CLAIMs. Use the verification guides below. -->
+     alongside standard CLAIMs. Each unit type has its own sub-table matching its
+     verification checklist — Toulmin for ARGUMENT, Whetten for PROPOSITION,
+     Auger for PROVOCATION. -->
 
-| ID | Statement | Type | Priority | Confidence | Source / Warrant | Source Tier | Status |
-|----|-----------|------|----------|------------|-----------------|-------------|--------|
-| SN-1 | [interpretive conclusion] | ARGUMENT | P0 | SUPPORTED | Warrant: [inferential bridge] | -- | [ ] |
-| SN-2 | [recommendation] | PROPOSITION | P1 | EMERGING | Reasoning: [logical basis] | -- | [ ] |
-| SN-3 | [factual comparison] | CLAIM | P1 | SUPPORTED | [Author Year] | A | [ ] |
+**CLAIMs:**
+
+| ID | Statement | Priority | Confidence | Source | Source Tier | Status |
+|----|-----------|----------|------------|--------|-------------|--------|
+| SN-3 | [factual comparison] | P1 | SUPPORTED | [Author Year] | A | [ ] |
+
+**ARGUMENTs** (Toulmin — see verification checklist below):
+
+| ID | Statement | Priority | Confidence | Grounds | Warrant | Rebuttal | Source | Source Tier | Status |
+|----|-----------|----------|------------|---------|---------|----------|--------|-------------|--------|
+| SN-1 | [interpretive conclusion] | P0 | SUPPORTED | S1-2; S2-1 | [inferential bridge] | [strongest counter-arguments addressed] | [optional Toulmin "backing" citation] | A | [ ] |
+
+<!-- Grounds: list registry IDs (semicolon-separated) of **CLAIMs or verified ARGUMENTs**
+     this argument builds on. Each must be marked [x] verified in its own row.
+     SPECULATIVE grounds cannot support SUPPORTED or ESTABLISHED arguments.
+     Source / Source Tier are optional and used only for Toulmin "backing" — an external
+     citation that supports the warrant itself, distinct from the registry-internal grounds. -->
+
+**PROPOSITIONs** (Whetten — see verification checklist below):
+
+| ID | Statement | Priority | Confidence | Constructs | Relationship | Premises | Reasoning | Boundary conditions | Alternatives engaged | Source | Source Tier | Status |
+|----|-----------|----------|------------|------------|--------------|----------|-----------|---------------------|----------------------|--------|-------------|--------|
+| SN-2 | [recommendation] | P1 | EMERGING | [X, Y, Z defined] | [X enables Y under Z] | S1-2; S2-3 | [logical basis] | [where applies / where doesn't] | [alt explanations engaged] | [optional framework-provenance citation] | C | [ ] |
+
+<!-- Whetten 5-item coverage: Constructs (What), Relationship (How), Reasoning (Why),
+     Boundary conditions (Who-Where-When), Alternatives engaged.
+     Premises: list registry IDs (semicolon-separated) of CLAIMs / ARGUMENTs this
+     proposition rests on.
+     Boundary conditions must be specific, falsifiable, and bounded — see anti-pattern
+     checks below.
+     Source / Source Tier are optional and used only for external framework provenance. -->
+
+**PROVOCATIONs** (Auger — opt-in, speculative-design only; see DR-010):
+
+Column semantics differ from the other sub-tables: Auger's four criteria are *evaluative questions*, so each column records the **evidence or move that answers the question**, not a yes/no judgment. The column headers below name the content the cell should carry.
+
+| ID | Statement | Priority | Tier (PROVOCATION axis) | Plausibility evidence | Generative move | Reflexive marker | Ethics commitment | Status |
+|----|-----------|----------|--------------------------|------------------------|------------------|-------------------|--------------------|--------|
+| SN-4 | [diegetic prototype / reflexive Ask / paradox box] | P1 | GROUNDED | [why a reader could hold this seriously inside the fiction] | [how the surrounding prose develops the artefact as material] | "[exact prose phrasing — required, verbatim]" | [potential harm considered + DR-level pre-commitment binding for writing] | [ ] |
+
+<!-- Tier uses the PROVOCATION axis (GROUNDED / EXTRAPOLATED / PROVOCATIVE / CRITICAL),
+     not the evidence-strength axis.
+     Reflexive marker must quote the prose phrasing verbatim — without it the entry is
+     indefensible (see Step Z in anti-hallucination.md and DR-010).
+     Each Auger criterion is recorded as the *substance* of the answer, not "yes/no".
+     An empty cell means the criterion has not been addressed; the entry is then not yet
+     verifiable as a PROVOCATION and should remain `[ ]` or be marked `[!]`. -->
+
+**Empty-cell convention.** A blank cell in any optional column (e.g. `Source` for an ARGUMENT, `Alternatives engaged` for a low-stakes PROPOSITION) is acceptable. A blank cell in a **required** column for that unit type signals the entry is not yet verifiable — keep the row `[ ]` or mark `[!]` and address before promoting confidence.
 
 ---
 

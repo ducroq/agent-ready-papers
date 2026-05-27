@@ -17,7 +17,7 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 | Making scope or methodology decisions | `decisions/` — 11 decision records (DR-001 through DR-011) |
 | Adding or verifying literature sources | `literature/README.md` — 47 indexed sources organized by topic |
 | Understanding how the framework was built | `docs/METHODOLOGY.md` — derived from 3 real paper projects |
-| Reviewing audit evidence from source projects | `audits/` — 8 retrofit audits with worked examples |
+| Reviewing audit evidence from source projects | `audits/` — 10 audits: retrofits of source projects + forward-feedback from FSD, blog, grant, and template-revision applications |
 | Working with claims, gates, or confidence calibration | `docs/framework-summary.md` — unit types, gates, tier-to-language mapping at a glance (templates remain normative) |
 | Stuck or debugging something weird | `memory/gotcha-log.md` — problem-fix archive |
 | Creating a new paper project | `templates/CLAUDE.md` — paper project template |
@@ -52,7 +52,7 @@ agent-ready-papers/
 │   └── key-quotes.md          <- Reference quotes
 ├── decisions/                 <- Architecture decision records (DR-001 to DR-011)
 ├── literature/                <- Source registry (47 sources, 17 detailed summaries)
-├── audits/                    <- Retrofit audits of 3 source projects + equation verification
+├── audits/                    <- Retrofit audits of source projects + forward-feedback from applications (FSD, blog, grant, template-revision)
 ├── docs/                      <- Methodology and development history
 ├── papers/
 │   └── perspective/           <- Paper 1: "The Verification Gap" (active)
