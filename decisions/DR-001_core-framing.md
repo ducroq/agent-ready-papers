@@ -12,7 +12,7 @@ The project launched with a central metaphor: "treat a paper like an engineered 
 
 A landscape review revealed that the AI-assisted academic writing space is active at three levels:
 - **Tool-level**: automated citation checkers (RefChecker, scite.ai, LLM Citation Verifier)
-- **Model-level**: RAG, grounded generation, span-level verification (ALCE, CiteLLM, REFIND)
+- **Model-level**: RAG, [grounded generation](../docs/framework-summary.md#terminology-note-grounding--grounded), span-level verification (ALCE, CiteLLM, REFIND)
 - **Policy-level**: publisher disclosure requirements (Elsevier, university policies)
 
 This project operates at a fourth level — **process-level** — providing workflow templates, session continuity, and quality gates. That's its distinctive contribution. The question is whether "paper-as-system" accurately frames that contribution, or whether it overstates the analogy.

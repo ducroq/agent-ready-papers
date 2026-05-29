@@ -71,3 +71,16 @@ For PROVOCATION (separate axis — quality of speculation, not strength of evide
 | CRITICAL | *"By imitating this DSM form we ask…"* |
 
 Normative source: `templates/writing-guide.md` Language Calibration; `templates/claim-registry.md` Confidence Tier Reference.
+
+## Terminology Note: "Grounding" / "GROUNDED"
+
+Two senses appear in this repo. Don't conflate:
+
+| Sense | Meaning | Layer |
+|-------|---------|-------|
+| **Grounding (AI sense)** | Anchoring model output to retrieved, verifiable sources at inference time — RAG, citation-enforced generation, web-search-augmented answers. A model-level technique for reducing hallucination. | Model layer |
+| **GROUNDED (PROVOCATION tier)** | A speculative-design entry explicitly anchored in cited research, with mechanism named and warrant visible (DR-010). A *confidence tier* for speculation, not a generation technique. | Process layer |
+
+The framework sits **downstream** of model-layer grounding (see `README.md` opening). Even a well-grounded model can produce un-warranted arguments, mis-calibrated confidence, or PROVOCATIONs without the required reflexive marker. Grounding addresses *did the source say this*; the framework adds *is the reasoning valid, is the confidence calibrated, is the speculation held ethically*.
+
+Other grounding senses from AI literature — *temporal* (current-state retrieval), *symbolic* (word-to-referent correspondence), *multimodal* (cross-sensory anchoring) — are noted here only to prevent confusion when reading source literature; they are not load-bearing for this framework.
