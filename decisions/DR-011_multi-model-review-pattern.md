@@ -112,6 +112,24 @@ Borrowing the Tier 1/2/3 merge-readiness split from `audits/feedback-from-fsd.md
 
 A second-order insight, specific to Pass 3: **the more bias a reviewer escapes, the more its suggestions will violate the project's style.** A reviewer that genuinely doesn't share the drafting context will also not share the drafting conventions. The mandatory style/voice filter is the operational fix.
 
+## Design Rationale: Functorial Composition
+
+The three-pass structure has a structural rationale beyond the empirical observation that catalysed it. Each pass is a different *view* of the manuscript — a functor onto a constraint space — that preserves some structural information and discards other. Their findings are partial *by construction*, not by accident, and the combined verification is what survives every pass.
+
+- **Pass 1 (intra-family small)** preserves checklist-compliance information. It loses argument-shape information: the small model lacks the capacity to hold a multi-paragraph chain of reasoning in working memory while simultaneously enforcing a rubric.
+- **Pass 2 (intra-family large)** preserves argument-shape information. It loses some of the rigour of mechanical rubric application: a large model is harder to anchor on a checklist than on the rhetorical pull of the prose.
+- **Pass 3 (cross-vendor)** preserves training-distribution-independent information. It loses the project's stylistic priors: the cross-vendor reviewer cannot reliably distinguish substantive critique from suggestions that violate the project's voice rules, which is why the style/voice filter is mandatory rather than optional.
+
+What survives every pass is the verified claim. Equivalently, the combined verification is a *limit* of the three pass-functors. The decomposition is the design choice. Adding a fourth pass requires showing it preserves invariants the existing three do not. Skipping a pass requires showing its invariants are preserved elsewhere.
+
+This framing matters operationally for three decisions:
+
+1. **Why both intra-family passes when only one model family is involved.** Pass 1 and Pass 2 preserve different invariants (checklist-compliance vs. argument-shape); collapsing them loses one. The triggering observation showed this empirically; the functorial framing names why it is structural rather than accidental.
+2. **Why the cross-vendor pass requires a style filter.** Pass 3's invariant is training-distribution independence. The price of that independence is that the cross-vendor reviewer cannot also preserve project-specific style. The filter recovers what Pass 3 must structurally drop.
+3. **What "no further reviewer adds value" means.** When a candidate next reviewer's invariants are already preserved by the existing battery, adding it is redundant. The structural test is the cleaner version of the empirical "did this reviewer surface findings the others did not."
+
+Background: `docs/category-theory-as-design-lens.md`, principle 3 ("multi-pass verification is a limit of functors"). The framing does not require category-theory vocabulary in operational use of this DR; the principle is what carries.
+
 ## Consequences
 
 - `templates/review-prompt.md`: add "Style/voice rules to filter against" as a required field with format-appropriate default; add filter-before-delivery instruction.
