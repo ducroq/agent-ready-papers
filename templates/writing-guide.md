@@ -29,6 +29,10 @@
 | EMERGING | "may", "preliminary evidence", "initial findings suggest" |
 | SPECULATIVE | "warrants investigation", "remains unclear", "we hypothesize" |
 
+### The Underlying Principle
+
+The rules in this guide are instances of one structural requirement: **the language tier used in the manuscript must be at most the confidence tier in the registry for the same claim.** Citation drift is the failure of that monotonicity — language climbing one or more tiers above what the evidence chain supports. The *Writing by Unit Type*, *Framework Component*, *Overclaiming*, and *Special Cases* sections below are domain-specific projections of the same rule. A reviewer's first check on any load-bearing claim is whether the language sits at or below the registered tier. If it does not, either the registry needs upgrading (with new evidence) or the language needs downshifting. The framing comes from `docs/category-theory-as-design-lens.md`; the operational rule is what carries, and category-theory vocabulary is not needed in this guide itself.
+
 ### Writing by Unit Type
 
 | Type | How to write it | Watch for |
