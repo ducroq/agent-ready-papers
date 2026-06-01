@@ -95,6 +95,44 @@ Claims that something *doesn't* exist (e.g., "no guidelines exist for non-empiri
 **Worked example:**
 > "No EQUATOR guidelines exist for non-empirical papers" → Verified by searching EQUATOR Network database (equator-network.org, accessed 2026-03-03): all 699 guidelines address empirical research types; search for "theoretical," "design science," and "perspective" returned no results. Hedged in manuscript as "to our knowledge, no equivalent guidelines exist."
 
+## Verifying Web Sources: WebFetch Fallback Discipline
+
+When the source for a claim is a website (an organisation's homepage, a non-academic publisher, a public-facing report), Step 6 (read the relevant section) becomes "fetch the relevant page and confirm the content." Two failure modes emerge that have no analogue when verifying a paper:
+
+- **Subpage blindspot** — WebFetching the homepage may not surface a topic the site covers on a dedicated subpage. Concluding "topic absent from this source" based on a homepage fetch alone risks demoting a verifiable claim to a defect. *WebSearch lies about what is on a page; homepage WebFetch lies about what is on the rest of the site.*
+- **Transport failure (Cloudflare / bot-protection)** — some sites serve WebFetch under HTTP 403 even when the content is openly readable in a browser. WebSearch typically has cached or syndicated access. Falling back to WebSearch is acceptable for some confidence tiers but not others.
+
+### Fallback ladder
+
+Before concluding "topic absent from primary source," walk the ladder:
+
+1. **First attempt — most-specific guess.** `/<topic-name>/`, `/tools/<topic-name>`, `/about/<topic>`. Use the most informative URL you can guess from the claim.
+2. **If negative — broaden the search:**
+   - WebFetch the homepage `/` (the site index may link to the topic)
+   - WebSearch `"<topic>" site:<example.org>` (returns the canonical URL on the site if any)
+   - WebFetch `/sitemap.xml` (the structured site map names every indexed page)
+3. **Only after the ladder returns empty,** conclude "topic absent from this source." Frame the registry note as *"not surfaced in pages we checked"* rather than *"primary source does not carry the topic."* The distinction is honest about the search bounds.
+
+### Worked examples (grant application, 2026-05-22)
+
+**Constructive Institute Algorithm.** Initial WebFetch of `https://constructiveinstitute.org/` returned "no Constructive News Algorithm mentioned anywhere on their public homepage." This nearly demoted a sharp differentiation claim to a soft fallback. Step 2 of the ladder (WebSearch `site:constructiveinstitute.org`) surfaced `/constructive-news-algorithm/`. WebFetching that page returned verbatim primary-source content with much stronger detail than the original framing (since 2019, GNI + EBU + EU funding, EBU "A European Perspective" consortium, in testing with newsrooms, *not openly available*). The claim was promoted from `[~]` to `[x]` ESTABLISHED with verbatim quotes.
+
+**Solutions Journalism Network impact figures.** Initial WebFetch of `https://www.solutionsjournalism.org/impact/explore-our-impact` returned no numbers. Step 2 of the ladder (try the `/impact` root) surfaced verbatim *"102,300 Journalists, educators and students trained and using SJN tools."* The claim was recovered.
+
+Both failures share the same mechanism: the first URL chosen does not carry the claim, even though the site does. Without the ladder, both would have failed silently — the agent concludes "absent from source" and the downstream prose softens or strikes the claim.
+
+### When to apply
+
+- Always, when the source is a website and the claim is P0 or P1
+- Always, when a first WebFetch returns "topic not mentioned" and the claim's importance to the argument justifies a second attempt
+- Skip the ladder when the topic is unambiguously not in the site's domain (a CPR-manikin site is unlikely to host fascism-spectrum content; don't burn cycles confirming the obvious)
+
+### Adoption-readiness
+
+Battle-tested through two independent instances in a single grant-application session (2026-05-22) — see [`audits/feedback-from-grant-application.md`] or [ducroq/agent-ready-papers#8](https://github.com/ducroq/agent-ready-papers/issues/8) Proposal 2. The ladder structure is stable. A companion failure mode (transport-level WebFetch 403 with bounded WebSearch fallback) is tracked separately as the incubating Proposal 3 in the same issue and has not been promoted to a checklist step.
+
+---
+
 ## Step Z: Inverse Hallucination Check (PROVOCATION-specific)
 
 *Applies only to projects that contain PROVOCATION entries — speculative-design, design-fiction, diegetic-prototype work. See [DR-010](../decisions/DR-010_provocation-unit-type.md). Standard empirical and methodological projects can skip this section.*
