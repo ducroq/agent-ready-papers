@@ -1,6 +1,6 @@
 # Working With AI Agents: Academic & Technical Writing
 
-Verification infrastructure for AI-augmented academic and structured non-fiction writing — templates, quality gates, and session continuity that catch the failure modes automated tools miss. Patterns extracted from three real paper projects across two journals (IEEE TIM, MST), pressure-tested over 50+ agent sessions, and extended in 2026-05 to cover speculative-design and voice-driven non-fiction work (see [DR-010](decisions/DR-010_provocation-unit-type.md)).
+Verification infrastructure for AI-augmented academic and structured non-fiction writing — templates, quality gates, and session continuity that catch the failure modes automated tools miss. Patterns extracted from real paper projects, pressure-tested over 50+ agent sessions, and extended in 2026-05 to cover speculative-design and voice-driven non-fiction work (see [DR-010](decisions/DR-010_provocation-unit-type.md)).
 
 Automated citation checkers (RefChecker, scite.ai) and model-level solutions (RAG, [grounded generation](docs/framework-summary.md#terminology-note-grounding--grounded)) address part of the problem. This guide operates at the **process level** — the workflow templates, decision records, and verification systems that make the difference between an agent that hallucinates citations and one that produces submission-ready prose.
 
@@ -438,5 +438,5 @@ See [`decisions/DR-006_publication-roadmap.md`](decisions/DR-006_publication-roa
 
 ## Further Reading
 
-- **[`docs/METHODOLOGY.md`](docs/METHODOLOGY.md)** — How these patterns were developed from three real paper projects, including the concrete failures that shaped them
+- **[`docs/METHODOLOGY.md`](docs/METHODOLOGY.md)** — How these patterns were developed from real paper projects, including the concrete failures that shaped them
 - **[agent-ready-projects](https://github.com/ducroq/agent-ready-projects)** — The companion guide for AI-assisted coding (layered documentation model, auto-loading cliff, progressive disclosure)

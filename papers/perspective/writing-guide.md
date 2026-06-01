@@ -195,7 +195,6 @@ Confidence progression for framework components:
 **Key sources:**
 - `../../audits/proposition-retrofit.md` — full audit with worked examples
 - `../../audits/technology-paper-retrofit.md` — empirical paper audit
-- `../../audits/engineering-fidelity-retrofit.md` — measurement paper audit
 - `literature/sources/peerarg-2024.md` — structured + LLM evidence
 - `literature/sources/gupta-2024.md` — Toulmin + LLM evidence
 
