@@ -47,9 +47,9 @@ propose a typed verification model distinguishing claims
 (source-verifiable facts), arguments (Toulmin-verified reasoning
 chains), and propositions (Whetten-verified recommendations with
 boundary conditions), each requiring distinct procedures.  Preliminary
-evidence from three retrospective audits suggests that typed
-verification reveals actionable issues invisible to conventional
-approaches, including false failures from type misclassification.  We
+evidence from two retrospective audits suggests that typed verification
+reveals actionable issues invisible to conventional approaches,
+including false failures from type misclassification.  We
 propose that the scholarly community develop verification infrastructure
 for non-empirical papers analogous to what EQUATOR provides for
 empirical research.
@@ -403,11 +403,13 @@ misclassification may occur in practice.
 
 To explore whether typed verification reveals issues that conventional
 approaches miss, we retrospectively applied the framework described in
-Section~3 to three paper projects that had been developed with AI
-writing assistance but without typed verification infrastructure.  These
-audits should be understood as proof of concept rather than
-validation---they are retrospective, conducted by the framework's
-developers, and drawn from a single domain cluster.
+Section~3 to two paper projects that had been developed with AI writing
+assistance but without typed verification infrastructure.  These audits
+should be understood as proof of concept rather than validation---they
+are retrospective, conducted by the framework's developers, drawn from a
+single domain cluster, and N=2 is a thin evidence base.  Further audits
+across other authors, domains, and paper types are needed for
+generalisable claims.
 
 % S4-1: Proposition audit (CLAIM, P0, EMERGING)
 The most instructive case involved a proposition paper arguing that
@@ -454,23 +456,14 @@ confident than the evidence warranted---for instance, using
 ``demonstrates'' for findings from a single validation study with a
 limited sample size.
 
-A third audit applied the typed verification framework to an engineering
-characterisation paper targeting a measurement science journal.  This
-project used a tag-based system that conflated verification status
-(``checked'' versus ``unchecked'') with confidence assessment (``how
-strong is the evidence?'').  Retyping its twenty-one entries identified
-two arguments and three propositions that had been treated as claims, and
-the discussion section contained at least six substantive arguments that
-were not tracked in the registry at all.
-
 % S4-4: Cross-project applicability (ARGUMENT, P1, EMERGING)
-Across all three retrospective audits, the typed verification framework
-revealed actionable issues in each project.  These issues included mistyped
-entries producing false failures, over-confident language, missing
-boundary conditions on propositions, and unregistered arguments in
-discussion sections.  While the specific issues varied by paper type, the
-common finding was that each audit identified problems that were not
-visible without the typed verification infrastructure.
+Across both retrospective audits, the typed verification framework
+revealed actionable issues in each project.  These issues included
+mistyped entries producing false failures, over-confident language,
+missing boundary conditions on propositions, and unregistered arguments
+in discussion sections.  While the specific issues varied by paper type,
+the common finding was that each audit identified problems that were
+not visible without the typed verification infrastructure.
 
 % S4-3: External validation (CLAIM, P1, EMERGING)
 These preliminary findings are consistent with independent research on
@@ -486,19 +479,18 @@ frameworks with LLM capabilities may outperform LLM capabilities
 alone---a principle consistent with the process-level verification
 approach proposed here.
 
-Several important limitations apply to these preliminary findings.  All
-three audits were retrospective---the framework was applied after the
-papers were drafted, not during writing.  (Appendix~\ref{app:self}
-presents a complementary data point: the verification registry
-maintained during the writing of this paper, showing the framework
-applied prospectively.)  All three projects share the
-same author team and fall within a related domain cluster (medical
-simulation and measurement science).  The audits were conducted by the
-framework's developers, introducing potential confirmation bias.  These
-limitations mean that the evidence should be interpreted as preliminary
-indications rather than validation.  Whether typed verification
-generalises to other authors, domains, and writing workflows remains an
-open question.
+Several important limitations apply to these preliminary findings.  Both
+audits were retrospective---the framework was applied after the papers
+were drafted, not during writing.  (Appendix~\ref{app:self} presents a
+complementary data point: the verification registry maintained during
+the writing of this paper, showing the framework applied prospectively.)
+Both projects share the same author team and fall within a related
+domain cluster (medical simulation and instrumentation).  The audits
+were conducted by the framework's developers, introducing potential
+confirmation bias.  N=2 is a thin evidence base.  These limitations mean
+that the evidence should be interpreted as preliminary indications
+rather than validation.  Whether typed verification generalises to other
+authors, domains, and writing workflows remains an open question.
 
 
 % ===============================================================
@@ -562,7 +554,7 @@ than structural verification.
 % S5-2: Next steps (CLAIM, P2, SPECULATIVE)
 Several directions warrant investigation.  First, the typed verification
 model proposed here has been developed and applied within medical
-simulation and measurement science.  Discipline-specific verification
+simulation and instrumentation.  Discipline-specific verification
 templates---adapting the three-type model to the conventions of different
 fields---would be needed to assess the framework's generalisability.
 Second, integration with AI writing tools could enable real-time
@@ -609,7 +601,7 @@ the rest.
 \section{Self-Application of the Typed Verification Framework}
 \label{app:self}
 
-This paper uses the framework it describes.  Unlike the three
+This paper uses the framework it describes.  Unlike the two
 retrospective audits in Section~4, the claim registry for this
 manuscript was maintained during writing---entries were registered,
 typed, and verified as the paper was drafted.  This appendix summarises

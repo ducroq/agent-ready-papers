@@ -99,7 +99,6 @@ This is the framework eating its own dog food. Any friction, gaps, or false fail
 | Paper 2 (DSR) | This paper establishes the gap (Swales Move 1-2); Paper 2 occupies it (Move 3) with full artifact + evaluation |
 | Technology paper (IEEE TIM) | Source project — retrofit audit provides evidence of language calibration issues (6/22 entries over-confident) |
 | Proposition paper (medical education) | Source project — retrofit audit provides evidence of typing benefits (76% coverage, false failures from mistyping) |
-| Engineering Fidelity paper (MST) | Source project — retrofit audit provides additional cross-project evidence |
 | DR-007 (SE identity upgrade) | Frames the contribution as lightweight SE applied to academic writing, not just SE metaphor |
 
 ## Current Status
@@ -131,7 +130,6 @@ This is the framework eating its own dog food. Any friction, gaps, or false fail
 - Acknowledged Gregor Type V empirical evaluation nuance
 - Acknowledged Toulmin 6→5 operationalization
 - Added counter-argument for the three-type model
-- Added engineering fidelity audit specifics (third audit)
 - Removed RefChecker/scite.ai names (uncitable tools)
 - Added DOIs for gregor2006 and peerarg2024
 - Title broadened: "Reporting Guidelines for Reasoning" (was "Beyond Citation Checking")
@@ -139,8 +137,6 @@ This is the framework eating its own dog food. Any friction, gaps, or false fail
 - Added forward reference to Appendix A in Section 4 limitations paragraph
 - Added Discussion-section bridging sentence in Section 2 (reasoning gap applies to empirical papers too)
 - Added fourth future direction in Section 5 (Discussion sections of empirical papers)
-- Re-audited Engineering Fidelity paper with updated framework (audits/engineering-fidelity-audit-2.md)
-- Created revision instructions for Engineering Fidelity author (REVISION_INSTRUCTIONS.md)
 - Added S1-5: calculation verification as failure mode (driven-pendulum Gemini-vs-Sonnet evidence)
 - Added fifth future direction in Section 5 (numerical reproduction as distinct verification procedure)
 - Created audits/equation-verification-journey.md (discovery log)
@@ -151,10 +147,9 @@ This is the framework eating its own dog food. Any friction, gaps, or false fail
 **Note:** Gate 2.5 (Internal Consistency) was introduced after Paper 1 passed Gate 2. Appendix A values were manually cross-checked against main text during the Appendix A addition (2026-03-06), which satisfies the Gate 2.5 intent retroactively.
 
 **Next priorities:**
-1. Co-author review (Gate 3) — title change + Appendix A + S1-5 are significant additions to discuss
+1. Co-author review (Gate 3) — title change + Appendix A + S1-5 + §4 evidence-base reduction (two audits, not three) are significant additions to discuss
 2. Decide submission article type: "Original Article" or "Opinion" (LP uses "Opinion" for perspective-type pieces)
 3. Pre-submission enquiry to LP editor (optional)
-4. Consider feeding Engineering Fidelity Discussion-coverage pattern (100% facts vs 25% reasoning) into Paper 1 evidence
 
 **Reference corrections found during writing:**
 - equator-gap.md attributes GoodReports to "Butcher et al. 2021" — actual first author is Struthers (DOI verified: 10.1186/s12874-021-01402-x)

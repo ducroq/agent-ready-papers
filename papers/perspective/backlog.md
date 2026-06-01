@@ -13,8 +13,6 @@ Last updated: 2026-03-16
 - [x] Broaden title: "Reporting Guidelines for Reasoning" (was "Beyond Citation Checking")
 - [x] Add Discussion-section bridging sentence in Section 2
 - [x] Add fourth future direction (Discussion sections of empirical papers) in Section 5
-- [x] Re-audit Engineering Fidelity paper with updated framework (audit-2)
-- [x] Create revision instructions for Engineering Fidelity author
 - [x] Add calculation verification as failure mode (S1-5) — driven-pendulum evidence (Gemini 0/3 vs Sonnet 3/3)
 - [x] Add fifth future direction (calculation verification as distinct procedure) in Section 5
 - [x] Create equation-verification-journey.md (discovery log)

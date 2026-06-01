@@ -79,7 +79,7 @@ The equation-checker is the first example: a prompt-based agent that performs on
 **What to draft:**
 - [ ] Survey which SE verification types have plausible paper-verification analogues
 - [ ] For each candidate: define the prompt, the input, and the output format
-- [ ] Test 2-3 candidates on existing audited papers (proposition, technology, engineering fidelity)
+- [ ] Test 2-3 candidates on existing audited papers (proposition, technology)
 - [ ] Assess which provide genuine signal vs which are redundant with existing procedures
 - [ ] Design a verification pipeline: which agents run when, in what order, with what dependencies
 - [ ] Frame as a V&V framework for academic papers (the SE mapping made concrete)

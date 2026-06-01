@@ -12,7 +12,7 @@ The research conducted for DR-004 revealed a concrete, publishable gap: EQUATOR 
 The project has sufficient raw material for publication:
 - A quantifiable landscape gap (EQUATOR)
 - An artifact (typed verification registry with Toulmin/Whetten checklists)
-- Evaluation evidence from three real paper projects (IEEE TIM, MST, medical education)
+- Evaluation evidence from two real paper projects (IEEE TIM, medical education)
 - 47 indexed literature sources
 - Five decision records documenting design rationale
 - A methodology narrative (patterns extracted, cross-validated, generalized)
@@ -75,12 +75,11 @@ Two papers, sequenced to build on each other:
 **Registry units:** Full mix of CLAIMs (literature, evaluation data), ARGUMENTs (interpretation of results), PROPOSITIONs (design principles, generalizability claims), and DESIGN PRINCIPLEs (activating DR-004's reserved types)
 
 **Evaluation evidence available:**
-- EngineeringFidelity (MST): V&V framework, claim registry, quality gates
 - Proposition (medical education): confidence scoring, language mapping, 7 decision records
 - Technology Paper (IEEE TIM): architecture blueprint, peer review simulation (scored 4.4/5.0)
-- Cross-project pattern extraction: 7 common patterns, 3 complementary, project-specific excluded
+- Cross-project pattern extraction: common patterns and complementary patterns identified; project-specific elements excluded
 
-**Timeline:** After Paper 1 is submitted. Requires gathering additional evaluation metrics from the three source projects.
+**Timeline:** After Paper 1 is submitted. Requires gathering additional evaluation metrics from the source projects (and likely a new prospective case study, per Revisit If).
 
 ### Paper 3: SE-Inspired Verification Pipeline (Methods/Tools)
 
@@ -130,7 +129,7 @@ This serves as both methodology and additional evaluation evidence ("the framewo
 
 - Create a `papers/` directory (or separate repos) for each paper project when writing begins
 - Paper 1 can be drafted from existing material (README, DRs, literature folder)
-- Paper 2 requires going back to the three source projects for quantitative evaluation data
+- Paper 2 requires going back to the source projects for quantitative evaluation data; a prospective case study (new project applied with the framework from the start) is likely needed to strengthen Paper 2's evaluation chapter
 - Both papers need co-author(s) — domain expertise in scholarly communication or IS methodology
 - The literature folder (47 sources) serves as the starting point for related work in both papers
 

@@ -184,13 +184,13 @@ Confidence progression for framework components:
 | S4-1 | Proposition audit: 76% coverage, false failure from mistyping | CLAIM | EMERGING | "A retrospective audit of the Proposition paper revealed 76% overall coverage and 100% P0 coverage; retyping entries revealed..." |
 | S4-2 | Technology audit: 6/22 over-confident language | CLAIM | EMERGING | "Applying confidence tiers to a technology paper identified 6 of 22 entries where language was more confident than evidence warranted" |
 | S4-3 | Structured verification + LLM > LLM alone | CLAIM | EMERGING | "Recent work on peer review (PeerArg 2024) and argument extraction (Gupta et al. 2024) suggests that structured frameworks combined with LLMs outperform LLMs alone" |
-| S4-4 | Three audits demonstrate practical applicability | ARGUMENT | EMERGING | "Preliminary evidence from three retrospective audits suggests the framework may be practically applicable across paper types" |
+| S4-4 | Two audits demonstrate practical applicability | ARGUMENT | EMERGING | "Preliminary evidence from two retrospective audits suggests the framework may be practically applicable across paper types" |
 
 **Warrant check for S4-4:**
-- S4-4 warrant: Three independent applications of the same framework to different paper types each revealed actionable issues → framework has cross-type applicability. The warrant bridges from "it worked in three cases" to "it is practically applicable."
-- Grounds: S4-1 (proposition audit), S4-2 (technology audit), engineering fidelity audit
-- Qualifier: EMERGING — retrospective audits by the same author team, same domain cluster
-- Strongest counter-argument: Three audits by the same team in related domains don't demonstrate generalizability to other authors, domains, or paper types
+- S4-4 warrant: Two independent applications of the same framework to different paper types each revealed actionable issues → framework has cross-type applicability. The warrant bridges from "it worked in two cases" to "it is practically applicable."
+- Grounds: S4-1 (proposition audit), S4-2 (technology audit)
+- Qualifier: EMERGING — retrospective audits by the same author team, same domain cluster, N=2
+- Strongest counter-argument: Two audits by the same team in related domains do not demonstrate generalizability to other authors, domains, or paper types
 
 **Key sources:**
 - `../../audits/proposition-retrofit.md` — full audit with worked examples
@@ -199,7 +199,7 @@ Confidence progression for framework components:
 - `literature/sources/gupta-2024.md` — Toulmin + LLM evidence
 
 **Cautions:**
-- All three audits are retrospective (applied after the fact) and by the same team — acknowledge this limitation explicitly
+- Both audits are retrospective (applied after the fact) and by the same team — acknowledge this limitation explicitly
 - Do NOT present audit data as experimental evidence — frame as "preliminary indications" or "proof of concept"
 - The H4 false failure story is compelling but anecdotal — one example does not constitute validation
 - S4-3 (external evidence) is the strongest entry here because it cites independent research

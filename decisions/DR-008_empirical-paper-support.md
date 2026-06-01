@@ -5,6 +5,8 @@ status: Accepted
 date: 2026-03-02
 ---
 
+> **2026-06-01 note:** The EngineeringFidelity retrofit referenced below in the findings table was archived outside this repo as of v1.3.0 (see `CHANGELOG.md`). The findings stand as historical record of the audits that motivated this DR's decisions; the archive location is the OneDrive path documented in v1.3.0's release notes. The decisions reached here (Tier-E weight clarification, methodological-facts exception) are not affected.
+
 ## Context
 
 Three retrofit audits (Proposition, EngineeringFidelity, Technology Paper) validated the framework against real paper projects. All three independently surfaced the same root issue: the framework was designed around non-empirical papers and needs explicit support for empirical papers where the primary evidence is the authors' own experimental data.
