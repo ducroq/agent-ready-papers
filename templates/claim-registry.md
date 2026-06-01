@@ -14,6 +14,10 @@
 
 ## Coverage Summary
 
+Two cuts of the same row set. Both should be filled when a registry contains more than one unit type; CLAIM-only registries can omit the by-type table.
+
+**Coverage by Priority**
+
 | Priority | Total | Verified | Needs Evidence | Coverage |
 |----------|-------|----------|----------------|----------|
 | P0 | 0 | 0 | 0 | 0% |
@@ -21,7 +25,19 @@
 | P2 | 0 | 0 | 0 | 0% |
 | **Total** | **0** | **0** | **0** | **0%** |
 
-**Targets:** ≥85% overall, 100% P0, 90% P1, 70% P2
+**Coverage by Type**
+
+| Type | Total | Verified | Coverage |
+|------|-------|----------|----------|
+| CLAIM | 0 | 0 | 0% |
+| ARGUMENT | 0 | 0 | 0% |
+| PROPOSITION | 0 | 0 | 0% |
+| PROVOCATION | 0 | 0 | 0% |
+| **Total** | **0** | **0** | **0%** |
+
+A combined Priority × Type matrix is optional for papers with many of both axes.
+
+**Targets:** ≥85% overall, 100% P0, 90% P1, 70% P2. Type-level targets are project-conditional — for example, every registered ARGUMENT and PROPOSITION should be `[x]` before Gate 2, because each is load-bearing for the contribution.
 
 ---
 

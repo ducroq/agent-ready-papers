@@ -14,6 +14,8 @@
 
 ## Coverage Summary
 
+**Coverage by Priority**
+
 | Priority | Total | Drafted | Verified | Needs Evidence | Coverage |
 |----------|-------|---------|----------|----------------|----------|
 | P0 | 8 | 8 | 8 | 0 | 100% |
@@ -21,8 +23,16 @@
 | P2 | 1 | 1 | 1 | 0 | 100% |
 | **Total** | **19** | **19** | **19** | **0** | **100%** |
 
-**Type distribution:** 16 CLAIMs, 2 ARGUMENTs, 1 PROPOSITION
-**Targets:** ≥85% overall, 100% P0, 90% P1, 70% P2
+**Coverage by Type**
+
+| Type | Total | Verified | Coverage |
+|------|-------|----------|----------|
+| CLAIM | 16 | 16 | 100% |
+| ARGUMENT | 2 | 2 | 100% |
+| PROPOSITION | 1 | 1 | 100% |
+| **Total** | **19** | **19** | **100%** |
+
+**Targets:** ≥85% overall, 100% P0, 90% P1, 70% P2. Every registered ARGUMENT and PROPOSITION is `[x]` per the type-conditional Gate 2 expectation.
 
 ---
 
@@ -66,57 +76,76 @@
 
 ## Registry by Section
 
+Each section uses per-type sub-tables (one each for CLAIMs / ARGUMENTs / PROPOSITIONs as applicable). IDs are `S<section>-<number>` and are unique within a section across all sub-tables. Grounds/premises references resolve by `Ctrl-F` within the section.
+
 ### Section 1: The Problem (AI failure modes)
 
-| ID | Statement | Type | Priority | Confidence | Source | Source Tier | Status |
-|----|-----------|------|----------|------------|--------|-------------|--------|
-| S1-1 | AI citation hallucination is a distinct failure mode — agents invent plausible-sounding papers, authors, and DOIs that can survive multiple review rounds undetected | CLAIM | P0 | SUPPORTED | Mugaanyi et al. 2024 (JMIR, DOI: 10.2196/52935): 62–89% DOI fabrication rates across disciplines | A | [x] |
-| S1-2 | AI agents exhibit confidence inflation — stating speculative claims with the same certainty as verified facts, using "demonstrates" where "suggests" is appropriate | CLAIM | P0 | SUPPORTED | Liang et al. 2024 (NEJM AI): LLMs catch surface issues, struggle with deep argument analysis; audits/technology-paper-retrofit.md §4 Language Calibration Impact: 6/22 entries need significant recalibration (T15, T16, T17, T18, T19, T21) | A + E | [x] |
-| S1-3 | Without architectural constraints (page budgets, section specifications), AI agents expand arguments beyond evidence, add unnecessary sections, and exceed page budgets | CLAIM | P1 | EMERGING | README.md "Architecture Blueprints"; technology audit G2 (no writing guide → unregistered discussion claims); hedged with "may" | E + F | [x] |
-| S1-4 | Existing solutions (citation checkers like RefChecker/scite.ai, model-level RAG/grounded generation) operate at model or tool level; no process-level verification infrastructure exists for academic writing | CLAIM | P0 | EMERGING | Negative claim qualified with "to our knowledge" in manuscript; EQUATOR gap analysis confirms no process-level frameworks | F | [x] |
-| S1-5 | AI-generated equations can contain arithmetic errors that survive plausibility review but are caught by mechanical numerical reproduction | CLAIM | P1 | EMERGING | Driven Pendulum project: Gemini review (0/3 errors found assessing "soundness") vs Sonnet 4.5 review (3/3 found via numerical reproduction). See audits/driven-pendulum-retrofit.md §9; audits/equation-verification-journey.md | E | [x] |
+**CLAIMs:**
+
+| ID | Statement | Priority | Confidence | Source | Source Tier | Status |
+|----|-----------|----------|------------|--------|-------------|--------|
+| S1-1 | AI citation hallucination is a distinct failure mode — agents invent plausible-sounding papers, authors, and DOIs that can survive multiple review rounds undetected | P0 | SUPPORTED | Mugaanyi et al. 2024 (JMIR, DOI: 10.2196/52935): 62–89% DOI fabrication rates across disciplines | A | [x] |
+| S1-2 | AI agents exhibit confidence inflation — stating speculative claims with the same certainty as verified facts, using "demonstrates" where "suggests" is appropriate | P0 | SUPPORTED | Liang et al. 2024 (NEJM AI): LLMs catch surface issues, struggle with deep argument analysis; audits/technology-paper-retrofit.md §4 Language Calibration Impact: 6/22 entries need significant recalibration (T15, T16, T17, T18, T19, T21) | A; E | [x] |
+| S1-3 | Without architectural constraints (page budgets, section specifications), AI agents expand arguments beyond evidence, add unnecessary sections, and exceed page budgets | P1 | EMERGING | README.md "Architecture Blueprints"; technology audit G2 (no writing guide → unregistered discussion claims); hedged with "may" | E; F | [x] |
+| S1-4 | Existing solutions (citation checkers like RefChecker/scite.ai, model-level RAG/grounded generation) operate at model or tool level; no process-level verification infrastructure exists for academic writing | P0 | EMERGING | Negative claim qualified with "to our knowledge" in manuscript; EQUATOR gap analysis confirms no process-level frameworks | F | [x] |
+| S1-5 | AI-generated equations can contain arithmetic errors that survive plausibility review but are caught by mechanical numerical reproduction | P1 | EMERGING | Driven Pendulum project: Gemini review (0/3 errors found assessing "soundness") vs Sonnet 4.5 review (3/3 found via numerical reproduction). See audits/driven-pendulum-retrofit.md §9; audits/equation-verification-journey.md | E | [x] |
 
 ### Section 2: The Landscape Gap
 
-| ID | Statement | Type | Priority | Confidence | Source | Source Tier | Status |
-|----|-----------|------|----------|------------|--------|-------------|--------|
-| S2-1 | EQUATOR Network maintains ~700 reporting guidelines for empirical health research (CONSORT for RCTs, STROBE for observational, PRISMA for reviews, etc.) | CLAIM | P0 | ESTABLISHED | EQUATOR Network website (equator-network.org, accessed 2026-03-03): 699 guidelines displayed. Reference claim — verifiable fact about external database. | D | [x] |
-| S2-2 | No EQUATOR or equivalent guidelines exist for non-empirical paper types (theoretical, design science, perspective, methodological) | CLAIM | P0 | ESTABLISHED | EQUATOR Network database (accessed 2026-03-03): all 699 guidelines address empirical research types; search for theoretical/design science/perspective returns no results. Reference claim — verifiable by searching the database. | D | [x] |
-| S2-3 | Gregor's (2006) five theory types include Type I (analytic) and Type V (design & action) that are fundamentally non-empirical — their contributions cannot be verified against sources because they ARE the new contribution | CLAIM | P1 | ESTABLISHED | Gregor 2006 (MIS Quarterly, DOI: 10.2307/25148742): Types I–V confirmed; Type I (analytic) and Type V (design) are non-empirical in contribution. Reference claim — verifiable fact about Gregor's taxonomy. | A | [x] |
-| S2-4 | For non-empirical papers, argument quality — warrant validity, reasoning coherence, boundary conditions — is the primary verification challenge, not factual accuracy | CLAIM | P1 | SUPPORTED | Toulmin (1958/2003): warrants are the inferential bridge; Whetten (1989): "Why" is most critical and most often missing. Both support argument quality over source checking for non-empirical contributions. | C + A | [x] |
+**CLAIMs:**
+
+| ID | Statement | Priority | Confidence | Source | Source Tier | Status |
+|----|-----------|----------|------------|--------|-------------|--------|
+| S2-1 | EQUATOR Network maintains ~700 reporting guidelines for empirical health research (CONSORT for RCTs, STROBE for observational, PRISMA for reviews, etc.) | P0 | ESTABLISHED | EQUATOR Network website (equator-network.org, accessed 2026-03-03): 699 guidelines displayed. Reference claim — verifiable fact about external database. | D | [x] |
+| S2-2 | No EQUATOR or equivalent guidelines exist for non-empirical paper types (theoretical, design science, perspective, methodological) | P0 | ESTABLISHED | EQUATOR Network database (accessed 2026-03-03): all 699 guidelines address empirical research types; search for theoretical/design science/perspective returns no results. Reference claim — verifiable by searching the database. | D | [x] |
+| S2-3 | Gregor's (2006) five theory types include Type I (analytic) and Type V (design & action) that are fundamentally non-empirical — their contributions cannot be verified against sources because they ARE the new contribution | P1 | ESTABLISHED | Gregor 2006 (MIS Quarterly, DOI: 10.2307/25148742): Types I–V confirmed; Type I (analytic) and Type V (design) are non-empirical in contribution. Reference claim — verifiable fact about Gregor's taxonomy. | A | [x] |
+| S2-4 | For non-empirical papers, argument quality — warrant validity, reasoning coherence, boundary conditions — is the primary verification challenge, not factual accuracy | P1 | SUPPORTED | Toulmin (1958/2003): warrants are the inferential bridge; Whetten (1989): "Why" is most critical and most often missing. Both support argument quality over source checking for non-empirical contributions. | C; A | [x] |
 
 ### Section 3: The Proposal (typed verification)
 
-| ID | Statement | Type | Priority | Confidence | Source | Source Tier | Status |
-|----|-----------|------|----------|------------|--------|-------------|--------|
-| S3-1 | Toulmin's (1958/2003) argument model — claim, grounds, warrant, qualifier, rebuttal — provides an operationalizable framework for verifying argument quality in academic writing | CLAIM | P1 | SUPPORTED | Toulmin (1958/2003): 6 components confirmed (claim, grounds, warrant, backing, qualifier, rebuttal). Gupta et al. 2024 (ACL, DOI: 10.18653/v1/2024.acl-long.552): LLM zero-shot Toulmin extraction outperforms generic prompts — demonstrates technical feasibility. | C + A | [x] |
-| S3-2 | Whetten's (1989) What/How/Why/Who-Where-When framework provides an operationalizable structure for verifying propositions by checking construct definition, relationship clarity, reasoning explicitness, and boundary conditions | CLAIM | P1 | SUPPORTED | Whetten 1989 (AMR, DOI: 10.5465/amr.1989.4308371): 4 components confirmed (What/How/Why/Who-Where-When). "Why" identified as most critical and most often missing. Operationalization demonstrated in own Whetten checklists (proposition audit §3, Examples C and D). | A + E | [x] |
-| S3-3 | Mapping confidence tiers (ESTABLISHED/SUPPORTED/EMERGING/SPECULATIVE) to prescribed language ("demonstrates" vs "suggests" vs "may" vs "warrants investigation") enables systematic calibration of claim strength to evidence strength | CLAIM | P1 | EMERGING | Own proposal (this paper's contribution). Supporting evidence: technology audit §4 found 6/22 entries with over-confident language that the tier system would have caught. Framed with "may enable" in manuscript. | E | [x] |
-| S3-4 | Claims, arguments, and propositions require fundamentally different verification procedures: source checking for CLAIMs, Toulmin analysis for ARGUMENTs, and Whetten analysis for PROPOSITIONs — applying the wrong procedure produces false failures | ARGUMENT | P0 | EMERGING | audits/proposition-retrofit.md §3 Example A: H4 scored 0.25 as CLAIM (no citation), earned EMERGING as ARGUMENT (Toulmin 4/5, premises verified); §5.1 documents the systematic misclassification | E | [x] |
+**CLAIMs:**
 
-**S3-4 warrant:** If entry H4 in the Proposition audit was scored SPECULATIVE (0.25) because it was evaluated as a source-backed claim, but its three premises are independently verified and its warrant is logically valid (Toulmin 4/5), then the low score was a false failure caused by applying the wrong verification procedure. The correct procedure (Toulmin checklist) reveals an EMERGING argument with strong grounds. This demonstrates that type-specific verification is not merely useful but necessary — wrong-type verification systematically misclassifies entries.
+| ID | Statement | Priority | Confidence | Source | Source Tier | Status |
+|----|-----------|----------|------------|--------|-------------|--------|
+| S3-1 | Toulmin's (1958/2003) argument model — claim, grounds, warrant, qualifier, rebuttal — provides an operationalizable framework for verifying argument quality in academic writing | P1 | SUPPORTED | Toulmin (1958/2003): 6 components confirmed (claim, grounds, warrant, backing, qualifier, rebuttal). Gupta et al. 2024 (ACL, DOI: 10.18653/v1/2024.acl-long.552): LLM zero-shot Toulmin extraction outperforms generic prompts — demonstrates technical feasibility. | C; A | [x] |
+| S3-2 | Whetten's (1989) What/How/Why/Who-Where-When framework provides an operationalizable structure for verifying propositions by checking construct definition, relationship clarity, reasoning explicitness, and boundary conditions | P1 | SUPPORTED | Whetten 1989 (AMR, DOI: 10.5465/amr.1989.4308371): 4 components confirmed (What/How/Why/Who-Where-When). "Why" identified as most critical and most often missing. Operationalization demonstrated in own Whetten checklists (proposition audit §3, Examples C and D). | A; E | [x] |
+| S3-3 | Mapping confidence tiers (ESTABLISHED/SUPPORTED/EMERGING/SPECULATIVE) to prescribed language ("demonstrates" vs "suggests" vs "may" vs "warrants investigation") enables systematic calibration of claim strength to evidence strength | P1 | EMERGING | Own proposal (this paper's contribution). Supporting evidence: technology audit §4 found 6/22 entries with over-confident language that the tier system would have caught. Framed with "may enable" in manuscript. | E | [x] |
+
+**ARGUMENTs** (Toulmin):
+
+| ID | Statement | Priority | Confidence | Grounds | Warrant | Rebuttal | Source | Source Tier | Status |
+|----|-----------|----------|------------|---------|---------|----------|--------|-------------|--------|
+| S3-4 | Claims, arguments, and propositions require fundamentally different verification procedures: source checking for CLAIMs, Toulmin analysis for ARGUMENTs, and Whetten analysis for PROPOSITIONs — applying the wrong procedure produces false failures | P0 | EMERGING | S3-1; S3-2; S3-3 | If entry H4 in the Proposition audit was scored SPECULATIVE (0.25) because it was evaluated as a source-backed claim, but its three premises are independently verified and its warrant is logically valid (Toulmin 4/5), then the low score was a false failure caused by applying the wrong verification procedure. The correct procedure (Toulmin checklist) reveals an EMERGING argument with strong grounds. This demonstrates that type-specific verification is not merely useful but necessary — wrong-type verification systematically misclassifies entries. | Limitation acknowledged: evidence is a single audited entry (H4) within one retrofit; cross-author replication not yet demonstrated. | audits/proposition-retrofit.md §3 Example A: H4 scored 0.25 as CLAIM (no citation), earned EMERGING as ARGUMENT (Toulmin 4/5, premises verified); §5.1 documents the systematic misclassification | E | [x] |
 
 ### Section 4: Preliminary Evidence
 
-| ID | Statement | Type | Priority | Confidence | Source | Source Tier | Status |
-|----|-----------|------|----------|------------|--------|-------------|--------|
-| S4-1 | Proposition paper retrofit audit achieved 76% overall coverage and 100% P0 coverage; retyping 21 entries revealed 2 ARGUMENTs and 3 PROPOSITIONs previously misclassified as CLAIMs, including a false failure (H4: scored 0.25 as CLAIM, earned EMERGING as ARGUMENT) | CLAIM | P0 | EMERGING | audits/proposition-retrofit.md §1: 76% (16/21), P0 100% (12/12). §3 retyping table: 16 CLAIMs, 2 ARGUMENTs (H4, D4), 3 PROPOSITIONs (I1, I2, I3). §3 Example A: H4 false failure verified. Note: audit result text says "15 CLAIMs, 4 PROPs" — table count (16/2/3) is authoritative. | E | [x] |
-| S4-2 | Technology paper retrofit audit extracted 22 claims from paper text; confidence tier assignment revealed 6 entries where the paper uses language more confident than the evidence warrants (e.g., "demonstrates" for single-unit findings) | CLAIM | P1 | EMERGING | audits/technology-paper-retrofit.md §4 "Language Calibration Impact": 6 entries verified (T15, T16, T17, T18, T19, T21). Changes include "demonstrates" → "indicates", "extends to" → "may extend to", "is the first" → "to our knowledge". | E | [x] |
-| S4-3 | Structured verification infrastructure combined with LLM capability outperforms LLM capability alone — demonstrated for peer review aggregation (PeerArg 2024) and argument extraction (Gupta et al. 2024) | CLAIM | P1 | SUPPORTED | PeerArg (NeLaMKRR@KR 2024, arXiv:2409.16813): "a variant of PeerArg outperforms end-to-end LLM baseline." Gupta (ACL 2024): Toulmin-based prompts outperform generic prompts. Both confirmed via content verification. | A | [x] |
-| S4-4 | Three retrofit audits across different paper types (empirical/technology, perspective/proposition, measurement/engineering fidelity) demonstrate that the typed verification framework is practically applicable and reveals actionable issues in each project | ARGUMENT | P1 | EMERGING | All three audit files verified: proposition (76% coverage, H4 false failure, 5 retyped), technology (22 entries, 6 over-confident, 5 retyped), engineering fidelity (21 entries, 5 retyped, 6+ unregistered discussion claims). Limitations stated in manuscript. | E | [x] |
+**CLAIMs:**
 
-**S4-4 warrant:** If the framework's typed registry and verification checklists were applied retrospectively to three independent paper projects across different types and venues, and in each case the analysis identified actionable issues (mistyped entries, over-confident language, missing boundary conditions) that were invisible without the framework, then the framework has demonstrated practical applicability across paper types. The limitation is that all three projects share the same author team and domain cluster — generalizability to other authors and domains is not established.
+| ID | Statement | Priority | Confidence | Source | Source Tier | Status |
+|----|-----------|----------|------------|--------|-------------|--------|
+| S4-1 | Proposition paper retrofit audit achieved 76% overall coverage and 100% P0 coverage; retyping 21 entries revealed 2 ARGUMENTs and 3 PROPOSITIONs previously misclassified as CLAIMs, including a false failure (H4: scored 0.25 as CLAIM, earned EMERGING as ARGUMENT) | P0 | EMERGING | audits/proposition-retrofit.md §1: 76% (16/21), P0 100% (12/12). §3 retyping table: 16 CLAIMs, 2 ARGUMENTs (H4, D4), 3 PROPOSITIONs (I1, I2, I3). §3 Example A: H4 false failure verified. Note: audit result text says "15 CLAIMs, 4 PROPs" — table count (16/2/3) is authoritative. | E | [x] |
+| S4-2 | Technology paper retrofit audit extracted 22 claims from paper text; confidence tier assignment revealed 6 entries where the paper uses language more confident than the evidence warrants (e.g., "demonstrates" for single-unit findings) | P1 | EMERGING | audits/technology-paper-retrofit.md §4 "Language Calibration Impact": 6 entries verified (T15, T16, T17, T18, T19, T21). Changes include "demonstrates" → "indicates", "extends to" → "may extend to", "is the first" → "to our knowledge". | E | [x] |
+| S4-3 | Structured verification infrastructure combined with LLM capability outperforms LLM capability alone — demonstrated for peer review aggregation (PeerArg 2024) and argument extraction (Gupta et al. 2024) | P1 | SUPPORTED | PeerArg (NeLaMKRR@KR 2024, arXiv:2409.16813): "a variant of PeerArg outperforms end-to-end LLM baseline." Gupta (ACL 2024): Toulmin-based prompts outperform generic prompts. Both confirmed via content verification. | A | [x] |
+
+**ARGUMENTs** (Toulmin):
+
+| ID | Statement | Priority | Confidence | Grounds | Warrant | Rebuttal | Source | Source Tier | Status |
+|----|-----------|----------|------------|---------|---------|----------|--------|-------------|--------|
+| S4-4 | Three retrofit audits across different paper types (empirical/technology, perspective/proposition, measurement/engineering fidelity) demonstrate that the typed verification framework is practically applicable and reveals actionable issues in each project | P1 | EMERGING | S4-1; S4-2; engineering-fidelity audit (external — archive moved out of repo 2026-06-01) | If the framework's typed registry and verification checklists were applied retrospectively to three independent paper projects across different types and venues, and in each case the analysis identified actionable issues (mistyped entries, over-confident language, missing boundary conditions) that were invisible without the framework, then the framework has demonstrated practical applicability across paper types. | All three projects share the same author team and domain cluster — generalizability to other authors and domains is not established. Limitation stated explicitly in manuscript. | All three audits previously verified: proposition (76% coverage, H4 false failure, 5 retyped), technology (22 entries, 6 over-confident, 5 retyped), engineering fidelity (21 entries, 5 retyped, 6+ unregistered discussion claims — audit archived externally 2026-06-01). | E | [x] |
 
 ### Section 5: Call to Action
 
-| ID | Statement | Type | Priority | Confidence | Source | Source Tier | Status |
-|----|-----------|------|----------|------------|--------|-------------|--------|
-| S5-1 | The scholarly community needs verification infrastructure for non-empirical papers — analogous to what EQUATOR provides for empirical research — to maintain academic integrity in the age of AI-augmented writing | PROPOSITION | P0 | EMERGING | Premises verified: S2-1 [x] (~700 EQUATOR guidelines, empirical only), S2-2 [x] (no non-empirical guidelines), S3-4 [x] (types need different verification), S4-1 [x] (preliminary evidence). Whetten: constructs defined, reasoning explicit, boundary conditions stated in manuscript, peer review counter-argument engaged. | F | [x] |
-| S5-2 | Next steps include: discipline-specific verification templates beyond the medical/engineering domains tested here, integration with AI writing tools as structured prompting infrastructure, and empirical validation comparing verification-assisted vs unassisted AI writing quality | CLAIM | P2 | SPECULATIVE | Logical inference from current framework state and limitations. (1) Templates: follows from acknowledged single-domain limitation (§4 para 6). (2) AI integration: follows from process-level argument + Gupta 2024 feasibility. (3) Empirical validation: follows from "preliminary" framing throughout §4. Manuscript language ("warrant investigation") matches SPECULATIVE tier. | F | [x] |
+**CLAIMs:**
 
-**S5-1 premises:** S2-1 (EQUATOR exists for empirical), S2-2 (nothing for non-empirical), S3-4 (types need different verification), S4-1–S4-4 (preliminary evidence works).
-**S5-1 reasoning:** If empirical research benefits from ~700 reporting guidelines (EQUATOR), and non-empirical research has zero equivalent infrastructure, and AI writing amplifies the verification challenge for non-empirical papers (where argument quality matters more than factual accuracy), and preliminary evidence shows typed verification reveals actionable issues, then extending verification infrastructure to non-empirical papers is a legitimate and urgent need.
-**S5-1 boundary conditions:** Applies to academic papers intended for peer-reviewed publication. Does not apply to: informal writing, journalism, creative writing, or papers where the verification infrastructure cost exceeds the benefit (e.g., very short opinion pieces). The specific checklists (Toulmin, Whetten) are grounded in Western academic argumentation traditions and may need adaptation for other scholarly traditions.
+| ID | Statement | Priority | Confidence | Source | Source Tier | Status |
+|----|-----------|----------|------------|--------|-------------|--------|
+| S5-2 | Next steps include: discipline-specific verification templates beyond the medical/engineering domains tested here, integration with AI writing tools as structured prompting infrastructure, and empirical validation comparing verification-assisted vs unassisted AI writing quality | P2 | SPECULATIVE | Logical inference from current framework state and limitations. (1) Templates: follows from acknowledged single-domain limitation (§4 para 6). (2) AI integration: follows from process-level argument + Gupta 2024 feasibility. (3) Empirical validation: follows from "preliminary" framing throughout §4. Manuscript language ("warrant investigation") matches SPECULATIVE tier. | F | [x] |
+
+**PROPOSITIONs** (Whetten):
+
+| ID | Statement | Priority | Confidence | Constructs | Relationship | Premises | Reasoning | Boundary conditions | Alternatives engaged | Source | Source Tier | Status |
+|----|-----------|----------|------------|------------|--------------|----------|-----------|---------------------|----------------------|--------|-------------|--------|
+| S5-1 | The scholarly community needs verification infrastructure for non-empirical papers — analogous to what EQUATOR provides for empirical research — to maintain academic integrity in the age of AI-augmented writing | P0 | EMERGING | "verification infrastructure" (process-level reporting + verification scaffolding analogous to EQUATOR guidelines); "non-empirical paper" (Gregor Type I analytic, Type V design, plus perspective and methodological papers); "AI-augmented writing" (drafting and revision assisted by general-purpose LLMs) | Non-empirical paper publishing requires verification infrastructure (analogous to EQUATOR for empirical work) to remain trustworthy under AI augmentation | S2-1; S2-2; S3-4; S4-1; S4-4 | If empirical research benefits from ~700 reporting guidelines (EQUATOR), and non-empirical research has zero equivalent infrastructure, and AI writing amplifies the verification challenge for non-empirical papers (where argument quality matters more than factual accuracy), and preliminary evidence shows typed verification reveals actionable issues, then extending verification infrastructure to non-empirical papers is a legitimate and urgent need. | Applies to academic papers intended for peer-reviewed publication. Does not apply to: informal writing, journalism, creative writing, or papers where the verification infrastructure cost exceeds the benefit (e.g., very short opinion pieces). The specific checklists (Toulmin, Whetten) are grounded in Western academic argumentation traditions and may need adaptation for other scholarly traditions. | Peer review counter-argument engaged in manuscript: peer review already polices argument quality. Response: peer review is end-stage and reviewer-dependent; reporting guidelines provide pre-submission structural checks complementary to (not replacing) peer review. | S2-1 [x], S2-2 [x], S3-4 [x], S4-1 [x], S4-4 [x] — all premises verified within this registry | F | [x] |
 
 ---
 
@@ -145,7 +174,6 @@
 |-------------|--------|---------------|
 | Proposition paper retrofit audit | S4-1, S3-4 | Audit file exists; 76% coverage verified; H4 false failure documented |
 | Technology paper retrofit audit | S4-2 | Audit file exists; 6/22 over-confident language documented |
-| Engineering fidelity retrofit audit | S4-4 | Audit file exists; issues documented |
 
 ### Own Work (Under Review)
 
