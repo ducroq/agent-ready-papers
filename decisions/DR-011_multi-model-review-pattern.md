@@ -143,15 +143,17 @@ Background: `docs/category-theory-as-design-lens.md`, principle 3 ("multi-pass v
 ## Evidence Base
 
 - Triggering session at dev.jeroenveen.nl (2026-05-11): three-reviewer comparison on a LinkedIn cross-post draft, plus a second cross-vendor review on the published article. Disjoint-coverage finding; cross-vendor style-violation finding.
+- Replication at grant scale (2026-05-22) on NLnet NGI Zero Commons Fund v3 application (~3,500 words + 19-entry V&V claim registry): Pass 1 (Haiku) caught 3 P0 + 5 minor defects with 1 false positive; Pass 2 (Opus) caught 5 major weaknesses + 6 suggestions weighted 4.05/5.0 (above NLnet >5.0/7 threshold) with 5 style-violating suggestions correctly pre-filtered. Within-Claude disjoint-coverage pattern replicated. Pass 3 deferred per low-yield caveat — no grant-scale Pass 3 data point gathered. Second application same day on the V&V-wrap edits (~600 words of §5 prose + claims.md updates + audit content drafting): Pass 2 weighted 3.85/5.0.
 - Originating issue: [ducroq/agent-ready-papers#7](https://github.com/ducroq/agent-ready-papers/issues/7)
+- Grant-scale feedback issue: [ducroq/agent-ready-papers#8](https://github.com/ducroq/agent-ready-papers/issues/8) — Proposal 4 sourced this Evidence Base / Open Questions update.
 - Roadmap precedent: `audits/feedback-from-fsd.md:208` (Step 7 cross-model verification was already pending).
 - Mechanism caveat: the triggering observation conflates training-data bias and stylistic-prior bias for cross-vendor reviewers. The DR claims the operational effect (style filter needed) without committing to which mechanism dominates; this matches the evidence.
 
 ## Open Questions Carried Forward
 
-- **Within-family-size generality.** Does the Haiku/Opus disjoint-coverage pattern hold for other model families (GPT-4o + GPT-4o-mini), or is it specific to a single Claude-family observation? Re-evaluate on next cross-family application.
-- **Pass 2 economics at paper scale.** At ~3,450 words with multiple revisions, Pass 2 cost compounds. The "every major revision" default is provisional and should be tuned after first paper-scale application.
-- **Pass 3 yield by content type.** Cross-vendor showed near-zero substantive yield on blog-style prose. Yield may differ for highly-technical numerical claims or content adjacent to Claude-specific training data. Recommend logging Pass 3 substantive-yield-after-filter on each future application to build evidence.
+- **Within-family-size generality.** N=2 within-Claude as of 2026-05-22 (blog 2026-05-11 + NLnet v3 grant 2026-05-22): the disjoint-coverage pattern replicated. Pass 1 (Haiku) caught 3 P0 + 5 minor defects with 1 false positive; Pass 2 (Opus) caught 5 major weaknesses + 6 suggestions (weighted 4.05/5.0) with 5 style-violating suggestions correctly pre-filtered. **Still untested across families** (GPT-mini vs. GPT-4, Gemini-Flash vs. Gemini-Pro). Re-evaluate on next cross-family application.
+- **Pass 2 economics at paper scale.** At ~3,450 words (blog) and ~3,500 words + 19-entry registry (grant), Pass 2 cost has remained acceptable; the "every major revision" default is defensible at these content scales. Full-paper scale (~8,000+ words with multiple revision rounds) still untested.
+- **Pass 3 yield by content type.** Cross-vendor showed near-zero substantive yield on blog-style prose. Grant-scale application (2026-05-22) deferred Pass 3 per the low-yield caveat — no grant-scale data point gathered. Yield may differ for highly-technical numerical claims or content adjacent to Claude-specific training data. Recommend attempting Pass 3 on next grant or paper to build the evidence base.
 
 ## Revisit If
 
