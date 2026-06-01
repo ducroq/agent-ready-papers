@@ -2,22 +2,24 @@
 
 Verification infrastructure for AI-augmented academic and structured non-fiction writing. Templates, quality gates, and session continuity that catch the failure modes automated tools miss — hallucinated citations, confidence inflation, argument quality gaps, and calculation errors. Originally developed for academic papers; extended in 2026-05 to cover speculative-design and voice-driven non-fiction work (DR-010).
 
-- **Type**: Guide + templates + active paper projects (non-fiction projects supported via DR-010 but currently external — e.g., FSD)
+- **Type**: Guide + templates + active paper projects (non-fiction projects supported via DR-010 but currently external — e.g., FSD; decision-support work supported via DR-012)
 - **Companion**: [agent-ready-projects](https://github.com/ducroq/agent-ready-projects) (for code)
 - **agent-ready-projects**: v1.7.0
+- **agent-ready-papers** (this repo): v1.3.0 (adopted explicit versioning 2026-06-01)
 
-> Live project state (current paper status, recent decisions, deferred items) lives in `memory/MEMORY.md`. Repo-name caveat and FSD-rename deferral are tracked in `audits/feedback-from-fsd.md`.
+> Live project state (current paper status, recent decisions, deferred items) lives in `memory/MEMORY.md`. Repo-name caveat and FSD-rename deferral are tracked in `audits/feedback-from-fsd.md`. Release notes live in `CHANGELOG.md`.
 
 ## Before You Start
 
 | When | Read |
 |------|------|
-| Starting any session | Compare the `agent-ready-projects: vX.Y.Z` line in this file's header against `C:/local_dev/agent-ready-projects/CHANGELOG.md` (local clone) or https://github.com/ducroq/agent-ready-projects/blob/master/CHANGELOG.md. If the project is behind the latest released version, briefly surface the drift to the user before starting work. Don't auto-update — adopting changes is the engineer's call. |
+| Starting any session (companion drift) | Compare the `agent-ready-projects: vX.Y.Z` line in this file's header against `C:/local_dev/agent-ready-projects/CHANGELOG.md` (local clone) or https://github.com/ducroq/agent-ready-projects/blob/master/CHANGELOG.md. If the project is behind the latest released version, briefly surface the drift to the user before starting work. Don't auto-update — adopting changes is the engineer's call. |
+| Starting any session (self drift) | Compare the `agent-ready-papers: vX.Y.Z` line in this file's header against `CHANGELOG.md`. If a newer version has shipped, surface it before starting. |
 | Working on Paper 1 (Perspective) | `papers/perspective/CLAUDE.md` — paper identity, constraints, status, verification state |
-| Making scope or methodology decisions | `decisions/` — 11 decision records (DR-001 through DR-011) |
+| Making scope or methodology decisions | `decisions/` — 12 decision records (DR-001 through DR-012) |
 | Adding or verifying literature sources | `literature/README.md` — 47 indexed sources organized by topic |
-| Understanding how the framework was built | `docs/METHODOLOGY.md` — derived from 3 real paper projects |
-| Reviewing audit evidence from source projects | `audits/` — 10 audits: retrofits of source projects + forward-feedback from FSD, blog, grant, and template-revision applications |
+| Understanding how the framework was built | `docs/METHODOLOGY.md` — derived from two source paper projects (third source-project audit archived externally in v1.3.0) |
+| Reviewing audit evidence | `audits/` — 9 audits: retrofits of source projects (proposition, technology) + cross-project comparisons (driven-pendulum) + forward-feedback applications (FSD, blog, template-revision, decision-support). Grant-application feedback lives in [ducroq/agent-ready-papers#8](https://github.com/ducroq/agent-ready-papers/issues/8). |
 | Working with claims, gates, or confidence calibration | `docs/framework-summary.md` — unit types, gates, tier-to-language mapping at a glance (templates remain normative) |
 | Stuck or debugging something weird | `memory/gotcha-log.md` — problem-fix archive |
 | Creating a new paper project | `templates/CLAUDE.md` — paper project template |
@@ -38,6 +40,7 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 agent-ready-papers/
 ├── .claude/skills/            <- Agent skills (/curate, /audit-context)
 ├── README.md                  <- The guide (public-facing)
+├── CHANGELOG.md               <- Versioned release notes (v1.0.0 onwards)
 ├── CLAUDE.md                  <- This file (agent orientation)
 ├── templates/                 <- Reusable templates for new paper projects
 │   ├── CLAUDE.md              <- Paper project identity template
@@ -50,9 +53,9 @@ agent-ready-papers/
 │   ├── glossary.md            <- Cross-domain terminology
 │   ├── decision-record.md     <- DR template
 │   └── key-quotes.md          <- Reference quotes
-├── decisions/                 <- Architecture decision records (DR-001 to DR-011)
+├── decisions/                 <- Architecture decision records (DR-001 to DR-012)
 ├── literature/                <- Source registry (47 sources, 17 detailed summaries)
-├── audits/                    <- Retrofit audits of source projects + forward-feedback from applications (FSD, blog, grant, template-revision)
+├── audits/                    <- Retrofit audits + cross-project comparisons + forward-feedback applications (FSD, blog, template-revision, decision-support)
 ├── docs/                      <- Methodology and development history
 ├── papers/
 │   └── perspective/           <- Paper 1: "The Verification Gap" (active)

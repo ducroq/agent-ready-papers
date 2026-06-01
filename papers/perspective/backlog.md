@@ -1,6 +1,6 @@
 # Paper 1 — Backlog
 
-Last updated: 2026-03-16
+Last updated: 2026-06-01
 
 ## Done
 
@@ -20,13 +20,22 @@ Last updated: 2026-03-16
 - [x] Integrate calculation verification into framework README
 - [x] Update claim registry (S1-5, coverage 19/19)
 - [x] Full framework reflection (2026-03-16): 5-agent audit, sync Paper 1 files with templates, DR-009, gotcha log cleanup
+- [x] Migrate Paper 1 registry to per-type sub-tables (v1.3.0, closes #11) — self-eating-dog-food restored
+- [x] §4 rewrite from "three audits" to "two audits" after Engineering Fidelity audits archived externally (v1.3.0) — **Gate 2 invalidation acknowledged; Gate 2.5 re-check is the co-author's call at Gate 3**
 
 ## Active (Paper 1)
 
 ### Gate 3 — Co-author Review
-- [ ] Co-author review of revised manuscript (title change + Appendix A are significant additions)
+- [ ] Co-author review of revised manuscript — significant additions to discuss:
+  - Title broadening: "Reporting Guidelines for Reasoning"
+  - Appendix A self-demonstration
+  - S1-5 calculation verification as a failure mode
+  - **§4 evidence base reduced from three audits to two** (Gate 2.5 re-check needed)
 - [ ] Decide submission article type: "Original Article" or "Opinion"
 - [ ] Consider pre-submission enquiry to LP editor (Laura Dormer or Michelle Urberg)
+
+### Direction question (parked 2026-06-01)
+- [ ] Decide on Paper 1 framing — case-leaning (current) vs methodological reframe. Three options sketched in session conversation: light pivot (one-paragraph §4 + appendix), real pivot (expand §3 methodology depth), full method-paper reframe. Status: think-out-loud only; revisit with co-author.
 
 ## Parked (Paper 2 — DSR)
 

@@ -6,6 +6,8 @@ Automated citation checkers (RefChecker, scite.ai) and model-level solutions (RA
 
 Companion to [agent-ready-projects](https://github.com/ducroq/agent-ready-projects) (for code).
 
+**Current release:** v1.3.0 (2026-06-01) — see [`CHANGELOG.md`](CHANGELOG.md). Pin your project with `agent-ready-papers: v1.3.0` in your CLAUDE.md and surface drift at session start.
+
 > **Want to get started fast?** Grab templates from [`templates/`](templates/) and adapt them to your paper project.
 
 ## The Core Problem
