@@ -17,6 +17,7 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 | Starting any session (self drift) | Compare the `agent-ready-papers: vX.Y.Z` line in this file's header against `CHANGELOG.md`. If a newer version has shipped, surface it before starting. |
 | Working on Paper 1 (Perspective) | `papers/perspective/CLAUDE.md` — paper identity, constraints, status, verification state |
 | Making scope or methodology decisions | `decisions/` — 12 decision records (DR-001 through DR-012) |
+| Starting template / DR / verification-gate design work | `memory/dead-ends.md` — pattern proposals already concluded as don't-retry (#15) |
 | Adding or verifying literature sources | `literature/README.md` — 47 indexed sources organized by topic |
 | Understanding how the framework was built | `docs/METHODOLOGY.md` — derived from two source paper projects (third source-project audit archived externally in v1.3.0) |
 | Reviewing audit evidence | `audits/` — 9 audits: retrofits of source projects (proposition, technology) + cross-project comparisons (driven-pendulum) + forward-feedback applications (FSD, blog, template-revision, decision-support). Grant-application feedback lives in [ducroq/agent-ready-papers#8](https://github.com/ducroq/agent-ready-papers/issues/8). |
