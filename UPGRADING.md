@@ -11,6 +11,16 @@ The full release notes are in [`CHANGELOG.md`](CHANGELOG.md). This file is the q
 - **PATCH** version bumps are docs-only / clarifications. No action required.
 - Every release entry in `CHANGELOG.md` includes an "Adopter notes" / "Adopter action" subsection. This file aggregates them per version for quick lookup.
 
+## v1.6.3 (2026-06-08)
+
+**From v1.6.2 — what to review when you bump your pin to v1.6.3:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| Root `CLAUDE.md` — new Before You Start row pointing at the three existing backlog locations (`memory/MEMORY.md` priorities + DR *Open Questions* + GitHub Issues) | Reference only — if you've ever asked yourself *"where's the backlog?"* in your own framework adoption, mirror the row in your project's `CLAUDE.md` with paths adjusted for your project's three locations (e.g., your paper's `backlog.md` + your DRs + your issue tracker). |
+
+**No breaking changes.** PATCH release: discoverability row only, no functional change.
+
 ## v1.6.2 (2026-06-08)
 
 **From v1.6.1 — what to review when you bump your pin to v1.6.2:**

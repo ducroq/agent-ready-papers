@@ -34,6 +34,20 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
        ("No adopter action required.") rather than omitting the subsection.
 -->
 
+## v1.6.3 (2026-06-08)
+
+Backlog discoverability. Framework backlog is distributed by velocity — `memory/MEMORY.md` "Next session priorities" for volatile near-term items, DR *Open Questions* sections for decision-specific long-burn items, GitHub Issues for externally-trackable work. No single `BACKLOG.md` file by design: forcing items at different velocities into one file creates synchronization burden, and the four-place set (those three plus a new file) would drift faster than the current three. But the question *"where's the backlog?"* needs an answer accessible in one CLAUDE.md row, not three. v1.6.3 adds the row.
+
+### Documentation
+- **Root `CLAUDE.md`** — new Before You Start row: *"Asking what's on the backlog"* → routes to the three existing locations with their velocity semantics named. The row also confirms by design that no single `BACKLOG.md` file exists, so an agent reading the row knows not to look for one.
+
+### Adopter notes
+- **No template content changes.** Pinned consumers on v1.6.2 require **no migration action**.
+- **Recommended for adopters:** if you're using this framework and find yourself asking *"where's the backlog?"* — copy the convention. Distributed-by-velocity tracking matches how research work actually moves; consolidating into one file is the antipattern.
+- **Discoverability principle**, now a four-surface set: v1.5.1 (CLAUDE.md routing for new artefacts), v1.6.1 (README routing), v1.6.2 (memory precedence), v1.6.3 (where-is-the-backlog routing). Implicit framework conventions get out-of-band-overridden by unanswered questions just as much as by parallel instructions.
+
+---
+
 ## v1.6.2 (2026-06-08)
 
 Framework convention codification: in-repo memory is canonical for project state.

@@ -5,7 +5,7 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 - **Type**: Guide + templates + active paper projects (non-fiction projects supported via DR-010 but currently external — e.g., FSD; decision-support work supported via DR-012)
 - **Companion**: [agent-ready-projects](https://github.com/ducroq/agent-ready-projects) (for code)
 - **agent-ready-projects**: v1.7.0
-- **agent-ready-papers** (this repo): v1.6.2 (codify in-repo-memory-is-canonical hard constraint, 2026-06-08)
+- **agent-ready-papers** (this repo): v1.6.3 (backlog discoverability row, 2026-06-08)
 
 > Live project state (current paper status, recent decisions, deferred items) lives in `memory/MEMORY.md` (maintainer-local — see *What is intentionally not shipped* below). Repo-name caveat and FSD-rename deferral are tracked in `audits/feedback-from-fsd.md`. Release notes live in `CHANGELOG.md`.
 
@@ -24,6 +24,7 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 | Reviewing audit evidence | `audits/` — 9 audits: retrofits of source projects (proposition, technology) + cross-project comparisons (driven-pendulum) + forward-feedback applications (FSD, blog, template-revision, decision-support). Grant-application feedback lives in [ducroq/agent-ready-papers#8](https://github.com/ducroq/agent-ready-papers/issues/8). |
 | Working with claims, gates, or confidence calibration | `docs/framework-summary.md` — unit types, gates, tier-to-language mapping at a glance (templates remain normative) |
 | Asking what a coverage or peer-review threshold means | `docs/THRESHOLDS.md` — rationale for the 100% P0 / 90% P1 / 70% P2 / ≥85% overall coverage and ≥3.5/5.0 simulated-peer-review thresholds (top-of-file SPECULATIVE label per the framework's own tier discipline) |
+| Asking what's on the backlog | No single `BACKLOG.md` by design — framework backlog is distributed by velocity: `memory/MEMORY.md` "Next session priorities" for volatile near-term items (maintainer-local); each `decisions/DR-*.md` *Open Questions* section for decision-specific long-burn items; GitHub Issues for externally-trackable work (currently #5 / #18 / #30 open). Paper projects have their own `papers/<name>/backlog.md` for paper-scoped tasks. Forcing items at different velocities into one file creates drift; this row is the discoverability fix instead. |
 | Stuck or debugging something weird | `memory/gotcha-log.md` — problem-fix archive |
 | Creating a new paper project | `templates/CLAUDE.md` — paper project template |
 | Ending a session | Run `/curate` — updates gotcha log, promotes patterns, syncs docs, checks freshness |
