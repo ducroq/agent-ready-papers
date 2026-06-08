@@ -53,6 +53,7 @@
 - Never exceed page budget without explicit decision record
 - Never skip the anti-hallucination checklist for AI-introduced citations
 - If this paper describes a framework it also uses, add: **This paper uses the framework it describes** — all claims must be registered and verified using the infrastructure presented as the contribution (self-demonstration constraint)
+- **Project state goes in this project's in-repo `memory/` directory (wherever the framework adopter tracks it — typically `<repo-root>/memory/` for a single-paper repo, or `<repo-root>/memory/` shared across papers in a multi-paper repo), not in user-level Claude Code auto-memory.** Versions, session narratives, gotchas, priorities, handoffs, and any state tied to *this* paper project belong in the in-repo memory the Before You Start table above routes to. The user-level path at `~/.claude/projects/<slug>/memory/` is reserved for cross-project memory types: user (about the user), feedback (corrections, validated approaches), reference (pointers to external systems). Don't write project state into both — drift starts as soon as you do. (Constraint added in agent-ready-papers v1.6.2.)
 
 ## Key Files
 

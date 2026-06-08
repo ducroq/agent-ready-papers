@@ -5,7 +5,7 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 - **Type**: Guide + templates + active paper projects (non-fiction projects supported via DR-010 but currently external — e.g., FSD; decision-support work supported via DR-012)
 - **Companion**: [agent-ready-projects](https://github.com/ducroq/agent-ready-projects) (for code)
 - **agent-ready-projects**: v1.7.0
-- **agent-ready-papers** (this repo): v1.6.1 (README discoverability fix for tools/ + cost-log, 2026-06-08)
+- **agent-ready-papers** (this repo): v1.6.2 (codify in-repo-memory-is-canonical hard constraint, 2026-06-08)
 
 > Live project state (current paper status, recent decisions, deferred items) lives in `memory/MEMORY.md` (maintainer-local — see *What is intentionally not shipped* below). Repo-name caveat and FSD-rename deferral are tracked in `audits/feedback-from-fsd.md`. Release notes live in `CHANGELOG.md`.
 
@@ -36,6 +36,7 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 - Never skip the anti-hallucination checklist for AI-introduced citations
 - Decision records are binding — check `decisions/` before proposing scope changes
 - This repo contains both the framework AND papers that use it — changes to templates may affect active papers
+- **Project state goes in `memory/` (in-repo, gitignored — see *What is intentionally not shipped*), not in user-level Claude Code auto-memory.** Versions, session narratives, gotchas, priorities, handoffs, and any state tied to *this* repo's work belong in this repo's `memory/` directory. The user-level path at `~/.claude/projects/<slug>/memory/` is reserved for cross-project memory types: user (about the user), feedback (corrections, validated approaches), and reference (pointers to external systems). The Before You Start table above routes to in-repo memory; that's the canonical pickup path. Don't duplicate project state into both — drift starts as soon as you do.
 
 ## Architecture
 

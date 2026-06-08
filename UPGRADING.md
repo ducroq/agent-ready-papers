@@ -11,6 +11,16 @@ The full release notes are in [`CHANGELOG.md`](CHANGELOG.md). This file is the q
 - **PATCH** version bumps are docs-only / clarifications. No action required.
 - Every release entry in `CHANGELOG.md` includes an "Adopter notes" / "Adopter action" subsection. This file aggregates them per version for quick lookup.
 
+## v1.6.2 (2026-06-08)
+
+**From v1.6.1 — what to review when you bump your pin to v1.6.2:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| Root `CLAUDE.md` + `templates/CLAUDE.md` — new Hard Constraint: project state goes in `memory/` (in-repo), not in user-level Claude Code auto-memory | **Recommended** — if you use Claude Code: mirror the constraint in your own paper project's `CLAUDE.md` so future agent sessions inherit the rule. The constraint is per-repo enforced; there's no global way to ship it from this framework. If your project predates v1.6.2 the Hard Constraint bullet must be copied manually; projects spawned from `templates/CLAUDE.md` after v1.6.2 inherit it. |
+
+**No breaking changes.** PATCH release: framework convention codification.
+
 ## v1.6.1 (2026-06-08)
 
 **From v1.6.0 — what to review when you bump your pin to v1.6.1:**

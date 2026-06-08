@@ -34,6 +34,26 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
        ("No adopter action required.") rather than omitting the subsection.
 -->
 
+## v1.6.2 (2026-06-08)
+
+Framework convention codification: in-repo memory is canonical for project state.
+
+A structural failure mode surfaced during the v1.6.1 wrap-up: when both Claude Code's user-level auto-memory (at `~/.claude/projects/<slug>/memory/`) and this repo's in-repo memory (at `memory/`) exist for the same project, the user-level path silently wins as the default for project-state writes — even though the project's `CLAUDE.md` routes the agent to in-repo memory via the Before You Start table. The conflict is between a *global* "you have this memory system" instruction (framed as agent capability, loaded early in the system prompt) and a *project-level* routing instruction (framed as task trigger). The global one wins by default unless the project explicitly tells the agent otherwise.
+
+This affects every repo on every machine that adopts the framework: in-repo memory exists, the routing table points at it, but no explicit rule says *"and don't write project state to user-level auto-memory instead."* v1.5.1 + v1.6.1 fixed adopter-facing discoverability (would a fresh CLAUDE.md/README surface this?). v1.6.2 fixes the agent-facing precedence (which memory location is canonical when both are wired into the session?). Same structural principle, different surface.
+
+### Documentation
+- **Root `CLAUDE.md`** — new Hard Constraint: project state goes in `memory/` (in-repo, gitignored), not in user-level Claude Code auto-memory. The user-level path is reserved for cross-project memory types (user / feedback / reference).
+- **`templates/CLAUDE.md`** — same constraint, phrased for adopters: state tied to *this paper project* goes in the framework's in-repo `memory/`. Future paper projects spawned from this template inherit the rule.
+
+### Adopter notes
+- **PATCH release.** No template content changes, no functional change. Pinned consumers on v1.6.1 require **no migration action**.
+- **Recommended for adopters using Claude Code:** mirror the constraint in your own paper project's `CLAUDE.md` if you bootstrap from `templates/CLAUDE.md` after v1.6.2 it's already present; if your project predates v1.6.2 copy the Hard Constraint bullet manually. Each repo with its own `CLAUDE.md` is its own enforcement surface — the global Claude Code instruction is per-repo silent otherwise.
+- **Out of scope:** patching the agent's user-level `~/.claude/CLAUDE.md` is the individual maintainer-or-adopter's call. The framework can document the convention; it cannot ship a fix to a path it doesn't own.
+- **Discoverability principle now covers three surfaces:** v1.5.1 surfaced adopter-facing routing (CLAUDE.md); v1.6.1 surfaced public-facing routing (README); v1.6.2 surfaces agent-facing precedence (which memory wins). All three need explicit rules — implicit framework conventions get out-of-band-overridden by parallel instructions the framework doesn't see.
+
+---
+
 ## v1.6.1 (2026-06-08)
 
 README discoverability fix. v1.5.0 shipped `tools/`, v1.6.0 shipped `templates/cost-log.md` — neither was threaded through the public-facing README. v1.5.1 fixed this for the three CLAUDE.md surfaces (agent-orientation); v1.6.1 applies the same discipline to the README (adopter-orientation). The principle from v1.5.1 — *audit each release against "would a fresh README/CLAUDE.md read surface this?"* — now covers both the agent-facing and adopter-facing entry points.
