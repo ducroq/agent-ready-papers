@@ -7,7 +7,7 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 - **agent-ready-projects**: v1.7.0
 - **agent-ready-papers** (this repo): v1.3.0 (adopted explicit versioning 2026-06-01)
 
-> Live project state (current paper status, recent decisions, deferred items) lives in `memory/MEMORY.md`. Repo-name caveat and FSD-rename deferral are tracked in `audits/feedback-from-fsd.md`. Release notes live in `CHANGELOG.md`.
+> Live project state (current paper status, recent decisions, deferred items) lives in `memory/MEMORY.md` (maintainer-local — see *What is intentionally not shipped* below). Repo-name caveat and FSD-rename deferral are tracked in `audits/feedback-from-fsd.md`. Release notes live in `CHANGELOG.md`.
 
 ## Before You Start
 
@@ -39,7 +39,7 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 
 ```
 agent-ready-papers/
-├── .claude/skills/            <- Agent skills (/curate, /audit-context)
+├── .claude/skills/            <- Maintainer slash commands (gitignored — not shipped)
 ├── README.md                  <- The guide (public-facing)
 ├── CHANGELOG.md               <- Versioned release notes (v1.0.0 onwards)
 ├── CLAUDE.md                  <- This file (agent orientation)
@@ -65,10 +65,26 @@ agent-ready-papers/
 │       ├── references.bib     <- 14 entries, all DOI-verified
 │       ├── vv/claims/         <- Claim registry (19 entries, 100% verified)
 │       └── ...
-└── memory/                    <- Session memory (not committed)
+└── memory/                    <- Session memory (gitignored — maintainer-local)
     ├── gotcha-log.md          <- Problem-fix archive
     └── ...
 ```
+
+## What is intentionally not shipped
+
+These paths exist in the maintainer's local clone but are gitignored — they are *not* in the public repo:
+
+| Path | What it holds | For adopters |
+|------|---------------|--------------|
+| `.claude/skills/curate/` | `/curate` slash command (session-end maintenance) | Optional — the README and templates already document what the skill does |
+| `.claude/skills/audit-context/` | `/audit-context` slash command (structural health check) | Optional — same |
+| `memory/MEMORY.md` | Maintainer's index of current project state and deferred items | Not needed — equivalent state for your paper lives in your paper's CLAUDE.md |
+| `memory/gotcha-log.md` | Maintainer's problem-fix archive | Build your own per-project |
+| `memory/dead-ends.md` | Maintainer's "don't retry" log | Build your own per-project |
+
+The public framework — templates, DRs, audits, README, CHANGELOG — is fully consumable without any of the above. Adopters maintain their own session state per the patterns in `templates/CLAUDE.md`, not by depending on the maintainer's `memory/`.
+
+Listed here so the architecture diagram above is honest about what an adopter sees on `git clone` versus what the maintainer has on disk. External-review observation that prompted this section: ducroq/agent-ready-papers#24.
 
 ## Key Paths
 
