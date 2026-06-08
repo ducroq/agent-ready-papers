@@ -271,7 +271,9 @@ See [`templates/glossary.md`](templates/glossary.md).
 
 ## Quality Gates
 
-Each gate must pass before proceeding:
+Each gate must pass before proceeding.
+
+> The numerical thresholds in Gate 2 (100% P0 / 90% P1 / 70% P2 / ≥85% overall coverage) and Gate 3 (≥3.5/5.0 simulated peer review) are **SPECULATIVE-tier heuristics** chosen on internal reasoning, not on a calibration dataset. See [`docs/THRESHOLDS.md`](docs/THRESHOLDS.md) for the rationale per threshold and what would harden them.
 
 ### Gate 1: Draft Complete
 - [ ] All sections drafted to page budget
