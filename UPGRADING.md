@@ -11,6 +11,18 @@ The full release notes are in [`CHANGELOG.md`](CHANGELOG.md). This file is the q
 - **PATCH** version bumps are docs-only / clarifications. No action required.
 - Every release entry in `CHANGELOG.md` includes an "Adopter notes" / "Adopter action" subsection. This file aggregates them per version for quick lookup.
 
+## v1.6.0 (2026-06-08)
+
+**From v1.5.1 — what to review when you bump your pin to v1.6.0:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| New template `templates/cost-log.md` for operation token-cost logging | **Optional** — adopt if you want empirical cost data for framework operations. Copy to `vv/cost-log.md` in your paper project; log `/status` deltas after named operations (review passes, `/curate`, etc.). |
+| `decisions/DR-011_multi-model-review-pattern.md` Evidence Base extended with N=2 token-cost replication (Pass 1 mean 36.8k tokens / 0 load-bearing findings; Pass 2 mean 52.5k tokens / 2 load-bearing findings) | Reference only — quantitative cost-per-Pass data added; Open Questions now names paper-scale cost-tier calibration as the next data point. If you've been applying DR-011, your own Pass 1/2 costs are now a meaningful contribution to N. |
+| `templates/CLAUDE.md` + `papers/perspective/CLAUDE.md` — Before You Start row added pointing at `vv/cost-log.md` | Reference only — agent-orientation; mirror in your own paper project's CLAUDE.md if you adopt the cost-log convention. |
+
+**No breaking changes.** MINOR release per SemVer: new opt-in template and convention, no existing template-surface changes.
+
 ## v1.5.1 (2026-06-08)
 
 **From v1.5.0 — what to review when you bump your pin to v1.5.1:**

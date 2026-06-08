@@ -34,6 +34,28 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
        ("No adopter action required.") rather than omitting the subsection.
 -->
 
+## v1.6.0 (2026-06-08)
+
+Operation cost logging. New `templates/cost-log.md` template + per-paper `vv/cost-log.md` convention for tracking token cost of major framework operations (review passes, `/curate`, `/audit-context`, batch verification, full Gate sweeps). Makes the *cost* side of cost-vs-value tradeoffs in decision-record evidence bases empirical rather than qualitative. DR-011 evidence base updated with the first N=2 token-cost replication, logged from this session's own scaffolding-stage and parser-stage review batteries on `tools/`.
+
+### New template
+- **`templates/cost-log.md`** — Column structure for per-paper operation cost log: date, operation, total tokens, input/output deltas (when available), cache read, wall clock, notes. Includes an aggregation section for summarizing by operation type after ~10 entries. Top-of-file convention paragraph documents how to use `/status` for the deltas and explicitly notes that subagent (Agent tool) results report `total_tokens` only — input/output/cache breakdown is not surfaced at that granularity.
+- **`papers/perspective/vv/cost-log.md`** — Paper 1 bootstrap data: four entries from today's two scaffold + parser DR-011 batteries (Haiku Pass 1 × 2, Opus Pass 2 × 2). Self-application of the convention with caveats and forward-looking gather list.
+
+### DR-011 evidence-base extension
+- **`decisions/DR-011_multi-model-review-pattern.md`** — Evidence Base section gains a token-cost replication entry (N=2 within-Claude, code-tooling scale): Pass 1 mean **36,812 tokens** with **0 / 2 rounds load-bearing findings**; Pass 2 mean **52,540 tokens** (~1.4× Pass 1) with **2 / 2 rounds load-bearing design findings** that would have shipped broken. Open Questions section gains a "paper-scale token cost calibration" entry naming the next data point to gather as Paper 1 accrues passes.
+
+### CLAUDE.md updates (continuing the v1.5.1 discoverability discipline)
+- **`templates/CLAUDE.md`** — Before You Start row added: *"Logging token cost of an operation"* → `vv/cost-log.md`.
+- **`papers/perspective/CLAUDE.md`** — same row added with the path correctly noting that bootstrap data from 2026-06-08 is already present.
+
+### Adopter notes
+- **Optional.** The cost-log is a convention, not a required surface. If you don't care about token spend you can ignore the template; nothing in the existing verification workflow depends on it.
+- **Recommended** if you want to make decision-record cost-vs-value claims quantitative (e.g., DR-011's Pass 2 prescription becomes empirically priceable), or if you want to budget framework overhead per paper.
+- **Discoverability continued.** New artefact routed through the three CLAUDE.md surfaces per the v1.5.1 principle. Fresh agent sessions discover the cost-log without `git log` or `ls`.
+
+---
+
 ## v1.5.1 (2026-06-08)
 
 CLAUDE.md discoverability fix. v1.5.0 shipped the `tools/` directory but did not update any of the three CLAUDE.md files (root, Paper 1, paper template) to point future agent sessions at the tools — and a separate gap surfaced in the same audit: `docs/THRESHOLDS.md` (landed v1.4.0) had no direct trigger in the root Before You Start table. A fresh session would have done the manual count or thumbed through `docs/framework-summary.md` instead of running the tool or reading the threshold rationale.

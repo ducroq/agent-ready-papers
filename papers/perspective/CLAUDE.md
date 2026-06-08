@@ -34,6 +34,7 @@ We propose a typed verification model: CLAIMs (source-verifiable facts), ARGUMEN
 | Writing or editing prose | `writing-guide.md` — claim-to-section mapping with language calibration |
 | Adding or verifying citations | `vv/claims/claim_registry.md` — all claims with priority and status |
 | Checking coverage or DOIs for this paper | From repo root: `python -m tools.coverage papers/perspective/vv/claims/claim_registry.md` and `python -m tools.check_dois papers/perspective/vv/claims/claim_registry.md` (or `make coverage` / `make check-dois`). Prefer the tool to manually counting P0/P1/P2 percentages or eyeballing DOIs in `references.bib`. See `../../tools/README.md` for flags and known limits. |
+| Logging token cost of an operation | `vv/cost-log.md` — record `/status` deltas (or subagent `total_tokens`) after named, repeatable operations (review passes, `/curate`, `/audit-context`, batch verification, full Gate sweeps). Bootstrap data from 2026-06-08 already present. See `../../templates/cost-log.md` for the convention. |
 | Making scope or methodology decisions | Latest `DR-*.md` — decision records |
 | Reviewing before submission | `review-prompt.md` — structured peer review simulation |
 | Stuck or unsure about a claim | `anti-hallucination.md` — citation verification checklist |
