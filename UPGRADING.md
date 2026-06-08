@@ -11,6 +11,16 @@ The full release notes are in [`CHANGELOG.md`](CHANGELOG.md). This file is the q
 - **PATCH** version bumps are docs-only / clarifications. No action required.
 - Every release entry in `CHANGELOG.md` includes an "Adopter notes" / "Adopter action" subsection. This file aggregates them per version for quick lookup.
 
+## v1.6.1 (2026-06-08)
+
+**From v1.6.0 — what to review when you bump your pin to v1.6.1:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| `README.md` — *"What's in this repo"* Framework row now lists `tools/`; new *## Tools* section threads `coverage.py` / `check_dois.py` / cost data into the adopter-facing entry point; *Templates* index gains a `cost-log.md` row; Anti-Hallucination section gains an automated-companion note pointing at `tools/check_dois.py` | Reference only — README discoverability fix; same principle as v1.5.1's CLAUDE.md fix. |
+
+**No breaking changes.** PATCH release: README docs-only, no functional change.
+
 ## v1.6.0 (2026-06-08)
 
 **From v1.5.1 — what to review when you bump your pin to v1.6.0:**

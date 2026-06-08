@@ -34,6 +34,24 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
        ("No adopter action required.") rather than omitting the subsection.
 -->
 
+## v1.6.1 (2026-06-08)
+
+README discoverability fix. v1.5.0 shipped `tools/`, v1.6.0 shipped `templates/cost-log.md` — neither was threaded through the public-facing README. v1.5.1 fixed this for the three CLAUDE.md surfaces (agent-orientation); v1.6.1 applies the same discipline to the README (adopter-orientation). The principle from v1.5.1 — *audit each release against "would a fresh README/CLAUDE.md read surface this?"* — now covers both the agent-facing and adopter-facing entry points.
+
+### Documentation
+- **`README.md`** — five edits:
+  - Current-release line bumped to v1.6.1.
+  - *"What's in this repo"* Framework row extended to include `tools/` (since v1.5.0).
+  - *"Anti-Hallucination Checklist"* gains an *Automated companion* note pointing at `python -m tools.check_dois` as the batch Step 0 helper.
+  - New *## Tools* section between *Templates* and *Paper Projects* — purpose-vs-when-to-run table for `coverage.py` and `check_dois.py`, known-limits pointer to `tools/README.md`, and the empirical cost data from `papers/perspective/vv/cost-log.md` (Pass 1 vs Pass 2 mean tokens + load-bearing-findings ratio).
+  - *Templates* index gains a row for `cost-log.md`.
+
+### Adopter notes
+- **No template content changes.** README-only edits. Pinned consumers on v1.6.0 require **no migration action**.
+- **Discoverability principle continued.** v1.5.1 audited CLAUDE.md; v1.6.1 audits the README. Future releases should check both surfaces against the same question — *would a fresh read of this file surface the new artefact?* — to avoid the v1.5.0 / v1.6.0 gap repeating.
+
+---
+
 ## v1.6.0 (2026-06-08)
 
 Operation cost logging. New `templates/cost-log.md` template + per-paper `vv/cost-log.md` convention for tracking token cost of major framework operations (review passes, `/curate`, `/audit-context`, batch verification, full Gate sweeps). Makes the *cost* side of cost-vs-value tradeoffs in decision-record evidence bases empirical rather than qualitative. DR-011 evidence base updated with the first N=2 token-cost replication, logged from this session's own scaffolding-stage and parser-stage review batteries on `tools/`.

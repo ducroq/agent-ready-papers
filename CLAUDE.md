@@ -5,7 +5,7 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 - **Type**: Guide + templates + active paper projects (non-fiction projects supported via DR-010 but currently external — e.g., FSD; decision-support work supported via DR-012)
 - **Companion**: [agent-ready-projects](https://github.com/ducroq/agent-ready-projects) (for code)
 - **agent-ready-projects**: v1.7.0
-- **agent-ready-papers** (this repo): v1.6.0 (operation cost logging + DR-011 token-cost replication, 2026-06-08)
+- **agent-ready-papers** (this repo): v1.6.1 (README discoverability fix for tools/ + cost-log, 2026-06-08)
 
 > Live project state (current paper status, recent decisions, deferred items) lives in `memory/MEMORY.md` (maintainer-local — see *What is intentionally not shipped* below). Repo-name caveat and FSD-rename deferral are tracked in `audits/feedback-from-fsd.md`. Release notes live in `CHANGELOG.md`.
 

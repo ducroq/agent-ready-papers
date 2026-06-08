@@ -6,7 +6,7 @@ Automated citation checkers (RefChecker, scite.ai) and model-level solutions (RA
 
 Companion to [agent-ready-projects](https://github.com/ducroq/agent-ready-projects) (for code).
 
-**Current release:** v1.4.0 (2026-06-08) — see [`CHANGELOG.md`](CHANGELOG.md). Pin your project with `agent-ready-papers: v1.4.0` in your CLAUDE.md and surface drift at session start.
+**Current release:** v1.6.1 (2026-06-08) — see [`CHANGELOG.md`](CHANGELOG.md). Pin your project with `agent-ready-papers: v1.6.1` in your CLAUDE.md and surface drift at session start.
 
 > **Want to get started fast?** Grab templates from [`templates/`](templates/) and adapt them to your paper project.
 
@@ -18,7 +18,7 @@ Three things are in here, kept separate:
 
 | Layer | What | Where |
 |-------|------|-------|
-| **Framework** — the reusable method | Templates, decision records, the methodology doc, this README | [`templates/`](templates/), [`decisions/`](decisions/), [`docs/`](docs/) |
+| **Framework** — the reusable method | Templates, decision records, the methodology doc, this README, optional Python tooling | [`templates/`](templates/), [`decisions/`](decisions/), [`docs/`](docs/), [`tools/`](tools/) (since v1.5.0) |
 | **Worked examples** — the method in use | Active paper projects with populated claim registries, writing guides, audit trails | [`papers/`](papers/) |
 | **Evidence and history** — what we learned | Retrofits of source projects, cross-project comparisons, forward-feedback applications, literature index | [`audits/`](audits/), [`literature/`](literature/) |
 
@@ -204,6 +204,8 @@ Before accepting any literature claim from an AI agent:
 6. **Have I read the relevant section?** (not just the abstract)
 
 This is non-negotiable. Run it for every new citation the agent introduces. Agents can and will invent plausible-sounding papers with real-sounding author names. Step 0 catches fabrications in seconds; the full checklist takes 2 minutes per citation. Catching a hallucinated citation in review takes 2 weeks.
+
+**Automated companion (since v1.5.0):** for whole-registry verification, `python -m tools.check_dois <registry.md>` extracts every DOI from your claim registry, HEADs against `doi.org`, and reports the unresolved ones. It does Step 0 at scale — useful before phase gates and in CI. Pair it with the manual checklist for the content-level steps (4, 5, 6) where machine verification cannot substitute for reading the source. See [Tools](#tools) below.
 
 **Inverse hallucination — Step Z.** For projects with PROVOCATION entries (speculative-design, design-fiction, diegetic-prototype work), an agent can present a *speculation* as if it had a citable source — the inverse of standard fabrication. Steps 0–6 will fail to catch this because no source exists to verify. Step Z reclassifies such entries as PROVOCATIONs rather than chasing missing sources. See [`templates/anti-hallucination.md`](templates/anti-hallucination.md) → Step Z and [DR-010](decisions/DR-010_provocation-unit-type.md).
 
@@ -494,8 +496,29 @@ Ready-to-use starter files in [`templates/`](templates/):
 - **[`anti-hallucination.md`](templates/anti-hallucination.md)** — Citation verification checklist
 - **[`glossary.md`](templates/glossary.md)** — Cross-domain terminology reference
 - **[`equation-checker.md`](templates/equation-checker.md)** — System prompt for mechanical verification of equations and derived values
+- **[`cost-log.md`](templates/cost-log.md)** — Per-operation token-cost log; copy to your paper's `vv/cost-log.md` (since v1.6.0)
 
 Copy what you need, delete the comments, fill in your specifics.
+
+## Tools
+
+Optional Python CLIs in [`tools/`](tools/) — stdlib only, deterministic, CI-friendly. Pair with the manual workflows above; replace nothing.
+
+| Tool | Purpose | When to run |
+|------|---------|-------------|
+| [`coverage.py`](tools/coverage.py) | Parse a `claim_registry.md`; report P0/P1/P2 coverage by unit type | Before phase gates; in CI with `--strict` to fail the build on missed thresholds |
+| [`check_dois.py`](tools/check_dois.py) | Extract DOIs; HEAD against `doi.org`; report unresolved | After any AI-assisted citation introduction; in CI; pair with the [Anti-Hallucination Checklist](#anti-hallucination-checklist) Step 0 |
+
+Invoke as `python -m tools.coverage <registry.md>` or via Makefile (`make coverage` / `make check-dois`) from the repo root. Known limits (no HTTPS proxy support, sequential HEAD scaling, no escaped-pipe support in cells) are documented in [`tools/README.md`](tools/README.md).
+
+Empirical operation costs from Paper 1's [`vv/cost-log.md`](papers/perspective/vv/cost-log.md) — first N=2 token-cost replication of [DR-011](decisions/DR-011_multi-model-review-pattern.md):
+
+| Operation | N | Mean total tokens | Load-bearing findings |
+|-----------|---|-------------------|-----------------------|
+| DR-011 Pass 1 (Haiku) on `tools/` code review | 2 | 36,812 | 0 / 2 rounds |
+| DR-011 Pass 2 (Opus) on `tools/` code review | 2 | 52,540 (~1.4× Pass 1) | 2 / 2 rounds (each would have shipped broken) |
+
+Per-paper cost logging via the [`cost-log.md`](templates/cost-log.md) template — see [DR-011 Open Questions](decisions/DR-011_multi-model-review-pattern.md) for what's still unmeasured.
 
 ## Paper Projects
 
