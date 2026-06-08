@@ -3,19 +3,35 @@
 All notable changes to `agent-ready-papers`. Adopters can check their paper project's framework version against this log to see what has changed.
 
 <!-- Maintainer release process:
-     When promoting a `vX.Y.Z (candidate, unreleased)` block to a dated release,
-     also tag the release commit:
+     When promoting a `vX.Y.Z (candidate, unreleased)` block to a dated release:
+
+     1. Tag the release commit:
 
          git tag vX.Y.Z <commit>
          git push --tags
 
-     Tags let adopters `git checkout vX.Y.Z` to inspect a pinned version and
-     `git diff vX.Y.Z..vX.Y+1.0 -- templates/` to preview an upgrade.
+        Tags let adopters `git checkout vX.Y.Z` to inspect a pinned version and
+        `git diff vX.Y.Z..vX.Y+1.0 -- templates/` to preview an upgrade.
+
+     2. Cut a GitHub Release from the tag (gh release create vX.Y.Z ...) with a
+        short summary + link back to this CHANGELOG entry.
+
+     3. Add a row to UPGRADING.md under the new version section: one table row
+        per change that requires pinned-consumer action, paired with the
+        from-version it applies from. Adopters read UPGRADING.md sequentially
+        from their pin down to latest.
 
      Versioning convention (mirrors agent-ready-projects):
      - MAJOR — breaking changes to template surfaces or DR semantics
      - MINOR — new templates, patterns, application classes, or behaviours
      - PATCH — docs-only changes, clarifications, cross-reference adds
+
+     Adopter-notes convention:
+     - Every release entry below MUST include an "Adopter notes" or
+       "Adopter action" subsection listing what action (if any) pinned
+       consumers need to take. UPGRADING.md aggregates these per version
+       for quick lookup. If an entry has no adopter action, say so explicitly
+       ("No adopter action required.") rather than omitting the subsection.
 -->
 
 ## v1.3.0 (2026-06-01)

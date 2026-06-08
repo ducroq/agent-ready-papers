@@ -546,3 +546,5 @@ See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the full guidance. Short version:
 - **Application reports** are the highest-signal contribution — see [`audits/feedback-from-*.md`](audits/) for the precedent (each led to a DR or template revision).
 
 Licence: CC BY 4.0 — see [`LICENSE`](LICENSE) and [`decisions/DR-013_license-choice.md`](decisions/DR-013_license-choice.md).
+
+Upgrading a pinned version? See [`UPGRADING.md`](UPGRADING.md) — per-release adopter notes aggregated for quick lookup.
