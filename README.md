@@ -10,6 +10,8 @@ Companion to [agent-ready-projects](https://github.com/ducroq/agent-ready-projec
 
 > **Want to get started fast?** Grab templates from [`templates/`](templates/) and adapt them to your paper project.
 
+> **Curious how this was built?** See [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md) — patterns derived from real paper-project failures, with what survived and what didn't.
+
 ## The Core Problem
 
 AI agents are remarkably useful for academic writing — literature synthesis, argument structuring, statistical interpretation, formatting. But they have failure modes that are *different* from coding:
@@ -374,7 +376,13 @@ Agents hallucinate citations. Not occasionally — routinely. Every citation nee
 Prose written without a claim registry is prose that will need to be rewritten. The registry forces you to identify what you're claiming and whether you can support it *before* you invest in beautiful sentences.
 
 ### Reviewing in the building session
-An agent that spent an hour helping write Section 3 will not catch its own errors in Section 3. Use a fresh session for review — or, for the strongest version, the three-pass pattern across model families ([DR-011](decisions/DR-011_multi-model-review-pattern.md)).
+An agent that spent an hour helping write Section 3 will not catch its own errors in Section 3 — it has sunk-cost bias in its own context. The strongest mitigation is the **three-pass review pattern** ([DR-011](decisions/DR-011_multi-model-review-pattern.md)):
+
+- **Pass 1** (intra-family small) — escapes session-level sunk-cost
+- **Pass 2** (intra-family large) — different review character, catches what the small model missed
+- **Pass 3** (cross-vendor) — escapes training-data and stylistic priors shared across one vendor's family
+
+Pass 1 + 2 are the default for every publish or major revision; Pass 3 is high-stakes only, with a mandatory style filter so cross-vendor critique doesn't drift into voice critique. Each pass is a different functorial view of the manuscript; the combined verification is the limit, not the sum. The pattern was empirically derived at blog scale (DR-011), replicated at grant scale (NLnet v3, 2026-05-22), and re-derived at decision-support scale (2026-05-30).
 
 ### Skipping verification for informal technical communication
 The framework applies to any outbound technical content — not just formal papers. WhatsApp messages, emails, and Slack discussions with quantitative claims have the same error classes (unit confusion, property overestimates, wrong formulas) but no verification trigger. If it contains numbers, equations, or technical terminology going to a stakeholder, run the relevant checks before sending.
@@ -437,6 +445,29 @@ Papers written using this framework live in [`papers/`](papers/). Each paper pro
 | Paper 3: SE-Inspired Verification Pipeline | — | Not yet started (equation-checker is proof of concept) | TBD |
 
 See [`decisions/DR-006_publication-roadmap.md`](decisions/DR-006_publication-roadmap.md) for the publication strategy and sequencing.
+
+## Audits
+
+The [`audits/`](audits/) directory holds the empirical evidence the framework was derived from and continues to test against:
+
+**Retrofits** (framework retrofitted onto already-completed source projects, surfacing the patterns the templates and DRs encode)
+- [`proposition-retrofit.md`](audits/proposition-retrofit.md) — Proposition-type analysis of a source paper project
+- [`technology-paper-retrofit.md`](audits/technology-paper-retrofit.md) — IEEE TIM sensor-integration paper
+- [`technology-paper-revisions.md`](audits/technology-paper-revisions.md) — Revision audit of the same project
+
+**Cross-project comparison**
+- [`driven-pendulum-retrofit.md`](audits/driven-pendulum-retrofit.md) — Framework applied to a driven-pendulum design-engineering project
+
+**Forward-feedback applications** (framework applied to a new domain; what surfaced flowed back as a DR or template revision)
+- [`feedback-from-fsd.md`](audits/feedback-from-fsd.md) — Speculative-design book (activated [DR-010](decisions/DR-010_provocation-unit-type.md) — PROVOCATION unit type)
+- [`feedback-from-blog-application.md`](audits/feedback-from-blog-application.md) — Blog cross-post (triggered [DR-011](decisions/DR-011_multi-model-review-pattern.md) — multi-model review)
+- [`feedback-from-template-revision.md`](audits/feedback-from-template-revision.md) — Multi-model review applied to a template revision
+- [`feedback-from-decision-support.md`](audits/feedback-from-decision-support.md) — Hardware-purchase decision support (activated [DR-012](decisions/DR-012_decision-support-artefacts.md) — third application class)
+
+**Discovery case studies**
+- [`equation-verification-journey.md`](audits/equation-verification-journey.md) — How the CALCULATION verification finding emerged: prompting an LLM for "soundness review" missed 3/3 arithmetic errors; "numerically reproduce every calculation" caught all three
+
+Each audit is dated and traceable to a specific application. These are the workings that produced the templates and decision records above.
 
 ## Further Reading
 
