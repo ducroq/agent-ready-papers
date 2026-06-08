@@ -34,6 +34,31 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
        ("No adopter action required.") rather than omitting the subsection.
 -->
 
+## v1.5.0 (2026-06-08)
+
+Registry-verification tooling. The `tools/` directory introduces the first Python footprint in the repo: two zero-dep CLIs that read a `claim_registry.md` and answer two operational questions — *what is my coverage* and *do all my DOIs resolve*. Both tools are deterministic, importable, and CLI-runnable; targeted at CI use against a paper project's registry. Two DR-011 multi-model review batteries (one against the API scaffolding, one against the parser implementation) caught real load-bearing issues — most notably a PROVOCATION column-resolution bug that would have shipped green against the empty-PROVOCATION Paper 1 fixture and bit the first FSD-style adopter. Closes [#17](https://github.com/ducroq/agent-ready-papers/issues/17).
+
+### New tooling
+- **`tools/coverage.py`** — Per-type sub-table parser. Walks a claim registry, identifies `**CLAIMs:**` / `**ARGUMENTs**` / `**PROPOSITIONs**` / `**PROVOCATIONs**` sub-tables by marker, finds Priority/Tier and Status columns by name (not position), counts verified entries. Two axes: priority (P0/P1/P2) for the standard unit types, provocation_tier (GROUNDED/EXTRAPOLATED/PROVOCATIVE/CRITICAL) for PROVOCATION sub-tables per [DR-010](decisions/DR-010_provocation-unit-type.md). Markdown and JSON output. Exit codes 0 (success) / 1 (with `--strict`, target missed) / 2 (tooling error).
+- **`tools/check_dois.py`** — DOI extractor and resolver. Regex-extracts DOIs (allowing balanced `()` for Lancet-style identifiers like `10.1016/S0140-6736(13)62228-X`), strips prose punctuation, then HEAD against `https://doi.org/` without redirect-following (a 30x from doi.org IS the resolution signal). `--offline` mode verifies parseability only; the `parseable` and `resolved` fields are intentionally distinct so a CI gate over `all_resolved` cannot silently pass if the offline flag is inherited.
+- **`tools/README.md`** — Usage, exit codes, design constraints, known limits (no escaped-pipe support in cells, no HTTP proxy support, sequential HEAD scaling, line-anchored marker recognition, heuristic `_clean_doi`).
+- **`Makefile`, `pyproject.toml`, `.gitignore`** — First Python footprint in the repo: ruff config (E/W/F/I/B/UP/S), pytest config, py3.10 target, `make test / lint / format / check / coverage / check-dois` targets. Patterns borrowed from `vmodel.eu/reqrev/structure_checker.py` (public API in module docstring, frozen dataclass result types).
+- **`tests/`** — Shape-pin tests against the Paper 1 fixture (19 entries, 9 DOIs). 17 tests: dataclass-shape pins, FileNotFoundError pins, end-to-end fixture verification, determinism pins (same input → byte-identical output across runs), focused unit tests for `_clean_doi` and `_find_bucket_and_status_columns` including the PROVOCATION-with-`Source Tier` regression test that the second DR-011 battery surfaced.
+
+### DR-011 evidence base
+Two review batteries across the scaffolding stage and the parser stage. Pass 2 (Opus, fresh session) caught **3 load-bearing design issues** across the two rounds that Pass 1 (Haiku) did not surface, including a forward-looking PROVOCATION column-resolution bug that the Paper 1 fixture could not exercise. Pass 1 in the scaffolding round had a documented false positive (regex check). Pass 1 in the parser round was visibly more careful (no false positives) — a single datapoint, not a confirmed pattern. Recorded as one more N within Claude family for the DR-011 evidence base.
+
+### DR-013 *Revisit If* check
+`tools/` is ~620 LOC of Python — sub-threshold for the dual CC BY 4.0 + MIT trigger condition named in [DR-013](decisions/DR-013_license-choice.md). No DR-013 amendment in this release. Re-evaluate when `tools/` exceeds ~2000 LOC or grows an importable API surface used by external code.
+
+### Adopter notes
+- **No template changes.** All additions are opt-in tooling. Pinned consumers on v1.4.0 require **no migration action**.
+- **Optional adoption.** If you maintain a `claim_registry.md` in your own paper project, you can run `python -m tools.coverage <your-registry.md>` and `python -m tools.check_dois <your-registry.md>` from your own clone of this repo. The tools have no dependency on the rest of `agent-ready-papers` — only stdlib.
+- **Known limits documented in `tools/README.md`.** If your registry uses escaped pipes in cells (`\|`), if you sit behind a corporate HTTPS proxy, or if your registry has >50 DOIs, read the limits section before adopting.
+- **License:** tools inherit CC BY 4.0 per DR-013. Current size is sub-threshold for revisiting that choice.
+
+---
+
 ## v1.4.0 (2026-06-08)
 
 External-feedback-driven release. June 2026 external review — three independent reviewers, convergent at [#30](https://github.com/ducroq/agent-ready-papers/issues/30) — produced 14 actionable issues. This release closes 12 of them outright plus DR-014 Proposed (#18) and #17 (registry tooling) deferred to a dedicated session. The framework gains a LICENSE (CC BY 4.0), three new top-level docs (`CONTRIBUTING.md`, `UPGRADING.md`, `docs/THRESHOLDS.md`), two new DRs (DR-013 Accepted, DR-014 Proposed), substantially restructured README front-of-file (Quickstart + three-layer map + adoption scorecard), and the maintainer release process is now codified in this CHANGELOG's header.

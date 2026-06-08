@@ -11,6 +11,19 @@ The full release notes are in [`CHANGELOG.md`](CHANGELOG.md). This file is the q
 - **PATCH** version bumps are docs-only / clarifications. No action required.
 - Every release entry in `CHANGELOG.md` includes an "Adopter notes" / "Adopter action" subsection. This file aggregates them per version for quick lookup.
 
+## v1.5.0 (2026-06-08)
+
+**From v1.4.0 — what to review when you bump your pin to v1.5.0:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| `tools/` directory added — two stdlib-only CLIs: `coverage.py` (registry coverage reporter) and `check_dois.py` (DOI resolver) | Optional — if you maintain a `claim_registry.md`, run `python -m tools.coverage <registry.md>` and `python -m tools.check_dois <registry.md>` from your own clone. No template changes. |
+| `Makefile`, `pyproject.toml`, `.gitignore` Python patterns added | Reference only — first Python footprint in the repo. The `.gitignore` Python patterns may be useful if your paper project also runs Python tooling. |
+| `tests/` directory added — shape-pin and edge-case tests against the Paper 1 fixture | Reference only — pattern source if you want to add tests against your own registry. |
+| `tools/README.md` documents known limits (escaped pipes in cells, no HTTP proxy support, sequential HEAD scaling, line-anchored marker recognition) | **Read before adopting** if your registry uses escaped pipes, you sit behind a corporate HTTPS proxy, or your registry has >50 DOIs. |
+
+**No breaking changes.** This is a MINOR release per the SemVer convention: new opt-in tooling, no template-surface changes.
+
 ## v1.4.0 (2026-06-08)
 
 **From v1.3.0 — what to review when you bump your pin to v1.4.0:**
