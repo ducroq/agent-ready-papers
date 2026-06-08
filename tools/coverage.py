@@ -37,6 +37,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
@@ -49,6 +50,19 @@ DEFAULT_PRIORITY_TARGETS: dict[str, float] = {
     "P1": 90.0,
     "P2": 70.0,
 }
+
+# Matches a sub-table marker line: **CLAIMs:**, **ARGUMENTs** (Toulmin):,
+# **PROPOSITIONs** (Whetten):, **PROVOCATIONs** (Auger ...):
+_MARKER_REGEX = re.compile(
+    r"^\s*\*\*\s*"
+    r"(CLAIM|ARGUMENT|PROPOSITION|PROVOCATION)s?"
+    r"\s*:?\s*\*\*"
+    r"(?:\s+\([^)]+\))?"
+    r"\s*:?\s*$"
+)
+
+_SEPARATOR_REGEX = re.compile(r"^\s*\|[\s\-:|]+\|\s*$")
+_STATUS_VERIFIED_REGEX = re.compile(r"^\s*\[\s*x\s*\]", re.IGNORECASE)
 
 
 @dataclass(frozen=True)
@@ -130,6 +144,114 @@ class CoverageReport:
         return True
 
 
+def _split_row(line: str) -> list[str] | None:
+    """Split a markdown table row into stripped cell values.
+
+    Returns None when the line is not a table row (no leading `|`).
+    Tolerates trailing whitespace and missing trailing `|`.
+    """
+    stripped = line.rstrip()
+    if not stripped.lstrip().startswith("|"):
+        return None
+    inner = stripped.lstrip()[1:]
+    if inner.endswith("|"):
+        inner = inner[:-1]
+    return [c.strip() for c in inner.split("|")]
+
+
+def _find_bucket_and_status_columns(
+    header: list[str], unit_type: str
+) -> tuple[int, str, int] | None:
+    """Return (bucket_col_index, axis, status_col_index) or None if not found.
+
+    PROVOCATION sub-tables prefer the Tier-axis column. The match must
+    be tight because PROVOCATION rows may also carry a `Source Tier`
+    column inherited from the CLAIM / ARGUMENT / PROPOSITION sub-tables;
+    a naive substring match on "tier" would silently bucket against the
+    wrong column. We require the column name to start with "tier" (so
+    "Source Tier" — which starts with "source" — is excluded) or to
+    contain "provocation".
+    """
+    bucket_col: int | None = None
+    bucket_axis: str | None = None
+    status_col: int | None = None
+
+    if unit_type == "PROVOCATION":
+        for idx, name in enumerate(header):
+            normalized = name.lower().strip()
+            if normalized.startswith("tier") or "provocation" in normalized:
+                bucket_col, bucket_axis = idx, PROVOCATION_TIER_AXIS
+                break
+
+    if bucket_col is None:
+        for idx, name in enumerate(header):
+            if name.lower().strip() == "priority":
+                bucket_col, bucket_axis = idx, PRIORITY_AXIS
+                break
+
+    for idx, name in enumerate(header):
+        if name.lower().strip() == "status":
+            status_col = idx
+            break
+
+    if bucket_col is None or status_col is None or bucket_axis is None:
+        return None
+    return bucket_col, bucket_axis, status_col
+
+
+def _parse_registry(content: str) -> dict[tuple[str, str, str], tuple[int, int]]:
+    """Walk the registry; return {(unit_type, axis, bucket): (total, verified)}."""
+    counts: dict[tuple[str, str, str], list[int]] = {}
+    lines = content.splitlines()
+    i = 0
+    while i < len(lines):
+        marker = _MARKER_REGEX.match(lines[i])
+        if not marker:
+            i += 1
+            continue
+
+        unit_type = marker.group(1).upper()
+        i += 1
+        while i < len(lines) and not lines[i].strip():
+            i += 1
+        if i >= len(lines):
+            break
+
+        header = _split_row(lines[i])
+        if header is None:
+            continue
+
+        cols = _find_bucket_and_status_columns(header, unit_type)
+        if cols is None:
+            i += 1
+            continue
+        bucket_col, axis, status_col = cols
+
+        i += 1
+        if i < len(lines) and _SEPARATOR_REGEX.match(lines[i]):
+            i += 1
+
+        while i < len(lines):
+            row = _split_row(lines[i])
+            if row is None:
+                break
+            if len(row) <= max(bucket_col, status_col):
+                break
+            bucket = row[bucket_col]
+            status = row[status_col]
+            if not bucket or not status:
+                i += 1
+                continue
+            key = (unit_type, axis, bucket)
+            slot = counts.setdefault(key, [0, 0])
+            slot[0] += 1
+            if _STATUS_VERIFIED_REGEX.match(status):
+                slot[1] += 1
+            i += 1
+
+    return {k: (v[0], v[1]) for k, v in counts.items()}
+
+
 def check_coverage(
     registry_path: Path,
     *,
@@ -150,20 +272,33 @@ def check_coverage(
 
     Raises:
         FileNotFoundError: if registry_path does not exist
-        ValueError: if the file is not a parseable registry
     """
     if not registry_path.is_file():
         raise FileNotFoundError(registry_path)
 
-    # TODO(#17): implement per-type sub-table parser.
-    #   Walk the file, identify "**CLAIMs:**" / "**ARGUMENTs**" / "**PROPOSITIONs**" /
-    #   "**PROVOCATIONs**" markers, parse the markdown table that follows each,
-    #   count rows by Priority column (axis=PRIORITY_AXIS) or Tier column
-    #   (axis=PROVOCATION_TIER_AXIS for PROVOCATION sub-tables),
-    #   count Status == [x] as verified.
-    #   Honour the `types` filter: skip sub-tables whose unit_type is not
-    #   in the filter when one is provided.
-    raise NotImplementedError("Sub-table parser not yet implemented — see TODO(#17)")
+    content = registry_path.read_text(encoding="utf-8")
+    counts = _parse_registry(content)
+
+    if types is not None:
+        wanted = tuple(t.upper() for t in types)
+        counts = {k: v for k, v in counts.items() if k[0] in wanted}
+
+    rows = tuple(
+        CoverageRow(unit_type=k[0], axis=k[1], bucket=k[2], total=v[0], verified=v[1])
+        for k, v in sorted(counts.items())
+    )
+
+    return CoverageReport(
+        registry_path=registry_path,
+        rows=rows,
+        priority_targets=(
+            dict(DEFAULT_PRIORITY_TARGETS) if priority_targets is None
+            else dict(priority_targets)
+        ),
+        provocation_targets=(
+            None if provocation_targets is None else dict(provocation_targets)
+        ),
+    )
 
 
 def _build_argparser() -> argparse.ArgumentParser:
@@ -189,7 +324,7 @@ def main(argv: list[str] | None = None) -> int:
     except FileNotFoundError as exc:
         print(f"error: registry file not found: {exc}", file=sys.stderr)
         return 2
-    except (ValueError, NotImplementedError) as exc:
+    except ValueError as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 2
 

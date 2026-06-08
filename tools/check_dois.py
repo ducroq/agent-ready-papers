@@ -22,24 +22,51 @@ design; CI gates that depend on resolution still fail if the offline
 flag is inherited unintentionally. The check is over `all_parseable`
 instead, and a stderr banner makes the mode explicit.
 
+Resolution policy: HEAD against `https://doi.org/<doi>` without
+following redirects. A 2xx or 3xx response from doi.org means the DOI
+is registered (3xx is the normal case — doi.org redirects to the
+publisher landing page). A 404 from doi.org means the DOI is not
+registered. Other failures are recorded with the HTTP status in the
+result note.
+
 Design notes:
-    - Zero-dep: urllib + stdlib only.
+    - Zero-dep: http.client + stdlib only.
     - Polite client: 10s default timeout, single retry on transient errors.
-    - HEAD against https://doi.org/<doi> resolves to the registered URL;
-      2xx and 3xx are both treated as "resolves".
+    - Trailing punctuation (.,:;) is stripped from regex matches; markdown
+      prose often places DOIs against closing colons/periods.
 """
 
 from __future__ import annotations
 
 import argparse
+import http.client
 import json
+import re
 import sys
+import urllib.parse
 from dataclasses import asdict, dataclass
 from pathlib import Path
 
-DOI_REGEX = r"10\.\d{4,9}/[^\s\]\)\"<>]+"
+DOI_REGEX = re.compile(r'10\.\d{4,9}/[^\s"<>|\]]+')
 DOI_BASE = "https://doi.org/"
 DEFAULT_TIMEOUT = 10.0
+_USER_AGENT = "agent-ready-papers/tools.check_dois"
+
+
+def _clean_doi(raw: str) -> str:
+    """Trim trailing punctuation and balance closing parens.
+
+    The DOI character class allows `(` and `)` because some real DOIs
+    carry them (e.g., Lancet `10.1016/S0140-6736(13)62228-X`). Markdown
+    prose then wraps DOIs in their own parens, which would otherwise
+    bleed in: `(DOI: 10.xxx/abc)` matches `10.xxx/abc)`, leaving an
+    unbalanced trailing `)`. We strip trailing `.,:;` first, then strip
+    trailing `)` while it exceeds the count of `(`.
+    """
+    doi = raw.rstrip(".,:;")
+    while doi.endswith(")") and doi.count(")") > doi.count("("):
+        doi = doi[:-1].rstrip(".,:;")
+    return doi
 
 
 @dataclass(frozen=True)
@@ -99,6 +126,53 @@ class DOIReport:
         return all(r.parseable for r in self.results)
 
 
+def _extract_dois(content: str) -> tuple[tuple[str, int], ...]:
+    """Extract DOIs with their first-seen line number, deduplicated.
+
+    Applies `_clean_doi` to every match — markdown prose commonly
+    wraps DOIs in parens and trails them with `.,:;` punctuation.
+    """
+    seen: dict[str, int] = {}
+    for lineno, line in enumerate(content.splitlines(), start=1):
+        for match in DOI_REGEX.finditer(line):
+            doi = _clean_doi(match.group(0))
+            if doi and doi not in seen:
+                seen[doi] = lineno
+    return tuple((doi, lineno) for doi, lineno in seen.items())
+
+
+def _head_doi(doi: str, timeout: float) -> tuple[int | None, bool, str]:
+    """HEAD https://doi.org/<doi> without following redirects.
+
+    Returns (http_status, resolved, note). One retry on transient error.
+    2xx or 3xx from doi.org → resolved. 404 → not resolved. Other
+    statuses → not resolved, note carries the status.
+    """
+    target = DOI_BASE + urllib.parse.quote(doi, safe="/:")
+    parsed = urllib.parse.urlparse(target)
+    path = parsed.path + (f"?{parsed.query}" if parsed.query else "")
+
+    last_error: str | None = None
+    for attempt in range(2):
+        try:
+            conn = http.client.HTTPSConnection(parsed.netloc, timeout=timeout)
+            try:
+                conn.request("HEAD", path, headers={"User-Agent": _USER_AGENT})
+                resp = conn.getresponse()
+                status = resp.status
+                resp.read()
+                resolved = 200 <= status < 400
+                note = "" if resolved else f"HTTP {status}"
+                return status, resolved, note
+            finally:
+                conn.close()
+        except (OSError, http.client.HTTPException) as exc:
+            last_error = f"{type(exc).__name__}: {exc}"
+            if attempt == 0:
+                continue
+    return None, False, last_error or "unreachable"
+
+
 def check_dois(
     registry_path: Path,
     *,
@@ -121,21 +195,40 @@ def check_dois(
     if not registry_path.is_file():
         raise FileNotFoundError(registry_path)
 
-    # TODO(#17): implement.
-    #   1. Read file lines, regex-extract DOIs with their line numbers.
-    #      After matching, strip trailing punctuation `.,:;` (markdown
-    #      prose context often follows the DOI with a closing colon or
-    #      period; the regex character class does not exclude these).
-    #   2. Deduplicate while preserving first-seen order.
-    #   3. If offline: build DOIResult(http_status=None, parseable=True,
-    #      resolved=False, note="not checked (offline mode)").
-    #   4. Else: urllib HEAD against https://doi.org/<doi>, 10s timeout,
-    #      follow redirects. Treat 2xx/3xx as resolved; record final status code.
-    #      One retry on URLError; subsequent failure → resolved=False
-    #      with the error string in `note`. `parseable=True` for any
-    #      DOI that survived the regex (parse failures should not reach
-    #      this branch).
-    raise NotImplementedError("DOI extraction + resolution not yet implemented — see TODO(#17)")
+    content = registry_path.read_text(encoding="utf-8")
+    extracted = _extract_dois(content)
+
+    results: list[DOIResult] = []
+    for doi, lineno in extracted:
+        if offline:
+            results.append(
+                DOIResult(
+                    doi=doi,
+                    line_number=lineno,
+                    http_status=None,
+                    parseable=True,
+                    resolved=False,
+                    note="not checked (offline mode)",
+                )
+            )
+        else:
+            status, resolved, note = _head_doi(doi, timeout)
+            results.append(
+                DOIResult(
+                    doi=doi,
+                    line_number=lineno,
+                    http_status=status,
+                    parseable=True,
+                    resolved=resolved,
+                    note=note,
+                )
+            )
+
+    return DOIReport(
+        registry_path=registry_path,
+        results=tuple(results),
+        offline=offline,
+    )
 
 
 def _build_argparser() -> argparse.ArgumentParser:
@@ -167,7 +260,7 @@ def main(argv: list[str] | None = None) -> int:
     except FileNotFoundError as exc:
         print(f"error: registry file not found: {exc}", file=sys.stderr)
         return 2
-    except (ValueError, NotImplementedError) as exc:
+    except ValueError as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 2
 

@@ -11,7 +11,7 @@ Two tools, both stdlib-only, both deterministic, both designed to run in CI:
 
 ## Status
 
-**Scaffolding stage.** Public API, dataclasses, CLI plumbing, and exit-code policy are in place. The parsing logic is stubbed — both modules raise `NotImplementedError` at the call sites marked `TODO(#17)`. See the source files for the parser specifications.
+**Implemented and tested.** Both parsers landed and verified against the Paper 1 fixture (19 entries, 9 DOIs); pytest suite is green; live HEAD-against-`doi.org` confirms all 9 DOIs resolve. Two DR-011 review batteries applied (one for the scaffold, one for the parser). Closes [#17](https://github.com/ducroq/agent-ready-papers/issues/17).
 
 ## Usage (once parsing lands)
 
@@ -50,6 +50,16 @@ The two tools share a code-space (0 / 1 / 2 = success / failure / tooling error)
 | 2 | Tooling error (file missing, parse failure) | Tooling error (file missing, parse failure) |
 
 **`--offline` note (check_dois only).** Offline mode does *not* mark DOIs as resolved. It checks parseability only and gates exit on `all_parseable` instead of `all_resolved`. A stderr banner makes the mode explicit so a CI gate over `all_resolved` cannot silently pass if the flag is inherited unintentionally.
+
+## Known limits
+
+Documented here so adopters hit informed surfaces rather than silent miscounts. None are blockers for the current Paper 1 fixture or the canonical templates; each is captured for the next adopter.
+
+- **Escaped pipes in cells (`\|`) are not supported.** `templates/claim-registry.md` instructs adopters to use `\|` for literal pipes inside cell content; `_split_row` in `coverage.py` splits on raw `|` and would corrupt cell indices on such registries. Keep cell content pipe-free or escape this support before adopting.
+- **No HTTP proxy support.** `check_dois.py` uses `http.client.HTTPSConnection` directly and does not honor `https_proxy` / `HTTPS_PROXY`. This is fine for CI runners and most direct connections; fails opaquely for adopters behind a corporate proxy. If this matters, switch the HEAD path to `urllib.request` (which respects proxy env vars).
+- **Sequential, single-retry HTTP.** No concurrency, no backoff. ≤20 DOIs runs in single-digit seconds; ~50 DOIs takes ~30s; 200+ DOIs becomes minute-scale. Concurrency is a follow-up, not a current need.
+- **Marker recognition is line-anchored.** `_MARKER_REGEX` requires the sub-table marker on its own line. A heading-form marker like `### **CLAIMs:**` is silently skipped. Keep markers on their own line per the templates.
+- **`_clean_doi` is heuristic.** For DOIs whose authoritative form ends with unbalanced punctuation (vanishingly rare in real Crossref data), the cleaner may strip too much. Run a spot-check against the publisher's canonical citation if a DOI fails to resolve unexpectedly.
 
 ## Design constraints
 

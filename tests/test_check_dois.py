@@ -12,7 +12,7 @@ from pathlib import Path
 
 import pytest
 
-from tools.check_dois import DOIReport, DOIResult, check_dois
+from tools.check_dois import DOIReport, DOIResult, _clean_doi, check_dois
 
 EXPECTED_DOIS = {
     "10.2196/52935",
@@ -46,9 +46,8 @@ def test_check_dois_raises_filenotfound_on_missing_path():
         check_dois(Path("does-not-exist.md"))
 
 
-@pytest.mark.xfail(reason="extractor stubbed — see TODO(#17) in tools/check_dois.py", strict=True)
 def test_paper1_registry_doi_extraction(paper1_registry):
-    """Once the extractor lands, --offline must surface exactly the 9 known DOIs."""
+    """--offline must surface exactly the 9 known DOIs from the Paper 1 fixture."""
     report = check_dois(paper1_registry, offline=True)
 
     assert isinstance(report, DOIReport)
@@ -65,3 +64,42 @@ def test_paper1_registry_doi_extraction(paper1_registry):
 
     # Line numbers must be populated (≥1, never zero).
     assert all(r.line_number >= 1 for r in report.results)
+
+
+def test_paper1_doi_extraction_is_deterministic(paper1_registry):
+    """Same input → byte-identical output across runs (#8 from DR-011 review)."""
+    r1 = check_dois(paper1_registry, offline=True)
+    r2 = check_dois(paper1_registry, offline=True)
+    assert r1.to_markdown() == r2.to_markdown()
+    assert r1.to_dict() == r2.to_dict()
+
+
+def test_clean_doi_strips_trailing_punctuation():
+    assert _clean_doi("10.2196/52935.") == "10.2196/52935"
+    assert _clean_doi("10.2196/52935,") == "10.2196/52935"
+    assert _clean_doi("10.2196/52935:") == "10.2196/52935"
+    assert _clean_doi("10.2196/52935;") == "10.2196/52935"
+
+
+def test_clean_doi_strips_unbalanced_closing_paren():
+    """Markdown wraps DOIs: `(DOI: 10.xxx/abc)` → regex captures 'abc)' → strip."""
+    assert _clean_doi("10.2196/52935)") == "10.2196/52935"
+    assert _clean_doi("10.2196/52935):") == "10.2196/52935"
+
+
+def test_clean_doi_preserves_balanced_parens():
+    """Lancet DOIs carry '(13)' mid-string — must not be stripped (the fix
+    that caused DR-011 Pass 2 to remark this needed an explicit test).
+    """
+    assert (
+        _clean_doi("10.1016/S0140-6736(13)62228-X")
+        == "10.1016/S0140-6736(13)62228-X"
+    )
+
+
+def test_clean_doi_handles_wrapped_lancet_doi():
+    """The real edge case: a balanced-paren DOI wrapped in prose parens."""
+    assert (
+        _clean_doi("10.1016/S0140-6736(13)62228-X)")
+        == "10.1016/S0140-6736(13)62228-X"
+    )
