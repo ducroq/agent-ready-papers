@@ -1,0 +1,39 @@
+[project]
+name = "agent-ready-papers-tools"
+version = "0.1.0"
+description = "Registry-verification tooling for agent-ready-papers. Not a redistributable package; pinned to the repo's tools/ directory."
+requires-python = ">=3.10"
+
+[tool.ruff]
+target-version = "py310"
+line-length = 120
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes
+    "I",    # isort
+    "B",    # flake8-bugbear
+    "UP",   # pyupgrade
+    "S",    # flake8-bandit
+]
+ignore = [
+    "E501",   # line too long — handled by formatter
+    "S101",   # assert in tests is fine
+    "S310",   # urllib audit warning — we use https://doi.org/ only, no user-controlled schemes
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.coverage.run]
+source = ["tools"]
+omit = ["*/tests/*"]
+
+[tool.coverage.report]
+show_missing = true
+skip_empty = true

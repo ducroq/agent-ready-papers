@@ -10,3 +10,11 @@ memory/
 *.log
 *.out
 *.synctex.gz
+
+# Python (tools/, tests/)
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
