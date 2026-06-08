@@ -34,6 +34,56 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
        ("No adopter action required.") rather than omitting the subsection.
 -->
 
+## v1.4.0 (2026-06-08)
+
+External-feedback-driven release. June 2026 external review — three independent reviewers, convergent at [#30](https://github.com/ducroq/agent-ready-papers/issues/30) — produced 14 actionable issues. This release closes 12 of them outright plus DR-014 Proposed (#18) and #17 (registry tooling) deferred to a dedicated session. The framework gains a LICENSE (CC BY 4.0), three new top-level docs (`CONTRIBUTING.md`, `UPGRADING.md`, `docs/THRESHOLDS.md`), two new DRs (DR-013 Accepted, DR-014 Proposed), substantially restructured README front-of-file (Quickstart + three-layer map + adoption scorecard), and the maintainer release process is now codified in this CHANGELOG's header.
+
+### New decisions
+- **[DR-013](decisions/DR-013_license-choice.md)** — *License Choice — CC BY 4.0.* Status: Accepted. Five options considered (CC BY 4.0, MIT, Apache 2.0, dual MIT+CC, no licence). CC BY 4.0 chosen as lingua franca for prose-heavy methodology repos. *Revisit If* conditions named for a future `tools/` directory (per [#17](https://github.com/ducroq/agent-ready-papers/issues/17)). Closes [#20](https://github.com/ducroq/agent-ready-papers/issues/20).
+- **[DR-014](decisions/DR-014_provocation-layered-as-opt-in-extension.md)** — *PROVOCATION as Explicit Opt-In Extension Over Core Unit Types.* Status: **Proposed**. Four options considered; Option B (separate extension doc referenced from core, mirroring the conditional-gates pattern) proposed. Three pending checks gate promotion to Accepted: (1) Paper 1 reference audit, (2) FSD template-adapter check, (3) v1.4.x-MINOR vs v2.0.0-MAJOR version-impact decision. Templates NOT touched in this release. [#18](https://github.com/ducroq/agent-ready-papers/issues/18) stays open as the implementation tracker.
+
+### New top-level files
+- **`LICENSE`** — CC BY 4.0 deed + canonical legal-code URL + citation block. GitHub-detected. Closes [#20](https://github.com/ducroq/agent-ready-papers/issues/20).
+- **`CONTRIBUTING.md`** — Three-audience structure (adopters / collaborators / issue filing), in-scope / out-of-scope sections, licence clause referencing DR-013, multi-issue commit-keyword convention codified (use `Closes #A. Closes #B.` not comma-separated multi-line — empirical finding from this session's #19/#27/#28 commit `fac6872` where only the first issue auto-closed). Closes [#22](https://github.com/ducroq/agent-ready-papers/issues/22).
+- **`UPGRADING.md`** — Per-version adopter-notes aggregation for pinned consumers. Convention block + sections for v1.4.0 / v1.3.0 / v1.2.0 / v1.1.0 / v1.0.0 baseline. Closes [#29](https://github.com/ducroq/agent-ready-papers/issues/29).
+
+### New docs
+- **`docs/THRESHOLDS.md`** — Rationale for the 100% P0 / 90% P1 / 70% P2 / ≥85% overall coverage and ≥3.5/5.0 simulated-peer-review thresholds. Top-of-file **SPECULATIVE** label per the framework's own confidence-tier discipline. Per-threshold reasoning, honest accounting (N=1 Paper 1 evidence is *consistent with* the thresholds but does not validate them), three data gaps named that would harden the thresholds to EMERGING or SUPPORTED (multi-project coverage benchmark, calibrated peer-review correlation, failure-mode tracking). Closes [#16](https://github.com/ducroq/agent-ready-papers/issues/16).
+
+### README restructure (front-of-file)
+Additive — nothing removed. The new sections sit between the existing intro callouts and `## The Core Problem`, in the order *orient → act → see data → understand problem*.
+
+- **## What's in this repo** — three-layer Framework / Worked examples / Evidence map with the "If you only want the framework, stop at the Quickstart below" opt-out. Closes [#25](https://github.com/ducroq/agent-ready-papers/issues/25).
+- **## Quickstart + Three tiers of adoption** — 5-step ~10-minute path with the minimum-viable-adoption file table (Required for first use / Useful once the paper grows / Reference-only). Closes [#23](https://github.com/ducroq/agent-ready-papers/issues/23).
+- **## What it does in practice** — six-row sourced metrics table with the CALCULATION 3/3 vs 0/3 finding led and emphasised; *when worth the overhead* / *when overkill* sections. Closes [#26](https://github.com/ducroq/agent-ready-papers/issues/26).
+- **DR-011 expanded in *What Doesn't Work*** — three-bullet pass breakdown + paragraph naming the empirical anchor scales (blog, grant N=2, decision-support). Closes [#19](https://github.com/ducroq/agent-ready-papers/issues/19).
+- **METHODOLOGY callout** — sibling to the existing "Want to get started fast?" line, surfacing `docs/METHODOLOGY.md` as provenance. Closes [#27](https://github.com/ducroq/agent-ready-papers/issues/27).
+- **## Audits index** — new section between *Paper Projects* and *Further Reading* indexing all 9 audits grouped by kind (retrofits / cross-project / forward-feedback / discovery). Closes [#28](https://github.com/ducroq/agent-ready-papers/issues/28).
+- **## Contributing & Support** — pointer into `CONTRIBUTING.md`, licence pointer, `UPGRADING.md` pointer.
+- **Quality Gates intro callout** — SPECULATIVE label on the gate thresholds, pointer to `docs/THRESHOLDS.md`. (Part of #16.)
+
+### CLAUDE.md changes
+- **`.claude/skills/` and `memory/`** in the architecture diagram now labelled as `(gitignored — not shipped)` / `(gitignored — maintainer-local)`. Closes [#24](https://github.com/ducroq/agent-ready-papers/issues/24).
+- **New ## What is intentionally not shipped section** — five-row table covering `/curate`, `/audit-context`, `MEMORY.md`, `gotcha-log.md`, `dead-ends.md` with "For adopters" guidance. Explicit statement that the public framework is fully consumable without these maintainer-local files.
+
+### Release process
+- **CHANGELOG header** now numbers the three-step maintainer release process (tag + push, `gh release create`, refresh `UPGRADING.md`) and codifies the *Adopter notes* subsection requirement for every entry — including the explicit "No adopter action required." case to avoid the omit-by-mistake failure mode.
+- **4 retroactive GitHub Releases** cut from existing tags v1.0.0–v1.3.0, each with a short summary plus CHANGELOG link, v1.3.0 marked latest at cut time (this release will subsequently overtake it). Closes [#21](https://github.com/ducroq/agent-ready-papers/issues/21).
+
+### External validation
+- **Issue [#30](https://github.com/ducroq/agent-ready-papers/issues/30)** — convergent positive signals from three independent reviewers recorded as a tracking issue. SE mental model, decision records, anti-hallucination (Step 0 + Step Z), and equation verification all called out as the framework's strongest assets by all three reviewers. Reviewer 2 (Gemini) verdict: 9/10 *"Gold Standard"*. Reviewer 3 (Copilot): *"framework looks stronger than the packaging"* — all productization concerns addressed in this release.
+
+### Carried forward to a future session
+- **[#17](https://github.com/ducroq/agent-ready-papers/issues/17)** — registry tooling (Python coverage calculator + DOI validator + `tools/` directory). Deferred to a dedicated session per maintainer call; the reviewer-asked scope is documented in the issue body.
+- **[#18](https://github.com/ducroq/agent-ready-papers/issues/18)** — PROVOCATION layering at DR-014 (Proposed) pending the three checks named in the DR. Implementation deferred.
+
+### Adopter notes
+- **No breaking changes.** All adopter-facing changes are additive: LICENSE adds permission that was previously absent; `CONTRIBUTING.md` / `UPGRADING.md` / `docs/THRESHOLDS.md` are new informational docs; README restructure is additive at the top of file; CLAUDE.md changes clarify previously implicit conventions. Pinned consumers on v1.3.0 require **no migration action**.
+- **Recommended:** if you maintain your own `UPGRADING.md` in a downstream paper project, copy the format from this repo's `UPGRADING.md` and start aggregating per-version adopter notes.
+- **DR-013 licence:** new contributions are CC BY 4.0 from v1.4.0 forward. Older versions inherit by default since no contrary licence was previously declared.
+
+---
+
 ## v1.3.0 (2026-06-01)
 
 Seven items landed: DR-012 names decision-support as a third opt-in application class; DR-011 evidence base extended to N=2 within-Claude; anti-hallucination gains WebFetch fallback discipline; claim-registry adds Coverage-by-Type cut; Paper 1 registry migrated to per-type sub-tables; Engineering Fidelity audit files archived outside the repo; Paper 1 §4 rewritten from "three audits" to "two audits" to reflect the reduced evidence base (Gate 2 invalidation acknowledged — Gate 2.5 re-check is co-author's call at Gate 3).

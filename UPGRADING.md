@@ -11,6 +11,24 @@ The full release notes are in [`CHANGELOG.md`](CHANGELOG.md). This file is the q
 - **PATCH** version bumps are docs-only / clarifications. No action required.
 - Every release entry in `CHANGELOG.md` includes an "Adopter notes" / "Adopter action" subsection. This file aggregates them per version for quick lookup.
 
+## v1.4.0 (2026-06-08)
+
+**From v1.3.0 — what to review when you bump your pin to v1.4.0:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| `LICENSE` file added (CC BY 4.0 per [DR-013](decisions/DR-013_license-choice.md)) | Reference only — formalises licence terms that were previously implicit. New contributions to this repo are CC BY 4.0 from v1.4.0 forward. |
+| `CONTRIBUTING.md` added | Reference only — formalises the contribution process. If you contribute upstream, read it. The multi-issue commit-keyword convention (`Closes #A. Closes #B.`) is documented there. |
+| `UPGRADING.md` added (this file) | Reference only — adopter convenience. If you maintain your own per-project `UPGRADING.md`, this is the template format. |
+| `docs/THRESHOLDS.md` added — rationale for the 100/90/70/85 coverage and 3.5/5.0 peer-review thresholds, tagged SPECULATIVE | Reference only — explains thresholds you already use. Quality gates unchanged. |
+| **DR-014 (Proposed)** — PROVOCATION layering as opt-in extension | **No action.** Template files NOT changed in v1.4.0. Promotion to Accepted requires Paper 1 audit + FSD adapter check + version-impact decision. |
+| README front-of-file restructured (Quickstart + 3-layer map + adoption scorecard near top, expanded DR-011 in *What Doesn't Work*, new Audits index, Contributing & Support pointer) | Reference only — additive; nothing removed. |
+| CLAUDE.md: gitignored maintainer-local paths now explicitly labelled (`.claude/skills/`, `memory/`); new *What is intentionally not shipped* section | Reference only — clarifies what is and isn't shipped publicly. No template changes. |
+| CHANGELOG header: maintainer release process numbered + *Adopter notes* convention codified | Reference only — formalises an existing pattern. If you use this repo as a reference for your own release process, adopt the same convention. |
+| 4 GitHub Releases cut retroactively from v1.0.0–v1.3.0 tags | Reference only — `git checkout vX.Y.Z` and `git diff vX.Y.Z..vX.Y+1.0 -- templates/` work the same. The Releases page now makes pinned versions easier to discover. |
+
+**No breaking changes.** This is a MINOR release per the SemVer convention: new docs and new DRs (DR-013 Accepted, DR-014 Proposed), no template-surface changes.
+
 ## v1.3.0 (2026-06-01)
 
 **From v1.2.0 — what to review when you bump your pin to v1.3.0:**

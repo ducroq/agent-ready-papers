@@ -5,7 +5,7 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 - **Type**: Guide + templates + active paper projects (non-fiction projects supported via DR-010 but currently external — e.g., FSD; decision-support work supported via DR-012)
 - **Companion**: [agent-ready-projects](https://github.com/ducroq/agent-ready-projects) (for code)
 - **agent-ready-projects**: v1.7.0
-- **agent-ready-papers** (this repo): v1.3.0 (adopted explicit versioning 2026-06-01)
+- **agent-ready-papers** (this repo): v1.4.0 (external-feedback-driven release, 2026-06-08)
 
 > Live project state (current paper status, recent decisions, deferred items) lives in `memory/MEMORY.md` (maintainer-local — see *What is intentionally not shipped* below). Repo-name caveat and FSD-rename deferral are tracked in `audits/feedback-from-fsd.md`. Release notes live in `CHANGELOG.md`.
 
@@ -16,7 +16,7 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 | Starting any session (companion drift) | Compare the `agent-ready-projects: vX.Y.Z` line in this file's header against `C:/local_dev/agent-ready-projects/CHANGELOG.md` (local clone) or https://github.com/ducroq/agent-ready-projects/blob/master/CHANGELOG.md. If the project is behind the latest released version, briefly surface the drift to the user before starting work. Don't auto-update — adopting changes is the engineer's call. |
 | Starting any session (self drift) | Compare the `agent-ready-papers: vX.Y.Z` line in this file's header against `CHANGELOG.md`. If a newer version has shipped, surface it before starting. |
 | Working on Paper 1 (Perspective) | `papers/perspective/CLAUDE.md` — paper identity, constraints, status, verification state |
-| Making scope or methodology decisions | `decisions/` — 12 decision records (DR-001 through DR-012) |
+| Making scope or methodology decisions | `decisions/` — 14 decision records (DR-001 through DR-014; DR-014 Proposed, gated on Paper 1 / FSD / version-impact checks per #18) |
 | Starting template / DR / verification-gate design work | `memory/dead-ends.md` — pattern proposals already concluded as don't-retry (#15) |
 | Adding or verifying literature sources | `literature/README.md` — 47 indexed sources organized by topic |
 | Understanding how the framework was built | `docs/METHODOLOGY.md` — derived from two source paper projects (third source-project audit archived externally in v1.3.0) |
@@ -43,6 +43,9 @@ agent-ready-papers/
 ├── README.md                  <- The guide (public-facing)
 ├── CHANGELOG.md               <- Versioned release notes (v1.0.0 onwards)
 ├── CLAUDE.md                  <- This file (agent orientation)
+├── LICENSE                    <- CC BY 4.0 (see DR-013)
+├── CONTRIBUTING.md            <- Three-audience contribution guide
+├── UPGRADING.md               <- Per-version adopter notes (pinned consumers)
 ├── templates/                 <- Reusable templates for new paper projects
 │   ├── CLAUDE.md              <- Paper project identity template
 │   ├── claim-registry.md      <- Registry structure (P0/P1/P2, typed verification)
@@ -54,10 +57,10 @@ agent-ready-papers/
 │   ├── glossary.md            <- Cross-domain terminology
 │   ├── decision-record.md     <- DR template
 │   └── key-quotes.md          <- Reference quotes
-├── decisions/                 <- Architecture decision records (DR-001 to DR-012)
+├── decisions/                 <- Architecture decision records (DR-001 to DR-014)
 ├── literature/                <- Source registry (47 sources, 17 detailed summaries)
 ├── audits/                    <- Retrofit audits + cross-project comparisons + forward-feedback applications (FSD, blog, template-revision, decision-support)
-├── docs/                      <- Methodology and development history
+├── docs/                      <- Methodology, framework summary, threshold rationale, category-theory lens
 ├── papers/
 │   └── perspective/           <- Paper 1: "The Verification Gap" (active)
 │       ├── CLAUDE.md          <- Paper-specific context (READ THIS for paper work)
