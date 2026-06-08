@@ -35,6 +35,7 @@
 |------|------|
 | Writing or editing prose | `writing-guide.md` — claim-to-section mapping with language calibration |
 | Adding or verifying citations | `vv/claims/claim_registry.md` — all claims with priority and status |
+| Checking coverage or DOIs for this paper | If your project uses `agent-ready-papers/tools/`: from the framework repo root, run `python -m tools.coverage <path-to-registry>` and `python -m tools.check_dois <path-to-registry>` (or the equivalent `make` targets). Prefer the tool to manually counting P0/P1/P2 percentages or eyeballing DOIs in `references.bib`. See `tools/README.md` in the framework repo for flags and known limits. |
 | Making scope or methodology decisions | Latest `DR-*.md` — decision records |
 | Checking terminology | `glossary.md` — cross-domain term definitions |
 | Reviewing before submission | `review-prompt.md` — structured peer review simulation |

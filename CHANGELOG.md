@@ -34,6 +34,27 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
        ("No adopter action required.") rather than omitting the subsection.
 -->
 
+## v1.5.1 (2026-06-08)
+
+CLAUDE.md discoverability fix. v1.5.0 shipped the `tools/` directory but did not update any of the three CLAUDE.md files (root, Paper 1, paper template) to point future agent sessions at the tools — and a separate gap surfaced in the same audit: `docs/THRESHOLDS.md` (landed v1.4.0) had no direct trigger in the root Before You Start table. A fresh session would have done the manual count or thumbed through `docs/framework-summary.md` instead of running the tool or reading the threshold rationale.
+
+The audit prompt and the principle behind it: *the whole point of this framework is that an agent picks up tools and skills automatically.* If an agent has to discover capabilities by `git log` or `ls`, the framework has failed at its primary job. Each release should be audited against the question "would a fresh session find this without external prompting?" — and the audit recurses into per-paper and template CLAUDE.md files, not just the root.
+
+### Documentation
+- **Root `CLAUDE.md`:**
+  - Architecture diagram — `tools/`, `tests/`, `Makefile`, `pyproject.toml` rows added.
+  - Before You Start — two new rows: *"Checking coverage or DOIs in a registry"* (points at `tools/coverage.py` and `tools/check_dois.py` with both direct and Makefile invocations); *"Asking what a coverage or peer-review threshold means"* (points at `docs/THRESHOLDS.md`).
+  - How to Work Here — replaced the *"Manual: open file and check P0/P1/P2 percentages"* comment with the actual `python -m tools.coverage` and `python -m tools.check_dois` commands.
+- **`papers/perspective/CLAUDE.md`** — Before You Start gains a row pointing at the tools with the correct registry path for Paper 1. Paper 1 is the first project to use the tools self-applied.
+- **`templates/CLAUDE.md`** — Before You Start gains the same row with adopter-facing path placeholders. New paper projects created from this template now discover the tools by default.
+
+### Adopter notes
+- **No template content changes.** Only the agent-orientation tables in the three CLAUDE.md files. Pinned consumers on v1.5.0 require **no migration action**.
+- **Recommended:** if you maintain your own paper project, copy the new Before You Start row from `papers/perspective/CLAUDE.md` (with paths adjusted for your project) so your own agent sessions discover the tools.
+- **Principle adoption:** the *"audit each release against discoverability from a fresh CLAUDE.md read"* discipline is recommended for every release. The framework's value depends on it.
+
+---
+
 ## v1.5.0 (2026-06-08)
 
 Registry-verification tooling. The `tools/` directory introduces the first Python footprint in the repo: two zero-dep CLIs that read a `claim_registry.md` and answer two operational questions — *what is my coverage* and *do all my DOIs resolve*. Both tools are deterministic, importable, and CLI-runnable; targeted at CI use against a paper project's registry. Two DR-011 multi-model review batteries (one against the API scaffolding, one against the parser implementation) caught real load-bearing issues — most notably a PROVOCATION column-resolution bug that would have shipped green against the empty-PROVOCATION Paper 1 fixture and bit the first FSD-style adopter. Closes [#17](https://github.com/ducroq/agent-ready-papers/issues/17).

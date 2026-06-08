@@ -11,6 +11,18 @@ The full release notes are in [`CHANGELOG.md`](CHANGELOG.md). This file is the q
 - **PATCH** version bumps are docs-only / clarifications. No action required.
 - Every release entry in `CHANGELOG.md` includes an "Adopter notes" / "Adopter action" subsection. This file aggregates them per version for quick lookup.
 
+## v1.5.1 (2026-06-08)
+
+**From v1.5.0 — what to review when you bump your pin to v1.5.1:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| Root `CLAUDE.md` — architecture diagram + two new Before You Start rows (`tools/` for coverage/DOI checks, `docs/THRESHOLDS.md` for threshold rationale); How to Work Here now uses `python -m tools.coverage` instead of the stale "manual P0/P1/P2 count" comment | Reference only — agent-orientation fix in this repo. If you maintain your own paper project's `CLAUDE.md`, copy the pattern. |
+| `papers/perspective/CLAUDE.md` — Before You Start row added pointing at tools with the correct registry path for Paper 1 | Reference only — Paper 1 self-application. |
+| `templates/CLAUDE.md` — Before You Start row added with adopter-facing path placeholders | **Recommended** — new paper projects created from this template now point at the tools by default. Existing paper projects: add the equivalent row to your own CLAUDE.md. |
+
+**No breaking changes.** PATCH release: discoverability only, no functional change.
+
 ## v1.5.0 (2026-06-08)
 
 **From v1.4.0 — what to review when you bump your pin to v1.5.0:**

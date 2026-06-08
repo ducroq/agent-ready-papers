@@ -5,7 +5,7 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 - **Type**: Guide + templates + active paper projects (non-fiction projects supported via DR-010 but currently external — e.g., FSD; decision-support work supported via DR-012)
 - **Companion**: [agent-ready-projects](https://github.com/ducroq/agent-ready-projects) (for code)
 - **agent-ready-projects**: v1.7.0
-- **agent-ready-papers** (this repo): v1.5.0 (registry-verification tooling, 2026-06-08)
+- **agent-ready-papers** (this repo): v1.5.1 (CLAUDE.md `tools/` discoverability fix, 2026-06-08)
 
 > Live project state (current paper status, recent decisions, deferred items) lives in `memory/MEMORY.md` (maintainer-local — see *What is intentionally not shipped* below). Repo-name caveat and FSD-rename deferral are tracked in `audits/feedback-from-fsd.md`. Release notes live in `CHANGELOG.md`.
 
@@ -19,9 +19,11 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 | Making scope or methodology decisions | `decisions/` — 14 decision records (DR-001 through DR-014; DR-014 Proposed, gated on Paper 1 / FSD / version-impact checks per #18) |
 | Starting template / DR / verification-gate design work | `memory/dead-ends.md` — pattern proposals already concluded as don't-retry (#15) |
 | Adding or verifying literature sources | `literature/README.md` — 47 indexed sources organized by topic |
+| Checking coverage or DOIs in a registry | Run `python -m tools.coverage <registry.md>` or `python -m tools.check_dois <registry.md>` (or `make coverage` / `make check-dois`). See `tools/README.md` for flags, exit codes, and known limits (no escaped-pipe support, no HTTP proxy support, sequential HEAD scaling). Prefer the tool to manually counting P0/P1/P2 percentages or eyeballing DOIs. |
 | Understanding how the framework was built | `docs/METHODOLOGY.md` — derived from two source paper projects (third source-project audit archived externally in v1.3.0) |
 | Reviewing audit evidence | `audits/` — 9 audits: retrofits of source projects (proposition, technology) + cross-project comparisons (driven-pendulum) + forward-feedback applications (FSD, blog, template-revision, decision-support). Grant-application feedback lives in [ducroq/agent-ready-papers#8](https://github.com/ducroq/agent-ready-papers/issues/8). |
 | Working with claims, gates, or confidence calibration | `docs/framework-summary.md` — unit types, gates, tier-to-language mapping at a glance (templates remain normative) |
+| Asking what a coverage or peer-review threshold means | `docs/THRESHOLDS.md` — rationale for the 100% P0 / 90% P1 / 70% P2 / ≥85% overall coverage and ≥3.5/5.0 simulated-peer-review thresholds (top-of-file SPECULATIVE label per the framework's own tier discipline) |
 | Stuck or debugging something weird | `memory/gotcha-log.md` — problem-fix archive |
 | Creating a new paper project | `templates/CLAUDE.md` — paper project template |
 | Ending a session | Run `/curate` — updates gotcha log, promotes patterns, syncs docs, checks freshness |
@@ -46,6 +48,8 @@ agent-ready-papers/
 ├── LICENSE                    <- CC BY 4.0 (see DR-013)
 ├── CONTRIBUTING.md            <- Three-audience contribution guide
 ├── UPGRADING.md               <- Per-version adopter notes (pinned consumers)
+├── Makefile                   <- Tooling targets: test / lint / format / coverage / check-dois (since v1.5.0)
+├── pyproject.toml             <- Python tooling config: ruff + pytest, py3.10 target (since v1.5.0)
 ├── templates/                 <- Reusable templates for new paper projects
 │   ├── CLAUDE.md              <- Paper project identity template
 │   ├── claim-registry.md      <- Registry structure (P0/P1/P2, typed verification)
@@ -61,6 +65,11 @@ agent-ready-papers/
 ├── literature/                <- Source registry (47 sources, 17 detailed summaries)
 ├── audits/                    <- Retrofit audits + cross-project comparisons + forward-feedback applications (FSD, blog, template-revision, decision-support)
 ├── docs/                      <- Methodology, framework summary, threshold rationale, category-theory lens
+├── tools/                     <- Registry tooling: coverage + DOI verification CLIs (since v1.5.0)
+│   ├── coverage.py            <- Per-type sub-table parser; P0/P1/P2 + PROVOCATION tier coverage
+│   ├── check_dois.py          <- DOI extractor + resolver (HEAD against doi.org, --offline mode)
+│   └── README.md              <- Usage, exit codes, design constraints, known limits
+├── tests/                     <- Shape-pin + edge-case tests for tools/ (since v1.5.0)
 ├── papers/
 │   └── perspective/           <- Paper 1: "The Verification Gap" (active)
 │       ├── CLAUDE.md          <- Paper-specific context (READ THIS for paper work)
@@ -109,8 +118,14 @@ Listed here so the architecture diagram above is honest about what an adopter se
 # Compile Paper 1 (LaTeX)
 cd papers/perspective && pdflatex manuscript && bibtex manuscript && pdflatex manuscript && pdflatex manuscript
 
-# Check claim registry coverage
-# Manual: open papers/perspective/vv/claims/claim_registry.md and check P0/P1/P2 percentages
+# Check claim registry coverage (since v1.5.0)
+python -m tools.coverage papers/perspective/vv/claims/claim_registry.md
+# or: make coverage
+# --strict makes the call fail if P0=100% / P1=90% / P2=70% thresholds are missed
+
+# Verify DOIs in a registry resolve at doi.org (since v1.5.0)
+python -m tools.check_dois papers/perspective/vv/claims/claim_registry.md
+# or: make check-dois  (use --offline to skip network)
 
 # Verify a citation (anti-hallucination)
 # Follow the Step 0 + 6-step checklist in papers/perspective/anti-hallucination.md
