@@ -12,6 +12,67 @@ Companion to [agent-ready-projects](https://github.com/ducroq/agent-ready-projec
 
 > **Curious how this was built?** See [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md) — patterns derived from real paper-project failures, with what survived and what didn't.
 
+## What's in this repo
+
+Three things are in here, kept separate:
+
+| Layer | What | Where |
+|-------|------|-------|
+| **Framework** — the reusable method | Templates, decision records, the methodology doc, this README | [`templates/`](templates/), [`decisions/`](decisions/), [`docs/`](docs/) |
+| **Worked examples** — the method in use | Active paper projects with populated claim registries, writing guides, audit trails | [`papers/`](papers/) |
+| **Evidence and history** — what we learned | Retrofits of source projects, cross-project comparisons, forward-feedback applications, literature index | [`audits/`](audits/), [`literature/`](literature/) |
+
+If you only want the framework, you can stop at the [Quickstart](#quickstart) below — worked examples and evidence are there if you want to see the method in use or how it was derived.
+
+## Quickstart
+
+Adopt the framework on a new paper in five steps (~10 minutes to set up):
+
+1. **Bootstrap session continuity.** Copy [`templates/CLAUDE.md`](templates/CLAUDE.md) into your paper project as `CLAUDE.md`. Fill in the paper identity, target journal, deadline.
+2. **Copy the minimum-viable adoption files.** [`templates/claim-registry.md`](templates/claim-registry.md), [`templates/anti-hallucination.md`](templates/anti-hallucination.md), and [`templates/writing-guide.md`](templates/writing-guide.md). These three plus CLAUDE.md are enough to start.
+3. **Register your first claims.** In `claim-registry.md`, list 5–10 of your paper's load-bearing factual statements. Assign each a priority (P0 / P1 / P2), confidence tier (ESTABLISHED / SUPPORTED / EMERGING / SPECULATIVE), and a source.
+4. **Verify each citation.** Run the Step 0 + 6-step checklist in `anti-hallucination.md` on every AI-introduced citation. Step 0 (Scholar + DOI) catches fabrications in seconds.
+5. **Run one review pass.** Use the three-pass pattern in [DR-011](decisions/DR-011_multi-model-review-pattern.md). Pass 1 (intra-family small) is the cheapest and catches sunk-cost-from-session bias; it's what you want before sharing a draft.
+
+### Three tiers of adoption
+
+| Tier | Files | When |
+|------|-------|------|
+| **Required for first use** | `CLAUDE.md`, `claim-registry.md`, `anti-hallucination.md`, `writing-guide.md` | From day one |
+| **Useful once the paper grows** | `review-prompt.md`, `decision-record.md`, `glossary.md`, `equation-checker.md`, `vv-framework.md` | After ~20 registry entries, or you hit a methodology decision worth recording |
+| **Reference / background only** | `key-quotes.md`, `docs/METHODOLOGY.md`, `audits/` | When you want context, not before |
+
+The full template index is in the [Templates](#templates) section near the bottom.
+
+## What it does in practice
+
+Conservative figures from applications of the framework to date — each row sourced to a specific audit or paper artefact:
+
+| Metric | Result | Source |
+|--------|--------|--------|
+| Calculation errors caught — **mechanical-reproduction prompt** | **3 / 3** in a 68-equation document | [`audits/equation-verification-journey.md`](audits/equation-verification-journey.md) |
+| Same errors caught — **LLM "soundness review" prompt** | **0 / 3** in the same document | Same |
+| Paper 1 claim-registry coverage at draft-complete | 100% across 19 entries (P0 / P1 / P2 all 100%) | [`papers/perspective/vv/claims/claim_registry.md`](papers/perspective/vv/claims/claim_registry.md) |
+| Paper 1 reference verification | 14/14 DOI-verified; 14/14 pass the anti-hallucination checklist | [`papers/perspective/references.bib`](papers/perspective/references.bib) |
+| Paper 1 simulated peer review (single-pass, pre-DR-011) | 3.95 / 5.0 — upper "Minor revision" | [`CHANGELOG.md`](CHANGELOG.md) v1.0.0 |
+| Independent v1.3.0 reviewers converging on SE mapping + decision records + equation finding as the strongest assets | 3 of 3 reviewers | [#30](https://github.com/ducroq/agent-ready-papers/issues/30) |
+
+The first two rows are the strongest single finding: **prompting an LLM for "soundness review" missed 3/3 arithmetic errors in a 68-equation document; prompting the same LLM for "numerically reproduce every calculation" caught all three.** Mechanical verification catches a class of error that expert-style assessment misses. See [`audits/equation-verification-journey.md`](audits/equation-verification-journey.md) for the discovery log and [DR-009](decisions/DR-009_calculation-verification.md) for the verification procedure.
+
+### When this framework is worth the overhead
+
+- The cost of a hallucinated citation in your output exceeds an hour of your time
+- The output spans multiple sessions (a paper, a grant, a long-form decision)
+- You have a load-bearing argument or proposition the reader will scrutinise
+- You are working in a domain where confidence-language calibration matters (academic, regulated, decision-support)
+
+### When it is overkill
+
+- One-shot prose with no citation chain
+- Throwaway code or scripts (correctness verified by execution)
+- Internal scratch notes
+- Anything with established compliance audit conventions (use those instead)
+
 ## The Core Problem
 
 AI agents are remarkably useful for academic writing — literature synthesis, argument structuring, statistical interpretation, formatting. But they have failure modes that are *different* from coding:
