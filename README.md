@@ -534,3 +534,13 @@ Each audit is dated and traceable to a specific application. These are the worki
 
 - **[`docs/METHODOLOGY.md`](docs/METHODOLOGY.md)** — How these patterns were developed from real paper projects, including the concrete failures that shaped them
 - **[agent-ready-projects](https://github.com/ducroq/agent-ready-projects)** — The companion guide for AI-assisted coding (layered documentation model, auto-loading cliff, progressive disclosure)
+
+## Contributing & Support
+
+See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the full guidance. Short version:
+
+- **Adopters** — copy templates, pin a version in your project's CLAUDE.md, you're not expected to upstream changes.
+- **Collaborators** — open an issue describing the proposed change before investing in a PR; most framework changes land as Decision Records.
+- **Application reports** are the highest-signal contribution — see [`audits/feedback-from-*.md`](audits/) for the precedent (each led to a DR or template revision).
+
+Licence: CC BY 4.0 — see [`LICENSE`](LICENSE) and [`decisions/DR-013_license-choice.md`](decisions/DR-013_license-choice.md).
