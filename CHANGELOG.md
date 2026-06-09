@@ -34,6 +34,26 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
        ("No adopter action required.") rather than omitting the subsection.
 -->
 
+## v1.7.1 (2026-06-09)
+
+Companion pin bump: `agent-ready-projects` advanced from v1.10.2 → v1.10.3. Upstream v1.10.3 added structural-lint self-tests at `tests/lint/` — maintainer-only infrastructure with no template-surface change. No adoption action required here; pin advance acknowledges the upstream PATCH without adopting the lint pattern itself.
+
+### Documentation
+- **Root `CLAUDE.md`** — Companion pin: `agent-ready-projects: v1.10.2` → `v1.10.3`. Self-pin: `v1.7.0` → `v1.7.1`.
+- **`README.md`** — Current release line bumped to v1.7.1.
+
+### Adopter notes
+
+No action required. PATCH release, metadata-only. Pinned consumers on v1.7.0 require **no migration action**.
+
+If you maintain your own pin to `agent-ready-projects` (companion repo): upstream's v1.10.3 is maintainer-only (deterministic structural-lint at `tests/lint/`, not templatized). The pattern is interesting if your own framework adoption grows complex enough to warrant lint coverage, but adopting it is a separate decision tracked upstream — not part of this PATCH.
+
+### Origin
+
+Surfaced 2026-06-09 wrap-up when the session-start drift-check row detected the companion gap. The drift-check protocol is doing its job: small upstream PATCHes get acknowledged via pin bumps without forcing template-level work downstream.
+
+---
+
 ## v1.7.0 (2026-06-09)
 
 Full adoption of agent-ready-projects v1.10.0 features. Two upstream additions land here: the **hypothesis log** (provisional positions with pre-registered falsification criteria) and the **self-verifying memory posture** (verify-comments embedded in state claims, audited by `/curate` Step 0 sub-step 5). Companion pin advances v1.7.0 → v1.10.2. This repo had partial v1.10.0 adoption since 2026-05-10 (drift-check row only — commit `1d30ceb`); v1.7.0 closes that loop.

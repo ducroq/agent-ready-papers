@@ -11,6 +11,19 @@ The full release notes are in [`CHANGELOG.md`](CHANGELOG.md). This file is the q
 - **PATCH** version bumps are docs-only / clarifications. No action required.
 - Every release entry in `CHANGELOG.md` includes an "Adopter notes" / "Adopter action" subsection. This file aggregates them per version for quick lookup.
 
+## v1.7.1 (2026-06-09)
+
+**From v1.7.0 — what to review when you bump your pin to v1.7.1:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| Root `CLAUDE.md` — companion pin advanced `agent-ready-projects: v1.10.2 → v1.10.3` | Reference only — upstream v1.10.3 added maintainer-only structural-lint self-tests. No template surface change; nothing to adopt unless you separately decide the lint pattern would help your own repo. |
+| `README.md` + `CLAUDE.md` self-pin bumped v1.7.0 → v1.7.1 | None — metadata only. |
+
+**No breaking changes.** PATCH release: companion-pin acknowledgment, no functional change.
+
+---
+
 ## v1.7.0 (2026-06-09)
 
 **From v1.6.3 — what to review when you bump your pin to v1.7.0:**
