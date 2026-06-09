@@ -6,7 +6,7 @@ Automated citation checkers (RefChecker, scite.ai) and model-level solutions (RA
 
 Companion to [agent-ready-projects](https://github.com/ducroq/agent-ready-projects) (for code).
 
-**Current release:** v1.6.1 (2026-06-08) — see [`CHANGELOG.md`](CHANGELOG.md). Pin your project with `agent-ready-papers: v1.6.1` in your CLAUDE.md and surface drift at session start.
+**Current release:** v1.7.0 (2026-06-09) — see [`CHANGELOG.md`](CHANGELOG.md). Pin your project with `agent-ready-papers: v1.7.0` in your CLAUDE.md and surface drift at session start.
 
 > **Want to get started fast?** Grab templates from [`templates/`](templates/) and adapt them to your paper project.
 
@@ -497,6 +497,7 @@ Ready-to-use starter files in [`templates/`](templates/):
 - **[`glossary.md`](templates/glossary.md)** — Cross-domain terminology reference
 - **[`equation-checker.md`](templates/equation-checker.md)** — System prompt for mechanical verification of equations and derived values
 - **[`cost-log.md`](templates/cost-log.md)** — Per-operation token-cost log; copy to your paper's `vv/cost-log.md` (since v1.6.0)
+- **[`hypothesis-log.md`](templates/hypothesis-log.md)** — Provisional positions whose evidence lives in the future (`Position` / `Method` / `Revisit trigger` / `Review by`); resolves to closed or promoted to DR (since v1.7.0; adopted from agent-ready-projects v1.10.0)
 
 Copy what you need, delete the comments, fill in your specifics.
 

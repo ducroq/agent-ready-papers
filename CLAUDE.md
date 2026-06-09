@@ -4,8 +4,8 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 
 - **Type**: Guide + templates + active paper projects (non-fiction projects supported via DR-010 but currently external — e.g., FSD; decision-support work supported via DR-012)
 - **Companion**: [agent-ready-projects](https://github.com/ducroq/agent-ready-projects) (for code)
-- **agent-ready-projects**: v1.7.0
-- **agent-ready-papers** (this repo): v1.6.3 (backlog discoverability row, 2026-06-08)
+- **agent-ready-projects**: v1.10.2
+- **agent-ready-papers** (this repo): v1.7.0 (hypothesis-log adoption + self-verifying memory posture, 2026-06-09)
 
 > Live project state (current paper status, recent decisions, deferred items) lives in `memory/MEMORY.md` (maintainer-local — see *What is intentionally not shipped* below). Repo-name caveat and FSD-rename deferral are tracked in `audits/feedback-from-fsd.md`. Release notes live in `CHANGELOG.md`.
 
@@ -26,7 +26,8 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 | Asking what a coverage or peer-review threshold means | `docs/THRESHOLDS.md` — rationale for the 100% P0 / 90% P1 / 70% P2 / ≥85% overall coverage and ≥3.5/5.0 simulated-peer-review thresholds (top-of-file SPECULATIVE label per the framework's own tier discipline) |
 | Asking what's on the backlog | No single `BACKLOG.md` by design — framework backlog is distributed by velocity: `memory/MEMORY.md` "Next session priorities" for volatile near-term items (maintainer-local); each `decisions/DR-*.md` *Open Questions* section for decision-specific long-burn items; GitHub Issues for externally-trackable work (currently #5 / #18 / #30 open). Paper projects have their own `papers/<name>/backlog.md` for paper-scoped tasks. Forcing items at different velocities into one file creates drift; this row is the discoverability fix instead. |
 | Stuck or debugging something weird | `memory/gotcha-log.md` — problem-fix archive |
-| Creating a new paper project | `templates/CLAUDE.md` — paper project template |
+| Placing a bet whose evidence lives in the future | `memory/hypothesis-log.md` — provisional positions with `Position` / `Method` / `Revisit trigger` / `Review by`. `/curate` surfaces due items. Adopted from agent-ready-projects v1.10.0 in this repo's v1.7.0. Paper projects: copy `templates/hypothesis-log.md`. |
+| Creating a new paper project | `templates/CLAUDE.md` — paper project template (includes hypothesis-log row since v1.7.0) |
 | Ending a session | Run `/curate` — updates gotcha log, promotes patterns, syncs docs, checks freshness |
 | Monthly or after major restructuring | Run `/audit-context` — structural health check for duplication, bloat, broken references |
 
@@ -38,6 +39,7 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 - Decision records are binding — check `decisions/` before proposing scope changes
 - This repo contains both the framework AND papers that use it — changes to templates may affect active papers
 - **Project state goes in `memory/` (in-repo, gitignored — see *What is intentionally not shipped*), not in user-level Claude Code auto-memory.** Versions, session narratives, gotchas, priorities, handoffs, and any state tied to *this* repo's work belong in this repo's `memory/` directory. The user-level path at `~/.claude/projects/<slug>/memory/` is reserved for cross-project memory types: user (about the user), feedback (corrections, validated approaches), and reference (pointers to external systems). The Before You Start table above routes to in-repo memory; that's the canonical pickup path. Don't duplicate project state into both — drift starts as soon as you do.
+- **New state claims in `memory/` may embed a verification command in an HTML comment: `<!-- verify: cmd -->`.** `/curate` Step 0 sub-step 5 runs the command on read and flags drift (PASS / FAIL / ERROR / MANUAL). Convention applies to *new* claims going forward; no retrofit required for existing entries — opportunistic retrofit during routine edits is welcome but not gated. Adopted from agent-ready-projects v1.9.0 (self-verifying memory) + v1.10.0 (/curate audit hook) in this repo's v1.7.0.
 
 ## Architecture
 
@@ -62,6 +64,7 @@ agent-ready-papers/
 │   ├── equation-checker.md    <- Mechanical equation verification prompt
 │   ├── glossary.md            <- Cross-domain terminology
 │   ├── decision-record.md     <- DR template
+│   ├── hypothesis-log.md      <- Provisional positions with future evidence (since v1.7.0)
 │   └── key-quotes.md          <- Reference quotes
 ├── decisions/                 <- Architecture decision records (DR-001 to DR-014)
 ├── literature/                <- Source registry (47 sources, 17 detailed summaries)
@@ -81,6 +84,7 @@ agent-ready-papers/
 │       └── ...
 └── memory/                    <- Session memory (gitignored — maintainer-local)
     ├── gotcha-log.md          <- Problem-fix archive
+    ├── hypothesis-log.md      <- Framework-level provisional positions (since v1.7.0)
     └── ...
 ```
 
@@ -95,6 +99,7 @@ These paths exist in the maintainer's local clone but are gitignored — they ar
 | `memory/MEMORY.md` | Maintainer's index of current project state and deferred items | Not needed — equivalent state for your paper lives in your paper's CLAUDE.md |
 | `memory/gotcha-log.md` | Maintainer's problem-fix archive | Build your own per-project |
 | `memory/dead-ends.md` | Maintainer's "don't retry" log | Build your own per-project |
+| `memory/hypothesis-log.md` | Maintainer's framework-level hypothesis log | Adopters maintain their own per `templates/hypothesis-log.md` |
 
 The public framework — templates, DRs, audits, README, CHANGELOG — is fully consumable without any of the above. Adopters maintain their own session state per the patterns in `templates/CLAUDE.md`, not by depending on the maintainer's `memory/`.
 

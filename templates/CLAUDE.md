@@ -41,6 +41,7 @@
 | Checking terminology | `glossary.md` — cross-domain term definitions |
 | Reviewing before submission | `review-prompt.md` — structured peer review simulation |
 | Stuck or unsure about a claim | `anti-hallucination.md` — citation verification checklist |
+| Placing a bet whose evidence lives in the future | `hypothesis-log.md` (copy from `agent-ready-papers/templates/hypothesis-log.md`) — provisional positions with `Position` / `Method` / `Revisit trigger` / `Review by`. `/curate` surfaces due items. |
 | Ending a session | `backlog.md` — update progress; `../../memory/gotcha-log.md` — review, promote patterns, retire stale entries |
 
 ## Hard Constraints
@@ -67,6 +68,7 @@
 | `glossary.md` | Terminology reference |
 | `backlog.md` | Current tasks |
 | `DR-*.md` | Decision records |
+| `hypothesis-log.md` | Provisional positions awaiting future evidence (since agent-ready-papers v1.7.0) |
 
 ## Directory Structure
 
@@ -80,6 +82,7 @@
 ├── writing-guide.md             <- Claim-to-section mapping
 ├── review-prompt.md             <- Peer review simulation
 ├── anti-hallucination.md        <- Citation verification
+├── hypothesis-log.md            <- Provisional positions awaiting future evidence
 ├── DR-*.md                      <- Decision records
 ├── vv/                          <- Verification & Validation
 │   ├── PAPER_VV_FRAMEWORK.md    <- V&V methodology

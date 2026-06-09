@@ -34,6 +34,42 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
        ("No adopter action required.") rather than omitting the subsection.
 -->
 
+## v1.7.0 (2026-06-09)
+
+Full adoption of agent-ready-projects v1.10.0 features. Two upstream additions land here: the **hypothesis log** (provisional positions with pre-registered falsification criteria) and the **self-verifying memory posture** (verify-comments embedded in state claims, audited by `/curate` Step 0 sub-step 5). Companion pin advances v1.7.0 → v1.10.2. This repo had partial v1.10.0 adoption since 2026-05-10 (drift-check row only — commit `1d30ceb`); v1.7.0 closes that loop.
+
+The two additions answer different questions. Decision records freeze rationale at decision time; the gotcha log captures problems with known root causes. Neither has a home for *bets* — provisional positions whose evidence lives in the future. Self-verifying memory addresses a different failure mode: state claims in `memory/` ("shipped," "deployed," "PARTIAL since 2026-05-10") decay immediately after the session that writes them. Without a verification mechanism, `/curate` can flag the lingering Auger 2013 PARTIAL but cannot machine-check whether *other* state claims still hold. Verify-comments make the check decidable per-claim.
+
+### Templates
+- **`templates/hypothesis-log.md`** — new template, adapted from agent-ready-projects v1.10.0 with paper-writing flavor. Lifecycle: open → dormant → revisit → resolved (close or promote to DR). Worked examples illustrate use for review-pattern bets (DR-011 cross-family generality) and template-restructure bets (DR-014 ships without parser changes). Adopters: copy to your paper project's root and populate.
+- **`templates/CLAUDE.md`** (paper-project template) — three edits to surface hypothesis-log:
+  - New Before You Start row: *"Placing a bet whose evidence lives in the future"* → routes to `hypothesis-log.md` (copy from this framework's templates/).
+  - Key Files table gains `hypothesis-log.md`.
+  - Directory Structure diagram gains `hypothesis-log.md`.
+
+### Documentation
+- **Root `CLAUDE.md`** — five edits:
+  - Companion pin bumped: `agent-ready-projects: v1.7.0` → `v1.10.2`.
+  - Self-pin bumped: `v1.6.3` → `v1.7.0`.
+  - New Before You Start row: *"Placing a bet whose evidence lives in the future"* → routes to `memory/hypothesis-log.md` (maintainer) or `templates/hypothesis-log.md` (adopters).
+  - New Hard Constraint: self-verifying memory posture — `<!-- verify: cmd -->` comments in new state claims; no retrofit required.
+  - Architecture diagram + *What is intentionally not shipped* updated to reflect both `templates/hypothesis-log.md` (shipped) and `memory/hypothesis-log.md` (gitignored).
+
+### Adopter notes
+- **Recommended migration for pinned consumers on v1.6.3:**
+  1. Copy `templates/hypothesis-log.md` to your paper project root (or wherever your project keeps `gotcha-log.md` / `dead-ends.md`).
+  2. Add the new Before You Start row in your paper project's `CLAUDE.md` — see updated `templates/CLAUDE.md` for the exact phrasing.
+  3. Self-verifying memory: optional and incremental. Add `<!-- verify: cmd -->` comments to new state claims going forward; opportunistic retrofit during routine edits. No mass-retrofit gate.
+- **No template-content breaking changes.** Existing `claim-registry.md`, `vv-framework.md`, `writing-guide.md`, `anti-hallucination.md`, `decision-record.md`, `equation-checker.md`, `cost-log.md`, etc. are unchanged. New file only.
+- **Companion-pin advance:** if your paper project pins to agent-ready-papers v1.6.3 and *also* pins to agent-ready-projects v1.7.0, the agent-ready-projects pin can now advance to v1.10.2. The drift between v1.7.0 and v1.10.2 is upstream's choice; this repo's adoption posture is documented per the v1.7.0 entry.
+- **Hard Constraint addition is not a breaking change** — it documents a posture for *new* memory writes, not a requirement for retrofitting existing entries. Existing `memory/MEMORY.md` and topic files remain valid as-is.
+
+### Origin
+
+Surfaced 2026-06-09 during the agent-ready-projects v1.10.2 wrap-up session. The /curate sweep flagged the partial-v1.10.0 adoption state as an Action Item; engineer chose to close the loop rather than continue carrying drift. Hypothesis-log seeded with one entry: DR-011 cross-family generality bet (currently blocked on Paper 1 paper-writing track resumption per MEMORY.md *Direction 2026-06-09* — paper-writing deferred to the far future, framework first).
+
+---
+
 ## v1.6.3 (2026-06-08)
 
 Backlog discoverability. Framework backlog is distributed by velocity — `memory/MEMORY.md` "Next session priorities" for volatile near-term items, DR *Open Questions* sections for decision-specific long-burn items, GitHub Issues for externally-trackable work. No single `BACKLOG.md` file by design: forcing items at different velocities into one file creates synchronization burden, and the four-place set (those three plus a new file) would drift faster than the current three. But the question *"where's the backlog?"* needs an answer accessible in one CLAUDE.md row, not three. v1.6.3 adds the row.

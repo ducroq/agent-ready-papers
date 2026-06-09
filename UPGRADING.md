@@ -11,6 +11,19 @@ The full release notes are in [`CHANGELOG.md`](CHANGELOG.md). This file is the q
 - **PATCH** version bumps are docs-only / clarifications. No action required.
 - Every release entry in `CHANGELOG.md` includes an "Adopter notes" / "Adopter action" subsection. This file aggregates them per version for quick lookup.
 
+## v1.7.0 (2026-06-09)
+
+**From v1.6.3 — what to review when you bump your pin to v1.7.0:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| New template `templates/hypothesis-log.md` — provisional positions with `Position` / `Method` / `Revisit trigger` / `Review by`. Adopted from agent-ready-projects v1.10.0. | **Optional** — copy `templates/hypothesis-log.md` to your paper project root (or wherever you keep `gotcha-log.md` / `dead-ends.md`). Add the new Before You Start row from updated `templates/CLAUDE.md`: *"Placing a bet whose evidence lives in the future"* → routes to your local `hypothesis-log.md`. Best fit: pre-registered forecasts about Pass-3 outcomes, S1-5 calculation predictions, PROVOCATION calibration bets — anywhere a position needs future evidence to resolve. |
+| Root `CLAUDE.md` — new Hard Constraint: self-verifying memory posture. New state claims in `memory/` may embed `<!-- verify: cmd -->` comments; `/curate` runs them on read. | **Optional, incremental.** Adopt for new state claims going forward. No retrofit required. The posture is documented; the discipline scales as you find it useful. Companion to agent-ready-projects v1.9.0 (self-verifying memory) and v1.10.0 (/curate Step 0 sub-step 5). |
+| `templates/CLAUDE.md` (paper-project template) — three edits to surface hypothesis-log: new Before You Start row, Key Files row, Directory Structure entry | **Recommended for projects spawned from this template after v1.7.0** — these are inherited automatically. Projects predating v1.7.0 should copy the three edits manually if they adopt the hypothesis-log. |
+| Root `CLAUDE.md` — companion pin advanced `agent-ready-projects: v1.7.0` → `v1.10.2` (your own pin can advance if it tracked this repo's) | Reference only — drift-check row will continue to surface upstream drift naturally. Adopting upstream v1.10.2 changes in your code projects is your call independent of this framework's pin. |
+
+**No breaking changes.** MINOR release per SemVer: new opt-in template + new Hard Constraint posture (documents new-write convention, doesn't require retrofit).
+
 ## v1.6.3 (2026-06-08)
 
 **From v1.6.2 — what to review when you bump your pin to v1.6.3:**
