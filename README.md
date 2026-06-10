@@ -10,56 +10,6 @@ Companion to [agent-ready-projects](https://github.com/ducroq/agent-ready-projec
 
 **Current release:** v1.7.1 (2026-06-09) — see [`CHANGELOG.md`](CHANGELOG.md). Pin your project with `agent-ready-papers: v1.7.1` in your CLAUDE.md and surface drift at session start.
 
-## Quickstart
-
-Adopt the framework on a new paper in five steps (~10 minutes to set up):
-
-1. **Bootstrap session continuity.** Copy [`templates/CLAUDE.md`](templates/CLAUDE.md) into your paper project as `CLAUDE.md`. Fill in the paper identity, target journal, deadline.
-2. **Copy the minimum-viable adoption files.** [`templates/claim-registry.md`](templates/claim-registry.md), [`templates/anti-hallucination.md`](templates/anti-hallucination.md), and [`templates/writing-guide.md`](templates/writing-guide.md). These three plus CLAUDE.md are enough to start.
-3. **Register your first claims.** In `claim-registry.md`, list 5–10 of your paper's load-bearing factual statements. Assign each a priority (P0 / P1 / P2), confidence tier (ESTABLISHED / SUPPORTED / EMERGING / SPECULATIVE), and a source.
-4. **Verify each citation.** Run the Step 0 + 6-step checklist in `anti-hallucination.md` on every AI-introduced citation. Step 0 (Scholar + DOI) catches fabrications in seconds.
-5. **Run one review pass.** Before sharing the draft, ask a *fresh session* of a smaller model in the same family (e.g., Haiku, GPT-4o-mini, Gemini-Flash) to review the manuscript against your review prompt. A fresh session escapes the sunk-cost bias of the session that wrote the draft. See [`templates/review-prompt.md`](templates/review-prompt.md) for the prompt template and [DR-011](decisions/DR-011_multi-model-review-pattern.md) for the full three-pass pattern (intra-family small → intra-family large → cross-vendor).
-
-### Three tiers of adoption
-
-| Tier | Files | When |
-|------|-------|------|
-| **Required for first use** | `CLAUDE.md`, `claim-registry.md`, `anti-hallucination.md`, `writing-guide.md` | From day one |
-| **Useful once the paper grows** | `review-prompt.md`, `decision-record.md`, `glossary.md`, `equation-checker.md`, `vv-framework.md`, `cost-log.md`, `hypothesis-log.md` | After ~20 registry entries, or once you hit a decision / cost-tracking / pre-registered bet worth recording |
-| **Reference / background only** | `key-quotes.md` | When you want context, not before |
-
-The full template index is in the [Templates](#templates) section near the bottom.
-
-## When This Framework Is Worth The Overhead
-
-- The cost of a hallucinated citation in your output exceeds an hour of your time
-- The output spans multiple sessions (a paper, a grant, a long-form decision)
-- You have a load-bearing argument or proposition the reader will scrutinise
-- You are working in a domain where confidence-language calibration matters (academic, regulated, decision-support)
-
-## When It Is Overkill
-
-- One-shot prose with no citation chain
-- Throwaway code or scripts (correctness verified by execution)
-- Internal scratch notes
-- Anything with established compliance audit conventions (use those instead)
-
-## Common Questions
-
-**Doesn't this add overhead?** Yes — roughly 10 minutes of setup plus ongoing claim logging as you draft. The trade is overhead against the cost of being wrong. If a hallucinated citation or a confidence-inflated claim could survive to submission, the overhead pays back the first time it catches one.
-
-**What if my paper has only a few claims?** Then the registry is short. The point is verification discipline, not registry size. Even 5–10 entries benefit from typed verification — type-checking each entry forces you to articulate what kind of statement it is and what would falsify it.
-
-**How is this different from a reference manager (Zotero, Mendeley)?** Reference managers track *citations*; this tracks the *structure of your argument*. A claim has a confidence tier; an argument has a warrant; a proposition has boundary conditions. Reference managers don't model those, and they don't enforce confidence-to-language calibration.
-
-**Can I use this without an AI agent?** Yes. The framework was designed for AI-augmented writing — that's where hallucination and confidence inflation are most acute — but registry discipline, decision records, and quality gates work fine for any structured non-fiction. The anti-hallucination checklist is most useful when an agent is introducing claims; the rest applies regardless.
-
-**Has this been peer-reviewed?** Not yet. We use it on our own work; Paper 1 (in this repo) is the perspective article that argues for the gap this framework addresses. Adopt as a structured starting point, not as a tested method.
-
----
-
-> **From here down: implementation detail.** If you came to decide whether this framework fits your project, you have what you need. The sections below explain how each piece works for adopters actually setting up.
-
 ## The Core Problem
 
 AI agents are remarkably useful for academic writing — literature synthesis, argument structuring, statistical interpretation, formatting. But they have failure modes that are *different* from coding:
@@ -96,6 +46,56 @@ The fix borrows a vocabulary from systems engineering: if claims are the paper's
 Every concept on the right maps to a concrete artifact in the project — a template, a checklist, a registry entry. The rest of this guide explains each one.
 
 </details>
+
+## When This Framework Is Worth The Overhead
+
+- The cost of a hallucinated citation in your output exceeds an hour of your time
+- The output spans multiple sessions (a paper, a grant, a long-form decision)
+- You have a load-bearing argument or proposition the reader will scrutinise
+- You are working in a domain where confidence-language calibration matters (academic, regulated, decision-support)
+
+## When It Is Overkill
+
+- One-shot prose with no citation chain
+- Throwaway code or scripts (correctness verified by execution)
+- Internal scratch notes
+- Anything with established compliance audit conventions (use those instead)
+
+## Common Questions
+
+**Doesn't this add overhead?** Yes — roughly 10 minutes of setup plus ongoing claim logging as you draft. The trade is overhead against the cost of being wrong. If a hallucinated citation or a confidence-inflated claim could survive to submission, the overhead pays back the first time it catches one.
+
+**What if my paper has only a few claims?** Then the registry is short. The point is verification discipline, not registry size. Even 5–10 entries benefit from typed verification — type-checking each entry forces you to articulate what kind of statement it is and what would falsify it.
+
+**How is this different from a reference manager (Zotero, Mendeley)?** Reference managers track *citations*; this tracks the *structure of your argument*. A claim has a confidence tier; an argument has a warrant; a proposition has boundary conditions. Reference managers don't model those, and they don't enforce confidence-to-language calibration.
+
+**Can I use this without an AI agent?** Yes. The framework was designed for AI-augmented writing — that's where hallucination and confidence inflation are most acute — but registry discipline, decision records, and quality gates work fine for any structured non-fiction. The anti-hallucination checklist is most useful when an agent is introducing claims; the rest applies regardless.
+
+**Has this been peer-reviewed?** Not yet. We use it on our own work; Paper 1 (in this repo) is the perspective article that argues for the gap this framework addresses. Adopt as a structured starting point, not as a tested method.
+
+## Quickstart
+
+Adopt the framework on a new paper in five steps (~10 minutes to set up):
+
+1. **Bootstrap session continuity.** Copy [`templates/CLAUDE.md`](templates/CLAUDE.md) into your paper project as `CLAUDE.md`. Fill in the paper identity, target journal, deadline.
+2. **Copy the minimum-viable adoption files.** [`templates/claim-registry.md`](templates/claim-registry.md), [`templates/anti-hallucination.md`](templates/anti-hallucination.md), and [`templates/writing-guide.md`](templates/writing-guide.md). These three plus CLAUDE.md are enough to start.
+3. **Register your first claims.** In `claim-registry.md`, list 5–10 of your paper's load-bearing factual statements. Assign each a priority (P0 / P1 / P2), confidence tier (ESTABLISHED / SUPPORTED / EMERGING / SPECULATIVE), and a source.
+4. **Verify each citation.** Run the Step 0 + 6-step checklist in `anti-hallucination.md` on every AI-introduced citation. Step 0 (Scholar + DOI) catches fabrications in seconds.
+5. **Run one review pass.** Before sharing the draft, ask a *fresh session* of a smaller model in the same family (e.g., Haiku, GPT-4o-mini, Gemini-Flash) to review the manuscript against your review prompt. A fresh session escapes the sunk-cost bias of the session that wrote the draft. See [`templates/review-prompt.md`](templates/review-prompt.md) for the prompt template and [DR-011](decisions/DR-011_multi-model-review-pattern.md) for the full three-pass pattern (intra-family small → intra-family large → cross-vendor).
+
+### Three tiers of adoption
+
+| Tier | Files | When |
+|------|-------|------|
+| **Required for first use** | `CLAUDE.md`, `claim-registry.md`, `anti-hallucination.md`, `writing-guide.md` | From day one |
+| **Useful once the paper grows** | `review-prompt.md`, `decision-record.md`, `glossary.md`, `equation-checker.md`, `vv-framework.md`, `cost-log.md`, `hypothesis-log.md` | After ~20 registry entries, or once you hit a decision / cost-tracking / pre-registered bet worth recording |
+| **Reference / background only** | `key-quotes.md` | When you want context, not before |
+
+The full template index is in the [Templates](#templates) section near the bottom.
+
+---
+
+> **From here down: implementation detail.** The sections below explain how each piece works for adopters actually setting up.
 
 ## Verification Registry: The Foundation
 
