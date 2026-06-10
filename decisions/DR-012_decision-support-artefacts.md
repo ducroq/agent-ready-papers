@@ -129,7 +129,6 @@ Naming the third class is justified by the worked example without committing to 
 
 ## Evidence Base
 
-- Originating issue: [ducroq/agent-ready-papers#14](https://github.com/ducroq/agent-ready-papers/issues/14)
 - N=1 caveat: the worked example is a single project, single author, single domain. Generalisability to vendor-selection, architectural choice, regulated-domain adoption, and policy-decision support is *plausible* on the structural-assumptions argument but not yet exercised.
 
 ## Open Questions Carried Forward

@@ -29,7 +29,7 @@ What makes a useful issue, roughly in descending order of signal:
 - **Application reports** — "I tried the framework on X; here's what worked, what didn't, what surfaced." Highest signal. Drives the empirical evidence base.
 - **Specific friction** — "Step Y in template Z confused me because A; suggested fix B." Concrete and reproducible.
 - **Conceptual gaps** — "The framework doesn't cover situation P; here's why it might or might not warrant Q." DRs often start here.
-- **Convergent external review** — independent reviewers landing on the same observation. See [#30](https://github.com/ducroq/agent-ready-papers/issues/30) for a precedent.
+- **Convergent external review** — independent reviewers landing on the same observation.
 
 Less useful:
 

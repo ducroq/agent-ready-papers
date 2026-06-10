@@ -67,7 +67,7 @@ def test_paper1_registry_doi_extraction(paper1_registry):
 
 
 def test_paper1_doi_extraction_is_deterministic(paper1_registry):
-    """Same input → byte-identical output across runs (#8 from DR-011 review)."""
+    """Same input → byte-identical output across runs (DR-011 review finding)."""
     r1 = check_dois(paper1_registry, offline=True)
     r2 = check_dois(paper1_registry, offline=True)
     assert r1.to_markdown() == r2.to_markdown()

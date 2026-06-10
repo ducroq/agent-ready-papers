@@ -7,7 +7,7 @@ date: 2026-06-08
 
 ## Context
 
-External feedback (June 2026, Reviewer 1 — convergent review at [ducroq/agent-ready-papers#30](https://github.com/ducroq/agent-ready-papers/issues/30)) flagged that PROVOCATION (added in DR-010, v1.1.0) adds complexity to the core framework that empirical-paper readers must mentally filter:
+External feedback (June 2026, Reviewer 1) flagged that PROVOCATION (added in DR-010, v1.1.0) adds complexity to the core framework that empirical-paper readers must mentally filter:
 
 > The PROVOCATION unit type is well-motivated by the speculative-design project (DR-010), and the GROUNDED / EXTRAPOLATED / PROVOCATIVE / CRITICAL confidence axis is genuinely useful for that genre. But it adds meaningful complexity to the core framework and applies to a narrow audience. A reader working on a standard empirical paper has to mentally filter out the PROVOCATION references throughout the README, the quality gates, the claim registry, and the anti-hallucination checklist.
 
@@ -97,7 +97,7 @@ If Rejected:
 
 ## Evidence Base
 
-- External feedback: [ducroq/agent-ready-papers#18](https://github.com/ducroq/agent-ready-papers/issues/18), filed with reference to the convergent review at [#30](https://github.com/ducroq/agent-ready-papers/issues/30).
+- External feedback from the June 2026 convergent review (Reviewer 1 substantive observation; Reviewer 3 confirmation).
 - Convergent observation from Reviewer 3 (Copilot): *"the README should state more bluntly which audience is primary and which extensions are optional."* This DR's Option B answers that by separating core from extensions explicitly.
 - Pattern precedent: Conditional Gates 2.6, 2.7, 2.8 already follow the opt-in pattern. The extension-doc-with-hook structure is also used in the companion `agent-ready-projects` repo.
 - N=0 evidence base for this DR specifically — no project has yet used a separate `templates/extensions/` doc. Risk is structurally similar to other restructures the framework has survived (the per-type sub-tables migration in v1.2.0 was structurally analogous; that migration worked).
@@ -110,7 +110,7 @@ Before this DR can be promoted from Proposed to Accepted, three checks are neede
 2. **Speculative-design adopter check.** If a speculative-design adopter has locally-adapted templates that inline PROVOCATION content, confirm whether the extension-as-separate-doc structure is acceptable from the adopter side before committing the restructure.
 3. **Version-impact decision.** Decide whether the restructure ships as **v1.4.0** (MINOR — behaviour unchanged from adopter perspective, content relocated) or **v2.0.0** (MAJOR — template surface visibly changed). This affects how the change is described in `UPGRADING.md` and whether existing pinned consumers are expected to review the new extension docs.
 
-The DR ships as Proposed so the layering decision is visible and discussable without forcing template changes in this session. Issue [#18](https://github.com/ducroq/agent-ready-papers/issues/18) stays open as the implementation tracker.
+The DR ships as Proposed so the layering decision is visible and discussable without forcing template changes in this session.
 
 ## Open Questions Carried Forward
 

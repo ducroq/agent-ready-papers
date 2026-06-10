@@ -63,7 +63,7 @@ def test_paper1_registry_coverage_shape(paper1_registry):
 
 
 def test_paper1_coverage_is_deterministic(paper1_registry):
-    """Same input → byte-identical output across runs (#8 from DR-011 review)."""
+    """Same input → byte-identical output across runs (DR-011 review finding)."""
     r1 = check_coverage(paper1_registry)
     r2 = check_coverage(paper1_registry)
     assert r1.to_markdown() == r2.to_markdown()

@@ -96,9 +96,9 @@ These illustrate what a useful entry looks like in this domain. Delete this sect
 
 **Method:** Run `make coverage` against Paper 1 BEFORE the restructure. Apply restructure. Run `make coverage` AFTER. If output is byte-identical, position confirmed. If different, examine the delta and decide whether to patch the parser or revise the restructure.
 
-**Revisit trigger:** User picks up #18 / DR-014 promotion thread.
+**Revisit trigger:** User picks up the DR-014 promotion thread.
 
 **Review by:** 2026-12-31
 
 **Domain:** DR-014, PROVOCATION layering, tools/
-**Status:** open (blocked on #18 pickup)
+**Status:** open (blocked on DR-014 pickup)

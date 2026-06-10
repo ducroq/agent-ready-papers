@@ -7,7 +7,7 @@ date: 2026-06-08
 
 ## Context
 
-External feedback (June 2026, three independent reviews — see issue #30) flagged the absence of a LICENSE file as the highest-priority adoption gap. Without a declared licence, the repo is legally unusable for adopters even though the content is intended for public reuse.
+External feedback (June 2026, three independent reviews) flagged the absence of a LICENSE file as the highest-priority adoption gap. Without a declared licence, the repo is legally unusable for adopters even though the content is intended for public reuse.
 
 The repo's content is a mix:
 
@@ -85,6 +85,6 @@ Attribution serves both an academic norm (the framework's claims are evidence-tr
 
 ## Evidence Base
 
-- External feedback flagging the gap: ducroq/agent-ready-papers#20, filed with citation to the convergent review feedback (#30).
+- External feedback flagging the gap: ducroq/agent-ready-papers#20, filed with citation to the convergent review feedback.
 - Convention check: methodology and educational-resource repos in adjacent spaces (e.g., the Carpentries, OpenStax, various academic methodology repos) standardise on CC BY 4.0.
 - Companion repo `agent-ready-projects` is code; its licensing question is separate and not bound by this DR.
