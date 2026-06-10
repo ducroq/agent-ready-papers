@@ -1,6 +1,6 @@
 # Contributing
 
-Thanks for your interest in `agent-ready-papers`. This repo holds a *methodology framework* for AI-augmented academic and structured non-fiction writing — templates, decision records, audits, and active papers using the framework. Below: who this is for, what contributions are welcome, what is out of scope, and how to file useful issues.
+Thanks for your interest in `agent-ready-papers`. This repo holds a *methodology framework* for AI-augmented academic and structured non-fiction writing — templates, decision records, and active papers using the framework. Below: who this is for, what contributions are welcome, what is out of scope, and how to file useful issues.
 
 ## Three audiences
 
@@ -18,9 +18,9 @@ If you want to apply the framework to your own paper, decision-support artefact,
 If you want to propose changes to the framework itself:
 
 - **Open an issue first** describing the proposed change. Most framework changes are recorded as Decision Records (DRs); the issue triggers a discussion before the DR is drafted.
-- Read [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md) for how patterns are derived. The framework is *not* "design first, deploy later" — it is "apply, surface gaps, promote what survives." Pattern proposals that have not been applied somewhere are usually returned with a request for evidence.
+- The framework is *not* "design first, deploy later" — it is "apply, surface gaps, promote what survives." Pattern proposals that have not been applied somewhere are usually returned with a request for evidence.
 - Check [`decisions/`](decisions/) to see whether your proposal touches an existing decision. DRs are binding; superseding one requires a new DR explicitly named as such.
-- **Application reports** — where you applied the framework to a new domain and found something — are the most welcome contribution. File them following the pattern of [`audits/feedback-from-*.md`](audits/). Each such audit has historically led to a DR or a template revision that other adopters benefit from.
+- **Application reports** — where you applied the framework to a new domain and found something — are the most welcome contribution. Each such report has historically led to a DR or a template revision that other adopters benefit from.
 
 ### For issue filing
 
@@ -49,7 +49,6 @@ Less useful:
 
 - **PRs to active paper artefacts** (`papers/perspective/manuscript.tex`, `papers/perspective/references.bib`, etc.) without prior discussion. These are author-controlled work-in-progress and unsolicited changes are generally not merged.
 - **Code generation for unrelated tools.** This repo is the *paper* framework; code patterns live in the companion [`agent-ready-projects`](https://github.com/ducroq/agent-ready-projects) repo.
-- **Engineering Fidelity content.** Archived externally as of v1.3.0 — see the v1.3.0 entry in [`CHANGELOG.md`](CHANGELOG.md).
 
 ## Licence
 
@@ -71,4 +70,4 @@ If you contribute substantial code (for example tooling scripts under [#17](http
 
 ## What this framework looks for in practice
 
-If your application of the framework surfaces a recurring pattern the framework doesn't capture, that's the highest-value contribution. The [`audits/feedback-from-*.md`](audits/) files are the precedent — each led to a DR or template revision that other adopters now benefit from. The framework's evidence base grows by application, not by speculation.
+If your application of the framework surfaces a recurring pattern the framework doesn't capture, that's the highest-value contribution. The framework's evidence base grows by application, not by speculation.

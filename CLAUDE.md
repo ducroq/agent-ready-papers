@@ -1,13 +1,13 @@
 # Agent-Ready Papers
 
-Verification infrastructure for AI-augmented academic and structured non-fiction writing. Templates, quality gates, and session continuity that catch the failure modes automated tools miss — hallucinated citations, confidence inflation, argument quality gaps, and calculation errors. Originally developed for academic papers; extended in 2026-05 to cover speculative-design and voice-driven non-fiction work (DR-010).
+Verification infrastructure for AI-augmented academic and structured non-fiction writing. Templates, quality gates, and session continuity that catch the failure modes automated tools miss — hallucinated citations, confidence inflation, argument quality gaps, and calculation errors. Covers academic papers plus speculative-design / voice-driven non-fiction work (DR-010) and decision-support artefacts (DR-012).
 
-- **Type**: Guide + templates + active paper projects (non-fiction projects supported via DR-010 but currently external — e.g., FSD; decision-support work supported via DR-012)
+- **Type**: Guide + templates + active paper projects
 - **Companion**: [agent-ready-projects](https://github.com/ducroq/agent-ready-projects) (for code)
 - **agent-ready-projects**: v1.10.3
 - **agent-ready-papers** (this repo): v1.7.1 (companion pin bump, 2026-06-09)
 
-> Live project state (current paper status, recent decisions, deferred items) lives in `memory/MEMORY.md` (maintainer-local — see *What is intentionally not shipped* below). Repo-name caveat and FSD-rename deferral are tracked in `audits/feedback-from-fsd.md`. Release notes live in `CHANGELOG.md`.
+> Live project state (current paper status, recent decisions, deferred items) lives in `memory/MEMORY.md` (maintainer-local — see *What is intentionally not shipped* below). Release notes live in `CHANGELOG.md`.
 
 ## Before You Start
 
@@ -16,15 +16,13 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 | Starting any session (companion drift) | Compare the `agent-ready-projects: vX.Y.Z` line in this file's header against `C:/local_dev/agent-ready-projects/CHANGELOG.md` (local clone) or https://github.com/ducroq/agent-ready-projects/blob/master/CHANGELOG.md. If the project is behind the latest released version, briefly surface the drift to the user before starting work. Don't auto-update — adopting changes is the engineer's call. |
 | Starting any session (self drift) | Compare the `agent-ready-papers: vX.Y.Z` line in this file's header against `CHANGELOG.md`. If a newer version has shipped, surface it before starting. |
 | Working on Paper 1 (Perspective) | `papers/perspective/CLAUDE.md` — paper identity, constraints, status, verification state |
-| Making scope or methodology decisions | `decisions/` — 14 decision records (DR-001 through DR-014; DR-014 Proposed, gated on Paper 1 / FSD / version-impact checks per #18) |
-| Starting template / DR / verification-gate design work | `memory/dead-ends.md` — pattern proposals already concluded as don't-retry (#15) |
-| Adding or verifying literature sources | `literature/README.md` — 47 indexed sources organized by topic |
+| Making scope or methodology decisions | `decisions/` — 14 decision records (DR-001 through DR-014; DR-014 Proposed) |
+| Starting template / DR / verification-gate design work | `memory/dead-ends.md` — pattern proposals already concluded as don't-retry |
+| Adding or verifying literature sources | `literature/README.md` — indexed sources organized by topic |
 | Checking coverage or DOIs in a registry | Run `python -m tools.coverage <registry.md>` or `python -m tools.check_dois <registry.md>` (or `make coverage` / `make check-dois`). See `tools/README.md` for flags, exit codes, and known limits (no escaped-pipe support, no HTTP proxy support, sequential HEAD scaling). Prefer the tool to manually counting P0/P1/P2 percentages or eyeballing DOIs. |
-| Understanding how the framework was built | `docs/METHODOLOGY.md` — derived from two source paper projects (third source-project audit archived externally in v1.3.0) |
-| Reviewing audit evidence | `audits/` — 9 audits: retrofits of source projects (proposition, technology) + cross-project comparisons (driven-pendulum) + forward-feedback applications (FSD, blog, template-revision, decision-support). Grant-application feedback lives in [ducroq/agent-ready-papers#8](https://github.com/ducroq/agent-ready-papers/issues/8). |
 | Working with claims, gates, or confidence calibration | `docs/framework-summary.md` — unit types, gates, tier-to-language mapping at a glance (templates remain normative) |
 | Asking what a coverage or peer-review threshold means | `docs/THRESHOLDS.md` — rationale for the 100% P0 / 90% P1 / 70% P2 / ≥85% overall coverage and ≥3.5/5.0 simulated-peer-review thresholds (top-of-file SPECULATIVE label per the framework's own tier discipline) |
-| Asking what's on the backlog | No single `BACKLOG.md` by design — framework backlog is distributed by velocity: `memory/MEMORY.md` "Next session priorities" for volatile near-term items (maintainer-local); each `decisions/DR-*.md` *Open Questions* section for decision-specific long-burn items; GitHub Issues for externally-trackable work (currently #5 / #18 / #30 open). Paper projects have their own `papers/<name>/backlog.md` for paper-scoped tasks. Forcing items at different velocities into one file creates drift; this row is the discoverability fix instead. |
+| Asking what's on the backlog | No single `BACKLOG.md` by design — framework backlog is distributed by velocity: `memory/MEMORY.md` "Next session priorities" for volatile near-term items (maintainer-local); each `decisions/DR-*.md` *Open Questions* section for decision-specific long-burn items. Paper projects have their own `papers/<name>/backlog.md` for paper-scoped tasks. Forcing items at different velocities into one file creates drift; this row is the discoverability fix instead. |
 | Stuck or debugging something weird | `memory/gotcha-log.md` — problem-fix archive |
 | Placing a bet whose evidence lives in the future | `memory/hypothesis-log.md` — provisional positions with `Position` / `Method` / `Revisit trigger` / `Review by`. `/curate` surfaces due items. Adopted from agent-ready-projects v1.10.0 in this repo's v1.7.0. Paper projects: copy `templates/hypothesis-log.md`. |
 | Creating a new paper project | `templates/CLAUDE.md` — paper project template (includes hypothesis-log row since v1.7.0) |
@@ -67,9 +65,8 @@ agent-ready-papers/
 │   ├── hypothesis-log.md      <- Provisional positions with future evidence (since v1.7.0)
 │   └── key-quotes.md          <- Reference quotes
 ├── decisions/                 <- Architecture decision records (DR-001 to DR-014)
-├── literature/                <- Source registry (47 sources, 17 detailed summaries)
-├── audits/                    <- Retrofit audits + cross-project comparisons + forward-feedback applications (FSD, blog, template-revision, decision-support)
-├── docs/                      <- Methodology, framework summary, threshold rationale, category-theory lens
+├── literature/                <- Source registry
+├── docs/                      <- Framework summary, threshold rationale, category-theory lens
 ├── tools/                     <- Registry tooling: coverage + DOI verification CLIs (since v1.5.0)
 │   ├── coverage.py            <- Per-type sub-table parser; P0/P1/P2 + PROVOCATION tier coverage
 │   ├── check_dois.py          <- DOI extractor + resolver (HEAD against doi.org, --offline mode)
@@ -101,9 +98,9 @@ These paths exist in the maintainer's local clone but are gitignored — they ar
 | `memory/dead-ends.md` | Maintainer's "don't retry" log | Build your own per-project |
 | `memory/hypothesis-log.md` | Maintainer's framework-level hypothesis log | Adopters maintain their own per `templates/hypothesis-log.md` |
 
-The public framework — templates, DRs, audits, README, CHANGELOG — is fully consumable without any of the above. Adopters maintain their own session state per the patterns in `templates/CLAUDE.md`, not by depending on the maintainer's `memory/`.
+The public framework — templates, DRs, README, CHANGELOG — is fully consumable without any of the above. Adopters maintain their own session state per the patterns in `templates/CLAUDE.md`, not by depending on the maintainer's `memory/`.
 
-Listed here so the architecture diagram above is honest about what an adopter sees on `git clone` versus what the maintainer has on disk. External-review observation that prompted this section: ducroq/agent-ready-papers#24.
+Listed here so the architecture diagram above is honest about what an adopter sees on `git clone` versus what the maintainer has on disk.
 
 ## Key Paths
 
@@ -117,7 +114,6 @@ Listed here so the architecture diagram above is honest about what an adopter se
 | `decisions/DR-006_publication-roadmap.md` | Publication sequencing (Papers 1-3) |
 | `literature/README.md` | Master source index (47 entries) |
 | `templates/CLAUDE.md` | Template for new paper projects |
-| `audits/equation-verification-journey.md` | Discovery of calculation verification blind spot |
 
 ## How to Work Here
 

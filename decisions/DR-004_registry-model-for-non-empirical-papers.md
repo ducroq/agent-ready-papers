@@ -117,9 +117,9 @@ The registry gets a `Type` column (default: CLAIM). Two additional types are ava
 
 ## Boundary Condition Quality Criteria
 
-Added 2026-03-16 based on Digital Engineers verification exercise (Issue #1). Full implementation with annotated examples in `templates/claim-registry.md` (Verifying PROPOSITIONs section) and `templates/vv-framework.md` (Section 4.1).
+Full implementation with annotated examples in `templates/claim-registry.md` (Verifying PROPOSITIONs section) and `templates/vv-framework.md` (Section 4.1).
 
-PROPOSITION entries systematically lacked boundary conditions (Whetten Q4 was the most commonly missed criterion, average Whetten score 3.2/5). Boundary conditions are now a required, prominent field rather than one of five checklist items.
+PROPOSITION entries systematically lack boundary conditions (Whetten Q4 is the most commonly missed criterion). Boundary conditions are a required, prominent field rather than one of five checklist items.
 
 Anti-patterns:
 - **Tautological** — boundary condition restates the proposition ("applies when applicable")

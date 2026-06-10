@@ -100,7 +100,6 @@ Confidence progression for framework components:
 **Key sources:**
 - `literature/sources/liang-2024.md` — AI hallucination evidence
 - `../../README.md` "The Core Problem" — failure mode taxonomy
-- `../../audits/technology-paper-retrofit.md` §4 — confidence inflation evidence
 
 **Cautions:**
 - Do NOT frame this as "AI is bad for writing" — frame as "AI writing assistance creates *new* failure modes that require *new* infrastructure"
@@ -193,8 +192,6 @@ Confidence progression for framework components:
 - Strongest counter-argument: Two audits by the same team in related domains do not demonstrate generalizability to other authors, domains, or paper types
 
 **Key sources:**
-- `../../audits/proposition-retrofit.md` — full audit with worked examples
-- `../../audits/technology-paper-retrofit.md` — empirical paper audit
 - `literature/sources/peerarg-2024.md` — structured + LLM evidence
 - `literature/sources/gupta-2024.md` — Toulmin + LLM evidence
 

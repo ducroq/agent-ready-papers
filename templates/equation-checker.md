@@ -10,11 +10,6 @@
      - Provide the document as the user message
      - Optionally provide source material for cross-referencing
 
-     ORIGIN: Created for the Driven Pendulum project (March 2026) after
-     discovering that LLM reviews assessing "soundness" missed 3/3
-     arithmetic errors that mechanical reproduction caught. See
-     audits/equation-verification-journey.md for the full case study.
-
      KEY INSIGHT: For arithmetic verification, the prompt matters more
      than the model. A capable model prompted to "review" missed all
      errors; a comparable model prompted to "reproduce" caught all three.

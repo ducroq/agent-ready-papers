@@ -46,10 +46,7 @@ rather than factual accuracy, is the primary verification challenge.  We
 propose a typed verification model distinguishing claims
 (source-verifiable facts), arguments (Toulmin-verified reasoning
 chains), and propositions (Whetten-verified recommendations with
-boundary conditions), each requiring distinct procedures.  Preliminary
-evidence from two retrospective audits suggests that typed verification
-reveals actionable issues invisible to conventional approaches,
-including false failures from type misclassification.  We
+boundary conditions), each requiring distinct procedures.  We
 propose that the scholarly community develop verification infrastructure
 for non-empirical papers analogous to what EQUATOR provides for
 empirical research.
@@ -65,7 +62,7 @@ guidelines, verification, argumentation, non-empirical research
 \item AI writing tools create verification challenges beyond citation hallucination, including confidence inflation and argument degradation.
 \item EQUATOR provides nearly 700 guidelines for empirical research; non-empirical papers have no equivalent infrastructure.
 \item We propose typed verification distinguishing claims, arguments, and propositions, each with distinct procedures.
-\item Retrospective audits show that wrong-type verification produces false failures invisible to conventional approaches.
+\item Wrong-type verification can produce false failures invisible to conventional approaches.
 \end{itemize}
 
 \clearpage
@@ -116,27 +113,17 @@ registers, the resulting text can misrepresent the state of evidence
 without containing any factually incorrect statements.  \citet{liang2024}
 found that LLM-generated feedback on research papers catches surface
 issues but struggles with the kind of deep argument analysis that would
-detect such confidence miscalibration.  A retrospective audit of a
-technology paper under review at an IEEE journal identified six of
-twenty-two verifiable entries where the manuscript language was more
-confident than the underlying evidence warranted.
+detect such confidence miscalibration.
 
 % S1-5: Calculation errors (CLAIM, P1, EMERGING)
 A third risk applies specifically to technical and empirical papers:
 AI-generated equations and derived values can contain arithmetic errors
-that survive review because they produce plausible-looking results.  In
-one instructive case, a theory document containing 68 equations was
-reviewed by two different LLMs.  One, prompted to assess physical
-soundness, found no errors.  The other, prompted to numerically
-reproduce every calculation, found three genuine errors---a label
-mismatch (values computed at a different input than stated), a formula
-with a spurious coefficient, and an internal inconsistency between a
-per-unit result and its aggregate.  All three produced numbers in
-physically reasonable ranges, which is precisely why they survived
-plausibility review.  This suggests that for quantitative content,
-\emph{mechanical reproduction} (substituting values and computing)
-catches errors that \emph{expert assessment} (evaluating whether the
-physics looks right) does not.
+that survive review because they produce plausible-looking results.
+Errors that produce numbers in physically reasonable ranges can survive
+plausibility review even when the underlying arithmetic is incorrect.
+This suggests that for quantitative content, \emph{mechanical reproduction}
+(substituting values and computing) catches errors that \emph{expert
+assessment} (evaluating whether the physics looks right) does not.
 
 % S1-3: Scope creep (CLAIM, P1, EMERGING)
 A fourth risk is scope creep.  Without structural constraints such as
@@ -390,107 +377,42 @@ and propositions matters because they fail differently: an argument with
 a weak warrant needs better reasoning, while a proposition with missing
 boundary conditions needs better scoping.  Conflating the two under a
 single ``non-empirical'' category obscures which corrective action is
-appropriate.  Preliminary evidence from the retrospective audits
-described in the following section suggests that this type of
-misclassification may occur in practice.
+appropriate.
 
 
 % ===============================================================
 % SECTION 4 — PRELIMINARY EVIDENCE
 % Registry entries: S4-1, S4-2, S4-3, S4-4
 % ===============================================================
-\section{Preliminary Evidence}
+\section{Related Work and Design Rationale}
 
-To explore whether typed verification reveals issues that conventional
-approaches miss, we retrospectively applied the framework described in
-Section~3 to two paper projects that had been developed with AI writing
-assistance but without typed verification infrastructure.  These audits
-should be understood as proof of concept rather than validation---they
-are retrospective, conducted by the framework's developers, drawn from a
-single domain cluster, and N=2 is a thin evidence base.  Further audits
-across other authors, domains, and paper types are needed for
-generalisable claims.
-
-% S4-1: Proposition audit (CLAIM, P0, EMERGING)
-The most instructive case involved a proposition paper arguing that
-feedback accuracy, not manikin realism, determines CPR training
-effectiveness.  This paper had been developed with a conventional claim
-registry that tracked twenty-one entries, achieving 76\% overall
-coverage and 100\% coverage of critical claims.  A retrospective audit
-reclassified all entries using the three-type model, revealing that
-sixteen were indeed claims, but two were arguments and three were
-propositions that had been misclassified as claims.
-
-The consequences of this misclassification were most apparent for one
-entry---the paper's central interpretive claim that invalid sensor
-feedback undermines the primary benefit of technology-enhanced feedback
-in CPR training.  Under claim-level verification, this entry was scored
-at the lowest confidence tier (speculative, 0.25 on the project's
-numeric scale) because it lacked a direct citation---it was classified as
-``logical inference.''  However, this entry is not a claim; it is an
-argument.  Its three premises---that sensors exhibit a 5.6\% calibration
-shift when integrated into a manikin, that datasheet specifications
-deviate 120--130 times from empirical calibration, and that most manikins
-lack metrological characterisation---are each independently verified.
-When evaluated using the Toulmin checklist, the entry achieves four of
-five verification criteria: the claim is clearly stated, the grounds are
-verified, the warrant is logically valid, and the qualifier is
-appropriately calibrated.  Only counter-argument engagement is partial.
-This represents what we term a \emph{false failure}: an entry scored as
-the weakest in the registry not because its reasoning is unsound, but
-because the wrong verification procedure was applied.  The distinction
-matters for the manuscript: the writing guide mapped the speculative
-score to heavily hedged language (``warrants investigation''), which is
-excessively cautious for a logically sound argument whose premises are
-verified.  Typed verification would have assigned an emerging confidence
-tier, permitting language such as ``preliminary evidence suggests''---a
-material improvement in argumentative force.
-
-% S4-2: Technology audit (CLAIM, P1, EMERGING)
-A second retrospective audit applied confidence tier analysis to a
-technology paper under review at an IEEE instrumentation journal.  This
-audit extracted twenty-two verifiable entries from the manuscript text
-and assigned each a confidence tier based on the available evidence.  The
-analysis identified six entries where the manuscript language was more
-confident than the evidence warranted---for instance, using
-``demonstrates'' for findings from a single validation study with a
-limited sample size.
-
-% S4-4: Cross-project applicability (ARGUMENT, P1, EMERGING)
-Across both retrospective audits, the typed verification framework
-revealed actionable issues in each project.  These issues included
-mistyped entries producing false failures, over-confident language,
-missing boundary conditions on propositions, and unregistered arguments
-in discussion sections.  While the specific issues varied by paper type,
-the common finding was that each audit identified problems that were
-not visible without the typed verification infrastructure.
+The framework described in Section~3 is proposed as a process-level
+addition to existing tool-level and model-level approaches; an empirical
+evaluation across multiple paper projects, authors, and domains is
+needed before generalisable claims about its effectiveness can be made.
+A self-application data point is provided in
+Appendix~\ref{app:self}---the verification registry maintained during
+the writing of this paper, showing the framework applied prospectively
+to a perspective-paper contribution.
 
 % S4-3: External validation (CLAIM, P1, EMERGING)
-These preliminary findings are consistent with independent research on
-structured verification for AI-assisted scholarly work.
-\citet{peerarg2024} developed PeerArg, a framework that combines formal
-argumentation structure with LLM-based review analysis; their results
-suggest that structured representation of support and attack relations
-improves review aggregation compared to end-to-end LLM approaches.
-Similarly, \citet{gupta2024} found that prompting LLMs with Toulmin's
-argument model significantly improves argument extraction compared to
-generic prompts.  Both findings suggest that combining structured
-frameworks with LLM capabilities may outperform LLM capabilities
-alone---a principle consistent with the process-level verification
-approach proposed here.
+The design rationale draws on independent research on structured
+verification for AI-assisted scholarly work.  \citet{peerarg2024}
+developed PeerArg, a framework that combines formal argumentation
+structure with LLM-based review analysis; their results suggest that
+structured representation of support and attack relations improves
+review aggregation compared to end-to-end LLM approaches.  Similarly,
+\citet{gupta2024} found that prompting LLMs with Toulmin's argument
+model significantly improves argument extraction compared to generic
+prompts.  Both findings suggest that combining structured frameworks
+with LLM capabilities may outperform LLM capabilities alone---a
+principle consistent with the process-level verification approach
+proposed here.
 
-Several important limitations apply to these preliminary findings.  Both
-audits were retrospective---the framework was applied after the papers
-were drafted, not during writing.  (Appendix~\ref{app:self} presents a
-complementary data point: the verification registry maintained during
-the writing of this paper, showing the framework applied prospectively.)
-Both projects share the same author team and fall within a related
-domain cluster (medical simulation and instrumentation).  The audits
-were conducted by the framework's developers, introducing potential
-confirmation bias.  N=2 is a thin evidence base.  These limitations mean
-that the evidence should be interpreted as preliminary indications
-rather than validation.  Whether typed verification generalises to other
-authors, domains, and writing workflows remains an open question.
+The proposal is offered as a model for the scholarly community to test,
+adapt, and evaluate.  Whether typed verification provides genuine value
+across authors, domains, and writing workflows remains an open
+empirical question.
 
 
 % ===============================================================
@@ -601,8 +523,7 @@ the rest.
 \section{Self-Application of the Typed Verification Framework}
 \label{app:self}
 
-This paper uses the framework it describes.  Unlike the two
-retrospective audits in Section~4, the claim registry for this
+This paper uses the framework it describes.  The claim registry for this
 manuscript was maintained during writing---entries were registered,
 typed, and verified as the paper was drafted.  This appendix summarises
 that registry to provide a prospective data point that reviewers can
@@ -676,17 +597,18 @@ during verification.
 \midrule
 Claim     & Different unit types require different verification
             procedures. \\
-Grounds   & Proposition audit entry H4 was scored speculative (0.25)
-            under claim-level verification but earned emerging under
-            Toulmin analysis (4/5 criteria met, premises independently
-            verified). \\
+Grounds   & A registry entry classified as a source-backed claim can be
+            scored at low confidence for lacking a citation, even when
+            its underlying reasoning would satisfy a Toulmin-style
+            argument checklist (premises verified, warrant logically
+            valid). \\
 Warrant   & If applying the wrong verification procedure to a correctly
             reasoned entry produces a false failure, then type-specific
             procedures are necessary to avoid systematic
             misclassification. \\
-Qualifier & Emerging---demonstrated in one retrospective audit; not
-            independently validated. \\
-Rebuttal  & The evidence rests on a single worked example; a larger
+Qualifier & Emerging---argued on design rationale; not independently
+            evaluated across multiple paper projects. \\
+Rebuttal  & The argument rests on a structural illustration; a larger
             sample across domains would be needed to establish
             generalisability. \\
 \bottomrule
@@ -710,18 +632,13 @@ traditions and may need adaptation for other scholarly conventions.
 
 \subsection*{Corrections discovered during verification}
 
-The verification process caught four categories of issue before
+The verification process caught two categories of issue before
 submission: (1)~the EQUATOR guideline count was corrected from
-approximately 500 to nearly 700 (S2-1); (2)~the citation hallucination
+approximately 500 to nearly 700 (S2-1); and (2)~the citation hallucination
 claim (S1-1) initially lacked a source, prompting a literature search
-that identified \citet{mugaanyi2024}; (3)~the retyping count for the
-proposition audit was corrected from 15/2/4 to 16/2/3 to match the
-audit source table (S4-1); and (4)~six confidence calibration issues
-were identified in the technology audit (S4-2), where manuscript
-language was more confident than the evidence warranted.  These
-corrections---ranging from a factual error to missing evidence to
-miscalibrated language---are the kinds of issues the framework is
-designed to catch.
+that identified \citet{mugaanyi2024}.  These
+corrections---ranging from a factual error to missing evidence---are the
+kinds of issues the framework is designed to catch.
 
 
 % ===============================================================

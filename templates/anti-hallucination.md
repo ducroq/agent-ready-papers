@@ -125,11 +125,11 @@ Both failures share the same mechanism: the first URL chosen does not carry the 
 
 - Always, when the source is a website and the claim is P0 or P1
 - Always, when a first WebFetch returns "topic not mentioned" and the claim's importance to the argument justifies a second attempt
-- Skip the ladder when the topic is unambiguously not in the site's domain (a CPR-manikin site is unlikely to host fascism-spectrum content; don't burn cycles confirming the obvious)
+- Skip the ladder when the topic is unambiguously not in the site's domain (don't burn cycles confirming the obvious)
 
 ### Adoption-readiness
 
-Battle-tested through two independent instances in a single grant-application session (2026-05-22) — see [`audits/feedback-from-grant-application.md`] or [ducroq/agent-ready-papers#8](https://github.com/ducroq/agent-ready-papers/issues/8) Proposal 2. The ladder structure is stable. A companion failure mode (transport-level WebFetch 403 with bounded WebSearch fallback) is tracked separately as the incubating Proposal 3 in the same issue and has not been promoted to a checklist step.
+The ladder structure is stable across applications. A companion failure mode (transport-level WebFetch 403 with bounded WebSearch fallback) is tracked separately and has not been promoted to a checklist step.
 
 ---
 
@@ -137,7 +137,7 @@ Battle-tested through two independent instances in a single grant-application se
 
 *Applies only to projects that contain PROVOCATION entries — speculative-design, design-fiction, diegetic-prototype work. See [DR-010](../decisions/DR-010_provocation-unit-type.md). Standard empirical and methodological projects can skip this section.*
 
-The Steps 0–6 checklist guards against the standard hallucination: an agent invents a source for a real-sounding statement. PROVOCATIONs surface the *inverse* failure mode: an agent presents a speculation *as if* it had a citable source. A fictional FSD criterion ending in `[Author, Year]` is a hallucination *into fictional territory* — the exact opposite move from standard fabrication.
+The Steps 0–6 checklist guards against the standard hallucination: an agent invents a source for a real-sounding statement. PROVOCATIONs surface the *inverse* failure mode: an agent presents a speculation *as if* it had a citable source. A fictional speculative-design criterion ending in `[Author, Year]` is a hallucination *into fictional territory* — the exact opposite move from standard fabrication.
 
 The check has to run in both directions:
 
@@ -161,14 +161,14 @@ For every entry in a project with PROVOCATION enabled, before running Steps 0–
 
 ### Worked Example
 
-**Agent output (in an FSD-style speculative-design book):**
-> "Criterion A.1 — Strong preference for in-group members and activities (DSM-FSD §301.42, American Psychiatric Association, 2025)."
+**Agent output (in a speculative-design book imitating DSM diagnostic form):**
+> "Criterion A.1 — Strong preference for in-group members and activities (DSM-X §301.42, American Psychiatric Association, 2025)."
 
 | Check | Action | Result |
 |-------|--------|--------|
-| Step 0 (DOI / Scholar) | Search "DSM-FSD §301.42 American Psychiatric Association 2025" | FAIL — no such reference |
+| Step 0 (DOI / Scholar) | Search "DSM-X §301.42 American Psychiatric Association 2025" | FAIL — no such reference |
 | Step Z.1 | Source not verified — continue Step Z | — |
-| Step Z.2 | Project is speculative-design; the FSD diagnostic entry is a diegetic prototype by design (DR-010, Auger 2013) | No source can apply |
+| Step Z.2 | Project is speculative-design; the diagnostic entry is a diegetic prototype by design (DR-010, Auger 2013) | No source can apply |
 | Step Z.3 | Tier: **CRITICAL** — the fiction critiques DSM diagnostic reification by imitating its form | — |
 | Step Z.4 | Required prose marker for CRITICAL: *"By imitating this DSM form we ask…"* | Add to manuscript |
 
@@ -194,7 +194,7 @@ Use up to three passes, each escaping a specific bias:
 
 Passes 1 and 2 are complementary, not redundant — in the triggering observation, different model sizes within the same family caught essentially disjoint issues. Pass 3 is opt-in for high-stakes content; without the style/voice filter, most cross-vendor suggestions will be style violations the human has to manually discard.
 
-**Evidence base:** N=1 session at blog scale (2026-05-11, dev.jeroenveen.nl). The three-pass structure and style-filter requirement are stable; specific cost-tier defaults are provisional pending paper-scale application. See DR-011 *Revisit If* for falsifiable demotion paths.
+The three-pass structure and style-filter requirement are stable; specific cost-tier defaults are provisional pending paper-scale application. See DR-011 *Revisit If* for falsifiable demotion paths.
 
 ---
 

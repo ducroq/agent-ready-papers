@@ -72,7 +72,7 @@ If accepted, the following changes land together as a single coordinated commit 
 ### What stays unchanged
 
 - **DR-010 itself.** The decision content (PROVOCATION = designed artefact, Auger criteria, separate confidence axis, opt-in default) is not revisited; only its surface in the templates and README is restructured.
-- **Existing PROVOCATION semantics** for projects that already use them (e.g. FSD). The extension doc is the same content, in a different location.
+- **Existing PROVOCATION semantics** for projects that already use them. The extension doc is the same content, in a different location.
 - **Conditional gates** (2.6, 2.7, 2.8) and the application-class statements (paper / speculative-design / decision-support). Those already follow the opt-in pattern this DR proposes to extend to PROVOCATION.
 
 ## Consequences
@@ -86,12 +86,12 @@ If Accepted:
 
 If Rejected:
 
-- DR-014 is closed with the rationale (e.g., Paper 1 impact too high, or FSD assumes inlined templates). Reviewer 1's concern is addressed via Option C or D as fallback (lighter relabelling rather than restructure).
+- DR-014 is closed with the rationale (e.g., Paper 1 impact too high, or speculative-design adopters assume inlined templates). Reviewer 1's concern is addressed via Option C or D as fallback (lighter relabelling rather than restructure).
 
 ## Revisit If
 
 - The Paper 1 impact assessment reveals migration cost exceeds the cognitive-load saving (e.g., dozens of cross-references that would need updating). Option C (README-only fold) becomes the fallback.
-- A speculative-design adopter (FSD or future) reports that extension-as-separate-doc is harder to follow than inlined. The pattern would be reconsidered, possibly with a hybrid (inline for adopters opted into PROVOCATION via a flag in their CLAUDE.md).
+- A speculative-design adopter reports that extension-as-separate-doc is harder to follow than inlined. The pattern would be reconsidered, possibly with a hybrid (inline for adopters opted into PROVOCATION via a flag in their CLAUDE.md).
 - DR-012's decision-support class accumulates similar friction (decision-support-only content cluttering the empirical-paper core). The `extensions/` directory pattern would generalise.
 - A fourth application class emerges where the `extensions/` pattern visibly does not scale (e.g., extensions overlapping or contradicting). The framework would need a higher-level layering scheme.
 
@@ -107,7 +107,7 @@ If Rejected:
 Before this DR can be promoted from Proposed to Accepted, three checks are needed:
 
 1. **Paper 1 reference audit.** Grep `papers/perspective/` for `PROVOCATION`, `Step Z`, and `GROUNDED` / `EXTRAPOLATED` / `PROVOCATIVE` / `CRITICAL` (in the confidence-tier sense, not as ordinary English). Confirm no broken references after the restructure. Paper 1 does not currently use PROVOCATION entries (per CHANGELOG v1.2.0: registry migrated to CLAIM / ARGUMENT / PROPOSITION sub-tables), so the audit should be clean — but checking before changing templates is the discipline this framework exists for.
-2. **FSD template-adapter check.** The Fascism Spectrum Disorder book applied DR-010 in 2026-05-10 (per `audits/feedback-from-fsd.md`). Its locally-adapted templates may inline PROVOCATION content. Confirm with the FSD maintainer (same person, different working directory) whether the extension-as-separate-doc structure is acceptable from the adopter side.
+2. **Speculative-design adopter check.** If a speculative-design adopter has locally-adapted templates that inline PROVOCATION content, confirm whether the extension-as-separate-doc structure is acceptable from the adopter side before committing the restructure.
 3. **Version-impact decision.** Decide whether the restructure ships as **v1.4.0** (MINOR — behaviour unchanged from adopter perspective, content relocated) or **v2.0.0** (MAJOR — template surface visibly changed). This affects how the change is described in `UPGRADING.md` and whether existing pinned consumers are expected to review the new extension docs.
 
 The DR ships as Proposed so the layering decision is visible and discussable without forcing template changes in this session. Issue [#18](https://github.com/ducroq/agent-ready-papers/issues/18) stays open as the implementation tracker.

@@ -13,15 +13,12 @@ Last updated: 2026-06-01
 - [x] Broaden title: "Reporting Guidelines for Reasoning" (was "Beyond Citation Checking")
 - [x] Add Discussion-section bridging sentence in Section 2
 - [x] Add fourth future direction (Discussion sections of empirical papers) in Section 5
-- [x] Add calculation verification as failure mode (S1-5) — driven-pendulum evidence (Gemini 0/3 vs Sonnet 3/3)
+- [x] Add calculation verification as failure mode (S1-5)
 - [x] Add fifth future direction (calculation verification as distinct procedure) in Section 5
-- [x] Create equation-verification-journey.md (discovery log)
-- [x] Update driven-pendulum audit with §9 (equation verification blind spot)
 - [x] Integrate calculation verification into framework README
 - [x] Update claim registry (S1-5, coverage 19/19)
-- [x] Full framework reflection (2026-03-16): 5-agent audit, sync Paper 1 files with templates, DR-009, gotcha log cleanup
+- [x] Full framework reflection (2026-03-16): sync Paper 1 files with templates, DR-009, gotcha log cleanup
 - [x] Migrate Paper 1 registry to per-type sub-tables (v1.3.0, closes #11) — self-eating-dog-food restored
-- [x] §4 rewrite from "three audits" to "two audits" after Engineering Fidelity audits archived externally (v1.3.0) — **Gate 2 invalidation acknowledged; Gate 2.5 re-check is the co-author's call at Gate 3**
 
 ## Active (Paper 1)
 
@@ -30,7 +27,6 @@ Last updated: 2026-06-01
   - Title broadening: "Reporting Guidelines for Reasoning"
   - Appendix A self-demonstration
   - S1-5 calculation verification as a failure mode
-  - **§4 evidence base reduced from three audits to two** (Gate 2.5 re-check needed)
 - [ ] Decide submission article type: "Original Article" or "Opinion"
 - [ ] Consider pre-submission enquiry to LP editor (Laura Dormer or Michelle Urberg)
 

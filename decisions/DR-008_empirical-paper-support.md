@@ -5,26 +5,24 @@ status: Accepted
 date: 2026-03-02
 ---
 
-> **2026-06-01 note:** The EngineeringFidelity retrofit referenced below in the findings table was archived outside this repo as of v1.3.0 (see `CHANGELOG.md`). The findings stand as historical record of the audits that motivated this DR's decisions; the archive location is the OneDrive path documented in v1.3.0's release notes. The decisions reached here (Tier-E weight clarification, methodological-facts exception) are not affected.
-
 ## Context
 
-Three retrofit audits (Proposition, EngineeringFidelity, Technology Paper) validated the framework against real paper projects. All three independently surfaced the same root issue: the framework was designed around non-empirical papers and needs explicit support for empirical papers where the primary evidence is the authors' own experimental data.
+The framework was originally designed around non-empirical papers; review against empirical paper projects surfaces a recurring issue: the framework needs explicit support for empirical papers where the primary evidence is the authors' own experimental data.
 
-Five specific gaps were identified across the audits:
+Specific gaps identified:
 
-| Finding | Audit | Section |
-|---------|-------|---------|
-| Own data penalized by Tier E weight | Technology Paper | 7.1 |
-| GUM results should be ESTABLISHED | Technology Paper | 7.3 |
-| Pre-submission checklist needs empirical items | Technology Paper | 7.5 |
-| Tag-to-tier migration not documented | EngineeringFidelity | 7.1 |
-| Claims have lifecycle in empirical papers | EngineeringFidelity | 7.2 |
-| Coverage report needs phase awareness | EngineeringFidelity | 7.4 |
-| Reference claims confirmed as issue | EngineeringFidelity | 7.5 |
-| Reference claims don't fit tiers | Proposition | 7.2 |
+| Finding |
+|---------|
+| Own data penalized by Tier E weight |
+| GUM results should be ESTABLISHED |
+| Pre-submission checklist needs empirical items |
+| Tag-to-tier migration not documented |
+| Claims have lifecycle in empirical papers |
+| Coverage report needs phase awareness |
+| Reference claims confirmed as issue |
+| Reference claims don't fit tiers |
 
-The reference claims issue was already addressed by DR-004's "Special Cases: Reference Claims" addition. This DR addresses two of the remaining five gaps — the ones that fix real design flaws in the framework. The other three are deferred as process guidance (see below).
+The reference claims issue was already addressed by DR-004's "Special Cases: Reference Claims" addition. This DR addresses two of the remaining gaps — the ones that fix real design flaws in the framework. The others are deferred as process guidance (see below).
 
 ## Decision
 
@@ -46,7 +44,7 @@ Two targeted additions to `claim-registry.md` that fix design flaws where the fr
 
 ## Considered but Deferred
 
-Three additional items were identified in the audits but deferred because they add process guidance rather than fixing design flaws in the framework:
+Three additional items were identified but deferred because they add process guidance rather than fixing design flaws in the framework:
 
 ### Tag-to-Tier Migration Guide
 

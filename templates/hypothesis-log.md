@@ -53,7 +53,7 @@ Lifecycle: **open** → dormant → revisit (with evidence) → resolved (close 
 
 **Review by:** YYYY-MM-DD — backstop date. The agent flags entries past this in `/curate`.
 
-**Domain:** Tags for filtering (e.g. "DR-011 review patterns", "PROVOCATION layering", "Paper 1 verification", "FSD adapter")
+**Domain:** Tags for filtering (e.g. "DR-011 review patterns", "PROVOCATION layering", "Paper 1 verification")
 **Status:** open | open (low priority) | open (blocked on X) | dormant
 ```
 

@@ -11,16 +11,16 @@ superseded_by:
 
 DR-001 established a dual framing: the project's identity is "verification infrastructure for AI-augmented academic writing," and the SE mapping (claims as components, verification as testing, coverage as test coverage) is a pedagogical tool — useful for explaining the approach, but not the project's core identity. The concern was that calling it "systems engineering" overstates the analogy and invites the criticism that papers aren't systems.
 
-The Proposition retrofit audit (2026-03-02) tested this framing empirically. The audit applied the framework's templates to a real paper project and found that what was performed was not metaphorical SE — it was actual SE:
+On closer examination, what the framework performs is not metaphorical SE — it is actual SE:
 
 - **Conformance audit** of a project against a specification (the templates)
 - **Gap analysis** with severity classification (Critical/Moderate/Minor) and traceability
-- **Requirements reclassification** (retyping 21 registry entries by unit type = reclassifying requirements)
+- **Requirements reclassification** (retyping registry entries by unit type = reclassifying requirements)
 - **Type-specific test execution** (Toulmin/Whetten checklists = unit test procedures with pass/fail criteria)
-- **Coverage measurement** (76% overall, 100% P0 = test coverage metrics)
+- **Coverage measurement** (P0 / P1 / P2 coverage = test coverage metrics)
 - **Traceability matrix** linking every finding to source artifacts in both directions
 
-The most telling evidence: entry H4 was scored 0.25/SPECULATIVE because it was evaluated as a source-backed claim. It has no citation because it is not a claim — it is an argument. Applying the correct test procedure (Toulmin checklist instead of source verification) revealed that all three premises are verified and the warrant is logically valid. This is exactly what happens in SE when the wrong test procedure is applied to a component: you get a false failure. The fix was correct classification followed by the appropriate test — not better evidence.
+A telling illustration: an entry can be scored low-confidence because it is evaluated as a source-backed CLAIM when it is in fact an ARGUMENT. Applying the correct test procedure (Toulmin checklist instead of source verification) can reveal that all premises are verified and the warrant is logically valid. This is exactly what happens in SE when the wrong test procedure is applied to a component: you get a false failure. The fix is correct classification followed by the appropriate test — not better evidence.
 
 ## Options Considered
 
@@ -63,9 +63,8 @@ This partially supersedes DR-001's framing. DR-001's structure (problem → solu
 
 ## Consequences
 
-- **Paper 2 framing:** The contribution claim upgrades from "verification infrastructure inspired by SE" to "lightweight SE applied to academic writing, validated through retrofit audit"
+- **Paper 2 framing:** The contribution claim upgrades from "verification infrastructure inspired by SE" to "lightweight SE applied to academic writing"
 - **README:** The SE mapping table moves from "mental model" status to "this is what the framework is" — though the table itself doesn't change
-- **Audit as evidence:** The Proposition retrofit audit (`audits/proposition-retrofit.md`) becomes the primary evidence for the identity claim. H4's reclassification is the clearest single example.
 - **DR-001:** Not fully superseded — the dual framing structure and the process-level positioning remain. Only the characterization of the SE mapping changes from metaphor to identity.
 - **Defensibility requirement:** Paper 2 must explicitly address the objection that informal SE application doesn't qualify as SE. The counter: formal vs. informal is a spectrum, and the framework's artifacts pass the functional test (they detect real defects using SE methods).
 

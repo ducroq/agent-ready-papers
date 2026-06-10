@@ -272,7 +272,7 @@ Reflexive marker: [Quote the exact prose phrasing that signals fictionality]
 
 If no marker is present in the prose: rewrite to add it, or downgrade the entry to EMERGING CLAIM with additional sources. PROVOCATIONs without reflexive markers are indistinguishable from authoritative-toned hallucinations and undermine the whole speculative-design contract with the reader.
 
-**The inverse-hallucination risk:** a CLAIM hallucination invents a source for a real-sounding statement. A PROVOCATION risks the reverse — being read as a CLAIM with a citable source when no source applies. An agent presenting a fictional FSD criterion ending in `[Author, Year]` has hallucinated *into* fictional territory. See `anti-hallucination.md` Step Z.
+**The inverse-hallucination risk:** a CLAIM hallucination invents a source for a real-sounding statement. A PROVOCATION risks the reverse — being read as a CLAIM with a citable source when no source applies. An agent presenting a fictional speculative-design criterion ending in `[Author, Year]` has hallucinated *into* fictional territory. See `anti-hallucination.md` Step Z.
 
 ---
 

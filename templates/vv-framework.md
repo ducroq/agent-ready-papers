@@ -266,7 +266,7 @@ For projects engaging actively contested ethical territory — political, religi
 - [ ] Reviewer composition for the contested chapters matches the traditions discussed (the work is reviewed by readers from each)
 - [ ] Project-specific operational rules from the contested-topic DR (e.g., paired-mirror rules, vocabulary substitution policies) are applied chapter by chapter
 
-See `audits/feedback-from-fsd.md` Tier 1 item 3 for the source pattern; project-specific operational rules belong in a DR per the project's `decision-record.md` template.
+Project-specific operational rules belong in a DR per the project's `decision-record.md` template.
 
 ### Gate 2.8: Voice Consistency (conditional — applies when the work has a voice-driven register)
 
@@ -317,4 +317,4 @@ vv/
 
 ---
 
-*Version: 2.4 — v2.1: Gate 2.5, PROPOSITION boundary condition quality criteria, falsification checklist, Toulmin grounds tier constraint (DR-004 Issues #1–#4). v2.2: scope note (informal technical communication), section-level coverage analysis, mistype re-check in Gate 2, full reflection pass (2026-03-16). v2.3: PROVOCATION as opt-in fifth unit type for speculative-design work (DR-010, 2026-05-10). v2.4: project-conditional Gates 2.6 (Reflexivity), 2.7 (Ethical Review), 2.8 (Voice Consistency) added (2026-05-10, FSD audit Tier 1 items 3+4).*
+*Version: 2.4 — v2.1: Gate 2.5, PROPOSITION boundary condition quality criteria, falsification checklist, Toulmin grounds tier constraint. v2.2: scope note (informal technical communication), section-level coverage analysis, mistype re-check in Gate 2. v2.3: PROVOCATION as opt-in fifth unit type for speculative-design work (DR-010). v2.4: project-conditional Gates 2.6 (Reflexivity), 2.7 (Ethical Review), 2.8 (Voice Consistency) added.*

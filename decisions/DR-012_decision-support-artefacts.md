@@ -9,18 +9,18 @@ date: 2026-06-01
 
 The framework was originally developed for academic papers. It has since extended along two axes the original name (`agent-ready-papers`) does not advertise:
 
-- **DR-010** (2026-05-10) added PROVOCATION as a fifth unit type for **speculative-design / design-fiction** work, after the FSD book activated DR-004's reserved non-empirical slot.
-- **DR-011** (2026-05-12) generalised the multi-model review pattern using a **LinkedIn cross-post + a blog article** as the empirical surface, not a paper. Subsequent applications at grant scale (NLnet v3, 2026-05-22) and at template-revision scale (2026-05-27) widened the evidence base further.
+- **DR-010** (2026-05-10) added PROVOCATION as a fifth unit type for **speculative-design / design-fiction** work, activating DR-004's reserved non-empirical slot.
+- **DR-011** (2026-05-12) generalised the multi-model review pattern to non-paper content (blog-scale prose).
 
-A worked third non-paper application emerged 2026-05-30 in `C:/local_dev/new_hardware/vv/`: a **decision-support artefact for a personal hardware-purchase decision** (~€2k–5k commit, gated on revenue, November 2026 deadline). The framework was applied largely unchanged — typed registry, source tiering, confidence-to-language mapping, anti-hallucination Step 0 + 6-step, DR-011 multi-pass review, Toulmin/Whetten checklists, and the gotcha-log curate loop all worked first time without paper-specific scaffolding adapted.
+A worked third non-paper application emerged in a **decision-support artefact for a consequential personal decision** (purchase commitment gated on a deadline). The framework was applied largely unchanged — typed registry, source tiering, confidence-to-language mapping, anti-hallucination Step 0 + 6-step, DR-011 multi-pass review, Toulmin/Whetten checklists, and the gotcha-log curate loop all worked first time without paper-specific scaffolding adapted.
 
 The framework's README already notes that informal technical communication (Slack, WhatsApp, emails) is in-scope. What is missing is a named *third application class* — alongside the academic-paper class and the speculative-design class — that decision-support artefacts can be recognised as, so future projects know whether the framework applies before they invest in the scaffold.
 
 This DR proposes naming that class.
 
-### Triggering observation (2026-05-30 session at `new_hardware/vv/`)
+### Observation pattern
 
-79-entry registry across 8 sections; 71% overall coverage / 78% on P0; DR-011 Pass 1 (Haiku) + Pass 2 (Opus) applied with near-zero overlap (DR-011 disjoint-coverage prediction replicated). Confidence-to-language mapping, anti-hallucination Step 0 + 6-step, and Whetten boundary-condition machinery all fired correctly. Full session record and pattern observations in [`audits/feedback-from-decision-support.md`](../audits/feedback-from-decision-support.md).
+Decision-support work with a moderately-sized registry, DR-011 multi-pass review applied (Pass 1 + Pass 2), and DR-011 disjoint-coverage between Haiku and Opus replicated. Confidence-to-language mapping, anti-hallucination Step 0 + 6-step, and Whetten boundary-condition machinery all fired correctly on this content type.
 
 ## Options Considered
 
@@ -33,7 +33,7 @@ This DR proposes naming that class.
 ### Option B: Rename the repo to acknowledge wider scope
 - (+) Honest about the framework's current span
 - (-) Breaks every external reference (commits, links, citations in published work, GitHub issues)
-- (-) The repo-name caveat is already deferred per `audits/feedback-from-fsd.md`; this DR is not the right surface to force that decision
+- (-) The repo-name question is a logistical concern best handled separately from scope expansion
 - (-) Conflates *scope expansion* (a methodological question) with *naming* (a logistical question)
 
 ### Option C: Name decision-support artefacts as a third opt-in application class, leave the repo name alone
@@ -96,32 +96,22 @@ The framework should not be applied to:
 
 ### Adoption readiness
 
-Borrowing the Tier 1/2/3 merge-readiness split from `audits/feedback-from-fsd.md`:
-
-- **Ready to merge (battle-tested through this decision):**
+- **Ready to merge through this decision:**
   - The application-class definition and structural assumptions above
   - A README scope section listing the three classes (academic / speculative-design / decision-support) with one-line scope each
   - Acknowledgement that the framework's existing scaffolding applied unchanged in the worked example
 
-- **Incubate (proven once at decision-artefact scale, re-evaluate at next application):**
+- **Provisional (re-evaluate at next application):**
   - The five-condition test as a sufficient gate for applying the framework (currently sufficient but not necessary; some projects may benefit even when one condition is borderline)
   - Whether the framework needs a per-class adaptation pattern (e.g., "what to skip for decision-support") in `templates/CLAUDE.md`, or whether the README scope statement suffices
-
-- **Pattern note (useful when applicable):**
-  - Three specific failure modes surfaced at decision-support scale (see `audits/feedback-from-decision-support.md`) that may generalise back to paper work; each marked *incubate* pending a second sighting.
-
-## Patterns Surfaced — Filed Separately
-
-The worked example surfaced three patterns that are general framework improvements (category-swap traps in evidence selection; trade-press headline numbers as inverse-hallucination candidates; workload-fit smuggling in synthesis prose). These are not specific to the decision-support class; they are observations made during the application. To keep this DR focused on the application-class question, the patterns are filed in [`audits/feedback-from-decision-support.md`](../audits/feedback-from-decision-support.md), each marked *incubate* pending a second sighting before promotion to a template checklist line.
 
 ## Consequences
 
 - `README.md`: add a "What does this framework apply to?" section listing the three application classes (academic / speculative-design / decision-support) with one-line scope each. The existing "what doesn't work" section that names informal technical communication remains as a finer-grained negative scope.
 - `decisions/DR-006_publication-roadmap.md`: review whether Paper 2 (DSR) should engage the third class as part of its evaluation scope, or whether the third class is out-of-scope for Paper 2 and warrants its own write-up.
-- `templates/CLAUDE.md`: consider a per-class adaptation note (what to keep, what to skip) — incubate pending second decision-support application.
-- `audits/feedback-from-decision-support.md`: filed with this DR. Captures the worked example, what confirmed unchanged, what did not apply, and the three patterns surfaced (each marked *incubate*). Follows the pattern of `feedback-from-fsd.md`, `feedback-from-blog-application.md`, `feedback-from-grant-application.md`, `feedback-from-template-revision.md`.
-- Active papers (`papers/perspective/`): no immediate action. If Paper 1 is later restructured along the methodological-reframe axis the maintainer is currently considering, the three-class scope statement may inform §2's gap description.
-- The repo-name question (`agent-ready-papers` vs. a wider name) remains deferred per `audits/feedback-from-fsd.md`. This DR does not force that decision; it does, however, raise the cost of *not* deciding by adding a third application class beyond the name's scope.
+- `templates/CLAUDE.md`: consider a per-class adaptation note (what to keep, what to skip) — provisional pending second decision-support application.
+- Active papers (`papers/perspective/`): no immediate action.
+- The repo-name question (`agent-ready-papers` vs. a wider name) remains deferred. This DR does not force that decision; it does, however, raise the cost of *not* deciding by adding a third application class beyond the name's scope.
 
 ## Key Insight (Hypothesis, Not Established)
 
@@ -139,10 +129,8 @@ Naming the third class is justified by the worked example without committing to 
 
 ## Evidence Base
 
-- Worked example: `C:/local_dev/new_hardware/vv/` (2026-05-30 session). 79 registry entries, 71% coverage, DR-011 multi-pass applied (Pass 1 + Pass 2; Pass 3 deferred).
 - Originating issue: [ducroq/agent-ready-papers#14](https://github.com/ducroq/agent-ready-papers/issues/14)
-- Precedent for forward-feedback flowing back as a DR: `audits/feedback-from-fsd.md` (DR-010), DR-011 (blog application).
-- N=1 caveat: the worked example is a single project, single author, single domain (hardware purchase). Generalisability to vendor-selection, architectural choice, regulated-domain adoption, and policy-decision support is *plausible* on the structural-assumptions argument but not yet exercised.
+- N=1 caveat: the worked example is a single project, single author, single domain. Generalisability to vendor-selection, architectural choice, regulated-domain adoption, and policy-decision support is *plausible* on the structural-assumptions argument but not yet exercised.
 
 ## Open Questions Carried Forward
 

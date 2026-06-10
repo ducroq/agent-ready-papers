@@ -25,28 +25,20 @@ Paper 3 exists because the equation-checker discovery showed that the SE mapping
 
 **Priority:** High — this is a concrete, evidence-backed addition to the framework artifact
 
-**Context:** The driven-pendulum project revealed that the framework's three verification types (source checking for CLAIMs, Toulmin for ARGUMENTs, Whetten for PROPOSITIONs) have a blind spot: none verify arithmetic. A controlled comparison showed that an LLM prompted to "assess soundness" missed 3/3 equation errors, while an LLM prompted to "numerically reproduce" caught all three. The errors survived because they produced plausible-looking results — the same fluency problem Paper 1 identifies for arguments, but in the quantitative domain.
+**Context:** The framework's three verification types (source checking for CLAIMs, Toulmin for ARGUMENTs, Whetten for PROPOSITIONs) have a blind spot: none verify arithmetic. Plausibility review can miss arithmetic errors that mechanical numerical reproduction catches. The errors survive because they produce plausible-looking results — the same fluency problem Paper 1 identifies for arguments, but in the quantitative domain.
 
 **What to draft:**
 - [ ] Position calculation verification as a fourth verification type in the DSR artifact
-- [ ] Present the Gemini-vs-Sonnet comparison as evaluation evidence (structured procedure beats impressionistic review — same principle as typed verification)
 - [ ] Describe the equation-checker prompt (`templates/equation-checker.md`) as an artifact component
 - [ ] Connect to the V-model: equation checking sits at the implementation/detailed-design boundary
 - [ ] Discuss limitations: LLM arithmetic is imperfect beyond ~4 significant figures; symbolic math backends (SymPy) would strengthen this
 - [ ] Frame the meta-insight: the framework's own blind spot was discovered by applying its own principle (structured > impressionistic) to a domain it hadn't considered
 
-**Evidence files:**
-- `audits/equation-verification-journey.md` — discovery narrative
-- `audits/driven-pendulum-retrofit.md` §9 — the experiment and results
-- `C:\local_dev\driven-pendulum\docs\Sonnet_theory_review.md` — Sonnet review (3/3 found)
-- `C:\local_dev\driven-pendulum\docs\gemini_theory_review.md` — Gemini review (0/3 found)
-- `C:\local_dev\driven-pendulum\tools\equation-checker\` — original tool
-
 **Key argument (Toulmin sketch):**
 - **Claim:** Calculation verification should be recognised as a distinct verification type alongside source checking, argument analysis, and proposition evaluation.
-- **Grounds:** Three equation errors survived plausibility review but were caught by mechanical reproduction. The errors were in different categories (LABEL, FORMULA, INCONSISTENT) but shared the property of producing plausible results.
+- **Grounds:** Equation errors can survive plausibility review but be caught by mechanical reproduction, sharing the property of producing plausible results.
 - **Warrant:** If structured numerical reproduction catches errors that expert assessment misses, and these errors can propagate into design decisions and published claims, then numerical reproduction is a necessary verification procedure that the existing types do not cover.
-- **Qualifier:** Emerging — demonstrated in one project (68 equations), not independently validated across domains.
+- **Qualifier:** Emerging — not independently validated across domains.
 - **Rebuttal:** LLM arithmetic is unreliable beyond ~4 significant figures. For high-precision work, symbolic math tools are needed. The equation-checker prompt is a starting point, not a complete solution.
 
 ---
@@ -71,7 +63,7 @@ The equation-checker is the first example: a prompt-based agent that performs on
 | Regression testing | Revision checker | Did this edit break something that was previously correct? | No |
 | Boundary analysis | Edge case checker | Do claims hold at the boundaries of stated conditions? (e.g., "works for all temperatures" — does it?) | No |
 | FMEA | Failure mode checker | What are the most likely ways each claim could be wrong? What's the impact? | No |
-| Requirements traceability | Registry completeness | Are all assertions in the manuscript tracked in the registry? (The gap the retrofit audits keep finding) | No (manual audit) |
+| Requirements traceability | Registry completeness | Are all assertions in the manuscript tracked in the registry? | No (manual audit) |
 | Formal inspection (Fagan) | Structured peer review | Systematic review with roles (moderator, reader, recorder) simulated by agents | Partial (review-prompt.md) |
 | Acceptance testing | Journal compliance | Does the manuscript meet all target journal requirements? | No |
 | Configuration audit | Reference integrity | Do all citations resolve? Do DOIs match? Do figure/table references exist? | Partial (anti-hallucination.md) |
@@ -79,7 +71,7 @@ The equation-checker is the first example: a prompt-based agent that performs on
 **What to draft:**
 - [ ] Survey which SE verification types have plausible paper-verification analogues
 - [ ] For each candidate: define the prompt, the input, and the output format
-- [ ] Test 2-3 candidates on existing audited papers (proposition, technology)
+- [ ] Test 2-3 candidates on a prospective case study
 - [ ] Assess which provide genuine signal vs which are redundant with existing procedures
 - [ ] Design a verification pipeline: which agents run when, in what order, with what dependencies
 - [ ] Frame as a V&V framework for academic papers (the SE mapping made concrete)
@@ -94,7 +86,7 @@ The equation-checker is the first example: a prompt-based agent that performs on
 
 ### Next concrete step
 
-Build and test 2 more subagents (cross-section consistency + registry completeness) on the 3 audited papers. If they find real issues the retrofit audits missed, Paper 3 has legs.
+Build and test 2 more subagents (cross-section consistency + registry completeness) on a prospective case study. If they find real issues a manual review misses, Paper 3 has legs.
 
 ---
 

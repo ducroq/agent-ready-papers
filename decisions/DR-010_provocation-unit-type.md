@@ -7,11 +7,9 @@ date: 2026-05-10
 
 ## Context
 
-DR-004 (2026-03-02) added three registry unit types — CLAIM, ARGUMENT, PROPOSITION — and reserved DESIGN PRINCIPLE, PROCEDURE, and SYNTHESIS as slots to activate when the framework was applied to non-empirical work. DR-006 (publication roadmap) anticipated such a project. *Fascism Spectrum Disorder* (FSD), a speculative-design book scaffolded against the framework in April–May 2026, is that project. The full audit is in [`audits/feedback-from-fsd.md`](../audits/feedback-from-fsd.md).
+DR-004 (2026-03-02) added three registry unit types — CLAIM, ARGUMENT, PROPOSITION — and reserved DESIGN PRINCIPLE, PROCEDURE, and SYNTHESIS as slots to activate when the framework was applied to non-empirical work. DR-006 (publication roadmap) anticipated such a project. Applying the framework to a speculative-design book scaffolding (April–May 2026) surfaced a class of registry units that none of the existing or reserved types describes:
 
-FSD surfaced a class of registry units that none of the existing or reserved types describes:
-
-- The DSM-form *FSD diagnostic entry* — a fictional clinical category, held with seriousness inside the fiction while the reader knows it is fictional (a *diegetic prototype* in Kirby's sense).
+- A DSM-form *diagnostic entry* — a fictional clinical category, held with seriousness inside the fiction while the reader knows it is fictional (a *diegetic prototype* in Kirby's sense).
 - A reflexive *Ask* directed at the reader.
 - An *It Is Both* paradox box that refuses resolution by design.
 
@@ -34,7 +32,7 @@ A literature search surfaced Auger (2013, *Digital Creativity* 24:1) on speculat
 ### Option C: Add PROVOCATION as a fifth unit type with Auger-criteria verification and a separate confidence axis
 - (+) Names the artefact accurately and gives it a verification procedure that fits its mode
 - (+) Confidence tiers (GROUNDED / EXTRAPOLATED / PROVOCATIVE / CRITICAL) measure quality of speculation, not strength of evidence — distinct axis, no conflation with the ESTABLISHED/SUPPORTED/EMERGING/SPECULATIVE scale
-- (+) Battle-tested in the FSD scaffold across the diagnostic entry, reflexive Asks, paradox boxes, and the calibration practice
+- (+) Covers diegetic prototypes, reflexive Asks, paradox boxes, and the calibration practice
 - (-) Adds complexity for projects that don't need it — mitigated by opt-in (default registry type stays CLAIM)
 - (-) PROVOCATION joins DESIGN PRINCIPLE / PROCEDURE / SYNTHESIS as four reserved-and-now-active types; clearer naming may be needed if more activate
 
@@ -109,8 +107,6 @@ PROVOCATION is **opt-in**. Default registry type remains CLAIM. Activate when th
 |--------|-------------|
 | Auger (2013, *Digital Creativity* 24:1) | Four-criteria verification (plausible, generative, reflexive, ethically held) |
 | Kirby (2010) on diegetic prototypes | Fictional artefacts held with seriousness inside the fiction; reader knows fictional |
-| FSD scaffold (`vv/PAPER_VV_FRAMEWORK.md`) | Battle-tested registration of PROVOCATIONs across diagnostic entry, Asks, paradox boxes, calibration practice |
-| FSD audit (`audits/feedback-from-fsd.md`) | Synthesis of what generalised back from the FSD scaffold |
 | DR-004 (2026-03-02) | Reserved the non-empirical-pivot slot this DR partially activates |
 
 ## Revisit If

@@ -12,10 +12,8 @@ The research conducted for DR-004 revealed a concrete, publishable gap: EQUATOR 
 The project has sufficient raw material for publication:
 - A quantifiable landscape gap (EQUATOR)
 - An artifact (typed verification registry with Toulmin/Whetten checklists)
-- Evaluation evidence from two real paper projects (IEEE TIM, medical education)
 - 47 indexed literature sources
 - Five decision records documenting design rationale
-- A methodology narrative (patterns extracted, cross-validated, generalized)
 
 The framework will be used to write the papers about the framework.
 
@@ -42,8 +40,7 @@ Two papers, sequenced to build on each other:
 1. The problem: AI writing failure modes beyond citation hallucination (confidence inflation, argument validity, scope creep)
 2. The landscape gap: tool-level and model-level solutions exist; process-level is missing; EQUATOR covers empirical only
 3. The proposal: typed verification registry (CLAIM/ARGUMENT/PROPOSITION) with per-type checklists
-4. Preliminary evidence: patterns extracted from three real projects
-5. Call to action: the scholarly community needs verification infrastructure for AI-augmented writing
+4. Call to action: the scholarly community needs verification infrastructure for AI-augmented writing
 
 **Registry units:** Mostly CLAIMs (landscape data, EQUATOR statistics) + 2-3 ARGUMENTs (the gap interpretation) + 1 PROPOSITION (the call to action)
 
@@ -53,7 +50,7 @@ Two papers, sequenced to build on each other:
 
 **Working title:** "Verification Infrastructure for AI-Augmented Academic Writing: A Design Science Approach"
 
-**Core argument:** We present a designed artifact — a verification framework with typed registries, confidence-calibrated language mapping, quality gates, and anti-hallucination checklists — developed and evaluated across three paper projects. The artifact addresses the gap identified in Paper 1.
+**Core argument:** We present a designed artifact — a verification framework with typed registries, confidence-calibrated language mapping, quality gates, and anti-hallucination checklists. The artifact addresses the gap identified in Paper 1.
 
 **Target venues (in order of preference):**
 
@@ -68,18 +65,13 @@ Two papers, sequenced to build on each other:
 1. Problem identification: AI writing failure modes + EQUATOR gap
 2. Objectives: process-level verification for claims, arguments, propositions
 3. Design & development: the framework (registry, confidence tiers, anti-hallucination, quality gates, Toulmin/Whetten checklists)
-4. Demonstration: application to three paper projects
-5. Evaluation: coverage metrics, hallucination catch rate, reviewer feedback, cross-project pattern validation
+4. Demonstration: application to a prospective case study
+5. Evaluation: coverage metrics, hallucination catch rate, reviewer feedback
 6. Communication: this paper
 
 **Registry units:** Full mix of CLAIMs (literature, evaluation data), ARGUMENTs (interpretation of results), PROPOSITIONs (design principles, generalizability claims), and DESIGN PRINCIPLEs (activating DR-004's reserved types)
 
-**Evaluation evidence available:**
-- Proposition (medical education): confidence scoring, language mapping, 7 decision records
-- Technology Paper (IEEE TIM): architecture blueprint, peer review simulation (scored 4.4/5.0)
-- Cross-project pattern extraction: common patterns and complementary patterns identified; project-specific elements excluded
-
-**Timeline:** After Paper 1 is submitted. Requires gathering additional evaluation metrics from the source projects (and likely a new prospective case study, per Revisit If).
+**Timeline:** After Paper 1 is submitted. Likely requires a prospective case study (a new project applied with the framework from the start) to strengthen the evaluation chapter.
 
 ### Paper 3: SE-Inspired Verification Pipeline (Methods/Tools)
 
@@ -93,7 +85,7 @@ Two papers, sequenced to build on each other:
 
 **Depends on:** Building and testing 2-3 more subagents beyond the equation-checker.
 
-**Evidence:** `audits/equation-verification-journey.md`, `papers/perspective/backlog-paper2.md` (candidate subagent table)
+**Evidence:** `papers/perspective/backlog-paper2.md` (candidate subagent table)
 
 ## Sequencing
 
@@ -129,7 +121,7 @@ This serves as both methodology and additional evaluation evidence ("the framewo
 
 - Create a `papers/` directory (or separate repos) for each paper project when writing begins
 - Paper 1 can be drafted from existing material (README, DRs, literature folder)
-- Paper 2 requires going back to the source projects for quantitative evaluation data; a prospective case study (new project applied with the framework from the start) is likely needed to strengthen Paper 2's evaluation chapter
+- Paper 2 requires a prospective case study (new project applied with the framework from the start) to provide quantitative evaluation data for the evaluation chapter
 - Both papers need co-author(s) — domain expertise in scholarly communication or IS methodology
 - The literature folder (47 sources) serves as the starting point for related work in both papers
 

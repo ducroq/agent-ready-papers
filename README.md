@@ -1,6 +1,6 @@
 # Working With AI Agents: Academic & Technical Writing
 
-Verification infrastructure for AI-augmented academic and structured non-fiction writing — templates, quality gates, and session continuity that catch the failure modes automated tools miss. Patterns extracted from real paper projects, pressure-tested over 50+ agent sessions, and extended in 2026-05 to cover speculative-design and voice-driven non-fiction work (see [DR-010](decisions/DR-010_provocation-unit-type.md)).
+Verification infrastructure for AI-augmented academic and structured non-fiction writing — templates, quality gates, and session continuity that catch the failure modes automated tools miss. Covers conventional academic papers plus speculative-design and voice-driven non-fiction work (see [DR-010](decisions/DR-010_provocation-unit-type.md)).
 
 Automated citation checkers (RefChecker, scite.ai) and model-level solutions (RAG, [grounded generation](docs/framework-summary.md#terminology-note-grounding--grounded)) address part of the problem. This guide operates at the **process level** — the workflow templates, decision records, and verification systems that make the difference between an agent that hallucinates citations and one that produces submission-ready prose.
 
@@ -9,20 +9,6 @@ Companion to [agent-ready-projects](https://github.com/ducroq/agent-ready-projec
 **Current release:** v1.7.1 (2026-06-09) — see [`CHANGELOG.md`](CHANGELOG.md). Pin your project with `agent-ready-papers: v1.7.1` in your CLAUDE.md and surface drift at session start.
 
 > **Want to get started fast?** Grab templates from [`templates/`](templates/) and adapt them to your paper project.
-
-> **Curious how this was built?** See [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md) — patterns derived from real paper-project failures, with what survived and what didn't.
-
-## What's in this repo
-
-Three things are in here, kept separate:
-
-| Layer | What | Where |
-|-------|------|-------|
-| **Framework** — the reusable method | Templates, decision records, the methodology doc, this README, optional Python tooling | [`templates/`](templates/), [`decisions/`](decisions/), [`docs/`](docs/), [`tools/`](tools/) (since v1.5.0) |
-| **Worked examples** — the method in use | Active paper projects with populated claim registries, writing guides, audit trails | [`papers/`](papers/) |
-| **Evidence and history** — what we learned | Retrofits of source projects, cross-project comparisons, forward-feedback applications, literature index | [`audits/`](audits/), [`literature/`](literature/) |
-
-If you only want the framework, you can stop at the [Quickstart](#quickstart) below — worked examples and evidence are there if you want to see the method in use or how it was derived.
 
 ## Quickstart
 
@@ -40,33 +26,18 @@ Adopt the framework on a new paper in five steps (~10 minutes to set up):
 |------|-------|------|
 | **Required for first use** | `CLAUDE.md`, `claim-registry.md`, `anti-hallucination.md`, `writing-guide.md` | From day one |
 | **Useful once the paper grows** | `review-prompt.md`, `decision-record.md`, `glossary.md`, `equation-checker.md`, `vv-framework.md` | After ~20 registry entries, or you hit a methodology decision worth recording |
-| **Reference / background only** | `key-quotes.md`, `docs/METHODOLOGY.md`, `audits/` | When you want context, not before |
+| **Reference / background only** | `key-quotes.md` | When you want context, not before |
 
 The full template index is in the [Templates](#templates) section near the bottom.
 
-## What it does in practice
-
-Conservative figures from applications of the framework to date — each row sourced to a specific audit or paper artefact:
-
-| Metric | Result | Source |
-|--------|--------|--------|
-| Calculation errors caught — **mechanical-reproduction prompt** | **3 / 3** in a 68-equation document | [`audits/equation-verification-journey.md`](audits/equation-verification-journey.md) |
-| Same errors caught — **LLM "soundness review" prompt** | **0 / 3** in the same document | Same |
-| Paper 1 claim-registry coverage at draft-complete | 100% across 19 entries (P0 / P1 / P2 all 100%) | [`papers/perspective/vv/claims/claim_registry.md`](papers/perspective/vv/claims/claim_registry.md) |
-| Paper 1 reference verification | 14/14 DOI-verified; 14/14 pass the anti-hallucination checklist | [`papers/perspective/references.bib`](papers/perspective/references.bib) |
-| Paper 1 simulated peer review (single-pass, pre-DR-011) | 3.95 / 5.0 — upper "Minor revision" | [`CHANGELOG.md`](CHANGELOG.md) v1.0.0 |
-| Independent v1.3.0 reviewers converging on SE mapping + decision records + equation finding as the strongest assets | 3 of 3 reviewers | [#30](https://github.com/ducroq/agent-ready-papers/issues/30) |
-
-The first two rows are the strongest single finding: **prompting an LLM for "soundness review" missed 3/3 arithmetic errors in a 68-equation document; prompting the same LLM for "numerically reproduce every calculation" caught all three.** Mechanical verification catches a class of error that expert-style assessment misses. See [`audits/equation-verification-journey.md`](audits/equation-verification-journey.md) for the discovery log and [DR-009](decisions/DR-009_calculation-verification.md) for the verification procedure.
-
-### When this framework is worth the overhead
+## When this framework is worth the overhead
 
 - The cost of a hallucinated citation in your output exceeds an hour of your time
 - The output spans multiple sessions (a paper, a grant, a long-form decision)
 - You have a load-bearing argument or proposition the reader will scrutinise
 - You are working in a domain where confidence-language calibration matters (academic, regulated, decision-support)
 
-### When it is overkill
+## When it is overkill
 
 - One-shot prose with no citation chain
 - Throwaway code or scripts (correctness verified by execution)
@@ -128,7 +99,7 @@ For papers with quantitative content (equations, derived values, numerical table
 |------|-----------|-----------------|--------------|
 | **CALCULATION** | Derived numerical value from a stated formula | Methods, Results, technical appendices | Does the stated result follow from stated inputs? |
 
-Calculation verification uses **mechanical reproduction** — substituting values into formulas and computing step by step — rather than plausibility assessment. In testing, an LLM prompted to "review for soundness" missed 3/3 arithmetic errors in a 68-equation document, while an LLM prompted to "numerically reproduce every calculation" caught all three. The errors survived because they produced plausible-looking numbers. See [`audits/equation-verification-journey.md`](audits/equation-verification-journey.md) for the full case study and [`audits/driven-pendulum-retrofit.md`](audits/driven-pendulum-retrofit.md) §9 for the evidence.
+Calculation verification uses **mechanical reproduction** — substituting values into formulas and computing step by step — rather than plausibility assessment. The rationale: a formula with correct units, reasonable magnitude, and coherent surrounding prose will pass plausibility review even when the arithmetic is wrong. Reproducing the calculation surfaces what assessment misses. See [DR-009](decisions/DR-009_calculation-verification.md) for the verification procedure.
 
 For speculative-design / design-fiction / diegetic-prototype work, an opt-in fifth unit type applies:
 
@@ -136,7 +107,7 @@ For speculative-design / design-fiction / diegetic-prototype work, an opt-in fif
 |------|-----------|-----------------|--------------|
 | **PROVOCATION** | Designed artefact making no truth claim — diegetic prototype, reflexive Ask, paradox box, fictional category | Speculative-design works only | Plausible? Generative? Reflexive marker present? Ethically held? (Auger 2013) |
 
-PROVOCATIONs use a separate confidence axis (GROUNDED / EXTRAPOLATED / PROVOCATIVE / CRITICAL) measuring quality of speculation rather than strength of evidence, with required prose markers binding for each tier. See [DR-010](decisions/DR-010_provocation-unit-type.md) and [`audits/feedback-from-fsd.md`](audits/feedback-from-fsd.md) for the activation rationale.
+PROVOCATIONs use a separate confidence axis (GROUNDED / EXTRAPOLATED / PROVOCATIVE / CRITICAL) measuring quality of speculation rather than strength of evidence, with required prose markers binding for each tier. See [DR-010](decisions/DR-010_provocation-unit-type.md) for the activation rationale.
 
 ### Priority (what breaks if this is wrong?)
 
@@ -447,7 +418,7 @@ An agent that spent an hour helping write Section 3 will not catch its own error
 - **Pass 2** (intra-family large) — different review character, catches what the small model missed
 - **Pass 3** (cross-vendor) — escapes training-data and stylistic priors shared across one vendor's family
 
-Pass 1 + 2 are the default for every publish or major revision; Pass 3 is high-stakes only, with a mandatory style filter so cross-vendor critique doesn't drift into voice critique. Each pass is a different functorial view of the manuscript; the combined verification is the limit, not the sum. The pattern was empirically derived at blog scale (DR-011), replicated at grant scale (NLnet v3, 2026-05-22), and re-derived at decision-support scale (2026-05-30).
+Pass 1 + 2 are the default for every publish or major revision; Pass 3 is high-stakes only, with a mandatory style filter so cross-vendor critique doesn't drift into voice critique. Each pass is a different functorial view of the manuscript; the combined verification is the limit, not the sum.
 
 ### Skipping verification for informal technical communication
 The framework applies to any outbound technical content — not just formal papers. WhatsApp messages, emails, and Slack discussions with quantitative claims have the same error classes (unit confusion, property overestimates, wrong formulas) but no verification trigger. If it contains numbers, equations, or technical terminology going to a stakeholder, run the relevant checks before sending.
@@ -459,7 +430,7 @@ Without page budgets, agents expand every section. A 4-page paper becomes 8 page
 In interdisciplinary work, letting agents use terms freely creates a paper that confuses every reviewer. A glossary isn't overhead — it's a prerequisite for clarity.
 
 ### Reviewing equations for "soundness" instead of reproducing them
-AI-generated equations can contain errors that look right. A formula with correct units, reasonable magnitude, and coherent surrounding prose will pass both human and AI review if the reviewer assesses plausibility rather than computing. The fix: for every derived value in a technical paper, substitute the stated inputs into the stated formula and verify the result matches. This mechanical check catches errors that expert assessment misses. An equation-checker prompt template is available in the [driven-pendulum project](https://github.com/ducroq/driven-pendulum/tree/main/tools/equation-checker).
+AI-generated equations can contain errors that look right. A formula with correct units, reasonable magnitude, and coherent surrounding prose will pass both human and AI review if the reviewer assesses plausibility rather than computing. The fix: for every derived value in a technical paper, substitute the stated inputs into the stated formula and verify the result matches. This mechanical check catches errors that expert assessment misses. See [`templates/equation-checker.md`](templates/equation-checker.md) for the prompt template.
 
 ### Confident language for weak claims
 "Our results demonstrate" for a SPECULATIVE inference is a credibility risk. The confidence-to-language mapping is mechanical but essential — it prevents the most subtle form of academic dishonesty.
@@ -533,32 +504,8 @@ Papers written using this framework live in [`papers/`](papers/). Each paper pro
 
 See [`decisions/DR-006_publication-roadmap.md`](decisions/DR-006_publication-roadmap.md) for the publication strategy and sequencing.
 
-## Audits
-
-The [`audits/`](audits/) directory holds the empirical evidence the framework was derived from and continues to test against:
-
-**Retrofits** (framework retrofitted onto already-completed source projects, surfacing the patterns the templates and DRs encode)
-- [`proposition-retrofit.md`](audits/proposition-retrofit.md) — Proposition-type analysis of a source paper project
-- [`technology-paper-retrofit.md`](audits/technology-paper-retrofit.md) — IEEE TIM sensor-integration paper
-- [`technology-paper-revisions.md`](audits/technology-paper-revisions.md) — Revision audit of the same project
-
-**Cross-project comparison**
-- [`driven-pendulum-retrofit.md`](audits/driven-pendulum-retrofit.md) — Framework applied to a driven-pendulum design-engineering project
-
-**Forward-feedback applications** (framework applied to a new domain; what surfaced flowed back as a DR or template revision)
-- [`feedback-from-fsd.md`](audits/feedback-from-fsd.md) — Speculative-design book (activated [DR-010](decisions/DR-010_provocation-unit-type.md) — PROVOCATION unit type)
-- [`feedback-from-blog-application.md`](audits/feedback-from-blog-application.md) — Blog cross-post (triggered [DR-011](decisions/DR-011_multi-model-review-pattern.md) — multi-model review)
-- [`feedback-from-template-revision.md`](audits/feedback-from-template-revision.md) — Multi-model review applied to a template revision
-- [`feedback-from-decision-support.md`](audits/feedback-from-decision-support.md) — Hardware-purchase decision support (activated [DR-012](decisions/DR-012_decision-support-artefacts.md) — third application class)
-
-**Discovery case studies**
-- [`equation-verification-journey.md`](audits/equation-verification-journey.md) — How the CALCULATION verification finding emerged: prompting an LLM for "soundness review" missed 3/3 arithmetic errors; "numerically reproduce every calculation" caught all three
-
-Each audit is dated and traceable to a specific application. These are the workings that produced the templates and decision records above.
-
 ## Further Reading
 
-- **[`docs/METHODOLOGY.md`](docs/METHODOLOGY.md)** — How these patterns were developed from real paper projects, including the concrete failures that shaped them
 - **[agent-ready-projects](https://github.com/ducroq/agent-ready-projects)** — The companion guide for AI-assisted coding (layered documentation model, auto-loading cliff, progressive disclosure)
 
 ## Contributing & Support
@@ -567,7 +514,6 @@ See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the full guidance. Short version:
 
 - **Adopters** — copy templates, pin a version in your project's CLAUDE.md, you're not expected to upstream changes.
 - **Collaborators** — open an issue describing the proposed change before investing in a PR; most framework changes land as Decision Records.
-- **Application reports** are the highest-signal contribution — see [`audits/feedback-from-*.md`](audits/) for the precedent (each led to a DR or template revision).
 
 Licence: CC BY 4.0 — see [`LICENSE`](LICENSE) and [`decisions/DR-013_license-choice.md`](decisions/DR-013_license-choice.md).
 

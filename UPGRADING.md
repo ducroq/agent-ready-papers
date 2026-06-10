@@ -114,7 +114,7 @@ The full release notes are in [`CHANGELOG.md`](CHANGELOG.md). This file is the q
 | `CONTRIBUTING.md` added | Reference only — formalises the contribution process. If you contribute upstream, read it. The multi-issue commit-keyword convention (`Closes #A. Closes #B.`) is documented there. |
 | `UPGRADING.md` added (this file) | Reference only — adopter convenience. If you maintain your own per-project `UPGRADING.md`, this is the template format. |
 | `docs/THRESHOLDS.md` added — rationale for the 100/90/70/85 coverage and 3.5/5.0 peer-review thresholds, tagged SPECULATIVE | Reference only — explains thresholds you already use. Quality gates unchanged. |
-| **DR-014 (Proposed)** — PROVOCATION layering as opt-in extension | **No action.** Template files NOT changed in v1.4.0. Promotion to Accepted requires Paper 1 audit + FSD adapter check + version-impact decision. |
+| **DR-014 (Proposed)** — PROVOCATION layering as opt-in extension | **No action.** Template files NOT changed in v1.4.0. Promotion to Accepted requires Paper 1 audit + speculative-design adopter check + version-impact decision. |
 | README front-of-file restructured (Quickstart + 3-layer map + adoption scorecard near top, expanded DR-011 in *What Doesn't Work*, new Audits index, Contributing & Support pointer) | Reference only — additive; nothing removed. |
 | CLAUDE.md: gitignored maintainer-local paths now explicitly labelled (`.claude/skills/`, `memory/`); new *What is intentionally not shipped* section | Reference only — clarifies what is and isn't shipped publicly. No template changes. |
 | CHANGELOG header: maintainer release process numbered + *Adopter notes* convention codified | Reference only — formalises an existing pattern. If you use this repo as a reference for your own release process, adopt the same convention. |
@@ -128,11 +128,9 @@ The full release notes are in [`CHANGELOG.md`](CHANGELOG.md). This file is the q
 
 | Change | Adopter action |
 |--------|-----------------|
-| Engineering Fidelity audits archived externally (`audits/engineering-fidelity-retrofit.md`, `audits/engineering-fidelity-audit-2.md` removed from this repo) | If you linked to either file in your own work, re-link to the external archive or replace with your own audit. New adopters: none required. |
 | Anti-hallucination "WebFetch Fallback Discipline" added | Optional — adopt if you use WebFetch for source verification. Names subpage-blindspot and transport-failure modes. |
 | Claim registry adds Coverage-by-Type cut | Recommended — update your registry's Coverage Summary to include the by-type cut at next major revision. Type-level Gate 2 expectation: every registered ARGUMENT and PROPOSITION should be `[x]` before gating. |
 | DR-012 names decision-support as a third opt-in application class | Optional — relevant only if your project is decision-support work. Inherits unchanged from paper-application class except for paper-specific scaffolding (page budgets, LaTeX, journal style, etc.). |
-| Paper 1 manuscript §4 rewritten from "three audits" to "two audits" (engineering-fidelity dropped) | Reference only — affects Paper 1's narrative, not the templates. |
 
 **From v1.0.0 or v1.1.0 → v1.3.0:** review the v1.2.0 entry below as well.
 
@@ -161,7 +159,7 @@ The full release notes are in [`CHANGELOG.md`](CHANGELOG.md). This file is the q
 | → Gate 2.6 — Reflexivity | When PROVOCATION entries exist |
 | → Gate 2.7 — Ethical Review | When the project engages contested topics |
 | → Gate 2.8 — Voice Consistency | When voice-driven work where register is part of the contribution |
-| Tier 1 / Tier 2 / Tier 3 adoption-readiness discipline introduced (via `audits/feedback-from-fsd.md`) | Reference only. Tier 2 / Tier 3 patterns from the FSD audit are deferred for the framework; adopter is free to reuse the same discipline locally. |
+| Tier 1 / Tier 2 / Tier 3 adoption-readiness discipline introduced | Reference only. The discipline is a convention adopters may reuse locally for staged feature promotion. |
 
 ## v1.0.0 (2026-05-09)
 

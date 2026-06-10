@@ -16,21 +16,19 @@ Two distinct bias-escape problems are being conflated:
 
 These are different problems and respond to different tools. The current guidance ("use a different model") collapses them.
 
-A pending TODO at `audits/feedback-from-fsd.md:208` ("Cross-model verification pattern as Step 7 in `templates/anti-hallucination.md`") anticipated this refinement. This DR implements that Step 7 with the multi-model structure built in.
+### Three reviewer characters
 
-### Triggering observation (2026-05-11 session at dev.jeroenveen.nl)
+A three-reviewer comparison applied the same review-prompt rubric across three reviewer configurations:
 
-A LinkedIn cross-post draft for the article *"Senior developers trust AI less than juniors"* was reviewed by three reviewers using the same `templates/review-prompt.md` Variant B rubric.
+| Reviewer | Review character | Cost |
+|---|---|---|
+| Intra-family small (e.g., Haiku-class) | Rigorous checklist application | Cheap |
+| Intra-family large (e.g., Opus-class) | Argument-shape critique | ~10x Haiku |
+| Cross-vendor (e.g., Gemini, GPT) | Outside-family perspective, but suggestions tend to violate the project's style/voice | Variable |
 
-| Reviewer | Substantive findings | Voice-rule violations in suggestions | Cost |
-|---|---|---|---|
-| Haiku (intra-family, small, fresh context) | 0 (all hard rules pass) | 0 | Cheap |
-| Opus (intra-family, large, fresh context) | 2 (subtitle drift, CTA pre-loading direction) | 0 | ~10x Haiku |
-| Gemini (cross-vendor) | 0 net after filter | 5+ (coined labels, subheadings, slogan copy, slide-register chart suggestion, popular-psych references) | Free for casual use |
+Each reviewer catches essentially **disjoint** issues. The small intra-family model rigorously applies the checklist; the large intra-family model surfaces argument-shape critique; the cross-vendor model suggests outside-family perspective but tends to drift into style-violating "improvements" that need filtering before delivery.
 
-Each reviewer caught essentially **disjoint** issues. The small intra-family model rigorously applied the checklist; the large intra-family model surfaced argument-shape critique; the cross-vendor model suggested mostly style-violating "improvements". Combined coverage was strictly greater than any single review. A second cross-vendor review on the published article in the same session showed the same pattern: many suggestions, most failed style rules, near-zero substantive items survived the filter.
-
-Evidence base is **N=1 session at blog scale**. The pattern is plausible enough to land structurally; specific cost-tier prescriptions are provisional and gated on paper-scale application (see *Revisit If*).
+The pattern is plausible enough to land structurally; specific cost-tier prescriptions are provisional (see *Revisit If*).
 
 ## Options Considered
 
@@ -39,7 +37,6 @@ Evidence base is **N=1 session at blog scale**. The pattern is plausible enough 
 - (+) Honours the N=1 evidence limit
 - (-) Loses the bias-escape distinction surfaced by the empirical observation
 - (-) Doesn't address the style-violation failure mode for cross-vendor reviewers — a real and previously-unflagged risk
-- (-) Step 7 from `feedback-from-fsd.md` remains pending
 
 ### Option B: Specify a two-pass pattern (intra-family + cross-vendor)
 - (+) Captures the main bias-escape distinction (sunk-cost vs. training-data)
@@ -50,7 +47,6 @@ Evidence base is **N=1 session at blog scale**. The pattern is plausible enough 
 - (+) Names the three distinct review characters that emerged empirically
 - (+) Pairs each pass with the bias it escapes — engineers can reason about what each pass is for
 - (+) The style/voice filter requirement directly addresses the cross-vendor failure mode
-- (+) Implements pending Step 7 from `feedback-from-fsd.md`
 - (-) Three passes per review is more surface than the current guidance
 - (-) Within-family-size finding rests on N=1 — may not generalise; specific cost-tier defaults are provisional
 - (-) "Pass" terminology must be chosen to avoid collision with existing "Tier" semantics in the framework
@@ -61,12 +57,11 @@ Evidence base is **N=1 session at blog scale**. The pattern is plausible enough 
 
 ### Naming: "Pass", not "Tier"
 
-The framework already uses "tier" for three distinct things:
+The framework already uses "tier" for two distinct things:
 - CLAIM confidence (ESTABLISHED / SUPPORTED / EMERGING / SPECULATIVE) — DR-002
 - PROVOCATION confidence (GROUNDED / EXTRAPOLATED / PROVOCATIVE / CRITICAL) — DR-010
-- Merge readiness in audit recommendations (battle-tested / proven-once / pattern-note) — `audits/feedback-from-fsd.md`
 
-A fourth "tier" semantic for reviewer strength would be confusing. The pattern uses **Pass 1 / Pass 2 / Pass 3**, with the bias each pass escapes named explicitly.
+A third "tier" semantic for reviewer strength would be confusing. The pattern uses **Pass 1 / Pass 2 / Pass 3**, with the bias each pass escapes named explicitly.
 
 ### The three passes
 
@@ -80,7 +75,7 @@ Passes 1 and 2 are **complementary, not redundant** — different model sizes wi
 
 ### Style/voice filter for Pass 3
 
-Cross-vendor reviewers in the triggering observation generated 5+ style-violating suggestions for 0 net substantive findings after filter. To prevent the human from having to manually discard most output, `templates/review-prompt.md` adds a **"Style/voice rules to filter against"** placeholder:
+Cross-vendor reviewers tend to generate style-violating suggestions because they do not share the project's stylistic priors. To prevent the human from having to manually discard most output, `templates/review-prompt.md` adds a **"Style/voice rules to filter against"** placeholder:
 
 - For academic-paper projects: defaults to the target journal's style guide
 - For non-fiction / blog projects: defaults to the project's voice rules
@@ -90,15 +85,13 @@ The reviewer is instructed to **pre-filter suggestions against these rules** bef
 
 ### Adoption readiness
 
-Borrowing the Tier 1/2/3 merge-readiness split from `audits/feedback-from-fsd.md`:
-
-- **Ready to merge (battle-tested through this decision):**
+- **Ready to merge through this decision:**
   - The three-pass structure with bias-escape semantics
   - The style/voice filter placeholder as a required-with-default field in `templates/review-prompt.md`
   - README update at lines 190 and 375 to point at the new pattern
   - Step 7 in `templates/anti-hallucination.md` implementing cross-model verification
 
-- **Incubate (proven once at blog scale, re-evaluate at paper scale):**
+- **Provisional (re-evaluate at paper scale):**
   - The specific cost-tier prescriptions ("every publish" vs. "every major revision")
   - The disjoint-coverage claim between intra-family small and large
   - The cost-benefit framing of Pass 3 as "high-stakes only"
@@ -135,27 +128,20 @@ Background: `docs/category-theory-as-design-lens.md`, principle 3 ("multi-pass v
 - `templates/review-prompt.md`: add "Style/voice rules to filter against" as a required field with format-appropriate default; add filter-before-delivery instruction.
 - `templates/anti-hallucination.md`: add Step 7 — "Multi-pass review across model families" — specifying the three passes by name and the style-filter requirement for Pass 3.
 - `README.md:190` and `README.md:375`: replace "fresh session or different model" with a pointer to the three-pass pattern.
-- `audits/feedback-from-blog-application.md` (new): empirical case study of the triggering observation, alongside the existing *Framing Accuracy* and *Retroactive Verification* sections referenced in the originating issue.
-- `audits/feedback-from-fsd.md:208`: mark Step 7 as implemented by this DR.
 - `CLAUDE.md`: no change — existing pointer to `templates/review-prompt.md` is sufficient.
 - Active papers (`papers/perspective/`): no immediate action; the three-pass pattern applies on the next major revision.
 
 ## Evidence Base
 
-- Triggering session at dev.jeroenveen.nl (2026-05-11): three-reviewer comparison on a LinkedIn cross-post draft, plus a second cross-vendor review on the published article. Disjoint-coverage finding; cross-vendor style-violation finding.
-- Replication at grant scale (2026-05-22) on NLnet NGI Zero Commons Fund v3 application (~3,500 words + 19-entry V&V claim registry): Pass 1 (Haiku) caught 3 P0 + 5 minor defects with 1 false positive; Pass 2 (Opus) caught 5 major weaknesses + 6 suggestions weighted 4.05/5.0 (above NLnet >5.0/7 threshold) with 5 style-violating suggestions correctly pre-filtered. Within-Claude disjoint-coverage pattern replicated. Pass 3 deferred per low-yield caveat — no grant-scale Pass 3 data point gathered. Second application same day on the V&V-wrap edits (~600 words of §5 prose + claims.md updates + audit content drafting): Pass 2 weighted 3.85/5.0.
-- Originating issue: [ducroq/agent-ready-papers#7](https://github.com/ducroq/agent-ready-papers/issues/7)
-- Grant-scale feedback issue: [ducroq/agent-ready-papers#8](https://github.com/ducroq/agent-ready-papers/issues/8) — Proposal 4 sourced this Evidence Base / Open Questions update.
-- Roadmap precedent: `audits/feedback-from-fsd.md:208` (Step 7 cross-model verification was already pending).
-- Mechanism caveat: the triggering observation conflates training-data bias and stylistic-prior bias for cross-vendor reviewers. The DR claims the operational effect (style filter needed) without committing to which mechanism dominates; this matches the evidence.
-- **Token-cost replication (2026-06-08), code-tooling scale.** Within-Claude application to `tools/coverage.py` + `tools/check_dois.py` (~620 LOC of Python) across two batteries: scaffolding stage + parser stage. Pass 1 (Haiku, subagent `total_tokens`) averaged **36,812 tokens** across N=2 with **0 / 2 rounds load-bearing findings** (1 false positive in the scaffolding round). Pass 2 (Opus, subagent `total_tokens`) averaged **52,540 tokens** across N=2 (**~1.4× Pass 1**) with **2 / 2 rounds load-bearing design findings** that would have shipped broken without it — scaffolding-stage `bucket: str` axis conflation (priority vs PROVOCATION tier), parser-stage PROVOCATION column substring-match (`"tier" in name.lower()` would have silently false-matched `Source Tier`). Per-operation log: `papers/perspective/vv/cost-log.md`. Subagent tool results report `total_tokens` only — input/output/cache breakdown not surfaced at this granularity, so per-pass economics here is total-only.
+- Mechanism caveat: the triggering observation conflates training-data bias and stylistic-prior bias for cross-vendor reviewers. The DR claims the operational effect (style filter needed) without committing to which mechanism dominates.
+- **Token-cost replication (2026-06-08), code-tooling scale.** Within-Claude application to `tools/coverage.py` + `tools/check_dois.py` (~620 LOC of Python) across two batteries: scaffolding stage + parser stage. Pass 1 (Haiku, subagent `total_tokens`) averaged **36,812 tokens** across N=2 with **0 / 2 rounds load-bearing findings** (1 false positive in the scaffolding round). Pass 2 (Opus, subagent `total_tokens`) averaged **52,540 tokens** across N=2 (**~1.4× Pass 1**) with **2 / 2 rounds load-bearing design findings** that would have shipped broken without it. Per-operation log: `papers/perspective/vv/cost-log.md`. Subagent tool results report `total_tokens` only — input/output/cache breakdown not surfaced at this granularity, so per-pass economics here is total-only.
 
 ## Open Questions Carried Forward
 
-- **Within-family-size generality.** N=2 within-Claude as of 2026-05-22 (blog 2026-05-11 + NLnet v3 grant 2026-05-22): the disjoint-coverage pattern replicated. Pass 1 (Haiku) caught 3 P0 + 5 minor defects with 1 false positive; Pass 2 (Opus) caught 5 major weaknesses + 6 suggestions (weighted 4.05/5.0) with 5 style-violating suggestions correctly pre-filtered. **Still untested across families** (GPT-mini vs. GPT-4, Gemini-Flash vs. Gemini-Pro). Re-evaluate on next cross-family application.
-- **Pass 2 economics at paper scale.** At ~3,450 words (blog) and ~3,500 words + 19-entry registry (grant), Pass 2 cost has remained acceptable; the "every major revision" default is defensible at these content scales. Full-paper scale (~8,000+ words with multiple revision rounds) still untested.
-- **Pass 3 yield by content type.** Cross-vendor showed near-zero substantive yield on blog-style prose. Grant-scale application (2026-05-22) deferred Pass 3 per the low-yield caveat — no grant-scale data point gathered. Yield may differ for highly-technical numerical claims or content adjacent to Claude-specific training data. Recommend attempting Pass 3 on next grant or paper to build the evidence base.
-- **Paper-scale token cost calibration.** The 2026-06-08 token-cost replication (above) is N=2 within-Claude at **code-tooling scale** (~620 LOC of Python reviewed, not prose). The "every major revision" cost-tier prescription for Pass 2 was qualitative when written; the empirical baseline now exists but is not yet at paper scale. Pass 2 cost on an ~8,000-word manuscript revision is still unmeasured — recalibration of the "every major revision" default may be warranted once Paper 1 accrues a paper-scale Pass 2 data point. Tracked in `papers/perspective/vv/cost-log.md` under *Forward-looking entries to gather*.
+- **Within-family-size generality.** Disjoint-coverage between intra-family small and large is observed within Claude. **Still untested across families** (GPT-mini vs. GPT-4, Gemini-Flash vs. Gemini-Pro). Re-evaluate on next cross-family application.
+- **Pass 2 economics at paper scale.** Full-paper scale (~8,000+ words with multiple revision rounds) still untested. Pass 2 cost on a manuscript revision needs measurement before the "every major revision" default can be considered hardened.
+- **Pass 3 yield by content type.** Cross-vendor yield may differ across content types. Recommend attempting Pass 3 on the next major content type to build the cost-vs-yield comparison.
+- **Paper-scale token cost calibration.** The 2026-06-08 token-cost replication (above) is N=2 within-Claude at **code-tooling scale** (~620 LOC of Python reviewed, not prose). Pass 2 cost on an ~8,000-word manuscript revision is still unmeasured. Tracked in `papers/perspective/vv/cost-log.md` under *Forward-looking entries to gather*.
 
 ## Revisit If
 

@@ -9,9 +9,9 @@ date: 2026-03-06
 
 The framework (DR-004) established three registry unit types: CLAIM, ARGUMENT, and PROPOSITION. Each has a structured verification procedure (source checking, Toulmin, Whetten). This model was developed from non-empirical papers that contain no equations.
 
-The Driven Pendulum project (March 2026) revealed a blind spot: a 68-equation theory document contained 3 arithmetic errors that survived expert-style review. Gemini, prompted to "review for physical soundness," found 0/3 errors. Sonnet, prompted to "numerically reproduce every calculation," found 3/3. All three errors produced plausible-looking results — reasonable magnitudes, correct units — making them invisible to plausibility assessment.
+Papers containing derived numerical values have a verification blind spot the three unit types do not catch: arithmetic errors that produce plausible-looking results (reasonable magnitudes, correct units, coherent surrounding prose) survive plausibility review. They are caught only by mechanical reproduction — substituting the stated inputs into the stated formula and computing.
 
-This discovery motivated adding calculation verification as a fourth verification procedure, orthogonal to the three registry unit types.
+This motivates adding calculation verification as a fourth verification procedure, orthogonal to the three registry unit types.
 
 ## Options Considered
 
@@ -39,7 +39,7 @@ The three registry unit types (CLAIM, ARGUMENT, PROPOSITION) are units of the pa
 
 ## Key Insight
 
-**For arithmetic verification, the prompt matters more than the model.** A capable model prompted to "review" missed all errors; a comparable model prompted to "reproduce" caught all three. Plausibility assessment and mechanical reproduction are fundamentally different procedures, and only the latter catches errors that produce plausible-looking results.
+**For arithmetic verification, the prompt matters more than the model.** A capable model prompted to "review" can miss arithmetic errors; the same model prompted to "reproduce" can catch them. Plausibility assessment and mechanical reproduction are fundamentally different procedures, and only the latter catches errors that produce plausible-looking results.
 
 ## Consequences
 
@@ -47,15 +47,7 @@ The three registry unit types (CLAIM, ARGUMENT, PROPOSITION) are units of the pa
 - `README.md`: add CALCULATION row to verification registry table; add "Reviewing equations for soundness" to What Doesn't Work
 - `CLAUDE.md`: clarify CALCULATION as procedure (not registry unit type) in Framework in Brief
 - `equation-checker.md` template: already created (templates/equation-checker.md)
-- Paper 1 (Perspective): S1-5 added as CLAIM citing driven-pendulum evidence; fifth future direction added (numerical reproduction as distinct verification procedure)
 - Paper 3 (planned): equation-checker is proof-of-concept artifact
-
-## Evidence Base
-
-- Driven Pendulum project: 3/3 errors caught by reproduction, 0/3 by plausibility review
-- Detailed case study: `audits/equation-verification-journey.md`
-- Driven Pendulum audit §9: `audits/driven-pendulum-retrofit.md`
-- Informal V&V application (2026-03-16): equation-checker methodology applied to WhatsApp messages, caught 5 errors including unit confusion (factor ~42) and wrong geometry assumption
 
 ## Revisit If
 
