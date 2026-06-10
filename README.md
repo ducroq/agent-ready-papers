@@ -1,14 +1,14 @@
 # Working With AI Agents: Academic & Technical Writing
 
-Verification infrastructure for AI-augmented academic and structured non-fiction writing — templates, quality gates, and session continuity that catch the failure modes automated tools miss. Covers conventional academic papers plus speculative-design and voice-driven non-fiction work (see [DR-010](decisions/DR-010_provocation-unit-type.md)).
+Verification infrastructure for AI-augmented academic and structured non-fiction writing — templates, quality gates, and session continuity that catch the failure modes automated tools miss. Covers conventional academic papers plus speculative-design work (see [DR-010](decisions/DR-010_provocation-unit-type.md)).
 
-Automated citation checkers (RefChecker, scite.ai) and model-level solutions (RAG, [grounded generation](docs/framework-summary.md#terminology-note-grounding--grounded)) address part of the problem. This guide operates at the **process level** — the workflow templates, decision records, and verification systems that make the difference between an agent that hallucinates citations and one that produces submission-ready prose.
+Automated citation checkers (RefChecker, scite.ai) and model-level solutions (RAG, [grounded generation](docs/framework-summary.md#terminology-note-grounding--grounded)) address part of the problem. This guide operates at the **process level** — the workflow templates, decision records, and verification systems that sit between an AI agent and a submission-ready manuscript.
 
 Companion to [agent-ready-projects](https://github.com/ducroq/agent-ready-projects) (for code).
 
-**Current release:** v1.7.1 (2026-06-09) — see [`CHANGELOG.md`](CHANGELOG.md). Pin your project with `agent-ready-papers: v1.7.1` in your CLAUDE.md and surface drift at session start.
+**Status:** A working framework we use on our own papers. Broader empirical validation across other authors and domains is an open question — adopt it as a structured starting point, not as a tested method.
 
-> **Want to get started fast?** Grab templates from [`templates/`](templates/) and adapt them to your paper project.
+**Current release:** v1.7.1 (2026-06-09) — see [`CHANGELOG.md`](CHANGELOG.md). Pin your project with `agent-ready-papers: v1.7.1` in your CLAUDE.md and surface drift at session start.
 
 ## Quickstart
 
@@ -18,31 +18,47 @@ Adopt the framework on a new paper in five steps (~10 minutes to set up):
 2. **Copy the minimum-viable adoption files.** [`templates/claim-registry.md`](templates/claim-registry.md), [`templates/anti-hallucination.md`](templates/anti-hallucination.md), and [`templates/writing-guide.md`](templates/writing-guide.md). These three plus CLAUDE.md are enough to start.
 3. **Register your first claims.** In `claim-registry.md`, list 5–10 of your paper's load-bearing factual statements. Assign each a priority (P0 / P1 / P2), confidence tier (ESTABLISHED / SUPPORTED / EMERGING / SPECULATIVE), and a source.
 4. **Verify each citation.** Run the Step 0 + 6-step checklist in `anti-hallucination.md` on every AI-introduced citation. Step 0 (Scholar + DOI) catches fabrications in seconds.
-5. **Run one review pass.** Use the three-pass pattern in [DR-011](decisions/DR-011_multi-model-review-pattern.md). Pass 1 (intra-family small) is the cheapest and catches sunk-cost-from-session bias; it's what you want before sharing a draft.
+5. **Run one review pass.** Before sharing the draft, ask a *fresh session* of a smaller model in the same family (e.g., Haiku, GPT-4o-mini, Gemini-Flash) to review the manuscript against your review prompt. A fresh session escapes the sunk-cost bias of the session that wrote the draft. See [`templates/review-prompt.md`](templates/review-prompt.md) for the prompt template and [DR-011](decisions/DR-011_multi-model-review-pattern.md) for the full three-pass pattern (intra-family small → intra-family large → cross-vendor).
 
 ### Three tiers of adoption
 
 | Tier | Files | When |
 |------|-------|------|
 | **Required for first use** | `CLAUDE.md`, `claim-registry.md`, `anti-hallucination.md`, `writing-guide.md` | From day one |
-| **Useful once the paper grows** | `review-prompt.md`, `decision-record.md`, `glossary.md`, `equation-checker.md`, `vv-framework.md` | After ~20 registry entries, or you hit a methodology decision worth recording |
+| **Useful once the paper grows** | `review-prompt.md`, `decision-record.md`, `glossary.md`, `equation-checker.md`, `vv-framework.md`, `cost-log.md`, `hypothesis-log.md` | After ~20 registry entries, or once you hit a decision / cost-tracking / pre-registered bet worth recording |
 | **Reference / background only** | `key-quotes.md` | When you want context, not before |
 
 The full template index is in the [Templates](#templates) section near the bottom.
 
-## When this framework is worth the overhead
+## When This Framework Is Worth The Overhead
 
 - The cost of a hallucinated citation in your output exceeds an hour of your time
 - The output spans multiple sessions (a paper, a grant, a long-form decision)
 - You have a load-bearing argument or proposition the reader will scrutinise
 - You are working in a domain where confidence-language calibration matters (academic, regulated, decision-support)
 
-## When it is overkill
+## When It Is Overkill
 
 - One-shot prose with no citation chain
 - Throwaway code or scripts (correctness verified by execution)
 - Internal scratch notes
 - Anything with established compliance audit conventions (use those instead)
+
+## Common Questions
+
+**Doesn't this add overhead?** Yes — roughly 10 minutes of setup plus ongoing claim logging as you draft. The trade is overhead against the cost of being wrong. If a hallucinated citation or a confidence-inflated claim could survive to submission, the overhead pays back the first time it catches one.
+
+**What if my paper has only a few claims?** Then the registry is short. The point is verification discipline, not registry size. Even 5–10 entries benefit from typed verification — type-checking each entry forces you to articulate what kind of statement it is and what would falsify it.
+
+**How is this different from a reference manager (Zotero, Mendeley)?** Reference managers track *citations*; this tracks the *structure of your argument*. A claim has a confidence tier; an argument has a warrant; a proposition has boundary conditions. Reference managers don't model those, and they don't enforce confidence-to-language calibration.
+
+**Can I use this without an AI agent?** Yes. The framework was designed for AI-augmented writing — that's where hallucination and confidence inflation are most acute — but registry discipline, decision records, and quality gates work fine for any structured non-fiction. The anti-hallucination checklist is most useful when an agent is introducing claims; the rest applies regardless.
+
+**Has this been peer-reviewed?** Not yet. We use it on our own work; Paper 1 (in this repo) is the perspective article that argues for the gap this framework addresses. Adopt as a structured starting point, not as a tested method.
+
+---
+
+> **From here down: implementation detail.** If you came to decide whether this framework fits your project, you have what you need. The sections below explain how each piece works for adopters actually setting up.
 
 ## The Core Problem
 
@@ -139,6 +155,16 @@ PROVOCATIONs use a separate confidence axis (GROUNDED / EXTRAPOLATED / PROVOCATI
 
 The **registry** tracks all of this in one place — a living table of every claim, argument, and proposition with its type, priority, confidence tier, source, and verification status. See [`templates/claim-registry.md`](templates/claim-registry.md).
 
+### One row, concretely
+
+A populated CLAIM entry looks like this:
+
+| ID | Type | Priority | Confidence | Source | Source Tier | Status |
+|----|------|----------|------------|--------|-------------|--------|
+| S1-1 | CLAIM | P0 | SUPPORTED | Mugaanyi et al. 2024 (JMIR, DOI: 10.2196/52935): 62–89% DOI fabrication rates across disciplines | A | [x] |
+
+The same row for an ARGUMENT carries additional fields (Grounds / Warrant / Rebuttal); a PROPOSITION carries Constructs / Relationship / Premises / Reasoning / Boundary conditions / Alternatives engaged. The per-type sub-table layout in [`templates/claim-registry.md`](templates/claim-registry.md) makes the type-specific fields explicit.
+
 ### Cross-reference rules
 
 - No claim accepted on a single non-textbook source
@@ -160,7 +186,7 @@ Without this mapping, agents default to confident language for everything. A SPE
 
 **PROVOCATIONs use a separate axis.** When the registry contains PROVOCATION entries, the table above does not apply to them — they take GROUNDED / EXTRAPOLATED / PROVOCATIVE / CRITICAL with their own required prose markers (see [DR-010](decisions/DR-010_provocation-unit-type.md) and [`templates/claim-registry.md`](templates/claim-registry.md) → "PROVOCATION Confidence — Separate Axis").
 
-**Own work under review** requires special framing: "we observed" (not "it was found"), with explicit status ("under review at IEEE TIM"). Don't let agents present under-review work as established.
+**Own work under review** requires special framing: "we observed" (not "it was found"), with explicit status ("under review at [journal name]"). Don't let agents present under-review work as established.
 
 ## Anti-Hallucination Checklist
 
@@ -233,12 +259,12 @@ See [`templates/review-prompt.md`](templates/review-prompt.md) for a structured 
 
 For interdisciplinary papers, create a **glossary** that serves as the single source of truth for terminology:
 
-- Group terms by domain (metrology, simulation science, medical education, etc.)
+- Group terms by the domain they come from
 - Include plain-language equivalents alongside formal definitions
 - Note where terms overlap or conflict across fields
-- Reference the standard each term comes from (VIM, GUM, ISO, APA)
+- Reference the standard each term comes from (VIM, GUM, ISO, APA, etc.)
 
-This prevents terminology drift — agents using "accuracy" when they mean "trueness" (a VIM distinction), or mixing "fidelity" across its simulation and measurement meanings. Point the agent to the glossary in your project file (CLAUDE.md) so it's consulted before writing.
+This prevents terminology drift — for instance, agents using "accuracy" when they mean "trueness" (a VIM distinction), or using a domain-specific term with its colloquial meaning where the formal meaning is required. Point the agent to the glossary in your project file (CLAUDE.md) so it's consulted before writing.
 
 See [`templates/glossary.md`](templates/glossary.md).
 
@@ -299,148 +325,65 @@ For voice-driven work where the manuscript's register is part of the contributio
 Academic papers involve many consequential choices — scope decisions, methodology pivots, journal selection, what to include vs. exclude. Document these as lightweight decision records:
 
 ```markdown
-# DR-001: Focus on infant ventilation (exclude adult compression)
+# DR-001: Restrict scope to single mechanism (exclude broader survey)
 
 ## Context
-Paper could cover adult + infant, both compression + ventilation.
-Page budget forces a choice.
+The paper could cover one mechanism in depth or survey three related
+mechanisms at a shallower level. Page budget forces a choice.
 
 ## Decision
-Infant ventilation primary, infant compression secondary (descriptive only).
+Single-mechanism deep treatment; the other two mechanisms appear only
+as related-work pointers.
 
 ## Rationale
-- Infant ventilation has the clearest human reference data (Huang 2016)
-- No human reference exists for infant compression (Kent 2010)
-- This gives us a clean fidelity gap analysis for ventilation
+- The single mechanism has the strongest empirical anchor in the literature.
+- A survey at the available page budget would underspecify each mechanism,
+  weakening the contribution.
+- Deep treatment lets us defend boundary conditions explicitly.
 
 ## Revisit If
-- Human infant compression data becomes available
-- Page budget increases (e.g., journal offers extended format)
+- Page budget increases (journal offers extended format).
+- Reviewer feedback specifically requests the survey framing.
+- A new result makes one of the excluded mechanisms load-bearing.
 ```
 
-Without DRs, agents will re-propose excluded approaches. "Should we add adult compression data?" gets answered once in DR-001, not every session.
+Without DRs, agents will re-propose excluded approaches. "Should we widen the scope to all three mechanisms?" gets answered once in DR-001, not every session.
 
 See [`templates/decision-record.md`](templates/decision-record.md).
 
-## Project File for Paper Projects
-
-Your CLAUDE.md (or equivalent) for a paper project should include:
-
-1. **Paper identity** — what it argues, target journal, deadline
-2. **Core concept** — the key insight in 2-3 sentences
-3. **Session continuity** — what to read on session start, what to update on session end
-4. **Key files table** — where everything lives
-5. **Methodology summary** — confidence tagging, claim audits, anti-hallucination
-6. **Before You Start** table — task-triggered pointers:
-
-```markdown
-| When | Read |
-|------|------|
-| Writing or editing prose | `writing-guide.md` — claim-to-section mapping with language calibration |
-| Adding or verifying citations | `vv/claims/claim_registry.md` — all claims with status |
-| Making scope or methodology decisions | `DR-*.md` — decision records index |
-| Checking terminology | `glossary.md` — cross-domain term definitions |
-| Reviewing before submission | `review-prompt.md` — structured peer review simulation |
-```
-
-See [`templates/CLAUDE.md`](templates/CLAUDE.md).
-
 ## Workflow Phases
 
-A structured workflow prevents the common failure of jumping straight to writing:
+A structured workflow prevents the common failure of jumping straight to writing. Phases group *what you're doing*; gates group *what must be true before moving on*. The mapping:
 
-### Phase 0: Problem Framing
-- Define research questions clearly
-- Identify target audience and outlet format
-- Document initial decisions (DR-000, DR-001)
+| Phase | What you're doing | Exits at |
+|-------|-------------------|----------|
+| 0 — Problem Framing | Research questions, target audience, initial decisions (DR-000, DR-001) | Paper identity set |
+| 1 — Requirements | Goals, success criteria, key claims, evidence mapping | Claims listed in registry |
+| 2 — Literature Audit | Find source → verify → extract citation → tag confidence | Registry coverage acceptable |
+| 3 — Writing | Architecture blueprint + writing guide + anti-hallucination checklist | **Gate 1** (Draft Complete) |
+| 4 — Validation | Simulated peer review, co-author review, full coverage report | **Gate 2** + **2.5** + **3** (Review Complete) |
+| 5 — Submission | Journal requirements, final citation check, data availability | **Gate 4** (Submission Ready) |
 
-### Phase 1: Requirements
-- Define paper goals (what must the paper demonstrate?)
-- Specify success criteria
-- Identify key claims that need support
-- Map claims to required evidence
-
-### Phase 2: Literature Audit
-- Register all claims in the claim registry
-- For each: find source → verify it exists → extract exact citation → tag confidence
-- Flag unsupported claims for resolution
-
-### Phase 3: Writing
-- Follow the architecture blueprint (page budgets)
-- Use the writing guide (confidence → language)
-- Run anti-hallucination checklist on new citations
-- Pass quality gates per section
-
-### Phase 4: Validation
-- Simulated peer review (fresh session)
-- Co-author review
-- Full claim audit (coverage report)
-
-### Phase 5: Submission
-- Format to journal requirements
-- Final citation check
-- Data availability statement
-- Author agreement
-
-## Session Continuity
-
-Paper projects span many sessions — often months. Session continuity is critical.
-
-### Starting a session
-1. Read CLAUDE.md (project identity and current state)
-2. Read the backlog (current tasks and priorities)
-3. Check recent decision records (any pending decisions?)
-4. Resume from last state (don't restart completed work)
-
-### Ending a session
-1. Update the backlog with progress
-2. Commit all changes
-3. Update CLAUDE.md if a major milestone was reached
-
-### AI handoff
-If switching AI systems or starting a fresh session:
-- CLAUDE.md is the primary handoff document
-- All context should be recoverable from committed files
-- No reliance on conversation memory
+Sessions within a phase span days to months. Session continuity rides on `CLAUDE.md` as the handoff document: read it at the start, update it at the end, commit everything. No reliance on conversation memory — all context recoverable from committed files. See [`templates/CLAUDE.md`](templates/CLAUDE.md) for the structure.
 
 ## What Doesn't Work
 
-### Trusting agent citations without verification
-Agents hallucinate citations. Not occasionally — routinely. Every citation needs the anti-hallucination checklist. This is the single most important practice in this guide.
+Common anti-patterns, in priority order. Each links back to the section that explains the fix:
 
-### Writing before the claim registry
-Prose written without a claim registry is prose that will need to be rewritten. The registry forces you to identify what you're claiming and whether you can support it *before* you invest in beautiful sentences.
-
-### Reviewing in the building session
-An agent that spent an hour helping write Section 3 will not catch its own errors in Section 3 — it has sunk-cost bias in its own context. The strongest mitigation is the **three-pass review pattern** ([DR-011](decisions/DR-011_multi-model-review-pattern.md)):
-
-- **Pass 1** (intra-family small) — escapes session-level sunk-cost
-- **Pass 2** (intra-family large) — different review character, catches what the small model missed
-- **Pass 3** (cross-vendor) — escapes training-data and stylistic priors shared across one vendor's family
-
-Pass 1 + 2 are the default for every publish or major revision; Pass 3 is high-stakes only, with a mandatory style filter so cross-vendor critique doesn't drift into voice critique. Each pass is a different functorial view of the manuscript; the combined verification is the limit, not the sum.
-
-### Skipping verification for informal technical communication
-The framework applies to any outbound technical content — not just formal papers. WhatsApp messages, emails, and Slack discussions with quantitative claims have the same error classes (unit confusion, property overestimates, wrong formulas) but no verification trigger. If it contains numbers, equations, or technical terminology going to a stakeholder, run the relevant checks before sending.
-
-### Skipping the architecture blueprint
-Without page budgets, agents expand every section. A 4-page paper becomes 8 pages. A focused argument becomes a literature review. The blueprint is constraint that enables quality.
-
-### Mixing terminology across domains
-In interdisciplinary work, letting agents use terms freely creates a paper that confuses every reviewer. A glossary isn't overhead — it's a prerequisite for clarity.
-
-### Reviewing equations for "soundness" instead of reproducing them
-AI-generated equations can contain errors that look right. A formula with correct units, reasonable magnitude, and coherent surrounding prose will pass both human and AI review if the reviewer assesses plausibility rather than computing. The fix: for every derived value in a technical paper, substitute the stated inputs into the stated formula and verify the result matches. This mechanical check catches errors that expert assessment misses. See [`templates/equation-checker.md`](templates/equation-checker.md) for the prompt template.
-
-### Confident language for weak claims
-"Our results demonstrate" for a SPECULATIVE inference is a credibility risk. The confidence-to-language mapping is mechanical but essential — it prevents the most subtle form of academic dishonesty.
+- **Trusting agent citations without verification.** Agents hallucinate citations routinely. Every citation goes through the [Anti-Hallucination Checklist](#anti-hallucination-checklist) — non-negotiable.
+- **Writing before the claim registry.** Prose written without a registry will need to be rewritten. The [Verification Registry](#verification-registry-the-foundation) forces you to name what you're claiming before you invest in sentences.
+- **Reviewing in the building session.** An agent that spent an hour helping write Section 3 carries sunk-cost bias into its own review. Use the three-pass pattern in [Peer Review Simulation](#peer-review-simulation) — at minimum, a fresh session of the same model.
+- **Skipping the architecture blueprint.** Without page budgets, agents expand every section. See [Architecture Blueprints](#architecture-blueprints).
+- **Mixing terminology across domains.** In interdisciplinary work, freely-used terms confuse every reviewer. See [Terminology References](#terminology-references).
+- **Reviewing equations for "soundness" instead of reproducing them.** Plausibility assessment misses arithmetic errors that mechanical reproduction catches. See [`templates/equation-checker.md`](templates/equation-checker.md).
+- **Confident language for weak claims.** "Our results demonstrate" for a SPECULATIVE inference is a credibility risk. See [Confidence-to-Language Mapping](#confidence-to-language-mapping).
+- **Skipping verification for informal technical communication.** The same error classes (unit confusion, property overestimates, wrong formulas) appear in WhatsApp messages, emails, and Slack discussions with quantitative claims — without the review trigger a paper would attract. If numbers or technical terminology go to a stakeholder, run the relevant checks before sending.
 
 ## Measuring Success
 
 You know the system is working when:
-- Claim registry coverage is above 85% before submission
-- All P0 claims are at 100% verification
-- Simulated peer review scores above 3.5/5.0
+- The claim registry hits its per-tier coverage targets before submission (P0 / P1 / P2; current targets in Gate 2 — see [`docs/THRESHOLDS.md`](docs/THRESHOLDS.md) for why)
+- The simulated peer review clears the project's submission threshold
 - No hallucinated citations survive to co-author review
 - Language consistently matches evidence strength
 - Agents don't re-propose excluded scope (because DRs exist)
@@ -453,6 +396,8 @@ You know it's failing when:
 - Agents use "demonstrates" for speculative claims
 - You're re-explaining the paper's scope every session
 - Terminology is inconsistent across sections
+
+The specific numbers behind the success signals (85% overall coverage, 100% P0, 3.5/5.0 peer-review) are SPECULATIVE-tier heuristics — defensible defaults, not calibrated constants. Adjust them per project as you accrue evidence.
 
 ## Templates
 
@@ -483,14 +428,16 @@ Optional Python CLIs in [`tools/`](tools/) — stdlib only, deterministic, CI-fr
 
 Invoke as `python -m tools.coverage <registry.md>` or via Makefile (`make coverage` / `make check-dois`) from the repo root. Known limits (no HTTPS proxy support, sequential HEAD scaling, no escaped-pipe support in cells) are documented in [`tools/README.md`](tools/README.md).
 
-Empirical operation costs from Paper 1's [`vv/cost-log.md`](papers/perspective/vv/cost-log.md) — first N=2 token-cost replication of [DR-011](decisions/DR-011_multi-model-review-pattern.md):
+### Self-applied cost data (N=2, code-tooling scale)
 
-| Operation | N | Mean total tokens | Load-bearing findings |
-|-----------|---|-------------------|-----------------------|
-| DR-011 Pass 1 (Haiku) on `tools/` code review | 2 | 36,812 | 0 / 2 rounds |
-| DR-011 Pass 2 (Opus) on `tools/` code review | 2 | 52,540 (~1.4× Pass 1) | 2 / 2 rounds (each would have shipped broken) |
+We ran the DR-011 two-pass review on this repo's own `tools/` code (`coverage.py` + `check_dois.py`, ~620 LOC) and logged the token cost. Treat as a back-of-envelope reference, not as a published benchmark — it covers one type of artefact (Python code) at one scale, reviewed within one model family (Claude):
 
-Per-paper cost logging via the [`cost-log.md`](templates/cost-log.md) template — see [DR-011 Open Questions](decisions/DR-011_multi-model-review-pattern.md) for what's still unmeasured.
+| Operation | N | Mean total tokens | Findings that would have shipped broken |
+|-----------|---|-------------------|------------------------------------------|
+| Pass 1 (Haiku) | 2 | 36,812 | 0 / 2 rounds |
+| Pass 2 (Opus) | 2 | 52,540 (~1.4× Pass 1) | 2 / 2 rounds |
+
+Per-paper cost logging via the [`cost-log.md`](templates/cost-log.md) template. See [DR-011 Open Questions](decisions/DR-011_multi-model-review-pattern.md) for what's still unmeasured (paper-scale prose, cross-family generality, Pass 3 yield).
 
 ## Paper Projects
 
