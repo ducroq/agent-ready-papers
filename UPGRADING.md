@@ -11,6 +11,22 @@ The full release notes are in [`CHANGELOG.md`](CHANGELOG.md). This file is the q
 - **PATCH** version bumps are docs-only / clarifications. No action required.
 - Every release entry in `CHANGELOG.md` includes an "Adopter notes" / "Adopter action" subsection. This file aggregates them per version for quick lookup.
 
+## v2.0.0 (2026-06-10)
+
+**From v1.7.x — what to review when you bump your pin to v2.0.0:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| `templates/physics-verification/` removed (nine files) | **BREAKING.** If your project depended on this template family, either freeze on v1.7.1 (`git checkout v1.7.1 -- templates/physics-verification/`) and copy the files into your own project, or replace with your own equivalents. The conceptual methodology (mechanical reproduction, dimensional checking, limiting-case analysis, two-paths consistency) is portable; what's gone is this repo's hosting of the templates. |
+| `docs/METHODOLOGY.md` removed | **BREAKING** if you linked to it. The framework is now described entirely by README + templates + DRs. Adopter docs that pointed at METHODOLOGY should re-target the README. |
+| `audits/` directory no longer published | Reference only — adopters did not need this directory in the first place. The framework's public artifact is now smaller and self-contained. |
+| README restructured (Problem → Approach → When-worth → When-overkill → Common Questions → Quickstart → details) | Reference only — front-of-file orientation changes; no template or DR contracts changed. |
+| Paper 1 manuscript Section 4 (Preliminary Evidence) rewritten to "Related Work and Design Rationale"; specific source-project audit findings removed | Reference only — affects Paper 1's content, not the templates. |
+| Templates' source-project examples genericised (Step Z worked example, equation-checker origin comment, claim-registry inverse-hallucination note, hypothesis-log example tags, vv-framework Gate 2.7 pointer) | Reference only — template contracts (fields, structure, gate semantics) are unchanged. The minor textual edits don't affect adopter projects that have already copied these templates. |
+| DRs (004, 006–014) had audit references and source-project names removed from their evidence sections | Reference only — the decisions themselves stand; only the evidence narratives were genericised. |
+
+**Breaking** flagged on the two removed surfaces (`templates/physics-verification/` and `docs/METHODOLOGY.md`). Everything else is content-level scrubbing that does not change template contracts.
+
 ## v1.7.1 (2026-06-09)
 
 **From v1.7.0 — what to review when you bump your pin to v1.7.1:**

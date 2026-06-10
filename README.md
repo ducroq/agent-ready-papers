@@ -8,7 +8,7 @@ Companion to [agent-ready-projects](https://github.com/ducroq/agent-ready-projec
 
 **Status:** A working framework we use on our own papers. Broader empirical validation across other authors and domains is an open question — adopt it as a structured starting point, not as a tested method.
 
-**Current release:** v1.7.1 (2026-06-09) — see [`CHANGELOG.md`](CHANGELOG.md). Pin your project with `agent-ready-papers: v1.7.1` in your CLAUDE.md and surface drift at session start.
+**Current release:** v2.0.0 (2026-06-10) — see [`CHANGELOG.md`](CHANGELOG.md). Pin your project with `agent-ready-papers: v2.0.0` in your CLAUDE.md and surface drift at session start.
 
 ## The Core Problem
 

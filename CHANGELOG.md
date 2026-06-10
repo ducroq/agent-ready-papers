@@ -34,6 +34,54 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
        ("No adopter action required.") rather than omitting the subsection.
 -->
 
+## v2.0.0 (2026-06-10)
+
+Repository scope-tightening + README reflection pass. This release is a **MAJOR bump** because two public artifacts have been removed entirely:
+
+- `templates/physics-verification/` — nine-file physics-paper verification template family removed. The methodology lives on conceptually but the template files are no longer shipped.
+- `docs/METHODOLOGY.md` — methodology-derivation narrative removed.
+
+In addition, all in-text references to specific source projects and audit findings have been replaced with generic phrasing throughout templates, DRs, and Paper 1 supporting files. The framework now stands on its own design rationale rather than enumerating which projects it was derived from.
+
+### Removed
+- **`templates/physics-verification/`** — all nine templates (`cross-document-consistency.md`, `dimensional-checker.md`, `estimation-checker.md`, `lean-as-optional-tier.md`, `limiting-case-checker.md`, `scope-domain-registry.md`, `two-paths-consistency.md`, `verification-tier-hierarchy.md`, `README.md`). Adopters who pinned to v1.7.x and depended on this family must either freeze on v1.7.x or replace with their own equivalents.
+- **`docs/METHODOLOGY.md`** — derivation narrative. No replacement; the framework is now described entirely by README + templates + DRs.
+- **`audits/`** — directory and its contents are gitignored and no longer published. Adopters do not need this directory.
+
+### Changed — README restructure (front-of-file)
+- **Order:** Problem → Approach → When-Worth-It → When-Overkill → Common Questions → Quickstart → (divider) → details. The case is made before the action is asked for.
+- **Status hedge:** A new line near the top declares the framework as "a working framework we use on our own papers" with broader empirical validation as an open question. The README's previous confident framing is calibrated.
+- **Common Questions** section added: overhead, small-paper applicability, vs. reference managers, non-AI use, peer-review status.
+- **One row, concretely** worked-example added to the Verification Registry section so adopters see a populated CLAIM entry inline rather than via a click-through.
+- **What Doesn't Work** tightened from eight paragraphs to eight one-liners with backlinks to the explanatory sections.
+- **Workflow Phases** consolidated with the former Session Continuity and Project File sections; now includes an explicit Phase→Gate mapping table.
+- **Tools cost-log** reframed from "empirical operation costs from Paper 1" to "self-applied cost data (N=2, code-tooling scale)" with honest scope caveats.
+
+### Changed — Paper 1
+- **`papers/perspective/manuscript.tex`** — Section 4 (Preliminary Evidence) collapsed from a two-audit case-study presentation into a shorter "Related Work and Design Rationale" section. Appendix A's worked examples are rewritten to use generic illustrations. The paper is publishable as a pure proposal/perspective; the empirical anchors from the source-project audits are removed.
+- **Supporting files** (`CLAUDE.md`, `backlog.md`, `backlog-paper2.md`, `writing-guide.md`, `vv/claims/claim_registry.md`) — all audit references removed; sources column reset to "own design rationale" or generic phrasing where source-project citations were used.
+
+### Changed — templates
+- **`templates/anti-hallucination.md`** — Step Z worked example uses a generic DSM-form imitation rather than naming a specific speculative-design book.
+- **`templates/equation-checker.md`** — origin comment removed (referenced source project).
+- **`templates/claim-registry.md`** — inverse-hallucination note genericised.
+- **`templates/hypothesis-log.md`** — example tags genericised.
+- **`templates/vv-framework.md`** — Gate 2.7 source-pattern pointer removed.
+
+### Changed — DRs
+All DRs that referenced audits or specific source projects (DR-004, 006, 007, 008, 009, 010, 011, 012, 013, 014) have had their evidence-base sections, triggering-observation blocks, and audit pointers rewritten. The decisions themselves are unchanged; their evidence narratives are genericised.
+
+### Adopter notes
+- **Pinned consumers on v1.7.x using `templates/physics-verification/`**: this is a breaking change. Freeze on v1.7.1 (`git checkout v1.7.1 -- templates/physics-verification/`) or replace with your own family.
+- **Pinned consumers on v1.7.x using `docs/METHODOLOGY.md`**: same — freeze or write your own.
+- **Pinned consumers using only the core templates** (`CLAUDE.md`, `claim-registry.md`, `vv-framework.md`, `writing-guide.md`, `review-prompt.md`, `decision-record.md`, `anti-hallucination.md`, `glossary.md`, `equation-checker.md`, `cost-log.md`, `hypothesis-log.md`, `key-quotes.md`): templates' contracts are unchanged. Migrate by bumping your pin to `agent-ready-papers: v2.0.0`. The minor template edits (Step Z example, etc.) do not affect the surface adopters consume.
+
+### Origin
+
+This release reflects a deliberate scope-tightening decision. The framework's public artifact is now intentionally smaller and self-contained: it does not point at evidence outside its own files, and it does not enumerate source projects. The README reflection pass that produced the restructure is documented in this session's curate output.
+
+---
+
 ## v1.7.1 (2026-06-09)
 
 Companion pin bump: `agent-ready-projects` advanced from v1.10.2 → v1.10.3. Upstream v1.10.3 added structural-lint self-tests at `tests/lint/` — maintainer-only infrastructure with no template-surface change.
