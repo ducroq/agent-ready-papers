@@ -1,6 +1,6 @@
 # Working With AI Agents: Academic & Technical Writing
 
-Verification infrastructure for AI-augmented academic and structured non-fiction writing — templates, quality gates, and session continuity that catch the failure modes automated tools miss. Covers conventional academic papers plus speculative-design work (see [DR-010](decisions/DR-010_provocation-unit-type.md)).
+Verification infrastructure for AI-augmented academic and structured non-fiction writing — templates, quality gates, and session continuity addressing the failure modes automated tools miss. Covers conventional academic papers plus speculative-design work (see [DR-010](decisions/DR-010_provocation-unit-type.md)).
 
 Automated citation checkers (RefChecker, scite.ai) and model-level solutions (RAG, [grounded generation](docs/framework-summary.md#terminology-note-grounding--grounded)) address part of the problem. This guide operates at the **process level** — the workflow templates, decision records, and verification systems that sit between an AI agent and a submission-ready manuscript.
 
@@ -8,7 +8,7 @@ Companion to [agent-ready-projects](https://github.com/ducroq/agent-ready-projec
 
 **Status:** A working framework we use on our own papers. Broader empirical validation across other authors and domains is an open question — adopt it as a structured starting point, not as a tested method.
 
-**Current release:** v2.0.0 (2026-06-10) — see [`CHANGELOG.md`](CHANGELOG.md). Pin your project with `agent-ready-papers: v2.0.0` in your CLAUDE.md and surface drift at session start.
+**Current release:** v2.0.1 (2026-06-10) — see [`CHANGELOG.md`](CHANGELOG.md). Pin your project with `agent-ready-papers: v2.0.1` in your CLAUDE.md and surface drift at session start.
 
 ## The Core Problem
 
@@ -20,7 +20,7 @@ AI agents are remarkably useful for academic writing — literature synthesis, a
 - **Terminology drift.** In interdisciplinary work, the same word means different things across fields. Agents mix terminology freely unless constrained by a reference document.
 - **Invisible verification gaps.** Agents produce fluent prose that *reads* like it's well-sourced. Without a systematic verification system, gaps in evidence are invisible until a reviewer finds them.
 
-The fix isn't avoiding AI assistance. It's building **verification infrastructure** — systematic processes that catch these failure modes before submission.
+The fix isn't avoiding AI assistance. It's building **verification infrastructure** — systematic processes designed to catch these failure modes before submission.
 
 ## The Approach
 
@@ -47,19 +47,37 @@ Every concept on the right maps to a concrete artifact in the project — a temp
 
 </details>
 
+## The Argument, Structurally
+
+Stating the case in Toulmin form makes it inspectable rather than persuasive:
+
+| Component | Statement |
+|-----------|-----------|
+| **Claim** | AI-augmented academic and structured non-fiction writing benefits from process-level verification infrastructure. |
+| **Grounds** | The five failure modes in [The Core Problem](#the-core-problem) — hallucinated citations, confidence inflation, scope creep, terminology drift, invisible verification gaps. Each is observable in agent output today. |
+| **Warrant** | Tool-level checkers (RefChecker, scite.ai) verify already-written citations; model-level techniques (RAG, [grounded generation](docs/framework-summary.md#terminology-note-grounding--grounded)) constrain what gets generated. Neither reaches the process layer where the failure modes originate — the templates, decision records, and registry discipline a writer brings *to* the session. |
+| **Qualifier** | **EMERGING.** We use this framework on our own papers; broader empirical validation across other authors and domains is an open question. |
+| **Rebuttal** | The framework is overhead with no return in the cases listed in *[When It Is Overkill](#when-it-is-overkill)* below — one-shot prose, throwaway code, internal notes, and domains with their own established compliance audit conventions. |
+
+The same statement is also registered, in [*This README, registered*](#this-readme-registered) near the bottom, alongside six other load-bearing claims from this file — each with priority, type, confidence tier, and source.
+
 ## When This Framework Is Worth The Overhead
 
-- The cost of a hallucinated citation in your output exceeds an hour of your time
-- The output spans multiple sessions (a paper, a grant, a long-form decision)
-- You have a load-bearing argument or proposition the reader will scrutinise
-- You are working in a domain where confidence-language calibration matters (academic, regulated, decision-support)
+Each test can be answered yes / no for your specific project — they're meant as boundary conditions, not aspirational filters:
+
+- **Hallucination cost exceeds review cost.** A hallucinated citation surviving into your output would cost more than an hour of your time to retract or correct downstream.
+- **Context cannot fit in a single session.** The work spans multiple sessions (a paper, a grant, a long-form decision) — no one conversation holds it all, so handoff state has to live in files.
+- **At least one claim is load-bearing.** You have an argument or proposition the reader will scrutinise — being wrong about it would cost a co-author conversation or a reviewer round.
+- **Confidence language is read as a signal.** "Demonstrates" vs. "suggests" will be parsed by your reader (reviewer, regulator, decision-maker) as a calibrated weighting, not interchangeable hedging.
 
 ## When It Is Overkill
 
-- One-shot prose with no citation chain
-- Throwaway code or scripts (correctness verified by execution)
-- Internal scratch notes
-- Anything with established compliance audit conventions (use those instead)
+Each test is similarly yes / no — if the description fits, the framework is overhead with no return:
+
+- **No citation surface.** One-shot prose that introduces no external references — no hallucination possible.
+- **Correctness verified by execution.** Throwaway code or scripts — running them is the verification.
+- **Audience of one.** Internal scratch notes that only you will read.
+- **Established audit conventions already cover it.** Domains with their own conventions (FDA 21 CFR 820, IEC 62304, ISO 17025, GDPR DPIA, regulated clinical trial reporting) — use those instead.
 
 ## Common Questions
 
@@ -115,7 +133,7 @@ For papers with quantitative content (equations, derived values, numerical table
 |------|-----------|-----------------|--------------|
 | **CALCULATION** | Derived numerical value from a stated formula | Methods, Results, technical appendices | Does the stated result follow from stated inputs? |
 
-Calculation verification uses **mechanical reproduction** — substituting values into formulas and computing step by step — rather than plausibility assessment. The rationale: a formula with correct units, reasonable magnitude, and coherent surrounding prose will pass plausibility review even when the arithmetic is wrong. Reproducing the calculation surfaces what assessment misses. See [DR-009](decisions/DR-009_calculation-verification.md) for the verification procedure.
+Calculation verification uses **mechanical reproduction** — substituting values into formulas and computing step by step — rather than plausibility assessment. The rationale: a formula with correct units, reasonable magnitude, and coherent surrounding prose will pass plausibility review even when the arithmetic is wrong. Reproducing the calculation is designed to surface what assessment misses. See [DR-009](decisions/DR-009_calculation-verification.md) for the verification procedure.
 
 For speculative-design / design-fiction / diegetic-prototype work, an opt-in fifth unit type applies:
 
@@ -182,7 +200,7 @@ This is the bridge between verification and writing. The confidence tier determi
 | EMERGING | "may", "preliminary evidence", "initial findings suggest" |
 | SPECULATIVE | "warrants investigation", "remains unclear", "we hypothesize" |
 
-Without this mapping, agents default to confident language for everything. A SPECULATIVE claim stated as "demonstrates" is a credibility risk that reviewers will catch. The writing guide template maps every claim to its section, confidence tier, and appropriate language. See [`templates/writing-guide.md`](templates/writing-guide.md).
+Without this mapping, agents default to confident language regardless of tier. A SPECULATIVE claim stated as "demonstrates" is a credibility risk that reviewers will catch. The writing guide template maps every claim to its section, confidence tier, and appropriate language. See [`templates/writing-guide.md`](templates/writing-guide.md).
 
 **PROVOCATIONs use a separate axis.** When the registry contains PROVOCATION entries, the table above does not apply to them — they take GROUNDED / EXTRAPOLATED / PROVOCATIVE / CRITICAL with their own required prose markers (see [DR-010](decisions/DR-010_provocation-unit-type.md) and [`templates/claim-registry.md`](templates/claim-registry.md) → "PROVOCATION Confidence — Separate Axis").
 
@@ -232,7 +250,7 @@ Each section gets:
 - What was cut and where it went (supplement, future work, or deleted)
 - Explicit "content moved" and "content cut" annotations
 
-This prevents scope creep — the most common failure mode when agents draft sections. Without a page budget, an introduction that should be half a page becomes two pages of background the reader doesn't need. The blueprint is a specification; the writing is implementation.
+This constrains scope creep — a common failure mode when agents draft sections. Without a page budget, an introduction that should be half a page becomes two pages of background the reader doesn't need. The blueprint is a specification; the writing is implementation.
 
 ## Peer Review Simulation
 
@@ -264,7 +282,7 @@ For interdisciplinary papers, create a **glossary** that serves as the single so
 - Note where terms overlap or conflict across fields
 - Reference the standard each term comes from (VIM, GUM, ISO, APA, etc.)
 
-This prevents terminology drift — for instance, agents using "accuracy" when they mean "trueness" (a VIM distinction), or using a domain-specific term with its colloquial meaning where the formal meaning is required. Point the agent to the glossary in your project file (CLAUDE.md) so it's consulted before writing.
+This guards against terminology drift — for instance, agents using "accuracy" when they mean "trueness" (a VIM distinction), or using a domain-specific term with its colloquial meaning where the formal meaning is required. Point the agent to the glossary in your project file (CLAUDE.md) so it's consulted before writing.
 
 See [`templates/glossary.md`](templates/glossary.md).
 
@@ -347,7 +365,7 @@ as related-work pointers.
 - A new result makes one of the excluded mechanisms load-bearing.
 ```
 
-Without DRs, agents will re-propose excluded approaches. "Should we widen the scope to all three mechanisms?" gets answered once in DR-001, not every session.
+Without DRs, agents repeatedly re-propose excluded approaches across sessions. "Should we widen the scope to all three mechanisms?" gets answered once in DR-001, not every session.
 
 See [`templates/decision-record.md`](templates/decision-record.md).
 
@@ -450,6 +468,26 @@ Papers written using this framework live in [`papers/`](papers/). Each paper pro
 | Paper 3: SE-Inspired Verification Pipeline | — | Not yet started (equation-checker is proof of concept) | TBD |
 
 See [`decisions/DR-006_publication-roadmap.md`](decisions/DR-006_publication-roadmap.md) for the publication strategy and sequencing.
+
+## This README, registered
+
+Applying the framework to its own home document. The seven entries below are the README's load-bearing claims, arguments, and propositions — registered with priority, type, confidence tier, and source. Coverage is not 100%: a README is a guide, not a paper, and not every sentence is registered. The load-bearing ones are.
+
+Tier vocabulary matches the [Confidence-to-Language Mapping](#confidence-to-language-mapping) above; type vocabulary matches the [Verification Registry](#verification-registry-the-foundation).
+
+| ID | Type | Priority | Confidence | Statement | Source / Anchor | Where it appears |
+|----|------|----------|------------|-----------|------------------|------------------|
+| R-1 | PROPOSITION | P0 | EMERGING | Process-level verification infrastructure (templates + gates + decision records + registry) catches a class of AI-augmented-writing failure modes that tool-level checkers and model-level techniques do not fully address. Boundary: the four When-Worth-It tests; reduces to overhead for the When-Overkill cases. | Own use on three application classes (academic-paper, speculative-design, decision-support); Paper 1 (this repo) is the perspective article arguing the gap | [The Approach](#the-approach), [The Argument, Structurally](#the-argument-structurally) |
+| R-2 | ARGUMENT | P0 | SUPPORTED | The systems-engineering identity (claims-as-components, sources-as-tests, coverage-as-measurable) operationalises verification rather than just metaphorising it. Warrant: typed registry + tier-monotonic language calibration + per-priority coverage targets are each independently tractable. Rebuttal addressed: the mapping is most natural for argumentative/empirical non-fiction and stretches for purely literary or oral genres. | [DR-007](decisions/DR-007_se-inspired-claim-verification.md) | [The Approach → SE mapping](#the-approach) |
+| R-3 | CLAIM | P1 | SUPPORTED | LLMs introduce plausible-but-fabricated citations at rates high enough that unverified citations can survive into submission-ready drafts. | Hallucination literature (see [`templates/anti-hallucination.md`](templates/anti-hallucination.md) for citations); replicated in own audits | [The Core Problem → Hallucinated citations](#the-core-problem), [Anti-Hallucination Checklist](#anti-hallucination-checklist) |
+| R-4 | CLAIM | P1 | SUPPORTED | Plausibility-based review of calculations misses arithmetic errors that mechanical reproduction catches. | Paper 3 equation-checker proof of concept; cross-model comparison (Gemini missed 3/3 errors that Sonnet caught via step-by-step computation) | [Verification Registry → CALCULATION](#verification-registry-the-foundation), [`templates/equation-checker.md`](templates/equation-checker.md) |
+| R-5 | PROPOSITION | P1 | EMERGING | A three-pass review pattern (intra-family small → intra-family large → cross-vendor) escapes biases a single pass cannot — sunk-cost-from-session, review-character convergence, training-prior alignment. Boundary: demonstrated at code-tooling scale within one model family (N=2 within Claude); paper-scale prose and cross-family generality remain untested. | [DR-011](decisions/DR-011_multi-model-review-pattern.md) (Status: Proposed) | [Peer Review Simulation](#peer-review-simulation), [Tools → cost data](#tools) |
+| R-6 | CLAIM | P1 | SPECULATIVE | The numerical thresholds in Gate 2 (100% P0 / 90% P1 / 70% P2 / ≥85% overall) and Gate 3 (≥3.5/5.0 simulated peer review) are defensible defaults, not calibrated constants. | [`docs/THRESHOLDS.md`](docs/THRESHOLDS.md) (self-declared SPECULATIVE at top of file) | [Quality Gates](#quality-gates), [Measuring Success](#measuring-success) |
+| R-7 | PROPOSITION | P2 | EMERGING | Speculative-design / design-fiction work creates an "inverse hallucination" risk — designed speculation presented as if it had a citable source — which Steps 0–6 of the standard anti-hallucination checklist will not catch. Boundary: opt-in extension for PROVOCATION-using projects only; standard academic papers can ignore. | [DR-010](decisions/DR-010_provocation-unit-type.md) | [Verification Registry → PROVOCATION](#verification-registry-the-foundation), [Anti-Hallucination Checklist → Step Z](#anti-hallucination-checklist) |
+
+**Coverage note.** Type cut: 3 CLAIMs / 1 ARGUMENT / 3 PROPOSITIONs. Tier cut: 0 ESTABLISHED / 3 SUPPORTED / 3 EMERGING / 1 SPECULATIVE. The absence of an ESTABLISHED tier is intentional — the README does not yet have validated claims about its own efficacy, and forcing one would be the exact confidence-inflation failure the framework is supposed to catch.
+
+**Why this section exists.** Two reasons. (1) The framework's strongest credibility move available post-scope-tightening is applying itself to its own home document — readers can audit the README's load-bearing claims using the apparatus the README proposes. (2) The exercise forces honest tiers: R-1 reads as EMERGING (not SUPPORTED), R-6 reads as SPECULATIVE (not SUPPORTED), and the README's earlier undifferentiated confidence tone hid that.
 
 ## Further Reading
 

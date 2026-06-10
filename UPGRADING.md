@@ -11,6 +11,20 @@ The full release notes are in [`CHANGELOG.md`](CHANGELOG.md). This file is the q
 - **PATCH** version bumps are docs-only / clarifications. No action required.
 - Every release entry in `CHANGELOG.md` includes an "Adopter notes" / "Adopter action" subsection. This file aggregates them per version for quick lookup.
 
+## v2.0.1 (2026-06-10)
+
+**From v2.0.0 — what to review when you bump your pin to v2.0.1:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| `README.md` — new `## The Argument, Structurally` section (Toulmin block) between *The Approach* and *When-Worth-It* | Reference only — makes the README's central argument inspectable. No template, DR, or tool surface changed. |
+| `README.md` — confidence-language calibration sweep across seven spots ("catches" → "designed to catch", "prevents" → "constrains" / "guards against", "for everything" → "regardless of tier", "will re-propose" → "repeatedly re-propose across sessions", and similar) | Reference only — README's own language now sits at or below the tier of the underlying claim. If you've copied any of these specific phrasings into your own README or supporting docs, consider mirroring the downshift. |
+| `README.md` — `## When This Framework Is Worth The Overhead` and `## When It Is Overkill` rewritten as yes/no-answerable testable boundary conditions | Reference only — you can now answer each bullet for your specific project, not just match it as a vibe. Useful when explaining to a collaborator whether the framework fits their work. |
+| `README.md` — new `## This README, registered` section (seven entries R-1…R-7 with priority, type, confidence tier, source, and section anchors) | **Recommended pattern** — applying the framework to its own home document is a low-cost credibility move. Mirror in your own paper project's README (or top of `CLAUDE.md`) with your project's load-bearing claims registered. |
+| Root `CLAUDE.md` + `README.md` self-pin bumped v2.0.0 → v2.0.1 | None — metadata only. |
+
+**No breaking changes.** PATCH release: README-only logic-application pass, no functional change to templates, DRs, or tooling.
+
 ## v2.0.0 (2026-06-10)
 
 **From v1.7.x — what to review when you bump your pin to v2.0.0:**

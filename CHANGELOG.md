@@ -34,6 +34,25 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
        ("No adopter action required.") rather than omitting the subsection.
 -->
 
+## v2.0.1 (2026-06-10)
+
+README logic-application pass. The framework is applied to its own home document — a four-move coordinated edit using the same discipline the README proposes for adopters' papers. **PATCH release:** README-only edits, no template/DR/tool surface changed.
+
+### README — four moves
+
+- **`## The Argument, Structurally`** — new section inserted between *The Approach* and *When-Worth-It*. Five-row Toulmin table making the central argument inspectable: Claim (process-level verification infrastructure benefits AI-augmented writing) / Grounds (the five failure modes) / Warrant (tool-level and model-level techniques don't reach the process layer) / Qualifier (EMERGING — own use, not externally validated) / Rebuttal (the four When-Overkill cases).
+- **Confidence-language calibration sweep** across seven load-bearing spots. ESTABLISHED-tier language ("catches", "prevents", "surfaces", "for everything", "will re-propose", "the most common") downshifted where the underlying claim is EMERGING or SPECULATIVE. Examples: `catches these failure modes` → `designed to catch these failure modes`; `Reproducing the calculation surfaces what assessment misses` → `…is designed to surface…`; `default to confident language for everything` → `default to confident language regardless of tier`; `prevents scope creep — the most common failure mode` → `constrains scope creep — a common failure mode`; `prevents terminology drift` → `guards against terminology drift`; `agents will re-propose excluded approaches` → `agents repeatedly re-propose excluded approaches across sessions`.
+- **`## When This Framework Is Worth The Overhead`** and **`## When It Is Overkill`** — rewritten as **testable boundary conditions**. Each bullet is now yes/no-answerable for a specific project. When-Worth-It: hallucination cost exceeds review cost / context cannot fit in a single session / at least one claim is load-bearing / confidence language is read as a signal. When-Overkill: no citation surface / correctness verified by execution / audience of one / established audit conventions already cover it (FDA 21 CFR 820, IEC 62304, ISO 17025, GDPR DPIA, regulated clinical trial reporting).
+- **`## This README, registered`** — new section near the bottom. Seven entries R-1…R-7 (3 CLAIMs / 1 ARGUMENT / 3 PROPOSITIONs; 0 ESTABLISHED / 3 SUPPORTED / 3 EMERGING / 1 SPECULATIVE) registering the README's load-bearing claims with priority, type, confidence tier, source, and section anchors. Coverage note explains the deliberate absence of ESTABLISHED tier (no validated efficacy claims about the framework itself); *Why this section exists* documents the rationale.
+
+### Adopter notes
+
+- **No template / DR / tool surface changed.** Pinned consumers bumping v2.0.0 → v2.0.1 inherit only README clarifications.
+- **Recommended for adopters:** mirror the *This README, registered* pattern in your own paper project's README — applying the framework to the document that describes the framework is a low-cost credibility move.
+- **Self-pin bump only:** if your `CLAUDE.md` pins `agent-ready-papers: v2.0.0`, update to `v2.0.1` to surface drift cleanly at session start; no functional change.
+
+---
+
 ## v2.0.0 (2026-06-10)
 
 Repository scope-tightening + README reflection pass. This release is a **MAJOR bump** because two public artifacts have been removed entirely:
