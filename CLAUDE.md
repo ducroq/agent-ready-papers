@@ -5,7 +5,7 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 - **Type**: Guide + templates + active paper projects
 - **Companion**: [agent-ready-projects](https://github.com/ducroq/agent-ready-projects) (for code)
 - **agent-ready-projects**: v1.10.3
-- **agent-ready-papers** (this repo): v2.1.1 (non-Claude setup doc — universal pattern + per-tool entry points for Copilot CLI / Cursor / Continue / web chat, 2026-06-11)
+- **agent-ready-papers** (this repo): v2.1.2 (Quickstart "Driving it with your agent" — four copy-paste prompts for bootstrap / register-while-drafting / verify-citation / peer-review-pass, 2026-06-11)
 
 > Live project state (current paper status, recent decisions, deferred items) lives in `memory/MEMORY.md` (maintainer-local — see *What is intentionally not shipped* below). Release notes live in `CHANGELOG.md`.
 

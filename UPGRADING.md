@@ -11,6 +11,17 @@ The full release notes are in [`CHANGELOG.md`](CHANGELOG.md). This file is the q
 - **PATCH** version bumps are docs-only / clarifications. No action required.
 - Every release entry in `CHANGELOG.md` includes an "Adopter notes" / "Adopter action" subsection. This file aggregates them per version for quick lookup.
 
+## v2.1.2 (2026-06-11)
+
+**From v2.1.1 — what to review when you bump your pin to v2.1.2:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| `README.md` — new `### Driving it with your agent` subsection in Quickstart, with four copy-paste prompts (bootstrap / register-while-drafting / verify-citation / peer-review-pass) | **Recommended reading** — closes the implicit assumption that adopters know how to delegate the Quickstart steps to an agent. The prompts work as-is across Claude Code, Copilot CLI, Cursor, Continue, web chat (per `docs/non-claude-setup.md`). Mirror in your own paper project's README if useful. |
+| Root `CLAUDE.md` + `README.md` self-pin bumped v2.1.1 → v2.1.2 | None — metadata only. |
+
+**No breaking changes.** PATCH release: README-only Quickstart addition, no template / DR / tool surface change.
+
 ## v2.1.1 (2026-06-11)
 
 **From v2.1.0 — what to review when you bump your pin to v2.1.1:**

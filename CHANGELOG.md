@@ -34,6 +34,28 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
        ("No adopter action required.") rather than omitting the subsection.
 -->
 
+## v2.1.2 (2026-06-11)
+
+Agent-driven Quickstart. The README's Quickstart described *what* gets set up but read as a checklist a human applies. The framework is for *AI-augmented* writing — most of the steps are things you delegate. **PATCH release:** README-only edit adding a new `### Driving it with your agent` subsection, no template / DR / tool surface changed.
+
+### Changed
+
+- **`README.md`** — new `### Driving it with your agent` subsection inserted under Quickstart, between *Three tiers of adoption* and the implementation-detail divider. Four copy-paste prompts cover the most common operations:
+  1. **Bootstrap a new paper project** — one-shot prompt that creates `papers/<name>/`, copies the minimum-viable adoption files, fills CLAUDE.md identity, initialises the registry, commits, and sets up session continuity.
+  2. **Register claims as I draft** — background companion mode the agent runs while the human writes; entries flagged as the human types, coverage summary at section end, citations auto-verified at Step 0.
+  3. **Verify a single citation** — one-shot lookup walking Step 0 + 6 of the anti-hallucination checklist with PASS / FAIL / NEEDS-CONTENT-CHECK output per step.
+  4. **Run a peer-review pass** — in a fresh session of a different model, applying `agents/review-prompt.md` per DR-011's three-pass pattern (intra-family small / intra-family large / cross-vendor).
+- Closing pointer at `docs/non-claude-setup.md` for non-Claude-Code adopters — the prompts work as-is across vendors; the setup doc covers per-tool entry points for how to load them.
+
+### Adopter notes
+
+- **No template / DR / tool surface changed.** Pinned consumers bumping v2.1.1 → v2.1.2 inherit only the new Quickstart subsection.
+- **Recommended:** if you maintain your own paper project, consider mirroring the four-prompts pattern in your own README. The prompts are deliberately generic — replace `<framework>` and `<paper>` placeholders and they work for any paper.
+- **The prompts are not new templates.** They are README-level documentation of how to delegate operations the agent could already perform — the framework's `agents/` directory and `templates/` checklists were always agent-runnable; v2.1.2 just makes that explicit in the Quickstart instead of implicit.
+- **Self-pin bump:** if your `CLAUDE.md` pins `agent-ready-papers: v2.1.1`, update to `v2.1.2`.
+
+---
+
 ## v2.1.1 (2026-06-11)
 
 Practical-setup doc for non-Claude-Code agents. v2.1.0 made the framework agent-agnostic in convention (the `agents/` directory + generalised Hard Constraint), but a fresh Cursor / Copilot CLI / Continue user still had no clear "where do I start" landing. This release adds [`docs/non-claude-setup.md`](docs/non-claude-setup.md). **PATCH release:** new doc + discoverability fixes, no template / DR / tool surface changed.

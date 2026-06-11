@@ -8,7 +8,7 @@ Companion to [agent-ready-projects](https://github.com/ducroq/agent-ready-projec
 
 **Status:** A working framework we use on our own papers. Broader empirical validation across other authors and domains is an open question — adopt it as a structured starting point, not as a tested method.
 
-**Current release:** v2.1.1 (2026-06-11) — see [`CHANGELOG.md`](CHANGELOG.md). Pin your project with `agent-ready-papers: v2.1.1` in your CLAUDE.md and surface drift at session start.
+**Current release:** v2.1.2 (2026-06-11) — see [`CHANGELOG.md`](CHANGELOG.md). Pin your project with `agent-ready-papers: v2.1.2` in your CLAUDE.md and surface drift at session start.
 
 ## The Core Problem
 
@@ -108,6 +108,28 @@ Adopt the framework on a new paper in five steps (~10 minutes to set up):
 | **Required for first use** | `CLAUDE.md`, `claim-registry.md`, `anti-hallucination.md`, `writing-guide.md` | From day one |
 | **Useful once the paper grows** | `review-prompt.md`, `decision-record.md`, `glossary.md`, `equation-checker.md`, `vv-framework.md`, `cost-log.md`, `hypothesis-log.md` | After ~20 registry entries, or once you hit a decision / cost-tracking / pre-registered bet worth recording |
 | **Reference / background only** | `key-quotes.md` | When you want context, not before |
+
+### Driving it with your agent
+
+The five steps above describe *what* gets set up. In practice you delegate most of it — the framework is for AI-augmented writing, not for the human applying a checklist on their own. Four common operations as one-shot prompts you can copy and adapt; replace `<framework>` with the path to your `agent-ready-papers` checkout and `<paper>` with your paper's directory.
+
+**Bootstrap a new paper project** (once, at project start):
+
+> Start a paper project using the agent-ready-papers framework at `<framework>` (currently v2.1.2). Topic: [X]. Target journal: [Y]. Deadline: [Z]. Do this: (1) Create `papers/<name>/`. (2) Copy `<framework>/templates/CLAUDE.md`, `claim-registry.md`, `anti-hallucination.md`, `writing-guide.md` into it. (3) Fill `CLAUDE.md` with the paper identity. (4) Initialise the registry with empty per-type sub-tables for each anticipated section. (5) Commit. From now on, read `papers/<name>/CLAUDE.md` at the start of every session.
+
+**Register claims as I draft** (background companion mode for every writing session):
+
+> As I draft, when I make a factual claim, argument, or proposition, register it in `<paper>/vv/claims/claim_registry.md` using the per-type sub-tables and the priority / tier conventions in CLAUDE.md. Don't ask permission for routine entries — just register them and report a running coverage summary at section end. Flag anything you're unsure about: CLAIMs that look like ARGUMENTs, PROPOSITIONs missing boundary conditions, SPECULATIVE claims phrased as ESTABLISHED. When I introduce a citation, run Step 0 of `<framework>/templates/anti-hallucination.md` immediately and tell me if it's verifiable or likely fabricated.
+
+**Verify a single citation** (one-shot lookup):
+
+> Walk the Step 0 + 6-step anti-hallucination checklist in `<framework>/templates/anti-hallucination.md` for [citation]. For each step report PASS / FAIL / NEEDS-CONTENT-CHECK with the evidence (Scholar result, DOI resolution, publisher URL, abstract excerpt, page number). If Step 0 fails, stop and tell me — the citation is likely fabricated.
+
+**Run a peer-review pass** (in a *fresh session of a different model* — see [DR-011](decisions/DR-011_multi-model-review-pattern.md)):
+
+> You are a peer reviewer. Read `<framework>/agents/review-prompt.md` and apply it as your system prompt to `<paper>/manuscript.tex`. This is Pass [1 intra-family small / 2 intra-family large / 3 cross-vendor]; the style/voice filter is [target journal's style guide / project's voice rules]. Use the scoring rubric in the role prompt and report scored assessments per dimension plus load-bearing findings. Do not propose rewrites — only flag findings I can act on.
+
+For non-Claude-Code agents (GitHub Copilot CLI, Cursor, Continue, web chat), see [`docs/non-claude-setup.md`](docs/non-claude-setup.md) for the universal four-step pattern and tool-specific entry points — the prompts above work as-is across vendors.
 
 The full template index is in the [Templates](#templates) section near the bottom.
 
