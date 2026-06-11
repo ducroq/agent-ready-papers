@@ -5,7 +5,7 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 - **Type**: Guide + templates + active paper projects
 - **Companion**: [agent-ready-projects](https://github.com/ducroq/agent-ready-projects) (for code)
 - **agent-ready-projects**: v1.10.3
-- **agent-ready-papers** (this repo): v2.1.0 (agent-agnostic move — `agents/` directory for portable role prompts; Hard Constraint generalised across agents, 2026-06-11)
+- **agent-ready-papers** (this repo): v2.1.1 (non-Claude setup doc — universal pattern + per-tool entry points for Copilot CLI / Cursor / Continue / web chat, 2026-06-11)
 
 > Live project state (current paper status, recent decisions, deferred items) lives in `memory/MEMORY.md` (maintainer-local — see *What is intentionally not shipped* below). Release notes live in `CHANGELOG.md`.
 
@@ -27,6 +27,7 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 | Placing a bet whose evidence lives in the future | `memory/hypothesis-log.md` — provisional positions with `Position` / `Method` / `Revisit trigger` / `Review by`. `/curate` surfaces due items. Adopted from agent-ready-projects v1.10.0 in this repo's v1.7.0. Paper projects: copy `templates/hypothesis-log.md`. |
 | Creating a new paper project | `templates/CLAUDE.md` — paper project template (includes hypothesis-log row since v1.7.0) |
 | Running a portable agent-role prompt (equation verifier, peer reviewer) | `agents/` — copy the prompt into any agent's system-prompt slot; works with Claude Code, GitHub Copilot CLI, Cursor, Gemini, ChatGPT, etc. (since v2.1.0) |
+| Using the framework with an agent other than Claude Code | `docs/non-claude-setup.md` — universal pattern + tool-specific entry points for Copilot CLI / Cursor / Continue / Aider / web chat; lists the per-tool behaviours adopters should verify (since v2.1.1) |
 | Ending a session | Run `/curate` — updates gotcha log, promotes patterns, syncs docs, checks freshness |
 | Monthly or after major restructuring | Run `/audit-context` — structural health check for duplication, bloat, broken references |
 

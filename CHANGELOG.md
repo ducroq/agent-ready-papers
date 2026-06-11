@@ -34,6 +34,31 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
        ("No adopter action required.") rather than omitting the subsection.
 -->
 
+## v2.1.1 (2026-06-11)
+
+Practical-setup doc for non-Claude-Code agents. v2.1.0 made the framework agent-agnostic in convention (the `agents/` directory + generalised Hard Constraint), but a fresh Cursor / Copilot CLI / Continue user still had no clear "where do I start" landing. This release adds [`docs/non-claude-setup.md`](docs/non-claude-setup.md). **PATCH release:** new doc + discoverability fixes, no template / DR / tool surface changed.
+
+### New
+
+- **`docs/non-claude-setup.md`** — covers the framework's agent-facing surface (`CLAUDE.md`, `agents/<role>.md`, in-repo `memory/`), the universal four-step pattern (orient → load role prompt → provide artefact → persist state), tool-specific entry points for GitHub Copilot CLI / Cursor / Continue / Aider / web chat (ChatGPT, Gemini, Claude.ai), an explicit *"things to verify per tool"* checklist, and a *"what you do not need to do"* section (no renaming `CLAUDE.md` → `AGENTS.md`; no parallel `agents/` copies per vendor; no per-agent Hard Constraint set). Vendor-specific syntax notes are flagged as point-in-time correct; adopters are pointed at each tool's own current docs for authoritative install / auth steps.
+
+### Changed
+
+- **Root `CLAUDE.md`** — new Before You Start row pointing at `docs/non-claude-setup.md` ("Using the framework with an agent other than Claude Code").
+- **`README.md`** — *Agent-Role Prompts* section's closing paragraph gains a pointer at `docs/non-claude-setup.md` for practical setup.
+
+### Why this is a separate release from v2.1.0
+
+The v2.1.0 release made the structural move (`agents/` directory + Hard Constraint generalisation) but deliberately scoped out the non-Claude setup doc on the grounds that I couldn't verify HAN-specific institutional details from the source pattern in `agent-ready-assessment`. That scoping was over-cautious — the framework's *own* agent-facing surface is verifiable without the institutional detail, and the per-tool entry points can name what they cover without claiming exhaustiveness. This release corrects the scoping decision rather than amending it after the fact (no force-push, no v2.1.0 re-tag).
+
+### Adopter notes
+
+- **No template / DR / tool surface changed.** Pinned consumers bumping v2.1.0 → v2.1.1 inherit only the new doc and two discoverability fixes.
+- **Recommended:** if you maintain your own paper-project `CLAUDE.md` and have non-Claude collaborators, mirror the Before You Start row pointing at the framework's `docs/non-claude-setup.md`.
+- **Self-pin bump:** if your `CLAUDE.md` pins `agent-ready-papers: v2.1.0`, update to `v2.1.1` to surface drift cleanly.
+
+---
+
 ## v2.1.0 (2026-06-11)
 
 Agent-agnostic move. The framework's portable agent-role prompts are split out from `templates/` into a new top-level `agents/` directory, and the Hard Constraint about in-repo memory is generalised so it speaks of "any agent's user-level auto-memory" rather than naming Claude Code as the only case. Convention mirrored from [`agent-ready-assessment`](https://github.com/ducroq/agent-ready-assessment)'s `agents/` directory pattern.

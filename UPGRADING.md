@@ -11,6 +11,19 @@ The full release notes are in [`CHANGELOG.md`](CHANGELOG.md). This file is the q
 - **PATCH** version bumps are docs-only / clarifications. No action required.
 - Every release entry in `CHANGELOG.md` includes an "Adopter notes" / "Adopter action" subsection. This file aggregates them per version for quick lookup.
 
+## v2.1.1 (2026-06-11)
+
+**From v2.1.0 — what to review when you bump your pin to v2.1.1:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| New `docs/non-claude-setup.md` — universal pattern + per-tool entry points (Copilot CLI, Cursor, Continue, Aider, web chat) for using the framework with an agent other than Claude Code | **Recommended reading** for adopters whose verification workflow uses any agent other than Claude Code. Document covers the framework's three agent-facing surfaces (`CLAUDE.md`, `agents/`, `memory/`), the universal four-step pattern, tool-specific entry points, things-to-verify-per-tool checklist, and a what-you-do-not-need-to-do section. |
+| Root `CLAUDE.md` — new Before You Start row pointing at `docs/non-claude-setup.md` | Reference only — discoverability fix. If you maintain a paper-project `CLAUDE.md` and have non-Claude collaborators, mirror the row. |
+| `README.md` — *Agent-Role Prompts* closing paragraph gains a pointer at `docs/non-claude-setup.md` | Reference only — discoverability. |
+| Root `CLAUDE.md` + `README.md` self-pin bumped v2.1.0 → v2.1.1 | None — metadata only. |
+
+**No breaking changes.** PATCH release: new doc + discoverability fixes, no template / DR / tool surface change.
+
 ## v2.1.0 (2026-06-11)
 
 **From v2.0.2 — what to review when you bump your pin to v2.1.0:**

@@ -8,7 +8,7 @@ Companion to [agent-ready-projects](https://github.com/ducroq/agent-ready-projec
 
 **Status:** A working framework we use on our own papers. Broader empirical validation across other authors and domains is an open question — adopt it as a structured starting point, not as a tested method.
 
-**Current release:** v2.1.0 (2026-06-11) — see [`CHANGELOG.md`](CHANGELOG.md). Pin your project with `agent-ready-papers: v2.1.0` in your CLAUDE.md and surface drift at session start.
+**Current release:** v2.1.1 (2026-06-11) — see [`CHANGELOG.md`](CHANGELOG.md). Pin your project with `agent-ready-papers: v2.1.1` in your CLAUDE.md and surface drift at session start.
 
 ## The Core Problem
 
@@ -442,7 +442,7 @@ Portable agent-role prompts in [`agents/`](agents/) — copy each as a system pr
 | [`equation-checker.md`](agents/equation-checker.md) | Mechanical equation & numerical verifier — substitute values, compute, flag discrepancies (not plausibility review) | When any equation or derived value is load-bearing; paired with the source equations for cross-reference |
 | [`review-prompt.md`](agents/review-prompt.md) | Peer-review simulator with multi-pass bias-escape semantics ([DR-011](decisions/DR-011_multi-model-review-pattern.md)) | Before submission; once per pass — Pass 1 intra-family small, Pass 2 intra-family large, Pass 3 cross-vendor (high-stakes only, with style/voice filter) |
 
-See [`agents/README.md`](agents/README.md) for the directory's purpose and the line between agent-role prompts (here) and fill-in templates (in [`templates/`](templates/)). Convention mirrored from [agent-ready-assessment](https://github.com/ducroq/agent-ready-assessment)'s `agents/` directory; new here in v2.1.0.
+See [`agents/README.md`](agents/README.md) for the directory's purpose and the line between agent-role prompts (here) and fill-in templates (in [`templates/`](templates/)). Convention mirrored from [agent-ready-assessment](https://github.com/ducroq/agent-ready-assessment)'s `agents/` directory; new here in v2.1.0. For practical setup with a non-Claude-Code agent (Copilot CLI, Cursor, Continue, web chat), see [`docs/non-claude-setup.md`](docs/non-claude-setup.md).
 
 ## Tools
 
