@@ -5,7 +5,7 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 - **Type**: Guide + templates + active paper projects
 - **Companion**: [agent-ready-projects](https://github.com/ducroq/agent-ready-projects) (for code)
 - **agent-ready-projects**: v1.10.3
-- **agent-ready-papers** (this repo): v2.0.2 (README self-audit fixes — type-consistency + source verifiability + simplified-columns note, 2026-06-11)
+- **agent-ready-papers** (this repo): v2.1.0 (agent-agnostic move — `agents/` directory for portable role prompts; Hard Constraint generalised across agents, 2026-06-11)
 
 > Live project state (current paper status, recent decisions, deferred items) lives in `memory/MEMORY.md` (maintainer-local — see *What is intentionally not shipped* below). Release notes live in `CHANGELOG.md`.
 
@@ -26,6 +26,7 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 | Stuck or debugging something weird | `memory/gotcha-log.md` — problem-fix archive |
 | Placing a bet whose evidence lives in the future | `memory/hypothesis-log.md` — provisional positions with `Position` / `Method` / `Revisit trigger` / `Review by`. `/curate` surfaces due items. Adopted from agent-ready-projects v1.10.0 in this repo's v1.7.0. Paper projects: copy `templates/hypothesis-log.md`. |
 | Creating a new paper project | `templates/CLAUDE.md` — paper project template (includes hypothesis-log row since v1.7.0) |
+| Running a portable agent-role prompt (equation verifier, peer reviewer) | `agents/` — copy the prompt into any agent's system-prompt slot; works with Claude Code, GitHub Copilot CLI, Cursor, Gemini, ChatGPT, etc. (since v2.1.0) |
 | Ending a session | Run `/curate` — updates gotcha log, promotes patterns, syncs docs, checks freshness |
 | Monthly or after major restructuring | Run `/audit-context` — structural health check for duplication, bloat, broken references |
 
@@ -36,7 +37,7 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 - Never skip the anti-hallucination checklist for AI-introduced citations
 - Decision records are binding — check `decisions/` before proposing scope changes
 - This repo contains both the framework AND papers that use it — changes to templates may affect active papers
-- **Project state goes in `memory/` (in-repo, gitignored — see *What is intentionally not shipped*), not in user-level Claude Code auto-memory.** Versions, session narratives, gotchas, priorities, handoffs, and any state tied to *this* repo's work belong in this repo's `memory/` directory. The user-level path at `~/.claude/projects/<slug>/memory/` is reserved for cross-project memory types: user (about the user), feedback (corrections, validated approaches), and reference (pointers to external systems). The Before You Start table above routes to in-repo memory; that's the canonical pickup path. Don't duplicate project state into both — drift starts as soon as you do.
+- **Project state goes in `memory/` (in-repo, gitignored — see *What is intentionally not shipped*), not in any agent's user-level auto-memory.** Versions, session narratives, gotchas, priorities, handoffs, and any state tied to *this* repo's work belong in this repo's `memory/` directory. For Claude Code specifically, the user-level path `~/.claude/projects/<slug>/memory/` is reserved for cross-project memory types: user (about the user), feedback (corrections, validated approaches), and reference (pointers to external systems). Other agents (Cursor, GitHub Copilot CLI, etc.) follow the same separation principle: cross-project knowledge in the agent's own store; this-repo state in `memory/`. The Before You Start table above routes to in-repo memory; that's the canonical pickup path. Don't duplicate project state into both — drift starts as soon as you do. (Generalised to all agents in v2.1.0; original Claude-Code-only form added in v1.6.2.)
 - **New state claims in `memory/` may embed a verification command in an HTML comment: `<!-- verify: cmd -->`.** `/curate` Step 0 sub-step 5 runs the command on read and flags drift (PASS / FAIL / ERROR / MANUAL). Convention applies to *new* claims going forward; no retrofit required for existing entries — opportunistic retrofit during routine edits is welcome but not gated. Adopted from agent-ready-projects v1.9.0 (self-verifying memory) + v1.10.0 (/curate audit hook) in this repo's v1.7.0.
 
 ## Architecture
@@ -52,14 +53,16 @@ agent-ready-papers/
 ├── UPGRADING.md               <- Per-version adopter notes (pinned consumers)
 ├── Makefile                   <- Tooling targets: test / lint / format / coverage / check-dois (since v1.5.0)
 ├── pyproject.toml             <- Python tooling config: ruff + pytest, py3.10 target (since v1.5.0)
-├── templates/                 <- Reusable templates for new paper projects
+├── agents/                    <- Portable agent-role prompts (since v2.1.0; mirrors agent-ready-assessment)
+│   ├── README.md              <- Directory purpose; line between role prompts and fill-in templates
+│   ├── equation-checker.md    <- Mechanical equation & numerical verifier (was templates/equation-checker.md)
+│   └── review-prompt.md       <- Peer-review simulator with multi-pass bias-escape (was templates/review-prompt.md)
+├── templates/                 <- Fill-in templates for new paper projects
 │   ├── CLAUDE.md              <- Paper project identity template
 │   ├── claim-registry.md      <- Registry structure (P0/P1/P2, typed verification)
 │   ├── vv-framework.md        <- Verification & validation framework
 │   ├── writing-guide.md       <- Confidence tier to language mapping
-│   ├── review-prompt.md       <- Structured peer review simulation
 │   ├── anti-hallucination.md  <- Step 0 + 6-step citation verification checklist
-│   ├── equation-checker.md    <- Mechanical equation verification prompt
 │   ├── glossary.md            <- Cross-domain terminology
 │   ├── decision-record.md     <- DR template
 │   ├── hypothesis-log.md      <- Provisional positions with future evidence (since v1.7.0)

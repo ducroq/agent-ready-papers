@@ -12,7 +12,8 @@ External feedback (June 2026, three independent reviews) flagged the absence of 
 The repo's content is a mix:
 
 - **Prose-heavy** — `README.md`, `docs/framework-summary.md`, decision records.
-- **Markdown templates** — `templates/CLAUDE.md`, `claim-registry.md`, `vv-framework.md`, `writing-guide.md`, `review-prompt.md`, `anti-hallucination.md`, `equation-checker.md`, `glossary.md`, `decision-record.md`, `key-quotes.md`.
+- **Markdown templates** — `templates/CLAUDE.md`, `claim-registry.md`, `vv-framework.md`, `writing-guide.md`, `anti-hallucination.md`, `glossary.md`, `decision-record.md`, `key-quotes.md`.
+- **Agent-role prompts** — `agents/equation-checker.md`, `agents/review-prompt.md` (moved from `templates/` in v2.1.0).
 - **Active papers** — `papers/perspective/manuscript.tex` and supporting `.tex` / `.bib` files.
 - **Short bash and tool snippets** embedded in README and CLAUDE.md.
 

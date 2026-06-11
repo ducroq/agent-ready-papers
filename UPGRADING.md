@@ -11,6 +11,24 @@ The full release notes are in [`CHANGELOG.md`](CHANGELOG.md). This file is the q
 - **PATCH** version bumps are docs-only / clarifications. No action required.
 - Every release entry in `CHANGELOG.md` includes an "Adopter notes" / "Adopter action" subsection. This file aggregates them per version for quick lookup.
 
+## v2.1.0 (2026-06-11)
+
+**From v2.0.2 — what to review when you bump your pin to v2.1.0:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| New top-level `agents/` directory; `templates/equation-checker.md` → `agents/equation-checker.md` (`git mv`, history preserved) | **Path update required** if your project's docs, scripts, or CLAUDE.md reference `templates/equation-checker.md` — change to `agents/equation-checker.md`. File contents unchanged. |
+| `templates/review-prompt.md` → `agents/review-prompt.md` (`git mv`) | **Path update required** if your project references `templates/review-prompt.md` — change to `agents/review-prompt.md`. File contents unchanged. Paper-local copies in adopter projects are unaffected — those stay where they are; the rename is in the framework only. |
+| New `agents/README.md` documenting the agents/ vs templates/ distinction | Reference only — read once to understand the convention. The line: templates are fill-in (copy + populate over project lifetime); agent-role prompts are single-shot (paste into agent system-prompt slot). |
+| Root `CLAUDE.md` + `templates/CLAUDE.md` — Hard Constraint about in-repo `memory/` generalised. Now reads "any agent's user-level auto-memory" rather than naming only Claude Code | **Recommended** — if you mirrored the v1.6.2 / v1.7.0 Hard Constraint into your own paper project's CLAUDE.md, update the wording to match (Claude Code retained as the named instance; Cursor / GitHub Copilot CLI / etc. named as parallel cases). |
+| Root `CLAUDE.md` Before You Start — new row for `agents/` directory | Reference only — pattern source if you maintain your own paper CLAUDE.md. |
+| `templates/CLAUDE.md` (adopter template) Before You Start — *Reviewing before submission* row now mentions both paper-local copy and framework's `agents/review-prompt.md`; new row for `agents/equation-checker.md` | **Optional but recommended** — if you start a new paper project from the v2.1.0 template, you inherit these rows. Existing paper projects: copy the rows if you want to make the agent-role-prompt path discoverable to future sessions. |
+| `templates/CLAUDE.md` Directory Structure — `review-prompt.md` removed from the paper-local listing | Reference only — adopters can now reference the framework's `agents/review-prompt.md` rather than keeping a paper-local copy, but the paper-local option remains valid (Paper 1 still uses it). |
+| DR-009, DR-011, DR-013 inline references updated to `agents/` paths; DR-013 *Markdown templates* list split into *Markdown templates* + *Agent-role prompts* sub-bullets | Reference only — license scope unchanged (CC BY 4.0 applies to both groups). |
+| Root `CLAUDE.md` + `README.md` self-pin bumped v2.0.2 → v2.1.0 | None — metadata only. |
+
+**No breaking changes to template contracts.** Path-level break only for the two moved files, and only for adopters who reference them by path. MINOR release per the SemVer convention used by this repo (path moves are not MAJOR when the file contracts are unchanged and the rename is a single mechanical step documented in UPGRADING).
+
 ## v2.0.2 (2026-06-11)
 
 **From v2.0.1 — what to review when you bump your pin to v2.0.2:**

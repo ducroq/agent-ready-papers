@@ -8,7 +8,7 @@ Companion to [agent-ready-projects](https://github.com/ducroq/agent-ready-projec
 
 **Status:** A working framework we use on our own papers. Broader empirical validation across other authors and domains is an open question — adopt it as a structured starting point, not as a tested method.
 
-**Current release:** v2.0.2 (2026-06-11) — see [`CHANGELOG.md`](CHANGELOG.md). Pin your project with `agent-ready-papers: v2.0.2` in your CLAUDE.md and surface drift at session start.
+**Current release:** v2.1.0 (2026-06-11) — see [`CHANGELOG.md`](CHANGELOG.md). Pin your project with `agent-ready-papers: v2.1.0` in your CLAUDE.md and surface drift at session start.
 
 ## The Core Problem
 
@@ -99,7 +99,7 @@ Adopt the framework on a new paper in five steps (~10 minutes to set up):
 2. **Copy the minimum-viable adoption files.** [`templates/claim-registry.md`](templates/claim-registry.md), [`templates/anti-hallucination.md`](templates/anti-hallucination.md), and [`templates/writing-guide.md`](templates/writing-guide.md). These three plus CLAUDE.md are enough to start.
 3. **Register your first claims.** In `claim-registry.md`, list 5–10 of your paper's load-bearing factual statements. Assign each a priority (P0 / P1 / P2), confidence tier (ESTABLISHED / SUPPORTED / EMERGING / SPECULATIVE), and a source.
 4. **Verify each citation.** Run the Step 0 + 6-step checklist in `anti-hallucination.md` on every AI-introduced citation. Step 0 (Scholar + DOI) catches fabrications in seconds.
-5. **Run one review pass.** Before sharing the draft, ask a *fresh session* of a smaller model in the same family (e.g., Haiku, GPT-4o-mini, Gemini-Flash) to review the manuscript against your review prompt. A fresh session escapes the sunk-cost bias of the session that wrote the draft. See [`templates/review-prompt.md`](templates/review-prompt.md) for the prompt template and [DR-011](decisions/DR-011_multi-model-review-pattern.md) for the full three-pass pattern (intra-family small → intra-family large → cross-vendor).
+5. **Run one review pass.** Before sharing the draft, ask a *fresh session* of a smaller model in the same family (e.g., Haiku, GPT-4o-mini, Gemini-Flash) to review the manuscript against your review prompt. A fresh session escapes the sunk-cost bias of the session that wrote the draft. See [`agents/review-prompt.md`](agents/review-prompt.md) for the prompt template and [DR-011](decisions/DR-011_multi-model-review-pattern.md) for the full three-pass pattern (intra-family small → intra-family large → cross-vendor).
 
 ### Three tiers of adoption
 
@@ -271,7 +271,7 @@ The review produces **scored assessments** — not just prose feedback. A weight
 
 **Critical**: Never review in the building session — an agent reviewing its own work has sunk-cost bias in its context and is unlikely to catch its own mistakes. For the strongest version, use the three-pass pattern that escapes distinct biases at each pass: Pass 1 (intra-family small, sunk-cost-from-session escape, every publish), Pass 2 (intra-family large, different review character, every major revision), Pass 3 (cross-vendor, training/stylistic-prior escape, high-stakes only with mandatory style filter). See [`decisions/DR-011_multi-model-review-pattern.md`](decisions/DR-011_multi-model-review-pattern.md) and Step 7 in [`templates/anti-hallucination.md`](templates/anti-hallucination.md).
 
-See [`templates/review-prompt.md`](templates/review-prompt.md) for a structured review prompt template.
+See [`agents/review-prompt.md`](agents/review-prompt.md) for a structured review prompt template.
 
 ## Terminology References
 
@@ -393,7 +393,7 @@ Common anti-patterns, in priority order. Each links back to the section that exp
 - **Reviewing in the building session.** An agent that spent an hour helping write Section 3 carries sunk-cost bias into its own review. Use the three-pass pattern in [Peer Review Simulation](#peer-review-simulation) — at minimum, a fresh session of the same model.
 - **Skipping the architecture blueprint.** Without page budgets, agents expand every section. See [Architecture Blueprints](#architecture-blueprints).
 - **Mixing terminology across domains.** In interdisciplinary work, freely-used terms confuse every reviewer. See [Terminology References](#terminology-references).
-- **Reviewing equations for "soundness" instead of reproducing them.** Plausibility assessment misses arithmetic errors that mechanical reproduction catches. See [`templates/equation-checker.md`](templates/equation-checker.md).
+- **Reviewing equations for "soundness" instead of reproducing them.** Plausibility assessment misses arithmetic errors that mechanical reproduction catches. See [`agents/equation-checker.md`](agents/equation-checker.md).
 - **Confident language for weak claims.** "Our results demonstrate" for a SPECULATIVE inference is a credibility risk. See [Confidence-to-Language Mapping](#confidence-to-language-mapping).
 - **Skipping verification for informal technical communication.** The same error classes (unit confusion, property overestimates, wrong formulas) appear in WhatsApp messages, emails, and Slack discussions with quantitative claims — without the review trigger a paper would attract. If numbers or technical terminology go to a stakeholder, run the relevant checks before sending.
 
@@ -419,21 +419,30 @@ The specific numbers behind the success signals (85% overall coverage, 100% P0, 
 
 ## Templates
 
-Ready-to-use starter files in [`templates/`](templates/):
+Fill-in templates in [`templates/`](templates/) — the files you copy, populate, and keep iterating on as the paper grows. (For single-shot agent system prompts, see [Agent-Role Prompts](#agent-role-prompts) below.)
 
 - **[`CLAUDE.md`](templates/CLAUDE.md)** — Paper project identity, session continuity, Before You Start table
 - **[`claim-registry.md`](templates/claim-registry.md)** — Claim tracking with priority, confidence, source tiers
 - **[`vv-framework.md`](templates/vv-framework.md)** — Verification and validation framework
 - **[`writing-guide.md`](templates/writing-guide.md)** — Confidence-to-language mapping, section-claim assignment
-- **[`review-prompt.md`](templates/review-prompt.md)** — Structured AI peer review with scoring rubric
 - **[`decision-record.md`](templates/decision-record.md)** — Lightweight ADR for scope and methodology decisions
 - **[`anti-hallucination.md`](templates/anti-hallucination.md)** — Citation verification checklist
 - **[`glossary.md`](templates/glossary.md)** — Cross-domain terminology reference
-- **[`equation-checker.md`](templates/equation-checker.md)** — System prompt for mechanical verification of equations and derived values
 - **[`cost-log.md`](templates/cost-log.md)** — Per-operation token-cost log; copy to your paper's `vv/cost-log.md` (since v1.6.0)
 - **[`hypothesis-log.md`](templates/hypothesis-log.md)** — Provisional positions whose evidence lives in the future (`Position` / `Method` / `Revisit trigger` / `Review by`); resolves to closed or promoted to DR (since v1.7.0; adopted from agent-ready-projects v1.10.0)
 
 Copy what you need, delete the comments, fill in your specifics.
+
+## Agent-Role Prompts
+
+Portable agent-role prompts in [`agents/`](agents/) — copy each as a system prompt into any agent (Claude Code, GitHub Copilot CLI, Cursor, ChatGPT, Gemini) and pair with the artefact to be processed. Vendor-neutral by design.
+
+| Prompt | Role | When to run |
+|--------|------|-------------|
+| [`equation-checker.md`](agents/equation-checker.md) | Mechanical equation & numerical verifier — substitute values, compute, flag discrepancies (not plausibility review) | When any equation or derived value is load-bearing; paired with the source equations for cross-reference |
+| [`review-prompt.md`](agents/review-prompt.md) | Peer-review simulator with multi-pass bias-escape semantics ([DR-011](decisions/DR-011_multi-model-review-pattern.md)) | Before submission; once per pass — Pass 1 intra-family small, Pass 2 intra-family large, Pass 3 cross-vendor (high-stakes only, with style/voice filter) |
+
+See [`agents/README.md`](agents/README.md) for the directory's purpose and the line between agent-role prompts (here) and fill-in templates (in [`templates/`](templates/)). Convention mirrored from [agent-ready-assessment](https://github.com/ducroq/agent-ready-assessment)'s `agents/` directory; new here in v2.1.0.
 
 ## Tools
 
@@ -482,7 +491,7 @@ Tier vocabulary matches the [Confidence-to-Language Mapping](#confidence-to-lang
 | R-1 | PROPOSITION | P0 | EMERGING | Process-level verification infrastructure (templates + gates + decision records + registry) catches a class of AI-augmented-writing failure modes that tool-level checkers and model-level techniques do not fully address. Boundary: the four When-Worth-It tests; reduces to overhead for the When-Overkill cases. | Own use on three application classes (academic-paper, speculative-design, decision-support); Paper 1 (this repo) is the perspective article arguing the gap | [The Approach](#the-approach), [The Argument, Structurally](#the-argument-structurally) |
 | R-2 | ARGUMENT | P0 | SUPPORTED | The systems-engineering identity (claims-as-components, sources-as-tests, coverage-as-measurable) operationalises verification rather than just metaphorising it. Warrant: typed registry + tier-monotonic language calibration + per-priority coverage targets are each independently tractable. Rebuttal addressed: the mapping is most natural for argumentative/empirical non-fiction and stretches for purely literary or oral genres. | [DR-007](decisions/DR-007_se-inspired-claim-verification.md) | [The Approach → SE mapping](#the-approach) |
 | R-3 | CLAIM | P1 | SUPPORTED | LLMs introduce plausible-but-fabricated citations at rates high enough that unverified citations can survive into submission-ready drafts. | Hallucination literature as cited in [`templates/anti-hallucination.md`](templates/anti-hallucination.md) | [The Core Problem → Hallucinated citations](#the-core-problem), [Anti-Hallucination Checklist](#anti-hallucination-checklist) |
-| R-4 | CLAIM | P1 | SUPPORTED | Plausibility-based review of calculations misses arithmetic errors that mechanical reproduction catches. | [DR-009](decisions/DR-009_calculation-verification.md) (calculation-verification rationale); [`templates/equation-checker.md`](templates/equation-checker.md) (designed implementation) | [Verification Registry → CALCULATION](#verification-registry-the-foundation), [`templates/equation-checker.md`](templates/equation-checker.md) |
+| R-4 | CLAIM | P1 | SUPPORTED | Plausibility-based review of calculations misses arithmetic errors that mechanical reproduction catches. | [DR-009](decisions/DR-009_calculation-verification.md) (calculation-verification rationale); [`agents/equation-checker.md`](agents/equation-checker.md) (designed implementation) | [Verification Registry → CALCULATION](#verification-registry-the-foundation), [`agents/equation-checker.md`](agents/equation-checker.md) |
 | R-5 | PROPOSITION | P1 | EMERGING | A three-pass review pattern (intra-family small → intra-family large → cross-vendor) escapes biases a single pass cannot — sunk-cost-from-session, review-character convergence, training-prior alignment. Boundary: demonstrated at code-tooling scale within one model family (N=2 within Claude); paper-scale prose and cross-family generality remain untested. | [DR-011](decisions/DR-011_multi-model-review-pattern.md) (Status: Proposed) | [Peer Review Simulation](#peer-review-simulation), [Tools → cost data](#tools) |
 | R-6 | CLAIM | P1 | SPECULATIVE | The numerical thresholds in Gate 2 (100% P0 / 90% P1 / 70% P2 / ≥85% overall) and Gate 3 (≥3.5/5.0 simulated peer review) are defensible defaults, not calibrated constants. | [`docs/THRESHOLDS.md`](docs/THRESHOLDS.md) (self-declared SPECULATIVE at top of file) | [Quality Gates](#quality-gates), [Measuring Success](#measuring-success) |
 | R-7 | PROPOSITION | P2 | EMERGING | Speculative-design / design-fiction work creates an "inverse hallucination" risk — designed speculation presented as if it had a citable source — which Steps 0–6 of the standard anti-hallucination checklist will not catch. Boundary: opt-in extension for PROVOCATION-using projects only; standard academic papers can ignore. | [DR-010](decisions/DR-010_provocation-unit-type.md) | [Verification Registry → PROVOCATION](#verification-registry-the-foundation), [Anti-Hallucination Checklist → Step Z](#anti-hallucination-checklist) |

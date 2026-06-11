@@ -34,6 +34,42 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
        ("No adopter action required.") rather than omitting the subsection.
 -->
 
+## v2.1.0 (2026-06-11)
+
+Agent-agnostic move. The framework's portable agent-role prompts are split out from `templates/` into a new top-level `agents/` directory, and the Hard Constraint about in-repo memory is generalised so it speaks of "any agent's user-level auto-memory" rather than naming Claude Code as the only case. Convention mirrored from [`agent-ready-assessment`](https://github.com/ducroq/agent-ready-assessment)'s `agents/` directory pattern.
+
+The principle being made explicit: **templates are files you copy and populate over time; agent-role prompts are files you paste once into any agent's system-prompt slot.** Two kinds of artefact, two locations. Adopters and reviewers reading the framework for the first time now see the distinction structurally instead of having to infer it from the contents of each file.
+
+### New
+
+- **`agents/`** — new top-level directory with portable agent-role prompts. Each file is a complete "you are X" system prompt that runs in Claude Code, GitHub Copilot CLI, Cursor, ChatGPT, Gemini, or any other agent harness.
+- **`agents/README.md`** — directory purpose; the line between agent-role prompts (here) and fill-in templates (in `templates/`). Documents the vendor-neutrality convention.
+- **`agents/equation-checker.md`** — moved from `templates/equation-checker.md` via `git mv` (history preserved). Mechanical equation & numerical verifier — substitute values, compute, flag discrepancies.
+- **`agents/review-prompt.md`** — moved from `templates/review-prompt.md` via `git mv`. Peer-review simulator with multi-pass bias-escape semantics per DR-011 (Pass 1 intra-family small / Pass 2 intra-family large / Pass 3 cross-vendor with style filter).
+
+### Changed
+
+- **README.md** — Templates section trimmed (review-prompt + equation-checker rows removed); new `## Agent-Role Prompts` section added between *Templates* and *Tools*; intro sentence to *Templates* clarifies the fill-in vs single-shot distinction. All inline references to the two moved files updated to point at `agents/`.
+- **Root `CLAUDE.md`** — Architecture diagram gains an `agents/` block above `templates/` and the two moved entries are removed from `templates/`. New Before You Start row pointing at `agents/`. Hard Constraint about in-repo memory generalised to "any agent's user-level auto-memory"; Claude Code's path retained as the named instance; Cursor and Copilot CLI named as other agents the same separation principle applies to.
+- **`templates/CLAUDE.md`** (adopter paper template) — Before You Start row about reviewing now mentions both paper-local copy *and* the framework's `agents/review-prompt.md` as valid paths; new row for `agents/equation-checker.md`. Hard Constraint generalised in parallel with root CLAUDE.md. Directory Structure no longer shows `review-prompt.md` as a paper-local file — adopters reference the framework's `agents/` directly unless they explicitly choose to keep a paper-local copy.
+- **`templates/anti-hallucination.md`** — inline reference to `templates/review-prompt.md` updated to `agents/review-prompt.md`.
+- **DRs** — DR-009, DR-011, DR-013 inline references updated to the new `agents/` paths. DR-013's "Markdown templates" list split into "Markdown templates" + "Agent-role prompts" sub-bullets to reflect the new structure; license scope unchanged (everything stays CC BY 4.0).
+- **`docs/THRESHOLDS.md`** — two inline references to `templates/review-prompt.md` updated.
+
+### Convention origin
+
+`agent-ready-assessment` has shipped an `agents/` directory at its repo root since at least its v1.2.0 era — used there for *quality-gate* agents that operate on assessment outputs (audit, calibrate, check-rubric-design, review-prompt-design). The pattern translates cleanly: portable agent-role prompts that work across modules / papers belong at the repo root, not inside a per-module / per-paper subdirectory. This release adopts that pattern for agent-ready-papers.
+
+### Adopter notes
+
+- **Path-level breaking change for pinned consumers who reference the two moved files by path.** If your project's `CLAUDE.md`, build scripts, or paper-local docs reference `templates/equation-checker.md` or `templates/review-prompt.md`, update to `agents/equation-checker.md` and `agents/review-prompt.md`. The files' *contents* are unchanged — only their location.
+- **Why this is MINOR despite the path change:** the surface affected is two files out of ~20 templates/agents combined; the move is mechanical (`git mv` preserved history); and both files were already framed as standalone agent system prompts (i.e., their internal contract was always "copy and paste into an agent", not "edit in place over the project's lifetime"). The MAJOR threshold is reserved for breaking changes to *template contracts* or *DR semantics* — neither happened here.
+- **No change for adopters who don't reference these paths directly.** If your paper's verification workflow runs the prompts via copy-and-paste rather than path reference, you don't need to do anything.
+- **The generalised Hard Constraint is documentation-level only.** No agent enforcement changes; the principle (in-repo `memory/` is canonical for project state) was already correct for any agent.
+- **Self-pin bump:** if your `CLAUDE.md` pins `agent-ready-papers: v2.0.2`, update to `v2.1.0` to surface drift cleanly at session start.
+
+---
+
 ## v2.0.2 (2026-06-11)
 
 README self-audit fixes. Applying the framework's verification checklist to the `## This README, registered` section shipped in v2.0.1 surfaced three small failures against the framework's own rigor. **PATCH release:** README-only edits, no template/DR/tool surface changed.

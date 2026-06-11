@@ -20,7 +20,7 @@ The framework declares five numerical thresholds:
 | Overall coverage | Gate 2 | ≥85% |
 | Simulated peer review | Gate 3 (Review Complete) | ≥3.5/5.0 |
 
-These appear in the README's [Quality Gates](../README.md#quality-gates) section, [`templates/vv-framework.md`](../templates/vv-framework.md) §3 "Claim Priority Classification" → "Coverage Targets", and [`templates/review-prompt.md`](../templates/review-prompt.md) "Recommendation thresholds".
+These appear in the README's [Quality Gates](../README.md#quality-gates) section, [`templates/vv-framework.md`](../templates/vv-framework.md) §3 "Claim Priority Classification" → "Coverage Targets", and [`agents/review-prompt.md`](../agents/review-prompt.md) "Recommendation thresholds".
 
 ## Why each value
 
@@ -110,6 +110,6 @@ A coverage calculator (planned per [#17](https://github.com/ducroq/agent-ready-p
 ## Cross-references
 
 - Coverage targets — [`templates/vv-framework.md`](../templates/vv-framework.md) §3 "Coverage Targets"; [Gate 2](../README.md#gate-2-verification-complete) in the README.
-- Peer-review threshold — [`templates/review-prompt.md`](../templates/review-prompt.md) "Recommendation thresholds"; [Gate 3](../README.md#gate-3-review-complete) in the README.
+- Peer-review threshold — [`agents/review-prompt.md`](../agents/review-prompt.md) "Recommendation thresholds"; [Gate 3](../README.md#gate-3-review-complete) in the README.
 - Paper 1 measured values — [`papers/perspective/vv/claims/claim_registry.md`](../papers/perspective/vv/claims/claim_registry.md); [`CHANGELOG.md`](../CHANGELOG.md) v1.0.0.
 - External feedback that prompted this doc — [#16](https://github.com/ducroq/agent-ready-papers/issues/16).

@@ -75,7 +75,7 @@ Passes 1 and 2 are **complementary, not redundant** — different model sizes wi
 
 ### Style/voice filter for Pass 3
 
-Cross-vendor reviewers tend to generate style-violating suggestions because they do not share the project's stylistic priors. To prevent the human from having to manually discard most output, `templates/review-prompt.md` adds a **"Style/voice rules to filter against"** placeholder:
+Cross-vendor reviewers tend to generate style-violating suggestions because they do not share the project's stylistic priors. To prevent the human from having to manually discard most output, `agents/review-prompt.md` adds a **"Style/voice rules to filter against"** placeholder:
 
 - For academic-paper projects: defaults to the target journal's style guide
 - For non-fiction / blog projects: defaults to the project's voice rules
@@ -87,7 +87,7 @@ The reviewer is instructed to **pre-filter suggestions against these rules** bef
 
 - **Ready to merge through this decision:**
   - The three-pass structure with bias-escape semantics
-  - The style/voice filter placeholder as a required-with-default field in `templates/review-prompt.md`
+  - The style/voice filter placeholder as a required-with-default field in `agents/review-prompt.md`
   - README update at lines 190 and 375 to point at the new pattern
   - Step 7 in `templates/anti-hallucination.md` implementing cross-model verification
 
@@ -125,10 +125,10 @@ Background: `docs/category-theory-as-design-lens.md`, principle 3 ("multi-pass v
 
 ## Consequences
 
-- `templates/review-prompt.md`: add "Style/voice rules to filter against" as a required field with format-appropriate default; add filter-before-delivery instruction.
+- `agents/review-prompt.md`: add "Style/voice rules to filter against" as a required field with format-appropriate default; add filter-before-delivery instruction.
 - `templates/anti-hallucination.md`: add Step 7 — "Multi-pass review across model families" — specifying the three passes by name and the style-filter requirement for Pass 3.
 - `README.md:190` and `README.md:375`: replace "fresh session or different model" with a pointer to the three-pass pattern.
-- `CLAUDE.md`: no change — existing pointer to `templates/review-prompt.md` is sufficient.
+- `CLAUDE.md`: no change — existing pointer to `agents/review-prompt.md` is sufficient.
 - Active papers (`papers/perspective/`): no immediate action; the three-pass pattern applies on the next major revision.
 
 ## Evidence Base

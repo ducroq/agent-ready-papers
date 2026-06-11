@@ -190,7 +190,7 @@ Use up to three passes, each escaping a specific bias:
 |------|----------|--------------|------|
 | **Pass 1** | Intra-family small (e.g., Haiku-class), fresh session | Sunk-cost-from-the-drafting-session | Every publish |
 | **Pass 2** | Intra-family large (e.g., Opus-class), fresh session | Sunk-cost-from-the-drafting-session; different review character (argument-shape critique vs. checklist rigour) | Blog-scale: every publish. Paper-scale: every major revision / before each phase gate. |
-| **Pass 3** | Cross-vendor (e.g., Gemini, GPT) | Training-data and stylistic priors shared by the entire family | High-stakes content only, **with mandatory style/voice filter** specified in `templates/review-prompt.md` |
+| **Pass 3** | Cross-vendor (e.g., Gemini, GPT) | Training-data and stylistic priors shared by the entire family | High-stakes content only, **with mandatory style/voice filter** specified in `agents/review-prompt.md` |
 
 Passes 1 and 2 are complementary, not redundant — in the triggering observation, different model sizes within the same family caught essentially disjoint issues. Pass 3 is opt-in for high-stakes content; without the style/voice filter, most cross-vendor suggestions will be style violations the human has to manually discard.
 

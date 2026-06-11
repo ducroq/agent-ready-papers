@@ -29,7 +29,7 @@ Paper 3 exists because the equation-checker discovery showed that the SE mapping
 
 **What to draft:**
 - [ ] Position calculation verification as a fourth verification type in the DSR artifact
-- [ ] Describe the equation-checker prompt (`templates/equation-checker.md`) as an artifact component
+- [ ] Describe the equation-checker prompt (`agents/equation-checker.md`) as an artifact component
 - [ ] Connect to the V-model: equation checking sits at the implementation/detailed-design boundary
 - [ ] Discuss limitations: LLM arithmetic is imperfect beyond ~4 significant figures; symbolic math backends (SymPy) would strengthen this
 - [ ] Frame the meta-insight: the framework's own blind spot was discovered by applying its own principle (structured > impressionistic) to a domain it hadn't considered

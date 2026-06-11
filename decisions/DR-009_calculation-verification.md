@@ -46,7 +46,7 @@ The three registry unit types (CLAIM, ARGUMENT, PROPOSITION) are units of the pa
 - `vv-framework.md` template: add CALCULATION as fourth verification procedure in Section 1; note that it applies alongside registry but is tracked separately
 - `README.md`: add CALCULATION row to verification registry table; add "Reviewing equations for soundness" to What Doesn't Work
 - `CLAUDE.md`: clarify CALCULATION as procedure (not registry unit type) in Framework in Brief
-- `equation-checker.md` template: already created (templates/equation-checker.md)
+- `equation-checker.md` template: already created (agents/equation-checker.md)
 - Paper 3 (planned): equation-checker is proof-of-concept artifact
 
 ## Revisit If

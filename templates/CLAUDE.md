@@ -39,7 +39,8 @@
 | Logging token cost of an operation | `vv/cost-log.md` — record `/status` deltas (or subagent `total_tokens`) after named, repeatable operations (review passes, `/curate`, `/audit-context`, batch verification, full Gate sweeps). Don't log incidental tool calls. See `templates/cost-log.md` for the convention. |
 | Making scope or methodology decisions | Latest `DR-*.md` — decision records |
 | Checking terminology | `glossary.md` — cross-domain term definitions |
-| Reviewing before submission | `review-prompt.md` — structured peer review simulation |
+| Reviewing before submission | `review-prompt.md` (paper-local copy) or the framework's `agents/review-prompt.md` — peer-review simulator runnable in any agent; pair with the three-pass pattern (DR-011) |
+| Verifying equations or derived numerical values | Framework's `agents/equation-checker.md` — mechanical reproduction (substitute → compute → flag), not plausibility review; works in any agent (since agent-ready-papers v2.1.0) |
 | Stuck or unsure about a claim | `anti-hallucination.md` — citation verification checklist |
 | Placing a bet whose evidence lives in the future | `hypothesis-log.md` (copy from `agent-ready-papers/templates/hypothesis-log.md`) — provisional positions with `Position` / `Method` / `Revisit trigger` / `Review by`. `/curate` surfaces due items. |
 | Ending a session | `backlog.md` — update progress; `../../memory/gotcha-log.md` — review, promote patterns, retire stale entries |
@@ -54,7 +55,7 @@
 - Never exceed page budget without explicit decision record
 - Never skip the anti-hallucination checklist for AI-introduced citations
 - If this paper describes a framework it also uses, add: **This paper uses the framework it describes** — all claims must be registered and verified using the infrastructure presented as the contribution (self-demonstration constraint)
-- **Project state goes in this project's in-repo `memory/` directory (wherever the framework adopter tracks it — typically `<repo-root>/memory/` for a single-paper repo, or `<repo-root>/memory/` shared across papers in a multi-paper repo), not in user-level Claude Code auto-memory.** Versions, session narratives, gotchas, priorities, handoffs, and any state tied to *this* paper project belong in the in-repo memory the Before You Start table above routes to. The user-level path at `~/.claude/projects/<slug>/memory/` is reserved for cross-project memory types: user (about the user), feedback (corrections, validated approaches), reference (pointers to external systems). Don't write project state into both — drift starts as soon as you do. (Constraint added in agent-ready-papers v1.6.2.)
+- **Project state goes in this project's in-repo `memory/` directory (wherever the framework adopter tracks it — typically `<repo-root>/memory/` for a single-paper repo, or `<repo-root>/memory/` shared across papers in a multi-paper repo), not in any agent's user-level auto-memory.** Versions, session narratives, gotchas, priorities, handoffs, and any state tied to *this* paper project belong in the in-repo memory the Before You Start table above routes to. For Claude Code users specifically, the user-level path `~/.claude/projects/<slug>/memory/` is reserved for cross-project memory types: user (about the user), feedback (corrections, validated approaches), reference (pointers to external systems). Other agents (Cursor, GitHub Copilot CLI, etc.) follow the same separation principle: cross-project knowledge in the agent's own store; this-paper state in the paper's in-repo `memory/`. Don't write project state into both — drift starts as soon as you do. (Constraint added in agent-ready-papers v1.6.2; generalised to all agents in v2.1.0.)
 
 ## Key Files
 
@@ -80,7 +81,6 @@
 ├── backlog.md                   <- Task tracking
 ├── glossary.md                  <- Terminology reference
 ├── writing-guide.md             <- Claim-to-section mapping
-├── review-prompt.md             <- Peer review simulation
 ├── anti-hallucination.md        <- Citation verification
 ├── hypothesis-log.md            <- Provisional positions awaiting future evidence
 ├── DR-*.md                      <- Decision records
