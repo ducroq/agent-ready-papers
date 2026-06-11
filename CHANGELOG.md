@@ -34,6 +34,44 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
        ("No adopter action required.") rather than omitting the subsection.
 -->
 
+## v2.2.0 (2026-06-11)
+
+Framework self-verification surface + argument-shape fixes from DR-011 Pass 2. The framework now applies its own apparatus to its own home document with public artefacts (`vv/cost-log.md`, `vv/hypothesis-log.md`), and the load-bearing argument-shape findings from a two-pass Claude-family review are addressed in the README, agents/, CLAUDE.md, and DR-011 evidence base. **MINOR release** per the SemVer convention — new public structural pattern (`vv/` at repo root for framework self-application).
+
+### New
+
+- **`vv/` top-level directory** — framework self-application artefacts. Public (not gitignored) so adopters can see how the framework verifies its own home document.
+- **[`vv/cost-log.md`](vv/cost-log.md)** — token-cost log for framework operations applied to the framework itself. First two entries from the 2026-06-11 DR-011 battery on v2.1.0–v2.1.2: Pass 1 Haiku 81,464 total tokens, Pass 2 Opus 69,747. Pass 2 < Pass 1 (~0.86×) is the opposite of the 2026-06-08 code-tooling ratio (1.4×) — logged as an open question for the third data point.
+- **[`vv/hypothesis-log.md`](vv/hypothesis-log.md)** — public framework-level provisional positions. Seeded with one entry surfaced by DR-011 Pass 2: the Toulmin Warrant's structural-vs-static reading, with Method (apply framework apparatus to a frontier-RAG-produced manuscript) and Revisit trigger (frontier RAG + reasoning-step verifier becomes available). Distinct from `memory/hypothesis-log.md`, which stays maintainer-local for intra-session bets.
+
+### Changed — argument-shape (from DR-011 Pass 2 review)
+
+- **README — `## The Argument, Structurally`** gains a *Dynamic counter to the Warrant* note pointing at `vv/hypothesis-log.md`. The Warrant's structural claim (process layer is the locus of failure modes, regardless of model capability) is now registered as a falsifiable bet rather than papered over as a static "today's tools don't reach it" assertion.
+- **README — `### Driving it with your agent`** opening sentence: "delegate most of it" → "delegate four of the five steps," with a parenthetical noting Step 3's initial selection of load-bearing claims is the human-judgement residue.
+- **README — *Three tiers of adoption* table** updated to reference `agents/review-prompt.md` and `agents/equation-checker.md` (stale `templates/`-prefixed paths fixed) and to explicitly path-prefix every other entry — fixes a v2.1.0-move artefact that Pass 1 caught.
+- **README — *verify-citation* Quickstart prompt** gains "re-read the checklist from the source file at each invocation" to address agent-caching risk Pass 1 flagged.
+- **[`agents/README.md`](agents/README.md) "What does not live here" section** rewritten as a *primary mode of use* principle (paste-as-system-prompt vs. author-edited-over-project-lifetime) with explicit edge-case discussion of `anti-hallucination.md`, `writing-guide.md`, and the legacy reasoning for `equation-checker.md` / `review-prompt.md`. Pass 2 noted the prior framing was a retrofit; v2.2.0 names the principle and acknowledges the edges.
+- **Hard Constraint (root `CLAUDE.md` + `templates/CLAUDE.md`) narrowed** to acknowledge per-agent memory mechanics: the principle applies most directly to agents with cross-project user-level memory (Claude Code, ChatGPT, Gemini Gems); CLI/IDE agents with only project-level rules files (Cursor, Copilot, Continue) inherit it vacuously since they have no cross-project store. Pass 2 flagged the v2.1.0 generalisation as overreaching.
+
+### Changed — discovery / mechanical (from DR-011 Pass 1 review)
+
+- **[`docs/non-claude-setup.md`](docs/non-claude-setup.md)** gains a *Last verified: 2026-06-11* date marker so adopters can assess the freshness of per-tool entry points.
+- **CHANGELOG v2.1.2 entry** — closing pointer to `docs/non-claude-setup.md` now uses a markdown link (was prose-only, undiscoverable for CHANGELOG-only readers).
+- **CHANGELOG v2.1.1 entry** — *"Why this is a separate release from v2.1.0"* subsection rewritten as *"Sequence relative to v2.1.0"*. Pass 2 flagged the prior framing ("v2.1.0 was over-cautious; v2.1.1 corrects it") as motivated retrospection. The new wording describes the sequence factually: v2.1.0 scoped narrowly; v2.1.1 added the doc the next day.
+
+### Changed — DRs
+
+- **[DR-011](decisions/DR-011_multi-model-review-pattern.md)** *Evidence Base* gains the 2026-06-11 paper-scale prose entry: first paper-scale prose replication of the disjoint-coverage prediction; zero overlap between Pass 1 (Haiku, 5 findings) and Pass 2 (Opus, 5 findings) load-bearing findings; opposite token-cost ratio to the 2026-06-08 code-tooling baseline. Strengthens the within-family disjoint-coverage claim.
+
+### Adopter notes
+
+- **PATCH-vs-MINOR call:** this release adds a new public structural pattern (the `vv/` directory) and renames the `agents/` vs `templates/` principle. Both are minor additions, not breaking changes — no existing template contracts changed, no DR semantics revised. Per the convention, MINOR fits.
+- **Recommended for adopters:** if your paper project has its own load-bearing arguments whose validity depends on future evidence, mirror the `vv/hypothesis-log.md` pattern at your paper's root (or wherever your `vv/` lives). If you run named framework-scale operations (audits, batch verifications), mirror `vv/cost-log.md` as a framework-level companion to your paper-level cost log.
+- **No path-level breaks.** Files moved in v2.1.0 (`agents/equation-checker.md`, `agents/review-prompt.md`) stay where they are.
+- **Self-pin bump:** if your `CLAUDE.md` pins `agent-ready-papers: v2.1.2`, update to `v2.2.0`.
+
+---
+
 ## v2.1.2 (2026-06-11)
 
 Agent-driven Quickstart. The README's Quickstart described *what* gets set up but read as a checklist a human applies. The framework is for *AI-augmented* writing — most of the steps are things you delegate. **PATCH release:** README-only edit adding a new `### Driving it with your agent` subsection, no template / DR / tool surface changed.
@@ -45,7 +83,7 @@ Agent-driven Quickstart. The README's Quickstart described *what* gets set up bu
   2. **Register claims as I draft** — background companion mode the agent runs while the human writes; entries flagged as the human types, coverage summary at section end, citations auto-verified at Step 0.
   3. **Verify a single citation** — one-shot lookup walking Step 0 + 6 of the anti-hallucination checklist with PASS / FAIL / NEEDS-CONTENT-CHECK output per step.
   4. **Run a peer-review pass** — in a fresh session of a different model, applying `agents/review-prompt.md` per DR-011's three-pass pattern (intra-family small / intra-family large / cross-vendor).
-- Closing pointer at `docs/non-claude-setup.md` for non-Claude-Code adopters — the prompts work as-is across vendors; the setup doc covers per-tool entry points for how to load them.
+- Closing pointer at [`docs/non-claude-setup.md`](docs/non-claude-setup.md) for non-Claude-Code adopters — the prompts work as-is across vendors; the setup doc covers per-tool entry points for how to load them.
 
 ### Adopter notes
 
@@ -69,9 +107,9 @@ Practical-setup doc for non-Claude-Code agents. v2.1.0 made the framework agent-
 - **Root `CLAUDE.md`** — new Before You Start row pointing at `docs/non-claude-setup.md` ("Using the framework with an agent other than Claude Code").
 - **`README.md`** — *Agent-Role Prompts* section's closing paragraph gains a pointer at `docs/non-claude-setup.md` for practical setup.
 
-### Why this is a separate release from v2.1.0
+### Sequence relative to v2.1.0
 
-The v2.1.0 release made the structural move (`agents/` directory + Hard Constraint generalisation) but deliberately scoped out the non-Claude setup doc on the grounds that I couldn't verify HAN-specific institutional details from the source pattern in `agent-ready-assessment`. That scoping was over-cautious — the framework's *own* agent-facing surface is verifiable without the institutional detail, and the per-tool entry points can name what they cover without claiming exhaustiveness. This release corrects the scoping decision rather than amending it after the fact (no force-push, no v2.1.0 re-tag).
+v2.1.0 made the structural move (`agents/` directory + Hard Constraint generalisation) and deliberately scoped out the non-Claude setup doc, citing inability to genericise the source pattern in `agent-ready-assessment` (which is HAN-institutional). v2.1.1 ships the doc the next day, written from scratch against the framework's own agent-facing surface rather than copied from the source pattern. The release is additive, not corrective: v2.1.0's choice to ship the structural move first and the setup doc second is preserved in history rather than rewritten.
 
 ### Adopter notes
 

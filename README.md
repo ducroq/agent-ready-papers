@@ -8,7 +8,7 @@ Companion to [agent-ready-projects](https://github.com/ducroq/agent-ready-projec
 
 **Status:** A working framework we use on our own papers. Broader empirical validation across other authors and domains is an open question — adopt it as a structured starting point, not as a tested method.
 
-**Current release:** v2.1.2 (2026-06-11) — see [`CHANGELOG.md`](CHANGELOG.md). Pin your project with `agent-ready-papers: v2.1.2` in your CLAUDE.md and surface drift at session start.
+**Current release:** v2.2.0 (2026-06-11) — see [`CHANGELOG.md`](CHANGELOG.md). Pin your project with `agent-ready-papers: v2.2.0` in your CLAUDE.md and surface drift at session start.
 
 ## The Core Problem
 
@@ -61,6 +61,8 @@ Stating the case in Toulmin form makes it inspectable rather than persuasive:
 
 This Toulmin block decomposes the **argument** the framework rests on; R-1 in [*This README, registered*](#this-readme-registered) below states the **proposition** the argument supports — registered with its own boundary conditions, per the framework's Whetten checklist. The two views coexist by design: argument verifies the reasoning chain; proposition verifies the recommendation; same case, two checklists. Six further entries (R-2…R-7) cover supporting CLAIMs / ARGUMENTs / PROPOSITIONs from the rest of this file.
 
+**Dynamic counter to the Warrant.** A reasonable objection: "tool-level + model-level techniques are improving fast; RAG with citation-grounded generation plus reasoning-step verification could close most of the gap as capability rises." The Warrant above claims a **structural** distinction (process layer is the locus of the failure modes), not a **static** one (today's tools don't reach it). The structural claim is empirically open — registered as a falsifiable position in [`vv/hypothesis-log.md`](vv/hypothesis-log.md) with a Method (apply the framework's apparatus to a frontier-model-RAG-produced manuscript and count residual process-level findings) and a Revisit trigger (frontier-model RAG pipeline with reasoning-step verification becomes available, applied to a ≥5,000-word manuscript with ≥10 citations). Reading this and disagreeing? File an issue or contact the maintainer; "the position fails if residual process-level findings drop below 3" is concrete enough to test.
+
 ## When This Framework Is Worth The Overhead
 
 Each test can be answered yes / no for your specific project — they're meant as boundary conditions, not aspirational filters:
@@ -106,12 +108,12 @@ Adopt the framework on a new paper in five steps (~10 minutes to set up):
 | Tier | Files | When |
 |------|-------|------|
 | **Required for first use** | `CLAUDE.md`, `claim-registry.md`, `anti-hallucination.md`, `writing-guide.md` | From day one |
-| **Useful once the paper grows** | `review-prompt.md`, `decision-record.md`, `glossary.md`, `equation-checker.md`, `vv-framework.md`, `cost-log.md`, `hypothesis-log.md` | After ~20 registry entries, or once you hit a decision / cost-tracking / pre-registered bet worth recording |
+| **Useful once the paper grows** | `agents/review-prompt.md`, `agents/equation-checker.md`, `templates/decision-record.md`, `templates/glossary.md`, `templates/vv-framework.md`, `templates/cost-log.md`, `templates/hypothesis-log.md` | After ~20 registry entries, or once you hit a decision / cost-tracking / pre-registered bet worth recording |
 | **Reference / background only** | `key-quotes.md` | When you want context, not before |
 
 ### Driving it with your agent
 
-The five steps above describe *what* gets set up. In practice you delegate most of it — the framework is for AI-augmented writing, not for the human applying a checklist on their own. Four common operations as one-shot prompts you can copy and adapt; replace `<framework>` with the path to your `agent-ready-papers` checkout and `<paper>` with your paper's directory.
+The five steps above describe *what* gets set up. In practice you delegate four of the five steps to the agent — the framework is for AI-augmented writing, not for the human applying a checklist on their own. (Step 3's *initial selection* of which 5–10 claims are load-bearing remains a human-judgement call the prompts don't claim; the agent registers what you point at, doesn't decide what's load-bearing.) Four common operations as one-shot prompts you can copy and adapt; replace `<framework>` with the path to your `agent-ready-papers` checkout and `<paper>` with your paper's directory.
 
 **Bootstrap a new paper project** (once, at project start):
 
@@ -123,7 +125,7 @@ The five steps above describe *what* gets set up. In practice you delegate most 
 
 **Verify a single citation** (one-shot lookup):
 
-> Walk the Step 0 + 6-step anti-hallucination checklist in `<framework>/templates/anti-hallucination.md` for [citation]. For each step report PASS / FAIL / NEEDS-CONTENT-CHECK with the evidence (Scholar result, DOI resolution, publisher URL, abstract excerpt, page number). If Step 0 fails, stop and tell me — the citation is likely fabricated.
+> Walk the Step 0 + 6-step anti-hallucination checklist in `<framework>/templates/anti-hallucination.md` for [citation]. Re-read the checklist from the source file at this invocation — don't rely on memorised steps from a prior session. For each step report PASS / FAIL / NEEDS-CONTENT-CHECK with the evidence (Scholar result, DOI resolution, publisher URL, abstract excerpt, page number). If Step 0 fails, stop and tell me — the citation is likely fabricated.
 
 **Run a peer-review pass** (in a *fresh session of a different model* — see [DR-011](decisions/DR-011_multi-model-review-pattern.md)):
 

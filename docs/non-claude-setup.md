@@ -2,7 +2,9 @@
 
 The framework's prose is agent-agnostic (since v2.1.0): the `agents/` directory holds portable role prompts, the Hard Constraint about in-repo `memory/` is generalised across agent vendors, and the README's worked examples cite Haiku, GPT-4o-mini, and Gemini-Flash as equivalent choices. This doc walks through the practical *how* of using the framework with a non-Claude-Code agent.
 
-**Scope:** focused on the three surfaces a non-Claude agent needs to touch — `CLAUDE.md`, `agents/<role>.md`, and the in-repo `memory/` directory. Not a full setup walkthrough for any specific tool; tool installs and authentication are out of scope (consult each tool's own current docs). Vendor-specific syntax in this doc was correct as of writing — verify against each tool's current docs before relying on a specific flag.
+**Scope:** focused on the three surfaces a non-Claude agent needs to touch — `CLAUDE.md`, `agents/<role>.md`, and the in-repo `memory/` directory. Not a full setup walkthrough for any specific tool; tool installs and authentication are out of scope (consult each tool's own current docs).
+
+**Last verified:** 2026-06-11. Vendor-specific syntax (Copilot CLI flags, Cursor's `.cursorrules` and `.cursor/rules/*.mdc` conventions, Continue's config path, web-chat memory features) was correct as of that date — verify against each tool's current docs before relying on a specific flag. The framework's own three surfaces (`CLAUDE.md`, `agents/`, `memory/`) are stable; the per-tool entry points are what age.
 
 ## The framework's agent-facing surface
 

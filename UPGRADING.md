@@ -11,6 +11,27 @@ The full release notes are in [`CHANGELOG.md`](CHANGELOG.md). This file is the q
 - **PATCH** version bumps are docs-only / clarifications. No action required.
 - Every release entry in `CHANGELOG.md` includes an "Adopter notes" / "Adopter action" subsection. This file aggregates them per version for quick lookup.
 
+## v2.2.0 (2026-06-11)
+
+**From v2.1.2 — what to review when you bump your pin to v2.2.0:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| New `vv/` top-level directory with `vv/cost-log.md` + `vv/hypothesis-log.md` — framework self-application surface | **Optional** — adopt the pattern if your own paper project has load-bearing arguments whose validity depends on future evidence (mirror `vv/hypothesis-log.md` at your paper's root) or runs named framework-scale operations worth cost-tracking (mirror `vv/cost-log.md` as a framework-level companion to your paper-level cost log). No action required if neither applies. |
+| README *The Argument, Structurally* — new *Dynamic counter to the Warrant* note pointing at `vv/hypothesis-log.md` | Reference only — the central Warrant is now registered as a falsifiable bet rather than papered over. If you write your own framework-level Warrants, mirror the pattern: pair the static reading of a Warrant with a hypothesis-log entry naming the dynamic counter. |
+| README *Driving it with your agent* opening sentence — "delegate most" → "delegate four of the five steps" with Step 3 human-judgement note | Reference only — language matches what the prompts actually claim. |
+| README *Three tiers of adoption* table — `templates/` paths explicit; `agents/review-prompt.md` and `agents/equation-checker.md` correctly prefixed (was a v2.1.0-move artefact) | **Recommended** — if you copied the v2.1.x adoption tiers into your own README, mirror the prefix fix so adopters can locate the files. |
+| README *verify-citation* Quickstart prompt — gains "re-read the checklist from the source file at each invocation" | Reference only — addresses agent-caching risk. Mirror in your own prompt templates if you have any. |
+| `agents/README.md` "What does not live here" rewritten as a *primary mode of use* principle (paste-as-system-prompt vs. author-edited-over-project-lifetime) with explicit edge-case discussion | Reference only — clarifies the principle behind the `agents/` vs `templates/` split. If you maintain a parallel agents/ directory in your own project, use the same heuristic. |
+| Root `CLAUDE.md` + `templates/CLAUDE.md` Hard Constraint narrowed: principle applies most directly to agents with cross-project user-level memory (Claude Code, ChatGPT, Gemini); CLI/IDE agents with project-level rules files only inherit it vacuously | **Recommended** — if you mirrored the v2.1.0 Hard Constraint into your own paper project's `CLAUDE.md`, update the wording to the narrowed form. |
+| `docs/non-claude-setup.md` gains *Last verified: 2026-06-11* date marker | Reference only — adopters can now assess freshness of per-tool entry points. |
+| CHANGELOG v2.1.1 entry — *Why this is a separate release from v2.1.0* rewritten as *Sequence relative to v2.1.0* (drops the "over-cautious scoping" value judgement) | Reference only — the v2.1.0 → v2.1.1 sequence is now described factually rather than as motivated retrospection. |
+| CHANGELOG v2.1.2 entry — closing pointer to `docs/non-claude-setup.md` made a markdown link (was prose-only) | Reference only — discoverability. |
+| DR-011 *Evidence Base* gains 2026-06-11 paper-scale prose data point: first paper-scale replication of disjoint-coverage; zero overlap between Pass 1 (Haiku, 5 findings) and Pass 2 (Opus, 5 findings) | Reference only — strengthens DR-011's within-family disjoint-coverage claim. If you run your own DR-011 batteries, note results here for cross-project aggregation. |
+| Root `CLAUDE.md` + `README.md` self-pin bumped v2.1.2 → v2.2.0 | None — metadata only. |
+
+**No breaking changes.** MINOR release per the SemVer convention: new public structural pattern (`vv/` directory), renamed-and-clarified principle for `agents/` vs `templates/`, plus targeted argument-shape and discovery fixes from a two-pass DR-011 review.
+
 ## v2.1.2 (2026-06-11)
 
 **From v2.1.1 — what to review when you bump your pin to v2.1.2:**

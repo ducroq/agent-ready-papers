@@ -5,7 +5,7 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 - **Type**: Guide + templates + active paper projects
 - **Companion**: [agent-ready-projects](https://github.com/ducroq/agent-ready-projects) (for code)
 - **agent-ready-projects**: v1.10.3
-- **agent-ready-papers** (this repo): v2.1.2 (Quickstart "Driving it with your agent" — four copy-paste prompts for bootstrap / register-while-drafting / verify-citation / peer-review-pass, 2026-06-11)
+- **agent-ready-papers** (this repo): v2.2.0 (framework self-verification surface — new `vv/cost-log.md` + `vv/hypothesis-log.md`; argument-shape fixes from DR-011 Pass 2 review; Hard Constraint narrowed to acknowledge per-agent memory mechanics; `agents/` vs `templates/` principle clarified, 2026-06-11)
 
 > Live project state (current paper status, recent decisions, deferred items) lives in `memory/MEMORY.md` (maintainer-local — see *What is intentionally not shipped* below). Release notes live in `CHANGELOG.md`.
 
@@ -38,7 +38,7 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 - Never skip the anti-hallucination checklist for AI-introduced citations
 - Decision records are binding — check `decisions/` before proposing scope changes
 - This repo contains both the framework AND papers that use it — changes to templates may affect active papers
-- **Project state goes in `memory/` (in-repo, gitignored — see *What is intentionally not shipped*), not in any agent's user-level auto-memory.** Versions, session narratives, gotchas, priorities, handoffs, and any state tied to *this* repo's work belong in this repo's `memory/` directory. For Claude Code specifically, the user-level path `~/.claude/projects/<slug>/memory/` is reserved for cross-project memory types: user (about the user), feedback (corrections, validated approaches), and reference (pointers to external systems). Other agents (Cursor, GitHub Copilot CLI, etc.) follow the same separation principle: cross-project knowledge in the agent's own store; this-repo state in `memory/`. The Before You Start table above routes to in-repo memory; that's the canonical pickup path. Don't duplicate project state into both — drift starts as soon as you do. (Generalised to all agents in v2.1.0; original Claude-Code-only form added in v1.6.2.)
+- **Project state goes in `memory/` (in-repo, gitignored — see *What is intentionally not shipped*), not in any agent's user-level auto-memory.** Versions, session narratives, gotchas, priorities, handoffs, and any state tied to *this* repo's work belong in this repo's `memory/` directory. The principle applies most directly to agents with **cross-project user-level memory** — Claude Code (`~/.claude/projects/<slug>/memory/`), ChatGPT memory, Gemini Gems — where state can leak across projects without an explicit boundary. Agents with only project-level rules files (Cursor's `.cursorrules`, GitHub Copilot's `.github/copilot-instructions.md`, Continue's `.continue/config.json`) inherit the principle vacuously since they have no cross-project store to spill into. The Before You Start table above routes to in-repo memory; that's the canonical pickup path. Don't duplicate project state into both — drift starts as soon as you do. (Generalised to all agents in v2.1.0; narrowed in v2.2.0 to acknowledge which agents have the failure mode the principle prevents; original Claude-Code-only form added in v1.6.2.)
 - **New state claims in `memory/` may embed a verification command in an HTML comment: `<!-- verify: cmd -->`.** `/curate` Step 0 sub-step 5 runs the command on read and flags drift (PASS / FAIL / ERROR / MANUAL). Convention applies to *new* claims going forward; no retrofit required for existing entries — opportunistic retrofit during routine edits is welcome but not gated. Adopted from agent-ready-projects v1.9.0 (self-verifying memory) + v1.10.0 (/curate audit hook) in this repo's v1.7.0.
 
 ## Architecture
@@ -83,9 +83,12 @@ agent-ready-papers/
 │       ├── references.bib     <- 14 entries, all DOI-verified
 │       ├── vv/claims/         <- Claim registry (19 entries, 100% verified)
 │       └── ...
+├── vv/                        <- Framework self-application (since v2.2.0; public)
+│   ├── cost-log.md            <- Operation cost log — framework operations on the framework
+│   └── hypothesis-log.md      <- Public framework-level provisional positions (where load-bearing README prose depends on a falsifiable bet)
 └── memory/                    <- Session memory (gitignored — maintainer-local)
     ├── gotcha-log.md          <- Problem-fix archive
-    ├── hypothesis-log.md      <- Framework-level provisional positions (since v1.7.0)
+    ├── hypothesis-log.md      <- Maintainer-local intra-session bets (since v1.7.0; complement to vv/hypothesis-log.md which is public)
     └── ...
 ```
 
@@ -100,7 +103,7 @@ These paths exist in the maintainer's local clone but are gitignored — they ar
 | `memory/MEMORY.md` | Maintainer's index of current project state and deferred items | Not needed — equivalent state for your paper lives in your paper's CLAUDE.md |
 | `memory/gotcha-log.md` | Maintainer's problem-fix archive | Build your own per-project |
 | `memory/dead-ends.md` | Maintainer's "don't retry" log | Build your own per-project |
-| `memory/hypothesis-log.md` | Maintainer's framework-level hypothesis log | Adopters maintain their own per `templates/hypothesis-log.md` |
+| `memory/hypothesis-log.md` | Maintainer's intra-session framework bets (working positions) | Adopters maintain their own per `templates/hypothesis-log.md`; the *public* framework-level positions are at `vv/hypothesis-log.md`, which IS shipped |
 
 The public framework — templates, DRs, README, CHANGELOG — is fully consumable without any of the above. Adopters maintain their own session state per the patterns in `templates/CLAUDE.md`, not by depending on the maintainer's `memory/`.
 
