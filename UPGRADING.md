@@ -11,6 +11,17 @@ The full release notes are in [`CHANGELOG.md`](CHANGELOG.md). This file is the q
 - **PATCH** version bumps are docs-only / clarifications. No action required.
 - Every release entry in `CHANGELOG.md` includes an "Adopter notes" / "Adopter action" subsection. This file aggregates them per version for quick lookup.
 
+## v2.2.3 (2026-06-11)
+
+**From v2.2.2 — what to review when you bump your pin to v2.2.3:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| `decisions/DR-011_multi-model-review-pattern.md` *Open Questions* — new *External-ground-truth ρ calibration (ICLR/OpenReview)* entry naming Stanford Agentic Reviewer's published 0.42 ≈ 0.41 ICLR-reviewer correlation as the ceiling reference; sketches a 30-paper calibration run bounded at ~€44 + maintainer-day; cross-references sibling project [vmodel.eu#135](https://github.com/ducroq/vmodel.eu/issues/135) | Reference only — if your paper project runs its own DR-011 batteries on a content type with available human ground truth (ICLR-like ratings, peer-review scores, calibration sets), the entry sketches a methodology you can mirror. The aggregate-ρ evidence type is complementary to DR-011's per-pass disjoint-coverage mechanism evidence; neither dominates the other. |
+| Root `CLAUDE.md` + `README.md` self-pin bumped v2.2.2 → v2.2.3 | None — metadata only. |
+
+**No breaking changes.** PATCH release: single DR Open Questions extension + cross-reference add.
+
 ## v2.2.2 (2026-06-11)
 
 **From v2.2.1 — what to review when you bump your pin to v2.2.2:**

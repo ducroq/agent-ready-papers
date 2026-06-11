@@ -34,6 +34,19 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
        ("No adopter action required.") rather than omitting the subsection.
 -->
 
+## v2.2.3 (2026-06-11)
+
+DR-011 *Open Questions Carried Forward* extends with an external-ground-truth ρ calibration entry naming the ICLR/OpenReview methodology mirrored from Stanford Agentic Reviewer's published 0.42 ≈ 0.41 ICLR-reviewer agreement result, with cross-reference to sibling project [vmodel.eu#135](https://github.com/ducroq/vmodel.eu/issues/135) (parallel Spearman-vs-human-ground-truth methodology adoption). **PATCH release:** single DR Open Questions extension + cross-reference add; no template surface, no DR semantics, no consumer behaviour changed.
+
+### Changed — `decisions/DR-011_multi-model-review-pattern.md`
+
+- **[DR-011](decisions/DR-011_multi-model-review-pattern.md) *Open Questions Carried Forward*** gains an *External-ground-truth ρ calibration (ICLR/OpenReview)* entry. Names Stanford Agentic Reviewer's 0.42 ≈ 0.41 ICLR-reviewer agreement result (Jiang & Ng, late 2025) as the published ceiling reference. Sketches a 30-paper calibration run (Pass 1 Haiku + Pass 2 Opus, no Pass 3 at this scale) bounded at ~€44 in compute plus roughly a maintainer-day to build the OpenReview scraper, pre-register a score-mapping from `agents/review-prompt.md` qualitative output to a 1-10 number, and write up. Three outcome bands named (ρ ≈ 0.4 supports cross-domain portability; ρ ≈ 0.2 is honest scope evidence; ρ ≈ 0 is diagnostic for the score-mapping). Frames the aggregate-correlation evidence type as *different from* — not strictly better than — DR-011's existing disjoint-coverage mechanism evidence. Cross-references [vmodel.eu#135](https://github.com/ducroq/vmodel.eu/issues/135) (parallel methodology adoption in the sibling project) and the `agentic-engineering` "LLM behavioural properties" pattern slot. Not load-bearing; framework's current evidence base supports the multi-pass claims via mechanism. Pickup would be either a backlog action (run it, report it) or a DR-016 proposal (only if the calibration result triggers a methodology change in `agents/review-prompt.md` or DR-011 itself).
+
+### Adopter notes
+
+- **PATCH-vs-MINOR call:** Single DR Open Questions extension naming an external-validation methodology, no template surface touched, no DR semantics changed, no behaviour change. PATCH fits per the convention. The MINOR threshold ("new templates, patterns, application classes, or behaviours") is reserved for landed changes. If the calibration run actually happens and produces a result triggering an `agents/review-prompt.md` change or a new DR, that lands as a MINOR.
+- **Recommended for adopters:** none directly. The cross-reference to vmodel.eu#135 is a pointer to a parallel-project artefact; adopters running their own multi-pass review batteries (per DR-011) may want to consider whether external-ground-truth-ρ calibration is reachable for their content type.
+
 ## v2.2.2 (2026-06-11)
 
 DR-015 (Pollock rebutting/undercutting defeater distinction on ARGUMENT rows) added as Proposed + framework-level borrowing-pattern bet registered + DR-011 *Open Questions* points at deferred dialogical-logic candidate + `vv/cost-log.md` row for the operation. **PATCH release:** new Proposed DR + cross-reference adds; no template surface, no DR semantics, no consumer behaviour changed.
