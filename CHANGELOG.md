@@ -34,6 +34,36 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
        ("No adopter action required.") rather than omitting the subsection.
 -->
 
+## v2.2.2 (2026-06-11)
+
+DR-015 (Pollock rebutting/undercutting defeater distinction on ARGUMENT rows) added as Proposed + framework-level borrowing-pattern bet registered + DR-011 *Open Questions* points at deferred dialogical-logic candidate + `vv/cost-log.md` row for the operation. **PATCH release:** new Proposed DR + cross-reference adds; no template surface, no DR semantics, no consumer behaviour changed.
+
+### New — DR-015 Proposed
+
+- **[DR-015](decisions/DR-015_rebutting-undercutting-defeater-distinction.md)** — *Rebutting vs. Undercutting Defeaters in the ARGUMENT Rebuttal Field.* Status: Proposed. Proposes an optional `rebuttal-type: rebutting | undercutting` sub-field on ARGUMENT rows in `templates/claim-registry.md`, with mirrored guidance in `agents/review-prompt.md` for typed finding reports. Pollock's defeasible-reasoning distinction (*rebutting defeater* attacks the conclusion; *undercutting defeater* attacks the warrant's applicability without contesting the conclusion). Three Pending Assessment checks gate promotion to Accepted: Paper 1 ARGUMENT-row field-test, DR-011 review-output classification, adopter check. No template touch yet — templates land on acceptance.
+
+### Changed — `vv/hypothesis-log.md`
+
+- **[`vv/hypothesis-log.md`](vv/hypothesis-log.md)** gains a new Open entry registering the broader framework-level bet behind DR-015: *named structural distinctions from defeasible-reasoning literature earn their place in the registry shape.* Three-signal Method (uptake rate / reviewer classification yield / downstream use). The 2026-06-11 in-session survey of six philosophical-logic candidates is documented in the Origin section — Pollock defeasible reasoning (promoted to DR-015), Lorenzen / Hintikka dialogical logic (deferred as DR-016 candidate for a DR-011 *Underlying Form* subsection), Dung abstract argumentation frameworks (deferred until inter-entry conflicts accumulate), Reiter default logic + epistemic logic (vocabulary-only relabeling, low payoff at current scale), classical proof theory + adaptive logic (over-formalisation, skipped).
+
+### Changed — `decisions/DR-011_multi-model-review-pattern.md`
+
+- **[DR-011](decisions/DR-011_multi-model-review-pattern.md) *Open Questions Carried Forward*** gains a *Dialogical-logic Underlying Form subsection (deferred candidate)* entry naming the Lorenzen / Hintikka attack-defense-game framing as a HIGH-FIT candidate that would parallel the existing *Design Rationale: Functorial Composition* section. Trigger: DR-011 stabilises after paper-scale Pass 2 validation AND DR-015's borrowing-pattern bet resolves. Pickup would be a DR-016 proposal, not an in-place DR-011 edit — closes the *where does the deferred candidate live* gap in the framework's distributed-backlog discipline.
+
+### Changed — `vv/cost-log.md`
+
+- **[`vv/cost-log.md`](vv/cost-log.md)** gains a row for the 2026-06-11 literature-survey + DR-015-draft operation. **Tokens not measured** (main session, no `/status` snapshots) — operation logged for record-completeness, with explicit forward-looking note that future similar operations should bracket the work with `/status` snapshots to capture deltas.
+
+### Adopter notes
+
+- **PATCH-vs-MINOR call:** DR-015 is Proposed and touches no consumer surface — no new template, no new pattern in active use, no behaviour change. PATCH fits per the convention. The MINOR threshold ("new templates, patterns, application classes, or behaviours") is reserved for landed changes, not proposals. When DR-015 is Accepted, the template change to `claim-registry.md` + `agents/review-prompt.md` will ship as a MINOR.
+- **Recommended for adopters:** none. DR-015's optional sub-field doesn't exist in templates yet; if it lands as Accepted in a future release, adopter action will be *Recommended uptake* then.
+- **Pending checks visible:** DR-015's three Pending Assessment checks (Paper 1 ARGUMENT-row field-test, DR-011 review-output classification, adopter check) are listed in the DR. External adopters running their own DR-011 batteries can contribute by classifying reviewer findings as `rebutting | undercutting | mixed` — that data informs whether DR-015 promotes.
+- **No path-level breaks.** All changes are additive prose.
+- **Self-pin bump:** if your `CLAUDE.md` pins `agent-ready-papers: v2.2.1`, update to `v2.2.2`.
+
+---
+
 ## v2.2.1 (2026-06-11)
 
 DR-011 cross-vendor data point + content fixes surfaced by Pass 3. Pass 3 cross-vendor of the 2026-06-11 paper-scale prose battery ran via Gemini CLI; the framework's first paper-scale cross-vendor result is logged in `vv/cost-log.md` + DR-011 Evidence Base. Two cleanest novel Pass 3 findings — Toulmin/Whetten citations missing at first mention + anti-hallucination Step 6 lacked an explicit human-in-loop anchor — applied in the same release. **PATCH release:** evidence-base extension + clarifications against the framework's own discipline. No structural surface changed.

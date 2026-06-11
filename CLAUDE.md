@@ -5,7 +5,7 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 - **Type**: Guide + templates + active paper projects
 - **Companion**: [agent-ready-projects](https://github.com/ducroq/agent-ready-projects) (for code)
 - **agent-ready-projects**: v1.10.3
-- **agent-ready-papers** (this repo): v2.2.1 (DR-011 cross-vendor data point from Pass 3 via Gemini CLI + content fixes — Toulmin/Whetten citations at first mention, anti-hallucination Step 6 *Human-in-loop anchor*; PATCH against v2.2.0's self-verification surface, 2026-06-11)
+- **agent-ready-papers** (this repo): v2.2.2 (DR-015 Proposed — Pollock rebutting/undercutting defeater distinction as optional sub-field on ARGUMENT rows + framework-level borrowing-pattern bet registered in `vv/hypothesis-log.md` + DR-011 *Open Questions* deferred-candidate pointer for a future DR-016 dialogical-logic *Underlying Form* subsection; PATCH against v2.2.1's content fixes, 2026-06-11)
 
 > Live project state (current paper status, recent decisions, deferred items) lives in `memory/MEMORY.md` (maintainer-local — see *What is intentionally not shipped* below). Release notes live in `CHANGELOG.md`.
 
@@ -16,7 +16,7 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 | Starting any session (companion drift) | Compare the `agent-ready-projects: vX.Y.Z` line in this file's header against `C:/local_dev/agent-ready-projects/CHANGELOG.md` (local clone) or https://github.com/ducroq/agent-ready-projects/blob/master/CHANGELOG.md. If the project is behind the latest released version, briefly surface the drift to the user before starting work. Don't auto-update — adopting changes is the engineer's call. |
 | Starting any session (self drift) | Compare the `agent-ready-papers: vX.Y.Z` line in this file's header against `CHANGELOG.md`. If a newer version has shipped, surface it before starting. |
 | Working on Paper 1 (Perspective) | `papers/perspective/CLAUDE.md` — paper identity, constraints, status, verification state |
-| Making scope or methodology decisions | `decisions/` — 14 decision records (DR-001 through DR-014; DR-014 Proposed) |
+| Making scope or methodology decisions | `decisions/` — 15 decision records (DR-001 through DR-015; DR-014 + DR-015 Proposed) |
 | Starting template / DR / verification-gate design work | `memory/dead-ends.md` — pattern proposals already concluded as don't-retry |
 | Adding or verifying literature sources | `literature/README.md` — indexed sources organized by topic |
 | Checking coverage or DOIs in a registry | Run `python -m tools.coverage <registry.md>` or `python -m tools.check_dois <registry.md>` (or `make coverage` / `make check-dois`). See `tools/README.md` for flags, exit codes, and known limits (no escaped-pipe support, no HTTP proxy support, sequential HEAD scaling). Prefer the tool to manually counting P0/P1/P2 percentages or eyeballing DOIs. |
@@ -68,7 +68,7 @@ agent-ready-papers/
 │   ├── decision-record.md     <- DR template
 │   ├── hypothesis-log.md      <- Provisional positions with future evidence (since v1.7.0)
 │   └── key-quotes.md          <- Reference quotes
-├── decisions/                 <- Architecture decision records (DR-001 to DR-014)
+├── decisions/                 <- Architecture decision records (DR-001 to DR-015)
 ├── literature/                <- Source registry
 ├── docs/                      <- Framework summary, threshold rationale, category-theory lens
 ├── tools/                     <- Registry tooling: coverage + DOI verification CLIs (since v1.5.0)

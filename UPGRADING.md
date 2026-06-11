@@ -11,6 +11,20 @@ The full release notes are in [`CHANGELOG.md`](CHANGELOG.md). This file is the q
 - **PATCH** version bumps are docs-only / clarifications. No action required.
 - Every release entry in `CHANGELOG.md` includes an "Adopter notes" / "Adopter action" subsection. This file aggregates them per version for quick lookup.
 
+## v2.2.2 (2026-06-11)
+
+**From v2.2.1 — what to review when you bump your pin to v2.2.2:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| `decisions/DR-015_rebutting-undercutting-defeater-distinction.md` — new Proposed DR adding an optional `rebuttal-type: rebutting \| undercutting` sub-field on ARGUMENT rows (Pollock's defeasible-reasoning distinction); no template touch yet | Reference only — DR is Proposed, not Accepted. Three Pending Assessment checks gate promotion. If you run your own DR-011 batteries, classifying reviewer findings as `rebutting \| undercutting \| mixed` is one of the three checks; data points contribute to whether DR-015 promotes. |
+| `vv/hypothesis-log.md` — new Open entry registering the framework-level bet behind DR-015 (low-cost borrowings from philosophical logic earn their place in registry shape); names deferred candidates (dialogical logic for DR-016, Dung argumentation frameworks for future) so they aren't lost | Reference only — if you write framework-level Warrants of your own, mirror the bet-registration pattern: pair a static Warrant with a hypothesis-log entry naming the dynamic counter. |
+| `decisions/DR-011_multi-model-review-pattern.md` *Open Questions* — new deferred-candidate entry for a dialogical-logic *Underlying Form* subsection (would recast Pass 1/2/3 as a Proponent-Opponent attack-defense game, parallel to the Functorial Composition rationale); pickup would be DR-016, not in-place DR-011 edit | Reference only — surfaces the framework's distributed-backlog discipline for deferred conceptual work. |
+| `vv/cost-log.md` — new row for the 2026-06-11 literature-survey + DR-015-draft operation; **tokens not measured** (main session, no `/status` snapshots); logged for record-completeness | Reference only — future similar operations (literature survey + DR draft) should bracket the work with `/status` snapshots to capture deltas, matching DR-011 Pass 1/2 subagent `total_tokens` discipline. |
+| Root `CLAUDE.md` + `README.md` self-pin bumped v2.2.1 → v2.2.2 | None — metadata only. |
+
+**No breaking changes.** PATCH release: new Proposed DR + cross-reference adds; no template surface, no DR semantics, no consumer behaviour changed.
+
 ## v2.2.1 (2026-06-11)
 
 **From v2.2.0 — what to review when you bump your pin to v2.2.1:**
