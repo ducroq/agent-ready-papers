@@ -11,6 +11,20 @@ The full release notes are in [`CHANGELOG.md`](CHANGELOG.md). This file is the q
 - **PATCH** version bumps are docs-only / clarifications. No action required.
 - Every release entry in `CHANGELOG.md` includes an "Adopter notes" / "Adopter action" subsection. This file aggregates them per version for quick lookup.
 
+## v2.0.2 (2026-06-11)
+
+**From v2.0.1 — what to review when you bump your pin to v2.0.2:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| `README.md` — `## The Argument, Structurally` closing sentence now clarifies type discipline (Toulmin block = ARGUMENT view; R-1 in registered section = PROPOSITION view; two views of the same case, each verified by its own checklist) | Reference only — surfaces the framework's argument/proposition distinction explicitly where the v2.0.1 wording had let them blur. |
+| `README.md` — R-3 source narrowed to "Hallucination literature as cited in `templates/anti-hallucination.md`" (removes maintainer-local "replicated in own audits" pointer, since `audits/` was scrubbed from the public repo in v2.0.0) | Reference only — public readers can now follow every source pointer in the registered section. If you copied the v2.0.1 R-3 phrasing into your own README, mirror the tightening. |
+| `README.md` — R-4 source narrowed to DR-009 + `templates/equation-checker.md` (removes maintainer-local Gemini-vs-Sonnet comparison pointer that lives in gitignored `memory/gotcha-log.md`) | Reference only — same as R-3: source pointers are now all publicly verifiable. |
+| `README.md` — new format-note paragraph above the registered table acknowledging the CLAIM-style single-table layout is a README-brevity compression, not the framework's normative per-type sub-tables; points adopters at `templates/claim-registry.md` for actual paper registries | Reference only — preempts a likely adopter question and prevents the README single-table from being mistaken for the canonical layout. |
+| Root `CLAUDE.md` + `README.md` self-pin bumped v2.0.1 → v2.0.2 | None — metadata only. |
+
+**No breaking changes.** PATCH release: README-only self-audit fixes following the v2.0.1 logic-application pass.
+
 ## v2.0.1 (2026-06-10)
 
 **From v2.0.0 — what to review when you bump your pin to v2.0.1:**

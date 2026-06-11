@@ -34,6 +34,24 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
        ("No adopter action required.") rather than omitting the subsection.
 -->
 
+## v2.0.2 (2026-06-11)
+
+README self-audit fixes. Applying the framework's verification checklist to the `## This README, registered` section shipped in v2.0.1 surfaced three small failures against the framework's own rigor. **PATCH release:** README-only edits, no template/DR/tool surface changed.
+
+### README — three fixes
+
+- **Type-consistency note in `## The Argument, Structurally`.** R-1 is registered as a PROPOSITION, but the section presents the same statement via Toulmin (which the framework reserves for ARGUMENT verification). The closing sentence now clarifies the two views coexist by design: the Toulmin block decomposes the *argument* the framework rests on; R-1 below states the *proposition* the argument supports, with Whetten-style boundary conditions. Argument verifies the reasoning chain; proposition verifies the recommendation; same case, two checklists.
+- **Source tightening on R-3 and R-4.** Both rows previously cited maintainer-local sources public readers couldn't verify. R-3's "replicated in own audits" pointed at `audits/`, which was scrubbed from the public repo in v2.0.0 and is gitignored. R-4's "Gemini missed 3/3 errors that Sonnet caught" lives in gitignored `memory/gotcha-log.md`. Sources are now constrained to publicly-verifiable halves: R-3 cites the hallucination literature within `templates/anti-hallucination.md`; R-4 cites DR-009 (calculation-verification rationale) and `templates/equation-checker.md` (designed implementation).
+- **Format note above the registered table.** The single-table layout (CLAIM-style columns with ARGUMENT/PROPOSITION fields inlined into the Statement cell) is a README-brevity compression, not the framework's normative per-type-sub-table layout. New paragraph above the table acknowledges this and points adopters at `templates/claim-registry.md` for actual paper registries.
+
+### Adopter notes
+
+- **No template / DR / tool surface changed.** Pinned consumers bumping v2.0.1 → v2.0.2 inherit only README clarifications.
+- **Self-pin bump only:** if your `CLAUDE.md` pins `agent-ready-papers: v2.0.1`, update to `v2.0.2`; no functional change.
+- **Pattern worth carrying back to your own README:** applying the framework to its own home document on the first pass (v2.0.1) produced three rigor-check violations, surfaced by an explicit self-audit prompt. The self-audit is itself a productive framework output — expect ~2-4 type / source / format gaps to surface on the first audit of any document the framework wasn't originally drafted around.
+
+---
+
 ## v2.0.1 (2026-06-10)
 
 README logic-application pass. The framework is applied to its own home document — a four-move coordinated edit using the same discipline the README proposes for adopters' papers. **PATCH release:** README-only edits, no template/DR/tool surface changed.
