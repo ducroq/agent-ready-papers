@@ -49,6 +49,7 @@ For each new citation, verify ALL six points:
   - Not just the abstract — the actual section containing the cited claim
   - Does the source actually say what we claim it says?
   - Watch for: paraphrasing that subtly changes meaning
+  - **Human-in-loop anchor.** This is the one step that cannot be delegated to the same agent that introduced the citation — if it could, you would be asking the source of the claim to verify itself. Either a human reads the cited section, or a *different* agent (fresh session, ideally cross-family per [DR-011](../decisions/DR-011_multi-model-review-pattern.md)) retrieves and reads it. Steps 0–5 the drafting agent can perform; Step 6 closes the circularity.
 
 ---
 

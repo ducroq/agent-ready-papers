@@ -5,7 +5,7 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 - **Type**: Guide + templates + active paper projects
 - **Companion**: [agent-ready-projects](https://github.com/ducroq/agent-ready-projects) (for code)
 - **agent-ready-projects**: v1.10.3
-- **agent-ready-papers** (this repo): v2.2.0 (framework self-verification surface — new `vv/cost-log.md` + `vv/hypothesis-log.md`; argument-shape fixes from DR-011 Pass 2 review; Hard Constraint narrowed to acknowledge per-agent memory mechanics; `agents/` vs `templates/` principle clarified, 2026-06-11)
+- **agent-ready-papers** (this repo): v2.2.1 (DR-011 cross-vendor data point from Pass 3 via Gemini CLI + content fixes — Toulmin/Whetten citations at first mention, anti-hallucination Step 6 *Human-in-loop anchor*; PATCH against v2.2.0's self-verification surface, 2026-06-11)
 
 > Live project state (current paper status, recent decisions, deferred items) lives in `memory/MEMORY.md` (maintainer-local — see *What is intentionally not shipped* below). Release notes live in `CHANGELOG.md`.
 

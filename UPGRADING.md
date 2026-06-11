@@ -11,6 +11,21 @@ The full release notes are in [`CHANGELOG.md`](CHANGELOG.md). This file is the q
 - **PATCH** version bumps are docs-only / clarifications. No action required.
 - Every release entry in `CHANGELOG.md` includes an "Adopter notes" / "Adopter action" subsection. This file aggregates them per version for quick lookup.
 
+## v2.2.1 (2026-06-11)
+
+**From v2.2.0 — what to review when you bump your pin to v2.2.1:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| `templates/anti-hallucination.md` Step 6 — new *Human-in-loop anchor* bullet naming the circularity of self-verification | **Recommended** — mirror in your own paper project's `anti-hallucination.md`. The bullet names a constraint that was implicit in the checklist structure; making it explicit reduces the risk of delegating Step 6 to the same agent that introduced the citation. |
+| `README.md` — *Toulmin form* and *Whetten checklist* gain first-mention author/year attribution + component lists + links to existing `literature/sources/` entries | Reference only — clarifications against the framework's own citing-sources discipline. If your project uses Toulmin or Whetten vocabulary, mirror the pattern. |
+| `decisions/DR-011_multi-model-review-pattern.md` *Evidence Base* — paper-scale cross-vendor data point (Pass 3 via Gemini CLI; 3-4 novel + 4 overlap with Pass 2) | Reference only — strengthens DR-011's evidence base; surfaces the two-tier empirical pattern (intra-family disjoint; cross-vendor partial-overlap-with-novelty). |
+| `decisions/DR-011_multi-model-review-pattern.md` *Open Questions* — new "Pass 3 ↔ Pass 2 overlap at cross-vendor" entry flagging the sequencing question | Reference only — if you run your own DR-011 batteries, note whether the overlap pattern replicates. |
+| `vv/cost-log.md` gains Pass 3 row + two-tier *Notable findings* entry + *Aggregation* row | Reference only — methodological caveat: Pass 3's cost is not directly comparable to Pass 1+2 due to delivery-mechanism asymmetry (inline content vs. multi-round file navigation). |
+| Root `CLAUDE.md` + `README.md` self-pin bumped v2.2.0 → v2.2.1 | None — metadata only. |
+
+**No breaking changes.** PATCH release: evidence-base extension + clarifications against the framework's own discipline.
+
 ## v2.2.0 (2026-06-11)
 
 **From v2.1.2 — what to review when you bump your pin to v2.2.0:**

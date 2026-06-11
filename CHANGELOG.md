@@ -34,6 +34,35 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
        ("No adopter action required.") rather than omitting the subsection.
 -->
 
+## v2.2.1 (2026-06-11)
+
+DR-011 cross-vendor data point + content fixes surfaced by Pass 3. Pass 3 cross-vendor of the 2026-06-11 paper-scale prose battery ran via Gemini CLI; the framework's first paper-scale cross-vendor result is logged in `vv/cost-log.md` + DR-011 Evidence Base. Two cleanest novel Pass 3 findings — Toulmin/Whetten citations missing at first mention + anti-hallucination Step 6 lacked an explicit human-in-loop anchor — applied in the same release. **PATCH release:** evidence-base extension + clarifications against the framework's own discipline. No structural surface changed.
+
+### Changed — DR-011 Evidence Base
+
+- **[DR-011](decisions/DR-011_multi-model-review-pattern.md) *Evidence Base*** gains the 2026-06-11 paper-scale cross-vendor entry. Pass 3 via Gemini CLI (v0.45.2 headless, ~21K tokens estimated, ~30 s wall, 4.2/5.0 Rubric B). 3-4 novel load-bearing findings (Toulmin/Whetten undefined; Step 6 Delegation Paradox; three-way structural cut alternative — `templates/` / `agents/` / `procedures/`; terminology micro-violations). 4-of-7 overlap with Pass 2 (identical match on v2.1.1 CHANGELOG "over-cautious"; mechanism overlap on delegation aspirational framing; topic overlap on `agents/` vs `templates/` soft edge; validating engagement on auto-memory Hard Constraint narrowing). Surfaces a **two-tier empirical pattern:** intra-family "essentially disjoint" framing holds; cross-vendor partial overlap with Pass 2 emerges. The weaker `memory/hypothesis-log.md` prediction (Pass 3 finds ≥1 novel load-bearing item) is confirmed with margin. Methodological caveat: cost not directly comparable to Pass 1+2 due to inline content delivery (no file-navigation tool use).
+- **[DR-011](decisions/DR-011_multi-model-review-pattern.md) *Open Questions Carried Forward*** updated: "Pass 3 yield by content type" gains the 2026-06-11 paper-scale prose result; new entry "Pass 3 ↔ Pass 2 overlap at cross-vendor" flags the sequencing question.
+
+### Changed — vv/cost-log.md
+
+- **[`vv/cost-log.md`](vv/cost-log.md)** gains Pass 3 row, two-tier *Notable findings* entry (intra-family disjoint at code-tooling + prose; cross-vendor partial-overlap-with-novelty at prose), and *Aggregation* table extension. Methodological caveat about delivery-mechanism asymmetry recorded.
+
+### Changed — content fixes from Pass 3 novel findings
+
+- **[`README.md:52`](README.md)** — *Toulmin form* gains a [link](literature/sources/toulmin-1958.md) to the existing source-index entry plus components named inline (*Claim / Grounds / Warrant / Qualifier / Rebuttal*) plus Toulmin (1958) attribution. Pass 3 flagged the term as used as a structural anchor without definition or citation — Claude-family reviewers absorbed it as familiar.
+- **[`README.md:62`](README.md)** — *Whetten checklist* gains a [link](literature/sources/whetten-1989.md) to the existing source-index entry plus components named inline (*Constructs / Premises / Reasoning / Boundary conditions / Alternatives engaged*) plus Whetten (1989) attribution. Same Pass 3 finding.
+- **[`templates/anti-hallucination.md` Step 6](templates/anti-hallucination.md)** gains a *Human-in-loop anchor* bullet naming the circularity ("if the agent that introduced the citation also verifies it, you are asking the source of the claim to verify itself") and prescribing the fix (either a human reads the cited section, or a *different* agent retrieves and reads it — fresh session, ideally cross-family per DR-011). Pass 3's *Delegation Paradox* finding: Step 6 is a P0 gate that cannot be delegated to the introducing agent without circularity.
+
+### Adopter notes
+
+- **PATCH-vs-MINOR call:** all changes are clarifications or evidence-base extensions against the framework's own discipline. No new structural pattern, no template contract changed, no DR semantics revised. The Step 6 anchor names a constraint that was implicit in the structure of the checklist (Step 6 was always the "did *I* read it" gate, not the "did the agent read it" gate) — making the implicit explicit is patch-shaped.
+- **Recommended for adopters:** if your paper project has a copy of `templates/anti-hallucination.md`, mirror the Step 6 *Human-in-loop anchor* bullet — names a constraint adopters' verification workflows should already respect but may not have stated.
+- **If your README cites Toulmin or Whetten,** mirror the first-mention author/year + components convention to match the framework's discipline of citing sources at first use.
+- **No path-level breaks.** All changes are additive prose; no files moved, no template structure changed.
+- **Self-pin bump:** if your `CLAUDE.md` pins `agent-ready-papers: v2.2.0`, update to `v2.2.1`.
+
+---
+
 ## v2.2.0 (2026-06-11)
 
 Framework self-verification surface + argument-shape fixes from DR-011 Pass 2. The framework now applies its own apparatus to its own home document with public artefacts (`vv/cost-log.md`, `vv/hypothesis-log.md`), and the load-bearing argument-shape findings from a two-pass Claude-family review are addressed in the README, agents/, CLAUDE.md, and DR-011 evidence base. **MINOR release** per the SemVer convention — new public structural pattern (`vv/` at repo root for framework self-application).

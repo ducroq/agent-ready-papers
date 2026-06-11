@@ -8,7 +8,7 @@ Companion to [agent-ready-projects](https://github.com/ducroq/agent-ready-projec
 
 **Status:** A working framework we use on our own papers. Broader empirical validation across other authors and domains is an open question — adopt it as a structured starting point, not as a tested method.
 
-**Current release:** v2.2.0 (2026-06-11) — see [`CHANGELOG.md`](CHANGELOG.md). Pin your project with `agent-ready-papers: v2.2.0` in your CLAUDE.md and surface drift at session start.
+**Current release:** v2.2.1 (2026-06-11) — see [`CHANGELOG.md`](CHANGELOG.md). Pin your project with `agent-ready-papers: v2.2.1` in your CLAUDE.md and surface drift at session start.
 
 ## The Core Problem
 
@@ -49,7 +49,7 @@ Every concept on the right maps to a concrete artifact in the project — a temp
 
 ## The Argument, Structurally
 
-Stating the case in Toulmin form makes it inspectable rather than persuasive:
+Stating the case in [Toulmin form](literature/sources/toulmin-1958.md) — *Claim / Grounds / Warrant / Qualifier / Rebuttal*, from Toulmin's *The Uses of Argument* (1958) — makes it inspectable rather than persuasive:
 
 | Component | Statement |
 |-----------|-----------|
@@ -59,7 +59,7 @@ Stating the case in Toulmin form makes it inspectable rather than persuasive:
 | **Qualifier** | **EMERGING.** We use this framework on our own papers; broader empirical validation across other authors and domains is an open question. |
 | **Rebuttal** | The framework is overhead with no return in the cases listed in *[When It Is Overkill](#when-it-is-overkill)* below — one-shot prose, throwaway code, internal notes, and domains with their own established compliance audit conventions. |
 
-This Toulmin block decomposes the **argument** the framework rests on; R-1 in [*This README, registered*](#this-readme-registered) below states the **proposition** the argument supports — registered with its own boundary conditions, per the framework's Whetten checklist. The two views coexist by design: argument verifies the reasoning chain; proposition verifies the recommendation; same case, two checklists. Six further entries (R-2…R-7) cover supporting CLAIMs / ARGUMENTs / PROPOSITIONs from the rest of this file.
+This Toulmin block decomposes the **argument** the framework rests on; R-1 in [*This README, registered*](#this-readme-registered) below states the **proposition** the argument supports — registered with its own boundary conditions, per the framework's [Whetten checklist](literature/sources/whetten-1989.md) (*Constructs / Premises / Reasoning / Boundary conditions / Alternatives engaged*, from Whetten's *What Constitutes a Theoretical Contribution?*, AMR 1989). The two views coexist by design: argument verifies the reasoning chain; proposition verifies the recommendation; same case, two checklists. Six further entries (R-2…R-7) cover supporting CLAIMs / ARGUMENTs / PROPOSITIONs from the rest of this file.
 
 **Dynamic counter to the Warrant.** A reasonable objection: "tool-level + model-level techniques are improving fast; RAG with citation-grounded generation plus reasoning-step verification could close most of the gap as capability rises." The Warrant above claims a **structural** distinction (process layer is the locus of the failure modes), not a **static** one (today's tools don't reach it). The structural claim is empirically open — registered as a falsifiable position in [`vv/hypothesis-log.md`](vv/hypothesis-log.md) with a Method (apply the framework's apparatus to a frontier-model-RAG-produced manuscript and count residual process-level findings) and a Revisit trigger (frontier-model RAG pipeline with reasoning-step verification becomes available, applied to a ≥5,000-word manuscript with ≥10 citations). Reading this and disagreeing? File an issue or contact the maintainer; "the position fails if residual process-level findings drop below 3" is concrete enough to test.
 
