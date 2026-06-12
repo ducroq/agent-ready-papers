@@ -5,7 +5,7 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 - **Type**: Guide + templates + active paper projects
 - **Companion**: [agent-ready-projects](https://github.com/ducroq/agent-ready-projects) (for code)
 - **agent-ready-projects**: v1.10.3
-- **agent-ready-papers** (this repo): v2.2.4 (candidate, unreleased — `vv/hypothesis-log.md` gains the dsp-workshop technical-syllabus pilot bet: lightweight profile (equation-checker + per-page registry + citation verification) pre-registered against one full-stack teaching page; PATCH, 2026-06-12)
+- **agent-ready-papers** (this repo): v2.2.4 (2026-06-12 — first end-to-end self-application to a non-paper adopter (dsp-workshop teaching site): syllabus pilot bet registered + resolved HELD, whole-repo V&V sweep, 6 basics claim registries (526 claims); fixes a `tools/coverage.py` escaped-pipe bug it exposed (+2 regression tests); literature L48 (Elsevier *Researcher of the Future* 2025 adoption–trust survey); PATCH)
 
 > Live project state (current paper status, recent decisions, deferred items) lives in `memory/MEMORY.md` (maintainer-local — see *What is intentionally not shipped* below). Release notes live in `CHANGELOG.md`.
 
@@ -19,7 +19,7 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 | Making scope or methodology decisions | `decisions/` — 15 decision records (DR-001 through DR-015; DR-014 + DR-015 Proposed) |
 | Starting template / DR / verification-gate design work | `memory/dead-ends.md` — pattern proposals already concluded as don't-retry |
 | Adding or verifying literature sources | `literature/README.md` — indexed sources organized by topic |
-| Checking coverage or DOIs in a registry | Run `python -m tools.coverage <registry.md>` or `python -m tools.check_dois <registry.md>` (or `make coverage` / `make check-dois`). See `tools/README.md` for flags, exit codes, and known limits (no escaped-pipe support, no HTTP proxy support, sequential HEAD scaling). Prefer the tool to manually counting P0/P1/P2 percentages or eyeballing DOIs. |
+| Checking coverage or DOIs in a registry | Run `python -m tools.coverage <registry.md>` or `python -m tools.check_dois <registry.md>` (or `make coverage` / `make check-dois`). See `tools/README.md` for flags, exit codes, and known limits (no HTTP proxy support, sequential HEAD scaling; escaped-pipe support added in v2.2.4). Prefer the tool to manually counting P0/P1/P2 percentages or eyeballing DOIs. |
 | Working with claims, gates, or confidence calibration | `docs/framework-summary.md` — unit types, gates, tier-to-language mapping at a glance (templates remain normative) |
 | Asking what a coverage or peer-review threshold means | `docs/THRESHOLDS.md` — rationale for the 100% P0 / 90% P1 / 70% P2 / ≥85% overall coverage and ≥3.5/5.0 simulated-peer-review thresholds (top-of-file SPECULATIVE label per the framework's own tier discipline) |
 | Asking what's on the backlog | No single `BACKLOG.md` by design — framework backlog is distributed by velocity: `memory/MEMORY.md` "Next session priorities" for volatile near-term items (maintainer-local); each `decisions/DR-*.md` *Open Questions* section for decision-specific long-burn items. Paper projects have their own `papers/<name>/backlog.md` for paper-scoped tasks. Forcing items at different velocities into one file creates drift; this row is the discoverability fix instead. |

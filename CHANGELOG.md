@@ -24,7 +24,10 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
      Versioning convention (mirrors agent-ready-projects):
      - MAJOR — breaking changes to template surfaces or DR semantics
      - MINOR — new templates, patterns, application classes, or behaviours
-     - PATCH — docs-only changes, clarifications, cross-reference adds
+     - PATCH — docs-only changes, clarifications, cross-reference adds, and
+       backward-compatible bug fixes (e.g. a tooling fix that changes no
+       public interface and adds no capability — it makes the tool honor a
+       contract it already documented). Per semver, which this convention mirrors.
 
      Adopter-notes convention:
      - Every release entry below MUST include an "Adopter notes" or
@@ -34,9 +37,9 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
        ("No adopter action required.") rather than omitting the subsection.
 -->
 
-## v2.2.4 (candidate, unreleased)
+## v2.2.4 (2026-06-12)
 
-First framework operation on a **non-paper, non-framework artefact** — a technical teaching syllabus. A lightweight profile of the framework (equation-checker + per-page claim registry + citation verification) was pre-registered as a falsifiable bet in `vv/hypothesis-log.md` and then **run same session against one full-stack page of the maintainer's dsp-workshop site** (Quarto DSP teaching KB, agent-ready-projects adopter). **Bet HELD.** **PATCH:** public-log entries (hypothesis-log resolution + cost-log row); no template surface, no DR semantics, no consumer behaviour changed.
+The framework's first **end-to-end self-application to a non-paper adopter** — the dsp-workshop teaching site — which, in the process, exposed and fixed a real bug in the framework's own coverage tool. A lightweight profile (equation-checker + per-page claim registry + citation verification) was pre-registered as a falsifiable bet in `vv/hypothesis-log.md`, run on one page (**bet HELD**), then extended to the whole repo and to full coverage-tracked claim registries for the basics chapters. Scope landing *in this repo*: public-log entries (`vv/hypothesis-log.md` + `vv/cost-log.md`), a `tools/coverage.py` bug fix with regression tests, and a new literature source (L48). **PATCH:** no template surface and no DR semantics changed; the coverage fix is backward-compatible — it makes the tool honor the `\|` escaping the templates already prescribe. The dsp-workshop content fixes themselves live in that repo, recorded here for provenance.
 
 ### Changed — `vv/hypothesis-log.md`
 
@@ -58,6 +61,10 @@ First framework operation on a **non-paper, non-framework artefact** — a techn
 ### dsp-workshop content fixes applied ("fix it all", 2026-06-12)
 
 - All **19 hard errors** from the sweep fixed in the dsp-workshop `.qmd` pages (plus the 3 adaptive-filtering pilot fixes = 22). Judgment calls: multirate 14×/2.4× SIMD → ~2.4×; ppg budget total → consistent with row sum; smoothing α-convention → disambiguating note + two `ema_init` α corrections; zero-crossing vowel demo → 4th-harmonic formant that genuinely inflates ZCR to ~300 Hz (verified by local execution); zero-phase → corrected Butterworth FB formula. The **6 basics claim registries now all PASS `tools.coverage --strict`** after the 8 soft-cell overreaches were hedged / given boundary conditions / arithmetic-corrected. All findings, fixes, and coverage logged in `audits/dsp-workshop-pilot/` + `vv/cost-log.md`.
+
+### New — `literature/` source L48 (AI Adoption & Trust in Research)
+
+- **[`literature/README.md`](literature/README.md)** gains a new *AI Adoption & Trust in Research* section with **L48** — Elsevier's *Researcher of the Future* report (Confidence in Research series, 2025; 3,200+ researchers, 113 countries): **84% of researchers have used AI tools, only 22% believe AI tools are currently trustworthy**. Source file [`literature/sources/elsevier-researcher-future-2025.md`](literature/sources/elsevier-researcher-future-2025.md) records the statistics verbatim from the report landing page (verified 2026-06-12, not via press coverage), with explicit tier-discipline caveats: industry self-published with a commercial stake (the survey underwrites Elsevier's LeapSpace marketing), methodology only partially disclosed on the landing page, and a named conflation risk with Elsevier's distinct *Insights 2024* survey. Indexed as direct quantitative support for Paper 1's verification-gap framing and as evidence that publisher-side tooling (LeapSpace Trust Cards / Claim Radar) addresses the consumption side of the gap while the author-side production gap remains open.
 
 ### Adopter notes
 
