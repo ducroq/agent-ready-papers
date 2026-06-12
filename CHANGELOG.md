@@ -24,7 +24,10 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
      Versioning convention (mirrors agent-ready-projects):
      - MAJOR — breaking changes to template surfaces or DR semantics
      - MINOR — new templates, patterns, application classes, or behaviours
-     - PATCH — docs-only changes, clarifications, cross-reference adds
+     - PATCH — docs-only changes, clarifications, cross-reference adds, and
+       backward-compatible bug fixes (e.g. a tooling fix that changes no
+       public interface and adds no capability — it makes the tool honor a
+       contract it already documented). Per semver, which this convention mirrors.
 
      Adopter-notes convention:
      - Every release entry below MUST include an "Adopter notes" or
@@ -33,6 +36,39 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
        for quick lookup. If an entry has no adopter action, say so explicitly
        ("No adopter action required.") rather than omitting the subsection.
 -->
+
+## v2.2.4 (2026-06-12)
+
+The framework's first **end-to-end self-application to a non-paper adopter** — the dsp-workshop teaching site — which, in the process, exposed and fixed a real bug in the framework's own coverage tool. A lightweight profile (equation-checker + per-page claim registry + citation verification) was pre-registered as a falsifiable bet in `vv/hypothesis-log.md`, run on one page (**bet HELD**), then extended to the whole repo and to full coverage-tracked claim registries for the basics chapters. Scope landing *in this repo*: public-log entries (`vv/hypothesis-log.md` + `vv/cost-log.md`), a `tools/coverage.py` bug fix with regression tests, and a new literature source (L48). **PATCH:** no template surface and no DR semantics changed; the coverage fix is backward-compatible — it makes the tool honor the `\|` escaping the templates already prescribe. The dsp-workshop content fixes themselves live in that repo, recorded here for provenance.
+
+### Changed — `vv/hypothesis-log.md`
+
+- **[`vv/hypothesis-log.md`](vv/hypothesis-log.md)** gains a **Resolved** entry: *A lightweight profile of the framework earns its cost on a technical syllabus (dsp-workshop pilot) — HELD.* Weakest-informative-form discipline: the bet claimed only that the portable verification surface pays for itself on one page (≥1 load-bearing finding existing QA missed, within a ~170K-token bound), not that the full apparatus applies to teaching content. **Result:** `agents/equation-checker.md`, run as an independent subagent over `topics/adaptive-filtering` `index.qmd` + `embedded.qmd` (28 checks, 23 OK, 35,364 tokens ≈ 21% of the bound), surfaced a hard arithmetic error in a student-facing performance-budget table (a self-contradictory cycle count) plus a complexity-normaliser mislabel, an acronym typo, and a soft internal inconsistency — all structurally invisible to the project's existing QA (pytest covers `.py`, not hand-authored `.qmd` prose tables; persona-review is qualitative). Both primary legs satisfied. Three secondary signals recorded (reserved-PROCEDURE-slot activation case **positive**; verification-by-execution fits the typed model unchanged at N=1; two-register tier-language test not exercised this pilot).
+
+### Changed — `vv/cost-log.md`
+
+- **[`vv/cost-log.md`](vv/cost-log.md)** gains a row for the pilot equation-check operation (35,364 tokens, ~109 s, 3 tool uses) — the framework's first cost data point on a teaching-KB artefact and first content-type-generalisation measurement — plus a row for the **full-repo sweep** below.
+
+### Whole-repo sweep (corroboration at scale)
+
+- The pilot's lightweight profile was extended from one page to the **whole dsp-workshop repo**: the portable capability suite (equation/numerical verification + citation/anti-hallucination + typed claim registry + confidence-language scan) applied to all 20 equation/number-bearing chapters via a background **Workflow** (`wf_2e0055ba-63d`, 39 agents, ~1.57M tokens, ~8.7 min). **390 checks → 19 hard errors, 0 citation issues, 32 confidence overreaches.** Result: the pilot's prediction held at scale — the embedded-budget-table failure mode recurred in five more topics, plus one genuine FORMULA error (zero-phase Butterworth correction). Per-chapter `_vv/<chapter>.md` records were generated deterministically from schema'd workflow output (`audits/dsp-workshop-pilot/_build_sweep.py`); consolidated in `full-sweep.md` + `full-sweep-tables.xlsx`. **Framework firsts:** first whole-repo application; first Workflow used as a V&V-sweep vehicle; first cost-per-finding figure (~83K tokens/hard error, ~31K/actionable finding). `vv/cost-log.md` row added.
+
+### Full claim registries (the real artifact) for the basics chapters
+
+- The whole-repo sweep produced findings records with a *sampled* claim list, not full registries. For the 6 **basics** chapters (the pedagogical core) a second Workflow (`wf_37573196-e02`, 6 agents, ~330K tokens) extracted **exhaustive** claim sets — **526 claims** — generated into coverage-parseable registries (`audits/dsp-workshop-pilot/_build_registries.py`, format per `templates/claim-registry.md`) at `dsp-workshop/_vv/claims/<chapter>.md`, validated with `python -m tools.coverage --strict`. **Every P0 cell and every CLAIM cell = 100% verified**; 3 chapters pass strict, 3 miss only on soft EMERGING ARGUMENT/PROPOSITION cells (actionable backlog in `_vv/claims/README.md`). First full coverage-tracked registry built for a non-paper adopter.
+- **Tooling bug surfaced AND fixed by dog-fooding (`tools/coverage.py`):** `_split_row()` had no escaped-pipe support, so registry cells containing literal `|` (magnitude notation `|H(z)|`) silently corrupted column parsing and miscounted coverage (read 5/7 where the data was 8/8). **Fixed:** `_split_row()` now replaces `\|` with a sentinel before splitting and restores it as a literal `|` in the cell value. Two regression tests added (`tests/test_coverage.py`: `test_split_row_honors_escaped_pipes`, `test_parse_registry_counts_correctly_with_escaped_pipes`); full suite green (19 tests). `tools/README.md` known-limit struck through; `memory/gotcha-log.md` entry marked RESOLVED. This is the strongest evidence from the dsp-workshop exercise: applying the framework's own coverage tool to math-heavy content exposed and closed a real bug in the tool.
+
+### dsp-workshop content fixes applied ("fix it all", 2026-06-12)
+
+- All **19 hard errors** from the sweep fixed in the dsp-workshop `.qmd` pages (plus the 3 adaptive-filtering pilot fixes = 22). Judgment calls: multirate 14×/2.4× SIMD → ~2.4×; ppg budget total → consistent with row sum; smoothing α-convention → disambiguating note + two `ema_init` α corrections; zero-crossing vowel demo → 4th-harmonic formant that genuinely inflates ZCR to ~300 Hz (verified by local execution); zero-phase → corrected Butterworth FB formula. The **6 basics claim registries now all PASS `tools.coverage --strict`** after the 8 soft-cell overreaches were hedged / given boundary conditions / arithmetic-corrected. All findings, fixes, and coverage logged in `audits/dsp-workshop-pilot/` + `vv/cost-log.md`.
+
+### New — `literature/` source L48 (AI Adoption & Trust in Research)
+
+- **[`literature/README.md`](literature/README.md)** gains a new *AI Adoption & Trust in Research* section with **L48** — Elsevier's *Researcher of the Future* report (Confidence in Research series, 2025; 3,200+ researchers, 113 countries): **84% of researchers have used AI tools, only 22% believe AI tools are currently trustworthy**. Source file [`literature/sources/elsevier-researcher-future-2025.md`](literature/sources/elsevier-researcher-future-2025.md) records the statistics verbatim from the report landing page (verified 2026-06-12, not via press coverage), with explicit tier-discipline caveats: industry self-published with a commercial stake (the survey underwrites Elsevier's LeapSpace marketing), methodology only partially disclosed on the landing page, and a named conflation risk with Elsevier's distinct *Insights 2024* survey. Indexed as direct quantitative support for Paper 1's verification-gap framing and as evidence that publisher-side tooling (LeapSpace Trust Cards / Claim Radar) addresses the consumption side of the gap while the author-side production gap remains open.
+
+### Adopter notes
+
+- **No adopter action required.** The result is maintainer-side evidence. Adopters applying the framework to teaching or reference content now have a worked data point for the **lightweight-profile** tier (portable prompts + per-page registry, no coverage gates): on content whose code is already tested, the equation-checker's distinct value is verifying **hand-authored numbers in prose** (budget tables, worked examples, unit conversions) that a test suite never reaches. The README's *When It Is Overkill* boundary gains its first empirical content-type data point. A follow-up DR to activate DR-004's reserved PROCEDURE slot is the open question for any project that wants formal content-type adoption rather than borrowing — not forced by this pilot.
 
 ## v2.2.3 (2026-06-11)
 

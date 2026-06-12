@@ -8,8 +8,21 @@ The full release notes are in [`CHANGELOG.md`](CHANGELOG.md). This file is the q
 
 - **MAJOR** version bumps signal breaking changes to template surfaces or DR semantics. Adopters should expect to review.
 - **MINOR** version bumps add templates, patterns, application classes, or behaviours. Adoption of the new additions is typically opt-in.
-- **PATCH** version bumps are docs-only / clarifications. No action required.
+- **PATCH** version bumps are docs-only / clarifications, or backward-compatible bug fixes (e.g. a tooling fix that changes no public interface). Usually no action required; a bug fix may be worth adopting if you hit the bug.
 - Every release entry in `CHANGELOG.md` includes an "Adopter notes" / "Adopter action" subsection. This file aggregates them per version for quick lookup.
+
+## v2.2.4 (2026-06-12)
+
+**From v2.2.3 — what to review when you bump your pin to v2.2.4:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| `tools/coverage.py` — `_split_row()` now honors backslash-escaped pipes (`\|`) in registry cells; magnitude notation like `\|H(z)\|` no longer corrupts column parsing or coverage counts | **Recommended if you run the coverage tool on registries with `\|` in cell text** (math-heavy claims). Such rows previously miscounted silently; they now parse correctly. No registry edits required — re-run `python -m tools.coverage` for correct numbers. The templates already prescribed `\|`; this makes the tool honor that contract. |
+| `vv/hypothesis-log.md` + `vv/cost-log.md` — dsp-workshop dog-fooding records (syllabus pilot resolved HELD; whole-repo sweep; basics claim-registry run, 526 claims) | Reference only — a worked example of applying the portable verification surface (equation-checker + per-page registry + citation check) to a non-paper teaching repo, with the lightweight-profile tier and a cost-per-finding figure. |
+| `literature/README.md` — new source L48 (Elsevier *Researcher of the Future* 2025: 84% AI adoption, 22% trust) | Reference only — direct quantitative support for the verification-gap framing; industry-self-published tier caveats noted in the source file. |
+| Root `CLAUDE.md` self-pin bumped v2.2.3 → v2.2.4 | None — metadata only. |
+
+**No breaking changes.** PATCH release: a backward-compatible tooling bug fix plus public-log and literature additions; no template surface, no DR semantics changed.
 
 ## v2.2.3 (2026-06-11)
 

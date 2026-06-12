@@ -88,6 +88,12 @@ Sources consulted during the development of this project, particularly for DR-00
 |----|-----------|------|-------|-------|------|
 | L47 | EQUATOR Network | -- | Reporting guideline database (~500 guidelines) | equator-network.org | [equator-gap](sources/equator-gap.md) |
 
+### AI Adoption & Trust in Research
+
+| ID | Author(s) | Year | Title | Venue | File |
+|----|-----------|------|-------|-------|------|
+| L48 | Elsevier | 2025 | Researcher of the Future (Confidence in Research) | elsevier.com (industry report) | [elsevier-researcher-future-2025](sources/elsevier-researcher-future-2025.md) |
+
 ## Key Insight
 
 EQUATOR has ~500 reporting guidelines for empirical health research. Essentially **zero** exist for theoretical, design science, perspective, or methodological papers. This gap is where this project can make its most distinctive contribution.
