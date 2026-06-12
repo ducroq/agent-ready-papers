@@ -5,7 +5,7 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 - **Type**: Guide + templates + active paper projects
 - **Companion**: [agent-ready-projects](https://github.com/ducroq/agent-ready-projects) (for code)
 - **agent-ready-projects**: v1.10.3
-- **agent-ready-papers** (this repo): v2.2.3 (DR-011 *Open Questions* extends with external-ground-truth ρ calibration entry — ICLR/OpenReview methodology mirroring Stanford Agentic Reviewer's published 0.42 ≈ 0.41 ICLR-reviewer agreement result; cross-references sibling project [vmodel.eu#135](https://github.com/ducroq/vmodel.eu/issues/135); PATCH against v2.2.2's Open Questions extension, 2026-06-11)
+- **agent-ready-papers** (this repo): v2.2.4 (candidate, unreleased — `vv/hypothesis-log.md` gains the dsp-workshop technical-syllabus pilot bet: lightweight profile (equation-checker + per-page registry + citation verification) pre-registered against one full-stack teaching page; PATCH, 2026-06-12)
 
 > Live project state (current paper status, recent decisions, deferred items) lives in `memory/MEMORY.md` (maintainer-local — see *What is intentionally not shipped* below). Release notes live in `CHANGELOG.md`.
 

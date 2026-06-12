@@ -18,6 +18,8 @@ from tools.coverage import (
     CoverageReport,
     CoverageRow,
     _find_bucket_and_status_columns,
+    _parse_registry,
+    _split_row,
     check_coverage,
 )
 
@@ -117,3 +119,29 @@ def test_find_columns_provocation_canonical_template():
 def test_find_columns_returns_none_when_required_missing():
     header = ["ID", "Statement", "Confidence", "Source"]  # no Priority, no Status
     assert _find_bucket_and_status_columns(header, "CLAIM") is None
+
+
+def test_split_row_honors_escaped_pipes():
+    """Escaped pipes (\\|) in cells — e.g. magnitude notation |H(z)| — must not
+    split the row into spurious columns. Regression for the dsp-workshop
+    dog-fooding finding (2026-06-12): unescaped handling shifted the Status
+    column and miscounted coverage (read 5/7 where the data was 8/8)."""
+    row = r"| S4-1 | The magnitude \|H(z)\| peaks at \|z\|=1 | P0 | [x] |"
+    cells = _split_row(row)
+    assert cells == ["S4-1", "The magnitude |H(z)| peaks at |z|=1", "P0", "[x]"]
+
+
+def test_parse_registry_counts_correctly_with_escaped_pipes():
+    """End-to-end: a sub-table whose statements contain \\| must still bucket
+    every row against the right Priority/Status columns."""
+    content = "\n".join([
+        "**CLAIMs:**",
+        "",
+        "| ID | Statement | Priority | Confidence | Source | Source Tier | Status |",
+        "|----|-----------|----------|------------|--------|-------------|--------|",
+        r"| S1-1 | \|H(z)\| is the magnitude response | P0 | ESTABLISHED | textbook | C | [x] |",
+        r"| S1-2 | \|z\|=1 is the unit circle | P0 | ESTABLISHED | textbook | C | [x] |",
+        "| S1-3 | A plain claim with no pipes | P0 | ESTABLISHED | textbook | C | [ ] |",
+    ])
+    counts = _parse_registry(content)
+    assert counts[("CLAIM", PRIORITY_AXIS, "P0")] == (3, 2)

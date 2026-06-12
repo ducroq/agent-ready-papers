@@ -149,14 +149,22 @@ def _split_row(line: str) -> list[str] | None:
 
     Returns None when the line is not a table row (no leading `|`).
     Tolerates trailing whitespace and missing trailing `|`.
+
+    Honors backslash-escaped pipes (``\\|``) inside cells — common in
+    magnitude notation like ``|H(z)|`` — so they do not split the row into
+    spurious columns (which silently shifts the bucket/status columns and
+    corrupts coverage counts). The escaped pipe is restored as a literal
+    ``|`` in the returned cell value.
     """
     stripped = line.rstrip()
     if not stripped.lstrip().startswith("|"):
         return None
     inner = stripped.lstrip()[1:]
+    sentinel = "\x00"
+    inner = inner.replace("\\|", sentinel)
     if inner.endswith("|"):
         inner = inner[:-1]
-    return [c.strip() for c in inner.split("|")]
+    return [c.strip().replace(sentinel, "|") for c in inner.split("|")]
 
 
 def _find_bucket_and_status_columns(
