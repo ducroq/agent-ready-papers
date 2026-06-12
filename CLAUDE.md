@@ -119,7 +119,7 @@ Listed here so the architecture diagram above is honest about what an adopter se
 | `papers/perspective/backlog.md` | Paper 1 current tasks and priorities |
 | `decisions/DR-004_registry-model-for-non-empirical-papers.md` | Most consequential DR — typed verification model |
 | `decisions/DR-006_publication-roadmap.md` | Publication sequencing (Papers 1-3) |
-| `literature/README.md` | Master source index (47 entries) |
+| `literature/README.md` | Master source index (48 entries) |
 | `templates/CLAUDE.md` | Template for new paper projects |
 
 ## How to Work Here
