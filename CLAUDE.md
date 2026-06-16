@@ -86,6 +86,7 @@ agent-ready-papers/
 ├── vv/                        <- Framework self-application (since v2.2.0; public)
 │   ├── cost-log.md            <- Operation cost log — framework operations on the framework
 │   └── hypothesis-log.md      <- Public framework-level provisional positions (where load-bearing README prose depends on a falsifiable bet)
+├── audits/                    <- Audits of external/published docs (gitignored — maintainer-local; may critique named authors)
 └── memory/                    <- Session memory (gitignored — maintainer-local)
     ├── gotcha-log.md          <- Problem-fix archive
     ├── hypothesis-log.md      <- Maintainer-local intra-session bets (since v1.7.0; complement to vv/hypothesis-log.md which is public)
@@ -104,6 +105,7 @@ These paths exist in the maintainer's local clone but are gitignored — they ar
 | `memory/gotcha-log.md` | Maintainer's problem-fix archive | Build your own per-project |
 | `memory/dead-ends.md` | Maintainer's "don't retry" log | Build your own per-project |
 | `memory/hypothesis-log.md` | Maintainer's intra-session framework bets (working positions) | Adopters maintain their own per `templates/hypothesis-log.md`; the *public* framework-level positions are at `vv/hypothesis-log.md`, which IS shipped |
+| `audits/` | Maintainer-local audits applying the framework to *external / published* documents (dogfooding on third-party material). May critique named authors, so kept private by default | Not needed — run your own audits locally; un-ignore per-folder only with the author's awareness if you intend to publish |
 
 The public framework — templates, DRs, README, CHANGELOG — is fully consumable without any of the above. Adopters maintain their own session state per the patterns in `templates/CLAUDE.md`, not by depending on the maintainer's `memory/`.
 
