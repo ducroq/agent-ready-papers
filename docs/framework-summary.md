@@ -72,6 +72,19 @@ For PROVOCATION (separate axis — quality of speculation, not strength of evide
 
 Normative source: `templates/writing-guide.md` Language Calibration; `templates/claim-registry.md` Confidence Tier Reference.
 
+**Tier-monotonicity** is the one rule the table is an instance of: *prose language tier ≤ the registered confidence tier for the same entry.* Citation drift, overclaiming, and Step Z are all the same failure — language climbing above the evidence. Normative source: `templates/writing-guide.md` → "The Underlying Principle".
+
+## Cross-Cutting Checks
+
+Two checks apply across unit types rather than to one type (both verification passes, not registry entries):
+
+| Check | Question | Scope | Normative source |
+|-------|----------|-------|------------------|
+| Step Z (inverse hallucination) | Does any sentence's language tier exceed the tier its evidence supports? | All projects (PROVOCATION reclassification is a speculative-design sub-case) | `templates/anti-hallucination.md` → "Step Z" |
+| Scope Drift (declared vs delivered) | Does the paper deliver what its abstract / stated contributions promised? | All papers | `templates/vv-framework.md` §4.6 |
+
+Both were generalized/adapted from agent-ready-assessment into the framework in v2.3.0 (see DR-017).
+
 ## Terminology Note: "Grounding" / "GROUNDED"
 
 Two senses appear in this repo. Don't conflate:

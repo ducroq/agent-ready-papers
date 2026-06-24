@@ -29,6 +29,10 @@
 | EMERGING | "may", "preliminary evidence", "initial findings suggest" |
 | SPECULATIVE | "warrants investigation", "remains unclear", "we hypothesize" |
 
+### The Underlying Principle
+
+The rules in this guide are instances of one structural requirement: **the language tier used in the manuscript must be at most the confidence tier in the registry for the same claim.** Citation drift, overclaiming, and inverse hallucination (Step Z) are all the same failure — language climbing one or more tiers above what the evidence chain supports. A reviewer's first check on any load-bearing claim is whether the language sits at or below the registered tier; if it does not, either the registry needs upgrading (with new evidence) or the language needs downshifting. (Propagated from `templates/writing-guide.md` per DR-017.)
+
 ### Writing by Unit Type
 
 | Type | How to write it | Watch for |

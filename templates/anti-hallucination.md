@@ -59,11 +59,16 @@ For each new citation, verify ALL six points:
 |---------|---------|-------------|
 | **Plausible fabrication** | Real author + real journal + fake paper | DOI check fails |
 | **Attribution error** | Real paper, but claim is from a different paper | Read the actual source |
-| **Number invention** | "Found a 23% improvement" — number doesn't appear in source | Check exact values against source |
+| **Number invention (cited)** | "Found a 23% improvement [5]" — number doesn't appear in source [5] | Check exact values against the cited source |
+| **Number invention (uncited)** | "Our method reached 94.3% accuracy" — no run log, seed, or checkpoint | Ask for the reproduction apparatus; if absent, mark SPECULATIVE (see Step Z) |
+| **Index drift** | In-text "[16]" doesn't match the entry at [16] in the bibliography | Cross-check every in-text bracket against the reference list |
+| **Single-run-as-measurement** | "The model achieves X" — one run, one seed, presented as a stable result | Look for variance / CI / multi-seed protocol; flag via Step Z |
+| **Library version drift** | Cited library behaviour may not match the version actually used | Verify the version in `requirements.txt` / lockfile matches the cited behaviour |
+| **Missing model / checkpoint card** | "We used ResNet-50" with no weights origin, version, or initialization | Ask for the model card or pretrained source |
 | **Journal confusion** | Paper exists but in a different journal than cited | Verify publication venue |
 | **Author swapping** | Correct finding but attributed to wrong author | Check author list |
 | **Recency fabrication** | "Recent study (2024)" — paper is actually from 2018 | Verify publication year |
-| **Inverse fabrication** *(speculative-design only)* | Fictional artefact presented with a citation as if sourced (e.g., a diegetic DSM entry attributed to a real journal) | Run Step Z — reclassify as PROVOCATION, not source-hunt |
+| **Inverse fabrication** | Language tier exceeds the evidence tier — a speculation, estimate, or single observation presented as a sourced/stable result (incl. a diegetic artefact cited as if real) | Run Step Z — reclassify (PROVOCATION if diegetic; else seek apparatus or downgrade) |
 
 ---
 
@@ -134,20 +139,26 @@ The ladder structure is stable across applications. A companion failure mode (tr
 
 ---
 
-## Step Z: Inverse Hallucination Check (PROVOCATION-specific)
+## Step Z: Inverse Hallucination Check (tier-monotonicity violation)
 
-*Applies only to projects that contain PROVOCATION entries — speculative-design, design-fiction, diegetic-prototype work. See [DR-010](../decisions/DR-010_provocation-unit-type.md). Standard empirical and methodological projects can skip this section.*
+*Applies to all project types. Steps 0–6 catch a fabricated or misread source; Step Z catches the inverse — language whose confidence tier exceeds what the evidence supports. This is the same tier-monotonicity rule the writing-guide states for prose, run here as a verification pass. (Generalized from a PROVOCATION-only check in v2.3.0 — see DR-017; the speculative-design form is now a sub-case below.)*
 
-The Steps 0–6 checklist guards against the standard hallucination: an agent invents a source for a real-sounding statement. PROVOCATIONs surface the *inverse* failure mode: an agent presents a speculation *as if* it had a citable source. A fictional speculative-design criterion ending in `[Author, Year]` is a hallucination *into fictional territory* — the exact opposite move from standard fabrication.
+Steps 0–6 guard against the standard hallucination: an agent invents (or misreads) a source for a real-sounding statement. Step Z surfaces the *inverse* failure mode: an agent presents a speculation, estimate, or single observation *as if* it were a sourced or stable result. Steps 0–6 *fail to fail* on these — there is often no false citation to catch — so the entry looks like a verifiable CLAIM that merely needs more sourcing. The fix is re-classification or downshift, not source-hunting.
 
-The check has to run in both directions:
+The diagnostic is mechanical: classify the sentence's language tier (writing-guide → Language Calibration); classify the tier its evidence actually supports; **if language > evidence, that is a Step Z finding.**
 
-- **Forward (Steps 0–6):** is the cited source real, and does it say this?
-- **Inverse (Step Z):** is the entry behaving as a citation when no source can apply?
+### General triggers (all projects)
 
-Inverse hallucinations are dangerous because Steps 0–6 will *fail to fail* on them — the source plausibly does not exist (the agent invented it), and the entry will look like a verifiable CLAIM that simply needs more sourcing. The fix is type re-classification, not source-hunting.
+- A numeric result reported once (one run, one measurement) but written as a stable value — no variance, confidence interval, or multi-seed/multi-trial protocol.
+- A performance / timing / accuracy figure with no measurement protocol described.
+- An assertion phrased as if cited ("recent work shows…") with no actual citation.
+- A single estimate or opinion written in fact-shaped language.
 
-### Workflow
+Remediation: (a) downshift the prose to the supported tier (EMERGING / SPECULATIVE), or (b) supply the missing apparatus (run log, protocol, source) that justifies the higher tier. The first is editorial; the second is engineering.
+
+### Speculative-design sub-case (PROVOCATION projects only)
+
+*See [DR-010](../decisions/DR-010_provocation-unit-type.md).* In speculative-design / design-fiction / diegetic-prototype work the inverse failure takes a specific form: a fictional artefact presented *with a citation as if sourced* (a diegetic DSM criterion ending in `[Author, Year]`). Here the fix is type re-classification to **PROVOCATION**, not a tier downshift.
 
 For every entry in a project with PROVOCATION enabled, before running Steps 0–6:
 
@@ -160,7 +171,7 @@ For every entry in a project with PROVOCATION enabled, before running Steps 0–
 3. **Assign a PROVOCATION tier** (GROUNDED / EXTRAPOLATED / PROVOCATIVE / CRITICAL — see `templates/claim-registry.md` → "PROVOCATION Confidence — Separate Axis").
 4. **Add the tier-required reflexive marker** to the prose. Without the marker, the entry remains indistinguishable from a fabricated CLAIM and must be rewritten or downgraded to EMERGING CLAIM with additional sources.
 
-### Worked Example
+#### Worked Example (PROVOCATION sub-case)
 
 **Agent output (in a speculative-design book imitating DSM diagnostic form):**
 > "Criterion A.1 — Strong preference for in-group members and activities (DSM-X §301.42, American Psychiatric Association, 2025)."
@@ -205,7 +216,7 @@ The three-pass structure and style-filter requirement are stable; specific cost-
 - **Spot-check:** Step 0 as initial filter; if it passes, continue with Steps 4–6 at minimum
 - **Re-verify:** When an agent changes the claim wording for an existing citation — Steps 4–6
 - **Skip only:** For citations you personally retrieved from the source paper
-- **Step Z:** Run on every entry in projects with PROVOCATION enabled, before Steps 0–6 — to catch the inverse failure mode (speculation presented as if sourced)
+- **Step Z:** Run on every load-bearing entry, all project types — does the language tier exceed the evidence tier? The PROVOCATION sub-case (reclassify a diegetic artefact, before Steps 0–6) applies to speculative-design projects only
 - **Step 7:** Run before publish / submission. Pass 1 every publish; Pass 2 per the scale guidance above; Pass 3 only for high-stakes content with the style filter active
 
 ---

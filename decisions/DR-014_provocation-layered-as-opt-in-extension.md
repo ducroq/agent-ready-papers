@@ -56,15 +56,26 @@ This DR proposes how to keep the speculative-design support (DR-010 is binding a
 
 This DR is **Proposed**, not Accepted. The decision is contingent on three pending checks documented in *Pending Assessment* below.
 
+### Reconciliation with DR-017 (2026-06-24): Step Z decouples from PROVOCATION
+
+DR-017's cross-repo evidence (agent-ready-assessment's `Reproduction_Verification_Prompt.md`) falsifies a premise this DR rested on: that **Step Z is PROVOCATION-coupled**. Assessment applies Step Z — the *tier-monotonicity violation* check, where a sentence's language tier exceeds the confidence tier its evidence supports — to ordinary student reports containing **no PROVOCATION entries at all** (single-run-as-measurement, uncited numbers, latency claims with no protocol). Step Z is therefore **audience-general**, not speculative-design-only.
+
+This changes the layering for Step Z *only*:
+
+- **PROVOCATION + the GROUNDED / EXTRAPOLATED / PROVOCATIVE / CRITICAL axis** → extraction to `templates/extensions/provocation.md` proceeds as proposed. Unchanged.
+- **Step Z** → **stays in core** `templates/anti-hallucination.md`, *generalized* from its current PROVOCATION-gated form (the present "standard empirical and methodological projects can skip this section" gate is removed) to the general tier-monotonicity check. The proposed `templates/extensions/anti-hallucination-step-z.md` is **withdrawn** — not created.
+
+This serves DR-014's own goal *better*. The cognitive-load concern was that empirical readers must filter narrow-audience content. A general Step Z is **not** narrow-audience content — overclaiming (language above evidence) is a failure mode of empirical papers too — so keeping it in core is correct, while only the genuinely speculative-design material (PROVOCATION) moves out. The scope bullets below are amended accordingly.
+
 ### Scope of the proposed change
 
 If accepted, the following changes land together as a single coordinated commit batch:
 
 - **New file**: `templates/extensions/provocation.md` — the PROVOCATION unit type definition, Auger 2013 four criteria, the GROUNDED/EXTRAPOLATED/PROVOCATIVE/CRITICAL axis with required prose markers, the registry sub-table format for PROVOCATION entries.
-- **New file**: `templates/extensions/anti-hallucination-step-z.md` — Step Z (Inverse Hallucination Check) as a standalone extension.
+- ~~**New file**: `templates/extensions/anti-hallucination-step-z.md` — Step Z as a standalone extension.~~ **Withdrawn per DR-017 reconciliation (2026-06-24)** — Step Z is audience-general; it stays in core, generalized (see *Reconciliation with DR-017* above).
 - **`templates/claim-registry.md`**: PROVOCATION row removed from the main Unit Type table; per-type sub-tables section keeps CLAIM / ARGUMENT / PROPOSITION; PROVOCATION sub-table moves to `templates/extensions/provocation.md` with a one-line opt-in hook from the main template.
 - **`templates/writing-guide.md`**: PROVOCATION confidence axis moves to extension; main template keeps the four-tier mapping (ESTABLISHED / SUPPORTED / EMERGING / SPECULATIVE).
-- **`templates/anti-hallucination.md`**: Step Z reference becomes a hook (*"If your project uses PROVOCATION, see extensions/anti-hallucination-step-z.md"*); the full Step Z content moves to the extension.
+- **`templates/anti-hallucination.md`**: ~~Step Z reference becomes a hook; the full Step Z content moves to the extension.~~ **Amended per DR-017 (2026-06-24):** Step Z content **stays in core** and is generalized — drop the "empirical/methodological projects can skip" gate so the tier-monotonicity check applies to all project types. Any PROVOCATION-*specific* inverse-fabrication example is cross-referenced from `extensions/provocation.md`, but the general check is core.
 - **`templates/vv-framework.md`**: PROVOCATION mentions stay only in the Gate 2.6 (Reflexivity) section, which is already explicitly conditional. Main framework body discusses CLAIM / ARGUMENT / PROPOSITION / CALCULATION only.
 - **`README.md`**: PROVOCATION paragraph moves out of the main "Verification Registry" section into a brief "Extensions for non-empirical work" subsection at the end of that section. Existing conditional-gates section unchanged.
 - **`docs/framework-summary.md`**: PROVOCATION section moves to a clearly-labelled extension subsection or splits into a separate extensions-summary doc.

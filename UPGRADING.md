@@ -11,6 +11,22 @@ The full release notes are in [`CHANGELOG.md`](CHANGELOG.md). This file is the q
 - **PATCH** version bumps are docs-only / clarifications, or backward-compatible bug fixes (e.g. a tooling fix that changes no public interface). Usually no action required; a bug fix may be worth adopting if you hit the bug.
 - Every release entry in `CHANGELOG.md` includes an "Adopter notes" / "Adopter action" subsection. This file aggregates them per version for quick lookup.
 
+## v2.3.0 (2026-06-24)
+
+**From v2.2.4 — what to review when you bump your pin to v2.3.0:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| `templates/anti-hallucination.md` — **Step Z generalized** from a PROVOCATION-only check to the general *tier-monotonicity violation* check (does any sentence's language tier exceed the tier its evidence supports?), applying to **all project types**; the speculative-design diegetic-artefact case is preserved as a labelled sub-case | **Review if you previously skipped Step Z as "PROVOCATION-only."** You now run it as a general pre-submission pass — it catches empirical overclaiming too (single-run-as-measurement, uncited performance numbers, no-protocol timing claims). No registry-structure change; PROVOCATION projects keep the diegetic sub-case unchanged. |
+| `templates/anti-hallucination.md` — failure-pattern table +5 rows (number invention uncited, index drift, single-run-as-measurement, library version drift, missing model/checkpoint card) | Reference only — extends the existing pattern catalogue. |
+| `templates/vv-framework.md` → v2.5 — new **§4.6 Scope Drift Check** (declared scope vs delivered sections: classify each abstract/contribution promise Delivered / Acknowledged-non-delivery / Silent) | **Optional new pre-submission pass.** Lightweight; no new registry fields. Adapted from agent-ready-assessment's SCOPE DRIFT (which uses a Plan-of-Approach) to authoring, where the abstract + stated contributions play that role. |
+| `docs/framework-summary.md` — new **Cross-Cutting Checks** section (generalized Step Z + Scope Drift) and an explicit statement of tier-monotonicity | Reference only — reference-card surface for the two cross-type checks. |
+| [DR-017](decisions/DR-017_typed-verification-core-ownership.md) (**Accepted**) — this repo is custodian of the operationalized typed layer; siblings **vendor with provenance**, not fork | **If you vendor the typed layer** (Whetten/Toulmin checklists, typed registry) into another repo, add an `imported-from: agent-ready-papers v2.3.0` note. Otherwise reference only. |
+| [DR-014](decisions/DR-014_provocation-layered-as-opt-in-extension.md) reconciliation (still Proposed) — Step Z **decoupled** from PROVOCATION; it stays in core (generalized) and the proposed `extensions/anti-hallucination-step-z.md` is withdrawn; PROVOCATION extraction unaffected | Reference only — relevant if you were tracking DR-014's proposed extension layout. |
+| Root `CLAUDE.md` self-pin bumped v2.2.4 → v2.3.0 | None — metadata only. |
+
+**No breaking changes.** MINOR release: additive concepts (Scope Drift Check, Cross-Cutting Checks) plus one generalization of an existing check (Step Z); no registry-structure change. The only adopter-facing behaviour change is that Step Z now applies to all project types, not just PROVOCATION ones.
+
 ## v2.2.4 (2026-06-12)
 
 **From v2.2.3 — what to review when you bump your pin to v2.2.4:**

@@ -187,6 +187,20 @@ If the marker is absent: rewrite to add it, or downgrade to EMERGING CLAIM with 
 | Domain expert | Technical accuracy check |
 | Simulated reviewer | Multi-pass peer review across model families (see DR-011) |
 
+### 4.6 Scope Drift Check (declared vs delivered)
+
+A paper can be internally consistent, well-cited, and arithmetically sound — and still not deliver what its own abstract, introduction, or stated contributions promised. The gap is neither a citation error nor a tier-monotonicity violation (Step Z); it is a distinct finding.
+
+Compare the paper's **declared scope** — abstract claims, introduction "we show / we propose", explicitly enumerated contributions — against the **delivered sections**. For each declared item, classify:
+
+- **Delivered** — a section substantiates the promise.
+- **Acknowledged non-delivery** — the paper names the gap (e.g., in Limitations).
+- **Silent** — neither delivered nor acknowledged. Highest-information case; flag it.
+
+Flag acknowledged and silent gaps as **SCOPE DRIFT**. This is not in itself a defect — every paper negotiates scope as it is written — but a silent gap between the abstract and the body is a reviewer's first finding, so catching it before submission is the point. Record findings in the registry Notes or a section audit; SCOPE DRIFT is a finding type, not a registry unit type.
+
+*Origin: adapted from agent-ready-assessment's SCOPE DRIFT finding (which compares a Plan-of-Approach against a delivered student report) to the authoring context, which has no Plan-of-Approach — the abstract and the stated-contributions list play that role. See DR-017.*
+
 ---
 
 ## 5. Oracle Documents
@@ -317,4 +331,4 @@ vv/
 
 ---
 
-*Version: 2.4 — v2.1: Gate 2.5, PROPOSITION boundary condition quality criteria, falsification checklist, Toulmin grounds tier constraint. v2.2: scope note (informal technical communication), section-level coverage analysis, mistype re-check in Gate 2. v2.3: PROVOCATION as opt-in fifth unit type for speculative-design work (DR-010). v2.4: project-conditional Gates 2.6 (Reflexivity), 2.7 (Ethical Review), 2.8 (Voice Consistency) added.*
+*Version: 2.5 — v2.1: Gate 2.5, PROPOSITION boundary condition quality criteria, falsification checklist, Toulmin grounds tier constraint. v2.2: scope note (informal technical communication), section-level coverage analysis, mistype re-check in Gate 2. v2.3: PROVOCATION as opt-in fifth unit type for speculative-design work (DR-010). v2.4: project-conditional Gates 2.6 (Reflexivity), 2.7 (Ethical Review), 2.8 (Voice Consistency) added. v2.5: §4.6 Scope Drift Check (declared vs delivered), adapted from agent-ready-assessment (DR-017).*

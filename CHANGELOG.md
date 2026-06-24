@@ -37,6 +37,41 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
        ("No adopter action required.") rather than omitting the subsection.
 -->
 
+## v2.3.0 (2026-06-24)
+
+**Cross-repo consolidation: agent-ready-papers becomes the custodian of the typed-verification layer, and three field-tested refinements are backported from `agent-ready-assessment`.** A cross-repo diff + a six-agent review battery established that the `agent-ready-*` family has *two* roots — `agent-ready-projects` for the generic V&V substrate and session scaffolding, and `agent-ready-papers` for the *operationalized* typed layer (CLAIM/ARGUMENT/PROPOSITION, Toulmin, Whetten, and the verified argumentation-theory sources). `agent-ready-assessment` had independently forked and *extended* that layer; the best of its extensions are now folded back, **adapted to the authoring context**. **MINOR:** additive concepts and one generalization of an existing check; no breaking template surface. See [DR-017](decisions/DR-017_typed-verification-core-ownership.md) (Accepted) and the reconciliation in [DR-014](decisions/DR-014_provocation-layered-as-opt-in-extension.md).
+
+### New — [DR-017](decisions/DR-017_typed-verification-core-ownership.md) (Accepted)
+
+- Records three-layer custody (projects = generic substrate; papers = operationalized typed layer + verified sources; assessment/research **vendor with provenance**, not fork). Custody is framed as *custodianship of the operationalization + sources*, not authorship (DR-004 imported the published argumentation theory) and not implementation-maturity (assessment's 892-line prompt is more elaborate but is a reason to backport *from*, not relocate *to*). Reference mechanism decided: **vendor-with-`imported-from:` note**, not git submodule (zero `.gitmodules` in the family; submodules would break assessment's confidentiality posture and cross-tool portability).
+
+### Changed — `templates/anti-hallucination.md` (Step Z generalized; failure-pattern table extended)
+
+- **Step Z is no longer PROVOCATION-gated.** It is now the general **tier-monotonicity violation** check — *does any sentence's language tier exceed the tier its evidence supports?* — applying to all project types, with the speculative-design diegetic-artefact case preserved as a labelled sub-case. Added **general triggers** (single-run-as-measurement, uncited performance numbers, no-protocol timing claims, opinion in fact-shaped language) and the mechanical diagnostic (classify language tier vs evidence tier; if language > evidence, it's a finding).
+- **Failure-pattern table** gains five rows from assessment: number invention (uncited), index drift, single-run-as-measurement, library version drift, missing model/checkpoint card; "Number invention" split into (cited)/(uncited); "Inverse fabrication" broadened to the general tier-monotonicity form.
+
+### Changed — `templates/vv-framework.md` (new §4.6) → v2.5
+
+- New **§4.6 Scope Drift Check (declared vs delivered)** — adapted from assessment's SCOPE DRIFT (which compares a Plan-of-Approach against a delivered report) to the authoring context, where the abstract and stated-contributions list play the PoA role. Classifies each declared item Delivered / Acknowledged-non-delivery / Silent. A finding type, not a registry unit type.
+
+### Changed — `docs/framework-summary.md`
+
+- New **Cross-Cutting Checks** section naming generalized Step Z and Scope Drift as cross-type verification passes; **tier-monotonicity** stated explicitly as the rule the Confidence-Tiers table instances.
+
+### Changed — DR-014 reconciliation
+
+- DR-014 (still Proposed) is amended: its premise that *Step Z is PROVOCATION-coupled* is falsified by assessment's general use of it, so **Step Z decouples from PROVOCATION** — it stays in core (generalized) and DR-014's proposed `templates/extensions/anti-hallucination-step-z.md` is **withdrawn**. PROVOCATION's own extraction is unaffected. This serves DR-014's cognitive-load goal better: a general Step Z is not narrow-audience clutter.
+
+### Changed — `papers/perspective/` (active paper; ripple ≈ nil)
+
+- Paper 1's `writing-guide.md` gains the tier-monotonicity "Underlying Principle" paragraph (previously only in the template). A pre-change reference audit confirmed Paper 1 has **no PROVOCATION or PoA entries**, so the Step Z generalization and §4.6 force **zero** registry reclassifications.
+
+### Adopter notes
+
+- **Step Z now applies to empirical/methodological projects too.** If you previously skipped Step Z as "PROVOCATION-only," you now run it as a general tier-monotonicity check before submission (it catches overclaiming — single-run-as-measurement, uncited numbers — in empirical work as well). No registry-structure change; PROVOCATION projects keep the diegetic sub-case unchanged.
+- **New §4.6 Scope Drift Check** is a lightweight pre-submission pass (abstract/contributions vs delivered sections); no new registry fields.
+- Pinned consumers vendoring the typed layer: add an `imported-from: agent-ready-papers v2.3.0` note per DR-017; no action otherwise.
+
 ## v2.2.4 (2026-06-12)
 
 The framework's first **end-to-end self-application to a non-paper adopter** — the dsp-workshop teaching site — which, in the process, exposed and fixed a real bug in the framework's own coverage tool. A lightweight profile (equation-checker + per-page claim registry + citation verification) was pre-registered as a falsifiable bet in `vv/hypothesis-log.md`, run on one page (**bet HELD**), then extended to the whole repo and to full coverage-tracked claim registries for the basics chapters. Scope landing *in this repo*: public-log entries (`vv/hypothesis-log.md` + `vv/cost-log.md`), a `tools/coverage.py` bug fix with regression tests, and a new literature source (L48). **PATCH:** no template surface and no DR semantics changed; the coverage fix is backward-compatible — it makes the tool honor the `\|` escaping the templates already prescribe. The dsp-workshop content fixes themselves live in that repo, recorded here for provenance.

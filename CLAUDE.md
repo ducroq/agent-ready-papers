@@ -5,7 +5,7 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 - **Type**: Guide + templates + active paper projects
 - **Companion**: [agent-ready-projects](https://github.com/ducroq/agent-ready-projects) (for code)
 - **agent-ready-projects**: v1.10.3
-- **agent-ready-papers** (this repo): v2.2.4 (2026-06-12 — first end-to-end self-application to a non-paper adopter (dsp-workshop teaching site): syllabus pilot bet registered + resolved HELD, whole-repo V&V sweep, 6 basics claim registries (526 claims); fixes a `tools/coverage.py` escaped-pipe bug it exposed (+2 regression tests); literature L48 (Elsevier *Researcher of the Future* 2025 adoption–trust survey); PATCH)
+- **agent-ready-papers** (this repo): v2.3.0 (2026-06-24 — cross-repo consolidation: DR-017 (Accepted) makes this repo custodian of the operationalized typed-verification layer (CLAIM/ARGUMENT/PROPOSITION + Toulmin + Whetten + verified sources); siblings vendor-with-provenance, not fork. Backports three refinements from agent-ready-assessment, adapted to authoring: Step Z generalized to a tier-monotonicity check for all project types, new §4.6 Scope Drift Check, failure-pattern table extended; DR-014 reconciled (Step Z decoupled from PROVOCATION, stays in core). Validated by a six-agent review battery; Paper 1 ripple nil. MINOR)
 
 > Live project state (current paper status, recent decisions, deferred items) lives in `memory/MEMORY.md` (maintainer-local — see *What is intentionally not shipped* below). Release notes live in `CHANGELOG.md`.
 
@@ -16,7 +16,7 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 | Starting any session (companion drift) | Compare the `agent-ready-projects: vX.Y.Z` line in this file's header against `C:/local_dev/agent-ready-projects/CHANGELOG.md` (local clone) or https://github.com/ducroq/agent-ready-projects/blob/master/CHANGELOG.md. If the project is behind the latest released version, briefly surface the drift to the user before starting work. Don't auto-update — adopting changes is the engineer's call. |
 | Starting any session (self drift) | Compare the `agent-ready-papers: vX.Y.Z` line in this file's header against `CHANGELOG.md`. If a newer version has shipped, surface it before starting. |
 | Working on Paper 1 (Perspective) | `papers/perspective/CLAUDE.md` — paper identity, constraints, status, verification state |
-| Making scope or methodology decisions | `decisions/` — 16 decision records (DR-001 through DR-016; DR-014, DR-015, DR-016 Proposed) |
+| Making scope or methodology decisions | `decisions/` — 17 decision records (DR-001 through DR-017; DR-014, DR-015, DR-016 Proposed) |
 | Starting template / DR / verification-gate design work | `memory/dead-ends.md` — pattern proposals already concluded as don't-retry |
 | Adding or verifying literature sources | `literature/README.md` — indexed sources organized by topic |
 | Checking coverage or DOIs in a registry | Run `python -m tools.coverage <registry.md>` or `python -m tools.check_dois <registry.md>` (or `make coverage` / `make check-dois`). See `tools/README.md` for flags, exit codes, and known limits (no HTTP proxy support, sequential HEAD scaling; escaped-pipe support added in v2.2.4). Prefer the tool to manually counting P0/P1/P2 percentages or eyeballing DOIs. |
