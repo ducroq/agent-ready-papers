@@ -94,6 +94,22 @@ Sources consulted during the development of this project, particularly for DR-00
 |----|-----------|------|-------|-------|------|
 | L48 | Elsevier | 2025 | Researcher of the Future (Confidence in Research) | elsevier.com (industry report) | [elsevier-researcher-future-2025](sources/elsevier-researcher-future-2025.md) |
 
+### Constructive & AI-Driven Journalism (Constructive Lenses paper)
+
+<!-- Seeded 2026-06-24 from the ovr.news [2026-05-27] intellectual-lineage entry. All ENTRIES
+     except L49 are TO READ — note files are reading-stubs (status + what-to-extract + claim map),
+     not summaries yet. Bibliographic details are UNVERIFIED until each is checked in Phase 2. -->
+
+| ID | Author(s) | Year | Title | Venue | File | Status |
+|----|-----------|------|-------|-------|------|--------|
+| L49 | Helberger | 2024 | FutureNewsCorp: AI Act & news media | UvA/IViR (verify) | [helberger-2024](sources/helberger-2024.md) | READ 2026-05-27 |
+| L50 | Vrijenhoek, Kaya, Metoui, Möller, Odijk, Helberger | 2021 | Recommenders with a Mission: Assessing Diversity in News Recommendations | CHIIR | [vrijenhoek-2021](sources/vrijenhoek-2021.md) | TO READ (highest payoff) |
+| L51 | Anderson, Bell & Shirky | 2012 | Post-Industrial Journalism: Adapting to the Present | Tow Center | [anderson-bell-shirky-2012](sources/anderson-bell-shirky-2012.md) | TO READ |
+| L52 | Simon | 2024 | Artificial Intelligence in the News | Tow Center | [simon-2024](sources/simon-2024.md) | TO READ |
+| L53 | Karadimitriou | 2026 | (verify title — constructive + networked + AI journalism synthesis) | Social Cohesion and Development 20(1) | [karadimitriou-2026](sources/karadimitriou-2026.md) | READ (trigger) |
+| L54 | Han | 2024 | The Crisis of Narration | Polity | [han-2024-narration](sources/han-2024-narration.md) | PARTIAL (owner thread) |
+| L55 | Han | 2022 | Infocracy / The Reign of Information | Polity | [han-2022-infocracy](sources/han-2022-infocracy.md) | TO READ (verify which work) |
+
 ## Key Insight
 
 EQUATOR has ~500 reporting guidelines for empirical health research. Essentially **zero** exist for theoretical, design science, perspective, or methodological papers. This gap is where this project can make its most distinctive contribution.
