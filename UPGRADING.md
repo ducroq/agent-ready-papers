@@ -11,6 +11,17 @@ The full release notes are in [`CHANGELOG.md`](CHANGELOG.md). This file is the q
 - **PATCH** version bumps are docs-only / clarifications, or backward-compatible bug fixes (e.g. a tooling fix that changes no public interface). Usually no action required; a bug fix may be worth adopting if you hit the bug.
 - Every release entry in `CHANGELOG.md` includes an "Adopter notes" / "Adopter action" subsection. This file aggregates them per version for quick lookup.
 
+## v2.3.1 (2026-06-24)
+
+**From v2.3.0 — what to review when you bump your pin to v2.3.1:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| [DR-017](decisions/DR-017_typed-verification-core-ownership.md) + CHANGELOG — provenance correction: v2.3.0 over-credited `agent-ready-assessment` as inventor of the backported refinements; assessment's own issues show most were imported *from* agent-ready-papers. Attribution narrative fixed; **no template content changed.** | None — documentation-only. The v2.3.0 capabilities (generalized Step Z, §4.6 Scope Drift, +5 failure-pattern rows, named tier-monotonicity) are unchanged. |
+| Root `CLAUDE.md` self-pin bumped v2.3.0 → v2.3.1 | None — metadata only. |
+
+**No breaking changes.** PATCH: provenance/attribution correction only.
+
 ## v2.3.0 (2026-06-24)
 
 **From v2.2.4 — what to review when you bump your pin to v2.3.0:**

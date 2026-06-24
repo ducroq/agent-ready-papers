@@ -37,6 +37,33 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
        ("No adopter action required.") rather than omitting the subsection.
 -->
 
+## v2.3.1 (2026-06-24)
+
+**Provenance correction to v2.3.0.** While doing v2.3.0's reciprocal cross-repo actions, reading `agent-ready-assessment`'s own issue records (`issues/005`, `006`, `010`, `012`) revealed that v2.3.0 **over-credited assessment** as the inventor of the backported refinements. Assessment's issues explicitly say these were *imported from agent-ready-papers*. No template content changes — this corrects the attribution narrative only. **PATCH.**
+
+### Corrected provenance
+
+The flow is overwhelmingly **papers → assessment** (assessment is the downstream consumer), not the "bidirectional drift" v2.3.0 described:
+
+| Capability | Actual origin | Evidence |
+|---|---|---|
+| Typed registry (CLAIM/ARGUMENT/PROPOSITION) | **papers** | assessment `issues/005`: "imported from agent-ready-papers" |
+| tier-monotonicity *principle* | **papers** (`writing-guide.md` v1.3.0) | assessment `issues/010`: "Porting the principle… agent-ready-papers v1.3.0 introduced [it]" |
+| Step Z *concept* | **papers** (PROVOCATION form) | assessment generalized it |
+| base failure-pattern table | **papers** | assessment `issues/006`: "six from the agent-ready-papers original" |
+| WebFetch fallback ladder | **papers** (v1.3.0) | assessment `issues/012` imports it |
+
+What **genuinely** flowed back assessment → papers (and is correctly attributed): **SCOPE DRIFT** (grading-origin, `issues/002`), the **five domain-specific failure-pattern rows** (`issues/006`), the **explicit name "tier-monotonicity" + cheat-sheet** (`issues/010`), and the **generalization of Step Z** to non-PROVOCATION reports. The v2.3.0 *content* (generalized Step Z, §4.6 Scope Drift, the 5 rows, the named tier-monotonicity in the summary) stays — only the attribution is fixed.
+
+### Changed
+
+- **[DR-017](decisions/DR-017_typed-verification-core-ownership.md)** — *Drift* section rewritten from "bidirectional" to "mostly one-directional (papers → assessment), with a small backflow," with the provenance table above; Whetten-table row for assessment changed from "Forked" to "Imported from papers (downstream consumer)"; Evidence Base gains a note that the review battery verified fact *existence* but not flow *direction* (the gap that let the overstatement through).
+- This correction **strengthens** DR-017's core custody thesis — assessment's own issues confirm papers is the upstream origin.
+
+### Adopter notes
+
+No action. Documentation-only correction; no template, DR semantics, or tool surface changed from v2.3.0.
+
 ## v2.3.0 (2026-06-24)
 
 **Cross-repo consolidation: agent-ready-papers becomes the custodian of the typed-verification layer, and three field-tested refinements are backported from `agent-ready-assessment`.** A cross-repo diff + a six-agent review battery established that the `agent-ready-*` family has *two* roots — `agent-ready-projects` for the generic V&V substrate and session scaffolding, and `agent-ready-papers` for the *operationalized* typed layer (CLAIM/ARGUMENT/PROPOSITION, Toulmin, Whetten, and the verified argumentation-theory sources). `agent-ready-assessment` had independently forked and *extended* that layer; the best of its extensions are now folded back, **adapted to the authoring context**. **MINOR:** additive concepts and one generalization of an existing check; no breaking template surface. See [DR-017](decisions/DR-017_typed-verification-core-ownership.md) (Accepted) and the reconciliation in [DR-014](decisions/DR-014_provocation-layered-as-opt-in-extension.md).
