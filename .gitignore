@@ -4,6 +4,11 @@ Thumbs.db
 memory/
 audits/
 
+# Papers are confidential-by-default; allowlist public framework demos explicitly.
+# A new papers/<name>/ is invisible to git until you add a matching `!papers/<name>` line.
+papers/*
+!papers/perspective
+
 # LaTeX build artifacts
 *.aux
 *.bbl
