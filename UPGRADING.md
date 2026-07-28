@@ -11,6 +11,19 @@ The full release notes are in [`CHANGELOG.md`](CHANGELOG.md). This file is the q
 - **PATCH** version bumps are docs-only / clarifications, or backward-compatible bug fixes (e.g. a tooling fix that changes no public interface). Usually no action required; a bug fix may be worth adopting if you hit the bug.
 - Every release entry in `CHANGELOG.md` includes an "Adopter notes" / "Adopter action" subsection. This file aggregates them per version for quick lookup.
 
+## v2.4.0 (2026-07-28)
+
+**From v2.3.1 — what to review when you bump your pin to v2.4.0:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| `templates/work-item.md` (new) — multi-session work savepoints | Optional — copy to your project if you want structured savepoints for work spanning multiple sessions. Save as `docs/work-items/[slug].md`. |
+| Root `CLAUDE.md` — epistemic-priority preamble on Hard Constraints, agent-write boundary | None for paper projects. Framework-level constraint changes; paper-project CLAUDE.md files are unaffected. |
+| `README.md` — "agents adhere to guidelines" framing | None — documentation-only. |
+| New literature L56 (Palmblad 2026 GROUNDING.md) + L50 matured | None — literature additions. |
+
+**No breaking changes.** MINOR: new opt-in template. Companion pin bumped v1.10.3 → v1.12.0 (internal).
+
 ## v2.3.1 (2026-06-24)
 
 **From v2.3.0 — what to review when you bump your pin to v2.3.1:**
