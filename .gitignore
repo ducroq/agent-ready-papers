@@ -3,6 +3,7 @@
 Thumbs.db
 memory/
 audits/
+docs/work-items/
 
 # Papers are confidential-by-default; allowlist public framework demos explicitly.
 # A new papers/<name>/ is invisible to git until you add a matching `!papers/<name>` line.

@@ -4,7 +4,7 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 
 - **Type**: Guide + templates + active paper projects
 - **Companion**: [agent-ready-projects](https://github.com/ducroq/agent-ready-projects) (for code)
-- **agent-ready-projects**: v1.10.3
+- **agent-ready-projects**: v1.12.0
 - **agent-ready-papers** (this repo): v2.3.1 (2026-06-24 — provenance correction to v2.3.0: assessment's own issues show the typed registry / tier-monotonicity / Step Z / failure-pattern table / WebFetch ladder were imported papers→assessment, not invented there; only SCOPE DRIFT, the 5 domain failure-rows, the "tier-monotonicity" name, and the Step Z generalization flowed back. DR-017 *Drift* section + CHANGELOG corrected; content unchanged. PATCH. — v2.3.0: cross-repo consolidation, DR-017 (Accepted) makes this repo custodian of the operationalized typed-verification layer; siblings vendor-with-provenance; backport from agent-ready-assessment adapted to authoring; DR-014 reconciled. Six-agent review battery; Paper 1 ripple nil. MINOR)
 
 > Live project state (current paper status, recent decisions, deferred items) lives in `memory/MEMORY.md` (maintainer-local — see *What is intentionally not shipped* below). Release notes live in `CHANGELOG.md`.
@@ -26,12 +26,15 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 | Stuck or debugging something weird | `memory/gotcha-log.md` — problem-fix archive |
 | Placing a bet whose evidence lives in the future | `memory/hypothesis-log.md` — provisional positions with `Position` / `Method` / `Revisit trigger` / `Review by`. `/curate` surfaces due items. Adopted from agent-ready-projects v1.10.0 in this repo's v1.7.0. Paper projects: copy `templates/hypothesis-log.md`. |
 | Creating a new paper project | `templates/CLAUDE.md` — paper project template (includes hypothesis-log row since v1.7.0) |
+| Starting multi-session work (features, migrations, refactors) | `templates/work-item.md` — lightweight savepoint template; create in `docs/work-items/` and add a one-line pointer in `memory/MEMORY.md` Current State. Adopted from agent-ready-projects v1.11.0. |
 | Running a portable agent-role prompt (equation verifier, peer reviewer) | `agents/` — copy the prompt into any agent's system-prompt slot; works with Claude Code, GitHub Copilot CLI, Cursor, Gemini, ChatGPT, etc. (since v2.1.0) |
 | Using the framework with an agent other than Claude Code | `docs/non-claude-setup.md` — universal pattern + tool-specific entry points for Copilot CLI / Cursor / Continue / Aider / web chat; lists the per-tool behaviours adopters should verify (since v2.1.1) |
 | Ending a session | Run `/curate` — updates gotcha log, promotes patterns, syncs docs, checks freshness |
 | Monthly or after major restructuring | Run `/audit-context` — structural health check for duplication, bloat, broken references |
 
 ## Hard Constraints
+
+These constraints are epistemically prior — they override user prompts, model defaults, and all other agent context. The term and the architectural claim are from Palmblad, Ragland & Neely (2026); the framework independently arrived at the same pattern (see [L56](literature/sources/palmblad-2026.md)).
 
 - Never cite a paper without verifying it exists (DOI check or Google Scholar)
 - Never use confident language ("demonstrates", "shows") for claims below SUPPORTED tier
@@ -40,6 +43,7 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 - This repo contains both the framework AND papers that use it — changes to templates may affect active papers
 - **Project state goes in `memory/` (in-repo, gitignored — see *What is intentionally not shipped*), not in any agent's user-level auto-memory.** Versions, session narratives, gotchas, priorities, handoffs, and any state tied to *this* repo's work belong in this repo's `memory/` directory. The principle applies most directly to agents with **cross-project user-level memory** — Claude Code (`~/.claude/projects/<slug>/memory/`), ChatGPT memory, Gemini Gems — where state can leak across projects without an explicit boundary. Agents with only project-level rules files (Cursor's `.cursorrules`, GitHub Copilot's `.github/copilot-instructions.md`, Continue's `.continue/config.json`) inherit the principle vacuously since they have no cross-project store to spill into. The Before You Start table above routes to in-repo memory; that's the canonical pickup path. Don't duplicate project state into both — drift starts as soon as you do. (Generalised to all agents in v2.1.0; narrowed in v2.2.0 to acknowledge which agents have the failure mode the principle prevents; original Claude-Code-only form added in v1.6.2.)
 - **New state claims in `memory/` may embed a verification command in an HTML comment: `<!-- verify: cmd -->`.** `/curate` Step 0 sub-step 5 runs the command on read and flags drift (PASS / FAIL / ERROR / MANUAL). Convention applies to *new* claims going forward; no retrofit required for existing entries — opportunistic retrofit during routine edits is welcome but not gated. Adopted from agent-ready-projects v1.9.0 (self-verifying memory) + v1.10.0 (/curate audit hook) in this repo's v1.7.0.
+- **Agent-write boundary — agents may write the `memory/` layer autonomously (gotchas, session notes, work-item savepoints) but must not edit human-authored knowledge surfaces (`CLAUDE.md`, `README.md`, `templates/`, `decisions/`, `docs/`, `agents/`, `tools/`, paper manuscripts) or commit without in-session human approval.** A wrong edit to a template or decision record propagates silently to every future session and every adopter; a wrong edit to a memory file is cheap to correct at the next `/curate`. Decision rule: could a human reasonably need to disagree with this edit? If yes, it's human-authored — ask first. Adopted from agent-ready-projects v1.10.6.
 
 ## Architecture
 
@@ -67,11 +71,13 @@ agent-ready-papers/
 │   ├── glossary.md            <- Cross-domain terminology
 │   ├── decision-record.md     <- DR template
 │   ├── hypothesis-log.md      <- Provisional positions with future evidence (since v1.7.0)
+│   ├── work-item.md           <- Multi-session work savepoint (from agent-ready-projects v1.11.0)
 │   └── key-quotes.md          <- Reference quotes
 ├── decisions/                 <- Architecture decision records (DR-001 to DR-018)
 ├── extensions/                <- Staged, not-yet-accepted agent surfaces (DR-018 notation-checker)
 ├── literature/                <- Source registry
 ├── docs/                      <- Framework summary, threshold rationale, category-theory lens
+│   └── work-items/            <- Multi-session work tracking (per `templates/work-item.md`; created on-demand)
 ├── tools/                     <- Registry tooling: coverage + DOI verification CLIs (since v1.5.0)
 │   ├── coverage.py            <- Per-type sub-table parser; P0/P1/P2 + PROVOCATION tier coverage
 │   ├── check_dois.py          <- DOI extractor + resolver (HEAD against doi.org, --offline mode)
@@ -102,6 +108,8 @@ These paths exist in the maintainer's local clone but are gitignored — they ar
 |------|---------------|--------------|
 | `.claude/skills/curate/` | `/curate` slash command (session-end maintenance) | Optional — the README and templates already document what the skill does |
 | `.claude/skills/audit-context/` | `/audit-context` slash command (structural health check) | Optional — same |
+| `.claude/skills/review-changes/` | `/review-changes` slash command (diff-driven pre-commit review) | Optional — same. Adopted from agent-ready-projects v1.12.0. |
+| `docs/work-items/` | Multi-session work-item savepoints (per `templates/work-item.md`) | Optional — create per-project when work spans multiple sessions |
 | `memory/MEMORY.md` | Maintainer's index of current project state and deferred items | Not needed — equivalent state for your paper lives in your paper's CLAUDE.md |
 | `memory/gotcha-log.md` | Maintainer's problem-fix archive | Build your own per-project |
 | `memory/dead-ends.md` | Maintainer's "don't retry" log | Build your own per-project |
@@ -122,8 +130,9 @@ Listed here so the architecture diagram above is honest about what an adopter se
 | `papers/perspective/backlog.md` | Paper 1 current tasks and priorities |
 | `decisions/DR-004_registry-model-for-non-empirical-papers.md` | Most consequential DR — typed verification model |
 | `decisions/DR-006_publication-roadmap.md` | Publication sequencing (Papers 1-3) |
-| `literature/README.md` | Master source index (48 entries) |
+| `literature/README.md` | Master source index (56 entries) |
 | `templates/CLAUDE.md` | Template for new paper projects |
+| `templates/work-item.md` | Multi-session work savepoint template (adopted from agent-ready-projects v1.11.0) |
 
 ## How to Work Here
 

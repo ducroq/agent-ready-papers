@@ -22,6 +22,8 @@ AI agents are remarkably useful for academic writing — literature synthesis, a
 
 The fix isn't avoiding AI assistance. It's building **verification infrastructure** — systematic processes designed to catch these failure modes before submission.
 
+There is a structural reason this works. Agents are poor at noticing when they're wrong, but they are good at following explicit rules — Palmblad, Ragland & Neely (2026) argue they may follow them more reliably, in many cases, than humans. The opportunity is to encode domain expertise into agent-facing constraints — invariants the agent checks automatically regardless of the user's prompt — rather than relying on the user to catch every failure.
+
 ## The Approach
 
 The fix borrows a vocabulary from systems engineering: if claims are the paper's components, then sources are tests, coverage is measurable, and quality gates can prevent defective work from shipping.
