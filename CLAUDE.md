@@ -5,7 +5,7 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 - **Type**: Guide + templates + active paper projects
 - **Companion**: [agent-ready-projects](https://github.com/ducroq/agent-ready-projects) (for code)
 - **agent-ready-projects**: v1.12.0
-- **agent-ready-papers** (this repo): v2.3.1 (2026-06-24 — provenance correction to v2.3.0: assessment's own issues show the typed registry / tier-monotonicity / Step Z / failure-pattern table / WebFetch ladder were imported papers→assessment, not invented there; only SCOPE DRIFT, the 5 domain failure-rows, the "tier-monotonicity" name, and the Step Z generalization flowed back. DR-017 *Drift* section + CHANGELOG corrected; content unchanged. PATCH. — v2.3.0: cross-repo consolidation, DR-017 (Accepted) makes this repo custodian of the operationalized typed-verification layer; siblings vendor-with-provenance; backport from agent-ready-assessment adapted to authoring; DR-014 reconciled. Six-agent review battery; Paper 1 ripple nil. MINOR)
+- **agent-ready-papers** (this repo): v2.4.0 (2026-07-28 — companion v1.12.0 adoption + work-item template + Palmblad 2026 GROUNDING.md L56 + epistemic-priority framing. New template = MINOR.)
 
 > Live project state (current paper status, recent decisions, deferred items) lives in `memory/MEMORY.md` (maintainer-local — see *What is intentionally not shipped* below). Release notes live in `CHANGELOG.md`.
 

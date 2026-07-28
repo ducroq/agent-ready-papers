@@ -37,6 +37,44 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
        ("No adopter action required.") rather than omitting the subsection.
 -->
 
+## v2.4.0 (2026-07-28)
+
+Companion adoption through v1.12.0 + new work-item template + Palmblad 2026 GROUNDING.md source. New template = MINOR bump.
+
+### Companion adoption (v1.10.3 to v1.12.0)
+
+Cumulative adoption of 5 companion releases (v1.10.4 through v1.12.0):
+
+| From | What | Landed as |
+|------|------|-----------|
+| v1.10.6 | Agent-write boundary principle | New Hard Constraint in `CLAUDE.md` |
+| v1.11.0 | Work-item template | `templates/work-item.md` |
+| v1.12.0 | Review-changes skill | `.claude/skills/review-changes/` (gitignored, maintainer-local) |
+
+### Templates
+- **`templates/work-item.md`** (new) — Lightweight savepoint for multi-session work. Five sections: What & Why, Current Status (the savepoint), Decisions, Open Questions, Outcome. Save as `docs/work-items/[slug].md` and add a one-line pointer in the memory index. Adopted from agent-ready-projects v1.11.0.
+
+### Literature
+- **L56** — Palmblad, Ragland & Neely (2026): "Agentic AI-assisted coding offers a unique opportunity to instill epistemic grounding during software development." New category: *Epistemic Grounding & Agent Constraints*.
+- **L50** — Vrijenhoek et al. (2021) matured from TO READ stub to full analysis with metric table and computability verdicts.
+
+### Docs
+- **`CLAUDE.md`** — Hard Constraints gain epistemic-priority preamble; agent-write boundary Hard Constraint (from companion v1.10.6); Before You Start row for `templates/work-item.md`; architecture diagram + Key Paths updated; literature count corrected.
+- **`README.md`** — "Agents adhere to guidelines" framing from Palmblad et al., hedged per framework tier discipline.
+- **`literature/README.md`** — L50 status corrected; L56 + new category added.
+
+### Adopter notes
+
+New adopters: `templates/work-item.md` is available for multi-session work. Save in `docs/work-items/` with a pointer in your memory index.
+
+Existing adopters pinned to v2.3.x: no action required. The new template is additive and optional. Paper-project CLAUDE.md files are unaffected by the Hard Constraints changes.
+
+### Versioning rationale
+
+MINOR — new template (`work-item.md`) is a reusable artifact adopters install. Companion adoption and literature additions alone would be PATCH.
+
+---
+
 ## v2.3.1 (2026-06-24)
 
 **Provenance correction to v2.3.0.** While doing v2.3.0's reciprocal cross-repo actions, reading `agent-ready-assessment`'s own issue records (`issues/005`, `006`, `010`, `012`) revealed that v2.3.0 **over-credited assessment** as the inventor of the backported refinements. Assessment's issues explicitly say these were *imported from agent-ready-papers*. No template content changes — this corrects the attribution narrative only. **PATCH.**
