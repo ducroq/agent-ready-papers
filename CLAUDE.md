@@ -13,7 +13,7 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 
 | When | Read |
 |------|------|
-| Starting any session (companion drift) | Compare the `agent-ready-projects: vX.Y.Z` line in this file's header against `C:/local_dev/agent-ready-projects/CHANGELOG.md` (local clone) or https://github.com/ducroq/agent-ready-projects/blob/master/CHANGELOG.md. If the project is behind the latest released version, briefly surface the drift to the user before starting work. Don't auto-update — adopting changes is the engineer's call. |
+| Starting any session (companion drift) | Compare the `agent-ready-projects: vX.Y.Z` line in this file's header against `~/repos/agent-ready-projects/CHANGELOG.md` (local clone) or https://github.com/ducroq/agent-ready-projects/blob/master/CHANGELOG.md. If the project is behind the latest released version, briefly surface the drift to the user before starting work. Don't auto-update — adopting changes is the engineer's call. |
 | Starting any session (self drift) | Compare the `agent-ready-papers: vX.Y.Z` line in this file's header against `CHANGELOG.md`. If a newer version has shipped, surface it before starting. |
 | Working on Paper 1 (Perspective) | `papers/perspective/CLAUDE.md` — paper identity, constraints, status, verification state |
 | Making scope or methodology decisions | `decisions/` — 18 decision records (DR-001 through DR-018; DR-014, DR-015, DR-016, DR-018 Proposed). DR-018 (notation-consistency checker) stages a draft agent in `extensions/`. |
