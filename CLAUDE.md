@@ -22,7 +22,7 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 | Checking coverage or DOIs in a registry | Run `python -m tools.coverage <registry.md>` or `python -m tools.check_dois <registry.md>` (or `make coverage` / `make check-dois`). See `tools/README.md` for flags, exit codes, and known limits (no HTTP proxy support, sequential HEAD scaling; escaped-pipe support added in v2.2.4). Prefer the tool to manually counting P0/P1/P2 percentages or eyeballing DOIs. |
 | Working with claims, gates, or confidence calibration | `docs/framework-summary.md` — unit types, gates, tier-to-language mapping at a glance (templates remain normative) |
 | Asking what a coverage or peer-review threshold means | `docs/THRESHOLDS.md` — rationale for the 100% P0 / 90% P1 / 70% P2 / ≥85% overall coverage and ≥3.5/5.0 simulated-peer-review thresholds (top-of-file SPECULATIVE label per the framework's own tier discipline) |
-| Asking what's on the backlog | No single `BACKLOG.md` by design — framework backlog is distributed by velocity: `memory/MEMORY.md` "Next session priorities" for volatile near-term items (maintainer-local); each `decisions/DR-*.md` *Open Questions* section for decision-specific long-burn items. Paper projects have their own `papers/<name>/backlog.md` for paper-scoped tasks. Forcing items at different velocities into one file creates drift; this row is the discoverability fix instead. |
+| Asking what's on the backlog | No single `BACKLOG.md` by design — framework backlog is distributed by velocity: `memory/priorities.md` for volatile near-term items (maintainer-local; a structured table, one row per item, unique ranks, self-verifying — extracted from `memory/MEMORY.md` in v2.5.0 after that entry reached 9,175 characters on one line and accumulated two items at the same rank); each `decisions/DR-*.md` *Open Questions* section for decision-specific long-burn items. Paper projects have their own `papers/<name>/backlog.md` for paper-scoped tasks. Forcing items at different velocities into one file creates drift; this row is the discoverability fix instead. |
 | Stuck or debugging something weird | `memory/gotcha-log.md` — problem-fix archive. New entries are **2-3 lines**: the lesson and the action, not the narrative of the session that found it. If an entry needs a page, that is the signal it belongs in a topic file or a DR. Adopted from agent-ready-projects v1.17.0. |
 | Placing a bet whose evidence lives in the future | `memory/hypothesis-log.md` — provisional positions with `Position` / `Method` / `Revisit trigger` / `Review by`. `/curate` surfaces due items. Adopted from agent-ready-projects v1.10.0 in this repo's v1.7.0. Paper projects: copy `templates/hypothesis-log.md`. |
 | Creating a new paper project | `templates/CLAUDE.md` — paper project template (includes hypothesis-log row since v1.7.0) |
@@ -103,7 +103,8 @@ agent-ready-papers/
 │   └── hypothesis-log.md      <- Public framework-level provisional positions (where load-bearing README prose depends on a falsifiable bet)
 ├── audits/                    <- Audits of external/published docs (gitignored — maintainer-local; may critique named authors)
 └── memory/                    <- Session memory (gitignored — maintainer-local)
-    ├── gotcha-log.md          <- Problem-fix archive
+    ├── gotcha-log.md          <- Problem-fix archive (entries 2-3 lines)
+    ├── priorities.md          <- Near-term bucket only; structured + self-verifying (extracted 2026-08-08)
     ├── hypothesis-log.md      <- Maintainer-local intra-session bets (since v1.7.0; complement to vv/hypothesis-log.md which is public)
     └── ...
 ```
@@ -119,6 +120,7 @@ These paths are *not* in the public repo. Most exist in the maintainer's local c
 | *(not in this repo)* `~/.claude/skills/curate/`, `~/.claude/skills/audit-context/` | `/curate` and `/audit-context` are installed **user-globally**, so they are absent from this repo entirely — not gitignored, just elsewhere. A local copy would be inert (see the skill-scope Hard Constraint) | Optional — install them globally from `agent-ready-projects`, which is their upstream. Do not copy them into your paper repo. |
 | `docs/work-items/` | Multi-session work-item savepoints (per `templates/work-item.md`) | Optional — create per-project when work spans multiple sessions |
 | `memory/MEMORY.md` | Maintainer's index of current project state and deferred items | Not needed — equivalent state for your paper lives in your paper's CLAUDE.md |
+| `memory/priorities.md` | Maintainer's near-term priorities — structured table with a `<!-- verify: -->` asserting it parses and is non-empty | Not needed. If you build one, keep it to a **single velocity**: near-term only. The value came from splitting one bucket out of a prose blob, not from merging buckets into a tracker |
 | `memory/gotcha-log.md` | Maintainer's problem-fix archive | Build your own per-project |
 | `memory/dead-ends.md` | Maintainer's "don't retry" log | Build your own per-project |
 | `memory/hypothesis-log.md` | Maintainer's intra-session framework bets (working positions) | Adopters maintain their own per `templates/hypothesis-log.md`; the *public* framework-level positions are at `vv/hypothesis-log.md`, which IS shipped |
