@@ -4,7 +4,7 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 
 - **Type**: Guide + templates + active paper projects
 - **Companion**: [agent-ready-projects](https://github.com/ducroq/agent-ready-projects) (for code)
-- **agent-ready-projects**: v1.17.0
+- **agent-ready-projects**: v1.18.0 <!-- v1.18.0 triaged as ALREADY IN FORCE: its only change is the `update-drift` skill, which installs user-global and is current on this machine. No papers-side artifact changed, so no version bump here. -->
 - **agent-ready-papers** (this repo): v2.5.0 (2026-08-08 — companion v1.13.0–v1.17.0 adoption: skill-scope Hard Constraint, `/release` skill, `/review-changes` magnitude gate, verification hooks, gotcha-log length rule. New skill = MINOR.)
 
 > Live project state (current paper status, recent decisions, deferred items) lives in `memory/MEMORY.md` (maintainer-local — see *What is intentionally not shipped* below). Release notes live in `CHANGELOG.md`.
