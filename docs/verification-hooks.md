@@ -64,7 +64,7 @@ This was derived here from `tools/coverage.py`, where four branches drop an item
 Two claims come out of this and they have very different strength, so they are stated separately:
 
 - **A seeded-defect harness cannot find a discovery failure.** This is true *by construction*, not by observation: a seeded defect is handed to the checker, so the harness only ever exercises the handed path. A suite can pass every seeded case and still never look at whole directories. Rely on this one.
-- **"Never evaluated" outnumbers "evaluated but weakened."** Observed 10-to-0 across two suites in one estate on one afternoon, both self-reported, with the two counts collected by different people using different instruments. That is suggestive and nothing more — it has not been tested on a fixture-pinned suite, which is precisely where the first bullet predicts it should *not* hold. **Do not plan around this number.**
+- **"Never evaluated" outnumbers "evaluated but weakened."** Observed 10-to-0 on a single tree-walking lint suite, one estate, one afternoon, self-reported. The second suite examined — this repo's, fixture-pinned — returned **0 on both sides**, so it is a qualifier on the ratio, not a second data point for it. That is suggestive and nothing more — it has not been tested on a fixture-pinned suite, which is precisely where the first bullet predicts it should *not* hold. **Do not plan around this number.**
 
 The distinction matters because the two invite different actions: the first justifies adding a discovery-enumeration step to any check you own; the second would justify prioritising it over other review effort, and it is nowhere near strong enough to carry that.
 
