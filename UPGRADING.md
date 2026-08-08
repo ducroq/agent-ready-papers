@@ -11,6 +11,23 @@ The full release notes are in [`CHANGELOG.md`](CHANGELOG.md). This file is the q
 - **PATCH** version bumps are docs-only / clarifications, or backward-compatible bug fixes (e.g. a tooling fix that changes no public interface). Usually no action required; a bug fix may be worth adopting if you hit the bug.
 - Every release entry in `CHANGELOG.md` includes an "Adopter notes" / "Adopter action" subsection. This file aggregates them per version for quick lookup.
 
+## v2.5.0 (2026-08-08)
+
+**From v2.4.0 — what to review when you bump your pin to v2.5.0:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| `templates/CLAUDE.md` — new `agent-ready-papers: vX.Y.Z` pin line in the header, plus a framework-drift row as the first Before You Start entry | **Recommended.** Add `- **agent-ready-papers:** v2.5.0` to your paper's `CLAUDE.md` header if it has no pin line. The framework has always told your agent to compare that line against the CHANGELOG at session start — until now the template it scaffolds from didn't contain one, so the check read nothing and passed. |
+| **Skill scope** — a user-global skill silently shadows a project-local one of the same name (new Hard Constraint in the framework's root `CLAUDE.md`) | **Check once.** If you installed `curate` or `audit-context` into your paper repo's `.claude/skills/` *and* also have `~/.claude/skills/<same>/`, the local copy is inert and has never loaded. Delete it, don't reconcile it. If you customized the local one, that customization was never in effect — move the content into your project's `CLAUDE.md`. |
+| `docs/verification-hooks.md` (new) — which of this framework's checks are worth firing automatically after an edit, and three ways a hook fails | Optional reading. **If you wire a `coverage --strict` hook, add the matching Hard Constraint the same day**: claims are never downgraded, deleted, or re-tiered to make a coverage check pass. The cheapest way to turn that check green is to reclassify a P0 claim as P2 — coverage passes and verification is gutted. |
+| `/review-changes` magnitude gate + rebuilt risk tiers (maintainer-local skill, not shipped) | None — the skill is gitignored and was never shipped. **If you maintain your own copy, do not copy this repo's tier table**; it names this repo's paths. Copy the *semantics*: `**` crosses directory levels, a leading `/` anchors, most specific wins, unmatched paths default to MEDIUM and get named under "Unclassified". |
+| `/release` skill (new, maintainer-local, not shipped) | None. Relevant only if you cut versioned releases of your own framework fork. |
+| `memory/gotcha-log.md` — new entries capped at 2-3 lines | Optional. Applies to *new* entries; retrofitting an existing log is a separate decision, not something to do while writing an unrelated entry. |
+| De-identification: a private repository name removed from `decisions/DR-011`, `tools/README.md`, `UPGRADING.md`; four dead `agent-ready-assessment` links de-linked | None — descriptors only. No evidence, reasoning, or cross-reference substance changed. |
+| Root `CLAUDE.md` — new skill-scope Hard Constraint, corrected not-shipped table, new Before You Start rows | None for paper projects. Framework-level; paper-project `CLAUDE.md` files are unaffected except for the pin line in row 1 above. |
+
+**No breaking changes.** MINOR: new doc + new maintainer skill + new documented pin convention. Companion pin bumped v1.12.0 → v1.17.0 (nine releases; see the adoption table in `CHANGELOG.md`).
+
 ## v2.4.0 (2026-07-28)
 
 **From v2.3.1 — what to review when you bump your pin to v2.4.0:**
@@ -70,7 +87,7 @@ The full release notes are in [`CHANGELOG.md`](CHANGELOG.md). This file is the q
 
 | Change | Adopter action |
 |--------|-----------------|
-| `decisions/DR-011_multi-model-review-pattern.md` *Open Questions* — new *External-ground-truth ρ calibration (ICLR/OpenReview)* entry naming Stanford Agentic Reviewer's published 0.42 ≈ 0.41 ICLR-reviewer correlation as the ceiling reference; sketches a 30-paper calibration run bounded at ~€44 + maintainer-day; cross-references sibling project [vmodel.eu#135](https://github.com/ducroq/vmodel.eu/issues/135) | Reference only — if your paper project runs its own DR-011 batteries on a content type with available human ground truth (ICLR-like ratings, peer-review scores, calibration sets), the entry sketches a methodology you can mirror. The aggregate-ρ evidence type is complementary to DR-011's per-pass disjoint-coverage mechanism evidence; neither dominates the other. |
+| `decisions/DR-011_multi-model-review-pattern.md` *Open Questions* — new *External-ground-truth ρ calibration (ICLR/OpenReview)* entry naming Stanford Agentic Reviewer's published 0.42 ≈ 0.41 ICLR-reviewer correlation as the ceiling reference; sketches a 30-paper calibration run bounded at ~€44 + maintainer-day; cross-references a parallel thread in a sibling project (private) | Reference only — if your paper project runs its own DR-011 batteries on a content type with available human ground truth (ICLR-like ratings, peer-review scores, calibration sets), the entry sketches a methodology you can mirror. The aggregate-ρ evidence type is complementary to DR-011's per-pass disjoint-coverage mechanism evidence; neither dominates the other. |
 | Root `CLAUDE.md` + `README.md` self-pin bumped v2.2.2 → v2.2.3 | None — metadata only. |
 
 **No breaking changes.** PATCH release: single DR Open Questions extension + cross-reference add.

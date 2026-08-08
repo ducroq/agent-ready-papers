@@ -7,6 +7,7 @@
 - **Target:** [Journal name — special issue / track if applicable]
 - **Deadline:** [Submission date]
 - **Status:** [Phase 0-5: Framing / Requirements / Literature Audit / Writing / Validation / Submission]
+- **agent-ready-papers:** v2.5.0 <!-- The framework version this project is pinned to. Keep this line: the drift row in the table below has nothing to read without it. Bump it deliberately, after reviewing UPGRADING.md — not automatically. -->
 
 ## Core Concept
 
@@ -33,6 +34,7 @@
 
 | When | Read |
 |------|------|
+| Starting any session (framework drift) | Compare the `- **agent-ready-papers:** vX.Y.Z` line in this file's header against the framework's [`CHANGELOG.md`](https://github.com/ducroq/agent-ready-papers/blob/master/CHANGELOG.md). If this project is behind, surface the drift before starting work and point at [`UPGRADING.md`](https://github.com/ducroq/agent-ready-papers/blob/master/UPGRADING.md) for what each version asks of you. Don't auto-update — bumping the pin is the author's call. |
 | Writing or editing prose | `writing-guide.md` — claim-to-section mapping with language calibration |
 | Adding or verifying citations | `vv/claims/claim_registry.md` — all claims with priority and status |
 | Checking coverage or DOIs for this paper | If your project uses `agent-ready-papers/tools/`: from the framework repo root, run `python -m tools.coverage <path-to-registry>` and `python -m tools.check_dois <path-to-registry>` (or the equivalent `make` targets). Prefer the tool to manually counting P0/P1/P2 percentages or eyeballing DOIs in `references.bib`. See `tools/README.md` in the framework repo for flags and known limits. |

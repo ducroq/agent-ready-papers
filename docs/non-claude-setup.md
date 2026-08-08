@@ -31,7 +31,7 @@ The notes below are entry points, not full setup guides. Each tool's CLI flags, 
 
 ### GitHub Copilot CLI
 
-- **Install / auth:** see <https://docs.github.com/copilot/how-tos/copilot-cli> for the current install command and licensing requirements. The [`agent-ready-assessment`](https://github.com/ducroq/agent-ready-assessment) repo's `docs/copilot-cli-setup.md` has a worked HAN-institutional setup if you need a template; adapt the institutional pieces (GitHub Education licensing, org policy workarounds) to your own context.
+- **Install / auth:** see <https://docs.github.com/copilot/how-tos/copilot-cli> for the current install command and licensing requirements. The `agent-ready-assessment` repo (not publicly resolvable) has a `docs/copilot-cli-setup.md` with a worked institutional setup if you need a template; adapt the institutional pieces (GitHub Education licensing, org policy workarounds) to your own context.
 - **`CLAUDE.md`:** Copilot CLI does not auto-read `CLAUDE.md` at session start. Point it at the file as the first instruction (e.g. `copilot -p "Read CLAUDE.md, then …"`) or maintain a `.github/copilot-instructions.md` that mirrors the Hard Constraints — Copilot reads that file automatically.
 - **`agents/` role prompts:** invoke as `copilot -p "Read 'agents/review-prompt.md' as your system prompt. Then review this manuscript: …"`, or paste the prompt contents directly in interactive mode.
 - **Limitations:** no native `.docx` / `.pdf` reading; convert manuscripts to markdown first. No session-persistent memory across runs — the in-repo `memory/` discipline carries the state.
@@ -74,5 +74,5 @@ The following are tool-specific behaviours the framework cannot assume. Check ea
 - [README](../README.md#agent-role-prompts) — Agent-Role Prompts section: the index of what's in `agents/`
 - [`agents/README.md`](../agents/README.md) — the line between agent-role prompts and fill-in templates, vendor-neutrality convention
 - Root [`CLAUDE.md`](../CLAUDE.md) Hard Constraint about in-repo `memory/` — the generalised principle
-- [`agent-ready-assessment`](https://github.com/ducroq/agent-ready-assessment) — convention source for the `agents/` directory pattern; the `docs/copilot-cli-setup.md` there has a worked HAN-institutional Copilot CLI example
+- `agent-ready-assessment` (not publicly resolvable) — convention source for the `agents/` directory pattern; its `docs/copilot-cli-setup.md` has a worked institutional Copilot CLI example
 - [`agent-ready-projects`](https://github.com/ducroq/agent-ready-projects) — companion guide for AI-assisted coding; layered documentation model applies to non-Claude agents the same way

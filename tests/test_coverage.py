@@ -47,6 +47,11 @@ def test_paper1_registry_coverage_shape(paper1_registry):
     assert isinstance(report, CoverageReport)
     assert report.registry_path == paper1_registry
 
+    # Non-emptiness first: every all()/any() below is vacuously true over an
+    # empty report, so a parser that silently matched nothing would satisfy
+    # them all. Zero rows is never a legitimate state for this fixture.
+    assert report.rows, "parsed zero rows — the parser matched nothing"
+
     # Every row in Paper 1 is on the priority axis (no PROVOCATION entries).
     assert all(row.axis == PRIORITY_AXIS for row in report.rows)
 

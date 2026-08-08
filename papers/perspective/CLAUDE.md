@@ -7,6 +7,13 @@ This paper argues that the scholarly community lacks verification infrastructure
 - **Target:** Learned Publishing (primary), Research Integrity and Peer Review (backup)
 - **Deadline:** TBD
 - **Status:** Phase 3 — Writing (first draft complete)
+- **agent-ready-papers:** v2.5.0 <!-- The framework version this project is pinned to. Compare against the framework CHANGELOG at session start and surface drift; bump deliberately after reading UPGRADING.md. -->
+
+<!-- This paper lives inside the framework repo, so the pin above tracks the
+     framework's own version by construction. It is stated anyway: this is the
+     repo's only shipped worked example, and an exemplar that omits the line
+     teaches adopters to omit it too. -->
+
 
 ## Core Concept
 

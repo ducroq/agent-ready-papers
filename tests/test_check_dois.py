@@ -56,6 +56,12 @@ def test_paper1_registry_doi_extraction(paper1_registry):
     extracted = {r.doi for r in report.results}
     assert extracted == EXPECTED_DOIS
 
+    # Non-emptiness before the all()/any() assertions, which are vacuously
+    # true over an empty result set. The set equality above already implies
+    # it for this fixture; stated explicitly so the guard survives anyone
+    # splitting or reordering this test.
+    assert report.results, "extracted zero DOIs — the extractor matched nothing"
+
     # Offline mode: parseable=True, resolved=False, by design.
     assert all(r.parseable for r in report.results)
     assert not any(r.resolved for r in report.results)

@@ -65,7 +65,7 @@ Documented here so adopters hit informed surfaces rather than silent miscounts. 
 
 - **Stdlib only.** No `requests`, no third-party YAML / Markdown libs. Keeps the toolchain trivial to install and free to vendor.
 - **Deterministic.** Same registry input → byte-identical report. Result types use `frozen=True` dataclasses; ordering is stable.
-- **No LLM step.** Registry format is author-controlled markdown; a regex parser suffices. (Pattern borrowed from `vmodel.eu` ADR-016 floor-check discipline.)
+- **No LLM step.** Registry format is author-controlled markdown; a regex parser suffices. (Pattern borrowed from the ADR-016 floor-check discipline in a sibling project, private.)
 - **Importable and runnable.** Both modules expose a `check_*` function in addition to the CLI, so tests can call them directly.
 
 ## File-naming note

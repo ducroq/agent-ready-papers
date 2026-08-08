@@ -45,4 +45,4 @@ Vendor names appear only where they describe *empirical scope* of testing or the
 
 ## Convention origin
 
-Pattern mirrored from [`agent-ready-assessment`](https://github.com/ducroq/agent-ready-assessment)'s `agents/` directory. Introduced in agent-ready-papers v2.1.0 — see [CHANGELOG.md](../CHANGELOG.md#v210-2026-06-11) for the framing rationale. Principle clarified in v2.2.0 after DR-011 Pass 2 review surfaced the edge cases above — see [CHANGELOG.md](../CHANGELOG.md#v220-2026-06-11).
+Pattern mirrored from `agent-ready-assessment`'s `agents/` directory (not publicly resolvable). Introduced in agent-ready-papers v2.1.0 — see [CHANGELOG.md](../CHANGELOG.md#v210-2026-06-11) for the framing rationale. Principle clarified in v2.2.0 after DR-011 Pass 2 review surfaced the edge cases above — see [CHANGELOG.md](../CHANGELOG.md#v220-2026-06-11).
