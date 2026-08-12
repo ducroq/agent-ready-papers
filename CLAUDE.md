@@ -102,7 +102,7 @@ agent-ready-papers/
 ├── vv/                        <- Framework self-application (since v2.2.0; public)
 │   ├── cost-log.md            <- Operation cost log — framework operations on the framework
 │   └── hypothesis-log.md      <- Public framework-level provisional positions (where load-bearing README prose depends on a falsifiable bet)
-├── audits/                    <- Audits of external/published docs (gitignored — maintainer-local; may critique named authors)
+├── audits/                    <- RESERVED, absent today — external-doc audits if recreated (gitignored; may critique named authors)
 └── memory/                    <- Session memory (gitignored — maintainer-local)
     ├── gotcha-log.md          <- Problem-fix archive (act above ~3,000 chars)
     ├── priorities.md          <- Near-term bucket only; structured + self-verifying (extracted 2026-08-08)
@@ -112,7 +112,7 @@ agent-ready-papers/
 
 ## What is intentionally not shipped
 
-These paths are *not* in the public repo. Most exist in the maintainer's local clone but are gitignored; one row is here because the artifact lives **outside this repo entirely** (user-global skills), which is a different reason for the same absence and the one most likely to mislead an adopter reading the architecture diagram:
+These paths are *not* in the public repo, for three different reasons — the distinction matters, because a row's reason tells you whether anything is there at all. **Most** exist in the maintainer's local clone and are gitignored. **One** lives outside this repo entirely (user-global skills), which is the row most likely to mislead an adopter reading the architecture diagram. **Two** — `audits/` and `docs/work-items/` — are conventions with a reserved path and no current contents: the policy is live, the directory is not. Each row says which case it is.
 
 | Path | What it holds | For adopters |
 |------|---------------|--------------|
@@ -125,7 +125,7 @@ These paths are *not* in the public repo. Most exist in the maintainer's local c
 | `memory/gotcha-log.md` | Maintainer's problem-fix archive | Build your own per-project |
 | `memory/dead-ends.md` | Maintainer's "don't retry" log | Build your own per-project |
 | `memory/hypothesis-log.md` | Maintainer's intra-session framework bets (working positions) | Adopters maintain their own per `templates/hypothesis-log.md`; the *public* framework-level positions are at `vv/hypothesis-log.md`, which IS shipped |
-| `audits/` | Maintainer-local audits applying the framework to *external / published* documents (dogfooding on third-party material). May critique named authors, so kept private by default | Not needed — run your own audits locally; un-ignore per-folder only with the author's awareness if you intend to publish |
+| `audits/` | **Reserved path, no current contents** — the directory does not exist on the maintainer's clone today. The convention: audits applying the framework to *external / published* documents (dogfooding on third-party material). May critique named authors, so gitignored and private by default if recreated. The v2.0.0 scrub purged the earlier contents from git history; what remained on disk has since gone too | Not needed — run your own audits locally; un-ignore per-folder only with the author's awareness if you intend to publish |
 
 The public framework — templates, DRs, README, CHANGELOG — is fully consumable without any of the above. Adopters maintain their own session state per the patterns in `templates/CLAUDE.md`, not by depending on the maintainer's `memory/`.
 
