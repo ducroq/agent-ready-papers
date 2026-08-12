@@ -107,7 +107,7 @@ The same shape applies to `tests/` — a test rewritten to match new behaviour i
 
 ## What to do with what it catches
 
-A hook failure the agent fixes in ten seconds is a typo, not knowledge, and should leave no trace. A hook failure that **surprised you**, or that you have now seen twice, is a `memory/gotcha-log.md` entry — 2-3 lines, the lesson and the action. The hook produces the raw signal; `/curate` decides what is worth keeping.
+A hook failure the agent fixes in ten seconds is a typo, not knowledge, and should leave no trace. A hook failure that **surprised you**, or that you have now seen twice, is a `memory/gotcha-log.md` entry — the lesson and the action, not the narrative of the session that found it. The hook produces the raw signal; `/curate` decides what is worth keeping.
 
 ## Tool support
 

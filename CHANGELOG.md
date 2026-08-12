@@ -7,8 +7,16 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
 
      1. Tag the release commit:
 
-         git tag vX.Y.Z <commit>
-         git push --tags
+         git tag -a vX.Y.Z <commit> -m "vX.Y.Z"
+         git push origin vX.Y.Z
+
+        `-a` because a lightweight tag carries no tagger, date or message, and
+        `git describe` and release tooling treat the two differently. Push the
+        SINGLE ref, never `git push --tags`: that publishes every local tag,
+        including wip-* and private scratch tags, permanently. (This block said
+        `git tag` + `git push --tags` through v2.5.0, contradicting the
+        /release skill's Step 6 — which is the copy that actually gets
+        followed. Corrected during the v1.19.0-v1.25.0 companion adoption.)
 
         Tags let adopters `git checkout vX.Y.Z` to inspect a pinned version and
         `git diff vX.Y.Z..vX.Y+1.0 -- templates/` to preview an upgrade.

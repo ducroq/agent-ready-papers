@@ -122,7 +122,7 @@ The repos stay separate. Do **not** hoist the operationalized typed layer into p
 
 A feasibility review confirmed **zero `.gitmodules` anywhere in the family**; the established pattern is copy-with-version-header (research's `heritage:` block already pins `agent-ready-papers v1.7.0` and imports primitives on demand). Therefore:
 
-- **Default: vendor with an `imported-from: agent-ready-papers vX.Y.Z` note**, drift surfaced at session start via the existing companion-drift Before-You-Start row.
+- **Default: vendor with an `imported-from: agent-ready-papers vX.Y.Z` note**, drift surfaced at session start via the existing version-drift Before-You-Start row.
 - **Rejected: git submodule** — it would be the only submodule in four repos, would pin a public repo into an institutional one (breaking assessment's confidentiality posture), and would break the cross-tool portability the framework advertises (`docs/non-claude-setup.md`: Cursor/Copilot/web-chat adopters can't resolve submodules).
 
 ### Backport — full, but adapted to the authoring context

@@ -33,6 +33,7 @@ Lifecycle: **open** → dormant → revisit (with evidence) → resolved (close 
 **How to use this file:**
 
 - Add an entry when you take a provisional position you want to revisit later — especially for predictions about verification outcomes, review findings, or model-behavior bets.
+- **Write the entry at the moment you make the claim, not at the end of the session.** A hypothesis reconstructed hours later is reconstructing a refutation criterion that was live at the time — which is post-hoc rationalization wearing the log's format, and exactly what the Method field exists to prevent. The cue to watch for, however your review is run: **a claim that needs a measurement and cannot get one yet.** That is a hypothesis asking to be written. If you run a pre-commit review with an adversarial pass, have it report such a claim as a finding in its own right — and expect it to stop there rather than registering the entry, since a reviewer reading a diff is not placed to supply a Method or a Revisit trigger. You are. (agent-ready-projects v1.25.0)
 - Each entry has a `Review by:` date and a `Revisit trigger:` so the agent can surface due items at session start and in `/curate`.
 - The **Method** field pins the falsification criterion *before* the data lands — that's the whole point. Don't loosen Method when the answer arrives; if you want to redefine the bet, open a new entry.
 - When an entry resolves, move it to `## Resolved` with a one-line outcome. If the resolution justifies a decision record, promote to `decisions/DR-XXX.md` and link it.

@@ -44,8 +44,44 @@
 | Reviewing before submission | `review-prompt.md` (paper-local copy) or the framework's `agents/review-prompt.md` — peer-review simulator runnable in any agent; pair with the three-pass pattern (DR-011) |
 | Verifying equations or derived numerical values | Framework's `agents/equation-checker.md` — mechanical reproduction (substitute → compute → flag), not plausibility review; works in any agent (since agent-ready-papers v2.1.0) |
 | Stuck or unsure about a claim | `anti-hallucination.md` — citation verification checklist |
-| Placing a bet whose evidence lives in the future | `hypothesis-log.md` (copy from `agent-ready-papers/templates/hypothesis-log.md`) — provisional positions with `Position` / `Method` / `Revisit trigger` / `Review by`. `/curate` surfaces due items. |
+| Placing a bet whose evidence lives in the future | `hypothesis-log.md` (copy from `agent-ready-papers/templates/hypothesis-log.md`) — provisional positions with `Position` / `Method` / `Revisit trigger` / `Review by`. `/curate` surfaces due items. Write the entry when you make the claim, not at the end of the session. |
+| Starting work that will span several sessions | `templates/work-item.md` in the framework repo — a savepoint file in `docs/work-items/`, plus a one-line pointer from wherever this project keeps its in-progress list: the memory index's Current State section if you have one, otherwise the **Active work** section below. |
 | Ending a session | `backlog.md` — update progress; `../../memory/gotcha-log.md` — review, promote patterns, retire stale entries |
+
+## Active work
+
+<!-- One line per work item that is IN PROGRESS. This is the same list an
+     in-repo memory index's "Current State" section carries.
+
+     THE CONDITION IS WHETHER YOU KEEP A MEMORY INDEX, NOT WHICH AGENT YOU USE.
+     If you keep one, DELETE this section: keeping both is how the two copies
+     start disagreeing, and an audit that finds both reports it as a finding.
+     If you do not, this section is where the pointer lives — because without
+     it, an adopter who followed every template has work-item files and
+     nowhere a pointer could have gone.
+
+     Do not read that as "this file is always loaded". It is not, for every
+     agent: `docs/non-claude-setup.md` records that Copilot CLI does not
+     auto-read `CLAUDE.md` at session start, and Cursor and Continue read
+     their own rules files. Whatever your agent DOES read first has to reach
+     this file, or this section is as unreachable as the index would be.
+
+     Work items themselves are agent-independent — `docs/work-items/` is an
+     ordinary directory and `templates/work-item.md` is written for any agent.
+     Only the location of the POINTER changes.
+
+     Bounded on purpose. A completed item loses its pointer — its Outcome
+     section in the work-item file is the durable residue, and that file is
+     reached from the pointer while the work is live. Only in-progress items
+     belong here, so this section stays two or three lines and does not become
+     the session narrative that blows this file's size budget.
+
+     Format — keep the example inside this comment, not below it, or every
+     fresh adoption ships a live pointer to a file that does not exist and the
+     reference check reports it, correctly, as broken:
+       - [Short description] → docs/work-items/slug.md [in progress]
+
+     (agent-ready-projects v1.22.0) -->
 
 ## Hard Constraints
 
@@ -72,6 +108,7 @@
 | `backlog.md` | Current tasks |
 | `DR-*.md` | Decision records |
 | `hypothesis-log.md` | Provisional positions awaiting future evidence (since agent-ready-papers v1.7.0) |
+| `docs/work-items/` | Savepoints for work spanning several sessions (per the framework's `templates/work-item.md`). Created on demand — absent until the first multi-session task. The pointer to an in-progress item goes in your memory index's Current State section, or in the **Active work** section of this file if you keep no index. |
 
 ## Directory Structure
 
@@ -86,6 +123,8 @@
 ├── anti-hallucination.md        <- Citation verification
 ├── hypothesis-log.md            <- Provisional positions awaiting future evidence
 ├── DR-*.md                      <- Decision records
+├── docs/
+│   └── work-items/              <- Multi-session savepoints (created on demand)
 ├── vv/                          <- Verification & Validation
 │   ├── PAPER_VV_FRAMEWORK.md    <- V&V methodology
 │   ├── claims/
