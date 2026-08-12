@@ -11,6 +11,23 @@ The full release notes are in [`CHANGELOG.md`](CHANGELOG.md). This file is the q
 - **PATCH** version bumps are docs-only / clarifications, or backward-compatible bug fixes (e.g. a tooling fix that changes no public interface). Usually no action required; a bug fix may be worth adopting if you hit the bug.
 - Every release entry in `CHANGELOG.md` includes an "Adopter notes" / "Adopter action" subsection. This file aggregates them per version for quick lookup.
 
+## v2.6.0 (2026-08-12)
+
+**From v2.5.0 — what to review when you bump your pin to v2.6.0:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| **`memory/gotcha-log.md` — the 2-3 line cap shipped in v2.5.0 is withdrawn.** It was unenforceable: a markdown source line has no length limit, so entries passed by lines while running 700–1,200 characters. Restated at ~200 characters it would flag 88–92% of entries across three logs and 277 entries — a bulk false-positive generator, not a rule | **Stop applying it, and if you were already ignoring it, you were right to.** This supersedes the v2.5.0 row below. What replaces it: act above **~3,000 characters**, where an entry has become a page and belongs in a topic file or a DR. Note the threshold is inherited from the companion's 277-entry measurement — in this framework's own log, median is ~1,050 and nothing has reached 3,000. Measure your own log before assuming it bites. |
+| `templates/CLAUDE.md` — new **`## Active work`** section, plus a work-item row in Before You Start, a Key Files row, and a Directory Structure entry | **Decide once, then act.** If you keep an in-repo memory index, **delete the section** — two in-progress lists disagree, and an audit that finds both reports it. If you do not, this is where a `docs/work-items/` pointer goes; without it you can have work-item files and nowhere the pointer could live. Do not read the section as proof your `CLAUDE.md` is always loaded: Copilot CLI does not auto-read it at session start, and Cursor and Continue read their own rules files. |
+| `templates/hypothesis-log.md` — write the entry **at the moment you make the claim**, not at session end | **Recommended, no file change needed.** A hypothesis reconstructed hours later reconstructs a refutation criterion that was live at the time, which is post-hoc rationalization in the log's format — the failure the `Method` field exists to prevent. |
+| Root `CLAUDE.md` — new session-start row pointing at the memory index; the two drift rows merged into one; `/update-drift` given a route | **Worth copying the pattern.** If your project file has more than one row beginning with the same trigger phrase and disambiguated by a parenthetical category, they collide as triggers — merge them or rename to a situation. If your memory index has no row pointing at it, nothing loads it and nothing tells you. |
+| `/review-changes` — new Step 1.5 structural pre-check, and a merged measurable-claim rule in the adversarial lens (maintainer-local skill, not shipped) | None — the skill is gitignored and was never shipped. **If you maintain your own copy, the two worth taking are portable.** Step 1.5: a `\|` inside a markdown table cell pushes cells past the end of the row and GFM drops the excess silently, which no content-reading lens catches. The lens rule: a claim that needs a measurement gets one, gets hedged, or is not ready — covering negatives and absolutes-in-descriptions. Both are stated with their own limits, including three false-positive shapes and a CRLF blind spot. |
+| `/release` — hardened tag selector, refresh-after-tag-is-live step (maintainer-local, not shipped) | None. Relevant only if you cut versioned releases of your own fork. If you do: `git tag --sort=-v:refname \| head -1` is silently won by a scratch tag, a prerelease, or a tag on an unmerged branch. |
+| `docs/verification-hooks.md`, `decisions/DR-017` — one withdrawn-rule reference and one row-name reference corrected | None. Wording only; no hook semantics and no decision semantics changed. |
+| `vv/cost-log.md` — an unescaped `\|H(z)\|` in a table cell was truncating a row when rendered | None. Framework-internal. Mentioned because the defect class is worth knowing: it is invisible in a diff and wrong only when rendered. |
+
+**No breaking changes.** MINOR: a new documented template section (`## Active work`). Companion pin bumped v1.18.0 → v1.25.0 (seven releases; most already in force — see the adoption table in `CHANGELOG.md`).
+
 ## v2.5.0 (2026-08-08)
 
 **From v2.4.0 — what to review when you bump your pin to v2.5.0:**

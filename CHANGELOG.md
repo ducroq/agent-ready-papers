@@ -45,6 +45,93 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
        ("No adopter action required.") rather than omitting the subsection.
 -->
 
+## v2.6.0 (2026-08-12)
+
+Cumulative companion adoption from `agent-ready-projects` v1.19.0 → v1.25.0 — seven releases. Most of the range was **already in force**: the three user-global skills (`/curate`, `/audit-context`, `/update-drift`) are byte-identical to the companion's v1.25.0 tracked copies, so what follows is only what needed an artifact on this side. What lands here: an **`## Active work` section** in `templates/CLAUDE.md`, a **structural pre-check** and a **merged measurable-claim rule** in `/review-changes`, a **hardened tag selector** in `/release`, a **session-start memory-index row** in `CLAUDE.md`, an **Occurrences column** in the gotcha log, and the **withdrawal of the 2-3 line gotcha rule** shipped in v2.5.0. New template section = MINOR bump.
+
+### Companion adoption (v1.19.0 to v1.25.0)
+
+| From | What | Landed as |
+|------|------|-----------|
+| v1.19.0 | `review-changes` Step 1.5 structural pre-check | `.claude/skills/review-changes/SKILL.md` — new deterministic step, runs at every tier and magnitude |
+| v1.19.0 | `review-changes` `Unclassified` report slot | Already in force — the rule and its report section were both present |
+| v1.19.0 | `review-changes` guarantee-lens invariant | Already in force — verified by enumerating all 22 lens entries against the HIGH row |
+| v1.19.0 | `curate` verify-command writing rules | Already in force — `/curate` is user-global and current |
+| v1.19.0 | `install-global-skills.sh` fixes, `physics-tests` disclosure | **Not applicable** — this repo has no `scripts/` and no counterpart template family |
+| v1.20.0 | Session-start pointer to the memory index | New `CLAUDE.md` row, *Picking up where the last session left off* |
+| v1.20.0 | Gotcha-log Promoted table gains `Occurrences` | `memory/gotcha-log.md` — merged with this repo's existing `Status` column rather than pasted over it |
+| v1.20.0 | Layer-3 auto-loading prose sweep; lint rule 6 / skill-sync tests | **Not applicable** — no `docs/GUIDE.md` counterpart, no lint harness for skills here |
+| v1.21.0 | `release` Step 1 three-filter tag selector | `.claude/skills/release/SKILL.md` Step 1 |
+| v1.21.0 | `release` Step 7 refresh-after-tag-is-live | `.claude/skills/release/SKILL.md` Step 7, adapted to this repo's real case (paper-local template copies) |
+| v1.21.0 | `git tag -a` and single-ref push | `CHANGELOG.md` maintainer block, which contradicted the `/release` skill it describes |
+| v1.21.0 | Installer release guard | **Not applicable** — no installer here; the globals come from the companion |
+| v1.22.0 | Verify runner shipped in `curate` Step 0.5 | Already in force — ran it against `memory/` and `vv/`, 8 of 10 annotations executed, 8 pass |
+| v1.22.0 | Adversarial lens: a negative carries its own check | `.claude/skills/review-changes/SKILL.md` Step 2, merged with v1.25.0's rule below |
+| v1.22.0 | `project-file.md` gains `## Active work` | `templates/CLAUDE.md` — **declined for the root `CLAUDE.md`**, which keeps a memory index |
+| v1.22.0 | Layer-3 conditionality, provisioning quote, index self-consistency | Already in force — and sub-step 6 had a finding waiting (see *Two live defects*) |
+| v1.23.0 | `audit-context` Step 4 placeholder skip | Already in force. The adopter action — marking placeholders — is **not adopted**: finding the population needs an `/audit-context` run |
+| v1.24.0 | `curate` Step 0 stops reading bodies | Already in force |
+| v1.24.0 | Status and recurrence count go in an entry's *heading* | `memory/gotcha-log.md` header convention, using `[x3]` to match what `/curate` writes |
+| v1.25.0 | Adversarial lens: a claim needing measurement gets one, gets hedged, or is not ready | `.claude/skills/review-changes/SKILL.md`, shipped as one instruction with v1.22.0's negatives rule |
+| v1.25.0 | The 2-3 line gotcha rule withdrawn as unenforceable | `CLAUDE.md`, `memory/gotcha-log.md`, `docs/verification-hooks.md` — three live sites |
+| v1.25.0 | `hypothesis-log` write-at-claim-time trigger | `templates/hypothesis-log.md` |
+| v1.25.0 | Prettier glob-shape corruption | **Not applicable** to the corruption — this repo runs no formatter — but the shape rule is carried, and six instances of the vulnerable shape were fixed |
+
+### Templates
+
+- **`templates/CLAUDE.md`** — new **`## Active work`** section, the one genuinely new adopter-facing artifact in this release. Work items are agent-independent (`docs/work-items/` is an ordinary directory), but every artifact that said where the *pointer* goes named a memory index unconditionally, and this template ships no such index. An adopter who followed every template therefore had work-item files and, by construction, nowhere the pointer could have gone. **The condition is whether you keep a memory index, not which agent you use** — the section is marked for deletion where an index exists, because two in-progress lists disagree. It also carries an explicit warning against reading the section as proof this file is always loaded: `docs/non-claude-setup.md` records that Copilot CLI does not auto-read `CLAUDE.md` at session start. Bounded on purpose — a completed item loses its pointer, so the section cannot grow into the session narrative. Also gains the matching **Before You Start row**, **Key Files row**, and **Directory Structure entry**, per this repo's own three-surface precedent from v1.7.0.
+
+- **`templates/hypothesis-log.md`** — **write the entry at the moment you make the claim**, not at the end of the session. A hypothesis reconstructed hours later is reconstructing a refutation criterion that was live at the time, which is post-hoc rationalization wearing the log's format — the exact failure the Method field exists to prevent. The cue is named tool-agnostically (*a claim that needs a measurement and cannot get one yet*) rather than keyed to `/review-changes`, which is gitignored and never shipped: a template that cues adopters off a tool they will not have is a rule with no trigger.
+
+### Docs
+
+- **`CLAUDE.md`** — four changes. A new first Before You Start row, **Picking up where the last session left off**, pointing at `memory/MEMORY.md`: nothing loads that file on its own, so without the row it is simply never read. The two existing drift rows are **merged into one**, because both began *"Starting any session ("* and were disambiguated only by a parenthetical category — the weak-trigger collision the companion identified in v1.20.0. They fire at the same moment and are checked together, so they are one row. The gotcha-log row drops the 2-3 line rule. And `/update-drift` gains a routing row and a not-shipped row: it was named in the header as the thing that "produces the triage" while being unreachable from the table that routes to everything else.
+
+- **`docs/verification-hooks.md`** — carried a third live copy of the withdrawn 2-3 line rule.
+
+- **`decisions/DR-017`** — one reference reworded to name the merged drift row. The decision itself is unchanged; only the pointer moved.
+
+### The 2-3 line gotcha rule is withdrawn
+
+v2.5.0 shipped it, adopted from the companion's v1.17.0. The companion withdrew it in v1.25.0 as **unenforceable, and wrong to enforce**. A markdown source line has no length limit, so entries "passed" by lines while running 700–1,200 characters: the unit did not track the cost, and the rule could be met and violated at once. Restating it in characters made it worse — at ~200 characters, 88–92% of entries across three logs and 277 entries would have been violations, which is a bulk false-positive generator rather than a rule.
+
+What replaces it: **above ~3,000 characters is the signal worth acting on**, because at that size an entry is a page and belongs in a topic file or a DR.
+
+**That threshold is inherited, not local.** Measured in this repo on 2026-08-12, the 38 entries above the Promoted table run a median of ~1,050 characters, 9 over 1,500, largest 2,362, and **none over 3,000**. The rule stands on the companion's 277-entry measurement; here it is a ceiling nothing has hit yet. The header comment carries a `<!-- verify: -->` probe that re-derives all four numbers on every `/curate` run.
+
+*An earlier draft of that header claimed 40 entries, median 1,108, and 2% over 3,000, calling the 2% "the population worth acting on". Those figures segmented on any heading, so the `## Promoted` section — a comment plus an 18-row table, ~5,600 characters — was counted as a gotcha entry, and it was the entire >3,000 population. The `/review-changes` adversarial lens caught it, using the measurable-claim rule adopted in this same release. Recorded rather than deleted: it is a measurement error inside the block that replaces a rule for being unmeasured.*
+
+### Skills (gitignored — adopters cannot see these in the diff)
+
+- **`.claude/skills/review-changes/SKILL.md`** — new **Step 1.5, a structural pre-check**. Every lens in this skill reads *content*; none asked whether the file is still valid markdown after the edit. A `|` added inside a table cell pushes cells past the end of the row and **GFM drops the excess silently** — it reads fine as prose in the diff and is wrong only when rendered, so a human reviewer and the adversarial lens both pass it. Deterministic, so it is a step rather than a lens, and it runs at every tier and every magnitude. It found a real defect on its first run (see below). Its limits are stated rather than discovered later: three non-table constructs produce false positives (YAML frontmatter whose closing `---` follows a piped `description:`, a setext heading with a pipe, a `---` break after a piped code span), and **a CRLF file is examined and reports nothing** — `isdelim()` strips spaces and tabs but not `\r`, so a file with real corruption prints exactly what a clean file prints.
+
+  The **adversarial lens** gains the merged rule from v1.22.0 and v1.25.0: *a claim that needs a measurement gets one, gets hedged, or is not ready* — covering negatives (which cannot distinguish a real absence from a broken instrument) and absolutes in descriptions (which ship unmeasured by default). An absolute in an *instruction* is a decision and is fine; this repo's Hard Constraints prescribe. Six instances of the prettier-vulnerable bold-glob shape were fixed in the same file.
+
+- **`.claude/skills/release/SKILL.md`** — Step 1's tag selector was `git tag --sort=-v:refname | head -1`, which a scratch tag, a prerelease, or a tag on an unmerged branch each silently wins. Now carries the companion's three filters, with the empty-answer diagnosis (shallow clone versus unmatched scheme) that takes opposite fixes. Step 7 gains a refresh-after-the-tag-is-live sub-step, adapted: the test is **"did this release touch the source?"**, not "do the two files match" — the paper-local copies are deliberately narrowed instances (5,585 vs 17,790 bytes for `anti-hallucination.md`), so a content-equality check would report DRIFT on every release forever.
+
+### Two live defects, found by running the newly adopted checks
+
+Both were invisible to every check this repo had before this release.
+
+1. **`vv/cost-log.md`** carried an unescaped `|H(z)|` in a table cell, truncating a row in a **shipped** file — inside a sentence about escaped-pipe support in `tools/coverage.py`. Found by Step 1.5 on its first run.
+2. **`memory/MEMORY.md`** claimed a companion pin of v1.17.0 while `CLAUDE.md` said v1.18.0. Found by the class `/curate` sub-step 6 exists to catch. It now carries a probe comparing the two, proved to fail on a seeded stale pin.
+
+### Adopter notes
+
+**What you get if you scaffold a new paper project:** the `## Active work` section in `templates/CLAUDE.md`, with the keep-or-delete decision stated; a work-item route in the Before You Start table, Key Files, and Directory Structure; and the write-at-claim-time trigger in `templates/hypothesis-log.md`.
+
+**What existing adopters must do: nothing is required.** If you adopted v2.5.0's 2-3 line gotcha rule, you may stop applying it — and if you were already ignoring it, you were right to. If you keep a memory index, delete the `## Active work` section rather than filling it in.
+
+**One thing worth doing:** if your paper project's `CLAUDE.md` was scaffolded from `templates/CLAUDE.md` before this release, it has no `## Active work` section and no work-item route. Adding them is optional and takes one edit each.
+
+### Versioning rationale
+
+**MINOR.** Rule 1 does not fire — nothing breaks and no adopter must act to stay working; the withdrawn gotcha rule *relieves* an obligation rather than creating one. Rule 2 fires on `templates/CLAUDE.md`'s new `## Active work` section: a documented, adopter-facing pattern that gives an adopter without a memory index somewhere a work-item pointer can go, which previously did not exist. Precedent is **v2.3.0**, which was MINOR for adding §4.6 Scope Drift Check — also a new section inside an existing template rather than a new file.
+
+The case for PATCH is on the record: no new file was created, and the two largest changes by volume are gitignored skills that adopters never receive. It was weighed and declined, because the section is new capability rather than a rewrite of an existing one.
+
+This release also carries three small commits that predate it and were deliberately left unversioned at the time — `f721b8e` (frequency claim stated once, accurately, in both places), `440c4cf` (near-term backlog routed to `memory/priorities.md`), and `0b49e94` (companion pin to v1.18.0, triaged already-in-force). They are in the range against `v2.5.0` and are described here rather than silently absorbed.
+
 ## v2.5.0 (2026-08-08)
 
 Cumulative companion adoption from `agent-ready-projects` v1.12.0 → v1.17.0 — nine releases. What lands here: a **skill-scope Hard Constraint** (a user-global skill silently shadows a project-local one), a new project-local **`/release`** skill, a **magnitude gate** on `/review-changes`, a new **`docs/verification-hooks.md`**, a length rule for the gotcha log, a framework pin line in `templates/CLAUDE.md`, and a de-identification pass that removed a private repository name from three shipped files. New skill and new doc = MINOR bump.
