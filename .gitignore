@@ -1,9 +1,15 @@
 .claude/
 .DS_Store
 Thumbs.db
-memory/
-audits/
-docs/work-items/
+# Anchored to the repo root with a leading slash. Unanchored, `memory/` also
+# matches a nested one — e.g. a `templates/test-fixtures/memory/` — so any new
+# file added there is silently unaddable and shows nothing in `git status`.
+# That bit agent-ready-projects, which anchored its own in v1.19.0. No nested
+# `memory/` exists here today, so this changes nothing now; it is preventive.
+# `audits/` and `docs/work-items/` are anchored for the same reason.
+/memory/
+/audits/
+/docs/work-items/
 
 # Papers are confidential-by-default; allowlist public framework demos explicitly.
 # A new papers/<name>/ is invisible to git until you add a matching `!papers/<name>` line.
