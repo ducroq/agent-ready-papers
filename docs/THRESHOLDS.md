@@ -55,22 +55,39 @@ P2 is defined as *"context — nice to have."* These claims are background, not 
 The overall coverage target is a weighted aggregate envelope that the per-tier distribution falls under:
 
 - 100% × (P0 share) + 90% × (P1 share) + 70% × (P2 share)
-- For a typical registry where P0 ≈ 30%, P1 ≈ 45%, P2 ≈ 25%: weighted average ≈ 88%.
-- For a heavier P2 distribution (P2 share 40%): weighted average ≈ 84%.
+- For an **illustrative** registry with P0 ≈ 30%, P1 ≈ 45%, P2 ≈ 25%: weighted average ≈ 88%. This shape is hypothetical — it is not drawn from any registry in this repo, and the "typical" label it used to carry asserted a population that has never been measured.
+- **The registries that actually exist are nothing like it**, and both sit far clear of the envelope: Paper 1 (`papers/perspective`, 19 entries) is P0 42.1% / P1 52.6% / P2 5.3% → **93.2%**; a second, maintainer-local paper project (7 entries) is P0 57.1% / P1 42.9% / P2 0% → **95.7%**. Both have a *lower* P2 share than the illustrative case, not higher. **Only the Paper 1 figure is reproducible from a clone** — the second project is gitignored under the same policy as `memory/` (see *What is intentionally not shipped* in `CLAUDE.md`), so an adopter can re-derive one of these two data points and must take the other on trust. N=2, and one of the two is unverifiable by the reader.
+- For a heavier P2 distribution (P2 share 40%, holding the illustrative 30:45 P0:P1 ratio for the rest): weighted average ≈ 84%.
 
-The 85% threshold is set just below the typical weighted average so that a project hitting its per-tier targets clears the overall threshold automatically, but a project gaming the per-tier targets by under-counting P0s or P1s does not.
+The 85% threshold is set just below **the illustrative 88% figure in the first bullet**, so that a project hitting its per-tier targets clears the overall threshold **for registries at or near that shape**, while a project gaming the per-tier targets by under-counting P0s or P1s does not.
 
-**Reasoning:** 85% is an envelope check, not an independent constraint. It catches the failure mode where per-tier targets are met by misclassifying load-bearing claims as P2.
+⚠ **The "clears automatically" property is false as an unconditional claim.** Meeting every per-tier target bounds overall coverage only into [70%, 100%] — a registry that is entirely P2 and hits its 70% target scores 70% overall. No ratio assumption is needed to see that per-tier compliance does not imply ≥85%.
 
-**What would change this:** Audited projects with P2 share > 50% may push the typical weighted average below 85%, suggesting the threshold should track tier distribution rather than be a fixed number.
+Where the break point sits depends on the P0:P1 split of the non-P2 remainder. Writing *r* for P0's share of that remainder, overall = 70 + (1 − p)(20 + 10r), and the break point is p\* = 1 − 15/(20 + 10r):
+
+| P0:P1 of the remainder | Identity | Break point |
+|---|---|---|
+| all P1 (r = 0) | 90 − 20p | **25.0%** |
+| 10:65 | 91.3 − 21.3p | 29.7% |
+| 30:45 (the illustrative shape above) | 94 − 24p | 37.5% |
+| 8:10 (Paper 1's actual) | 94.4 − 24.4p | 38.6% |
+| all P0 (r = 1) | 100 − 30p | **50.0%** |
+
+So the break point ranges over **25–50%**, and the frequently-quoted 37.5% is a property of the illustrative 30:45 shape, not of the gate. The second bullet above is an instance: at P2 share 40% under that shape the weighted average is ≈84%, below the gate. Stated here rather than smoothed away, because the earlier wording asserted the property unconditionally and its own adjacent example falsified it. If your registry is P2-heavy, the honest reading is that the overall gate is measuring your tier distribution, not your verification discipline.
+
+**Reasoning:** 85% is an envelope check, not an independent constraint. It catches the failure mode where per-tier targets are met by misclassifying load-bearing claims as P2 — and, on the arithmetic above, it also fires on a legitimately context-heavy registry, which is a false positive it cannot distinguish from that failure mode.
+
+**Note on enforcement:** `tools/coverage.py --strict` gates the **per-tier** targets only; it never computes an overall figure (verified by source read — no code path aggregates across tiers). The ≥85% line is enforced only by a human, and it is stated in at least four shipped places: [Gate 2](../README.md#gate-2-verification-complete) in the README, [`templates/vv-framework.md`](../templates/vv-framework.md) §3, [`templates/claim-registry.md`](../templates/claim-registry.md) *Targets*, and the *Targets* line each paper registry inherits from it. So the tool and the checklist disagree about what Gate 2 requires — worth knowing before treating a green `--strict` run as a passed Gate 2.
+
+**What would change this:** A registry whose P2 share exceeds its break point (25–50% depending on tier mix — see the table above) would settle whether the threshold should track tier distribution rather than be a fixed number. To our knowledge no audited project has yet supplied one: the two that exist sit at 5.3% and 0%. (This bullet previously named ">50%" as the risk point; that figure did not follow from the arithmetic and is corrected. An intermediate revision named 37.5% just as unconditionally, which was the same error with a better number — the break point is a range, not a constant.)
 
 ### Why ≥3.5/5.0 for simulated peer review
 
 The 3.5 floor matches the review-prompt rubric's *Minor revision* band:
 
 - ≥4.0 — Accept with minor revisions
-- 3.5–3.9 — Minor revision
-- 2.5–3.4 — Major revision
+- 3.5–<4.0 — Minor revision
+- 2.5–<3.5 — Major revision
 - <2.5 — Reject
 
 ≥3.5 is the threshold below which a real journal reviewer is likely to flag for major revision rather than minor. Setting the simulated-review gate at 3.5 means *"before submission, the paper should be in Minor revision territory at worst by AI peer-review simulation."*
@@ -87,7 +104,7 @@ These thresholds are **SPECULATIVE** per the framework's own confidence-tier dis
 - The 85% overall is an envelope check derived arithmetically from the per-tier targets, not from external data.
 - The 3.5/5.0 peer-review floor is calibrated to the review-prompt rubric, which is itself a heuristic.
 
-The framework requires SPECULATIVE-tier claims to use hedged language ("warrants investigation", "remains unclear", "we hypothesise"). This document holds itself to the same discipline: the thresholds are presented as **defensible heuristics**, not as derived constants.
+The framework requires SPECULATIVE-tier claims to use hedged language ("warrants investigation", "remains unclear", "we hypothesise"). This document *attempts* to hold itself to the same discipline — the thresholds are presented as **defensible heuristics**, not as derived constants — but the claim that it succeeds is one it should not make on its own behalf, and a 2026-08-13 review found it did not. Two tier violations remain open in the sections above: the flat mechanism claim under "Why 70% for P2" (no measurement exists anywhere in this document), and the transfer of the rubric's band edge onto *real* reviewer behaviour under "Why ≥3.5/5.0" (N=0 real reviews). Both are left standing rather than papered over, because repairing them requires deciding what the actual justification for those two thresholds is — which is content work, not an editing pass. Tracked in [#33](https://github.com/ducroq/agent-ready-papers/issues/33).
 
 ### N=1 evidence
 

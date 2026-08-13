@@ -11,7 +11,7 @@
 Compared GPT-4 feedback with human peer reviewer feedback from 15 Nature family journals (3,096 papers) and ICLR (1,709 papers). Found that GPT-4/human overlap (30.85% Nature, 39.23% ICLR) is comparable to human/human overlap (28.58% Nature, 35.25% ICLR). 57.4% of researchers found GPT-4 feedback helpful.
 
 ## Key Findings
-- LLM feedback is "useful but lacking depth, especially in detailed critique"
+- LLM feedback is useful but shallow: GPT-4 "often struggles to provide in-depth critique of method design". (Corrected 2026-08-13: previously quoted as "useful but lacking depth, especially in detailed critique", a phrasing that appears nowhere in the source.)
 - LLMs catch surface issues but struggle with deep argument analysis
 - GPT-4/human agreement is comparable to human/human agreement (both ~30-39%)
 - Validates using LLMs as a pre-flight check (not a replacement for peer review)

@@ -13,7 +13,7 @@ Comprehensive survey of argument mining -- the automatic identification and extr
 ## Key Findings
 - Argument mining pipeline: segmentation -> component detection -> relation prediction -> structure reconstruction
 - Field historically focused on extraction (finding arguments) not evaluation (assessing quality)
-- Datasets exist for persuasive essays (AAEC), abstracts (AbstRCT), debate (IBM Debater)
+- Datasets exist for persuasive essays (AAEC) and debate (IBM Debater) — the survey's corpus table lists no abstracts corpus. (AbstRCT was previously listed here; it was introduced at ECAI 2020, a year *after* this December 2019 survey, so it cannot be one of its findings)
 - No major benchmark for full academic papers
 - Gap between "extract arguments from a paragraph" and "verify argument structure of a 20-page paper" is substantial
 

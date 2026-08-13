@@ -39,7 +39,7 @@ The three registry unit types (CLAIM, ARGUMENT, PROPOSITION) are units of the pa
 
 ## Key Insight
 
-**For arithmetic verification, the prompt matters more than the model.** A capable model prompted to "review" can miss arithmetic errors; the same model prompted to "reproduce" can catch them. Plausibility assessment and mechanical reproduction are fundamentally different procedures, and only the latter catches errors that produce plausible-looking results.
+**For arithmetic verification, prompt framing appears to matter at least as much as model choice.** In one observation (N=1, Driven Pendulum, 2026-03), a capable model prompted to "review" for physical soundness missed all three errors, while a model prompted to substitute values and compute step by step caught all three. ⚠ **This does not isolate the prompt**: vendor, prompt and inference mode varied together (Gemini reviewing vs Claude Sonnet with extended thinking). The compute-vs-assess distinction is this framework's working hypothesis, not a measured effect. (Corrected 2026-08-13: this passage read "the same model prompted to reproduce", which is false against the record in the gotcha log and overstated a binding decision record.) Plausibility assessment and mechanical reproduction are fundamentally different procedures, and only the latter catches errors that produce plausible-looking results.
 
 ## Consequences
 

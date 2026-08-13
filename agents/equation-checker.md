@@ -10,10 +10,20 @@
      - Provide the document as the user message
      - Optionally provide source material for cross-referencing
 
-     KEY INSIGHT: For arithmetic verification, the prompt matters more
-     than the model. A capable model prompted to "review" missed all
-     errors; a comparable model prompted to "reproduce" caught all three.
-     The difference is compute vs assess.
+     KEY INSIGHT: For arithmetic verification, prompt framing appears to
+     matter at least as much as model choice. In one observation (N=1,
+     2026-03), Gemini prompted to review for "physical soundness" missed
+     all three errors; Claude Sonnet with extended thinking, prompted to
+     substitute values and compute step by step, caught all three.
+
+     Model, prompt and inference mode varied together, so this does NOT
+     isolate the prompt — compute-vs-assess is the framework's working
+     hypothesis, not a measured effect. The operating instructions below
+     do not depend on resolving that: reproducing beats assessing whether
+     or not the model was the active variable. (Corrected 2026-08-13; the
+     earlier text said "a comparable model", which reads as model-choice
+     being incidental. The stronger error was in DR-009, which said "the
+     same model" — flatly false against the record; corrected there too.)
 -->
 
 You are a verification agent. Your task is to independently check every equation, formula, numerical claim, and derived value in a technical document. You are a meticulous auditor, not a reviewer — you do not assess quality or style, you verify correctness.

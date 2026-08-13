@@ -74,11 +74,11 @@ The issue title uses `check-dois.py` (hyphenated). The actual file is `check_doi
 
 ## Licensing
 
-Tools live inside the agent-ready-papers repo and inherit its licence (CC BY 4.0). If `tools/` grows substantially, [DR-013](../decisions/DR-013_licensing.md) carries a "Revisit If" condition for re-examining a dual CC BY 4.0 + MIT split.
+Tools live inside the agent-ready-papers repo and inherit its licence (CC BY 4.0). If `tools/` grows substantially, [DR-013](../decisions/DR-013_license-choice.md) carries a "Revisit If" condition for re-examining a dual CC BY 4.0 + MIT split.
 
 ## Roadmap (post-scaffold)
 
 1. Implement `coverage.py` sub-table parser. Tests against `papers/perspective/vv/claims/claim_registry.md` (19 entries, 100% verified — known-good fixture).
 2. Implement `check_dois.py` extractor + resolver. Tests against the same fixture; offline mode verified against a hand-curated DOI/non-DOI fixture file.
-3. PROVOCATION axis support in `coverage.py` (GROUNDED / EXTRAPOLATED / PROVOCATIVE / CRITICAL — see [DR-010](../decisions/DR-010_provocation-unit-type.md) and [DR-014](../decisions/DR-014_provocation-layered-as-opt-in-extension.md)).
+3. ~~PROVOCATION axis support in `coverage.py`~~ — **shipped.** `axis="provocation_tier"` buckets GROUNDED / EXTRAPOLATED / PROVOCATIVE / CRITICAL (see [DR-010](../decisions/DR-010_provocation-unit-type.md), [DR-014](../decisions/DR-014_provocation-layered-as-opt-in-extension.md)). Note the rows are *reported but not gated* unless `provocation_targets` is supplied, so `--strict` gates them on neither axis by default.
 4. Add `tools/` to repo CI once a real fixture suite exists.

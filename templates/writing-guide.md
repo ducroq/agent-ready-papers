@@ -214,7 +214,7 @@ Certain claim categories are systematically overclaimed. Watch for these pattern
 - [ ] All quotes verified against source
 - [ ] "Own work" claims clearly marked with status
 - [ ] Hypotheses distinguished from verified claims
-- [ ] No "demonstrates" or "shows" for EMERGING or SPECULATIVE claims
+- [ ] No "demonstrates", "shows" or "confirms" below **ESTABLISHED** (per the DR-002 mapping above — the earlier wording said "for EMERGING or SPECULATIVE", which passed "demonstrates" at SUPPORTED, the exact defect the retrofit audit found in 6/22 entries)
 
 ### ARGUMENTs
 - [ ] Each ARGUMENT has its warrant stated explicitly (not left implicit)

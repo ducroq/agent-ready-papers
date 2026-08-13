@@ -52,7 +52,7 @@ For speculative-design / design-fiction / diegetic-prototype work, an opt-in fif
 
 ### Section-Level Coverage Analysis
 
-Overall coverage can mask dramatic section-level variation. In audited projects, Discussion sections typically had 25–35% coverage while Methods/Results had 100%. This happens because Discussion sections contain ARGUMENTs and PROPOSITIONs that go unregistered when only CLAIMs are tracked.
+Overall coverage can mask dramatic section-level variation. In the two audited projects, Discussion-section coverage ran far below Methods/Results. (This previously gave "typically 25–35%" against 100% — a band drawn from two data points whose underlying audits were removed from the repo in v2.0.0, so no reader can reproduce it. Treat the pattern as directional; measure your own sections rather than checking against a number.) This happens because Discussion sections contain ARGUMENTs and PROPOSITIONs that go unregistered when only CLAIMs are tracked.
 
 **At Gate 2, check coverage by section type:**
 - **Factual sections** (Introduction, Methods, Results): expect high CLAIM coverage
@@ -159,7 +159,7 @@ If the marker is absent: rewrite to add it, or downgrade to EMERGING CLAIM with 
 |-------|--------|---------------|
 | LaTeX compiles | `pdflatex` exit code 0 | No errors |
 | BibTeX valid | `biber` exit code 0 | All refs resolve |
-| DOIs exist | Web lookup | All DOIs return 200 |
+| DOIs resolve | `python -m tools.check_dois <registry>` | All DOIs resolve at doi.org (HTTP 2xx **or 3xx** — 3xx is the normal case, doi.org redirects to the publisher) |
 | Word count | `texcount` | Within journal limit |
 | Data files exist | Script check | All referenced files present |
 | Figures sourced | Manual check | All figures from own data or cited |
@@ -248,6 +248,8 @@ Status (Pass / Fail)
 ### Gate 2: Verification Complete
 - [ ] P0 entries 100% verified (CLAIMs source-checked; ARGUMENTs Toulmin-checked; PROPOSITIONs Whetten-checked)
 - [ ] P1 entries 90% verified
+- [ ] P1 tier floor: ≥90% at EMERGING or above — **manual check.** `tools/coverage.py` reads only the Status checkbox (`_STATUS_VERIFIED_REGEX`) and never reads the Confidence column, so `--strict` reports this gate met for a registry whose P1 rows are all verified and all SPECULATIVE. Priority and confidence are deliberately orthogonal axes (DR-017); do not read a green `--strict` as covering this line.
+- [ ] P2 entries 70% verified
 - [ ] Coverage checked by section type (see Section 3 — Section-Level Coverage Analysis)
 - [ ] Entry types re-checked (see `claim-registry.md` — Detecting Mistyped Entries)
 - [ ] Coverage report generated from registry dashboard (timestamped snapshot for co-author review)

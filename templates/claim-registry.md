@@ -125,9 +125,17 @@ Edge cases:
      checks below.
      Source / Source Tier are optional and used only for external framework provenance. -->
 
-**PROVOCATIONs** (Auger — opt-in, speculative-design only; see DR-010):
+Column semantics for the PROVOCATION sub-table below differ from the other sub-tables: Auger's four criteria are *evaluative questions*, so each column records the **evidence or move that answers the question**, not a yes/no judgment. The column headers name the content the cell should carry.
 
-Column semantics differ from the other sub-tables: Auger's four criteria are *evaluative questions*, so each column records the **evidence or move that answers the question**, not a yes/no judgment. The column headers below name the content the cell should carry.
+<!-- Keep this paragraph ABOVE the sub-table marker, not between the marker and
+     the table header. `tools/coverage.py` skips only blank lines after a marker
+     before expecting a table row; any prose there makes it abandon the sub-table
+     silently. Until 2026-08-13 this paragraph sat below the marker, and the
+     shipped template's PROVOCATION rows were invisible to the shipped tool —
+     found by the repo-wide sweep, which ran the tool against the template
+     instead of reading it. -->
+
+**PROVOCATIONs** (Auger — opt-in, speculative-design only; see DR-010):
 
 | ID | Statement | Priority | Tier (PROVOCATION axis) | Plausibility evidence | Generative move | Reflexive marker | Ethics commitment | Status |
 |----|-----------|----------|--------------------------|------------------------|------------------|-------------------|--------------------|--------|
@@ -188,7 +196,7 @@ Column semantics differ from the other sub-tables: Auger's four criteria are *ev
 
 ### Detecting Mistyped Entries
 
-Every audit found 3–6 entries initially typed as CLAIMs that were actually ARGUMENTs or PROPOSITIONs. Run this decision tree on each entry after initial registration:
+In the two retrofit audits this framework has run (both 2026-03), several entries per registry were initially mistyped as CLAIMs when they were ARGUMENTs or PROPOSITIONs. (This previously read "every audit found 3–6 entries" — a range that quantified over N=2 and cannot be reproduced from anything now in the repo, since the audit files were removed in v2.0.0. Treat mistyping as expected, not as a count to calibrate against.) Run this decision tree on each entry after initial registration:
 
 1. **Does it cite a specific external source?** → Likely CLAIM
 2. **Does it draw a conclusion from multiple pieces of evidence?** → Likely ARGUMENT

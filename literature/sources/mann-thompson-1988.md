@@ -8,7 +8,7 @@
 - **DOI:** 10.1515/text.1.1988.8.3.243
 
 ## Summary
-Decomposes text into Elementary Discourse Units (EDUs) connected by rhetorical relations in a hierarchical tree. Relations connect a nucleus (central unit) to a satellite (supporting unit). ~30 relation types covering subject matter (Elaboration, Cause, Evidence) and presentational (Antithesis, Concession, Motivation) functions.
+Decomposes text into Elementary Discourse Units (EDUs) connected by rhetorical relations in a hierarchical tree. Relations connect a nucleus (central unit) to a satellite (supporting unit). ~30 relation types covering subject matter (Elaboration, Cause, Circumstance) and presentational (Evidence, Justify, Antithesis, Concession, Motivation) functions.
 
 ## Key Findings
 - Atomic unit: EDU (roughly clause-sized) + rhetorical relation
@@ -22,4 +22,4 @@ Decomposes text into Elementary Discourse Units (EDUs) connected by rhetorical r
 Operates at the full document level -- uniquely suited for coherence verification across sections. However, RST is descriptive (what relations exist) not normative (are arguments valid). Best used as a complement to Toulmin/Walton for checking that sections are connected by appropriate relations and that the main argument (nucleus) is properly supported.
 
 ## Related
-- Zeldes et al. (2025). "eRST: A Signaled Graph Theory of Discourse Relations." Computational Linguistics, 51(1), 23-72. DOI: 10.1162/coli_a_00538
+- Zeldes et al. (2025). "eRST: A Signaled Graph Theory of Discourse Relations and Organization." Computational Linguistics, 51(1), 23-72. DOI: 10.1162/coli_a_00538

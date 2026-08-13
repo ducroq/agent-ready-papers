@@ -12,10 +12,11 @@ Proposes GROUNDING.md — a community-governed, field-scoped epistemic grounding
 
 ## Key Findings
 - Epistemic grounding documents separate into two categories: invariants (must hold for correctness) and conventions (community defaults, overrideable)
-- The grounding document overrides all other agent contexts — it is epistemically prior to user prompts, system prompts, and model defaults
+- The grounding document takes priority over other agent contexts — the paper says the specification "wins any conflict" and is loaded "with highest priority". ⚠ **Not an unconditional override**: the paper's own testing reports "boundary cases in which compliance degrades under explicit override instructions or weakened normative language", and that it "does not by itself guarantee correctness under all context conditions"
+- ⚠ The phrase **"epistemically prior" is not the paper's** — it appears zero times in v1 and v2. The paper uses "epistemic grounding" and "epistemic foundation". The framing is this repo's; the architectural claim is theirs
 - Community governance model: field-scoped (not project-scoped), maintained by domain experts rather than software engineers
-- Demonstrated in proteomics but the pattern is explicitly domain-agnostic
-- Letter-format paper (12 pages, 1 table) — a proposal with a worked example, not an empirical evaluation
+- Demonstrated in proteomics; the paper suggests the document type "could be used for other domains" — extensible, but the architecture is deliberately **field-scoped**, not domain-agnostic
+- Letter-format paper ("12 pages, 1 table" per the authors' own arXiv Comments field; the rendered PDF is shorter) — a proposal with a worked example plus **preliminary proof-of-principle testing** (Claude Code v2.1.90 + NVIDIA Nemotron-3, six adversarial prompts, public validation repo), not a full empirical evaluation
 
 ## Relevance to agent-ready-papers
 This is a **parallel invention** of the same core pattern this project uses: a constraint document (GROUNDING.md / CLAUDE.md) that encodes domain-specific invariants an AI agent must respect, overriding other contexts. The Hard Constraints / Convention Parameters distinction maps cleanly to the framework's P0 (must-verify) vs P1/P2 (should-verify) tiering. The paper provides **external validation** that the constraint-document pattern generalizes beyond academic writing into scientific software — same architecture, different domain.
@@ -30,4 +31,4 @@ Concrete touchpoints:
 ## Open Questions
 - The paper proposes *field-scoped* grounding (one GROUNDING.md per scientific domain). The framework uses *project-scoped* grounding (one CLAUDE.md per repo). Is there a case for field-scoped constraint documents in academic writing (e.g., a `GROUNDING.md` for conceptual papers, for DSR papers, for perspective papers)?
 - The paper's **two-tier constraint taxonomy** (Hard Constraints = invariants, Convention Parameters = defaults) is cleaner than the framework's current flat Hard Constraints list. Should the framework adopt this distinction structurally — splitting CLAUDE.md's Hard Constraints section into labeled invariant and convention groups, mirroring what the claim registry already does with P0/P1/P2 tiers?
-- The paper is a proposal with a worked example — no empirical evaluation of whether GROUNDING.md actually reduces errors in agent-generated code. Same tier as the framework's own PROPOSITION-level claims about its efficacy.
+- The paper is a proposal with a worked example and preliminary proof-of-principle testing — not a controlled evaluation of whether GROUNDING.md reduces errors in agent-generated code. (Corrected 2026-08-13: this line previously said there was *no* empirical evaluation. False against both versions, which both report the Nemotron testing. Note the split: the *testing* is in v1 and v2; the **degradation boundary cases** and "does not by itself guarantee correctness" are **v2 only**. Cite v2 for the caveat.) Same tier as the framework's own PROPOSITION-level claims about its efficacy.

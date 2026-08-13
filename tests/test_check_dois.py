@@ -93,6 +93,20 @@ def test_clean_doi_strips_unbalanced_closing_paren():
     assert _clean_doi("10.2196/52935):") == "10.2196/52935"
 
 
+def test_clean_doi_strips_bibtex_closing_brace():
+    """BibTeX writes `doi = {10.xxx/abc}` → regex captures 'abc}' → strip.
+
+    Found 2026-08-13 by the repo-wide sweep: without this, every DOI in
+    `papers/perspective/references.bib` returned HTTP 404 — a verification
+    tool reporting twelve false failures, which is worse than reporting
+    nothing because it trains the reader to disbelieve it.
+    """
+    assert _clean_doi("10.1136/bmj.n71}") == "10.1136/bmj.n71"
+    assert _clean_doi("10.2196/52935},") == "10.2196/52935"
+    # a brace-wrapped Lancet DOI must lose the brace and keep its parens
+    assert _clean_doi("10.1016/S0140-6736(13)62228-X}") == "10.1016/S0140-6736(13)62228-X"
+
+
 def test_clean_doi_preserves_balanced_parens():
     """Lancet DOIs carry '(13)' mid-string — must not be stripped (the fix
     that caused DR-011 Pass 2 to remark this needed an explicit test).

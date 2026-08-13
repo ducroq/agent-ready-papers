@@ -5,9 +5,9 @@
 ## Bibliographic Info
 - **Author:** Natali Helberger
 - **Year:** 2024
-- **Title:** FutureNewsCorp — how the AI Act (and related regulation) will affect news media *(verify exact title)*
-- **Venue:** UvA / IViR working paper or journal — **UNVERIFIED, confirm before citing**
-- **DOI/URL:** TODO verify
+- **Title:** FutureNewsCorp, or how the AI Act changed the future of news *(verified 2026-08-13)*
+- **Venue:** *Computer Law & Security Review* 52 (2024), art. 105915. DOI 10.1016/j.clsr.2023.105915 *(verified 2026-08-13 — peer-reviewed journal, so this is source tier **A**, not the B/C the caveats section assumed)*
+- **DOI/URL:** 10.1016/j.clsr.2023.105915 *(verified 2026-08-13 — resolves; open-access full text via UvA-DARE)*
 
 ## Summary
 Maps the EU AI Act onto the news-media value chain. Central for the paper: the **provider/deployer asymmetry** — duties land differently on those who build vs. those who deploy AI — and the resulting **disincentive against in-house AI** in smaller media organisations. Also names AI Act Art. 52 "right to authenticity" / transparency duties.
@@ -18,7 +18,7 @@ Maps the EU AI Act onto the news-media value chain. Central for the paper: the *
 - Art. 52 transparency / authenticity language → candidate compliance hook for the `legal-reviewer`-style angle.
 
 ## Caveats (tier discipline)
-- Confirm venue + peer-review status; a working paper is tier B/C, a journal article tier A. Set `Source Tier` in the registry accordingly.
+- ~~Confirm venue + peer-review status~~ **resolved 2026-08-13**: peer-reviewed journal article → **tier A**. Set `Source Tier` in the registry accordingly.
 
 ## Relevance to the Constructive Lenses paper
 The governance frame that turns "ovr.news is a deployer that also builds" from a fact into a *significant* fact. Load-bearing for the contribution's "why open infrastructure matters" leg.

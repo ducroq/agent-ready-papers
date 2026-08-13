@@ -14,7 +14,8 @@ Seven guidelines for conducting and evaluating design science research: (1) desi
 - DSR outputs: constructs, models, methods, instantiations (per March & Smith 1995)
 - Design principles are prescriptive ("in context C, use mechanism M"), not descriptive claims
 - Evaluation evidence is required but the artifact itself IS the contribution
-- Explicitly cautioned against using guidelines as "mindless checklists"
+- Explicitly advised "against mandatory or rote use of the guidelines" (p. 82), following Klein & Myers (1999)
+  - ⚠ Until 2026-08-13 this line read: cautioned against using guidelines as *"mindless checklists"*. That phrase is **not Hevner's** — it appears zero times in the article. It traces to Venable, J. (2010), *Design Science Research Post Hevner et al.: Criteria, Standards, Guidelines, and Expectations*, DESRIST 2010, LNCS 6105, pp. 109–123, DOI 10.1007/978-3-642-13335-0_8 — which reports **survey respondents' objections** to how the guidelines were being applied. Not currently in `literature/README.md`; add an entry before citing it anywhere load-bearing. The substance survived; the attribution was reversed
 - DSR requires both rigor (research methods) and relevance (practical importance)
 
 ## Relevance to DR-004

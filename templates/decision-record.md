@@ -4,7 +4,7 @@
      Naming: DR-000_initial_format.md, DR-001_scope_decision.md, etc. -->
 
 ---
-status: Proposed | Accepted | Superseded
+status: Proposed | Accepted | Partially superseded | Superseded
 date: [YYYY-MM-DD]
 superseded_by: [DR-NNN if applicable]
 ---

@@ -63,9 +63,9 @@ def _clean_doi(raw: str) -> str:
     unbalanced trailing `)`. We strip trailing `.,:;` first, then strip
     trailing `)` while it exceeds the count of `(`.
     """
-    doi = raw.rstrip(".,:;")
+    doi = raw.rstrip(".,:;}")
     while doi.endswith(")") and doi.count(")") > doi.count("("):
-        doi = doi[:-1].rstrip(".,:;")
+        doi = doi[:-1].rstrip(".,:;}")
     return doi
 
 

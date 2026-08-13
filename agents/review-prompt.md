@@ -123,8 +123,8 @@ Review the manuscript section(s) pasted below for submission readiness. Evaluate
 
 **Recommendation thresholds:**
 - ≥4.0: Accept with minor revisions
-- 3.5–3.9: Minor revision
-- 2.5–3.4: Major revision
+- 3.5–<4.0: Minor revision
+- 2.5–<3.5: Major revision
 - <2.5: Reject
 
 ---

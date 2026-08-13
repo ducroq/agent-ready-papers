@@ -17,7 +17,7 @@ Defines the CARS (Create A Research Space) model: a three-move rhetorical struct
 - The 2004 revision simplified Move 1 and expanded Move 3 to seven steps
 - Moves are genre conventions, not argument quality measures
 - Validated across disciplines through corpus studies
-- ML classifiers (SVM, BERT, GPT-2) have been applied to automatic move detection
+- *(Later work, not a finding of Swales 1990/2004 — BERT and GPT-2 postdate both books by ~15 years.)* ML classifiers (SVM, BERT, GPT-2) have since been applied to automatic move detection; cite the specific study rather than this entry
 
 ## Relevance to DR-004
 Provides section-level structure verification, especially for introductions. Complements argument-level models (Toulmin, Walton). However, CARS was designed for empirical research introductions -- perspective papers and theoretical papers may not follow the gap-fill logic. For non-empirical papers, adapted move structures would be needed.

@@ -9,8 +9,11 @@ Before running the full checklist, do a quick web search to catch obvious halluc
 
 1. Search Google Scholar for `[Author Year Title]`
 2. Check if a DOI resolves at `https://doi.org/[DOI]`
-3. If both return the source → proceed to full checklist for exact claims
-4. If the source cannot be confirmed via both signals → **HIGH RISK** of hallucination; investigate before proceeding
+3. **If a DOI is cited, it must resolve.** A cited DOI that 404s is **HIGH RISK** even when Scholar confirms a paper of that name — that is the wrong-DOI / attribution case, not a fabrication, and Scholar cannot detect it.
+4. **If no DOI is cited**, a Google Scholar, publisher, or ISBN record is sufficient to proceed.
+5. If **neither** signal confirms the source → **HIGH RISK** of hallucination; investigate before proceeding
+
+   > **Absence of a DOI is not itself a risk signal.** Books, standards, reports and websites are verified by publisher page, ISBN or Scholar record. 12 of the 25 entries in this framework's own `literature/` carry no resolvable DOI (no `10.xxxx/` identifier anywhere in the entry) — including Toulmin (1958), the source underpinning the ARGUMENT unit type. (Corrected twice on 2026-08-13. It first required **both** signals, which classified every DOI-less source as HIGH RISK and contradicted the rule stated 12 lines below, in the Hard Constraints, and in the WebFetch section built for those sources. The first fix made it a plain **either**, which was worse: an adversarial review seeded a positive against it using *this file's own worked example* — `10.1109/JTEHM.2024.3410652` 404s while Scholar returns a real Lim 2024 JTEHM paper, so the conjunctive rule caught it and a disjunctive rule does not. Step 1 only *records* the DOI when Step 0 passes, so nothing downstream re-resolves it. Gating on DOI **presence** rather than DOI **success** keeps the cross-check between two independent signals — which is what Step 0 actually contributes — without failing books and reports.)
 
 This catches fabricated citations in seconds. The full 6-step checklist below remains necessary for verifying exact claims against the source content.
 
@@ -71,15 +74,15 @@ For each new citation, verify ALL six points:
 
 | Check | Action | Result |
 |-------|--------|--------|
-| 0. Quick web check | Google Scholar + DOI: 10.1109/JTEHM.2024.3410652 → both resolve | PASS |
+| 0. Quick web check | Google Scholar + DOI: 10.1109/JTEHM.2024.3429422 → both resolve | PASS |
 | 1. Canonical citation | DOI confirmed, title and year recorded | PASS |
 | 2. Author real? | Lim at university affiliation page | PASS |
 | 3. Journal real? | IEEE JTEHM on IEEE Xplore | PASS |
-| 4. Scope match? | Abstract mentions chest mechanical properties | PASS |
-| 5. Exact location? | Table 2, Results section | PASS |
-| 6. Read section? | Values confirmed in Table 2: 5.3–13.6 N/mm | PASS |
+| 4. Scope match? | Paper is about a **CPR manikin mechanism**, not a study of human chests | **FAIL** |
+| 5. Exact location? | Results, "Mechanical Characteristic Analysis" | PASS |
+| 6. Read section? | "stiffness at maximum depth ranged from 5.34 to 13.59 N/mm" — **the device the authors built**. The paper's *human* figure is 4–10 N/mm, cited from its own reference [16] | **FAIL** |
 
-**Verdict:** Citation verified. Safe to use.
+**Verdict:** Citation **rejected** — an attribution error. The paper is real and the numbers are real, but they describe the authors' apparatus, not human anatomy. Either cite the device figure for what it is, or follow reference [16] to the human measurement and cite that source. (Corrected 2026-08-13: this table previously carried a wrong DOI (`…3410652` for `…3429422`; four digits differ, so not a transposition) and scored Steps 4–6 PASS. See the note in `../../templates/anti-hallucination.md`.)
 
 ---
 

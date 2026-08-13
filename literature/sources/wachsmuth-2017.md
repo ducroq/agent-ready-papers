@@ -12,7 +12,7 @@ Presents the first holistic taxonomy of argument quality with 15 dimensions acro
 
 ## Key Findings
 - **Logical quality (cogency):** local acceptability, local relevance, local sufficiency
-- **Rhetorical quality (effectiveness):** credibility, clarity, arrangement, appropriateness
+- **Rhetorical quality (effectiveness):** credibility, emotional appeal, clarity, appropriateness, arrangement — **five** sub-dimensions (the arithmetic checks: 1 overall + cogency + 3 + effectiveness + 5 + reasonableness + 3 = 15)
 - **Dialectical quality:** global acceptability, global relevance, global sufficiency
 - Current claim registries check local acceptability only (does the source exist and support?)
 - Missing: local relevance (does evidence support THIS claim?), local sufficiency (ENOUGH evidence?), and all global dimensions

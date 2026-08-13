@@ -6,7 +6,7 @@
 - **Title:** Researcher of the Future — a Confidence in Research report
 - **URL:** https://www.elsevier.com/insights/confidence-in-research/researcher-of-the-future
 - **DOI:** none (industry report; PDF, infographic, and databook downloadable from the landing page)
-- **Report PDF:** https://assets.ctfassets.net/o78em1y1w4i4/137SmnpRSP2mSuhDxtFdls/72a1777e8a72f3c60748956037f76433/Researcher-Of-The-Future.pdf (26 pp.; local copy at `audits/elsevier-researcher-of-the-future-2025.pdf`, gitignored)
+- **Report PDF:** https://assets.ctfassets.net/o78em1y1w4i4/137SmnpRSP2mSuhDxtFdls/72a1777e8a72f3c60748956037f76433/Researcher-Of-The-Future.pdf (44 pp.; local copy at `audits/elsevier-researcher-of-the-future-2025.pdf` <!-- placeholder -->, gitignored and absent by design)
 - **Verified:** 2026-06-12 — statistics first read from the report landing page, then confirmed at the full report PDF same day (84% = Figure 1 p.12; 22% = Figure 2 p.13; methodology box p.4)
 
 ## Summary
@@ -18,7 +18,7 @@ Elsevier survey of 3,200+ researchers across 113 countries on AI adoption, trust
 - "58% of researchers now use AI tools in their work, up from 37% in 2024"
 - 61% use AI for finding/summarizing research; 51% for literature reviews
 - Only 27% believe they have adequate AI training; 32% say their institution provides good AI governance
-- "74% believe peer-reviewed research remains trustworthy and essential to research integrity"
+- 74% say peer-reviewed research is trustworthy (p. 22). A **separate** item — 76% (p. 22) — says *publishers* are critical for research integrity. (Note a second, distinct 76% appears on p. 23 about peer-review status being very/extremely important; cite the page, not the bare figure.) (Corrected 2026-08-13: these were previously merged inside one set of quotation marks, which read as verbatim and was not.)
 - 68% say publish-or-perish pressure has intensified
 
 ## Caveats (tier discipline)

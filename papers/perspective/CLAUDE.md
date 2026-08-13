@@ -53,7 +53,7 @@ We propose a typed verification model: CLAIMs (source-verifiable facts), ARGUMEN
 ## Hard Constraints
 
 - Never cite a paper without verifying it exists (DOI check or Google Scholar)
-- Never use confident language ("demonstrates", "shows") for claims below SUPPORTED tier
+- Never use confident language ("demonstrates", "shows", "confirms") for claims below **ESTABLISHED** tier — that is where the DR-002 mapping puts these three words. (Was "below SUPPORTED tier" until 2026-08-13, which permitted "demonstrates" *at* SUPPORTED — the drift a 2026-03 retrofit audit found in 6 of 22 entries — a single-audit figure registered at EMERGING (`S3-3`), not a calibrated rate.)
 - Never claim own unpublished work as established — always note "under review" status
 - Never exceed word budget (3,500 words target, 5,000 max) without explicit decision record
 - Never skip the anti-hallucination checklist for AI-introduced citations
