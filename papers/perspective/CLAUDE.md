@@ -7,7 +7,7 @@ This paper argues that the scholarly community lacks verification infrastructure
 - **Target:** Learned Publishing (primary), Research Integrity and Peer Review (backup)
 - **Deadline:** TBD
 - **Status:** Phase 3 — Writing (first draft complete)
-- **agent-ready-papers:** v2.5.0 <!-- The framework version this project is pinned to. Compare against the framework CHANGELOG at session start and surface drift; bump deliberately after reading UPGRADING.md. -->
+- **agent-ready-papers:** v2.6.0 <!-- The framework version this project is pinned to. Compare against the framework CHANGELOG at session start and surface drift; bump deliberately after reading UPGRADING.md. v2.5.0 -> v2.6.0 reconciled 2026-08-12 via /audit-context. v2.6.0 carried two paper-facing template changes, and BOTH are not applicable here: (1) the `## Active work` section in templates/CLAUDE.md — this paper uses the repo's shared memory index at ../../memory/MEMORY.md, and that template ships the section with an explicit instruction to delete it where an index exists; (2) the write-at-claim-time cue in templates/hypothesis-log.md — this paper keeps no local hypothesis-log.md, so there is no copy to update. No file in this directory changed. (An earlier draft of this note said `## Active work` was "the only paper-facing change" and was wrong on point 2; caught by the /review-changes doc-accuracy lens against the v2.6.0 CHANGELOG.) -->
 
 <!-- This paper lives inside the framework repo, so the pin above tracks the
      framework's own version by construction. It is stated anyway: this is the
