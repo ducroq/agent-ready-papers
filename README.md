@@ -109,9 +109,9 @@ Adopt the framework on a new paper in five steps (~10 minutes to set up):
 
 | Tier | Files | When |
 |------|-------|------|
-| **Required for first use** | `CLAUDE.md`, `claim-registry.md`, `anti-hallucination.md`, `writing-guide.md` | From day one |
+| **Required for first use** | `templates/CLAUDE.md`, `templates/claim-registry.md`, `templates/anti-hallucination.md`, `templates/writing-guide.md` | From day one |
 | **Useful once the paper grows** | `agents/review-prompt.md`, `agents/equation-checker.md`, `templates/decision-record.md`, `templates/glossary.md`, `templates/vv-framework.md`, `templates/cost-log.md`, `templates/hypothesis-log.md` | After ~20 registry entries, or once you hit a decision / cost-tracking / pre-registered bet worth recording |
-| **Reference / background only** | `key-quotes.md` | When you want context, not before |
+| **Reference / background only** | `templates/key-quotes.md` | When you want context, not before |
 
 ### Driving it with your agent
 
