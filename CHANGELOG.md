@@ -45,6 +45,48 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
        ("No adopter action required.") rather than omitting the subsection.
 -->
 
+## v2.6.1 (2026-08-13)
+
+`/audit-context` run and full remediation — the item v2.6.0 deferred. v1.23.0's placeholder markers were that release's only "not adopted" entry, blocked on finding their population; this release finds it (~48 paths) and fixes the real defects the run surfaced. Also versions two post-v2.6.0 corrections that landed untagged. PATCH: nothing new to adopt, and every change is confined to an existing artifact.
+
+### Docs
+
+- **`CLAUDE.md`** — new Hard Constraint documenting the `<!-- placeholder -->` convention: a path never meant to resolve carries the marker, or it is re-triaged as broken on every audit forever. Two properties decide whether a marker is correct, and both were learned by reading the checker rather than assuming: it is **span-scoped** (it covers the nearest backticked path *before* it, not the line), and a marker on a path that resolves **anywhere, including by filename suffix**, is reported as a stale marker. That second property is why three template placeholders in `templates/CLAUDE.md` are deliberately left unmarked — they suffix-match this repo's own paper instances, so marking them is a finding and not marking them is a finding. The bullet also carries a **version-anchored caveat**: as of companion v1.25.0 the checker has no doc-relative rung, so a correct relative link is reported as a collision. The anchor is deliberate, so the claim dates itself when the pin moves.
+- **`README.md`** — the three-tier adoption table qualified bare template filenames in the *Required for first use* and *Reference / background only* rows. The middle row already used full paths; the other two did not, so the column mixed "source file to copy" with "file in your project" and the same name could mean either.
+
+### Templates
+
+- **`templates/CLAUDE.md`** — the *Ending a session* row pointed at `../../memory/gotcha-log.md`, which hardcodes a two-deep `papers/<name>/` layout. This template also covers a single-paper repo where the paper **is** the root, where that path resolves nowhere. Now written as `<repo-root>/memory/gotcha-log.md` with both concrete forms given. Backward-compatible: an existing project's own copy keeps working unchanged.
+
+### Papers
+
+- **`papers/perspective/CLAUDE.md`** — framework pin reconciled v2.5.0 → v2.6.0 with a record of what was reviewed and why it did not apply. (`papers/constructive-lenses/` is gitignored; it received the same treatment plus a first-ever stamp, and is not part of this release's tracked diff.)
+
+### Also versioned here
+
+Two commits landed after the v2.6.0 tag and were never released:
+
+- **`.gitignore`** — `memory/`, `audits/` and `docs/work-items/` anchored to the repo root. Unanchored, those patterns match at any depth, and in this repo `.gitignore` decides whether an unpublished manuscript is public.
+- **`CLAUDE.md`** — `audits/` documented as a reserved path with no current contents, rather than as a directory that exists.
+
+### Reference integrity — what the run actually found
+
+102 findings, of which **42 (41%) were correct doc-relative references**. Three upstream defects were reproduced on seeded minimal inputs and filed against `agent-ready-projects`: [#54](https://github.com/ducroq/agent-ready-projects/issues/54) (Step 4 has no doc-relative rung), [#55](https://github.com/ducroq/agent-ready-projects/issues/55) (backticked markdown link *text* extracted as a reference, so a correct link reports a phantom collision), [#56](https://github.com/ducroq/agent-ready-projects/issues/56) (a template placeholder cannot be marked in a repo that also ships instances). After remediation: 65 findings, no stale and no ineffective markers.
+
+Genuine defects fixed, all in gitignored surfaces except where noted: a broken `writing-guide.md` reference in `papers/constructive-lenses/` (its scaffold was incomplete), two memory-index rows naming user-global skills as if they lived in this repo, a paper carrying no framework stamp at all, an orphaned `memory/presentation/`, and a dangling colon the v2.6.0 memory extraction left behind.
+
+### Adopter notes
+
+**No action required.** Nothing was added, removed or renamed, and no required structure changed.
+
+Worth taking if you maintain your own copies: the `templates/CLAUDE.md` gotcha-log path fix if your project is not two levels deep, and the `<!-- placeholder -->` convention if you run `/audit-context` and are tired of re-triaging the same non-defects. The convention itself is companion v1.23.0's, not this repo's — you get it from `agent-ready-projects`, not from here.
+
+Paper pins are deliberately **not** bumped by this release; bumping one is the paper author's act, and the drift row exists to surface it at session start.
+
+### Versioning rationale
+
+Step 2 rule 1 does not fire: no existing consumer must act to keep working. Rule 2 lands on PATCH — no new template, DR, tool or unit type; the template change edits an existing row. The `<!-- placeholder -->` convention is documented in this repo's own orientation file rather than in a template adopters install, and its source is the companion. Precedent: **v1.6.2**, a PATCH that added a Hard Constraint to both the root and template `CLAUDE.md`; **v1.6.3** likewise for a root `CLAUDE.md` row. The MINOR reading — the bump table lists "new documented convention" — was weighed and set aside on those precedents.
+
 ## v2.6.0 (2026-08-12)
 
 Cumulative companion adoption from `agent-ready-projects` v1.19.0 → v1.25.0 — seven releases. Most of the range was **already in force**: the three user-global skills (`/curate`, `/audit-context`, `/update-drift`) are byte-identical to the companion's v1.25.0 tracked copies, so what follows is only what needed an artifact on this side. What lands here: an **`## Active work` section** in `templates/CLAUDE.md`, a **structural pre-check** and a **merged measurable-claim rule** in `/review-changes`, a **hardened tag selector** in `/release`, a **session-start memory-index row** in `CLAUDE.md`, an **Occurrences column** in the gotcha log, and the **withdrawal of the 2-3 line gotcha rule** shipped in v2.5.0. New template section = MINOR bump.

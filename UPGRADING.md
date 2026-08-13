@@ -11,6 +11,20 @@ The full release notes are in [`CHANGELOG.md`](CHANGELOG.md). This file is the q
 - **PATCH** version bumps are docs-only / clarifications, or backward-compatible bug fixes (e.g. a tooling fix that changes no public interface). Usually no action required; a bug fix may be worth adopting if you hit the bug.
 - Every release entry in `CHANGELOG.md` includes an "Adopter notes" / "Adopter action" subsection. This file aggregates them per version for quick lookup.
 
+## v2.6.1 (2026-08-13)
+
+**From v2.6.0 — what to review when you bump your pin to v2.6.1:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| `templates/CLAUDE.md` — the *Ending a session* row no longer hardcodes `../../memory/gotcha-log.md` | **Check yours if your paper project is not exactly two levels deep.** `../../` assumes a `papers/<name>/` layout; in a single-paper repo where the paper *is* the root it resolves nowhere, and the row silently pointed at nothing. The template now says `<repo-root>/memory/gotcha-log.md` and gives both concrete forms. Your existing copy keeps working — this is a correction to what new projects scaffold from. |
+| Root `CLAUDE.md` — new Hard Constraint documenting the `<!-- placeholder -->` marker for paths never meant to resolve | **Optional, and it is not ours to give you** — the convention ships in `agent-ready-projects` v1.23.0, which is where you adopt it from. Worth knowing if you run `/audit-context`: without markers, instructional and cross-repo paths are re-reported as broken on every run forever. Two gotchas if you do adopt it: the marker is **span-scoped** (it covers the nearest backticked path *before* it, not the whole line), and a marker on a path that resolves anywhere — **including by filename suffix** — is reported as a stale marker, which makes template placeholders unmarkable in a repo that also ships instances of that template. |
+| `README.md` — adoption-tier table qualifies template filenames with their `templates/` path | None. The middle row already did; the other two now match, so a bare name no longer means "source file" in one row and "file in your project" in another. |
+| `.gitignore` — `memory/`, `audits/`, `docs/work-items/` anchored to the repo root (landed after v2.6.0, versioned here) | None for you, but **worth copying the reasoning** if you keep unpublished manuscripts in a public repo. Unanchored, those patterns match at any depth; anchored, they mean what they look like they mean. |
+| Reference-integrity caveat | **Read a `/audit-context` Step 4 report as a candidate list, not a defect list.** As of companion v1.25.0 it has no doc-relative rung, so a correct relative link inside a nested project file is reported as a collision — 42 of this repo's 102 findings were exactly that. Re-resolve a finding against the referencing document's own directory before acting. Tracked upstream as [projects#54](https://github.com/ducroq/agent-ready-projects/issues/54), with [#55](https://github.com/ducroq/agent-ready-projects/issues/55) and [#56](https://github.com/ducroq/agent-ready-projects/issues/56). |
+
+**No breaking changes.** PATCH: nothing new to adopt; every change is confined to an existing artifact. Companion pin unchanged at v1.25.0. Paper pins are not bumped by a framework release — that is the paper author's deliberate act, and the drift row surfaces it at session start.
+
 ## v2.6.0 (2026-08-12)
 
 **From v2.5.0 — what to review when you bump your pin to v2.6.0:**

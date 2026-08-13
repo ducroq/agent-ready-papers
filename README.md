@@ -8,7 +8,7 @@ Companion to [agent-ready-projects](https://github.com/ducroq/agent-ready-projec
 
 **Status:** A working framework we use on our own papers. Broader empirical validation across other authors and domains is an open question — adopt it as a structured starting point, not as a tested method.
 
-**Current release:** v2.6.0 (2026-08-12) — see [`CHANGELOG.md`](CHANGELOG.md). Pin your project with `agent-ready-papers: v2.6.0` in your CLAUDE.md and surface drift at session start; [`templates/CLAUDE.md`](templates/CLAUDE.md) now carries that line for you.
+**Current release:** v2.6.1 (2026-08-13) — see [`CHANGELOG.md`](CHANGELOG.md). Pin your project with `agent-ready-papers: v2.6.1` in your CLAUDE.md and surface drift at session start; [`templates/CLAUDE.md`](templates/CLAUDE.md) now carries that line for you.
 
 ## The Core Problem
 
@@ -119,7 +119,7 @@ The five steps above describe *what* gets set up. In practice you delegate four 
 
 **Bootstrap a new paper project** (once, at project start):
 
-> Start a paper project using the agent-ready-papers framework at `<framework>` (currently v2.6.0). Topic: [X]. Target journal: [Y]. Deadline: [Z]. Do this: (1) Create `papers/<name>/`. (2) Copy `<framework>/templates/CLAUDE.md`, `claim-registry.md`, `anti-hallucination.md`, `writing-guide.md` into it. (3) Fill `CLAUDE.md` with the paper identity. (4) Initialise the registry with empty per-type sub-tables for each anticipated section. (5) Commit. From now on, read `papers/<name>/CLAUDE.md` at the start of every session.
+> Start a paper project using the agent-ready-papers framework at `<framework>` (currently v2.6.1). Topic: [X]. Target journal: [Y]. Deadline: [Z]. Do this: (1) Create `papers/<name>/`. (2) Copy `<framework>/templates/CLAUDE.md`, `claim-registry.md`, `anti-hallucination.md`, `writing-guide.md` into it. (3) Fill `CLAUDE.md` with the paper identity. (4) Initialise the registry with empty per-type sub-tables for each anticipated section. (5) Commit. From now on, read `papers/<name>/CLAUDE.md` at the start of every session.
 
 **Register claims as I draft** (background companion mode for every writing session):
 
