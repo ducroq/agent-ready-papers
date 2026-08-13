@@ -11,6 +11,25 @@ The full release notes are in [`CHANGELOG.md`](CHANGELOG.md). This file is the q
 - **PATCH** version bumps are docs-only / clarifications, or backward-compatible bug fixes (e.g. a tooling fix that changes no public interface). Usually no action required; a bug fix may be worth adopting if you hit the bug.
 - Every release entry in `CHANGELOG.md` includes an "Adopter notes" / "Adopter action" subsection. This file aggregates them per version for quick lookup.
 
+## v3.0.0 (2026-08-13)
+
+**From v2.6.1 — what to review when you bump your pin to v3.0.0:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| `templates/anti-hallucination.md` — **Step 0's decision rule replaced** | **Required — re-read Step 0 and update your paper-local copy.** It required **both** Google Scholar *and* DOI resolution to proceed, which marked every DOI-less source HIGH RISK: books, standards, reports, and any website — including the sources the file's own WebFetch ladder exists to verify. It now gates on DOI **presence**: *if a DOI is cited it must resolve; if none is cited, a Scholar / publisher / ISBN record suffices.* Note this is stricter in one direction — a cited DOI that 404s is now HIGH RISK **even when Scholar confirms a paper of that name**, because that is the wrong-DOI case and Scholar cannot see it. |
+| `templates/vv-framework.md` — **Gate 2 gains `P2 entries 70% verified`** | **Required — a paper that passed Gate 2 may no longer pass.** The 70% P2 target was already documented in `docs/THRESHOLDS.md` and the README Gate 2 checklist; only the template's own checklist omitted it. If your P2 entries are under 70% verified, you now have an unchecked Gate 2 box. `python -m tools.coverage <registry> --strict` has always enforced this target, so a project gating on the tool is unaffected. |
+| `templates/CLAUDE.md` + `templates/writing-guide.md` — **confident-language floor moves from below-SUPPORTED to below-ESTABLISHED** | **Required — re-audit your prose.** "demonstrates", "shows" and "confirms" were barred only *below* SUPPORTED, which permitted them **at** SUPPORTED; the DR-002 mapping reserves them for ESTABLISHED. Prose that was compliant is no longer. The pre-submission checklist in `writing-guide.md` had the same hole, so ticking that box previously certified the violation. Grep your manuscript for the three words and check each against its registered tier. |
+| `templates/vv-framework.md` — P1 tier floor marked as a **manual** check | **Know what your green `--strict` does not cover.** `tools/coverage.py` reads only the Status checkbox and never the Confidence column, so `--strict` reports the P1 gate met for a registry whose P1 rows are all verified and all SPECULATIVE. Priority and confidence are deliberately orthogonal axes; the tool measures one of them. |
+| `templates/claim-registry.md` — PROVOCATION sub-table now parses | **Check yours if you use PROVOCATION.** Any prose between a sub-table marker (`**PROVOCATIONs**`) and its table header makes `tools/coverage.py` abandon that sub-table silently — the rows vanish from the report and `--strict` passes because there is nothing left to fail. If your registry has explanatory text under a marker, move it above the marker. |
+| `templates/anti-hallucination.md` — worked example rewritten as a **failing** example | None, but worth reading. The example previously scored a citation PASS on every step and concluded "Safe to use"; the citation carried a DOI that 404s and attributed a device's measurement to human anatomy. It now scores Steps 4 and 6 FAIL and rejects the citation. |
+| `decisions/DR-009` (Accepted) — Key Insight corrected | None. The decision is unchanged; the supporting observation is now stated with its confound disclosed (vendor, prompt and inference mode varied together, so it does not isolate the prompt). If you cited DR-009 for "the prompt matters more than the model", that claim is weaker than it read. |
+| `agents/review-prompt.md` — recommendation bands | None. `3.5–3.9` → `3.5–<4.0` and `2.5–3.4` → `2.5–<3.5`, closing two ranges that fell in no band. |
+| `tools/check_dois.py` — trailing `}` stripped | None, and re-run it if you gave it a `.bib` file. Every BibTeX `doi = {…}` field previously produced a false 404. |
+| `decisions/DR-019` (Proposed) — Step Z surface scope | None — it is **Proposed and unimplemented**, and says so. Only Accepted DRs bind. |
+
+**Breaking changes:** three, all listed above as *Required* — Step 0's decision rule, Gate 2's P2 line, and the confident-language floor. Each changes what a compliant project must do; none removes an artifact. If you maintain paper-local copies of `anti-hallucination.md` or `writing-guide.md`, they keep the old rules until you refresh them.
+
 ## v2.6.1 (2026-08-13)
 
 **From v2.6.0 — what to review when you bump your pin to v2.6.1:**

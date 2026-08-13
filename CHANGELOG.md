@@ -45,6 +45,60 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
        ("No adopter action required.") rather than omitting the subsection.
 -->
 
+## v3.0.0 (2026-08-13)
+
+Repo-wide sweep of the shipped surface and the literature layer, and remediation of what it found. Three adopter-installed templates now oblige action, so **MAJOR** — the first MAJOR triggered by tightening rather than removal.
+
+The sweep ran 10 reviewers over `templates/`, `agents/`, the README's normative sections and `literature/sources/`, with an independent adjudicator over the judgement calls and a full `/review-changes` battery over the remediation itself. The classification rubric was pre-registered before any file was read.
+
+### Templates
+
+- **`anti-hallucination.md` — the worked example was wrong, and is now a *failing* example.** It shipped as the demonstration of a *successfully verified* citation and failed its own check twice: a DOI that returns 404 marked `resolves | PASS`, and the CPR-manikin **device's** stiffness range (5.34–13.59 N/mm) attributed to **human chests**, marked PASS on Steps 4, 5 and 6. The paper's human figure is 4–10 N/mm, cited from its own reference [16]. Rewritten to score those steps FAIL and reject the citation as an attribution error — the failure mode the same file tabulates and previously demonstrated passing.
+- **`anti-hallucination.md` — Step 0's decision rule replaced.** It required **both** Google Scholar *and* DOI resolution, which classified every source without a DOI as HIGH RISK — including Toulmin (1958), which underpins the ARGUMENT unit type; 12 of 25 entries in this repo's own `literature/sources/` carry no resolvable DOI. It now gates on DOI **presence**: a cited DOI must resolve, an absent one is not a failure. An interim fix made it a plain "either" and was refuted during review by a seeded positive built from this file's own worked example.
+- **`vv-framework.md` — Gate 2 gains `P2 entries 70% verified`**, which `docs/THRESHOLDS.md` and the README already required. The P1 tier floor is split out as an explicit **manual** check: `tools/coverage.py` reads only the Status checkbox and never the Confidence column, so `--strict` reports that gate met for a registry whose P1 rows are all verified and all SPECULATIVE.
+- **`CLAUDE.md` and `writing-guide.md` — the confident-language floor moves to below ESTABLISHED.** Four surfaces said "below SUPPORTED", permitting "demonstrates" *at* SUPPORTED — the exact drift a 2026-03 retrofit audit found in 6 of 22 entries, and contrary to the DR-002 mapping the same guide ships. The pre-submission checklist had the same hole, so it certified the violation it exists to prevent.
+- **`claim-registry.md` — the PROVOCATION sub-table was invisible to `tools/coverage.py`.** A prose paragraph between the sub-table marker and its header made the parser abandon the table, so a speculative-design adopter's PROVOCATION rows were silently uncounted. Paragraph moved above the marker; a comment records why it must stay there.
+- **`decision-record.md`** — the `status:` vocabulary gains `Partially superseded`, which DR-001 has used all along.
+
+### Decisions
+
+- **`DR-009` (Accepted, binding) — Key Insight corrected.** It read "the prompt matters more than the model … the *same* model prompted to reproduce", which is false against the record: vendor, prompt and inference mode all varied together (Gemini reviewing vs Claude Sonnet with extended thinking). Now states the observation with the confound disclosed. The decision itself — calculation verification as a distinct procedure — is unchanged.
+- **`DR-019` (Proposed) — Step Z surface scope.** Names framework prose as an unstated axis in Step Z's scope. Carries an explicit `Implementation status: nothing implemented` section and a probe that fails if that changes silently, because a Proposed DR must not read as shipped.
+
+### Agents
+
+- **`equation-checker.md`** — the KEY INSIGHT block asserted a causal result the underlying N=1 observation cannot isolate. Reworded with the confound named; the operating instructions are unchanged and do not depend on resolving it.
+- **`review-prompt.md`** — recommendation bands were `≥4.0` / `3.5–3.9` / `2.5–3.4`, leaving 3.4–3.5 and 3.9–4.0 unclassifiable. Paper 1 scored 3.95, landing in the second gap. Now `3.5–<4.0` and `2.5–<3.5`.
+
+### Tooling
+
+- **`check_dois.py`** — `_clean_doi` did not strip a trailing `}`, so every BibTeX `doi = {…}` field produced a false 404. Twelve of twelve DOIs in `papers/perspective/references.bib` reported as failures; all twelve resolve. Regression test added and mutation-tested against the unfixed implementation.
+- **`tools/README.md`** — a dead DR link, and a roadmap item listing a feature that shipped.
+
+### Docs
+
+- **`THRESHOLDS.md`** — the 85% envelope's stated design property ("a project hitting its per-tier targets clears the overall threshold automatically") is arithmetically false, and its own adjacent example falsified it. The break point is a range (25–50%, depending on tier mix), not the 37.5% implied by one illustrative shape. Also documents that `--strict` never computes an overall figure, so the tool and the Gate 2 checklist disagree about what Gate 2 requires.
+
+### Literature
+
+Nine entries corrected. **No fabricated sources, no invented authors, no invented numbers were found across 25 entries, and every DOI checked resolves** — the failure mode was quote fidelity: a phrase attributed to Hevner et al. belongs to Venable (2010) reporting objections *to* their work; a dataset (AbstRCT, ECAI 2020) listed among the findings of a survey published in 2019; a merged quotation; a taxonomy misclassification. `palmblad-2026.md` gains the paper's own caveat that compliance degrades under override instructions.
+
+### Adopter notes
+
+**New adopters** get templates whose worked example teaches the error it previously demonstrated passing, a Gate 2 that matches the thresholds documented elsewhere, and a DOI checker that does not report false failures.
+
+**Existing adopters must act on three changes** — see `UPGRADING.md` for the table:
+
+1. **Re-read Step 0 in your `anti-hallucination.md`.** The decision rule changed in both directions.
+2. **Add the P2 line to your Gate 2 checklist.** A paper that passed Gate 2 with unverified P2 entries no longer does.
+3. **Re-audit prose for "demonstrates" / "shows" / "confirms" at SUPPORTED tier.** These are now reserved for ESTABLISHED.
+
+If you maintain paper-local copies of `anti-hallucination.md` or `writing-guide.md`, they carry the old rules until you refresh them.
+
+### Versioning rationale
+
+**MAJOR.** Step 2 rule 1 fires: existing consumers must act to stay working, on two counts in adopter-installed templates — Gate 2's new P2 line can fail a paper that previously passed, and the confident-language floor makes previously-compliant prose non-compliant. Rule 1 outranks rule 2, so the presence of a new DR (which alone would be MINOR) does not decide it. The closest precedent is **v2.0.0**, this repo's only other MAJOR — but that fired on *removal* of public artifacts, so this is a new trigger shape rather than a followed precedent, and it is recorded as such.
+
 ## v2.6.1 (2026-08-13)
 
 `/audit-context` run and full remediation — the item v2.6.0 deferred. v1.23.0's placeholder markers were that release's only "not adopted" entry, blocked on finding their population; this release finds it (~48 paths) and fixes the real defects the run surfaced. Also versions two post-v2.6.0 corrections that landed untagged. PATCH: nothing new to adopt, and every change is confined to an existing artifact.

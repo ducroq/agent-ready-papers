@@ -7,7 +7,7 @@
 - **Target:** [Journal name — special issue / track if applicable]
 - **Deadline:** [Submission date]
 - **Status:** [Phase 0-5: Framing / Requirements / Literature Audit / Writing / Validation / Submission]
-- **agent-ready-papers:** v2.6.1 <!-- The framework version this project is pinned to. Keep this line: the drift row in the table below has nothing to read without it. Bump it deliberately, after reviewing UPGRADING.md — not automatically. -->
+- **agent-ready-papers:** v3.0.0 <!-- The framework version this project is pinned to. Keep this line: the drift row in the table below has nothing to read without it. Bump it deliberately, after reviewing UPGRADING.md — not automatically. -->
 
 ## Core Concept
 
