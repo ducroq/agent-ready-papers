@@ -127,7 +127,7 @@ Ten reviewers over the shipped surface (`templates/`, `agents/`, README normativ
 
 **Nothing in the Decision section has been implemented.** Recorded explicitly because a 2026-08-13 review found this document reading as though it had. What exists today: the Context, the two-stage evidence, and the sweep result. What does not: the Step Z surface axis, the CHANGELOG entry, the `UPGRADING.md` row.
 
-<!-- verify: cd "$(git rev-parse --show-toplevel)" && grep -q 'Applies to all project types' templates/anti-hallucination.md && ! grep -q 'DR-019' CHANGELOG.md && echo 'DR-019 correctly unimplemented' || { echo 'CLAIM REFUTED: DR-019 has been partly implemented — update this section and the Status field'; exit 1; } -->
+<!-- verify: cd "$(git rev-parse --show-toplevel)" && grep -q 'Applies to all project types' templates/anti-hallucination.md && echo 'DR-019 correctly unimplemented: Step Z still has no surface axis' || { echo 'CLAIM REFUTED: DR-019 has been partly implemented — update this section and the Status field'; exit 1; } -->
 
 <!-- The `||` above is deliberately UNescaped. The `\|` form is correct only
      inside a markdown table cell, where a bare pipe would split the row and
