@@ -112,22 +112,26 @@ Paper 1 ("The Verification Gap") hit 100% on all tiers (19 entries) and scored 3
 
 ### Scope: these thresholds assume you can close your own claims
 
-*(EMERGING, n=2 — added 2026-08-16 on the resolution of a registered bet; see `vv/hypothesis-log.md`.)*
+*(Added 2026-08-16 on the resolution of a registered bet; see `vv/hypothesis-log.md`. **Tier is per row, not per table** — see the n column below. The document's own SPECULATIVE status is unchanged: this section observes an assumption the thresholds were making, and does not raise the tier of any threshold. Both audits behind it are unpublished and gitignored, so — per the standard `templates/vv-framework.md` §3 sets for exactly this case — **treat the pattern as directional and measure your own registry rather than checking against these numbers**.)*
 
 Every number above presumes a **self-authored** project, where an unverified claim is work the author has not done yet. Applied to a document the project did not write, coverage measures something different, and two audits run in this repo put a usable bound on how different.
 
 The governing variable is not third-party status. It is **whether a claim can be closed without its author.**
 
-| Claim closes by… | Third-party coverage | Why |
-|---|---|---|
-| Citation | Capped, and low | The evidence is in the author's hands; true-but-uncited stays `[ ]` |
-| Reproduction (arithmetic, code, derivation) | Uncapped | A stranger can compute it; one such audit reached 77% on a document citing **no** sources at all |
-| Inference (ARGUMENT, PROPOSITION) | ~0% in both audits so far | Toulmin item 2 requires every ground `[x]`, and the grounds are the audited text's own units |
+| Claim closes by… | Third-party coverage | n | Tier | Why |
+|---|---|---|---|---|
+| Citation | Low — 16% on the CLAIM axis | 1 | EMERGING | The evidence is in the author's hands; true-but-uncited stays `[ ]` |
+| Reproduction (arithmetic, code, derivation) | Higher — **not** demonstrably uncapped: 77% on the CLAIM axis, with the residual 3 of 13 unexplained | 1 | EMERGING | A stranger can compute it. The audit reaching 77% cited **no** sources at all, so the figure is not a function of sourcing quality |
+| Inference (ARGUMENT, PROPOSITION) | 0% in both audits | 2, of which 1 informative | EMERGING | Toulmin item 2 requires every ground `[x]`, and the grounds are the audited text's own units. See the caveat below |
 
 Three consequences for reading a coverage number:
 
-1. **Do not compare coverage across projects whose claims close differently.** The same percentage means different things, and the two audits here differ by a factor of four for that reason alone.
-2. **Report the CLAIM and the ARGUMENT/PROPOSITION axes as a pair.** `tools/coverage.py` already emits both. A single overall figure hides the split that carries the information — which is how a 12% ceiling on one audit was briefly read as a general property of third-party review.
+1. **Do not compare coverage across projects whose claims close differently.** The same percentage means different things. The two audits here differ by roughly a factor of five on the CLAIM axis (16% and 77%); **claim-closure type is the candidate explanation, not an isolated one** — the two also differ in genre, size, subject and auditor familiarity, and nothing was held constant. This repo retiered `README.md` R-4 from SUPPORTED to EMERGING for exactly this shape of attribution, and the same caveat applies here.
+
+   On the inference row: 0-of-N is **largely forced** where CLAIM coverage is low, because a unit needs *every* ground verified. In the 16% audit, 0 of 22 was close to arithmetically inevitable and carries little information. In the 77% audit, 0 of 6 is genuinely surprising and is the one informative observation. Read the row as n=1, not n=2.
+2. **Report the CLAIM and the ARGUMENT/PROPOSITION axes as a pair.** `tools/coverage.py` emits per-unit-type coverage, which gives you both. A single overall figure hides the split that carries the information — which is how a 12% ceiling on one audit was briefly read as a general property of third-party review, and why the numbers in the table above are CLAIM-axis figures rather than overall ones.
+
+   ⚠ **Coverage is not grounds-verification, and no shipped tool measures the latter.** `tools/coverage.py` reads the Status checkbox only; it has no concept of Toulmin grounds. "ARGUMENT coverage 0%" and "0 units with every ground `[x]`" are different measurements — a unit can be `[ ]` for a warrant or rebuttal failure with all grounds verified, and an auditor can tick `[x]` while a ground is `[ ]`. If you need the grounds figure, **count it by hand and say that you did**.
 3. **A missed threshold on a third-party audit is not a defect in the audit.** It is a measurement of how much of that document its readers can check. Say which reading you mean.
 
 This does **not** create a threshold exemption, and no number above changes. It states the assumption the thresholds were always making. Registered at EMERGING because n=2, both self-run, with no external replication.
