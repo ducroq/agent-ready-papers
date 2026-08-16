@@ -110,6 +110,28 @@ The framework requires SPECULATIVE-tier claims to use hedged language ("warrants
 
 Paper 1 ("The Verification Gap") hit 100% on all tiers (19 entries) and scored 3.95/5.0 pre-DR-011 simulated peer review. This is **consistent with** the thresholds but does not validate them — a project would also be consistent with the thresholds if those thresholds were wrong, because Paper 1's coverage was driven by the author's discipline, not by the threshold-induced pressure.
 
+### Scope: these thresholds assume you can close your own claims
+
+*(EMERGING, n=2 — added 2026-08-16 on the resolution of a registered bet; see `vv/hypothesis-log.md`.)*
+
+Every number above presumes a **self-authored** project, where an unverified claim is work the author has not done yet. Applied to a document the project did not write, coverage measures something different, and two audits run in this repo put a usable bound on how different.
+
+The governing variable is not third-party status. It is **whether a claim can be closed without its author.**
+
+| Claim closes by… | Third-party coverage | Why |
+|---|---|---|
+| Citation | Capped, and low | The evidence is in the author's hands; true-but-uncited stays `[ ]` |
+| Reproduction (arithmetic, code, derivation) | Uncapped | A stranger can compute it; one such audit reached 77% on a document citing **no** sources at all |
+| Inference (ARGUMENT, PROPOSITION) | ~0% in both audits so far | Toulmin item 2 requires every ground `[x]`, and the grounds are the audited text's own units |
+
+Three consequences for reading a coverage number:
+
+1. **Do not compare coverage across projects whose claims close differently.** The same percentage means different things, and the two audits here differ by a factor of four for that reason alone.
+2. **Report the CLAIM and the ARGUMENT/PROPOSITION axes as a pair.** `tools/coverage.py` already emits both. A single overall figure hides the split that carries the information — which is how a 12% ceiling on one audit was briefly read as a general property of third-party review.
+3. **A missed threshold on a third-party audit is not a defect in the audit.** It is a measurement of how much of that document its readers can check. Say which reading you mean.
+
+This does **not** create a threshold exemption, and no number above changes. It states the assumption the thresholds were always making. Registered at EMERGING because n=2, both self-run, with no external replication.
+
 ## What would harden these numbers
 
 Promoting any of these thresholds from SPECULATIVE to EMERGING or SUPPORTED requires:

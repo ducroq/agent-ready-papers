@@ -26,21 +26,40 @@
 
 ## Open
 
-### [2026-08-16] The verification ceiling on a third-party audit is structural, not project-specific
+### [2026-08-16] The third-party ceiling lives in the interpretive layer, not the factual one
 
-**Position (provisional):** The coverage ceiling measured on a third-party audit run in this repo — **11 of 91 units (12%)** — is a property of *auditing text the project did not author*, and any future third-party audit here will land in the same low band (under ~25%) regardless of subject, source quality or effort spent. Two independent mechanisms produce it and both are structural: (1) claims the audited text leaves uncited are permanently `[ ]`, because only the original author can cite them and the framework's own rule is that true-and-uncited is `[ ]`; (2) every ARGUMENT and PROPOSITION fails Toulmin item 2, which requires each ground be `[x]` verified, because their grounds *are* those uncited claims. Measured on the worked case: 0 of 22 had fully verified grounds. If this holds, the project-level ruling that produced it (a DR titled *Coverage thresholds do not apply to a third-party audit*, held in the audit's own untracked project directory) generalises to a framework-level statement, and `docs/THRESHOLDS.md` needs an explicit scope note naming the self-authorship assumption it currently leaves unstated.
+**Position (provisional):** Successor to the split entry in *Resolved*, carrying only the half that survived. **In any third-party audit, coverage of ARGUMENT and PROPOSITION units will be at or near 0%, whatever the CLAIM coverage turns out to be.** The mechanism is Toulmin item 2: an ARGUMENT is verified only when each of its grounds is `[x]`, and its grounds are the audited text's own units. Where those units are closeable by a reader — reproducible arithmetic, checkable references — the CLAIM layer can go high; the interpretive layer still cannot, because the audited author's *inferences* are not reproducible in the way their arithmetic is. Measured twice: 0 of 22 and 0 of 6, on documents with nothing else in common.
 
-**Alternative:** A second third-party audit reaches materially higher coverage — say above 40% — because its subject cites its sources properly, so most CLAIMs close on the author's own citations and the ARGUMENT grounds verify in turn. In that case the ceiling is a function of *how well-sourced the audited text is*, not of third-party auditing as such, and the right fix is guidance about which documents are worth auditing rather than a threshold exemption. The 12% figure would then be evidence about one unusually uncited essay and nothing more.
+**The stronger claim this deliberately does not make:** that CLAIM coverage is capped. It is not — one audit reached 77% on a document citing no sources at all. The weakest informative form is the interpretive half alone, per the 2026-06-11 discipline.
 
-**Method:** On the next third-party audit in this repo, record before drawing any conclusion: total units; fraction of CLAIMs the audited text cites at all; coverage at the point the audit is declared complete; and the count of ARGUMENTs/PROPOSITIONs with fully verified grounds. The last is the decisive one — if it is again 0, mechanism (2) is structural and the position holds even if mechanism (1) varies with subject. Compute it mechanically rather than by inspection; the worked case first produced a wrong ceiling estimate (~32%) from reasoning about the grounds instead of measuring them.
+**Alternative (the falsifier):** A third-party audit in which one or more ARGUMENTs or PROPOSITIONs reaches `[x]` with all grounds verified. Most likely route: a document whose interpretive steps rest entirely on units the auditor could close independently — a purely mathematical argument, say, where each premise is a reproducible calculation. If that happens the pattern is about *inference from uncheckable premises*, not about third-party status, and the right response is guidance on which documents repay auditing rather than any threshold change.
 
-**Revisit trigger:** A second third-party audit completing in this repo; or any change relaxing Toulmin item 2 or adding an exception for true-but-uncited grounds, which would raise the ceiling substantially and is the single change with the largest effect on it.
+**Method:** On the next third-party audit, before drawing conclusions, record the count of ARGUMENT + PROPOSITION units with all grounds `[x]`, and separately the CLAIM coverage. Compute mechanically — `tools/coverage.py` reports both axes and needs no adaptation. The two numbers must be reported as a pair; the first audit's error was letting a single overall percentage stand for both.
 
-**Review by:** 2027-08-16 — backstop. Expected to resolve whenever a second third-party audit runs; there is no reason to force one early.
+**Revisit trigger:** A third third-party audit completing in this repo; or any change to Toulmin item 2 or to how grounds verification is scored, which would move this directly.
 
-**Origin:** A third-party audit of a published essay, run to completion in this repo on 2026-08-16. The audit is deliberately not tracked in git (see `.gitignore` — reviews of work this project did not author stay invisible, because the repo is public as a general tool), so this entry records the *structural* result without the subject. The ceiling was reached, not merely approached: after full source verification, cluster sourcing and the Toulmin/Whetten passes, no further unit could be marked `[x]` by the audit at all.
+**Review by:** 2027-08-16 — backstop; expected to resolve whenever a third audit runs.
+
+**Origin:** Registered 2026-08-16 on the resolution of the entry now in *Resolved*, whose headline prediction and first mechanism were both refuted by a second audit the same day while this half replicated exactly.
 
 **Domain:** Coverage thresholds, third-party audit scope, Toulmin grounds constraint
+**Status:** open
+
+### [2026-08-16] Circular evidence is a recurring defect class with no shipped check
+
+**Position (provisional):** A result can be arithmetically correct, dimensionally sound and fully reproducible while carrying **no evidential weight**, because the derivation entails it. This is a distinct defect class, it recurs, and no shipped instrument names it — `agents/equation-checker.md` has no category for it (its nearest, `ASSUMPTION`, is severity Low and describes something else), and the framework's five existing circularity touchpoints are all judgment calls. The bet: **it will keep appearing, and the ad-hoc retiering that has handled it twice will keep being the only response until something names it.** `DR-020` (Proposed) proposes the narrowest defensible check — a single mechanical *Reuse* test.
+
+**Alternative (the falsifier):** No third instance appears within a year of ordinary use, in which case two instances three days apart were a coincidence of one session's attention rather than a rate, and `DR-020` should be declined rather than accepted. Or: instances keep appearing but the *Reuse* test catches none of them, because they take the idle-wheel or change-of-units form instead — both of which `DR-020` explicitly declines to make mechanical. That outcome argues for Option D (a standalone lens) over the proposed limb.
+
+**Method:** Count instances, and for each record which form it took — reuse of a defining equation, an idle wheel (the posited entity drops out), or a change of units. Record whether the *Reuse* test would have caught it by inspection. Three forms were distinguished on the worked case only after adversarial review collapsed a four-instance count to two, so classify before counting.
+
+**Revisit trigger:** A third instance in any surface; or `DR-020` reaching Accepted or Declined; or an adopter reporting a false positive from the *Reuse* test on a legitimate internal consistency check, which is its known weak point.
+
+**Review by:** 2027-08-16.
+
+**Origin:** n=2 — one in-repo registry row retiered 2026-08-13 by the `DR-019` sweep, and one external quantitative note audited 2026-08-16 (untracked, subject withheld). A first draft of `DR-020` claimed three instances and a general mechanical procedure; a DR-011 Pass 1 / Pass 2 battery established that two of the three were the same finding and that the proposed diagnostic was unsound — every defined constant vanishes under reduction to primitives, so "what cancels" would flag most of derived physics. Both corrections are recorded in that DR's *Draft history*.
+
+**Domain:** Step Z, equation-checker categories, evidential weight vs arithmetic correctness
 **Status:** open
 
 ### [2026-08-16] Sentence-level calibration and whole-argument impression come apart, and only structural registration catches it
@@ -106,6 +125,49 @@ Position holds if ≥3 load-bearing process-level findings remain that the RAG p
 **Status:** open
 
 ## Resolved
+
+### [2026-08-16] The verification ceiling on a third-party audit is structural, not project-specific — SPLIT
+
+**Position (provisional):** The coverage ceiling measured on a third-party audit run in this repo — **11 of 91 units (12%)** — is a property of *auditing text the project did not author*, and any future third-party audit here will land in the same low band (under ~25%) regardless of subject, source quality or effort spent. Two independent mechanisms produce it and both are structural: (1) claims the audited text leaves uncited are permanently `[ ]`, because only the original author can cite them and the framework's own rule is that true-and-uncited is `[ ]`; (2) every ARGUMENT and PROPOSITION fails Toulmin item 2, which requires each ground be `[x]` verified, because their grounds *are* those uncited claims. Measured on the worked case: 0 of 22 had fully verified grounds. If this holds, the project-level ruling that produced it (a DR titled *Coverage thresholds do not apply to a third-party audit*, held in the audit's own untracked project directory) generalises to a framework-level statement, and `docs/THRESHOLDS.md` needs an explicit scope note naming the self-authorship assumption it currently leaves unstated.
+
+**Alternative:** A second third-party audit reaches materially higher coverage — say above 40% — because its subject cites its sources properly, so most CLAIMs close on the author's own citations and the ARGUMENT grounds verify in turn. In that case the ceiling is a function of *how well-sourced the audited text is*, not of third-party auditing as such, and the right fix is guidance about which documents are worth auditing rather than a threshold exemption. The 12% figure would then be evidence about one unusually uncited essay and nothing more.
+
+**Method:** On the next third-party audit in this repo, record before drawing any conclusion: total units; fraction of CLAIMs the audited text cites at all; coverage at the point the audit is declared complete; and the count of ARGUMENTs/PROPOSITIONs with fully verified grounds. The last is the decisive one — if it is again 0, mechanism (2) is structural and the position holds even if mechanism (1) varies with subject. Compute it mechanically rather than by inspection; the worked case first produced a wrong ceiling estimate (~32%) from reasoning about the grounds instead of measuring them.
+
+**Revisit trigger:** A second third-party audit completing in this repo; or any change relaxing Toulmin item 2 or adding an exception for true-but-uncited grounds, which would raise the ceiling substantially and is the single change with the largest effect on it.
+
+**Review by:** 2027-08-16 — backstop. Expected to resolve whenever a second third-party audit runs; there is no reason to force one early.
+
+**Origin:** A third-party audit of a published essay, run to completion in this repo on 2026-08-16. The audit is deliberately not tracked in git (see `.gitignore` — reviews of work this project did not author stay invisible, because the repo is public as a general tool), so this entry records the *structural* result without the subject. The ceiling was reached, not merely approached: after full source verification, cluster sourcing and the Toulmin/Whetten passes, no further unit could be marked `[x]` by the audit at all.
+
+**Domain:** Coverage thresholds, third-party audit scope, Toulmin grounds constraint
+**Status:** resolved — **SPLIT: headline prediction REFUTED, mechanism (2) HELD** (2026-08-16, same day as registration)
+
+**Resolution [2026-08-16]:** The revisit trigger fired the same day. A **second third-party audit** completed in this repo — an unpublished quantitative note, subject withheld and directory untracked per the same rule as the first. Measured against the four items this entry's *Method* named, before drawing any conclusion:
+
+| Method item | First audit | Second audit |
+|---|---|---|
+| Total units | 91 | 19 |
+| Fraction of CLAIMs the text cites at all | low | **zero — the document cites nothing at all** |
+| Coverage at completion | **12%** | **53%** (P0 36%, P1 83%, P2 50%) |
+| ARGUMENTs/PROPOSITIONs with fully verified grounds | **0 of 22** | **0 of 6** |
+
+**The headline prediction is refuted.** It said any future third-party audit here would land under ~25% *regardless of subject*. The second landed at 53%.
+
+**Mechanism (1) is refuted, and in the strongest possible form.** It said claims the audited text leaves uncited are permanently `[ ]` because only the original author can cite them. The second document cites **nothing whatsoever** — no bibliography, no DOIs, not one reference — and 10 of its 13 CLAIMs still verified `[x]`. The mechanism assumed claims close by *citation*. These closed by *reproduction*: they were arithmetic, and arithmetic is fully available to a stranger.
+
+**Mechanism (2) held, and is now the durable half.** 0 of 6 ARGUMENTs and PROPOSITIONs had fully verified grounds, against 0 of 22 in the first audit. Two audits, disjoint subject matter, disjoint evidence types, same result. This entry's *Method* nominated it as the decisive item in advance, and it survived.
+
+**The registered Alternative was also wrong, though it pointed the right way.** It predicted that higher coverage would arrive *because the subject cites its sources properly*. Higher coverage arrived from a document with no sources at all. Neither branch anticipated the variable that actually governs:
+
+> **The ceiling is set by whether a claim can be closed without the author — not by third-party status, and not by how well-sourced the text is.** Citation-bound claims put the evidence in the author's hands and cap out. Calculation-bound claims can be reproduced by anyone and do not. Interpretive units (ARGUMENT, PROPOSITION) rest on the other units and inherit whatever ceiling those have, which is why their coverage was 0% in both audits even though the CLAIM halves differed by a factor of four.
+
+**What this means for `docs/THRESHOLDS.md`.** This entry proposed a scope note naming the self-authorship assumption. That is still warranted but must say something different from what was drafted: the exemption is not "third-party audits get a lower bar" but "**coverage is only comparable between projects whose claims close the same way**". A scope note to that effect has been added; it is registered at EMERGING (n=2) and points here.
+
+**Superseded by** the successor entry registered in *Open* the same day, which carries the surviving half as a falsifiable claim in its own right.
+
+**Do not cite the 12% figure as a general third-party ceiling.** It is one measurement on one citation-bound essay, and the contrast case is now on record.
+
 
 ### [2026-06-12] A lightweight profile of the framework earns its cost on a technical syllabus (dsp-workshop pilot) — HELD
 
