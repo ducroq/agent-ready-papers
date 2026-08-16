@@ -26,6 +26,40 @@
 
 ## Open
 
+### [2026-08-16] The verification ceiling on a third-party audit is structural, not project-specific
+
+**Position (provisional):** The coverage ceiling measured on a third-party audit run in this repo — **11 of 91 units (12%)** — is a property of *auditing text the project did not author*, and any future third-party audit here will land in the same low band (under ~25%) regardless of subject, source quality or effort spent. Two independent mechanisms produce it and both are structural: (1) claims the audited text leaves uncited are permanently `[ ]`, because only the original author can cite them and the framework's own rule is that true-and-uncited is `[ ]`; (2) every ARGUMENT and PROPOSITION fails Toulmin item 2, which requires each ground be `[x]` verified, because their grounds *are* those uncited claims. Measured on the worked case: 0 of 22 had fully verified grounds. If this holds, the project-level ruling that produced it (a DR titled *Coverage thresholds do not apply to a third-party audit*, held in the audit's own untracked project directory) generalises to a framework-level statement, and `docs/THRESHOLDS.md` needs an explicit scope note naming the self-authorship assumption it currently leaves unstated.
+
+**Alternative:** A second third-party audit reaches materially higher coverage — say above 40% — because its subject cites its sources properly, so most CLAIMs close on the author's own citations and the ARGUMENT grounds verify in turn. In that case the ceiling is a function of *how well-sourced the audited text is*, not of third-party auditing as such, and the right fix is guidance about which documents are worth auditing rather than a threshold exemption. The 12% figure would then be evidence about one unusually uncited essay and nothing more.
+
+**Method:** On the next third-party audit in this repo, record before drawing any conclusion: total units; fraction of CLAIMs the audited text cites at all; coverage at the point the audit is declared complete; and the count of ARGUMENTs/PROPOSITIONs with fully verified grounds. The last is the decisive one — if it is again 0, mechanism (2) is structural and the position holds even if mechanism (1) varies with subject. Compute it mechanically rather than by inspection; the worked case first produced a wrong ceiling estimate (~32%) from reasoning about the grounds instead of measuring them.
+
+**Revisit trigger:** A second third-party audit completing in this repo; or any change relaxing Toulmin item 2 or adding an exception for true-but-uncited grounds, which would raise the ceiling substantially and is the single change with the largest effect on it.
+
+**Review by:** 2027-08-16 — backstop. Expected to resolve whenever a second third-party audit runs; there is no reason to force one early.
+
+**Origin:** A third-party audit of a published essay, run to completion in this repo on 2026-08-16. The audit is deliberately not tracked in git (see `.gitignore` — reviews of work this project did not author stay invisible, because the repo is public as a general tool), so this entry records the *structural* result without the subject. The ceiling was reached, not merely approached: after full source verification, cluster sourcing and the Toulmin/Whetten passes, no further unit could be marked `[x]` by the audit at all.
+
+**Domain:** Coverage thresholds, third-party audit scope, Toulmin grounds constraint
+**Status:** open
+
+### [2026-08-16] Sentence-level calibration and whole-argument impression come apart, and only structural registration catches it
+
+**Position (provisional):** There is a failure mode in careful AI-assisted writing that **no amount of close reading detects and registry-based verification does**: every individual sentence is correctly hedged relative to its evidence, while the piece as a whole leaves the reader with an impression stronger than any of its sentences licenses. It arises when a recurring motif keeps its persuasive force after the text has itself explained why the motif should not extend to the case at hand. If this holds, it is an argument-*structure* defect with no sentence-level signature, it will recur across AI-assisted work, and the framework should name it explicitly — as a Step Z sibling operating at whole-argument scale rather than at the level of a single claim's language tier.
+
+**Alternative:** The pattern is an artefact of one document, or it is reliably caught by an ordinary careful reader or a simulated peer-review pass without any registry. Evidence for the alternative: a DR-011 review pass on the same document independently surfaces it, or two further registered documents show fully calibrated sentence-level tiers with no whole-argument inflation. In that case the observation is a good critical note about one essay and not a framework-worthy pattern, and Step Z stays where it is.
+
+**Method:** Two tests, both cheap. (1) **Reader test** — run a DR-011 peer-review pass on a document where the registry has found this pattern, *without* showing the reviewer the registry, and see whether the reviewer names it unaided. If reviewers reliably catch it, no new machinery is warranted. (2) **Recurrence test** — on the next two registered documents, record whether all entries pass the tier-language check individually while the document's overall thesis outruns them. The pattern needs the conjunction; either half alone is an ordinary finding already covered.
+
+**Revisit trigger:** A DR-011 review pass run on a document with this pattern already registered; or the second registered document showing the same conjunction.
+
+**Review by:** 2027-02-16 — sooner than the other open entries, because test (1) is a single review pass and can be run against work already in hand.
+
+**Origin:** Surfaced 2026-08-16 by a completed registry pass on a third-party document, where all 16 ARGUMENTs passed qualifier calibration (item 4) with none overclaiming, and four counter-argument gaps were nevertheless found — one of which was that a motif kept doing rhetorical work after the text had explicitly stated the constraint that should have stopped it. Neither the framework's tier-language mapping nor Step Z, both of which operate per-entry, has a place to record a defect that only exists between entries.
+
+**Domain:** Step Z, tier-monotonicity, argument-structure verification, AI-assisted writing failure modes
+**Status:** open
+
 ### [2026-06-11] Named structural distinctions from defeasible-reasoning literature earn their place in the registry shape
 
 **Position (provisional):** Pollock's rebutting/undercutting distinction (and the broader family of defeater typologies from the defeasible-reasoning literature) will, when introduced as an optional sub-field on ARGUMENT rows per [DR-015](../decisions/DR-015_rebutting-undercutting-defeater-distinction.md), see non-trivial uptake — at least 40% of newly-authored ARGUMENT entries across active projects use the sub-typing, and DR-011 Pass 2 / Pass 3 review outputs benefit from the classification (reviewer-finding-type correlates with which Pass produced it). If this holds, the framework should pursue further low-cost vocabulary borrowings from philosophical logic (dialogical-logic Underlying Form for DR-011; Dung-graph-style attack typology when inter-entry conflicts accumulate). If it fails, the borrowing was vocabulary-without-payoff and Option D in DR-015 (guidance prose only) is the lesson.

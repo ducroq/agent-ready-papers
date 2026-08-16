@@ -13,6 +13,23 @@ Thumbs.db
 
 # Papers are confidential-by-default; allowlist public framework demos explicitly.
 # A new papers/<name>/ is invisible to git until you add a matching `!papers/<name>` line.
+#
+# DECIDED 2026-08-16, and the reason matters more than the rule: **this repo is
+# public because it is a general tool.** That makes the allowlist a publishing
+# decision, not a tracking convenience.
+#
+# So: **never add a `!papers/<name>` line for a paper that audits, reviews or
+# critiques work this project did not author.** Such a directory stays ignored
+# permanently — not pending a later review, not once the author has been told.
+# Version-controlling a critique of a named third party would publish it as a
+# side effect, and that is not a trade this project makes. At least one such
+# audit exists on the maintainer's disk and is deliberately not named here:
+# naming the instance in a tracked file leaks exactly what ignoring it protects.
+# The same reasoning already anchors `/audits/` above.
+#
+# `!papers/perspective` is allowlisted because it is this project's OWN paper,
+# written to be published — the one category where the publishing decision is
+# already settled.
 papers/*
 !papers/perspective
 
