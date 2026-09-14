@@ -63,6 +63,8 @@ Sources consulted during the development of this project, particularly for DR-00
 | L36 | Gupta, Zuckerman & O'Connor | 2024 | Harnessing Toulmin's theory for zero-shot argument explication | ACL | [gupta-2024](sources/gupta-2024.md) |
 | L37 | Castagna, Sassoon & Parsons | 2024 | Critical-Questions-of-Thought: Steering LLM reasoning | arXiv | -- |
 | L38 | Stofiana et al. | 2025 | Writing with AI, thinking with Toulmin | ScienceDirect | -- |
+| L62 | Mori, Tanaka, Hirasawa, Kozuno, Yoshino & Ushiku | 2026 | WarrantScore: Modeling Warrants between Claims and Evidence for Substantiation Evaluation in Peer Reviews | arXiv | [mori-2026-warrantscore](sources/mori-2026-warrantscore.md) |
+| L63 | Kim & Yang | 2026 | TRACE: Toulmin-based Reasoning Assessment through Constructive Elements for LLM CoT Evaluation | ICML 2026 | [kim-yang-2026-trace](sources/kim-yang-2026-trace.md) |
 
 ### LLM Evaluation & Peer Review
 
@@ -86,13 +88,14 @@ Sources consulted during the development of this project, particularly for DR-00
 
 | ID | Author(s) | Year | Title | Venue | File |
 |----|-----------|------|-------|-------|------|
-| L47 | EQUATOR Network | -- | Reporting guideline database (~500 guidelines) | equator-network.org | [equator-gap](sources/equator-gap.md) |
+| L47 | EQUATOR Network | -- | Reporting guideline database (704 guidelines, 2026-09-14) | equator-network.org | [equator-gap](sources/equator-gap.md) |
 
 ### AI Adoption & Trust in Research
 
 | ID | Author(s) | Year | Title | Venue | File |
 |----|-----------|------|-------|-------|------|
 | L48 | Elsevier | 2025 | Researcher of the Future (Confidence in Research) | elsevier.com (industry report) | [elsevier-researcher-future-2025](sources/elsevier-researcher-future-2025.md) |
+| L65 | Song, Hu & Dunn | 2026 | Trustworthy AI beyond the technical: a three-layer framework informed by Chinese-language scholarship | AI & SOCIETY | [song-2026-trustworthy-ai](sources/song-2026-trustworthy-ai.md) |
 
 ### Epistemic Grounding & Agent Constraints
 
@@ -116,9 +119,43 @@ Sources consulted during the development of this project, particularly for DR-00
 | L54 | Han | 2024 | The Crisis of Narration | Polity | [han-2024-narration](sources/han-2024-narration.md) | PARTIAL (owner thread) |
 | L55 | Han | 2022 | Infocracy / The Reign of Information | Polity | [han-2022-infocracy](sources/han-2022-infocracy.md) | TO READ (verify which work) |
 
+### Citation Integrity at Scale
+
+<!-- Seeded 2026-09-14 from a state-of-the-art scan. These are the empirical
+     warrant for the paper's motivating problem; L57 is the strongest and the
+     least read. Reading status is per-row and load-bearing — see each file. -->
+
+| ID | Author(s) | Year | Title | Venue | File | Status |
+|----|-----------|------|-------|-------|------|--------|
+| L57 | Topaz et al. | 2026 | Fabricated citations: an audit across 2·5 million biomedical papers | The Lancet | [topaz-2026](sources/topaz-2026.md) | PARTIAL — press coverage only |
+| L58 | Rao & Callison-Burch | 2026 | BibTeX Citation Errors in Scientific Publishing Agents: Evaluation and Mitigation | arXiv | [rao-callison-burch-2026](sources/rao-callison-burch-2026.md) | READ (abstract) |
+| L59 | *(authors unconfirmed)* | 2026 | GhostCite: A Large-Scale Analysis of Citation Validity in the Age of Large Language Models | arXiv | [ghostcite-2026](sources/ghostcite-2026.md) | TO VERIFY — not read |
+
+### Verification Infrastructure for AI-Assisted Writing (prior art)
+
+<!-- Independent 2026 convergence on registry-plus-gates architecture. Both
+     overlap this project's contribution and neither addresses argument quality.
+     Read in full before Paper 1 submission — the related-work paragraph
+     depends on the distinction holding against the full texts, not abstracts. -->
+
+| ID | Author(s) | Year | Title | Venue | File | Status |
+|----|-----------|------|-------|-------|------|--------|
+| L60 | Chen, Yu & Wang | 2026 | Evidence-Ledger Adjudication for Claim-Evidence Traceability | arXiv | [chen-2026-evidence-ledger](sources/chen-2026-evidence-ledger.md) | READ (abstract) |
+| L61 | Zhou & Yu | 2026 | Auditable AI-Assisted Research Writing: An Engineering Discipline with Pre-Registered Process Observation | arXiv | [zhou-yu-2026](sources/zhou-yu-2026.md) | READ (abstract) |
+
+### Self-Verification Limits
+
+<!-- Bears on DR-020 (circular evidence) and DR-011 Pass 3 (cross-vendor).
+     The correlated-error account is the external support DR-020's gap half
+     lacked; its primary sources are still unverified (see L64 Open Questions). -->
+
+| ID | Author(s) | Year | Title | Venue | File | Status |
+|----|-----------|------|-------|-------|------|--------|
+| L64 | Li | 2026 | Decomposing LLM Self-Correction: The Accuracy-Correction Paradox and Error Depth Hypothesis | arXiv | [li-2026-self-correction](sources/li-2026-self-correction.md) | READ (abstract) |
+
 ## Key Insight
 
-EQUATOR has ~500 reporting guidelines for empirical health research. Essentially **zero** exist for theoretical, design science, perspective, or methodological papers. This gap is where this project can make its most distinctive contribution.
+EQUATOR has ~700 reporting guidelines for empirical health research (704 as of 2026-09-14; 699 when first checked 2026-03-03). Essentially **zero** exist for theoretical, design science, perspective, or methodological papers. This gap is where this project can make its most distinctive contribution.
 
 ## Source File Template
 

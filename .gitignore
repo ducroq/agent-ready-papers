@@ -33,6 +33,16 @@ Thumbs.db
 papers/*
 !papers/perspective
 
+# Third-party full texts. Same reasoning as the papers allowlist above: this
+# repo is public, so tracking a file here republishes it. arXiv's default
+# non-exclusive licence does not grant redistribution and publisher PDFs
+# certainly do not, so our reading copies stay local. The source NOTES in
+# literature/sources/ are ours and are tracked; the PDFs they summarise are not.
+# See literature/pdfs/README.md — which IS tracked, so the convention survives
+# a fresh clone even though the directory it describes arrives empty.
+/literature/pdfs/*
+!/literature/pdfs/README.md
+
 # LaTeX build artifacts
 *.aux
 *.bbl
