@@ -67,9 +67,9 @@ _STATUS_VERIFIED_REGEX = re.compile(r"^\s*\[\s*x\s*\]", re.IGNORECASE)
 
 @dataclass(frozen=True)
 class CoverageRow:
-    unit_type: str   # CLAIM | ARGUMENT | PROPOSITION | PROVOCATION
-    axis: str        # PRIORITY_AXIS | PROVOCATION_TIER_AXIS
-    bucket: str      # P0/P1/P2 or GROUNDED/EXTRAPOLATED/PROVOCATIVE/CRITICAL
+    unit_type: str  # CLAIM | ARGUMENT | PROPOSITION | PROVOCATION
+    axis: str  # PRIORITY_AXIS | PROVOCATION_TIER_AXIS
+    bucket: str  # P0/P1/P2 or GROUNDED/EXTRAPOLATED/PROVOCATIVE/CRITICAL
     total: int
     verified: int
 
@@ -82,9 +82,7 @@ class CoverageRow:
 class CoverageReport:
     registry_path: Path
     rows: tuple[CoverageRow, ...]
-    priority_targets: dict[str, float] = field(
-        default_factory=lambda: dict(DEFAULT_PRIORITY_TARGETS)
-    )
+    priority_targets: dict[str, float] = field(default_factory=lambda: dict(DEFAULT_PRIORITY_TARGETS))
     provocation_targets: dict[str, float] | None = None
 
     def _target_for(self, row: CoverageRow) -> float | None:
@@ -99,15 +97,9 @@ class CoverageReport:
     def to_dict(self) -> dict:
         return {
             "registry_path": self.registry_path.name,
-            "rows": [
-                asdict(r) | {"percent": r.percent, "target": self._target_for(r)}
-                for r in self.rows
-            ],
+            "rows": [asdict(r) | {"percent": r.percent, "target": self._target_for(r)} for r in self.rows],
             "priority_targets": dict(self.priority_targets),
-            "provocation_targets": (
-                None if self.provocation_targets is None
-                else dict(self.provocation_targets)
-            ),
+            "provocation_targets": (None if self.provocation_targets is None else dict(self.provocation_targets)),
             "meets_targets": self.meets_targets,
         }
 
@@ -167,9 +159,7 @@ def _split_row(line: str) -> list[str] | None:
     return [c.strip().replace(sentinel, "|") for c in inner.split("|")]
 
 
-def _find_bucket_and_status_columns(
-    header: list[str], unit_type: str
-) -> tuple[int, str, int] | None:
+def _find_bucket_and_status_columns(header: list[str], unit_type: str) -> tuple[int, str, int] | None:
     """Return (bucket_col_index, axis, status_col_index) or None if not found.
 
     PROVOCATION sub-tables prefer the Tier-axis column. The match must
@@ -209,6 +199,10 @@ def _find_bucket_and_status_columns(
 
 def _parse_registry(content: str) -> dict[tuple[str, str, str], tuple[int, int]]:
     """Walk the registry; return {(unit_type, axis, bucket): (total, verified)}."""
+
+    def registry_line_no(idx: int) -> str:
+        return f"line {idx + 1}"
+
     counts: dict[tuple[str, str, str], list[int]] = {}
     lines = content.splitlines()
     i = 0
@@ -243,8 +237,33 @@ def _parse_registry(content: str) -> dict[tuple[str, str, str], tuple[int, int]]
             row = _split_row(lines[i])
             if row is None:
                 break
-            if len(row) <= max(bucket_col, status_col):
-                break
+            if len(row) > len(header):
+                # GFM DISCARDS the excess cells, so this row loses data when
+                # rendered AND shifts every column index we read below. The
+                # usual cause is an unescaped `|` inside a cell — including
+                # inside backticks, because GFM splits a row into cells BEFORE
+                # it parses inline content. Refuse rather than mis-parse: a
+                # shifted read is silent, and it has been measured to move a
+                # P0 claim into an invented bucket where `--strict` then
+                # reports 100% P0 over nothing. Escape it as `\|`.
+                raise ValueError(
+                    f"{registry_line_no(i)}: table row has {len(row)} cells but "
+                    f"the header defines {len(header)} — the excess is discarded "
+                    f"when rendered and shifts every column read from this row. "
+                    f"An unescaped '|' inside a cell is the usual cause "
+                    f"(escape it as '\\|'), including inside backticks. Row: "
+                    f"{lines[i].strip()[:120]}"
+                )
+            if len(row) < len(header):
+                # GFM PADS a short row with empty cells and renders it as
+                # intended, so this is not corruption — a section divider like
+                # `| **PART ONE** |` inside a wide table is idiomatic. Pad to
+                # match, and let the empty bucket/status test below skip it.
+                # Breaking here instead (the behaviour until 2026-09-14) ended
+                # the table at the first divider and silently dropped every
+                # row after it from the counts, so a P0 claim could leave the
+                # denominator and `--strict` pass over what remained.
+                row = row + [""] * (len(header) - len(row))
             bucket = row[bucket_col]
             status = row[status_col]
             if not bucket or not status:
@@ -299,13 +318,8 @@ def check_coverage(
     return CoverageReport(
         registry_path=registry_path,
         rows=rows,
-        priority_targets=(
-            dict(DEFAULT_PRIORITY_TARGETS) if priority_targets is None
-            else dict(priority_targets)
-        ),
-        provocation_targets=(
-            None if provocation_targets is None else dict(provocation_targets)
-        ),
+        priority_targets=(dict(DEFAULT_PRIORITY_TARGETS) if priority_targets is None else dict(priority_targets)),
+        provocation_targets=(None if provocation_targets is None else dict(provocation_targets)),
     )
 
 

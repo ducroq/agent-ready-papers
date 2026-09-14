@@ -74,6 +74,30 @@ _VERIFIED_REGEX = re.compile(r"^\s*\[\s*x\s*\]", re.IGNORECASE)
 TIER_ORDER = ("ESTABLISHED", "SUPPORTED", "EMERGING", "SPECULATIVE")
 _TIER_RANK = {tier: rank for rank, tier in enumerate(TIER_ORDER)}
 
+# DR-010's PROVOCATION axis. These are NOT confidence tiers and are not
+# rankable against them; naming them lets the report say so instead of
+# reporting a real unit type as an unrecognised string.
+PROVOCATION_TIERS = ("GROUNDED", "EXTRAPOLATED", "PROVOCATIVE", "CRITICAL")
+
+
+def _normalise_tier(raw: str) -> str:
+    """Strip cell decoration before ranking a tier.
+
+    Registries legitimately write `**SPECULATIVE**`, `` `EMERGING` `` or
+    `SUPPORTED ⚠`, and an exact dict lookup on the raw cell silently returned
+    None for every one of them — which skipped the comparison with no finding
+    and no change to the Examined count, so a broken check and a clean run
+    printed the same thing. Measured 2026-09-14.
+    """
+    out = raw.strip()
+    for ch in ("*", "`", "_", "⚠", "~"):
+        out = out.replace(ch, "")
+    # a parenthetical qualifier: "SPECULATIVE (provisional)"
+    if "(" in out:
+        out = out.split("(", 1)[0]
+    return out.strip().upper()
+
+
 REQUIRED_COLUMNS = {
     "ARGUMENT": ("grounds", "warrant", "rebuttal"),
     "PROPOSITION": (
@@ -274,6 +298,27 @@ def _check_schema(entries: tuple[Entry, ...]) -> tuple[list[Finding], int]:
     return findings, examined
 
 
+def _uncomparable(raw: str, subject: str) -> str:
+    """Say WHY a tier could not be ranked, rather than skipping in silence."""
+    norm = _normalise_tier(raw)
+    if not norm:
+        return (
+            f"{subject} records no confidence tier, so tier-monotonicity could NOT be "
+            "checked for this entry — an absent check is not a passing one. If the "
+            "column exists under another name, the parser did not find it."
+        )
+    if norm in PROVOCATION_TIERS:
+        return (
+            f"{subject} is on the PROVOCATION axis (`{norm}`, DR-010), which is not "
+            "rankable against the confidence tiers, so tier-monotonicity could NOT be "
+            "checked here. This tool does not yet support the PROVOCATION axis."
+        )
+    return (
+        f"{subject} has tier `{raw.strip()}`, which is not one of "
+        f"{', '.join(TIER_ORDER)}, so tier-monotonicity could NOT be checked for it."
+    )
+
+
 def _check_premises(entries: tuple[Entry, ...]) -> tuple[list[Finding], int]:
     by_id = {e.entry_id: e for e in entries}
     findings: list[Finding] = []
@@ -301,11 +346,25 @@ def _check_premises(entries: tuple[Entry, ...]) -> tuple[list[Finding], int]:
                 findings.append(
                     Finding("premises", "finding", entry.entry_id, f"rests on `{premise_id}`, which is not verified")
                 )
-            rank = _TIER_RANK.get(premise.tier)
-            if rank is not None and rank > weakest_rank:
+            rank = _TIER_RANK.get(_normalise_tier(premise.tier))
+            if rank is None:
+                findings.append(
+                    Finding(
+                        "premises",
+                        "finding",
+                        entry.entry_id,
+                        _uncomparable(premise.tier, f"premise `{premise_id}`"),
+                    )
+                )
+                continue
+            if rank > weakest_rank:
                 weakest_rank, weakest_id = rank, premise_id
 
-        own_rank = _TIER_RANK.get(entry.tier)
+        own_rank = _TIER_RANK.get(_normalise_tier(entry.tier))
+        if own_rank is None:
+            findings.append(
+                Finding("premises", "finding", entry.entry_id, _uncomparable(entry.tier, "this entry")),
+            )
         if own_rank is not None and weakest_rank >= 0 and own_rank < weakest_rank:
             findings.append(
                 Finding(

@@ -141,10 +141,49 @@ def test_parse_bib_records_entries_without_a_doi():
     assert entry.doi == ""
 
 
-def test_parse_registry_dedupes_and_keeps_first_line_number():
+def test_parse_registry_keeps_every_occurrence_not_just_the_first():
+    """OVERRULES the previous assertion, deliberately and with a reason.
+
+    This test used to pin a file-global dedup: `[("10.1000/x", 1),
+    ("10.2000/y", 2)]`, with the third line discarded. That dedup silently
+    dropped every later citation of a DOI — so a source captioned correctly on
+    one line and MISCAPTIONED on another was never checked on the second, and
+    whether the miscaption surfaced depended on row order. Registry mode exists
+    to catch exactly that, so the pinned behaviour defeated the mode's purpose.
+
+    Measured 2026-09-14 before changing it: a registry citing 10.2196/52935 as
+    "Mugaanyi et al. 2024" on one row and "Smith et al. 2019" on the next
+    reported `3 checked` with the miscaptioned row absent from the report
+    entirely; it now reports 2 entries, the second a year MISMATCH, exit 1.
+
+    The cost the dedup was paying for is preserved: the CALLER caches the fetch
+    per DOI, so the run above makes one network call for two entries.
+    """
     content = "a 10.1000/x here\nb 10.2000/y there\nc 10.1000/x again\n"
     entries = _parse_registry(content)
-    assert [(e.doi, e.line_number) for e in entries] == [("10.1000/x", 1), ("10.2000/y", 2)]
+    assert [(e.doi, e.line_number) for e in entries] == [
+        ("10.1000/x", 1),
+        ("10.2000/y", 2),
+        ("10.1000/x", 3),
+    ]
+
+
+def test_registry_mode_makes_one_fetch_per_distinct_doi(tmp_path, monkeypatch):
+    """The dedup moved from parsing to fetching; prove the saving survived."""
+    import tools.check_metadata as m
+
+    calls: list[str] = []
+
+    def fake_fetch(doi, timeout, mailto):
+        calls.append(doi)
+        return ({"title": "T", "years": ("2024",), "surnames": ("x",), "venue": ""}, "stub", "found")
+
+    monkeypatch.setattr(m, "_fetch_record", fake_fetch)
+    reg = tmp_path / "r.md"
+    reg.write_text("a 10.1000/x\nb 10.1000/x\nc 10.2000/y\n", encoding="utf-8")
+    report = m.check_metadata(reg)
+    assert len(report.results) == 3, "every occurrence must be checked"
+    assert sorted(calls) == ["10.1000/x", "10.2000/y"], "one fetch per distinct DOI"
 
 
 # --------------------------------------------------------------------------
@@ -254,7 +293,15 @@ def test_venue_abbreviation_does_not_fail():
         ),
         WHETTEN,
     )
-    assert _worst(checks) != "mismatch"
+    # ⚠️ Assert the VENUE check, not the aggregate. `_worst(...) != "mismatch"`
+    # cannot fail here: the venue branch only ever emits "ok" or "warn", so
+    # the assertion passed against an implementation with NO venue check at
+    # all — verified 2026-09-14 by deleting the whole venue block from
+    # _compare_bib, which left the suite green.
+    venue = [c for c in checks if c.field_name == "venue"]
+    assert venue, "no venue check was produced at all"
+    assert venue[0].verdict == "warn", f"expected the benign abbreviation case: {venue[0]}"
+    assert "abbreviation is normal" in venue[0].note
 
 
 def test_title_subtitle_truncation_does_not_fail():
@@ -263,7 +310,10 @@ def test_title_subtitle_truncation_does_not_fail():
         _bib_entry(author="Whetten, David A.", title="What Constitutes a Theoretical Contribution?", year="1989"),
         record,
     )
-    assert _worst(checks) != "mismatch"
+    # Same reasoning as the venue test above: name the field under test.
+    title = [c for c in checks if c.field_name == "title"]
+    assert title, "no title check was produced at all"
+    assert title[0].verdict == "ok", f"subtitle truncation should match: {title[0]}"
 
 
 # --------------------------------------------------------------------------
@@ -362,3 +412,108 @@ def test_mode_is_chosen_by_suffix(tmp_path):
     md.write_text("see DOI: 10.1000/x\n", encoding="utf-8")
     assert check_metadata(bib, offline=True).mode == "bib"
     assert check_metadata(md, offline=True).mode == "registry"
+
+
+# --- the network layer: a DOI we could not check is not a DOI that is absent --
+#
+# Seeded 2026-09-14. The caller decided the verdict with `"404" in note`, and
+# the note for "Crossref said 404, DataCite was unreachable" is
+# `"Crossref 404; DataCite: <error>"` — which contains "404". So an arXiv DOI on
+# any DataCite outage or proxied network rendered as NO RECORD: a real paper
+# reported as fabricated, in a tool whose purpose is catching fabrication.
+# Before this there was NO test of the network layer at all.
+
+
+def _stub_get_json(monkeypatch, crossref, datacite):
+    import tools.check_metadata as m
+
+    def fake(host, path, timeout):
+        return crossref if host == m.CROSSREF_HOST else datacite
+
+    monkeypatch.setattr(m, "_get_json", fake)
+
+
+@pytest.mark.parametrize(
+    "crossref,datacite,expected_outcome",
+    [
+        ((None, 404, "404"), (None, 404, "404"), "absent"),
+        ((None, 404, "404"), (None, None, "gaierror"), "unreachable"),
+        ((None, None, "timeout"), (None, 404, "404"), "unreachable"),
+        (({"message": {}}, 200, "Crossref"), (None, 404, "404"), "found"),
+    ],
+)
+def test_fetch_record_reports_absent_and_unreachable_distinctly(monkeypatch, crossref, datacite, expected_outcome):
+    """Only BOTH agencies answering 404 licenses 'absent'. Anything else is
+    'unreachable', which must not render as NO RECORD."""
+    import tools.check_metadata as m
+
+    _stub_get_json(monkeypatch, crossref, datacite)
+    _record, _note, outcome = m._fetch_record("10.1234/abcd", 5.0, None)
+    assert outcome == expected_outcome
+
+
+def test_unreachable_datacite_is_not_reported_as_no_record(monkeypatch):
+    """The exact regression: Crossref 404 + DataCite unreachable must NOT
+    produce the 'unresolved' verdict that renders as NO RECORD."""
+    import tools.check_metadata as m
+
+    _stub_get_json(monkeypatch, (None, 404, "404"), (None, None, "gaierror: no name"))
+    record, note, outcome = m._fetch_record("10.48550/arXiv.2601.00828", 5.0, None)
+    assert record is None
+    assert outcome == "unreachable"
+    verdict = "unresolved" if outcome == "absent" else "error"
+    assert verdict == "error", "an unreachable DOI must not be called NO RECORD"
+    assert "unreachable" in note
+
+
+# --- an entry where nothing was compared is not an entry that passed ---------
+#
+# Seeded 2026-09-14. `_worst` ranked only mismatch/warn, so a bib entry whose
+# every field check came back "absent" fell through to "ok" — and to_markdown
+# suppresses the detail block for "ok", so the word "absent" never reached the
+# reader. A bare `@article{k, doi = {...}}` reported OK and passed --strict.
+# Zero fields compared was indistinguishable from all fields matching.
+
+
+def test_worst_returns_unchecked_when_nothing_was_comparable():
+    from tools.check_metadata import FieldCheck, _worst
+
+    absent_only = (
+        FieldCheck("title", "", "remote title", "absent", "no local title"),
+        FieldCheck("author", "", "remote authors", "absent", "no local author field"),
+    )
+    assert _worst(absent_only) == "unchecked"
+
+
+def test_worst_still_ranks_normally_when_something_was_compared():
+    """The guard must not fire when any real comparison happened."""
+    from tools.check_metadata import FieldCheck, _worst
+
+    assert _worst((FieldCheck("title", "a", "a", "ok", ""),)) == "ok"
+    assert (
+        _worst(
+            (
+                FieldCheck("title", "a", "a", "ok", ""),
+                FieldCheck("author", "", "x", "absent", "no local author field"),
+            )
+        )
+        == "ok"
+    )
+    assert _worst((FieldCheck("t", "a", "b", "warn", ""),)) == "warn"
+    assert _worst((FieldCheck("t", "a", "b", "mismatch", ""),)) == "mismatch"
+
+
+def test_offline_with_strict_is_refused_not_silently_passed(tmp_path, capsys):
+    """Seeded 2026-09-14: `if args.offline: return 0` sat ABOVE the --strict
+    branch, so --offline --strict exited 0 unconditionally. A CI step that
+    inherited --offline could never fail — the exact hazard tools/README.md
+    documents for the sibling tool while asserting the flag is check_dois only.
+    """
+    from tools.check_metadata import main
+
+    bib = tmp_path / "r.bib"
+    bib.write_text("@article{k,\n  doi = {10.2196/52935},\n  title = {T}\n}\n", encoding="utf-8")
+    assert main([str(bib), "--offline", "--strict"]) == 2
+    assert "Drop one of them" in capsys.readouterr().err
+    # offline alone still succeeds: it is a legitimate parse-only mode
+    assert main([str(bib), "--offline"]) == 0

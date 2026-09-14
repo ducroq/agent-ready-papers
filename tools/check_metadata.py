@@ -81,7 +81,7 @@ _TITLE_MATCH = 0.90
 _TITLE_WARN = 0.50
 _VENUE_MATCH = 0.60
 
-_VERDICT_ORDER = {"ok": 0, "warn": 1, "mismatch": 2, "unresolved": 3, "error": 4}
+_VERDICT_ORDER = {"ok": 0, "warn": 1, "unchecked": 2, "mismatch": 3, "unresolved": 4, "error": 5}
 
 
 # --------------------------------------------------------------------------
@@ -242,7 +242,12 @@ class MetadataReport:
 
     @property
     def all_ok(self) -> bool:
-        return bool(self.results) and self.count_mismatch == 0
+        return bool(self.results) and self.count_mismatch == 0 and self.count_unchecked == 0
+
+    @property
+    def count_unchecked(self) -> int:
+        """Entries where the record resolved but NO field could be compared."""
+        return sum(1 for r in self.results if r.verdict == "unchecked")
 
     @property
     def all_clean(self) -> bool:
@@ -257,6 +262,7 @@ class MetadataReport:
             "results": [{**asdict(r), "failed_fields": list(r.failed_fields)} for r in self.results],
             "count_total": len(self.results),
             "count_ok": sum(1 for r in self.results if r.verdict == "ok"),
+            "count_unchecked": self.count_unchecked,
             "count_warn": self.count_warn,
             "count_mismatch": self.count_mismatch,
             "all_ok": self.all_ok,
@@ -277,6 +283,7 @@ class MetadataReport:
             "ok": "OK",
             "warn": "WARN",
             "mismatch": "MISMATCH",
+            "unchecked": "NOTHING COMPARED",
             "unresolved": "NO RECORD",
             "error": "ERROR",
             "skipped": "—",
@@ -291,7 +298,8 @@ class MetadataReport:
         lines.append(
             f"**{len(self.results)} checked** — "
             f"{sum(1 for r in self.results if r.verdict == 'ok')} ok, "
-            f"{self.count_warn} warn, {self.count_mismatch} failing."
+            f"{self.count_warn} warn, {self.count_unchecked} nothing-compared, "
+            f"{self.count_mismatch} failing."
         )
         # Detail only for entries that need a human; a clean run stays short.
         for r in self.results:
@@ -406,15 +414,21 @@ def _parse_registry(content: str) -> tuple[_LocalEntry, ...]:
     The line is the local claim: a registry cell reads
     `Mugaanyi et al. 2024 (JMIR, DOI: 10.2196/52935): ...`. The year and
     surname on that line are what we check the record against.
+
+    ⚠️ EVERY occurrence is returned, not the first per DOI. A file-global
+    dedup (the behaviour until 2026-09-14) silently discarded later citations
+    of the same DOI — so a source cited correctly on one line and MISCAPTIONED
+    on another was never checked on the second line, and whether the
+    miscaption was caught depended on row order. That is precisely the failure
+    this mode exists to catch. The network cost is deduplicated in the caller
+    instead, by caching the fetch per DOI.
     """
     entries: list[_LocalEntry] = []
-    seen: set[str] = set()
     for lineno, line in enumerate(content.splitlines(), start=1):
         for match in DOI_REGEX.finditer(line):
             doi = _clean_doi(match.group(0))
-            if not doi or doi in seen:
+            if not doi:
                 continue
-            seen.add(doi)
             entries.append(_LocalEntry(key="", line_number=lineno, doi=doi, fields={"_context": line}))
     return tuple(entries)
 
@@ -516,8 +530,20 @@ def _record_from_datacite(data: dict) -> dict:
     }
 
 
-def _fetch_record(doi: str, timeout: float, mailto: str | None) -> tuple[dict | None, str]:
+def _fetch_record(doi: str, timeout: float, mailto: str | None) -> tuple[dict | None, str, str]:
     """Resolve a DOI's registered metadata, Crossref first then DataCite.
+
+    Returns ``(record, note, outcome)``. ``outcome`` is ``"found"``,
+    ``"absent"`` (both agencies answered and neither has this DOI) or
+    ``"unreachable"`` (we could not get an answer).
+
+    ⚠️ The outcome is RETURNED, never inferred from the note. The caller used
+    to decide with ``"404" in note``, which matches the string
+    ``"Crossref 404; DataCite: gaierror"`` — a DOI we could not check at all.
+    Every arXiv DOI then rendered as **NO RECORD** on any DataCite outage or
+    proxied network, i.e. a real paper reported as fabricated. In an
+    anti-hallucination workflow that is the expensive direction. Measured
+    2026-09-14.
 
     Not every DOI is a Crossref DOI. arXiv registers under the 10.48550
     prefix with **DataCite**, so a Crossref-only lookup reports every
@@ -531,17 +557,19 @@ def _fetch_record(doi: str, timeout: float, mailto: str | None) -> tuple[dict | 
         path += "?" + urllib.parse.urlencode({"mailto": mailto})
     data, status, note = _get_json(CROSSREF_HOST, path, timeout)
     if data is not None:
-        return _record_from_crossref(data.get("message", {})), "Crossref"
+        return _record_from_crossref(data.get("message", {})), "Crossref", "found"
 
     if status == 404:
         dc, dc_status, dc_note = _get_json(DATACITE_HOST, "/dois/" + quoted, timeout)
         if dc is not None:
-            return _record_from_datacite(dc), "DataCite"
+            return _record_from_datacite(dc), "DataCite", "found"
         if dc_status == 404:
-            return None, "no record at Crossref or DataCite (404)"
-        return None, f"Crossref 404; DataCite: {dc_note}"
+            # Both agencies answered and neither holds it. This is the ONLY
+            # path that licenses "NO RECORD".
+            return None, "no record at Crossref or DataCite (404)", "absent"
+        return None, f"Crossref 404; DataCite unreachable: {dc_note}", "unreachable"
 
-    return None, note
+    return None, note, "unreachable"
 
 
 def _first(value) -> str:
@@ -680,12 +708,26 @@ def _compare_registry(entry: _LocalEntry, record: dict) -> tuple[FieldCheck, ...
 
 
 def _worst(checks: tuple[FieldCheck, ...]) -> str:
+    """Worst field verdict, with "compared nothing" kept distinct from "ok".
+
+    ⚠️ "absent" means the LOCAL entry had no such field, so nothing was
+    compared. Folding it into "ok" made an entry with zero comparable fields —
+    a bare `@article{k, doi = {...}}`, which is exactly the AI-generated stub
+    shape this tool cites Rao & Callison-Burch for — report OK and pass
+    `--strict`. The detail block is also suppressed for "ok", so the word
+    "absent" never reached the reader. Measured 2026-09-14.
+    """
     worst = "ok"
+    comparable = 0
     for c in checks:
+        if c.verdict in ("ok", "warn", "mismatch"):
+            comparable += 1
         if c.verdict == "mismatch":
             return "mismatch"
         if c.verdict == "warn":
             worst = "warn"
+    if comparable == 0:
+        return "unchecked"
     return worst
 
 
@@ -726,6 +768,8 @@ def check_metadata(
     if not any(e.doi for e in entries):
         raise ValueError(f"no DOIs found in {source_path}")
 
+    # One network call per DOI even though every OCCURRENCE is checked.
+    _fetch_cache: dict[str, tuple[dict | None, str, str]] = {}
     results: list[MetadataResult] = []
     for entry in entries:
         if not entry.doi:
@@ -751,9 +795,15 @@ def check_metadata(
             )
             continue
 
-        record, note = _fetch_record(entry.doi, timeout, mailto)
+        if entry.doi in _fetch_cache:
+            record, note, outcome = _fetch_cache[entry.doi]
+        else:
+            record, note, outcome = _fetch_record(entry.doi, timeout, mailto)
+            _fetch_cache[entry.doi] = (record, note, outcome)
         if record is None:
-            verdict = "unresolved" if "404" in note else "error"
+            # "unresolved" renders as NO RECORD and is a claim that the DOI
+            # does not exist. Only an "absent" outcome supports it.
+            verdict = "unresolved" if outcome == "absent" else "error"
             results.append(
                 MetadataResult(
                     doi=entry.doi, line_number=entry.line_number, entry_key=entry.key, verdict=verdict, note=note
@@ -821,6 +871,19 @@ def main(argv: list[str] | None = None) -> int:
         print(report.to_markdown())
 
     if args.offline:
+        # --strict asserts "every field matched". Offline compares no fields at
+        # all, so the combination asserts cleanliness over nothing. Returning 0
+        # here (the behaviour until 2026-09-14) meant a CI step that inherited
+        # --offline could never fail, which is the exact hazard the --offline
+        # note in tools/README.md was written about — for the sibling tool.
+        # Refuse the combination rather than pass it.
+        if args.strict:
+            print(
+                "error: --strict with --offline asserts every field matched while "
+                "comparing no fields at all. Drop one of them.",
+                file=sys.stderr,
+            )
+            return 2
         return 0
     if args.strict:
         return 0 if report.all_clean else 1

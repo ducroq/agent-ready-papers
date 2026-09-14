@@ -73,10 +73,10 @@ def _clean_doi(raw: str) -> str:
 class DOIResult:
     doi: str
     line_number: int
-    http_status: int | None       # None if offline / not checked
-    parseable: bool               # regex matched a well-formed DOI
-    resolved: bool                # True if 2xx or 3xx; always False under --offline
-    note: str                     # diagnostic (empty when resolved cleanly)
+    http_status: int | None  # None if offline / not checked
+    parseable: bool  # regex matched a well-formed DOI
+    resolved: bool  # True if 2xx or 3xx; always False under --offline
+    note: str  # diagnostic (empty when resolved cleanly)
 
 
 @dataclass(frozen=True)
@@ -112,9 +112,7 @@ class DOIReport:
             status = "—" if r.http_status is None else str(r.http_status)
             parseable = "yes" if r.parseable else "NO"
             resolved = "yes" if r.resolved else "NO"
-            lines.append(
-                f"| {r.line_number} | `{r.doi}` | {status} | {parseable} | {resolved} | {r.note} |"
-            )
+            lines.append(f"| {r.line_number} | `{r.doi}` | {status} | {parseable} | {resolved} | {r.note} |")
         return "\n".join(lines) + "\n"
 
     @property
@@ -266,8 +264,7 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.offline:
         print(
-            "OFFLINE MODE: no network verification performed; "
-            "checking DOI parseability only.",
+            "OFFLINE MODE: no network verification performed; checking DOI parseability only.",
             file=sys.stderr,
         )
 

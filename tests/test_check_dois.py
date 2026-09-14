@@ -111,15 +111,9 @@ def test_clean_doi_preserves_balanced_parens():
     """Lancet DOIs carry '(13)' mid-string — must not be stripped (the fix
     that caused DR-011 Pass 2 to remark this needed an explicit test).
     """
-    assert (
-        _clean_doi("10.1016/S0140-6736(13)62228-X")
-        == "10.1016/S0140-6736(13)62228-X"
-    )
+    assert _clean_doi("10.1016/S0140-6736(13)62228-X") == "10.1016/S0140-6736(13)62228-X"
 
 
 def test_clean_doi_handles_wrapped_lancet_doi():
     """The real edge case: a balanced-paren DOI wrapped in prose parens."""
-    assert (
-        _clean_doi("10.1016/S0140-6736(13)62228-X)")
-        == "10.1016/S0140-6736(13)62228-X"
-    )
+    assert _clean_doi("10.1016/S0140-6736(13)62228-X)") == "10.1016/S0140-6736(13)62228-X"

@@ -20,6 +20,7 @@ from tools.check_registry import (
     _check_premises,
     _check_schema,
     _find_cycles,
+    _normalise_tier,
     _parse_entries,
     check_registry,
     count_words,
@@ -285,3 +286,59 @@ def test_notes_alone_do_not_fail_the_run(tmp_path):
     report = check_registry(reg, manuscript_path=man, budget=100)
     assert [f.severity for f in report.findings] == ["note"]
     assert report.ok is True
+
+
+# --- tier-monotonicity must never skip in silence (seeded 2026-09-14) ---------
+#
+# `_TIER_RANK.get(raw)` returned None for anything it did not recognise and the
+# comparison was then skipped with NO finding and NO change to the Examined
+# count — so a registry where the check was inert printed exactly what a clean
+# registry prints. Three reachable paths, all measured, all seeded below.
+
+
+def _arg(entry_id: str, tier: str, premises: tuple[str, ...] = ()) -> Entry:
+    return Entry(
+        entry_id=entry_id,
+        unit_type="ARGUMENT",
+        tier=tier,
+        verified=True,
+        line_number=1,
+        columns={},
+        premises=premises,
+    )
+
+
+def test_normalise_tier_strips_cell_decoration():
+    """Registries legitimately bold or quote a tier cell."""
+    for raw in ("**SPECULATIVE**", " `SPECULATIVE` ", "SPECULATIVE ⚠", "speculative"):
+        assert _normalise_tier(raw) == "SPECULATIVE", raw
+    assert _normalise_tier("SUPPORTED (provisional)") == "SUPPORTED"
+
+
+def test_decorated_premise_tier_is_ranked_not_skipped():
+    """A bold premise tier must produce the REAL monotonicity finding."""
+    entries = (_arg("S1-2", "ESTABLISHED", ("S1-1",)), _arg("S1-1", "**SPECULATIVE**"))
+    findings, _ = _check_premises(entries)
+    assert any("may not outrank" in f.message for f in findings)
+
+
+def test_unrankable_premise_tier_is_reported_not_skipped():
+    """An absent tier, a PROVOCATION-axis tier and a bogus string must each be
+    REPORTED. Silence here is indistinguishable from a clean pass."""
+    for tier, needle in (
+        ("", "records no confidence tier"),
+        ("PROVOCATIVE", "PROVOCATION axis"),
+        ("PROBABLY-FINE", "not one of"),
+    ):
+        entries = (_arg("S1-2", "ESTABLISHED", ("S1-1",)), _arg("S1-1", tier))
+        findings, _ = _check_premises(entries)
+        assert any(needle in f.message for f in findings), f"{tier!r} skipped silently"
+        assert any("could NOT be checked" in f.message for f in findings), tier
+
+
+def test_unrankable_own_tier_is_reported_not_skipped():
+    """The conclusion's own tier has the same hole: unrecognised meant no
+    comparison at all, silently."""
+    entries = (_arg("S1-2", "", ("S1-1",)), _arg("S1-1", "SPECULATIVE"))
+    findings, _ = _check_premises(entries)
+    assert any("could NOT be checked" in f.message for f in findings)
