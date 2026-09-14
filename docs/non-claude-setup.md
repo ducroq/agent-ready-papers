@@ -2,9 +2,17 @@
 
 The framework's prose is agent-agnostic (since v2.1.0): the `agents/` directory holds portable role prompts, the Hard Constraint about in-repo `memory/` is generalised across agent vendors, and the README's worked examples cite Haiku, GPT-4o-mini, and Gemini-Flash as equivalent choices. This doc walks through the practical *how* of using the framework with a non-Claude-Code agent.
 
+<!-- CONVENTION: another tool's filename is written WITHOUT backticks here
+     (AGENTS.md, CONVENTIONS.md, .aider.conf.yml, .continue/config.json,
+     .github/copilot-instructions.md). A backticked filename is indistinguishable
+     from a path in THIS tree, so a reference-integrity audit reports every one of
+     them as broken -- and they are not broken, they are other people's files. The
+     remedy costs nothing and needs no marker: drop the backticks. Paths that DO
+     live in this tree keep theirs. (agent-ready-projects v1.37.0, #76.) -->
+
 **Scope:** focused on the three surfaces a non-Claude agent needs to touch — `CLAUDE.md`, `agents/<role>.md`, and the in-repo `memory/` directory. Not a full setup walkthrough for any specific tool; tool installs and authentication are out of scope (consult each tool's own current docs).
 
-**Last verified:** 2026-06-11. Vendor-specific syntax (Copilot CLI flags, Cursor's `.cursorrules` and `.cursor/rules/*.mdc` conventions, Continue's config path, web-chat memory features) was correct as of that date — verify against each tool's current docs before relying on a specific flag. The framework's own three surfaces (`CLAUDE.md`, `agents/`, `memory/`) are stable; the per-tool entry points are what age.
+**Last verified:** 2026-06-11. The naming map below was **updated — not re-verified —** on 2026-09-14. Vendor-specific syntax (Copilot CLI flags, Cursor's .cursorrules and .cursor/rules/*.mdc conventions, Continue's config path, web-chat memory features) was correct as of the earlier date — verify against each tool's current docs before relying on a specific flag. The framework's own three surfaces (`CLAUDE.md`, `agents/`, `memory/`) are stable; the per-tool entry points are what age, and this file has now watched one of them age: see the AGENTS.md note below. ⚠️ **The 2026-09-14 half is second-hand** — it is agent-ready-projects v1.37.0's verification (#128), each entry checked against the vendor's own documentation rather than against the standard's adopter list, not a re-verification run here.
 
 ## The framework's agent-facing surface
 
@@ -31,20 +39,20 @@ The notes below are entry points, not full setup guides. Each tool's CLI flags, 
 
 ### GitHub Copilot CLI
 
-- **Install / auth:** see <https://docs.github.com/copilot/how-tos/copilot-cli> for the current install command and licensing requirements. The `agent-ready-assessment` repo (not publicly resolvable) has a `docs/copilot-cli-setup.md` with a worked institutional setup if you need a template; adapt the institutional pieces (GitHub Education licensing, org policy workarounds) to your own context.
-- **`CLAUDE.md`:** Copilot CLI does not auto-read `CLAUDE.md` at session start. Point it at the file as the first instruction (e.g. `copilot -p "Read CLAUDE.md, then …"`) or maintain a `.github/copilot-instructions.md` that mirrors the Hard Constraints — Copilot reads that file automatically.
+- **Install / auth:** see <https://docs.github.com/copilot/how-tos/copilot-cli> for the current install command and licensing requirements. The `agent-ready-assessment` repo (not publicly resolvable) has a docs/copilot-cli-setup.md with a worked institutional setup if you need a template; adapt the institutional pieces (GitHub Education licensing, org policy workarounds) to your own context.
+- **`CLAUDE.md`:** Copilot CLI does not auto-read `CLAUDE.md` at session start. Point it at the file as the first instruction (e.g. `copilot -p "Read CLAUDE.md, then …"`) or maintain a .github/copilot-instructions.md that mirrors the Hard Constraints — Copilot reads that file automatically.
 - **`agents/` role prompts:** invoke as `copilot -p "Read 'agents/review-prompt.md' as your system prompt. Then review this manuscript: …"`, or paste the prompt contents directly in interactive mode.
 - **Limitations:** no native `.docx` / `.pdf` reading; convert manuscripts to markdown first. No session-persistent memory across runs — the in-repo `memory/` discipline carries the state.
 
 ### Cursor
 
-- **Project rules:** Cursor reads `.cursorrules` (older convention) and `.cursor/rules/*.mdc` (newer convention) for project-level system instructions. Cross-tool conventions like `AGENTS.md` are also being adopted across vendors — check Cursor's current docs for which your version reads. The pragmatic move: keep `CLAUDE.md` as the canonical orientation file and add a `.cursorrules` (or symlink / duplicate) that points Cursor at `CLAUDE.md` and the relevant Hard Constraints.
+- **Project rules:** Cursor reads .cursorrules (older convention) and .cursor/rules/*.mdc (newer convention) for project-level system instructions, and *merges* its rule layers (Team → Project → User) rather than shadowing them. ⚠️ **Cursor's CLI reads both AGENTS.md and CLAUDE.md**, so a repo carrying both loads two instruction sets that drift apart silently — name the canonical one. The pragmatic move: keep `CLAUDE.md` as the canonical orientation file and add a .cursorrules that *points at* it rather than restating it.
 - **`agents/` role prompts:** paste `agents/review-prompt.md` or `agents/equation-checker.md` contents into Cursor's Composer or Chat's system-instructions slot before processing the artefact.
 
 ### Continue, Aider, and other CLI agents
 
-- **Continue:** project-level system prompts go in `.continue/config.json` or via project-level `.md` references. Add a `systemMessage` that includes the framework's Hard Constraints, or reference `CLAUDE.md` from the config.
-- **Aider:** use `--read CLAUDE.md` (or the current equivalent flag) to include the repo's orientation file in every session.
+- **Continue:** project-level system prompts go in .continue/config.json or via project-level `.md` references. Add a `systemMessage` that includes the framework's Hard Constraints, or reference `CLAUDE.md` from the config.
+- **Aider:** its own convention is CONVENTIONS.md, loaded with `--read` or a `read:` key in .aider.conf.yml. ⚠️ **Aider does not read AGENTS.md** — the agents.md adopter list names it, and Aider's own docs do not mention the file at all; the vendor's documentation is the authority here, not the standard's list. Use `--read CLAUDE.md` (or the current equivalent flag) to include this repo's orientation file in every session.
 - **General pattern:** every CLI agent has *some* way to include a markdown file as orientation. The framework's surface is just markdown, so the integration is always *"how does this tool include a markdown file as system context?"*
 
 ### Web chat (ChatGPT, Gemini, Claude.ai, Mistral Le Chat)
@@ -60,12 +68,14 @@ The following are tool-specific behaviours the framework cannot assume. Check ea
 - **Does the tool read `CLAUDE.md` automatically at session start?** Claude Code does; most others do not. If not, you need a separate orientation step.
 - **Does the tool have a session-persistent system-prompt slot?** Or does the role prompt have to be re-pasted each session?
 - **Does the tool support reading `.docx` / `.pdf` / `.bib` natively?** Most don't — convert artefacts to markdown first. Pandoc handles `.docx` → markdown well; `.bib` is already plain text.
-- **Does the tool have a per-project rules file convention?** (`.cursorrules`, `.cursor/rules/*.mdc`, `.github/copilot-instructions.md`, `.continue/config.json`, etc.) If yes, mirror the relevant Hard Constraints there so they apply to every session.
+- **Does the tool have a per-project rules file convention?** (.cursorrules, .cursor/rules/*.mdc, .github/copilot-instructions.md, .continue/config.json, etc.) If yes, mirror the relevant Hard Constraints there so they apply to every session.
 - **How does the tool's auto-memory interact with the framework's `memory/` constraint?** If the tool has user-level memory across projects (Claude Code, ChatGPT memory, Gemini memory), treat it like Claude Code's `~/.claude/` — cross-project knowledge only; this-repo state stays in the in-repo `memory/`.
 
 ## What you do *not* need to do
 
-- **You do not need to rename `CLAUDE.md` to `AGENTS.md`** to use this framework with a non-Claude agent. The filename is a convention from Claude Code's auto-discovery behaviour; the file contents are plain markdown that any agent can read. Renaming would break Claude Code's auto-discovery without buying anything for other agents (which usually need to be pointed at orientation files explicitly anyway). If you want both Claude Code auto-discovery *and* `AGENTS.md`-aware-tool support: symlink or duplicate, don't pick.
+- **You do not need to rename `CLAUDE.md` to AGENTS.md** to use this framework with a non-Claude agent. The filename is a convention from Claude Code's auto-discovery behaviour; the file contents are plain markdown that any agent can read. Renaming would break Claude Code's auto-discovery without buying anything for other agents.
+  ⚠️ **But AGENTS.md is no longer one vendor's convention, and this file said otherwise until 2026-09-14.** It is stewarded by the **Agentic AI Foundation under the Linux Foundation** and is read natively by Codex, Cursor, Windsurf, GitHub Copilot's coding agent, VS Code and Zed, among others. Treating it as "the Codex column" steers adopters toward vendor lock-in the ecosystem has already removed.
+  ⚠️ **And the advice that used to close this bullet — *symlink or duplicate, don't pick* — is withdrawn.** Some tools read AGENTS.md *and* `CLAUDE.md` (Cursor's CLI does), so a repo carrying both loads two instruction sets that drift apart silently. **Pick a canonical one.** A symlink is the one safe form of "both", because there is only ever one file; a duplicate is the failure mode. (Adopted from agent-ready-projects v1.37.0, #128.)
 - **You do not need to maintain parallel copies of `agents/` prompts** for different agents. The prompts in `agents/` are written in vendor-neutral form (`"You are an X agent. Your task is to Y."` — see `agents/README.md`) and work across vendors as-is.
 - **You do not need a separate per-agent Hard Constraint set** in your paper project. The Hard Constraints in `templates/CLAUDE.md` are agent-agnostic since v2.1.0 — they speak of *"any agent's user-level auto-memory"* rather than naming a specific tool.
 
@@ -74,5 +84,5 @@ The following are tool-specific behaviours the framework cannot assume. Check ea
 - [README](../README.md#agent-role-prompts) — Agent-Role Prompts section: the index of what's in `agents/`
 - [`agents/README.md`](../agents/README.md) — the line between agent-role prompts and fill-in templates, vendor-neutrality convention
 - Root [`CLAUDE.md`](../CLAUDE.md) Hard Constraint about in-repo `memory/` — the generalised principle
-- `agent-ready-assessment` (not publicly resolvable) — convention source for the `agents/` directory pattern; its `docs/copilot-cli-setup.md` has a worked institutional Copilot CLI example
+- `agent-ready-assessment` (not publicly resolvable) — convention source for the `agents/` directory pattern; its docs/copilot-cli-setup.md has a worked institutional Copilot CLI example
 - [`agent-ready-projects`](https://github.com/ducroq/agent-ready-projects) — companion guide for AI-assisted coding; layered documentation model applies to non-Claude agents the same way

@@ -68,7 +68,7 @@ Two claims come out of this and they have very different strength, so they are s
 
 The distinction matters because the two invite different actions: the first justifies adding a discovery-enumeration step to any check you own; the second would justify prioritising it over other review effort, and it is nowhere near strong enough to carry that.
 
-## Three failure modes
+## Four failure modes
 
 **The silent hook.** If the check's output never reaches the agent's context, it teaches nothing and costs time. This is the *default* behaviour on at least one major tool. Before trusting a hook, break something on purpose and confirm the agent reacts.
 
@@ -102,6 +102,23 @@ If you wire the coverage hook, add the matching Hard Constraint to `CLAUDE.md` t
 **A zero-row report is a failure, not a pass.** `--strict` over a registry whose sub-tables no longer parse returns exit 0, because every threshold is vacuously met over nothing. Any hook wired to this command should also assert the report is non-empty — otherwise the check that examines nothing is indistinguishable from the check that passes.
 
 The same shape applies to `tests/` — a test rewritten to match new behaviour is a removed guarantee, not a refactor.
+
+**The adjacent measurement.** A hook can measure something *next to* the thing it claims to check, and then it cannot fail. This is the quietest of the four, because the adjacency is exactly what makes the output read as evidence rather than as nothing.
+
+Four instances were found on **2026-09-14**, across this repo and one sibling estate:
+
+| The check measured | Instead of | How it failed |
+|--------------------|------------|---------------|
+| `git status --short \| wc -l` — a **file list** | a **content change** | a file already listed as modified stays listed when its contents change again; the count returned the same number across a concurrent rewrite of three of those files |
+| a printed verdict word (`PASS`/`FAIL` from awk) | an **exit code** | awk exits 0 on all input, so a seeded duplicate rank — the one defect the file existed to prevent — returned exit 0, and an empty table printed `FAIL` while still exiting 0 |
+| the **visible** paths in a tier table | the **real** population | four patterns were 100% gitignored, and the file list the checker builds enumerates no ignored file, so a change landing wholly inside them reported "nothing to review" |
+| a PDF's **byte size** | the PDF's **correctness** | wrong for a week before anyone noticed |
+
+⚠️ **Two of the four were written by the people who found the other two**, and the fourth was authored the same day its author identified the identical defect in someone else's file. **This is not a pattern other people have.** Recognising the shape does not inoculate you against producing it an hour later.
+
+**The test that separates all four, and it is the same one:** *state what a positive would look like, then produce one.* Each was settled in minutes by seeding — an ignored path, a duplicate rank, a second write to an already-listed file, a correct-but-undersized output. A guard that has never been shown failing has not been tested; it has been read.
+
+This is the general form of *"a zero-row report is a failure, not a pass"* three paragraphs above — that is the adjacency between *a threshold met* and *a threshold met over something*. ⚠️ **Evidence tier: EMERGING.** Four instances, all on one day, across two estates, self-reported by the parties who made them. There is no rate here and no second day — the *shape* is what transfers, not a frequency.
 
 **The tightened leash.** A hook firing on every write turns drafting into a stop-start crawl. Scope it: registry checks on `papers/*/vv/claims/**`, lint and tests on `tools/**` and `tests/**`, nothing on `manuscript.tex` or `memory/**`.
 

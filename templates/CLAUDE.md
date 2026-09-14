@@ -7,7 +7,11 @@
 - **Target:** [Journal name — special issue / track if applicable]
 - **Deadline:** [Submission date]
 - **Status:** [Phase 0-5: Framing / Requirements / Literature Audit / Writing / Validation / Submission]
-- **agent-ready-papers:** v3.0.0 <!-- The framework version this project is pinned to. Keep this line: the drift row in the table below has nothing to read without it. Bump it deliberately, after reviewing UPGRADING.md — not automatically. -->
+- **agent-ready-papers:** v3.0.0 <!-- The framework version this project is pinned to. Keep this line: the drift row in the table below has nothing to read without it. Bump it deliberately, after reviewing UPGRADING.md — not automatically.
+     A NUMBER, not a status. Never write "current" or "latest" here: the framework's release cadence is what
+     falsifies the adjective, and you cannot see the next tag coming. One adopter upstream had `current` become
+     false within hours of committing a stamp that was correct when they wrote it. A state report decays; a
+     number does not. (Adopted from agent-ready-projects v1.34.0.) -->
 
 ## Core Concept
 
@@ -46,6 +50,7 @@
 | Stuck or unsure about a claim | `anti-hallucination.md` — citation verification checklist |
 | Placing a bet whose evidence lives in the future | `hypothesis-log.md` (copy from `agent-ready-papers/templates/hypothesis-log.md` <!-- placeholder -->) — provisional positions with `Position` / `Method` / `Revisit trigger` / `Review by`. `/curate` surfaces due items. Write the entry when you make the claim, not at the end of the session. |
 | Starting work that will span several sessions | `templates/work-item.md` in the framework repo — a savepoint file in `docs/work-items/`, plus a one-line pointer from wherever this project keeps its in-progress list: the memory index's Current State section if you have one, otherwise the **Active work** section below. |
+| **Before committing** | Diff-driven review, lenses chosen by what changed — `/review-changes` where your agent has skills, otherwise paste the framework's `agent-ready-projects/templates/review-changes.md` as a prompt. **This row is what fires it**: nothing else prompts either party mid-flow. ⚠️ **Since agent-ready-projects v1.40.0** the skill is *user-global* and needs a per-repo **review profile** at `<repo-root>/.claude/review-profile.md` — copy `agent-ready-projects/templates/review-profile.md` and fill it in with your own paths. Without one it **STOPS** rather than reviewing at LOW, which is deliberate: a silently-LOW review is indistinguishable from one that ran and found nothing. ⚠️ **`<repo-root>/`, not `.claude/` — the skill reads it from the repo root, and this template is copied into layouts where that is not where you are.** From a two-deep `papers/<name>/` project, creating `.claude/review-profile.md` beside this file puts it at `papers/<name>/.claude/…`, where the skill will not find it and will STOP — looking exactly like the deliberate refusal rather than a misplaced file. Same reasoning as the `<repo-root>/memory/gotcha-log.md` row below. ⚠️ **On an older companion** `/review-changes` is project-local, reads no profile and never stops, so none of this applies — check your own pin before following it. For a paper, the HIGH row is whatever a reader would be misled by — `references.bib`, the claim registry, the manuscript's claim-bearing sections. |
 | Ending a session | `backlog.md` — update progress; `<repo-root>/memory/gotcha-log.md` — review, promote patterns, retire stale entries. (Written as `<repo-root>/` rather than a fixed relative path because the layout varies: from a two-deep `papers/<name>/` project it is `../../memory/gotcha-log.md` <!-- placeholder -->, and in a single-paper repo where the paper *is* the root it is just `memory/gotcha-log.md`. Substitute for your layout.) |
 
 ## Active work
