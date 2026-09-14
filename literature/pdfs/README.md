@@ -18,13 +18,13 @@ Consequence for adopters and for future sessions: **this directory will be empty
 |------|----|------|
 | `chen-2026-evidence-ledger.pdf` | L60 | |
 | `ghostcite-2026.pdf` | L59 | |
-| `kim-yang-2026-trace.pdf` | L63 | ⚠ **No text layer** — 23 pages, `pdftotext` returns nothing. Needs OCR, or read the arXiv HTML version instead |
+| `kim-yang-2026-trace.pdf` | L63 | 23 pages. ⚠ **Corrected 2026-09-14** — this row read *"No text layer … `pdftotext` returns nothing. Needs OCR"*, which is false: `pdftotext` extracts **67,702** non-whitespace characters and the title and author lines are clean. Only the *figure* glyphs are garbled. Re-derive rather than trust: `pdftotext <file> - \| tr -d '[:space:]' \| wc -c`. The false note would have sent a future session to OCR a readable PDF |
 | `li-2026-self-correction.pdf` | L64 | |
 | `mori-2026-warrantscore.pdf` | L62 | |
 | `rao-callison-burch-2026.pdf` | L58 | Title page reads "Published as a conference paper at COLM 2026" — peer-reviewed, not a bare preprint |
 | `zhou-yu-2026.pdf` | L61 | |
 
-Each was fetched from arXiv on 2026-09-14 and verified against its title page.
+Each was fetched from arXiv on 2026-09-14. ⚠ **"Verified against its title page" is not true of all of them** and was an unmeasured absolute: `rao-callison-burch-2026.pdf` genuinely was (the row above records what the title page says), while `kim-yang-2026-trace.md` records its identity as confirmed via *PDF metadata title*, not the title page. Say per-row what was actually checked; the blanket claim was refuted by a row in its own table.
 
 ## Not obtainable
 

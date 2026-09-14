@@ -2,12 +2,16 @@
 
 Registry-verification tooling for agent-ready-papers. Closes [#17](https://github.com/ducroq/agent-ready-papers/issues/17).
 
-Two tools, both stdlib-only, both deterministic, both designed to run in CI:
+**Four tools**, all stdlib-only, all deterministic, all designed to run in CI. ⚠️ This
+section said *"Two tools"* until 2026-09-14, two releases after the third and fourth
+shipped — re-derive with `ls tools/*.py` rather than trusting the count here.
 
 | Tool | Purpose |
 |------|---------|
 | `coverage.py` | Parse per-type sub-tables in a claim registry; report P0/P1/P2 coverage. |
 | `check_dois.py` | Extract DOI patterns from a registry; verify each resolves via `https://doi.org/`. |
+| `check_metadata.py` | Compare the bibliographic FIELDS against Crossref/DataCite — a resolving DOI is not a correct entry. |
+| `check_registry.py` | Registry/manuscript internal consistency: anchors, type-conditional schema, premise graph, word budget. |
 
 ## Status
 
@@ -41,7 +45,7 @@ make check         # lint + tests
 
 ## Exit codes
 
-The two tools share a code-space (0 / 1 / 2 = success / failure / tooling error) but **default behavior differs**: `coverage.py` only fails the build under `--strict`; `check_dois.py` fails by default whenever a DOI does not resolve. The asymmetry is intentional — coverage targets are policy-configurable and may legitimately be missed mid-draft, while a DOI that fails to resolve is unambiguous.
+All four tools share a code-space (0 / 1 / 2 = success / failure / tooling error) but **default behavior differs**: `coverage.py` only fails the build under `--strict`; `check_dois.py` fails by default whenever a DOI does not resolve. The asymmetry is intentional — coverage targets are policy-configurable and may legitimately be missed mid-draft, while a DOI that fails to resolve is unambiguous.
 
 | Code | `coverage.py` | `check_dois.py` |
 |------|---------------|-----------------|
@@ -49,7 +53,20 @@ The two tools share a code-space (0 / 1 / 2 = success / failure / tooling error)
 | 1 | `--strict` and at least one target missed | At least one DOI failed to resolve (or, with `--offline`, failed to parse) |
 | 2 | Tooling error (file missing, parse failure) | Tooling error (file missing, parse failure) |
 
-**`--offline` note (check_dois only).** Offline mode does *not* mark DOIs as resolved. It checks parseability only and gates exit on `all_parseable` instead of `all_resolved`. A stderr banner makes the mode explicit so a CI gate over `all_resolved` cannot silently pass if the flag is inherited unintentionally.
+**`--offline` note.** ⚠️ This said *"check_dois only"* until 2026-09-14 and was wrong:
+`check_metadata.py` has `--offline` too. Both print a stderr banner so an inherited flag
+is visible.
+
+- **`check_dois.py`** — offline does *not* mark DOIs as resolved. It checks parseability
+  only and gates exit on `all_parseable` instead of `all_resolved`, so a CI gate over
+  `all_resolved` cannot silently pass if the flag is inherited unintentionally.
+- **`check_metadata.py`** — offline compares **no fields at all**, so there is nothing for
+  `--strict` to be strict about. The two flags together are **refused** (exit 2) rather
+  than returning 0. Until 2026-09-14 `--offline` returned before `--strict` was consulted,
+  so a CI step inheriting it could never fail — the exact hazard the `check_dois` half of
+  this note was written to prevent, reproduced in the sibling tool.
+
+`check_metadata.py` also accepts `--json`, `--timeout` and `--mailto` (opt-in; no default).
 
 ## `check_metadata.py` — field-level verification
 
@@ -137,7 +154,7 @@ Documented here so adopters hit informed surfaces rather than silent miscounts. 
 
 ## File-naming note
 
-The issue title uses `check-dois.py` (hyphenated). The actual file is `check_dois.py` (underscored) so Python can import it as `tools.check_dois`. The CLI is invoked via `python -m tools.check_dois` either way.
+The issue title uses `check-dois.py` <!-- placeholder --> (hyphenated). The actual file is `check_dois.py` (underscored) so Python can import it as `tools.check_dois`. The CLI is invoked via `python -m tools.check_dois` either way.
 
 ## Licensing
 
