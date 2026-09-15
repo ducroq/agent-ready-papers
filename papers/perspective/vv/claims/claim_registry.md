@@ -48,7 +48,7 @@
 | S2-1 | EQUATOR maintains ~700 reporting guidelines for empirical research | Central landscape claim — entire gap argument depends on this |
 | S2-2 | No guidelines exist for non-empirical papers | The gap claim — paper has no reason to exist without it |
 | S3-4 | Claims, arguments, and propositions require fundamentally different verification | Central interpretive claim — the paper's core insight |
-| S4-1 | Proposition paper audit: 76% coverage, 100% P0, with retyping revealing false failures | Primary evidence for practical applicability |
+| S4-1 | Typed verification applied to a non-empirical paper can reveal misclassified entries, incl. arguments mistyped as claims | Weakens the practical-applicability argument. ⚠️ **Corrected 2026-09-14 — this cell previously read *"Proposition paper audit: 76% coverage, 100% P0, with retyping revealing false failures"* and called S4-1 *"Primary evidence for practical applicability"*. Neither figure appears anywhere: `76` and `audit` each occur **0 times** in `manuscript.tex`, and S4-1's own registry row (below) is an EMERGING capability claim sourced to *"Own design rationale"*, not a measurement. A summary cell was asserting an audit the row it summarises does not contain.** Open: whether a claim evidenced only by design rationale belongs in P0 at all. |
 | S5-1 | The scholarly community needs verification infrastructure for non-empirical papers | Core recommendation — paper has no purpose without it |
 
 ### P1 (Important) — target 90%
