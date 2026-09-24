@@ -109,7 +109,7 @@ This is the framework eating its own dog food. Any friction, gaps, or false fail
 
 ## Current Status
 
-**Phase:** 3 — Writing (revised draft, verification complete)
+**Phase:** 3 — Writing (revised draft; verification coverage complete, P0 tier gate failing)
 
 **Completed:**
 - Scaffold (CLAUDE.md, claim registry, writing guide, review prompt, anti-hallucination checklist)
@@ -118,7 +118,8 @@ This is the framework eating its own dog food. Any friction, gaps, or false fail
 - P0 verification: 8/8 verified (100%)
 - P1 verification: 10/10 verified (100%)
 - P2 verification: 1/1 verified (100%)
-- Overall: 19/19 (100% coverage — all targets exceeded)
+- Overall: 19/19 (100% coverage — all coverage targets exceeded; the P0 *tier* target is not met, see below)
+- ⚠️ **P0 tier floor not met (2026-09-24):** 7 of 8 P0 entries are below SUPPORTED after tiers were corrected to DR-002 criteria; DR-002 sets the P0 gate with no exception, so the gate fails (the writing guide's "framed as hypothesis" clause is not in DR-002). Coverage (above) counts verification status, not tier. See the registry header.
 - Anti-hallucination checklist: 14/14 references pass
 - Peer review simulation: scored 3.95/5.0 (upper "Minor revision")
 - Manuscript revisions based on review findings

@@ -242,17 +242,11 @@ Confidence progression for framework components:
 
 ### ESTABLISHED / SUPPORTED — Ready for Strong Statements
 
+⚠️ *Rebuilt from the claim registry 2026-09-24. This table and the EMERGING one below had drifted: nine entries were listed in both tables, each with contradictory tiers. The registry is the source of truth — re-derive from it rather than editing these tables by hand.*
+
 | ID | Statement | Type | Tier | Best Source |
 |----|-----------|------|------|------------|
-| S1-1 | AI citation hallucination | CLAIM | SUPPORTED | Mugaanyi et al. 2024 (JMIR) |
-| S1-2 | Confidence inflation | CLAIM | SUPPORTED | Liang et al. 2024 (NEJM AI) + technology audit |
 | S2-1 | EQUATOR ~700 guidelines | CLAIM | ESTABLISHED | EQUATOR website (699, 2026-03-03) |
-| S2-2 | No non-empirical guidelines | CLAIM | ESTABLISHED | EQUATOR database search |
-| S2-3 | Gregor Type I and V non-empirical | CLAIM | ESTABLISHED | Gregor 2006 (MIS Quarterly) |
-| S2-4 | Argument quality primary challenge | CLAIM | SUPPORTED | Toulmin 2003 + Whetten 1989 |
-| S3-1 | Toulmin operationalizable | CLAIM | SUPPORTED | Toulmin 2003 + Gupta 2024 (ACL) |
-| S3-2 | Whetten operationalizable | CLAIM | SUPPORTED | Whetten 1989 + own checklists |
-| S4-3 | Structure + LLM > LLM alone | CLAIM | SUPPORTED | PeerArg 2024 + Gupta 2024 |
 
 ### EMERGING — Appropriately Hedged
 
@@ -263,7 +257,6 @@ Confidence progression for framework components:
 | S1-3 | Scope creep | CLAIM | EMERGING | "may expand", "without constraints" |
 | S1-5 | Calculation errors in AI-generated equations | CLAIM | EMERGING | "can contain", "survive plausibility review" |
 | S1-4 | No process-level solutions | CLAIM | EMERGING | "we are not aware of", "current approaches address [tool] but not [process]" |
-| S2-1 | EQUATOR ~700 guidelines | CLAIM | EMERGING | "maintains approximately 500" — will likely upgrade after verification |
 | S2-2 | No non-empirical guidelines | CLAIM | EMERGING | "to our knowledge, no equivalent" |
 | S2-3 | Gregor Type I and V non-empirical | CLAIM | EMERGING | "identified five types, two of which" |
 | S2-4 | Argument quality is primary challenge | CLAIM | EMERGING | "may be the primary challenge" |
