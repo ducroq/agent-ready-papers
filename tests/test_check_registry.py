@@ -19,6 +19,7 @@ from tools.check_registry import (
     _check_budget,
     _check_premises,
     _check_schema,
+    _check_tiers,
     _find_cycles,
     _normalise_tier,
     _parse_entries,
@@ -116,6 +117,278 @@ def test_anchor_regex_requires_the_colon_form():
     counting it would have hidden the very finding this check exists for."""
     findings, _ = _check_anchors((_entry("S4-1"),), "% Registry entries: S4-1, S4-2\n")
     assert [f.entry_id for f in findings] == ["S4-1"]
+
+
+# --------------------------------------------------------------------------
+# tiers — every copy of an ID's tier agrees (#37)
+# --------------------------------------------------------------------------
+
+REGISTRY_TABLE_TEX = r"""\begin{tabular}{@{}lllll@{}}
+\toprule
+\textbf{ID} & \textbf{Type} & \textbf{Priority} & \textbf{Confidence} & \textbf{Status} \\
+\midrule
+S1-1 & Claim & P0 & Established & Verified \\
+S1-2 & Claim & P1 & Emerging    & Verified \\
+\bottomrule
+\end{tabular}
+"""
+
+
+def test_tiers_pass_when_every_copy_agrees():
+    """Registry, anchor and printed table agree; the table's title case
+    ("Emerging") must match the registry's "EMERGING"."""
+    entries = (_entry("S1-1", tier="ESTABLISHED"), _entry("S1-2", tier="EMERGING"))
+    manuscript = "% S1-1: a (CLAIM, P0, ESTABLISHED)\n% S1-2: b (CLAIM, P1, EMERGING)\n" + REGISTRY_TABLE_TEX
+    findings, examined = _check_tiers(entries, manuscript)
+    assert findings == []
+    assert examined == 2
+
+
+def test_tiers_flag_an_anchor_disagreeing_with_the_registry():
+    """The live case at 828f9cd^: registry raised to SUPPORTED, anchor left at EMERGING."""
+    entries = (_entry("S1-1", tier="SUPPORTED"),)
+    findings, examined = _check_tiers(entries, "text\n% S1-1: a (CLAIM, P0, EMERGING)\n")
+    assert [(f.entry_id, f.severity) for f in findings] == [("S1-1", "finding")]
+    assert "registry line 1 `SUPPORTED`" in findings[0].message
+    assert "manuscript anchor line 2 `EMERGING`" in findings[0].message
+    assert examined == 1
+
+
+def test_tiers_flag_a_printed_table_disagreeing_with_the_registry():
+    entries = (_entry("S1-1", tier="SUPPORTED"), _entry("S1-2", tier="EMERGING"))
+    findings, _ = _check_tiers(entries, REGISTRY_TABLE_TEX)
+    assert [f.entry_id for f in findings] == ["S1-1"]
+    assert "manuscript table line 5 `Established`" in findings[0].message
+
+
+def test_tiers_flag_an_id_whose_registry_rows_disagree():
+    """An ID may appear in more than one registry sub-table."""
+    content = CLAIM_TABLE + "\n" + ARGUMENT_TABLE.replace("S2-1", "S1-1")
+    findings, _ = _check_tiers(_parse_entries(content), "")
+    assert [f.entry_id for f in findings] == ["S1-1"]
+
+
+def test_tiers_note_an_anchor_with_no_parseable_tier():
+    """A copy the check cannot read is reported, never skipped in silence."""
+    entries = (_entry("S1-1"),)
+    findings, examined = _check_tiers(entries, "% S1-1: no parenthesis\n% S1-1: short (CLAIM, P0)\n")
+    assert [(f.severity, f.check, f.entry_id) for f in findings] == [
+        ("note", "tiers", "S1-1"),
+        ("note", "tiers", "S1-1"),
+        ("note", "tiers", ""),  # and the check says it compared nothing
+    ]
+    assert examined == 0
+
+
+def test_tiers_ignore_a_tabular_without_a_confidence_column():
+    entries = (_entry("S1-1", tier="SUPPORTED"),)
+    tex = REGISTRY_TABLE_TEX.replace(r"\textbf{Confidence}", r"\textbf{Notes}")
+    findings, examined = _check_tiers(entries, tex)
+    assert [f.severity for f in findings] == ["note"]  # "compared NOTHING", never a silent zero
+    assert examined == 0
+
+
+def test_tiers_examined_counts_only_ids_with_two_copies():
+    entries = (_entry("S1-1"), _entry("S1-2"))
+    _, examined = _check_tiers(entries, "% S1-1: a (CLAIM, P0, EMERGING)\n")
+    assert examined == 1
+
+
+def test_tiers_read_the_table_forms_a_manuscript_actually_uses():
+    """Seeded from review 2026-09-25: each of these was skipped in silence, and
+    the ID still counted as agreeing. longtable, tabularx, a macro-wrapped ID,
+    a group-header row above the real header, a leading \\hline, an escaped
+    \\& in an earlier cell, and a macro-wrapped tier."""
+    entries = tuple(_entry(f"S1-{n}", tier="SUPPORTED") for n in range(1, 6))
+    tex = r"""\begin{longtable}{lll}
+ID & Type & Confidence \\
+S1-1 & Claim & Speculative \\
+\end{longtable}
+\begin{tabularx}{\textwidth}{lXl}
+ & \multicolumn{2}{c}{Registry} \\
+ID & Statement & Confidence \\
+\texttt{S1-2} & x & Speculative \\
+\hline S1-3 & a \& b & Speculative \\
+S1-4 & wrapped
+  over two lines & \textsc{Speculative} \\ S1-5 & two rows on one line & Speculative \\
+\end{tabularx}
+"""
+    findings, examined = _check_tiers(entries, tex)
+    assert [f.entry_id for f in findings if f.severity == "finding"] == ["S1-1", "S1-2", "S1-3", "S1-4", "S1-5"]
+    assert all("`Speculative`" in f.message for f in findings)
+    assert examined == 5
+
+
+def test_tiers_multicolumn_header_does_not_shift_the_confidence_index():
+    entries = (_entry("S1-1", tier="SUPPORTED"),)
+    tex = r"""\begin{tabular}{llll}
+\multicolumn{2}{c}{Entry} & Priority & Confidence \\
+S1-1 & Claim & P0 & Supported \\
+\end{tabular}
+"""
+    findings, examined = _check_tiers(entries, tex)
+    assert findings == [] and examined == 1
+
+
+def test_tiers_note_a_table_row_too_short_to_reach_confidence():
+    entries = (_entry("S1-1", tier="SUPPORTED"), _entry("S1-2", tier="EMERGING"))
+    tex = REGISTRY_TABLE_TEX.replace(r"S1-2 & Claim & P1 & Emerging    & Verified", "S1-2 & Claim")
+    findings, _ = _check_tiers(entries, tex)
+    assert {(f.severity, f.entry_id) for f in findings} == {("finding", "S1-1"), ("note", "S1-2")}
+
+
+def test_tiers_see_through_a_trailing_comment_on_an_anchor():
+    """`% was SUPPORTED` after the parenthesis must not demote the #37 drift to a note."""
+    entries = (_entry("S1-1", tier="SUPPORTED"),)
+    findings, _ = _check_tiers(entries, "% S1-1: a (CLAIM, P0, EMERGING) % was SUPPORTED\n")
+    assert [(f.severity, f.entry_id) for f in findings] == [("finding", "S1-1")]
+
+
+@pytest.mark.parametrize(
+    "row_end",
+    [r"\\", r"\\[2pt]", r"\\*", r"\tabularnewline", "\\\\ % trailing comment\n"],
+)
+def test_tiers_read_every_row_terminator(row_end):
+    """Round 2 (2026-09-25): after `\\[2pt]`, `\\*` or `\tabularnewline` every
+    later row was dropped in silence, and `\\%` swallowed the next row."""
+    entries = (_entry("S1-1", tier="SUPPORTED"), _entry("S1-2", tier="SUPPORTED"))
+    tex = (
+        "\\begin{tabular}{ll}\nID & Confidence " + row_end + "\nS1-1 & Speculative " + row_end + "\n"
+        "S1-2 & Speculative " + row_end + "\n\\end{tabular}\n"
+    )
+    findings, examined = _check_tiers(entries, tex)
+    assert [f.entry_id for f in findings if f.severity == "finding"] == ["S1-1", "S1-2"]
+    assert examined == 2
+
+
+def test_tiers_strip_row_leading_rules_and_cell_decoration():
+    entries = (_entry("S1-1", tier="SUPPORTED"), _entry("S1-2", tier="SUPPORTED"))
+    tex = r"""\begin{tabular}{ll}
+ID & Confidence \\
+\cmidrule(lr){1-2} \rowcolor{gray} S1-1\footnote{see text} & Supported$^\dagger$ \\
+\cline{1-2} S1-2 & \textsc{Supported}\footnote{x} \\
+\end{tabular}
+"""
+    findings, examined = _check_tiers(entries, tex)
+    assert findings == [] and examined == 2
+
+
+def test_tiers_pass_over_a_caption_that_mentions_confidence():
+    entries = (_entry("S1-1", tier="SUPPORTED"),)
+    tex = r"""\begin{longtable}{ll}
+\caption{Claims by confidence tier} \\
+ID & Confidence \\ \endhead
+S1-1 & Supported \\
+\end{longtable}
+"""
+    findings, examined = _check_tiers(entries, tex)
+    assert findings == [] and examined == 1
+
+
+def test_tiers_note_a_confidence_header_spanning_columns():
+    """Which of Before/After is "the" tier is ambiguous; say so, don't guess."""
+    entries = (_entry("S1-1", tier="SUPPORTED"),)
+    tex = r"""\begin{tabular}{llll}
+\multicolumn{2}{c}{Claim} & \multicolumn{2}{c}{Confidence} \\
+ID & Claim & Before & After \\
+S1-1 & a & Emerging & Supported \\
+\end{tabular}
+"""
+    findings, _ = _check_tiers(entries, tex)
+    assert any(f.severity == "note" and "ambiguous" in f.message for f in findings)
+    assert not any(f.severity == "finding" for f in findings)
+
+
+def test_tiers_backstop_notes_an_id_no_row_accounted_for():
+    """The net under the whole silent-drop class: an ID in a Confidence table's
+    body that yields neither a copy nor a note is itself a note."""
+    entries = (_entry("S1-1", tier="SUPPORTED"),)
+    tex = r"""\begin{tabular}{ll}
+ID & Confidence \\
+S1-1 & Supported \\
+Merged into & S1-9 \\
+\end{tabular}
+"""
+    findings, _ = _check_tiers(entries, tex)
+    assert [(f.severity, f.entry_id) for f in findings] == [("note", "S1-9")]
+
+
+def test_tiers_ignore_tables_in_verbatim_and_comments():
+    entries = (_entry("S1-1", tier="SUPPORTED"),)
+    table = "\\begin{tabular}{ll}\nID & Confidence \\\\\nS1-1 & Speculative \\\\\n\\end{tabular}\n"
+    tex = "\\begin{verbatim}\n" + table + "\\end{verbatim}\n" + "".join("% " + ln + "\n" for ln in table.splitlines())
+    findings, examined = _check_tiers(entries, tex)
+    assert not any(f.severity == "finding" for f in findings)
+    assert examined == 0
+
+
+def test_tiers_anchor_prose_may_contain_a_percent_sign():
+    """The anchor is already a comment, so `100%` is prose, not a second comment."""
+    entries = (_entry("S1-1", tier="SUPPORTED"),)
+    findings, examined = _check_tiers(entries, "% S1-1: 100% of them (CLAIM, P0, SUPPORTED)\n")
+    assert findings == [] and examined == 1
+
+
+def test_tiers_anchor_reads_the_tier_not_the_history_in_its_comment_tail():
+    """Round 3: `% raised from (…, EMERGING)` after the real tier used to be
+    read instead of it, masking a disagreement."""
+    entries = (_entry("S1-1", tier="EMERGING"),)
+    anchor = "% S1-1: a (CLAIM, P0, SUPPORTED) % raised from (CLAIM, P0, EMERGING)\n"
+    findings, _ = _check_tiers(entries, anchor)
+    assert [(f.severity, f.entry_id) for f in findings] == [("finding", "S1-1")]
+    assert "`SUPPORTED`" in findings[0].message
+
+
+@pytest.mark.parametrize("typed_id", ["S1--1", "S1–1", "S1 -- 1", r"S1\-1", "S1$-$1", "S1{-}1"])
+def test_tiers_read_latex_typed_id_dashes(typed_id):
+    entries = (_entry("S1-1", tier="SUPPORTED"),)
+    tex = "\\begin{tabular}{ll}\nID & Confidence \\\\\n" + typed_id + " & Emerging \\\\\n\\end{tabular}\n"
+    findings, _ = _check_tiers(entries, tex)
+    assert [(f.severity, f.entry_id) for f in findings] == [("finding", "S1-1")]
+
+
+def test_tiers_note_a_nested_table():
+    """Nested tables are unsupported; the rows after one must not vanish unannounced."""
+    entries = (_entry("S1-1", tier="SUPPORTED"), _entry("S1-2", tier="SUPPORTED"))
+    tex = r"""\begin{tabular}{ll}
+ID & Confidence \\
+S1-1 & \begin{tabular}{@{}l@{}}Supported\\x\end{tabular} \\
+S1-2 & Emerging \\
+\end{tabular}
+"""
+    findings, _ = _check_tiers(entries, tex)
+    assert any(f.severity == "note" and "nested table" in f.message for f in findings)
+
+
+def test_tiers_commented_verbatim_opener_does_not_swallow_tables():
+    entries = (_entry("S1-1", tier="SUPPORTED"),)
+    tex = (
+        "% \\begin{verbatim}\n\\begin{tabular}{ll}\nID & Confidence \\\\\nS1-1 & Emerging \\\\\n\\end{tabular}\n"
+        "\\begin{verbatim}\nx\n\\end{verbatim}\n"
+    )
+    findings, _ = _check_tiers(entries, tex)
+    assert [(f.severity, f.entry_id) for f in findings] == [("finding", "S1-1")]
+
+
+def test_tiers_read_the_text_argument_of_multirow_and_not_a_prefix_macro():
+    entries = (_entry("S1-1", tier="SUPPORTED"), _entry("S1-2", tier="SUPPORTED"))
+    tex = r"""\begin{tabular}{ll}
+ID & Confidence \\
+S1-1 & \multirow{2}{*}{Supported} \\
+S1-2 & \reflectbox{Supported} \\
+\end{tabular}
+"""
+    findings, examined = _check_tiers(entries, tex)
+    assert findings == [] and examined == 2
+
+
+def test_normalise_tier_matches_coverage_copy():
+    """The two copies are kept equivalent by hand (importing would be circular);
+    this is what keeps the tiers check and the P0 floor reading a cell alike."""
+    from tools.coverage import _normalise_tier as coverage_normalise
+
+    for raw in ("**SUPPORTED**", "`EMERGING`", "SUPPORTED ⚠", "Emerging", "SPECULATIVE (provisional)", "~~X~~", ""):
+        assert _normalise_tier(raw) == coverage_normalise(raw)
 
 
 # --------------------------------------------------------------------------
@@ -275,6 +548,7 @@ def test_anchor_check_is_skipped_without_a_manuscript(tmp_path):
     path.write_text(CLAIM_TABLE, encoding="utf-8")
     report = check_registry(path)
     assert "anchors" not in report.checks_run
+    assert "tiers" not in report.checks_run
     assert report.ok is True
 
 
@@ -282,7 +556,11 @@ def test_notes_alone_do_not_fail_the_run(tmp_path):
     reg = tmp_path / "r.md"
     reg.write_text(CLAIM_TABLE, encoding="utf-8")
     man = tmp_path / "m.tex"
-    man.write_text("% S1-1: x\n% S1-2: y\n" + " ".join(["w"] * 96), encoding="utf-8")
+    # Anchors carry tiers matching the registry, so the budget note is the only one.
+    man.write_text(
+        "% S1-1: x (CLAIM, P0, ESTABLISHED)\n% S1-2: y (CLAIM, P1, EMERGING)\n" + " ".join(["w"] * 96),
+        encoding="utf-8",
+    )
     report = check_registry(reg, manuscript_path=man, budget=100)
     assert [f.severity for f in report.findings] == ["note"]
     assert report.ok is True

@@ -21,6 +21,7 @@ from tools.coverage import (
     _parse_registry,
     _split_row,
     check_coverage,
+    main,
 )
 
 
@@ -227,3 +228,100 @@ def test_parse_registry_tolerates_a_short_divider_row_without_truncating():
     )
     counts = _parse_registry(content)
     assert counts[("CLAIM", PRIORITY_AXIS, "P0")] == (3, 2)
+
+
+# --------------------------------------------------------------------------
+# P0 tier floor (DR-002) — reported separately from coverage (#37)
+# --------------------------------------------------------------------------
+
+
+def _floor_registry(tmp_path, *tiers, header_confidence="Confidence"):
+    rows = "\n".join(f"| S1-{n} | claim {n} | P0 | {tier} | s | A | [x] |" for n, tier in enumerate(tiers, start=1))
+    path = tmp_path / "r.md"
+    path.write_text(
+        "**CLAIMs:**\n\n"
+        f"| ID | Statement | Priority | {header_confidence} | Source | Source Tier | Status |\n"
+        "|----|-----------|----------|------------|--------|-------------|--------|\n"
+        f"{rows}\n"
+        "| S1-99 | a P1 below the floor is not P0 | P1 | SPECULATIVE | s | A | [x] |\n",
+        encoding="utf-8",
+    )
+    return path
+
+
+def test_tier_floor_passes_when_every_p0_is_supported_or_established(tmp_path):
+    report = check_coverage(_floor_registry(tmp_path, "SUPPORTED", "**ESTABLISHED**", "SUPPORTED ⚠"))
+    assert report.meets_tier_floor is True
+    assert report.p0_below_floor == ()
+    assert len(report.p0_tiers) == 3
+    assert "P0 tier floor (SUPPORTED or ESTABLISHED, DR-002): 3 of 3 meet it — meets" in report.to_markdown()
+    assert main([str(report.registry_path), "--strict"]) == 0
+
+
+def test_tier_floor_fails_on_a_p0_below_supported_even_at_full_coverage(tmp_path):
+    report = check_coverage(_floor_registry(tmp_path, "SUPPORTED", "EMERGING", "Speculative"))
+    assert report.meets_targets is True  # coverage is untouched by the floor
+    assert report.meets_tier_floor is False
+    assert report.p0_below_floor == ("S1-2", "S1-3")
+    assert "1 of 3 meet it — FAILS; below the floor: S1-2, S1-3" in report.to_markdown()
+    floor = report.to_dict()["p0_tier_floor"]
+    assert floor["meets"] is False and floor["below_floor"] == ["S1-2", "S1-3"]
+    assert main([str(report.registry_path), "--strict"]) == 1
+    assert main([str(report.registry_path)]) == 0  # the floor gates --strict only
+
+
+def test_tier_floor_counts_an_unreadable_tier_as_failing(tmp_path):
+    """No Confidence column at all: every P0 row fails the floor, not passes it."""
+    report = check_coverage(_floor_registry(tmp_path, "SUPPORTED", header_confidence="Notes"))
+    assert report.meets_tier_floor is False
+    assert report.p0_below_floor == ("S1-1",)
+
+
+def test_paper1_p0_tier_floor_fails(paper1_registry):
+    """Paper 1's P0 gate genuinely fails after the 828f9cd re-derivation (#38)."""
+    report = check_coverage(paper1_registry)
+    assert len(report.p0_tiers) == 8
+    assert report.meets_tier_floor is False
+    assert set(report.p0_below_floor) == {"S1-1", "S1-2", "S1-4", "S2-2", "S3-4", "S4-1", "S5-1"}
+
+
+def test_tier_floor_sees_a_decorated_or_unticked_p0(tmp_path):
+    """Seeded from review 2026-09-25: `**P0**` and a blank Status each dropped an
+    EMERGING P0 out of the floor, which then printed "meets"."""
+    path = tmp_path / "r.md"
+    path.write_text(
+        "**CLAIMs:**\n\n"
+        "| ID | Statement | Priority | Confidence | Status |\n"
+        "|----|-----------|----------|------------|--------|\n"
+        "| S1-1 | ok | P0 | SUPPORTED | [x] |\n"
+        "| S1-2 | decorated | **P0** | EMERGING | [x] |\n"
+        "| S1-3 | unticked | P0 | EMERGING |  |\n",
+        encoding="utf-8",
+    )
+    report = check_coverage(path)
+    assert report.p0_below_floor == ("S1-2", "S1-3")
+    # coverage itself is unchanged: the unticked row is still not counted there
+    assert sum(r.total for r in report.rows) == 2
+
+
+def test_tier_floor_counts_entries_not_rows(tmp_path):
+    path = tmp_path / "r.md"
+    table = "| ID | Statement | Priority | Confidence | Status |\n|----|----|----|----|----|\n"
+    path.write_text(
+        "**CLAIMs:**\n\n" + table + "| S1-1 | a | P0 | EMERGING | [x] |\n| S1-2 | b | P0 | SUPPORTED | [x] |\n\n"
+        "**ARGUMENTs:**\n\n" + table + "| S1-1 | a | P0 | EMERGING | [x] |\n",
+        encoding="utf-8",
+    )
+    report = check_coverage(path)
+    assert report.p0_ids == ("S1-1", "S1-2")
+    assert report.p0_below_floor == ("S1-1",)
+    assert "1 of 2 meet it — FAILS; below the floor: S1-1." in report.to_markdown()
+
+
+def test_tier_floor_with_no_p0_says_not_evaluated(tmp_path):
+    """ "0 of 0 meet it — meets" reads as a pass; it must say nothing was checked."""
+    report = check_coverage(_floor_registry(tmp_path))  # only the P1 row
+    assert report.p0_ids == ()
+    assert "NOT evaluated" in report.to_markdown()
+    assert "meets" not in report._tier_floor_line()
+    assert report.to_dict()["p0_tier_floor"]["evaluated"] is False

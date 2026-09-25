@@ -16,6 +16,8 @@ def paper1_registry() -> Path:
 
     19 entries: 16 CLAIMs, 2 ARGUMENTs, 1 PROPOSITION.
     Priority breakdown: P0=8, P1=10, P2=1. All status [x] (100% verified).
+    Known-good for PARSING only: its DR-002 P0 tier floor fails (7 of 8
+    below SUPPORTED, #38), and `test_paper1_p0_tier_floor_fails` pins that.
     Contains 9 DOIs (verified independently in DR-011 Pass 1 review).
     """
     assert PAPER1_REGISTRY.is_file(), f"fixture missing: {PAPER1_REGISTRY}"

@@ -1,6 +1,6 @@
 """Internal-consistency checks over a claim registry and its manuscript.
 
-Four checks, all of them *internal consistency* — comparisons between two
+Five checks, all of them *internal consistency* — comparisons between two
 artifacts the author controls. None of them touches the question a rule
 cannot decide: whether a registered tier is the right tier given the
 evidence. That is Step Z, and it stays a human-and-agent pass.
@@ -17,6 +17,14 @@ Checks:
              and every registry row has an anchor. A row with no anchor
              claims coverage the paper may not have; an anchor with no
              row is prose nothing tracks.
+
+  tiers      Every copy of an ID's confidence tier agrees: registry
+             sub-table rows, manuscript anchors `% S1-1: text (TYPE, P0,
+             TIER)`, and a LaTeX table whose header has a Confidence
+             column. A disagreement says two copies differ — never which
+             one is right. The copies have drifted apart before: eight
+             registry tiers were raised without touching their anchors,
+             and the two disagreed for six months (#37).
 
   schema     Type-conditional column completeness. ARGUMENT rows need
              Grounds, Warrant and Rebuttal; PROPOSITION rows need
@@ -54,6 +62,7 @@ Exit codes:
 from __future__ import annotations
 
 import argparse
+import bisect
 import json
 import re
 import sys
@@ -66,6 +75,35 @@ from pathlib import Path
 from tools.coverage import _MARKER_REGEX, _SEPARATOR_REGEX, _split_row
 
 ANCHOR_REGEX = re.compile(r"^%\s*(S\d+-\d+)\s*:", re.MULTILINE)
+_ANCHOR_LINE_REGEX = re.compile(r"^%\s*(S\d+-\d+)\s*:(.*)$")
+_TRAILING_PAREN_REGEX = re.compile(r"\(([^()]*)\)\s*$")
+# `%` starts a comment unless escaped as `\%`; `\\%` is a row break then a comment.
+_TEX_COMMENT_REGEX = re.compile(r"(?<!(?<!\\)\\)%.*$", re.M)
+_TEX_VERBATIM_REGEX = re.compile(r"\\begin\{(verbatim|lstlisting|minted|comment)\*?\}.*?\\end\{\1\*?\}", re.S)
+# tabular, tabular*, tabularx and longtable. Nested tables are not supported:
+# the lazy match stops at the first matching \end.
+_TABULAR_REGEX = re.compile(r"\\begin\{(tabular\*?|tabularx|longtable\*?)\}(.*?)\\end\{\1\}", re.S)
+# `\\`, `\\*`, `\\[2pt]` and `\tabularnewline` all end a row.
+_TEX_ROW_END_REGEX = re.compile(r"\\\\\*?(?:\s*\[[^\]]*\])?|\\tabularnewline\b")
+_TEX_CELL_SPLIT_REGEX = re.compile(r"(?<!\\)&")
+_TEX_MULTICOLUMN_REGEX = re.compile(r"\\multicolumn\{(\d+)\}")
+# Macros whose argument is not cell text: footnotes, references, and the
+# rule/colour commands that can lead a row (`\cmidrule(lr){2-3}`).
+_TEX_DROP_REGEX = re.compile(
+    r"\\(footnote(?:mark|text)?|tnote|cite[a-zA-Z]*|ref|label|cline|cmidrule|rowcolor|cellcolor|addlinespace)"
+    r"(?![a-zA-Z])\*?"
+    r"(?:\([^)]*\))?(?:\[[^\]]*\])*(?:\{[^{}]*\})*"
+)
+_TEX_MATH_REGEX = re.compile(r"\$[^$]*\$")
+# `\multirow{2}{*}{EMERGING}`: the first two arguments are layout, the third is text.
+_TEX_MULTIROW_REGEX = re.compile(r"\\multirow\*?(?:\[[^\]]*\])?\{[^{}]*\}(?:\[[^\]]*\])?\{[^{}]*\}")
+# LaTeX-typed ID dashes: `S2--1` (en-dash), a pasted – or —, `S1\-1`, `S1$-$1`, `S1{-}1`.
+_ID_DASH_REGEX = re.compile(r"(S\d+)[ \t]*(?:--|–|—|\\-|\$-\$|\{-\})[ \t]*(\d+)")
+_NESTED_TABLE_REGEX = re.compile(r"\\begin\{(tabular\*?|tabularx|longtable\*?)\}")
+_ANCHOR_PAREN_REGEX = re.compile(r"\(([^()]*)\)")
+_AFTER_ANCHOR_PAREN_REGEX = re.compile(r"\s*(%.*)?$")
+_TEX_MACRO_REGEX = re.compile(r"\\[a-zA-Z]+\*?(\[[^\]]*\])?")
+_ID_TOKEN_REGEX = re.compile(r"(?<![\w-])S\d+-\d+(?![\w-])")
 ENTRY_ID_REGEX = re.compile(r"^S\d+-\d+$")
 _PREMISE_ID_REGEX = re.compile(r"S\d+-\d+")
 _VERIFIED_REGEX = re.compile(r"^\s*\[\s*x\s*\]", re.IGNORECASE)
@@ -274,6 +312,232 @@ def _check_anchors(entries: tuple[Entry, ...], manuscript: str) -> tuple[list[Fi
     return findings, len(anchored | registered)
 
 
+def _anchor_tiers(manuscript: str) -> tuple[list[tuple[str, str, str]], list[Finding]]:
+    """Return ([(id, where, raw_tier)], notes) for every `% S#-#:` anchor.
+
+    The tier is the last element of the trailing parenthesis, which the
+    convention writes as `(TYPE, PRIORITY, TIER)`. An anchor without all
+    three is a note rather than a silent skip: it is a copy of the tier
+    that this check could not read, and the Examined count would
+    otherwise hide it.
+    """
+    copies: list[tuple[str, str, str]] = []
+    notes: list[Finding] = []
+    for lineno, line in enumerate(manuscript.splitlines(), start=1):
+        match = _ANCHOR_LINE_REGEX.match(line)
+        if not match:
+            continue
+        entry_id, rest = match.groups()
+        # The tier is the first parenthesis followed only by whitespace or a
+        # `% comment`. First, not last: in `(…, SUPPORTED) % raised from
+        # (…, EMERGING)` the tail is history, and reading it would hide the
+        # very disagreement this check exists for. A `%` before the
+        # parenthesis is prose ("100% of …"), since the anchor is already a
+        # comment.
+        parts: list[str] = []
+        for paren in _ANCHOR_PAREN_REGEX.finditer(rest):
+            candidate = [p.strip() for p in paren.group(1).split(",")]
+            if len(candidate) >= 3 and _AFTER_ANCHOR_PAREN_REGEX.match(rest, paren.end()):
+                parts = candidate
+                break
+        if len(parts) < 3 or not parts[-1]:
+            notes.append(
+                Finding(
+                    "tiers",
+                    "note",
+                    entry_id,
+                    f"manuscript anchor at line {lineno} has no parseable tier — expected a "
+                    "trailing `(TYPE, PRIORITY, TIER)`, so this copy was NOT compared",
+                )
+            )
+            continue
+        copies.append((entry_id, f"manuscript anchor line {lineno}", parts[-1]))
+    return copies, notes
+
+
+def _blank(match: re.Match) -> str:
+    """Replace a match with spaces, keeping newlines so line numbers survive."""
+    return re.sub(r"[^\n]", " ", match.group(0))
+
+
+def _tex_cell(raw: str) -> str:
+    """Reduce a LaTeX cell to its text: `\\texttt{S1-2}` -> `S1-2`, `\\textsc{Emerging}$^a$` -> `Emerging`."""
+    out = _TEX_MULTIROW_REGEX.sub(" ", raw)
+    out = _TEX_DROP_REGEX.sub(" ", out)
+    out = _TEX_MATH_REGEX.sub(" ", out)
+    out = _TEX_MACRO_REGEX.sub(" ", out)
+    for ch in "{}":
+        out = out.replace(ch, " ")
+    return " ".join(out.split())
+
+
+def _tex_cells(row: str) -> list[tuple[str, int]]:
+    """Split a row on unescaped `&` into (text, span); `\\multicolumn{n}` spans n columns."""
+    cells: list[tuple[str, int]] = []
+    for raw in _TEX_CELL_SPLIT_REGEX.split(row):
+        span = _TEX_MULTICOLUMN_REGEX.search(raw)
+        cells.append((_tex_cell(raw), int(span.group(1)) if span else 1))
+    return cells
+
+
+def _table_tiers(manuscript: str) -> tuple[list[tuple[str, str, str]], list[Finding]]:
+    """Return ([(id, where, raw_tier)], notes) from LaTeX tables with a Confidence column.
+
+    Rows are split on the row terminators, not on newlines, so a row wrapped
+    across lines or two rows on one line both parse. The header is the first
+    row with at least two cells, one containing "Confidence"; rows above it
+    (a caption, a group header) are passed over. A header whose Confidence
+    cell spans several columns is ambiguous and the table is noted, not read.
+
+    Backstop for the whole class of silent drops: every entry ID that occurs
+    in a Confidence table's body must yield either a copy or a note. Two
+    review rounds found seven separate ways to lose a row; this is what makes
+    an eighth visible.
+    """
+    # Comments first: a `% \\begin{verbatim}` must not open a verbatim block
+    # that swallows every table up to the next real `\\end{verbatim}`.
+    text = _TEX_COMMENT_REGEX.sub(_blank, manuscript)
+    text = _TEX_VERBATIM_REGEX.sub(_blank, text)
+    # Same length is not needed; only newlines are, and the dash forms have none.
+    text = _ID_DASH_REGEX.sub(r"\1-\2", text)
+    copies: list[tuple[str, str, str]] = []
+    notes: list[Finding] = []
+
+    newlines = [i for i, ch in enumerate(text) if ch == "\n"]
+
+    def line_at(pos: int) -> int:
+        return bisect.bisect_left(newlines, pos) + 1
+
+    for block in _TABULAR_REGEX.finditer(text):
+        body_start, body = block.start(2), block.group(2)
+        column: int | None = None
+        accounted: set[str] = set()
+        rows = []
+        pos = 0
+        for end in [*(m for m in _TEX_ROW_END_REGEX.finditer(body)), None]:
+            stop = len(body) if end is None else end.start()
+            rows.append((pos, body[pos:stop]))
+            pos = len(body) if end is None else end.end()
+
+        for row_start, row in rows:
+            cells = _tex_cells(row)
+            if column is None:
+                if len(cells) < 2:
+                    continue
+                col = 0
+                for text_, span in cells:
+                    if "confidence" in text_.lower():
+                        column = col if span == 1 else -1
+                        break
+                    col += span
+                if column == -1:
+                    notes.append(
+                        Finding(
+                            "tiers",
+                            "note",
+                            "",
+                            f"table at line {line_at(block.start())} has a Confidence header spanning "
+                            "several columns, so which column holds the tier is ambiguous; its "
+                            "tier copies were NOT compared",
+                        )
+                    )
+                    break
+                continue
+            id_match = _ID_TOKEN_REGEX.search(cells[0][0]) if cells else None
+            if id_match is None:
+                continue
+            entry_id = id_match.group(0)
+            accounted.add(entry_id)
+            lineno = line_at(body_start + row_start + row.find(entry_id))
+            flat = [c for c, span in cells for c in [c] + [""] * (span - 1)]
+            if len(flat) <= column or not flat[column]:
+                notes.append(
+                    Finding(
+                        "tiers",
+                        "note",
+                        entry_id,
+                        f"manuscript table row at line {lineno} has no cell in the Confidence "
+                        "column, so this copy was NOT compared",
+                    )
+                )
+                continue
+            copies.append((entry_id, f"manuscript table line {lineno}", flat[column]))
+
+        if column is None or column == -1:
+            continue
+        nested = _NESTED_TABLE_REGEX.search(body)
+        if nested:
+            notes.append(
+                Finding(
+                    "tiers",
+                    "note",
+                    "",
+                    f"the Confidence table at line {line_at(block.start())} contains a nested table "
+                    f"(line {line_at(body_start + nested.start())}); nested tables are not supported, "
+                    "and rows after the nested table's end were NOT read",
+                )
+            )
+        for token in _ID_TOKEN_REGEX.finditer(body):
+            if token.group(0) not in accounted:
+                accounted.add(token.group(0))
+                notes.append(
+                    Finding(
+                        "tiers",
+                        "note",
+                        token.group(0),
+                        f"appears in the Confidence table at line {line_at(body_start + token.start())} "
+                        "but no tier copy was read from it — the row did not parse as an entry row",
+                    )
+                )
+    return copies, notes
+
+
+def _check_tiers(entries: tuple[Entry, ...], manuscript: str) -> tuple[list[Finding], int]:
+    """Compare every parseable copy of each ID's tier; one finding per disagreeing ID.
+
+    Consistency only: which copy is right is Step Z's question, and the
+    remediation that made Paper 1's copies agree first did so in the wrong
+    direction (#37).
+    """
+    copies: dict[str, list[tuple[str, str]]] = {}
+    for entry in entries:
+        copies.setdefault(entry.entry_id, []).append((f"registry line {entry.line_number}", entry.tier))
+    anchor_copies, findings = _anchor_tiers(manuscript)
+    table_copies, table_notes = _table_tiers(manuscript)
+    findings += table_notes
+    for entry_id, where, raw in anchor_copies + table_copies:
+        copies.setdefault(entry_id, []).append((where, raw))
+
+    examined = 0
+    for entry_id in sorted(copies):
+        found = copies[entry_id]
+        if len(found) < 2:
+            continue
+        examined += 1
+        if len({_normalise_tier(raw) for _, raw in found}) > 1:
+            listed = "; ".join(f"{where} `{raw.strip() or '(blank)'}`" for where, raw in found)
+            findings.append(
+                Finding(
+                    "tiers",
+                    "finding",
+                    entry_id,
+                    f"tier copies disagree — {listed}. This says the copies differ, not which one is right",
+                )
+            )
+    if examined == 0:
+        findings.append(
+            Finding(
+                "tiers",
+                "note",
+                "",
+                "no entry had two readable tier copies, so the tier check compared NOTHING — "
+                "anchors need a trailing `(TYPE, PRIORITY, TIER)`, or print a table with a "
+                "Confidence column",
+            )
+        )
+    return findings, examined
+
+
 def _check_schema(entries: tuple[Entry, ...]) -> tuple[list[Finding], int]:
     findings: list[Finding] = []
     examined = 0
@@ -472,8 +736,8 @@ def check_registry(
 
     Args:
         registry_path: path to claim_registry.md
-        manuscript_path: optional manuscript; enables the anchor check
-            (and the budget check, which needs a word count)
+        manuscript_path: optional manuscript; enables the anchor and tier
+            checks (and the budget check, which needs a word count)
         budget: optional word budget; requires manuscript_path
 
     Raises:
@@ -514,6 +778,11 @@ def check_registry(
         counts["anchors"] = anchor_count
         checks.append("anchors")
 
+        tier_findings, tier_count = _check_tiers(entries, manuscript)
+        findings += tier_findings
+        counts["tiers"] = tier_count
+        checks.append("tiers")
+
         if budget is not None:
             budget_findings, words = _check_budget(manuscript, budget)
             findings += budget_findings
@@ -539,7 +808,7 @@ def _build_argparser() -> argparse.ArgumentParser:
     )
     p.add_argument("registry", type=Path, help="Path to claim_registry.md")
     p.add_argument(
-        "--manuscript", type=Path, default=None, help="Manuscript source; enables the anchor and budget checks"
+        "--manuscript", type=Path, default=None, help="Manuscript source; enables the anchor, tier and budget checks"
     )
     p.add_argument("--budget", type=int, default=None, help="Word budget; requires --manuscript")
     p.add_argument("--json", action="store_true", help="Emit JSON instead of Markdown")

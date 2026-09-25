@@ -14,6 +14,13 @@ Targets apply per axis: `priority_targets` gate P0/P1/P2 coverage;
 gate the tier axis. Rows whose axis has no configured target are
 included in the report but excluded from `meets_targets`.
 
+Separately from coverage, the DR-002 P0 tier floor: every P0 entry must be
+SUPPORTED or ESTABLISHED. It is reported apart from the coverage table
+(`meets_tier_floor`, not `meets_targets`) because the two answer different
+questions — a registry can be 100% verified while most of its P0 entries
+sit below the floor, and one combined verdict would hide which failed.
+A P0 row with no readable tier fails the floor rather than being skipped.
+
 Public API:
     check_coverage(registry_path, *, types=None,
                    priority_targets=None,
@@ -23,8 +30,9 @@ CLI:
     python -m tools.coverage <registry.md> [--json] [--strict]
 
 Exit codes:
-    0  success (and, with --strict, all applicable targets met)
-    1  failure (with --strict, at least one target missed)
+    0  success (and, with --strict, all applicable targets met and the
+       P0 tier floor met)
+    1  failure (with --strict, a target missed or the P0 tier floor failed)
     2  tooling error (file missing, parse failure)
 
 Design notes:
@@ -39,6 +47,7 @@ import argparse
 import json
 import re
 import sys
+from collections.abc import Iterator
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 
@@ -64,6 +73,34 @@ _MARKER_REGEX = re.compile(
 _SEPARATOR_REGEX = re.compile(r"^\s*\|[\s\-:|]+\|\s*$")
 _STATUS_VERIFIED_REGEX = re.compile(r"^\s*\[\s*x\s*\]", re.IGNORECASE)
 
+# DR-002: "all SUPPORTED or ESTABLISHED (no EMERGING/SPECULATIVE)".
+P0_TIER_FLOOR = ("ESTABLISHED", "SUPPORTED")
+
+
+def _normalise_tier(raw: str) -> str:
+    """Strip cell decoration (`**`, backticks, `⚠`, a parenthetical) and upper-case.
+
+    Kept equivalent to `tools.check_registry._normalise_tier` by hand rather
+    than imported: check_registry already imports from this module, and the
+    reverse import would make the two modules circular.
+    """
+    out = raw.strip()
+    for ch in ("*", "`", "_", "⚠", "~"):
+        out = out.replace(ch, "")
+    if "(" in out:
+        out = out.split("(", 1)[0]
+    return out.strip().upper()
+
+
+@dataclass(frozen=True)
+class _RegistryRow:
+    unit_type: str
+    axis: str
+    bucket: str
+    status: str
+    entry_id: str
+    tier: str
+
 
 @dataclass(frozen=True)
 class CoverageRow:
@@ -84,6 +121,29 @@ class CoverageReport:
     rows: tuple[CoverageRow, ...]
     priority_targets: dict[str, float] = field(default_factory=lambda: dict(DEFAULT_PRIORITY_TARGETS))
     provocation_targets: dict[str, float] | None = None
+    # (entry_id, raw Confidence cell) for every priority-axis P0 row.
+    p0_tiers: tuple[tuple[str, str], ...] = ()
+
+    @property
+    def p0_ids(self) -> tuple[str, ...]:
+        """Distinct P0 entry IDs. The floor counts entries, not rows — an ID
+        registered in two sub-tables is one entry."""
+        return tuple(dict.fromkeys(eid for eid, _ in self.p0_tiers))
+
+    @property
+    def p0_below_floor(self) -> tuple[str, ...]:
+        """P0 IDs with any copy not SUPPORTED/ESTABLISHED, including unreadable ones."""
+        return tuple(dict.fromkeys(eid for eid, tier in self.p0_tiers if _normalise_tier(tier) not in P0_TIER_FLOOR))
+
+    @property
+    def meets_tier_floor(self) -> bool:
+        """True iff every P0 entry is SUPPORTED or ESTABLISHED.
+
+        Vacuously True when no P0 entry was parsed (a PROVOCATION-only registry
+        legitimately has none); the report then says NOT evaluated rather than
+        "meets", and the JSON carries `evaluated: false`.
+        """
+        return not self.p0_below_floor
 
     def _target_for(self, row: CoverageRow) -> float | None:
         if row.axis == PRIORITY_AXIS:
@@ -101,6 +161,14 @@ class CoverageReport:
             "priority_targets": dict(self.priority_targets),
             "provocation_targets": (None if self.provocation_targets is None else dict(self.provocation_targets)),
             "meets_targets": self.meets_targets,
+            "p0_tier_floor": {
+                "floor": list(P0_TIER_FLOOR),
+                "evaluated": bool(self.p0_ids),
+                "total": len(self.p0_ids),
+                "meeting": len(self.p0_ids) - len(self.p0_below_floor),
+                "below_floor": list(self.p0_below_floor),
+                "meets": self.meets_tier_floor,
+            },
         }
 
     def to_markdown(self) -> str:
@@ -118,7 +186,26 @@ class CoverageReport:
                 f"| {row.unit_type} | {row.axis} | {row.bucket} | {row.total} "
                 f"| {row.verified} | {row.percent:.0f}% | {target_str} | {meets} |"
             )
+        lines.append("")
+        lines.append(self._tier_floor_line())
         return "\n".join(lines) + "\n"
+
+    def _tier_floor_line(self) -> str:
+        if not self.p0_ids:
+            # Vacuously met, and said so: "0 of 0 meet it — meets" reads as a pass.
+            return (
+                "P0 tier floor (SUPPORTED or ESTABLISHED, DR-002): NOT evaluated — no P0 entries were "
+                "parsed. If this registry has P0 entries, the parser did not find them."
+            )
+        total = len(self.p0_ids)
+        below = self.p0_below_floor
+        line = (
+            f"P0 tier floor (SUPPORTED or ESTABLISHED, DR-002): {total - len(below)} of {total} "
+            f"meet it — {'meets' if not below else 'FAILS'}"
+        )
+        if below:
+            line += f"; below the floor: {', '.join(below)}"
+        return line + ". Reported separately from the coverage table above, which counts Status only."
 
     @property
     def meets_targets(self) -> bool:
@@ -199,11 +286,27 @@ def _find_bucket_and_status_columns(header: list[str], unit_type: str) -> tuple[
 
 def _parse_registry(content: str) -> dict[tuple[str, str, str], tuple[int, int]]:
     """Walk the registry; return {(unit_type, axis, bucket): (total, verified)}."""
+    counts: dict[tuple[str, str, str], list[int]] = {}
+    for row in _iter_registry_rows(content):
+        if not row.status:
+            continue
+        slot = counts.setdefault((row.unit_type, row.axis, row.bucket), [0, 0])
+        slot[0] += 1
+        if _STATUS_VERIFIED_REGEX.match(row.status):
+            slot[1] += 1
+    return {k: (v[0], v[1]) for k, v in counts.items()}
+
+
+def _find_column(header: list[str], name: str) -> int | None:
+    return next((idx for idx, cell in enumerate(header) if cell.lower().strip() == name), None)
+
+
+def _iter_registry_rows(content: str) -> Iterator[_RegistryRow]:
+    """Walk the registry's typed sub-tables, yielding one record per counted row."""
 
     def registry_line_no(idx: int) -> str:
         return f"line {idx + 1}"
 
-    counts: dict[tuple[str, str, str], list[int]] = {}
     lines = content.splitlines()
     i = 0
     while i < len(lines):
@@ -228,6 +331,8 @@ def _parse_registry(content: str) -> dict[tuple[str, str, str], tuple[int, int]]
             i += 1
             continue
         bucket_col, axis, status_col = cols
+        id_col = _find_column(header, "id")
+        tier_col = _find_column(header, "confidence")
 
         i += 1
         if i < len(lines) and _SEPARATOR_REGEX.match(lines[i]):
@@ -266,17 +371,21 @@ def _parse_registry(content: str) -> dict[tuple[str, str, str], tuple[int, int]]
                 row = row + [""] * (len(header) - len(row))
             bucket = row[bucket_col]
             status = row[status_col]
-            if not bucket or not status:
+            # A blank Status still yields the row: the P0 tier floor must see a
+            # P0 entry whether or not anyone has ticked it. Coverage skips it
+            # in `_parse_registry`, exactly as before.
+            if not bucket:
                 i += 1
                 continue
-            key = (unit_type, axis, bucket)
-            slot = counts.setdefault(key, [0, 0])
-            slot[0] += 1
-            if _STATUS_VERIFIED_REGEX.match(status):
-                slot[1] += 1
+            yield _RegistryRow(
+                unit_type=unit_type,
+                axis=axis,
+                bucket=bucket,
+                status=status,
+                entry_id=row[0 if id_col is None else id_col],
+                tier="" if tier_col is None else row[tier_col],
+            )
             i += 1
-
-    return {k: (v[0], v[1]) for k, v in counts.items()}
 
 
 def check_coverage(
@@ -305,6 +414,14 @@ def check_coverage(
 
     content = registry_path.read_text(encoding="utf-8")
     counts = _parse_registry(content)
+    p0_tiers = tuple(
+        (row.entry_id, row.tier)
+        for row in _iter_registry_rows(content)
+        if row.axis == PRIORITY_AXIS
+        # `**P0**` is still P0: an undecorated compare would drop it from the floor.
+        and _normalise_tier(row.bucket) == "P0"
+        and (types is None or row.unit_type in {t.upper() for t in types})
+    )
 
     if types is not None:
         wanted = tuple(t.upper() for t in types)
@@ -320,6 +437,7 @@ def check_coverage(
         rows=rows,
         priority_targets=(dict(DEFAULT_PRIORITY_TARGETS) if priority_targets is None else dict(priority_targets)),
         provocation_targets=(None if provocation_targets is None else dict(provocation_targets)),
+        p0_tiers=p0_tiers,
     )
 
 
@@ -333,7 +451,7 @@ def _build_argparser() -> argparse.ArgumentParser:
     p.add_argument(
         "--strict",
         action="store_true",
-        help="Exit 1 if any configured target is missed",
+        help="Exit 1 if any configured target is missed or the P0 tier floor fails",
     )
     return p
 
@@ -355,7 +473,7 @@ def main(argv: list[str] | None = None) -> int:
     else:
         print(report.to_markdown())
 
-    if args.strict and not report.meets_targets:
+    if args.strict and not (report.meets_targets and report.meets_tier_floor):
         return 1
     return 0
 

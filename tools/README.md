@@ -8,10 +8,10 @@ shipped — re-derive with `ls tools/*.py` rather than trusting the count here.
 
 | Tool | Purpose |
 |------|---------|
-| `coverage.py` | Parse per-type sub-tables in a claim registry; report P0/P1/P2 coverage. |
+| `coverage.py` | Parse per-type sub-tables in a claim registry; report P0/P1/P2 coverage, and separately the DR-002 P0 tier floor. |
 | `check_dois.py` | Extract DOI patterns from a registry; verify each resolves via `https://doi.org/`. |
 | `check_metadata.py` | Compare the bibliographic FIELDS against Crossref/DataCite — a resolving DOI is not a correct entry. |
-| `check_registry.py` | Registry/manuscript internal consistency: anchors, type-conditional schema, premise graph, word budget. |
+| `check_registry.py` | Registry/manuscript internal consistency: anchors, tier agreement across copies, type-conditional schema, premise graph, word budget. |
 
 ## Status
 
@@ -28,7 +28,7 @@ python -m tools.check_dois papers/perspective/vv/claims/claim_registry.md
 python -m tools.coverage papers/perspective/vv/claims/claim_registry.md --json
 python -m tools.check_dois papers/perspective/vv/claims/claim_registry.md --json
 
-# CI-friendly: exit 1 if a configured target is missed
+# CI-friendly: exit 1 if a configured target is missed or the P0 tier floor fails
 python -m tools.coverage papers/perspective/vv/claims/claim_registry.md --strict
 
 # Offline DOI parse-check (no network)
@@ -49,9 +49,24 @@ All four tools share a code-space (0 / 1 / 2 = success / failure / tooling error
 
 | Code | `coverage.py` | `check_dois.py` |
 |------|---------------|-----------------|
-| 0 | Report emitted (always, unless `--strict` and a target was missed) | All DOIs resolved (or, with `--offline`, all DOIs parseable) |
-| 1 | `--strict` and at least one target missed | At least one DOI failed to resolve (or, with `--offline`, failed to parse) |
+| 0 | Report emitted (always, unless `--strict` and a target was missed or the tier floor failed) | All DOIs resolved (or, with `--offline`, all DOIs parseable) |
+| 1 | `--strict` and at least one target missed, or the P0 tier floor failed | At least one DOI failed to resolve (or, with `--offline`, failed to parse) |
 | 2 | Tooling error (file missing, parse failure) | Tooling error (file missing, parse failure) |
+
+**The P0 tier floor is reported separately from coverage.** DR-002 requires every P0 entry
+to be SUPPORTED or ESTABLISHED. The coverage table counts the Status column only, so a
+registry can be 100% verified while most of its P0 entries sit below the floor — Paper 1 is
+exactly that case (7 of 8 below, [#38](https://github.com/ducroq/agent-ready-papers/issues/38)).
+The floor gets its own line under the table (`P0 tier floor … N of M meet it — FAILS`, naming
+the failing IDs) and its own `p0_tier_floor` object in JSON, and `meets_targets` stays
+coverage-only; `--strict` fails if either does. N and M count **entries, not rows**: an ID
+registered in two sub-tables is one entry, and fails if any copy is below the floor. Three
+cases are deliberately *not* skipped: a P0 row whose Confidence cell is empty or absent
+**fails** the floor; a decorated `**P0**` priority is still P0; and a P0 row with a blank
+Status is still on the floor, though coverage does not count it. A registry with no P0 entry
+at all prints `NOT evaluated` (JSON `evaluated: false`) rather than `0 of 0 … meets`. Like everything here this checks
+**consistency, not correctness**: it compares the registered tier to the floor, never whether
+the registered tier is right.
 
 **`--offline` note.** ⚠️ This said *"check_dois only"* until 2026-09-14 and was wrong:
 `check_metadata.py` has `--offline` too. Both print a stderr banner so an inherited flag
@@ -95,7 +110,7 @@ python -m tools.check_metadata <registry.md>                          # or: make
 
 ## `check_registry.py` — internal consistency
 
-Four checks over a registry and its manuscript. All four are **internal consistency** — comparisons between two artifacts the author controls. None touches the question a rule cannot decide.
+Five checks over a registry and its manuscript. All five are **internal consistency** — comparisons between two artifacts the author controls. None touches the question a rule cannot decide.
 
 That line is the whole design, and it is worth stating precisely because the two halves are easy to conflate:
 
@@ -114,6 +129,7 @@ python -m tools.check_registry <registry.md> [--manuscript <file.tex>] [--budget
 | Check | What it decides | Needs |
 |-------|-----------------|-------|
 | `anchors` | Every `% S#-#:` anchor has a registry row, and every row has an anchor | `--manuscript` |
+| `tiers` | Every copy of an ID's confidence tier agrees — registry sub-table rows (an ID may appear in more than one), manuscript anchors `% S1-1: text (TYPE, P0, TIER)`, and a LaTeX `tabular` whose header row has a Confidence column. Case-insensitive, so a printed "Emerging" matches "EMERGING". One finding per disagreeing ID, naming each copy and its line. **A disagreement says the copies differ, never which one is right** | `--manuscript` |
 | `schema` | Type-conditional column completeness — ARGUMENT rows carry Grounds/Warrant/Rebuttal, PROPOSITION rows carry Constructs/Relationship/Premises/Reasoning/Boundary conditions/Alternatives. **Presence only, never quality** | registry |
 | `premises` | Every referenced premise exists and is verified; the graph is acyclic; and **no conclusion sits at a higher tier than its weakest premise** | registry |
 | `budget` | Word count against a declared budget — a Hard Constraint previously checked by eye | `--manuscript` + `--budget` |
@@ -142,6 +158,7 @@ Documented here so adopters hit informed surfaces rather than silent miscounts. 
 - **Sequential HTTP, no concurrency** in `check_metadata.py` too, and each entry costs one or two requests rather than one. A 14-entry bibliography takes a few seconds; a 200-entry one is minute-scale.
 - **`check_registry.py` word counting is approximate.** Comments, math environments, floats and macros are stripped; everything else counts. It reports ~3,322 words for Paper 1 where `CLAUDE.md` says ~3,450. The budget is a threshold with slack, so a stable approximation is worth more than a precise figure that disagrees with whatever the target venue counts — but do not quote the tool's number as the submission word count.
 - **`check_registry.py` schema checks presence, not quality.** A Warrant column containing the word "because" passes. Whether the warrant licenses the inference is the ARGUMENT verification procedure's job and stays with a human. The check is worth having anyway: an empty Warrant is a defect the eye skips over in a wide table.
+- **`check_registry.py` tiers reads only what it can parse.** Registry rows, anchors, and a LaTeX `tabular`, `tabular*`, `tabularx` or `longtable` whose header — the first row with two or more cells, one containing "Confidence" — names the column. Other table environments (`tblr`, `tabu`, `array`, `NiceTabular`) are ignored, and prose tables in other files (a writing guide's tier table, say) are not copies it sees. Within a table: rows end at `\\`, `\\*`, `\\[len]` or `\tabularnewline`, so wrapped rows and two rows on one line parse; wrapping macros (`\texttt{S1-2}`, `\textsc{Emerging}`), `\footnote`/`\cite`/`\ref` arguments, inline math, `\multirow`'s layout arguments, row-leading `\hline`/`\cline`/`\cmidrule`/`\rowcolor`, `\multicolumn` spans, escaped `\&` and `\%`, and LaTeX-typed ID dashes (`S2--1`, a pasted en-dash, `S1\-1`, `S1$-$1`) are handled. A caption or group header above the real header is passed over **unless** it has two or more cells and one contains "Confidence" — so a *data* row mentioning "confidence" in a table with no Confidence header is misread as the header, and the false findings that follow are loud, not silent. A Confidence header spanning several columns is ambiguous and the table is noted, not read. **Nested tables are not supported**: the table is noted and rows after the nested table's end are not read. Tables inside comments or `verbatim`/`lstlisting`/`minted` are ignored. The backstop is that every entry ID occurring in a Confidence table's body yields a copy or a note, so a row form none of the above anticipates is reported rather than lost; its cost is a note for an ID mentioned in passing (`\footnote{formerly S1-3}`). Tier-cell residue it does not strip (`\(n=3\)`, a trailing `\%`) shows up as a false disagreement, again loud. Pathological input (hundreds of thousands of `%` on one anchor line, an unclosed `\\[` repeated through megabytes) is quadratic; a 5 MB manuscript of ordinary text takes well under a second. **Anchors:** the tier is the last element of the *first* parenthesis followed only by whitespace or a `% comment` — so `(CLAIM, P0, SUPPORTED) % raised from (…, EMERGING)` reads SUPPORTED, and a `%` before the parenthesis (`100% of …`) is prose. `(CLAIM, P0, SUPPORTED, see §3)` reads `see §3` and reports a disagreement. An anchor with fewer than three elements, or a table row too short to reach the Confidence column, is a note, not a skip. `Examined` counts only IDs with at least two copies compared, and when it is 0 a note says the check compared nothing — a note rather than a finding, because the templates do not yet prescribe the tier in anchors. It exists because the copies drifted before: eight Paper 1 registry tiers were raised without touching their anchors, and the two disagreed for six months ([#37](https://github.com/ducroq/agent-ready-papers/issues/37)). The first remediation made them agree **in the wrong direction**, which is exactly what a consistency check cannot see.
 - **`check_registry.py` anchors require the `% S#-#:` colon form.** A section header comment like `% Registry entries: S4-1, S4-2` is deliberately *not* counted as an anchor — counting it would have concealed the finding the check was written to surface.
 - **`_clean_doi` is heuristic.** For DOIs whose authoritative form ends with unbalanced punctuation (vanishingly rare in real Crossref data), the cleaner may strip too much. Run a spot-check against the publisher's canonical citation if a DOI fails to resolve unexpectedly.
 
