@@ -45,6 +45,14 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
        ("No adopter action required.") rather than omitting the subsection.
 -->
 
+## Unreleased
+
+### Agents
+
+- **`equation-checker.md` — derived op-counts, complexity and budgets are reproduced from the procedure, not the reported number** ([#32](https://github.com/ducroq/agent-ready-papers/issues/32)). Step 3 confirms a figure follows from its stated formula; a new Rule, a Step 3 pointer and a widened `FORMULA` description require that, for a *derived* operation-count / complexity / runtime / cost figure, the formula itself be rebuilt from the algorithm, pseudocode or experimental setup the document describes, within its stated counting convention. Measured figures are excluded. Motivated by an adopter pilot where the lens passed a self-consistent compute budget that counted a feature suite the real-time path never ran (true load 3x lower). Framed as correctness — a wrong-model figure is *false* — on the argument in #32's 2026-08-16 comment that this keeps it clear of the Option-B objection (DR-018, applied to circularity in DR-020). Deliberately limited to that case: entailed or circular results, and comparisons that are true but unfair, are out of scope.
+
+**Adopter notes:** a copied or adapted `equation-checker.md` can take this surgically — add the Rule beginning `Reproduce op-counts, complexity and budgets from the procedure`, the Step 3 bullet beginning `For a derived operation-count`, and the `FORMULA` row's added clause `or counts work the described procedure does not perform`. Those three strings are the markers a current copy contains. No other adopter action.
+
 ## v3.0.0 (2026-08-13)
 
 Repo-wide sweep of the shipped surface and the literature layer, and remediation of what it found. Three adopter-installed templates now oblige action, so **MAJOR** — the first MAJOR triggered by tightening rather than removal.
