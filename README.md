@@ -478,10 +478,10 @@ Optional Python CLIs in [`tools/`](tools/) — stdlib only, deterministic, CI-fr
 
 | Tool | Purpose | When to run |
 |------|---------|-------------|
-| [`coverage.py`](tools/coverage.py) | Parse a `claim_registry.md`; report P0/P1/P2 coverage by unit type | Before phase gates; in CI with `--strict` to fail the build on missed thresholds |
+| [`coverage.py`](tools/coverage.py) | Parse a `claim_registry.md`; report P0/P1/P2 coverage by unit type, and separately the DR-002 P0 tier floor (every P0 entry SUPPORTED or ESTABLISHED) | Before phase gates; in CI with `--strict` to fail the build on missed thresholds or a failed P0 tier floor |
 | [`check_dois.py`](tools/check_dois.py) | Extract DOIs; HEAD against `doi.org`; report unresolved | After any AI-assisted citation introduction; in CI; pair with the [Anti-Hallucination Checklist](#anti-hallucination-checklist) Step 0 |
 | [`check_metadata.py`](tools/check_metadata.py) | Compare the bibliographic **fields** against Crossref/DataCite — a resolving DOI is not a correct entry | After any AI-assisted citation introduction; in CI with `--strict`. ⚠️ `--offline` compares no fields, so it is refused together with `--strict` |
-| [`check_registry.py`](tools/check_registry.py) | Registry/manuscript internal consistency: anchors, type-conditional schema, premise graph, word budget | Before phase gates; checks *consistency*, never whether a tier is the right tier |
+| [`check_registry.py`](tools/check_registry.py) | Registry/manuscript internal consistency: anchors, tier agreement across the registry/anchor/table copies, type-conditional schema, premise graph, word budget | Before phase gates; checks *consistency*, never whether a tier is the right tier |
 
 Invoke as `python -m tools.coverage <registry.md>` or via Makefile (`make coverage` / `make check-dois` / `make verify-bib` / `make check-registry`) from the repo root. Known limits (no HTTPS proxy support, sequential HEAD scaling) are documented in [`tools/README.md`](tools/README.md).
 

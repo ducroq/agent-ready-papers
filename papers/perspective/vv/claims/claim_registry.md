@@ -32,7 +32,7 @@
 | PROPOSITION | 1 | 1 | 100% |
 | **Total** | **19** | **19** | **100%** |
 
-⚠️ **P0 tier floor (2026-09-24): 7 of 8 P0 entries are below SUPPORTED** (S1-1, S1-2, S1-4, S2-2, S3-4, S4-1, S5-1; only S2-1 meets it). **The P0 gate therefore fails.** DR-002 (Accepted, binding) sets it as "all SUPPORTED or ESTABLISHED (no EMERGING/SPECULATIVE)" with no exception; the "or explicitly framed as hypothesis" clause in `papers/perspective/writing-guide.md`'s checklist is not in DR-002 and cannot waive it. Remedies are stronger sources, re-prioritisation, or an explicit decision — not a reading of the exception. The 100% figures below are *verification coverage* (Status column), not tier — `tools.coverage` does not check the floor.
+⚠️ **P0 tier floor (2026-09-24): 7 of 8 P0 entries are below SUPPORTED** (S1-1, S1-2, S1-4, S2-2, S3-4, S4-1, S5-1; only S2-1 meets it). **The P0 gate therefore fails.** DR-002 (Accepted, binding) sets it as "all SUPPORTED or ESTABLISHED (no EMERGING/SPECULATIVE)" with no exception; the "or explicitly framed as hypothesis" clause in `papers/perspective/writing-guide.md`'s checklist is not in DR-002 and cannot waive it. Remedies are stronger sources, re-prioritisation, or an explicit decision — not a reading of the exception. The 100% figures below are *verification coverage* (Status column), not tier. `tools.coverage` reports the floor separately, below its coverage table (it reports 1 of 8 meeting it), and `--strict` fails on it (added in 75f928c, #37).
 
 **Targets:** ≥85% overall, 100% P0, 90% P1, 70% P2. Every registered ARGUMENT and PROPOSITION is `[x]` per the type-conditional Gate 2 expectation.
 

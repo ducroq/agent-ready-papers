@@ -248,7 +248,7 @@ Status (Pass / Fail)
 ### Gate 2: Verification Complete
 - [ ] P0 entries 100% verified (CLAIMs source-checked; ARGUMENTs Toulmin-checked; PROPOSITIONs Whetten-checked)
 - [ ] P1 entries 90% verified
-- [ ] P1 tier floor: ≥90% at EMERGING or above — **manual check.** `tools/coverage.py` reads only the Status checkbox (`_STATUS_VERIFIED_REGEX`) and never reads the Confidence column, so `--strict` reports this gate met for a registry whose P1 rows are all verified and all SPECULATIVE. Priority and confidence are deliberately orthogonal axes (DR-017); do not read a green `--strict` as covering this line.
+- [ ] P1 tier floor: ≥90% at EMERGING or above — **manual check.** `tools/coverage.py` counts coverage from the Status checkbox (`_STATUS_VERIFIED_REGEX`) and reads the Confidence column only for the **P0** tier floor (DR-002), so `--strict` reports this gate met for a registry whose P1 rows are all verified and all SPECULATIVE. Priority and confidence are deliberately orthogonal axes (DR-017); do not read a green `--strict` as covering this line.
 - [ ] P2 entries 70% verified
 - [ ] Coverage checked by section type (see Section 3 — Section-Level Coverage Analysis)
 - [ ] Entry types re-checked (see `claim-registry.md` — Detecting Mistyped Entries)
