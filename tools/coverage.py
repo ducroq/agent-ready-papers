@@ -72,6 +72,7 @@ _MARKER_REGEX = re.compile(
 
 _SEPARATOR_REGEX = re.compile(r"^\s*\|[\s\-:|]+\|\s*$")
 _STATUS_VERIFIED_REGEX = re.compile(r"^\s*\[\s*x\s*\]", re.IGNORECASE)
+_ENTRY_ID_REGEX = re.compile(r"^\W*S\d+-\d+\W*$")
 
 # DR-002: "all SUPPORTED or ESTABLISHED (no EMERGING/SPECULATIVE)".
 P0_TIER_FLOOR = ("ESTABLISHED", "SUPPORTED")
@@ -145,6 +146,19 @@ class CoverageReport:
         """
         return not self.p0_below_floor
 
+    def _unknown_priority_bucket(self, row: CoverageRow) -> bool:
+        """A priority bucket that is neither P0/P1/P2 nor a configured target.
+
+        `-`, `TBD` or `P9` in a Priority cell used to become its own untargeted
+        bucket, so overwriting a claim's `P0` passed --strict exactly as
+        blanking it did (review 2026-09-26). Custom targets stay valid.
+        """
+        return (
+            row.axis == PRIORITY_AXIS
+            and row.bucket not in DEFAULT_PRIORITY_TARGETS
+            and row.bucket not in self.priority_targets
+        )
+
     def _target_for(self, row: CoverageRow) -> float | None:
         if row.axis == PRIORITY_AXIS:
             return self.priority_targets.get(row.bucket)
@@ -180,7 +194,10 @@ class CoverageReport:
         ]
         for row in self.rows:
             target = self._target_for(row)
-            meets = "—" if target is None else ("yes" if row.percent >= target else "NO")
+            if self._unknown_priority_bucket(row):
+                meets = "NO — not a priority"
+            else:
+                meets = "—" if target is None else ("yes" if row.percent >= target else "NO")
             target_str = "—" if target is None else f"{target:.0f}%"
             lines.append(
                 f"| {row.unit_type} | {row.axis} | {row.bucket} | {row.total} "
@@ -214,9 +231,13 @@ class CoverageReport:
         Rows whose axis has no configured target are excluded from the
         check (not treated as silent pass — they are reported and
         skipped). Configure `provocation_targets` to gate the
-        PROVOCATION tier axis.
+        PROVOCATION tier axis. A priority-axis row in an unrecognised
+        bucket is the exception: it FAILS, because on that axis an
+        untargeted bucket is a mistyped or overwritten Priority cell.
         """
         for row in self.rows:
+            if self._unknown_priority_bucket(row):
+                return False
             target = self._target_for(row)
             if target is not None and row.percent < target:
                 return False
@@ -288,8 +309,9 @@ def _parse_registry(content: str) -> dict[tuple[str, str, str], tuple[int, int]]
     """Walk the registry; return {(unit_type, axis, bucket): (total, verified)}."""
     counts: dict[tuple[str, str, str], list[int]] = {}
     for row in _iter_registry_rows(content):
-        if not row.status:
-            continue
+        # A blank Status is an entry nobody has verified: it stays in the
+        # denominator. Until 2026-09-26 it was skipped, so blanking a Status
+        # cell raised coverage.
         slot = counts.setdefault((row.unit_type, row.axis, row.bucket), [0, 0])
         slot[0] += 1
         if _STATUS_VERIFIED_REGEX.match(row.status):
@@ -377,18 +399,36 @@ def _iter_registry_rows(content: str) -> Iterator[_RegistryRow]:
                 # GFM PADS a short row with empty cells and renders it as
                 # intended, so this is not corruption — a section divider like
                 # `| **PART ONE** |` inside a wide table is idiomatic. Pad to
-                # match, and let the empty bucket/status test below skip it.
+                # match, and let the empty-bucket test below skip it.
                 # Breaking here instead (the behaviour until 2026-09-14) ended
                 # the table at the first divider and silently dropped every
                 # row after it from the counts, so a P0 claim could leave the
                 # denominator and `--strict` pass over what remained.
                 row = row + [""] * (len(header) - len(row))
             bucket = row[bucket_col]
+            if axis == PRIORITY_AXIS:
+                # `p0` and `**P0**` are P0 — the same reading the P0 tier floor
+                # uses, so coverage and the floor cannot disagree about a cell.
+                bucket = _normalise_tier(bucket)
             status = row[status_col]
-            # A blank Status still yields the row: the P0 tier floor must see a
-            # P0 entry whether or not anyone has ticked it. Coverage skips it
-            # in `_parse_registry`, exactly as before.
+            # A section divider (`| **PART TWO** |`) is the only row allowed to
+            # lack a bucket: nothing after its first cell, and that cell not an
+            # entry ID. Any other row without one is an entry whose Priority
+            # was blanked — including one blanked down to its ID, at any width
+            # (`| S2-1 |`, `| S2-1 | | | |`) — and skipping it took an unverified
+            # claim out of the count while it still sat visibly in the registry
+            # (docs/verification-hooks.md, measured 2026-09-26). A blank Status
+            # is not skipped either: `_parse_registry` counts it as unverified.
             if not bucket:
+                first = row[0 if id_col is None else id_col]
+                is_divider = not any(row[1:]) and not _ENTRY_ID_REGEX.match(first)
+                if not is_divider:
+                    raise ValueError(
+                        f"{registry_line_no(i)}: row has content but no "
+                        f"{'Tier' if axis == PROVOCATION_TIER_AXIS else 'Priority'} — it cannot be "
+                        "counted, and skipping it would drop an entry from coverage and the P0 "
+                        f"tier floor. Row: {lines[i].strip()[:120]}"
+                    )
                 i += 1
                 continue
             yield _RegistryRow(

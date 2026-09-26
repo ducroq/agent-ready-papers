@@ -300,8 +300,9 @@ def test_tier_floor_sees_a_decorated_or_unticked_p0(tmp_path):
     )
     report = check_coverage(path)
     assert report.p0_below_floor == ("S1-2", "S1-3")
-    # coverage itself is unchanged: the unticked row is still not counted there
-    assert sum(r.total for r in report.rows) == 2
+    # and coverage counts the unticked row as unverified, not as absent
+    assert sum(r.total for r in report.rows) == 3
+    assert sum(r.verified for r in report.rows) == 2
 
 
 def test_tier_floor_counts_entries_not_rows(tmp_path):
@@ -374,3 +375,74 @@ def test_renaming_a_priority_header_no_longer_turns_strict_green(tmp_path, paper
     path.write_text(renamed, encoding="utf-8")
     assert main([str(paper1_registry), "--strict"]) == 1
     assert main([str(path), "--strict"]) == 2
+
+
+def test_a_row_with_a_blanked_priority_is_an_error_not_a_skip(tmp_path):
+    """Measured route (docs/verification-hooks.md): deleting the two characters
+    of `P0` took an unverified claim out of the count while it stayed visibly in
+    the registry, and --strict exited 0."""
+    path = tmp_path / "r.md"
+    path.write_text(
+        "**CLAIMs:**\n\n" + _HEADER + _ROW + _ROW.replace("S1-1", "S1-2").replace("| P0 |", "|  |"), encoding="utf-8"
+    )
+    with pytest.raises(ValueError, match="no Priority"):
+        check_coverage(path)
+    assert main([str(path), "--strict"]) == 2
+
+
+def test_a_blank_status_counts_as_unverified(tmp_path):
+    """Blanking a Status cell used to remove the row from the denominator, which
+    RAISED coverage. It is an entry nobody has verified."""
+    path = tmp_path / "r.md"
+    path.write_text(
+        "**CLAIMs:**\n\n" + _HEADER + _ROW + _ROW.replace("S1-1", "S1-2").replace("[x]", ""), encoding="utf-8"
+    )
+    report = check_coverage(path)
+    assert [(r.bucket, r.total, r.verified) for r in report.rows] == [("P0", 2, 1)]
+    assert report.meets_targets is False
+    assert main([str(path), "--strict"]) == 1
+
+
+@pytest.mark.parametrize("overwrite", ["-", "TBD", "N/A", "P9"])
+def test_an_overwritten_priority_fails_instead_of_hiding_in_its_own_bucket(tmp_path, overwrite):
+    """Review 2026-09-26: replacing `P0` with anything unrecognised moved an
+    unverified claim into an untargeted bucket, and --strict exited 0."""
+    path = tmp_path / "r.md"
+    unverified = _ROW.replace("S1-1", "S1-2").replace("[x]", "[ ]").replace("| P0 |", f"| {overwrite} |")
+    path.write_text("**CLAIMs:**\n\n" + _HEADER + _ROW + unverified, encoding="utf-8")
+    report = check_coverage(path)
+    assert report.meets_targets is False
+    assert "NO — not a priority" in report.to_markdown()
+    assert main([str(path), "--strict"]) == 1
+
+
+def test_a_lowercase_or_decorated_priority_is_the_same_bucket_the_floor_reads(tmp_path):
+    path = tmp_path / "r.md"
+    path.write_text(
+        "**CLAIMs:**\n\n"
+        + _HEADER
+        + _ROW
+        + _ROW.replace("S1-1", "S1-2").replace("| P0 |", "| p0 |")
+        + _ROW.replace("S1-1", "S1-3").replace("| P0 |", "| **P0** |"),
+        encoding="utf-8",
+    )
+    report = check_coverage(path)
+    assert [(r.bucket, r.total) for r in report.rows] == [("P0", 3)]
+    assert len(report.p0_ids) == 3
+
+
+def test_custom_priority_targets_are_not_unknown_buckets(tmp_path):
+    path = tmp_path / "r.md"
+    path.write_text("**CLAIMs:**\n\n" + _HEADER + _ROW.replace("| P0 |", "| P3 |"), encoding="utf-8")
+    assert check_coverage(path).meets_targets is False
+    assert check_coverage(path, priority_targets={"P3": 50.0}).meets_targets is True
+
+
+@pytest.mark.parametrize("row", ["| S1-2 |  |  |  |  |\n", "| S1-2 |\n", "| **S1-2** | |\n"])
+def test_a_row_blanked_down_to_its_id_is_not_a_divider(tmp_path, row):
+    """A divider's shape but an entry's ID, at any width (round 2: the short
+    form `| S1-2 |` was still skipped)."""
+    path = tmp_path / "r.md"
+    path.write_text("**CLAIMs:**\n\n" + _HEADER + _ROW + row, encoding="utf-8")
+    with pytest.raises(ValueError, match="no Priority"):
+        check_coverage(path)
