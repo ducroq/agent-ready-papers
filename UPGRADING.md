@@ -11,6 +11,24 @@ The full release notes are in [`CHANGELOG.md`](CHANGELOG.md). This file is the q
 - **PATCH** version bumps are docs-only / clarifications, or backward-compatible bug fixes (e.g. a tooling fix that changes no public interface). Usually no action required; a bug fix may be worth adopting if you hit the bug.
 - Every release entry in `CHANGELOG.md` includes an "Adopter notes" / "Adopter action" subsection. This file aggregates them per version for quick lookup.
 
+## v4.0.0 (2026-09-26)
+
+**From v3.0.0 — what to review when you bump your pin to v4.0.0:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| `tools/coverage.py` — **`--strict` enforces the DR-002 P0 tier floor** | **Required if you run `coverage --strict` in CI — it can now go red with no change on your side.** Every P0 entry must be SUPPORTED or ESTABLISHED; DR-002 always said so, and nothing checked it. Run `python -m tools.coverage <registry.md>` and read the `P0 tier floor` line under the table: it names every failing ID. Remedies are stronger sources, re-prioritisation, or an explicit decision record. A P0 row with an empty or missing Confidence cell **fails** the floor. |
+| `tools/coverage.py` — **fails closed on a registry it cannot read (exit 2, with or without `--strict`)** | **Required if yours hits one — the error names the line.** Now errors: a row with more cells than its header (escape `\|`, including inside backticks); a sub-table marker followed by prose, end of file, or a table with no Priority/Status column; a file with no recognised sub-table marker; a row with content but a blank Priority. Every one of these was previously a silent miscount. A one-cell section divider (`\| **PART TWO** \|`) still passes, but a divider with a second cell, or a totals row inside a marked sub-table, now exits 2 — move totals outside the marked table. A freshly started registry (recognised markers over empty tables) reports zero rows cleanly, in `check_registry` too. |
+| `tools/coverage.py` — blank Status counts as unverified; unknown Priority values fail | **Check your numbers.** A blank Status cell used to remove the row from the denominator, so your coverage may drop. A Priority that is not P0/P1/P2 (`-`, `TBD`) now fails `meets_targets` (`NO — not a priority`); `p0` and `**P0**` now count as P0. Custom `priority_targets` passed through the API are unaffected. |
+| **New: `tools/check_metadata.py`** (`make verify-bib`) | **Optional, recommended.** Compares citation fields — title, authors, year, venue — against Crossref/DataCite. A DOI that resolves can still carry the wrong metadata; `check_dois.py` cannot see that. |
+| **New: `tools/check_registry.py`** (`make check-registry`) | **Optional.** Registry/manuscript consistency: anchors, tier agreement across copies, type-conditional schema, premise graph, word budget. To use the `tiers` check, write anchors as `% S1-1: label (TYPE, P0, TIER)`; an anchor without the tier is a note, not a failure. Checks consistency, never whether a tier is right. |
+| `agents/equation-checker.md` — derived op-counts reproduced from the procedure ([#32](https://github.com/ducroq/agent-ready-papers/issues/32)) | **Optional.** For an adapted copy, add the Rule beginning `Reproduce op-counts, complexity and budgets from the procedure`, the Step 3 bullet beginning `For a derived operation-count`, and the `FORMULA` row's clause `or counts work the described procedure does not perform`. |
+| `templates/CLAUDE.md` — pin is "a number, not a status"; *Before committing* row | None required. If you copy the new row, it points at `/review-changes` or its paste-in prompt. |
+| `templates/vv-framework.md`, `templates/claim-registry.md` — comment and note wording | None. They now describe the tools accurately (coverage reads Confidence for the P0 floor only; prose after a marker is an error). |
+| `decisions/DR-020`, `DR-021` (both **Proposed**) | None — Proposed DRs do not bind. |
+
+**Breaking changes:** two, both in `tools/coverage.py` and both listed above as *Required* — the P0 tier floor under `--strict`, and exit 2 on an unreadable registry. Neither removes an artifact or changes a template's required structure; each makes a check that used to pass over a non-compliant or miscounted registry report it.
+
 ## v3.0.0 (2026-08-13)
 
 **From v2.6.1 — what to review when you bump your pin to v3.0.0:**

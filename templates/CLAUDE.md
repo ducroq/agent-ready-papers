@@ -7,7 +7,7 @@
 - **Target:** [Journal name — special issue / track if applicable]
 - **Deadline:** [Submission date]
 - **Status:** [Phase 0-5: Framing / Requirements / Literature Audit / Writing / Validation / Submission]
-- **agent-ready-papers:** v3.0.0 <!-- The framework version this project is pinned to. Keep this line: the drift row in the table below has nothing to read without it. Bump it deliberately, after reviewing UPGRADING.md — not automatically.
+- **agent-ready-papers:** v4.0.0 <!-- The framework version this project is pinned to. Keep this line: the drift row in the table below has nothing to read without it. Bump it deliberately, after reviewing UPGRADING.md — not automatically.
      A NUMBER, not a status. Never write "current" or "latest" here: the framework's release cadence is what
      falsifies the adjective, and you cannot see the next tag coming. One adopter upstream had `current` become
      false within hours of committing a stamp that was correct when they wrote it. A state report decays; a

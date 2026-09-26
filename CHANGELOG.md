@@ -45,13 +45,94 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
        ("No adopter action required.") rather than omitting the subsection.
 -->
 
-## Unreleased
+## v4.0.0 (2026-09-26)
+
+The claim-registry tools stop trusting what they cannot read. `coverage --strict` now enforces DR-002's P0 confidence floor, and `coverage` fails closed on a registry it cannot parse instead of miscounting it. Two new tools check citation *fields* and registry/manuscript *consistency*. **MAJOR**, because a registry that passed `--strict` under v3.0.0 can now fail it with no change on the adopter's side.
+
+Twenty commits since v3.0.0: a companion adoption (pin v1.25.0 → v1.42.0), two new tools, two Proposed DRs, nine literature sources, and three rounds of fail-closed work on `coverage.py` — from a review battery on the new tools, from #37, and from re-measuring the green-at-any-cost routes. #32 lands an agent rule. All tooling changes carry seeded-fail tests; the suite went from 20 tests at v3.0.0 to 173.
+
+### Tooling
+
+- **`tools/coverage.py` — DR-002 P0 tier floor** ([#37](https://github.com/ducroq/agent-ready-papers/issues/37)). Every P0 entry must be SUPPORTED or ESTABLISHED. Reported *separately* from coverage — a `P0 tier floor: N of M meet it` line under the table, a `p0_tier_floor` JSON object, `meets_tier_floor` on the report — because a registry can be 100% verified while its P0 entries sit below the floor, and Paper 1 is exactly that case (1 of 8 meets it, [#38](https://github.com/ducroq/agent-ready-papers/issues/38)). `meets_targets` stays coverage-only; `--strict` fails if either fails. A P0 row with no readable tier fails the floor; the count is entries, not rows.
+- **`tools/coverage.py` — fails closed instead of miscounting.** Each of these used to be skipped in silence, dropping a row or a whole sub-table from the counts, and each was measured turning `--strict` green over an unverified claim. Now:
+  - a row with **more cells than its header** (an unescaped `|`, including inside backticks) → exit 2;
+  - a sub-table marker followed by prose, end of file, or a table with no Priority/Status column → exit 2;
+  - a file with **no recognised sub-table marker** at all (e.g. only `**Claims:**`) → exit 2. A freshly started registry — recognised markers over empty tables — reports zero rows cleanly;
+  - a row with content but a **blank Priority** (including one blanked down to its ID) → exit 2;
+  - a **blank Status** → counted as unverified, where it used to leave the denominator;
+  - a Priority that is not P0/P1/P2 or a configured target (`-`, `TBD`) → fails `meets_targets` (`NO — not a priority`); `p0` and `**P0**` normalise to `P0`;
+  - a **short** row (a one-cell section divider) is padded as GFM renders it, where it used to end the table.
+
+  Routes still open are measured and listed in `docs/verification-hooks.md`: deleting a row, P0→P1 into a bucket with slack, an ID the `S#-#` pattern misses, a miscased marker.
+- **New: `tools/check_metadata.py`** — a resolving DOI is not a correct entry. Compares title, authors, year and venue against Crossref, falling back to DataCite (arXiv DOIs are not Crossref). Distinguishes a DOI that does not exist from one that could not be *reached*, and an entry where nothing could be compared from a passing one. Runs on `.bib` files (`make verify-bib`) and on registries (`make check-metadata`).
+- **New: `tools/check_registry.py`** — internal consistency between a registry and its manuscript, never whether a tier is right: `anchors` (every `% S#-#:` anchor has a row and vice versa), `tiers` (every copy of an ID's tier — registry rows, anchors, a LaTeX table with a Confidence column — agrees; #37), `schema` (type-conditional columns present), `premises` (the premise graph resolves, is acyclic, and no conclusion outranks its weakest premise), `budget`. Unreadable copies are notes, never silent skips. Like `coverage`, it exits 2 on a file with no recognised sub-table marker and accepts a freshly started registry. `make check-registry`.
 
 ### Agents
 
 - **`equation-checker.md` — derived op-counts, complexity and budgets are reproduced from the procedure, not the reported number** ([#32](https://github.com/ducroq/agent-ready-papers/issues/32)). Step 3 confirms a figure follows from its stated formula; a new Rule, a Step 3 pointer and a widened `FORMULA` description require that, for a *derived* operation-count / complexity / runtime / cost figure, the formula itself be rebuilt from the algorithm, pseudocode or experimental setup the document describes, within its stated counting convention. Measured figures are excluded. Motivated by an adopter pilot where the lens passed a self-consistent compute budget that counted a feature suite the real-time path never ran (true load 3x lower). Framed as correctness — a wrong-model figure is *false* — on the argument in #32's 2026-08-16 comment that this keeps it clear of the Option-B objection (DR-018, applied to circularity in DR-020). Deliberately limited to that case: entailed or circular results, and comparisons that are true but unfair, are out of scope.
 
-**Adopter notes:** a copied or adapted `equation-checker.md` can take this surgically — add the Rule beginning `Reproduce op-counts, complexity and budgets from the procedure`, the Step 3 bullet beginning `For a derived operation-count`, and the `FORMULA` row's added clause `or counts work the described procedure does not perform`. Those three strings are the markers a current copy contains. No other adopter action.
+### Templates
+
+- **`templates/CLAUDE.md`** — the framework pin is "a number, not a status" (companion v1.34.0), and a *Before committing* row points at `/review-changes` or its paste-in prompt.
+- **`templates/vv-framework.md`** — Gate 2's P1-tier-floor note now says `coverage.py` reads the Confidence column for the **P0** floor only; the P1 floor is still a manual check.
+- **`templates/claim-registry.md`** — a comment now says prose between a marker and its table is an error, not a silent skip.
+
+### Decisions
+
+- **DR-020 (Proposed)** — circular evidence as a Step Z limb: a result entailed by its own inputs carries no evidential weight. Both the gap and the remedy are declared EMERGING.
+- **DR-021 (Proposed)** — prose tier-floor scanning as a *locator*, not a gate.
+- DR-015 and DR-019 carry notes (a mechanization argument; a probe that measured a CHANGELOG mention instead of an implementation). No status changes; only Accepted DRs bind.
+
+### Docs
+
+- **`docs/verification-hooks.md`** — a fourth failure mode, *the adjacent measurement*; the green-at-any-cost routes table re-measured against the new `coverage.py`, with open routes marked open.
+- **`docs/THRESHOLDS.md`** — `--strict` also gates the P0 floor; a new scope section: the thresholds assume a self-authored project, and on a document the project did not write, what governs coverage is whether a claim can be closed without its author.
+- **`docs/non-claude-setup.md`** — AGENTS.md as the cross-tool standard (companion v1.37.0); the *symlink or duplicate* advice withdrawn.
+- **README** tools table names the new tools and checks.
+
+### Also in this release
+
+- **`vv/hypothesis-log.md`** (public) — the third-party-audit ceiling bet, registered and resolved **SPLIT** within three days by a second audit (headline prediction refuted; one mechanism held), with its successor positions registered.
+- **`.gitignore`** — third-party full texts under `literature/pdfs/` are not tracked; and a publishing rule for `papers/*`: never allowlist a paper that critiques third-party work.
+- **README** — `check_dois` is described as DOI resolution, not whole-registry verification.
+- **Paper 1** (the repo's own demonstration paper) — eight claim tiers re-derived from DR-002 and lowered to EMERGING, with the manuscript's appendix table and the writing guide's Quick Reference rebuilt to match; a P0 summary cell that asserted an audit its row does not contain was corrected. The resulting P0-floor failure is #38.
+
+### Literature
+
+L57–L65 ingested (65 sources). They re-verify Paper 1's gap claim (EQUATOR now lists 704 guidelines, still no non-empirical category) and **falsify S1-4 as written**: L60 and L61 are process-level verification infrastructure for AI-assisted writing. The rewording is staged, not applied, because a P0 rewording is a human call. Third-party full texts are gitignored under `literature/pdfs/`.
+
+### Companion adoption (agent-ready-projects pin v1.25.0 → v1.42.0)
+
+| From | What | Landed as |
+|------|------|-----------|
+| v1.25.1 | Step 1.5's awk lacked CRLF handling: no table was examined on a CRLF checkout | Ported into the then-local `/review-changes` — a copy later found inert (shadowed by the global install) and deleted under v1.40.0. In effect only through the user-global install |
+| v1.26.1 | Review baseline computed from `@{u}`, empty on a pushed unmerged branch | Same as v1.25.1 |
+| v1.28.0 | Reference checker gains a doc-relative rung | Retired a standing caveat in `CLAUDE.md` |
+| v1.31.0 | Adopter notes name marker strings, never only "re-copy it" (#94) | `/release` Step 4 (maintainer-local); applied in this entry |
+| v1.34.0 | A version stamp is a number, not an adjective | `templates/CLAUDE.md`, `CLAUDE.md` stamps |
+| v1.37.0 | AGENTS.md as a standard; symlink-or-duplicate withdrawn | `docs/non-claude-setup.md` |
+| v1.40.0 | `/review-changes` user-global, with a per-repo `.claude/review-profile.md` | Profile written; inert local copy removed; skill-scope Hard Constraint rewritten |
+| v1.41.0 | Gotcha log gains a `## Mechanized` table | Maintainer-local memory (no commit in this repo records it) |
+| v1.27.0–v1.42.0 (whole range, including the rows above) | 19 releases triaged: 8 adopt, 0 decline, 2 not applicable, 9 already in force | Full record maintainer-local |
+
+### Adopter notes
+
+**New adopters** get tools that fail loudly on a registry they cannot read, a P0 floor that `--strict` enforces, and two checkers — field-level citation metadata and registry/manuscript consistency — that did not exist in v3.0.0.
+
+**Existing adopters who run `coverage --strict` in CI must expect it to go red** in two ways — see `UPGRADING.md`:
+
+1. **Any P0 entry below SUPPORTED now fails.** DR-002 always required this; nothing enforced it. Remedies are stronger sources, re-prioritisation, or an explicit decision record — not a waiver.
+2. **A malformed registry now exits 2, with or without `--strict`.** Every case listed under *Tooling* was already a miscount; the error message names the line. One shape was harmless before and is now an error too: a section divider with a second cell, or a totals row inside a marked sub-table — move it outside. A blank Status now lowers coverage instead of vanishing. A freshly started registry is unaffected.
+
+A copied or adapted `equation-checker.md` can take this surgically — add the Rule beginning `Reproduce op-counts, complexity and budgets from the procedure`, the Step 3 bullet beginning `For a derived operation-count`, and the `FORMULA` row's added clause `or counts work the described procedure does not perform`. Those three strings are the markers a current copy contains. No other adopter action.
+
+The paper-local copies under `papers/*/` are not refreshed by this release; `templates/vv-framework.md` and `agents/equation-checker.md` changed.
+
+**Known at release:** this repo's own Paper 1 fails the new floor (1 of 8 P0 entries at SUPPORTED or above; #38), so `/release`'s own `coverage --strict` precondition is red for a content reason, not a tooling one. That is the floor working. `check_registry` also exits 1 on Paper 1 for three unanchored entries (S4-1, S4-2, S4-4), whose prose was removed deliberately in an earlier revision; whether they remain in the registry is an open decision.
+
+### Versioning rationale
+
+**MAJOR.** Step 2 rule 1 fires: an adopter's `coverage --strict` can fail where it passed under v3.0.0, and a registry `coverage` used to read now exits 2 — both without any change on the adopter's side. Rule 1 outranks rule 2, so the new tools and DRs (MINOR on their own) do not decide it. Precedent is **v3.0.0**, which went MAJOR because "Gate 2's new P2 line can fail a paper that previously passed" — a requirement also already documented elsewhere, as DR-002's floor was here. The case for MINOR is on the record: every newly-red input was already non-compliant with DR-002 or already miscounted, so no *correct* registry changes result. It was weighed and declined, because rule 1 asks whether consumers must act to keep working, not whether they were right before.
 
 ## v3.0.0 (2026-08-13)
 
