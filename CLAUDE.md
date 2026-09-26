@@ -99,9 +99,9 @@ agent-ready-papers/
 │   ├── verification-hooks.md  <- Which checks to fire automatically after an edit (since v2.5.0)
 │   └── work-items/            <- Multi-session work tracking (per `templates/work-item.md`; created on-demand)
 ├── tools/                     <- Registry tooling: coverage, DOI, metadata + consistency CLIs (since v1.5.0)
-│   ├── coverage.py            <- Per-type sub-table parser; P0/P1/P2 + PROVOCATION tier coverage
+│   ├── coverage.py            <- Per-type sub-table parser; P0/P1/P2 + PROVOCATION coverage, DR-002 P0 floor; fails closed (v4.0.0)
 │   ├── check_metadata.py      <- Field-level verification against Crossref/DataCite (since 2026-09-14)
-│   ├── check_registry.py      <- Registry/manuscript internal consistency: anchors, schema, premise graph, budget
+│   ├── check_registry.py      <- Registry/manuscript internal consistency: anchors, tiers, schema, premise graph, budget
 │   ├── check_dois.py          <- DOI extractor + resolver (HEAD against doi.org, --offline mode)
 │   └── README.md              <- Usage, exit codes, design constraints, known limits
 ├── tests/                     <- Shape-pin + edge-case tests for tools/ (since v1.5.0)
