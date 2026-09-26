@@ -45,6 +45,26 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
        ("No adopter action required.") rather than omitting the subsection.
 -->
 
+## Unreleased
+
+Token economy: what a session reads at start (`CLAUDE.md` plus the memory index its first row points to) is cut from ~107k characters to ~17k (`wc -m`). Companion pin v1.42.0 → v1.49.0.
+
+- **`CLAUDE.md` 34,712 → 11,824 characters.** Edit histories and restated counts are removed; instructions, Key Paths and every Hard Constraint's operative clause stay. A review lens checked the Hard Constraints clause by clause against the old text, and the five clauses it found weakened were restored. The removed text is in git history. New Hard Constraint, *Token economy*: cut at least as much as you add, and keep no edit histories in per-session files.
+- **New `scripts/` + Makefile targets** replace prose that went stale by hand. `scripts/**` is a HIGH review tier with its own guarantee.
+  - `make drift`: exit 0 no drift, 1 drift, 2 cannot verify. It checks the companion pin against the latest release, the global skills byte for byte against the reference install at the pinned tag (`cmp`), this repo's stamp against this file, and paper pins. A failed fetch, a missing pin tag or no clone gives 2, never 0. A tracked paper pinned behind counts as drift, so **Paper 1 (v2.6.0) makes it exit 1 today**; gitignored sub-projects are only reported.
+  - `make dr-status`: DRs grouped by the `status:` in their frontmatter block, not the body. Portable awk (mawk tested).
+  - `make gotcha-stats`: entry count and sizes, fence-aware.
+  - Every exit path above was exercised on a seeded fixture.
+- **Companion adoption, v1.43.0–v1.49.0 (9 tags): 2 adopt / 1 decline / 0 n-a / 6 already in force.**
+  - Adopted: v1.43.0 `tagfree` in the project-local `/release`, whose old tag check exited 0 whether or not the tag existed. Offline, no argument, or an unsubstituted `vX.Y.Z` now give 2, never free.
+  - Adopted: v1.47.0's size signals, a project file flagged above ~15k characters and a memory archive pass above ~300k.
+  - Declined: v1.45.1's cheaper HIGH review tier. Upstream offers it as not the default (n=2), and it drops lenses this repo's tool guarantees rely on.
+  - The four global skills are byte-identical to v1.49.0.
+- **`/release` also fixed**: its command block ran `make coverage`, which never enforces the thresholds (no `--strict`), against its own precondition 4. It now runs `tools.coverage --strict`.
+- **Maintainer-local `memory/`**: the index went from 71,895 to 5,188 characters. Everything outside `archive/` went from 417k to 216k. Sessions before 2026-09, release history, resolved gotchas and resolved hypotheses move to `memory/archive/`.
+
+**Adopter notes**: no adopter action required. The scripts read this repo's own layout.
+
 ## v4.0.0 (2026-09-26)
 
 The claim-registry tools stop trusting what they cannot read. `coverage --strict` now enforces DR-002's P0 confidence floor, and `coverage` fails closed on a registry it cannot parse instead of miscounting it. Two new tools check citation *fields* and registry/manuscript *consistency*. **MAJOR**, because a registry that passed `--strict` under v3.0.0 can now fail it with no change on the adopter's side.

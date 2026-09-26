@@ -43,6 +43,8 @@ make check-dois    # DOI verification against Paper 1
 make check         # lint + tests
 ```
 
+Repo-maintenance checks are shell scripts in `scripts/`, not `tools/`: `make drift` (framework stamps, 0/1/2), `make dr-status`, `make gotcha-stats`.
+
 ## Exit codes
 
 All four tools share a code-space (0 / 1 / 2 = success / failure / tooling error) but **default behavior differs**: `coverage.py` only fails the build under `--strict`; `check_dois.py` fails by default whenever a DOI does not resolve. The asymmetry is intentional — coverage targets are policy-configurable and may legitimately be missed mid-draft, while a DOI that fails to resolve is unambiguous.
