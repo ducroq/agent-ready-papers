@@ -62,6 +62,15 @@ Token economy: what a session reads at start (`CLAUDE.md` plus the memory index 
   - The four global skills are byte-identical to v1.49.0.
 - **`/release` also fixed**: its command block ran `make coverage`, which never enforces the thresholds (no `--strict`), against its own precondition 4. It now runs `tools.coverage --strict`.
 - **Maintainer-local `memory/`**: the index went from 71,895 to 5,188 characters. Everything outside `archive/` went from 417k to 216k. Sessions before 2026-09, release history, resolved gotchas and resolved hypotheses move to `memory/archive/`.
+- **Companion pin v1.49.0 → v1.49.2.** Both are PATCH releases, and the four global skills are byte-identical to v1.49.2, so there was nothing to adopt. `make drift` exits 0.
+- **Paper 1 P0 tier gate: 1 of 8 → 3 of 6** (#38). Commits `9c759a3`, `657a302`, `a618f83`, `7cecf42`.
+  - S4-1, S4-2 and S4-4 are withdrawn: they had no manuscript text. S5-1 is re-grounded on S2-1, S2-2 and S3-4.
+  - S1-4 is reworded against prior art and demoted to P1. The prior art is Chen et al. 2026, Zhou & Yu 2026, sciwrite-lint (L66), and the VANRA registration at EQUATOR.
+  - S1-1 and S1-2 are now SUPPORTED, with new sources read in full. S1-2 is reworded to what its evidence shows.
+  - S2-2 is narrowed to "no published consensus-based guideline", and stays EMERGING.
+  - S3-4 and S5-1 are capped by tier-monotonicity, because their premises are EMERGING. No DR was needed: DR-004 already defines tiers per entry type.
+- **Paper 1 framework pin v2.6.0 → v4.0.0.** The v3.0.0 Required items were already in force.
+- **`tests/`**: Paper 1 counts updated. The comment-in-cell test now compares against the plain parse. `conftest.py` names the pinning tests rather than restating counts.
 
 **Adopter notes**: no adopter action required. The scripts read this repo's own layout.
 

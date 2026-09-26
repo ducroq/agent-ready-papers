@@ -123,6 +123,8 @@ Position holds if ≥3 load-bearing process-level findings remain that the RAG p
 
 **Review by:** 2027-06-30 — backstop. Expected to resolve naturally as frontier-model capability progresses through 2026-2027 and end-to-end RAG pipelines become operationally common.
 
+**Evidence 2026-09-26 (for, weak).** Four independent groups now build *process-level* verification for AI-assisted writing, rather than relying on better models: Chen et al. 2026 (L60), Zhou & Yu 2026 (L61), sciwrite-lint (L66), and the VANRA checklist registered at EQUATOR. That is convergence on the locus, but not yet evidence that process beats model capability. None compares against a frontier RAG pipeline, which is what the revisit trigger requires. Status unchanged: open.
+
 **Origin:** Surfaced 2026-06-11 by DR-011 Pass 2 (Opus, intra-family large) reviewing v2.1.0–v2.1.2. Pass 2's finding (quoted): *"the Rebuttal row (README:60) deflects to *When It Is Overkill* (which addresses *who shouldn't use the framework*), not the Warrant's actual challenger"* — i.e., the README's central Warrant had no engaged counter for the dynamic case (capability rises over time). Logged here as a falsifiable bet rather than papered over in the Warrant itself, per the hypothesis-log convention. README's Toulmin block now points at this entry from a *Dynamic counter to the Warrant* note. Logged in `vv/cost-log.md` as the second of two findings from the 2026-06-11 DR-011 battery.
 
 **Domain:** Framework Warrant validity, process-layer-vs-model-layer competition
