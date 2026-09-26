@@ -1,6 +1,6 @@
 # Zhou & Yu 2026 — Auditable AI-Assisted Research Writing (L61)
 
-**Reading status:** READ (abstract + listing, 2026-09-14). Full text not read. **Closest prior art found — read in full before Paper 1 submission.**
+**Reading status:** READ (full text, 2026-09-26). ⚠ The full text **narrows** the abstract-based line. It has a claim–evidence index with a human **sufficiency audit** on a sample (10 of 30 judged sufficient). It also gives every metric an evidential-standing tier (confirmatory / secondary / descriptive / exploratory) and a pre-registered blind-spot field. Those tiers and blind spots attach to its measurement instrument, not to the manuscript's prose claims. There is no warrant analysis and no sorting of entries into claims, arguments and propositions.
 
 ## Bibliographic Info
 - **Authors:** Yang Zhou, Chengqun Yu

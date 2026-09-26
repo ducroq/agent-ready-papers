@@ -280,9 +280,9 @@ def test_tier_floor_counts_an_unreadable_tier_as_failing(tmp_path):
 def test_paper1_p0_tier_floor_fails(paper1_registry):
     """Paper 1's P0 gate genuinely fails after the 828f9cd re-derivation (#38)."""
     report = check_coverage(paper1_registry)
-    assert len(report.p0_tiers) == 7
+    assert len(report.p0_tiers) == 6
     assert report.meets_tier_floor is False
-    assert set(report.p0_below_floor) == {"S1-1", "S1-2", "S1-4", "S2-2", "S3-4", "S5-1"}
+    assert set(report.p0_below_floor) == {"S1-2", "S2-2", "S3-4", "S5-1"}
 
 
 def test_tier_floor_sees_a_decorated_or_unticked_p0(tmp_path):

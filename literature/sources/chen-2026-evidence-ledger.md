@@ -1,6 +1,6 @@
 # Chen, Yu & Wang 2026 — Evidence-Ledger Adjudication (L60)
 
-**Reading status:** READ (abstract, 2026-09-14). Full text not read. **Prior-art relevance — read in full before Paper 1 submission.**
+**Reading status:** READ (full text, 2026-09-26). The characterisation below held against the full text; the category is **cs.AI**.
 
 ## Bibliographic Info
 - **Authors:** Gengyu Chen, Yongjie Yu, Weiling Wang
@@ -33,4 +33,4 @@ Cuts both ways, and the manuscript should say both: it **narrows** the novelty c
 - The 295/900 supported-claim routing rate is a real cost the abstract underplays; if Paper 1 cites this work as a baseline, cite that number too.
 
 ## Open Questions
-- Does the full text position itself against reporting guidelines at all, or purely against fact-checking baselines? That determines whether it is a competitor to Paper 1's framing or merely adjacent to it.
+- ~~Does it position itself against reporting guidelines?~~ No (2026-09-26). It positions against citation checkers and review tools (SemanticCite, sciwrite-lint [L66], FactReview, Peerispect), so it is adjacent to Paper 1's framing, not a competitor to it.

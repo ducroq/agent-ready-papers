@@ -44,7 +44,7 @@ The rules in this guide are instances of one structural requirement: **the langu
 **ARGUMENT prose pattern:**
 > [Grounds — the evidence, citing verified CLAIMs]. [Warrant — why this evidence leads to the conclusion]. [Qualifier — hedging per confidence tier]. [Therefore, conclusion]. [Rebuttal — acknowledging the strongest counter-argument].
 
-Example: "The Proposition paper audit classified all 21 entries as CLAIMs, but retyping revealed 2 ARGUMENTs and 3 PROPOSITIONs (S4-1). Entry H4 — the paper's central interpretive claim — was scored SPECULATIVE (0.25) because it was evaluated against source-backed criteria. Since arguments derive validity from their warrant and premises, not from citation count, this constitutes a false failure caused by applying the wrong verification procedure. This **suggests** that typed verification is not merely useful but necessary for avoiding systematic misclassification, although the evidence comes from a single retrospective audit."
+Example: "Toulmin's model makes an argument's warrant explicit (S3-1), Whetten's framework does the same for a proposition's boundary conditions (S3-2), and confidence tiers tie language to evidence (S3-3). An argument's validity rests on its warrant and premises, not on how many sources it cites. So an argument checked as if it were a claim **may** be scored unverified when it is not wrong, a false failure caused by the procedure rather than the content. This **suggests** that each unit type needs its own verification procedure. Cross-author replication has not yet tested it."
 
 **PROPOSITION prose pattern:**
 > [Reasoning — why this recommendation follows from the arguments]. [Proposition — the recommendation itself]. [Boundary conditions — where it applies and where it doesn't].
@@ -95,11 +95,11 @@ Confidence progression for framework components:
 
 | ID | Statement | Type | Tier | Appropriate Language |
 |----|-----------|------|------|---------------------|
-| S1-1 | AI citation hallucination as distinct failure mode | CLAIM | EMERGING | "AI agents can invent plausible-sounding papers" — frame as documented risk, not speculation |
+| S1-1 | AI citation hallucination as distinct failure mode | CLAIM | SUPPORTED | "evidence indicates that LLMs invent plausible-sounding papers" (Mugaanyi 2024; Walters & Wilder 2023) |
 | S1-2 | Confidence inflation — "demonstrates" vs "suggests" | CLAIM | EMERGING | "AI agents may state speculative claims with the same certainty as verified facts" |
 | S1-3 | Scope creep without architectural constraints | CLAIM | EMERGING | "Without structural constraints, AI-assisted drafts may expand beyond what evidence supports" |
 | S1-5 | AI-generated equations contain arithmetic errors surviving plausibility review | CLAIM | EMERGING | "AI-generated equations can contain arithmetic errors that survive review because they produce plausible-looking results" |
-| S1-4 | Existing solutions operate at model/tool level, not process level | CLAIM | EMERGING | "Current approaches address [specific tools] but do not provide process-level verification" |
+| S1-4 | No existing infrastructure applies a verification procedure per unit type (P1) | CLAIM | EMERGING | "To our knowledge, none distinguishes claims from arguments and propositions" — name L60, L61, L66 first |
 
 **Key sources:**
 - `literature/sources/liang-2024.md` — AI hallucination evidence
@@ -107,8 +107,8 @@ Confidence progression for framework components:
 
 **Cautions:**
 - Do NOT frame this as "AI is bad for writing" — frame as "AI writing assistance creates *new* failure modes that require *new* infrastructure"
-- S1-1 through S1-3 are all at EMERGING — use hedged language throughout
-- The claim that "no process-level infrastructure exists" (S1-4) is a strong universal negative — verify carefully and consider softening to "we are not aware of process-level infrastructure"
+- S1-2 and S1-3 are EMERGING, so hedge them. S1-1 is SUPPORTED: "indicates", "evidence suggests", never "demonstrates"
+- S1-4 is a hedged negative about prior art. Process-level systems exist (L60 Chen, L61 Zhou & Yu, L66 sciwrite-lint), so name them and state precisely what they lack. Never write "no process-level infrastructure exists"
 - Reference model/tool level solutions generically (citation checkers, RAG) — specific tool names were removed as uncitable
 
 ---
@@ -154,12 +154,12 @@ Confidence progression for framework components:
 | S3-1 | Toulmin provides operationalizable argument verification | CLAIM | EMERGING | "Toulmin's (1958/2003) argument model may provide a basis for operationalizing argument verification" |
 | S3-2 | Whetten provides operationalizable proposition verification | CLAIM | EMERGING | "Whetten's (1989) framework may similarly operationalize proposition verification" |
 | S3-3 | Confidence tiers enable systematic language calibration | CLAIM | EMERGING | "Mapping confidence tiers to prescribed language may enable systematic calibration" |
-| S3-4 | Different types require different verification procedures | ARGUMENT | EMERGING | See warrant in registry; use "preliminary evidence from retrospective audits suggests" |
+| S3-4 | Different types require different verification procedures | ARGUMENT | EMERGING | See warrant in registry; use "may produce false failures", argued from S3-1–S3-3 |
 
 **Warrant check for S3-4:**
-- S3-4 warrant: If the wrong verification procedure (source checking) was applied to an ARGUMENT (H4), producing a false failure, then type-specific verification is necessary. The warrant bridges from "misclassification happened" to "types need different procedures."
-- Grounds: S4-1 (audit data showing H4 false failure)
-- Qualifier: EMERGING — demonstrated in one retrospective audit, not independently validated
+- S3-4 warrant: if an argument is scored as a source-backed claim when its premises are verified and its warrant is valid, the low score is a false failure caused by the procedure. So type-specific verification is needed. The warrant bridges from "the procedures test different things" to "types need different procedures."
+- Grounds: S3-1, S3-2, S3-3 (the registry's premises)
+- Qualifier: EMERGING. The argument is reasoned from its premises; no cross-author replication yet. Since 2026-09-26 no audit data backs it (S4-1 is withdrawn, #38)
 
 **Key sources:**
 - `literature/sources/toulmin-1958.md` — argument model
@@ -174,36 +174,25 @@ Confidence progression for framework components:
 
 ---
 
-### 4. Preliminary Evidence
+### 4. Related Work and Design Rationale
 
-**Purpose:** Present evidence from three retrospective audits that the typed verification model reveals actionable issues. This is preliminary — frame it as "proof of concept" not "validation."
+**Purpose:** Position the proposal against existing tool-level, model-level and process-level approaches, and give its design rationale. There is no evidence section. The retrospective-audit entries (S4-1, S4-2, S4-4) were withdrawn on 2026-09-26 (#38) after their prose was stripped in `1d8c68c`. Do not reintroduce audit figures.
 
-**Word budget:** ~700 words
+**Word budget:** ~400 words
 
 **Entries to use:**
 
 | ID | Statement | Type | Tier | Appropriate Language |
 |----|-----------|------|------|---------------------|
-| S4-1 | Proposition audit: 76% coverage, false failure from mistyping | CLAIM | EMERGING | "A retrospective audit of the Proposition paper revealed 76% overall coverage and 100% P0 coverage; retyping entries revealed..." |
-| S4-2 | Technology audit: 6/22 over-confident language | CLAIM | EMERGING | "Applying confidence tiers to a technology paper identified 6 of 22 entries where language was more confident than evidence warranted" |
 | S4-3 | Structured verification + LLM > LLM alone | CLAIM | EMERGING | "Recent work on peer review (PeerArg 2024) and argument extraction (Gupta et al. 2024) suggests that structured frameworks combined with LLMs outperform LLMs alone" |
-| S4-4 | Two audits demonstrate practical applicability | ARGUMENT | EMERGING | "Preliminary evidence from two retrospective audits suggests the framework may be practically applicable across paper types" |
-
-**Warrant check for S4-4:**
-- S4-4 warrant: Two independent applications of the same framework to different paper types each revealed actionable issues → framework has cross-type applicability. The warrant bridges from "it worked in two cases" to "it is practically applicable."
-- Grounds: S4-1 (proposition audit), S4-2 (technology audit)
-- Qualifier: EMERGING — retrospective audits by the same author team, same domain cluster, N=2
-- Strongest counter-argument: Two audits by the same team in related domains do not demonstrate generalizability to other authors, domains, or paper types
 
 **Key sources:**
 - `literature/sources/peerarg-2024.md` — structured + LLM evidence
 - `literature/sources/gupta-2024.md` — Toulmin + LLM evidence
 
 **Cautions:**
-- Both audits are retrospective (applied after the fact) and by the same team — acknowledge this limitation explicitly
-- Do NOT present audit data as experimental evidence — frame as "preliminary indications" or "proof of concept"
-- The H4 false failure story is compelling but anecdotal — one example does not constitute validation
-- S4-3 (external evidence) is the strongest entry here because it cites independent research
+- Each of S4-3's two sources covers one narrow task; say "suggests", and do not generalise to "verification"
+- Name process-level prior art (S1-4) and draw the line precisely. Overstating what it lacks is worse than the original overclaim
 
 ---
 
@@ -223,11 +212,11 @@ Confidence progression for framework components:
 **Boundary check for S5-1:**
 - Applies to: Academic papers intended for peer-reviewed publication
 - Does NOT apply to: Informal writing, journalism, creative writing, very short opinion pieces
-- Reasoning: If EQUATOR benefits empirical research (S2-1) and non-empirical research has no equivalent (S2-2), and preliminary evidence shows typed verification reveals actionable issues (S4-1–S4-4), then extending infrastructure is warranted
+- Reasoning: If EQUATOR benefits empirical research (S2-1) and non-empirical research has no equivalent (S2-2), and each unit type needs its own verification procedure (S3-4), then extending infrastructure is warranted
 - Alternative engaged: One could argue that journal peer review already provides adequate argument verification for non-empirical papers — counter: AI writing amplifies the challenge beyond what traditional review was designed for
 
 **Key sources:**
-- Synthesis of S2-1 through S4-4
+- Synthesis of S2-1, S2-2 and S3-4 (the registry's premises)
 - `literature/sources/equator-gap.md` — the gap being addressed
 
 **Cautions:**
@@ -247,27 +236,24 @@ Confidence progression for framework components:
 | ID | Statement | Type | Tier | Best Source |
 |----|-----------|------|------|------------|
 | S2-1 | EQUATOR ~700 guidelines | CLAIM | ESTABLISHED | EQUATOR website (699, 2026-03-03) |
+| S1-1 | AI citation hallucination | CLAIM | SUPPORTED | Mugaanyi 2024; Walters & Wilder 2023 |
 
 ### EMERGING — Appropriately Hedged
 
 | ID | Statement | Type | Tier | Hedging Language |
 |----|-----------|------|------|------------------|
-| S1-1 | AI citation hallucination | CLAIM | EMERGING | "can invent", "documented cases" |
 | S1-2 | Confidence inflation | CLAIM | EMERGING | "may state", "tend to use" |
 | S1-3 | Scope creep | CLAIM | EMERGING | "may expand", "without constraints" |
 | S1-5 | Calculation errors in AI-generated equations | CLAIM | EMERGING | "can contain", "survive plausibility review" |
-| S1-4 | No process-level solutions | CLAIM | EMERGING | "we are not aware of", "current approaches address [tool] but not [process]" |
+| S1-4 | No per-type procedure in existing infrastructure (P1) | CLAIM | EMERGING | "to our knowledge, none distinguishes claims from arguments and propositions" |
 | S2-2 | No non-empirical guidelines | CLAIM | EMERGING | "to our knowledge, no equivalent" |
 | S2-3 | Gregor Type I and V non-empirical | CLAIM | EMERGING | "identified five types, two of which" |
 | S2-4 | Argument quality is primary challenge | CLAIM | EMERGING | "may be the primary challenge" |
 | S3-1 | Toulmin operationalizable | CLAIM | EMERGING | "may provide a basis for" |
 | S3-2 | Whetten operationalizable | CLAIM | EMERGING | "may similarly operationalize" |
 | S3-3 | Confidence tiers enable calibration | CLAIM | EMERGING | "may enable systematic calibration" |
-| S3-4 | Different types need different verification | ARGUMENT | EMERGING | "preliminary evidence suggests" |
-| S4-1 | Proposition audit results | CLAIM | EMERGING | "a retrospective audit revealed" |
-| S4-2 | Technology audit language issues | CLAIM | EMERGING | "applying confidence tiers identified" |
+| S3-4 | Different types need different verification | ARGUMENT | EMERGING | "may produce", "suggests" |
 | S4-3 | Structure + LLM > LLM alone | CLAIM | EMERGING | "recent work suggests" |
-| S4-4 | Three audits show applicability | ARGUMENT | EMERGING | "preliminary evidence suggests" |
 | S5-1 | Community needs infrastructure | PROPOSITION | EMERGING | "we propose that" |
 
 ### SPECULATIVE — Requires Careful Framing
@@ -286,7 +272,7 @@ Confidence progression for framework components:
 - [ ] All quotes verified against source
 - [ ] "Own work" claims clearly marked with status
 - [ ] Hypotheses distinguished from verified claims
-- [ ] No "demonstrates", "shows" or "confirms" below **ESTABLISHED** (per the DR-002 mapping above — the earlier wording said "for EMERGING or SPECULATIVE", which passed "demonstrates" at SUPPORTED, the exact defect the retrofit audit found in 6/22 entries)
+- [ ] No "demonstrates", "shows" or "confirms" below **ESTABLISHED** (per the DR-002 mapping above — the earlier wording said "for EMERGING or SPECULATIVE", which passed "demonstrates" at SUPPORTED, the exact defect this rule exists to catch)
 
 ### ARGUMENTs
 - [ ] Each ARGUMENT has its warrant stated explicitly (not left implicit)

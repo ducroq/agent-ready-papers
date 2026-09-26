@@ -18,8 +18,8 @@
 
 | Priority | Total | Drafted | Verified | Needs Evidence | Coverage |
 |----------|-------|---------|----------|----------------|----------|
-| P0 | 7 | 7 | 7 | 0 | 100% |
-| P1 | 8 | 8 | 8 | 0 | 100% |
+| P0 | 6 | 6 | 6 | 0 | 100% |
+| P1 | 9 | 9 | 9 | 0 | 100% |
 | P2 | 1 | 1 | 1 | 0 | 100% |
 | **Total** | **16** | **16** | **16** | **0** | **100%** |
 
@@ -32,7 +32,7 @@
 | PROPOSITION | 1 | 1 | 100% |
 | **Total** | **16** | **16** | **100%** |
 
-⚠️ **P0 tier floor (2026-09-24; S4-1 withdrawn 2026-09-26): 6 of 7 P0 entries are below SUPPORTED** (S1-1, S1-2, S1-4, S2-2, S3-4, S5-1; only S2-1 meets it). **The P0 gate therefore fails.** DR-002 (Accepted, binding) sets it as "all SUPPORTED or ESTABLISHED (no EMERGING/SPECULATIVE)" with no exception; the "or explicitly framed as hypothesis" clause in `papers/perspective/writing-guide.md`'s checklist is not in DR-002 and cannot waive it. Remedies are stronger sources, re-prioritisation, or an explicit decision — not a reading of the exception. The 100% figures below are *verification coverage* (Status column), not tier. `tools.coverage` reports the floor separately, below its coverage table (it reports 1 of 7 meeting it), and `--strict` fails on it (added in 75f928c, #37).
+⚠️ **P0 tier floor (2026-09-24; S4-1 withdrawn and S1-4 moved to P1, 2026-09-26): 4 of 6 P0 entries are below SUPPORTED** (S1-2, S2-2, S3-4, S5-1; S2-1 and S1-1 meet it). **The P0 gate therefore fails.** DR-002 (Accepted, binding) sets it as "all SUPPORTED or ESTABLISHED (no EMERGING/SPECULATIVE)" with no exception; the "or explicitly framed as hypothesis" clause in `papers/perspective/writing-guide.md`'s checklist is not in DR-002 and cannot waive it. Remedies are stronger sources, re-prioritisation, or an explicit decision — not a reading of the exception. The 100% figures below are *verification coverage* (Status column), not tier. `tools.coverage` reports the floor separately, below its coverage table (it reports 2 of 6 meeting it), and `--strict` fails on it (added in 75f928c, #37).
 
 **Targets:** ≥85% overall, 100% P0, 90% P1, 70% P2. Every registered ARGUMENT and PROPOSITION is `[x]` per the type-conditional Gate 2 expectation.
 
@@ -46,7 +46,6 @@
 |----|-------|---------------|
 | S1-1 | AI citation hallucination is a distinct failure mode | Core problem statement collapses |
 | S1-2 | Confidence inflation — agents use "demonstrates" for speculative claims | Loses key distinction from citation checkers |
-| S1-4 | Existing solutions operate at model/tool level, not process level | Loses the niche for the proposal |
 | S2-1 | EQUATOR maintains ~700 reporting guidelines for empirical research | Central landscape claim — entire gap argument depends on this |
 | S2-2 | No guidelines exist for non-empirical papers | The gap claim — paper has no reason to exist without it |
 | S3-4 | Claims, arguments, and propositions require fundamentally different verification | Central interpretive claim — the paper's core insight |
@@ -57,6 +56,7 @@
 | ID | Claim | Risk if Wrong |
 |----|-------|---------------|
 | S1-3 | Scope creep without architectural constraints | Weakens problem framing |
+| S1-4 | No existing infrastructure applies a verification procedure per unit type (P0 → P1 2026-09-26) | Weakens positioning; prior art L60/L61/L66 must be engaged either way |
 | S1-5 | AI-generated equations contain arithmetic errors surviving plausibility review | Weakens breadth of problem framing beyond non-empirical |
 | S2-3 | Gregor's 5 theory types include 2 that are fundamentally non-empirical | Weakens theoretical grounding |
 | S2-4 | Argument quality is the primary verification challenge for non-empirical papers | Weakens the pivot from facts to arguments |
@@ -83,10 +83,10 @@ Each section uses per-type sub-tables (one each for CLAIMs / ARGUMENTs / PROPOSI
 
 | ID | Statement | Priority | Confidence | Source | Source Tier | Status |
 |----|-----------|----------|------------|--------|-------------|--------|
-| S1-1 | AI citation hallucination is a distinct failure mode — agents invent plausible-sounding papers, authors, and DOIs that can survive multiple review rounds undetected | P0 | EMERGING | Mugaanyi et al. 2024 (JMIR, DOI: 10.2196/52935): 62–89% DOI fabrication rates across disciplines ⚠️ **Tier corrected 2026-09-24 (SUPPORTED → EMERGING):** one peer-reviewed source; DR-002 requires 2–3 agreeing sources for SUPPORTED. The manuscript anchor said EMERGING from the first draft. The statement's "can survive multiple review rounds undetected" is not measured by Mugaanyi; the manuscript does not make that part of the claim. Below the P0 SUPPORTED floor — see the P0 tier-floor line in the header. | A | [x] |
+| S1-1 | AI citation hallucination is a distinct failure mode — LLMs invent plausible-sounding papers, authors, and DOIs at substantial rates (lower for GPT-4 than GPT-3.5 in the one study comparing them) | P0 | SUPPORTED | Mugaanyi et al. 2024 (JMIR, DOI: 10.2196/52935): 62–89% DOI fabrication rates across disciplines. Walters & Wilder 2023 (Sci Rep 13:14045, DOI: 10.1038/s41598-023-41032-5, full text read 2026-09-26): 55% of GPT-3.5 and 18% of GPT-4 citations fabricated across 636 citations in 84 generated literature reviews. ⚠️ **Tier raised 2026-09-26 (EMERGING → SUPPORTED):** two agreeing peer-reviewed sources meet DR-002. The unmeasured clause "can survive multiple review rounds undetected" was dropped from the statement. Bhattacharyya 2023 (Cureus) and Chelli 2024 (JMIR) also agree, but only their abstracts have been read; add them after a full-text read. | A | [x] |
 | S1-2 | AI agents exhibit confidence inflation — stating speculative claims with the same certainty as verified facts, using "demonstrates" where "suggests" is appropriate | P0 | EMERGING | Liang et al. 2024 (NEJM AI): LLMs catch surface issues, struggle with deep argument analysis ⚠️ **Tier corrected 2026-09-24 (SUPPORTED → EMERGING):** Liang et al. find LLM *review feedback* misses deep argument problems; that does not show AI *writing* states speculative claims with verified-fact certainty, which is this row's claim. The manuscript hedges it ("may state") and always did — its anchor said EMERGING since the first draft. Below the P0 SUPPORTED floor — see the P0 tier-floor line in the header; a source measuring expressed confidence would lift it. | A | [x] |
 | S1-3 | Without architectural constraints (page budgets, section specifications), AI agents expand arguments beyond evidence, add unnecessary sections, and exceed page budgets | P1 | EMERGING | README.md "Architecture Blueprints"; hedged with "may" | F | [x] |
-| S1-4 | Existing solutions (citation checkers like RefChecker/scite.ai, model-level RAG/grounded generation) operate at model or tool level; no process-level verification infrastructure exists for academic writing | P0 | EMERGING | Negative claim qualified with "to our knowledge" in manuscript; EQUATOR gap analysis confirms no process-level frameworks | F | [x] |
+| S1-4 | Existing verification infrastructure for AI-assisted writing — citation and consistency linters, claim–evidence adjudication, provenance disciplines — checks whether evidence exists, supports or suffices, and some of it audits language against empirical study design; to our knowledge none distinguishes claims from arguments and propositions and applies a procedure suited to each, and none targets papers whose contribution is reasoning rather than fact | P1 | EMERGING | L66 Samsonau 2026 (arXiv:2604.08501): 23-check manuscript linter incl. causal-language-vs-design and citation-purpose checks, experimental claim-typing by type/testability/scope; no warrant analysis or per-kind procedure; calibrated on empirical papers only. L60 Chen et al. 2026 (arXiv:2607.26512): four support relations routed back to the author; no warrant, calibration or boundary check. L61 Zhou & Yu 2026 (arXiv:2608.10858): provenance discipline with a claim–evidence index and a sampled sufficiency audit; standing tiers attach to its metrics, not to manuscript claims. Adjacent: L62 WarrantScore scores warrants in peer-review comments, not manuscripts. All three read in full 2026-09-26. ⚠️ **Reworded and P0 → P1 2026-09-26:** the earlier "no process-level verification infrastructure exists" is falsified by L60, L61 and L66. As a positioning claim the paper does not collapse without it (its case rests on S2-2, S3-4 and S5-1). It remains a hedged negative, so it stays EMERGING. | B | [x] |
 | S1-5 | AI-generated equations can contain arithmetic errors that survive plausibility review but are caught by mechanical numerical reproduction | P1 | EMERGING | Internal experiments comparing LLM reviews prompted to "assess soundness" vs LLM reviews prompted to "numerically reproduce every calculation" show systematic difference in error detection. | F | [x] |
 
 ### Section 2: The Landscape Gap
@@ -155,6 +155,7 @@ Each section uses per-type sub-tables (one each for CLAIMs / ARGUMENTs / PROPOSI
 | Gupta et al. 2024 (ACL) | S3-1, S4-3 | Verified: Toulmin-based zero-shot prompting outperforms generic; DOI 10.18653/v1/2024.acl-long.552 | [x] |
 | PeerArg 2024 (NeLaMKRR@KR) | S4-3 | Verified: PeerArg outperforms end-to-end LLM baseline; arXiv:2409.16813 | [x] |
 | Mugaanyi et al. 2024 (JMIR) | S1-1 | Verified: 62–89% DOI fabrication rates; DOI 10.2196/52935 | [x] |
+| Walters & Wilder 2023 (Sci Rep) | S1-1 | Verified 2026-09-26 (Crossref + full text): 55% GPT-3.5 / 18% GPT-4 citations fabricated; DOI 10.1038/s41598-023-41032-5 | [x] |
 | Liang et al. 2024 (NEJM AI) | S1-2 | Verified: LLMs catch surface issues but struggle with deep argument analysis; DOI 10.1056/AIoa2400196 | [x] |
 | Liang et al. 2025 (Nat Hum Behav) | S1 (opening) | Verified: up to 22% of CS papers show LLM modification; DOI 10.1038/s41562-025-02273-8 | [x] |
 | Turner et al. 2012 (Cochrane) | S2, S5 | Verified: 25/27 CONSORT items favoured endorsing journals, 5 significant; DOI 10.1002/14651858.MR000030.pub2 | [x] |

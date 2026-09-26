@@ -140,8 +140,9 @@ Sources consulted during the development of this project, particularly for DR-00
 
 | ID | Author(s) | Year | Title | Venue | File | Status |
 |----|-----------|------|-------|-------|------|--------|
-| L60 | Chen, Yu & Wang | 2026 | Evidence-Ledger Adjudication for Claim-Evidence Traceability | arXiv | [chen-2026-evidence-ledger](sources/chen-2026-evidence-ledger.md) | READ (abstract) |
-| L61 | Zhou & Yu | 2026 | Auditable AI-Assisted Research Writing: An Engineering Discipline with Pre-Registered Process Observation | arXiv | [zhou-yu-2026](sources/zhou-yu-2026.md) | READ (abstract) |
+| L60 | Chen, Yu & Wang | 2026 | Evidence-Ledger Adjudication for Claim-Evidence Traceability | arXiv | [chen-2026-evidence-ledger](sources/chen-2026-evidence-ledger.md) | READ (full, 2026-09-26) |
+| L61 | Zhou & Yu | 2026 | Auditable AI-Assisted Research Writing: An Engineering Discipline with Pre-Registered Process Observation | arXiv | [zhou-yu-2026](sources/zhou-yu-2026.md) | READ (full, 2026-09-26) |
+| L66 | Samsonau | 2026 | sciwrite-lint: Verification Infrastructure for the Age of Science Vibe-Writing | arXiv | [samsonau-2026-sciwrite-lint](sources/samsonau-2026-sciwrite-lint.md) | READ (full, 2026-09-26) |
 
 ### Self-Verification Limits
 

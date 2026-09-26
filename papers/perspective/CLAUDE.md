@@ -115,12 +115,12 @@ This is the framework eating its own dog food. Any friction, gaps, or false fail
 - Scaffold (CLAUDE.md, claim registry, writing guide, review prompt, anti-hallucination checklist)
 - First draft of manuscript.tex (~3,450 words incl. abstract, 5 sections)
 - references.bib (14 entries, all DOIs verified)
-- P0 verification: 7/7 verified (100%)
-- P1 verification: 8/8 verified (100%)
+- P0 verification: 6/6 verified (100%)
+- P1 verification: 9/9 verified (100%)
 - P2 verification: 1/1 verified (100%)
 - Overall: 16/16 (100% coverage — all coverage targets exceeded; the P0 *tier* target is not met, see below)
-- ⚠️ **P0 tier floor not met (2026-09-24):** 6 of 7 P0 entries are below SUPPORTED after tiers were corrected to DR-002 criteria (S4-1, S4-2, S4-4 withdrawn 2026-09-26, #38); DR-002 sets the P0 gate with no exception, so the gate fails (the writing guide's "framed as hypothesis" clause is not in DR-002). Coverage (above) counts verification status, not tier. See the registry header.
-- Anti-hallucination checklist: 14/14 references pass
+- ⚠️ **P0 tier floor not met (2026-09-24):** 4 of 6 P0 entries are below SUPPORTED after tiers were corrected to DR-002 criteria (2026-09-26: S4-1/S4-2/S4-4 withdrawn, S1-4 moved to P1, S1-1 raised to SUPPORTED; #38); DR-002 sets the P0 gate with no exception, so the gate fails (the writing guide's "framed as hypothesis" clause is not in DR-002). Coverage (above) counts verification status, not tier. See the registry header.
+- Anti-hallucination checklist: 14/14 references pass (plus 3 arXiv preprints added 2026-09-26 for S1-4: L60, L61, L66, each read in full)
 - Peer review simulation: scored 3.95/5.0 (upper "Minor revision")
 - Manuscript revisions based on review findings
 - DOI verification for all references

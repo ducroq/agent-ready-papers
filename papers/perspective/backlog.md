@@ -25,13 +25,13 @@ Last updated: 2026-09-26
 ### Tier remediation (opened 2026-09-24 by `828f9cd`)
 Tiers were re-derived from DR-002; the registry header states the consequence. Decisions, not chores:
 - [x] **Decided 2026-09-26: withdrawn**, S5-1 re-grounded on S2-1/S2-2/S3-4; `check_registry` green. *Was:* **Decide first: do S4-1, S4-2, S4-4 still exist?** Their prose was removed in `1d8c68c`; the registry rows stayed, so `check_registry` fails `anchors`. Dropping or withdrawing them also takes S4-1 out of the P0 count (floor 1 of 7) — **but S4-1 and S4-4 are listed premises of S5-1**, the P0 proposition (registry line 150), so dropping them means re-grounding S5-1 on S2-1, S2-2 and S3-4 alone. Asked in [#38](https://github.com/ducroq/agent-ready-papers/issues/38)
-- [ ] **P0 tier gate fails** (enforced since v4.0.0: `coverage --strict` is red) — 6 of 7 P0 entries below SUPPORTED (S1-1, S1-2, S1-4, S2-2, S3-4, S5-1). DR-002 has no exception. Per claim: find 2–3 agreeing peer-reviewed sources, re-prioritise to P1, or record a DR on how the P0 floor applies to a perspective paper
+- [ ] **P0 tier gate fails** (enforced since v4.0.0: `coverage --strict` is red) — 4 of 6 P0 entries below SUPPORTED (S1-2, S2-2, S3-4, S5-1; 2026-09-26: S1-4 moved to P1, S1-1 raised). S3-4 and S5-1 are capped by tier-monotonicity (premises S3-1/S3-2/S3-3, S2-2 are EMERGING): raise the premises, no DR (DR-004 already types the tiers). DR-002 has no exception. Per claim: find 2–3 agreeing peer-reviewed sources, re-prioritise to P1, or record a DR on how the P0 floor applies to a perspective paper
 - [ ] **S1-2 sources** — Liang 2024 does not show confidence inflation in AI *writing*; look for studies of expressed/verbalised confidence (candidates, unverified: Xiong et al. 2024, Zhou et al. 2024)
 - [ ] **SPECULATIVE or EMERGING?** DR-002 puts inference and extrapolation at SPECULATIVE; the registry's own notes use those words for S1-2, S2-3, S2-4, S4-3, and S1-3 rests on own design rationale
 - [ ] **Hedge prose under EMERGING anchors** — S2-3 "This absence is not accidental", S2-2 "reveals a structural gap", S3-2 "Propositions can be evaluated", S1-2's closing Liang citation
 - [ ] **Split S2-3** — Gregor's five types (reference claim, ESTABLISHED) vs. the non-empirical interpretation (ours)
 - [ ] S3-4 Warrant cell says "This demonstrates" on an EMERGING entry
-- [ ] Writing guide still describes the scrubbed audits and the withdrawn S4-1/S4-2/S4-4 as live: §4 rows ("76% coverage", "two audits demonstrate"), the audit example (~line 47), the Toulmin grounds (~161), and S5-1's reasoning "S4-1–S4-4" (~226-230; the registry now grounds S5-1 on S2-1/S2-2/S3-4)
+- [x] Writing guide cleaned of the scrubbed audits and the withdrawn S4-1/S4-2/S4-4 (2026-09-26)
 - [ ] S5-1 cites "AI writing amplifies the verification challenge" (manuscript §5 opening and appendix *Why*; registry Reasoning) with no registered premise behind it — register a Section 1 premise or drop the clause (pre-existing; surfaced by review 2026-09-26)
 
 ### Gate 3 — Co-author Review

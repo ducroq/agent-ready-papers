@@ -24,6 +24,7 @@ EXPECTED_DOIS = {
     "10.1002/14651858.MR000030.pub2",
     "10.1016/S0140-6736(13)62228-X",
     "10.2753/MIS0742-1222240302",
+    "10.1038/s41598-023-41032-5",  # Walters & Wilder 2023, S1-1 (2026-09-26)
 }
 
 
@@ -47,7 +48,7 @@ def test_check_dois_raises_filenotfound_on_missing_path():
 
 
 def test_paper1_registry_doi_extraction(paper1_registry):
-    """--offline must surface exactly the 9 known DOIs from the Paper 1 fixture."""
+    """--offline must surface exactly the 10 known DOIs from the Paper 1 fixture."""
     report = check_dois(paper1_registry, offline=True)
 
     assert isinstance(report, DOIReport)
