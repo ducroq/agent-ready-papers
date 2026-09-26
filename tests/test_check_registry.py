@@ -100,7 +100,7 @@ def test_anchors_pass_when_manuscript_and_registry_agree():
 
 
 def test_anchors_flag_a_registered_entry_with_no_prose_anchor():
-    """The live case: S4-1/S4-2/S4-4 in Paper 1."""
+    """The case found in Paper 1: S4-1/S4-2/S4-4, withdrawn 2026-09-26 (#38)."""
     entries = (_entry("S1-1"), _entry("S1-2"))
     findings, _ = _check_anchors(entries, "% S1-1: only this one\n")
     assert [f.entry_id for f in findings] == ["S1-2"]

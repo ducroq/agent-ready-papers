@@ -18,21 +18,21 @@
 
 | Priority | Total | Drafted | Verified | Needs Evidence | Coverage |
 |----------|-------|---------|----------|----------------|----------|
-| P0 | 8 | 8 | 8 | 0 | 100% |
-| P1 | 10 | 10 | 10 | 0 | 100% |
+| P0 | 7 | 7 | 7 | 0 | 100% |
+| P1 | 8 | 8 | 8 | 0 | 100% |
 | P2 | 1 | 1 | 1 | 0 | 100% |
-| **Total** | **19** | **19** | **19** | **0** | **100%** |
+| **Total** | **16** | **16** | **16** | **0** | **100%** |
 
 **Coverage by Type**
 
 | Type | Total | Verified | Coverage |
 |------|-------|----------|----------|
-| CLAIM | 16 | 16 | 100% |
-| ARGUMENT | 2 | 2 | 100% |
+| CLAIM | 14 | 14 | 100% |
+| ARGUMENT | 1 | 1 | 100% |
 | PROPOSITION | 1 | 1 | 100% |
-| **Total** | **19** | **19** | **100%** |
+| **Total** | **16** | **16** | **100%** |
 
-⚠️ **P0 tier floor (2026-09-24): 7 of 8 P0 entries are below SUPPORTED** (S1-1, S1-2, S1-4, S2-2, S3-4, S4-1, S5-1; only S2-1 meets it). **The P0 gate therefore fails.** DR-002 (Accepted, binding) sets it as "all SUPPORTED or ESTABLISHED (no EMERGING/SPECULATIVE)" with no exception; the "or explicitly framed as hypothesis" clause in `papers/perspective/writing-guide.md`'s checklist is not in DR-002 and cannot waive it. Remedies are stronger sources, re-prioritisation, or an explicit decision — not a reading of the exception. The 100% figures below are *verification coverage* (Status column), not tier. `tools.coverage` reports the floor separately, below its coverage table (it reports 1 of 8 meeting it), and `--strict` fails on it (added in 75f928c, #37).
+⚠️ **P0 tier floor (2026-09-24; S4-1 withdrawn 2026-09-26): 6 of 7 P0 entries are below SUPPORTED** (S1-1, S1-2, S1-4, S2-2, S3-4, S5-1; only S2-1 meets it). **The P0 gate therefore fails.** DR-002 (Accepted, binding) sets it as "all SUPPORTED or ESTABLISHED (no EMERGING/SPECULATIVE)" with no exception; the "or explicitly framed as hypothesis" clause in `papers/perspective/writing-guide.md`'s checklist is not in DR-002 and cannot waive it. Remedies are stronger sources, re-prioritisation, or an explicit decision — not a reading of the exception. The 100% figures below are *verification coverage* (Status column), not tier. `tools.coverage` reports the floor separately, below its coverage table (it reports 1 of 7 meeting it), and `--strict` fails on it (added in 75f928c, #37).
 
 **Targets:** ≥85% overall, 100% P0, 90% P1, 70% P2. Every registered ARGUMENT and PROPOSITION is `[x]` per the type-conditional Gate 2 expectation.
 
@@ -50,7 +50,6 @@
 | S2-1 | EQUATOR maintains ~700 reporting guidelines for empirical research | Central landscape claim — entire gap argument depends on this |
 | S2-2 | No guidelines exist for non-empirical papers | The gap claim — paper has no reason to exist without it |
 | S3-4 | Claims, arguments, and propositions require fundamentally different verification | Central interpretive claim — the paper's core insight |
-| S4-1 | Typed verification applied to a non-empirical paper can reveal misclassified entries, incl. arguments mistyped as claims | Weakens the practical-applicability argument. ⚠️ **Corrected 2026-09-14 — this cell previously read *"Proposition paper audit: 76% coverage, 100% P0, with retyping revealing false failures"* and called S4-1 *"Primary evidence for practical applicability"*. Neither figure appears anywhere: `76` and `audit` each occur **0 times** in `manuscript.tex`, and S4-1's own registry row (below) is an EMERGING capability claim sourced to *"Own design rationale"*, not a measurement. A summary cell was asserting an audit the row it summarises does not contain.** Open: whether a claim evidenced only by design rationale belongs in P0 at all. |
 | S5-1 | The scholarly community needs verification infrastructure for non-empirical papers | Core recommendation — paper has no purpose without it |
 
 ### P1 (Important) — target 90%
@@ -64,9 +63,7 @@
 | S3-1 | Toulmin framework provides operationalizable argument verification | Weakens proposal's theoretical basis |
 | S3-2 | Whetten framework provides operationalizable proposition verification | Weakens proposal's theoretical basis |
 | S3-3 | Confidence tiers enable systematic language calibration | Weakens proposal's practical value |
-| S4-2 | Confidence tier assignment can reveal over-confident language in existing papers | Weakens evidence from prior application |
 | S4-3 | Structured verification + LLM outperforms LLM alone | Weakens external validation |
-| S4-4 | Multiple applications demonstrate practical applicability across paper types | Weakens cross-project evidence |
 
 ### P2 (Supporting) — target 70%
 
@@ -119,21 +116,15 @@ Each section uses per-type sub-tables (one each for CLAIMs / ARGUMENTs / PROPOSI
 |----|-----------|----------|------------|---------|---------|----------|--------|-------------|--------|
 | S3-4 | Claims, arguments, and propositions require fundamentally different verification procedures: source checking for CLAIMs, Toulmin analysis for ARGUMENTs, and Whetten analysis for PROPOSITIONs — applying the wrong procedure produces false failures | P0 | EMERGING | S3-1; S3-2; S3-3 | If an entry is scored low-confidence because it is evaluated as a source-backed CLAIM but its three premises are independently verified and its warrant is logically valid, then the low score is a false failure caused by applying the wrong verification procedure. This demonstrates that type-specific verification is not merely useful but necessary. | Limitation acknowledged: cross-author replication not yet demonstrated. | Own design rationale. | F | [x] |
 
-### Section 4: Preliminary Evidence
+### Section 4: Related Work and Design Rationale
+
+**Withdrawn 2026-09-26 ([#38](https://github.com/ducroq/agent-ready-papers/issues/38)): S4-1, S4-2 and S4-4.** Their prose was removed deliberately in `1d8c68c` ("strip evidence claims"), and each was sourced only to own design rationale (tier F), so nothing in the manuscript still asserts them. S5-1 is re-grounded on S2-1, S2-2 and S3-4. The IDs are retired, not reused. The rows are in git history.
 
 **CLAIMs:**
 
 | ID | Statement | Priority | Confidence | Source | Source Tier | Status |
 |----|-----------|----------|------------|--------|-------------|--------|
-| S4-1 | Applying typed verification to a non-empirical paper can reveal previously misclassified entries, including arguments mistyped as claims — producing false failures when source-checked | P0 | EMERGING | Own design rationale; misclassification mechanism described in S3-4. | F | [x] |
-| S4-2 | Confidence tier assignment applied to an empirical paper can reveal entries where the language is more confident than the evidence warrants ("demonstrates" for single-unit findings, etc.) | P1 | EMERGING | Own design rationale; confidence-to-language mapping described in writing-guide. | F | [x] |
 | S4-3 | Structured verification infrastructure combined with LLM capability outperforms LLM capability alone — reported for peer review aggregation (PeerArg 2024) and argument extraction (Gupta et al. 2024) | P1 | EMERGING | PeerArg (NeLaMKRR@KR 2024, arXiv:2409.16813): "a variant of PeerArg outperforms end-to-end LLM baseline." Gupta (ACL 2024): Toulmin-based prompts outperform generic prompts. Both confirmed via content verification. ⚠️ **Tier corrected 2026-09-24 (SUPPORTED → EMERGING):** both sources are real and say what is quoted, but each covers one narrow task (review aggregation; argument extraction); the general "structured + LLM outperforms LLM alone" is our extrapolation. The manuscript hedges it ("may outperform"). | A | [x] |
-
-**ARGUMENTs** (Toulmin):
-
-| ID | Statement | Priority | Confidence | Grounds | Warrant | Rebuttal | Source | Source Tier | Status |
-|----|-----------|----------|------------|---------|---------|----------|--------|-------------|--------|
-| S4-4 | Applying the typed verification framework retrospectively to paper projects across different types can reveal actionable issues (mistyped entries, over-confident language, missing boundary conditions) that are invisible without the framework | P1 | EMERGING | S4-1; S4-2 | If the framework's typed registry and verification checklists were applied retrospectively to independent paper projects across different types and venues, and in each case the analysis identified actionable issues that were invisible without the framework, then the framework has preliminary evidence of practical applicability across paper types. | Generalizability to other authors and domains is not established. Framing as "preliminary indications" rather than validation is required. | Own design rationale. | F | [x] |
 
 ### Section 5: Call to Action
 
@@ -141,13 +132,13 @@ Each section uses per-type sub-tables (one each for CLAIMs / ARGUMENTs / PROPOSI
 
 | ID | Statement | Priority | Confidence | Source | Source Tier | Status |
 |----|-----------|----------|------------|--------|-------------|--------|
-| S5-2 | Next steps include: discipline-specific verification templates beyond the medical/engineering domains tested here, integration with AI writing tools as structured prompting infrastructure, and empirical validation comparing verification-assisted vs unassisted AI writing quality | P2 | SPECULATIVE | Logical inference from current framework state and limitations. (1) Templates: follows from acknowledged single-domain limitation (§4 para 6). (2) AI integration: follows from process-level argument + Gupta 2024 feasibility. (3) Empirical validation: follows from "preliminary" framing throughout §4. Manuscript language ("warrant investigation") matches SPECULATIVE tier. | F | [x] |
+| S5-2 | Next steps include: discipline-specific verification templates beyond the medical/engineering domains tested here, integration with AI writing tools as structured prompting infrastructure, and empirical validation comparing verification-assisted vs unassisted AI writing quality | P2 | SPECULATIVE | Logical inference from current framework state and limitations. (1) Templates: follows from §4's opening (evaluation across projects, authors and domains still needed) and §5's limited-domain statement. (2) AI integration: follows from process-level argument + Gupta 2024 feasibility. (3) Empirical validation: follows from §4's closing "open empirical question". Manuscript language ("warrant investigation") matches SPECULATIVE tier. | F | [x] |
 
 **PROPOSITIONs** (Whetten):
 
 | ID | Statement | Priority | Confidence | Constructs | Relationship | Premises | Reasoning | Boundary conditions | Alternatives engaged | Source | Source Tier | Status |
 |----|-----------|----------|------------|------------|--------------|----------|-----------|---------------------|----------------------|--------|-------------|--------|
-| S5-1 | The scholarly community needs verification infrastructure for non-empirical papers — analogous to what EQUATOR provides for empirical research — to maintain academic integrity in the age of AI-augmented writing | P0 | EMERGING | "verification infrastructure" (process-level reporting + verification scaffolding analogous to EQUATOR guidelines); "non-empirical paper" (Gregor Type I analytic, Type V design, plus perspective and methodological papers); "AI-augmented writing" (drafting and revision assisted by general-purpose LLMs) | Non-empirical paper publishing requires verification infrastructure (analogous to EQUATOR for empirical work) to remain trustworthy under AI augmentation | S2-1; S2-2; S3-4; S4-1; S4-4 | If empirical research benefits from ~700 reporting guidelines (EQUATOR), and non-empirical research has zero equivalent infrastructure, and AI writing amplifies the verification challenge for non-empirical papers (where argument quality matters more than factual accuracy), and preliminary evidence shows typed verification reveals actionable issues, then extending verification infrastructure to non-empirical papers is a legitimate and urgent need. | Applies to academic papers intended for peer-reviewed publication. Does not apply to: informal writing, journalism, creative writing, or papers where the verification infrastructure cost exceeds the benefit (e.g., very short opinion pieces). The specific checklists (Toulmin, Whetten) are grounded in Western academic argumentation traditions and may need adaptation for other scholarly traditions. | Peer review counter-argument engaged in manuscript: peer review already polices argument quality. Response: peer review is end-stage and reviewer-dependent; reporting guidelines provide pre-submission structural checks complementary to (not replacing) peer review. | S2-1 [x], S2-2 [x], S3-4 [x], S4-1 [x], S4-4 [x] — all premises verified within this registry | F | [x] |
+| S5-1 | The scholarly community needs verification infrastructure for non-empirical papers — analogous to what EQUATOR provides for empirical research — to maintain academic integrity in the age of AI-augmented writing | P0 | EMERGING | "verification infrastructure" (process-level reporting + verification scaffolding analogous to EQUATOR guidelines); "non-empirical paper" (Gregor Type I analytic, Type V design, plus perspective and methodological papers); "AI-augmented writing" (drafting and revision assisted by general-purpose LLMs) | Non-empirical paper publishing requires verification infrastructure (analogous to EQUATOR for empirical work) to remain trustworthy under AI augmentation | S2-1; S2-2; S3-4 | If empirical research benefits from ~700 reporting guidelines (EQUATOR), and non-empirical research has zero equivalent infrastructure, and AI writing amplifies the verification challenge for non-empirical papers (where argument quality matters more than factual accuracy), and claims, arguments and propositions each need their own verification procedure (S3-4), then extending verification infrastructure to non-empirical papers is a legitimate and urgent need. | Applies to academic papers intended for peer-reviewed publication. Does not apply to: informal writing, journalism, creative writing, or papers where the verification infrastructure cost exceeds the benefit (e.g., very short opinion pieces). The specific checklists (Toulmin, Whetten) are grounded in Western academic argumentation traditions and may need adaptation for other scholarly traditions. | Peer review counter-argument engaged in manuscript: peer review already polices argument quality. Response: peer review is end-stage and reviewer-dependent; reporting guidelines provide pre-submission structural checks complementary to (not replacing) peer review. | S2-1 [x], S2-2 [x], S3-4 [x] — all premises verified within this registry | F | [x] |
 
 ---
 
@@ -174,7 +165,7 @@ Each section uses per-type sub-tables (one each for CLAIMs / ARGUMENTs / PROPOSI
 
 | Source | Claims |
 |--------|--------|
-| Framework design rationale; misclassification mechanism described in S3-4 | S4-1, S3-4, S4-2, S4-4 |
+| Framework design rationale; misclassification mechanism described in S3-4 | S3-4 |
 
 ---
 

@@ -62,7 +62,7 @@ guidelines, verification, argumentation, non-empirical research
 \item AI writing tools create verification challenges beyond citation hallucination, including confidence inflation and argument degradation.
 \item EQUATOR provides nearly 700 guidelines for empirical research; non-empirical papers have no equivalent infrastructure.
 \item We propose typed verification distinguishing claims, arguments, and propositions, each with distinct procedures.
-\item Wrong-type verification can produce false failures invisible to conventional approaches.
+\item Applying the wrong verification procedure to a unit type may produce false failures.
 \end{itemize}
 
 \clearpage
@@ -381,8 +381,8 @@ appropriate.
 
 
 % ===============================================================
-% SECTION 4 — PRELIMINARY EVIDENCE
-% Registry entries: S4-1, S4-2, S4-3, S4-4
+% SECTION 4 — RELATED WORK AND DESIGN RATIONALE
+% Registry entries: S4-3 (S4-1, S4-2, S4-4 withdrawn 2026-09-26, #38)
 % ===============================================================
 \section{Related Work and Design Rationale}
 
@@ -426,9 +426,9 @@ AI writing assistance creates verification challenges that extend beyond
 citation hallucination (Section~1), yet EQUATOR's nearly 700 reporting
 guidelines address empirical research exclusively---leaving non-empirical
 paper types without systematic verification support (Section~2).  On the
-basis of this gap, and preliminary evidence that typed verification
-reveals actionable issues invisible to conventional approaches
-(Section~4), we propose that the scholarly community develop verification
+basis of this gap, and of the argument that claims, arguments, and
+propositions each need their own verification procedure (Section~3),
+we propose that the scholarly community develop verification
 infrastructure for non-empirical papers.  Specifically, we propose that
 verification procedures be differentiated by unit type:
 
@@ -531,15 +531,15 @@ independently verify.
 
 \subsection*{Registry summary}
 
-Table~\ref{tab:registry} presents all 19 registered entries.  The
-distribution across types---16 claims, 2 arguments, 1
+Table~\ref{tab:registry} presents all 16 registered entries.  The
+distribution across types---14 claims, 1 argument, 1
 proposition---reflects the paper's structure: a perspective article
 grounded primarily in verifiable facts and reasoning chains, culminating
 in a single recommendation.
 
 \begin{table}[htbp]
 \centering
-\caption{Complete verification registry for this manuscript (19 entries).}
+\caption{Complete verification registry for this manuscript (16 entries).}
 \label{tab:registry}
 \footnotesize
 \begin{tabular}{@{}lllll@{}}
@@ -559,10 +559,7 @@ S3-1 & Claim      & P1 & Emerging    & Verified \\
 S3-2 & Claim      & P1 & Emerging    & Verified \\
 S3-3 & Claim      & P1 & Emerging    & Verified \\
 S3-4 & Argument   & P0 & Emerging    & Verified \\
-S4-1 & Claim      & P0 & Emerging    & Verified \\
-S4-2 & Claim      & P1 & Emerging    & Verified \\
 S4-3 & Claim      & P1 & Emerging    & Verified \\
-S4-4 & Argument   & P1 & Emerging    & Verified \\
 S5-1 & Proposition & P0 & Emerging   & Verified \\
 S5-2 & Claim      & P2 & Speculative & Verified \\
 \bottomrule
@@ -623,8 +620,9 @@ distinguishing claims, arguments, and propositions.
 \emph{How}---per-type checklists adapted from Toulmin (arguments) and
 Whetten (propositions), with confidence-to-language mapping.
 \emph{Why}---EQUATOR provides nearly 700 guidelines for empirical
-research (S2-1) while non-empirical papers have none (S2-2), and AI
-writing amplifies the verification challenge.  \emph{Boundary
+research (S2-1) while non-empirical papers have none (S2-2), each unit
+type needs its own verification procedure (S3-4), and AI writing
+amplifies the verification challenge.  \emph{Boundary
 conditions}---applies to academic papers intended for peer-reviewed
 publication; excludes informal writing, journalism, and creative
 writing; the proposed checklists are grounded in Western argumentation

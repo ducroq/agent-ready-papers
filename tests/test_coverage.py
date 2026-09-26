@@ -54,9 +54,9 @@ def test_paper1_registry_coverage_shape(paper1_registry):
     # Every row in Paper 1 is on the priority axis (no PROVOCATION entries).
     assert all(row.axis == PRIORITY_AXIS for row in report.rows)
 
-    # Total entries across the registry: 19.
-    assert sum(r.total for r in report.rows) == 19
-    assert sum(r.verified for r in report.rows) == 19
+    # Total entries across the registry: 16 (S4-1, S4-2, S4-4 withdrawn, #38).
+    assert sum(r.total for r in report.rows) == 16
+    assert sum(r.verified for r in report.rows) == 16
 
     unit_types = {r.unit_type for r in report.rows}
     assert unit_types == {"CLAIM", "ARGUMENT", "PROPOSITION"}
@@ -280,9 +280,9 @@ def test_tier_floor_counts_an_unreadable_tier_as_failing(tmp_path):
 def test_paper1_p0_tier_floor_fails(paper1_registry):
     """Paper 1's P0 gate genuinely fails after the 828f9cd re-derivation (#38)."""
     report = check_coverage(paper1_registry)
-    assert len(report.p0_tiers) == 8
+    assert len(report.p0_tiers) == 7
     assert report.meets_tier_floor is False
-    assert set(report.p0_below_floor) == {"S1-1", "S1-2", "S1-4", "S2-2", "S3-4", "S4-1", "S5-1"}
+    assert set(report.p0_below_floor) == {"S1-1", "S1-2", "S1-4", "S2-2", "S3-4", "S5-1"}
 
 
 def test_tier_floor_sees_a_decorated_or_unticked_p0(tmp_path):
@@ -490,7 +490,8 @@ def test_a_comment_opened_inside_a_cell_does_not_drop_rows(tmp_path, paper1_regi
     assert injected != content
     path = tmp_path / "r.md"
     path.write_text(injected, encoding="utf-8")
-    assert sum(r.total for r in check_coverage(path).rows) == 19
+    plain = sum(r.total for r in check_coverage(paper1_registry).rows)
+    assert sum(r.total for r in check_coverage(path).rows) == plain
 
 
 @pytest.mark.parametrize(

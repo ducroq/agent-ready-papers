@@ -7,7 +7,7 @@ This paper argues that the scholarly community lacks verification infrastructure
 - **Target:** Learned Publishing (primary), Research Integrity and Peer Review (backup)
 - **Deadline:** TBD
 - **Status:** Phase 3 — Writing (first draft complete)
-- **agent-ready-papers:** v2.6.0 <!-- The framework version this project is pinned to. Compare against the framework CHANGELOG at session start and surface drift; bump deliberately after reading UPGRADING.md. v2.5.0 -> v2.6.0 reconciled 2026-08-12 via /audit-context. v2.6.0 carried two paper-facing template changes, and BOTH are not applicable here: (1) the `## Active work` section in templates/CLAUDE.md — this paper uses the repo's shared memory index at ../../memory/MEMORY.md, and that template ships the section with an explicit instruction to delete it where an index exists; (2) the write-at-claim-time cue in templates/hypothesis-log.md — this paper keeps no local hypothesis-log.md, so there is no copy to update. No file in this directory changed. (An earlier draft of this note said `## Active work` was "the only paper-facing change" and was wrong on point 2; caught by the /review-changes doc-accuracy lens against the v2.6.0 CHANGELOG.) -->
+- **agent-ready-papers:** v4.0.0 <!-- A number, not a status. Bump deliberately after reading UPGRADING.md. v2.6.0 -> v4.0.0 reconciled 2026-09-26: all v3.0.0 Required items were already in force here (Step 0 rule, P2 70% target, confident-language floor below ESTABLISHED); v4.0.0's P0 floor is the known red gate (#38). Earlier reconciliation notes: git history. -->
 
 <!-- This paper lives inside the framework repo, so the pin above tracks the
      framework's own version by construction. It is stated anyway: this is the
@@ -115,11 +115,11 @@ This is the framework eating its own dog food. Any friction, gaps, or false fail
 - Scaffold (CLAUDE.md, claim registry, writing guide, review prompt, anti-hallucination checklist)
 - First draft of manuscript.tex (~3,450 words incl. abstract, 5 sections)
 - references.bib (14 entries, all DOIs verified)
-- P0 verification: 8/8 verified (100%)
-- P1 verification: 10/10 verified (100%)
+- P0 verification: 7/7 verified (100%)
+- P1 verification: 8/8 verified (100%)
 - P2 verification: 1/1 verified (100%)
-- Overall: 19/19 (100% coverage — all coverage targets exceeded; the P0 *tier* target is not met, see below)
-- ⚠️ **P0 tier floor not met (2026-09-24):** 7 of 8 P0 entries are below SUPPORTED after tiers were corrected to DR-002 criteria; DR-002 sets the P0 gate with no exception, so the gate fails (the writing guide's "framed as hypothesis" clause is not in DR-002). Coverage (above) counts verification status, not tier. See the registry header.
+- Overall: 16/16 (100% coverage — all coverage targets exceeded; the P0 *tier* target is not met, see below)
+- ⚠️ **P0 tier floor not met (2026-09-24):** 6 of 7 P0 entries are below SUPPORTED after tiers were corrected to DR-002 criteria (S4-1, S4-2, S4-4 withdrawn 2026-09-26, #38); DR-002 sets the P0 gate with no exception, so the gate fails (the writing guide's "framed as hypothesis" clause is not in DR-002). Coverage (above) counts verification status, not tier. See the registry header.
 - Anti-hallucination checklist: 14/14 references pass
 - Peer review simulation: scored 3.95/5.0 (upper "Minor revision")
 - Manuscript revisions based on review findings
