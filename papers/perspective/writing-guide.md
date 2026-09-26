@@ -49,7 +49,7 @@ Example: "Toulmin's model makes an argument's warrant explicit (S3-1), Whetten's
 **PROPOSITION prose pattern:**
 > [Reasoning — why this recommendation follows from the arguments]. [Proposition — the recommendation itself]. [Boundary conditions — where it applies and where it doesn't].
 
-Example: "Given the ~700 EQUATOR guidelines for empirical research and zero for non-empirical types (S2-1, S2-2), combined with the growing use of AI writing tools that amplify argument-level verification challenges, we propose that the scholarly community develop verification infrastructure for non-empirical papers. This applies to academic papers intended for peer-reviewed publication in fields where argument quality is a primary contribution; informal writing, journalism, and very short opinion pieces fall outside this recommendation."
+Example: "Given the ~700 EQUATOR guidelines for empirical research and no consensus-based equivalent for non-empirical types (S2-1, S2-2), combined with the growing use of AI writing tools that amplify argument-level verification challenges, we propose that the scholarly community develop verification infrastructure for non-empirical papers. This applies to academic papers intended for peer-reviewed publication in fields where argument quality is a primary contribution; informal writing, journalism, and very short opinion pieces fall outside this recommendation."
 
 ### Framework Component Language — Special Case
 
@@ -96,7 +96,7 @@ Confidence progression for framework components:
 | ID | Statement | Type | Tier | Appropriate Language |
 |----|-----------|------|------|---------------------|
 | S1-1 | AI citation hallucination as distinct failure mode | CLAIM | SUPPORTED | "evidence indicates that LLMs invent plausible-sounding papers" (Mugaanyi 2024; Walters & Wilder 2023) |
-| S1-2 | Confidence inflation — "demonstrates" vs "suggests" | CLAIM | EMERGING | "AI agents may state speculative claims with the same certainty as verified facts" |
+| S1-2 | Confidence inflation: more certainty than the evidence warrants | CLAIM | SUPPORTED | "evidence suggests LLMs express more certainty than warranted" (Xiong, Zhou 2024, Peters). Keep the booster clause as unsettled |
 | S1-3 | Scope creep without architectural constraints | CLAIM | EMERGING | "Without structural constraints, AI-assisted drafts may expand beyond what evidence supports" |
 | S1-5 | AI-generated equations contain arithmetic errors surviving plausibility review | CLAIM | EMERGING | "AI-generated equations can contain arithmetic errors that survive review because they produce plausible-looking results" |
 | S1-4 | No existing infrastructure applies a verification procedure per unit type (P1) | CLAIM | EMERGING | "To our knowledge, none distinguishes claims from arguments and propositions" — name L60, L61, L66 first |
@@ -107,7 +107,7 @@ Confidence progression for framework components:
 
 **Cautions:**
 - Do NOT frame this as "AI is bad for writing" — frame as "AI writing assistance creates *new* failure modes that require *new* infrastructure"
-- S1-2 and S1-3 are EMERGING, so hedge them. S1-1 is SUPPORTED: "indicates", "evidence suggests", never "demonstrates"
+- S1-3 is EMERGING, so hedge it. S1-1 and S1-2 are SUPPORTED: "indicates", "evidence suggests", never "demonstrates"
 - S1-4 is a hedged negative about prior art. Process-level systems exist (L60 Chen, L61 Zhou & Yu, L66 sciwrite-lint), so name them and state precisely what they lack. Never write "no process-level infrastructure exists"
 - Reference model/tool level solutions generically (citation checkers, RAG) — specific tool names were removed as uncitable
 
@@ -124,7 +124,7 @@ Confidence progression for framework components:
 | ID | Statement | Type | Tier | Appropriate Language |
 |----|-----------|------|------|---------------------|
 | S2-1 | EQUATOR maintains ~700 reporting guidelines | CLAIM | ESTABLISHED | "The EQUATOR Network maintains nearly 700 reporting guidelines" — verified: 699 guidelines (2026-03-03) |
-| S2-2 | No guidelines for non-empirical papers | CLAIM | EMERGING | "To our knowledge, no equivalent guidelines exist for non-empirical paper types" — hedge the universal negative |
+| S2-2 | No consensus-based guideline for non-empirical papers | CLAIM | EMERGING | "To our knowledge, no published consensus-based guideline of the EQUATOR type exists" — name SANRA, Nashwan, VANRA |
 | S2-3 | Gregor's Type I and V are non-empirical | CLAIM | EMERGING | "Gregor (2006) identified five theory types, two of which — analytic (Type I) and design (Type V) — are fundamentally non-empirical" |
 | S2-4 | Argument quality is the primary verification challenge | CLAIM | EMERGING | "For non-empirical papers, the primary verification challenge may be argument quality rather than factual accuracy" |
 
@@ -212,7 +212,7 @@ Confidence progression for framework components:
 **Boundary check for S5-1:**
 - Applies to: Academic papers intended for peer-reviewed publication
 - Does NOT apply to: Informal writing, journalism, creative writing, very short opinion pieces
-- Reasoning: If EQUATOR benefits empirical research (S2-1) and non-empirical research has no equivalent (S2-2), and each unit type needs its own verification procedure (S3-4), then extending infrastructure is warranted
+- Reasoning: If EQUATOR benefits empirical research (S2-1) and non-empirical research has no consensus-based equivalent (S2-2), and each unit type needs its own verification procedure (S3-4), then extending infrastructure is warranted
 - Alternative engaged: One could argue that journal peer review already provides adequate argument verification for non-empirical papers — counter: AI writing amplifies the challenge beyond what traditional review was designed for
 
 **Key sources:**
@@ -237,16 +237,16 @@ Confidence progression for framework components:
 |----|-----------|------|------|------------|
 | S2-1 | EQUATOR ~700 guidelines | CLAIM | ESTABLISHED | EQUATOR website (699, 2026-03-03) |
 | S1-1 | AI citation hallucination | CLAIM | SUPPORTED | Mugaanyi 2024; Walters & Wilder 2023 |
+| S1-2 | Confidence inflation | CLAIM | SUPPORTED | Xiong 2024; Zhou 2024; Peters & Chin-Yee 2025 |
 
 ### EMERGING — Appropriately Hedged
 
 | ID | Statement | Type | Tier | Hedging Language |
 |----|-----------|------|------|------------------|
-| S1-2 | Confidence inflation | CLAIM | EMERGING | "may state", "tend to use" |
 | S1-3 | Scope creep | CLAIM | EMERGING | "may expand", "without constraints" |
 | S1-5 | Calculation errors in AI-generated equations | CLAIM | EMERGING | "can contain", "survive plausibility review" |
 | S1-4 | No per-type procedure in existing infrastructure (P1) | CLAIM | EMERGING | "to our knowledge, none distinguishes claims from arguments and propositions" |
-| S2-2 | No non-empirical guidelines | CLAIM | EMERGING | "to our knowledge, no equivalent" |
+| S2-2 | No consensus-based non-empirical guidelines | CLAIM | EMERGING | "to our knowledge, no published consensus-based guideline" |
 | S2-3 | Gregor Type I and V non-empirical | CLAIM | EMERGING | "identified five types, two of which" |
 | S2-4 | Argument quality is primary challenge | CLAIM | EMERGING | "may be the primary challenge" |
 | S3-1 | Toulmin operationalizable | CLAIM | EMERGING | "may provide a basis for" |

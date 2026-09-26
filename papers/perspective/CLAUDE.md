@@ -119,8 +119,8 @@ This is the framework eating its own dog food. Any friction, gaps, or false fail
 - P1 verification: 9/9 verified (100%)
 - P2 verification: 1/1 verified (100%)
 - Overall: 16/16 (100% coverage — all coverage targets exceeded; the P0 *tier* target is not met, see below)
-- ⚠️ **P0 tier floor not met (2026-09-24):** 4 of 6 P0 entries are below SUPPORTED after tiers were corrected to DR-002 criteria (2026-09-26: S4-1/S4-2/S4-4 withdrawn, S1-4 moved to P1, S1-1 raised to SUPPORTED; #38); DR-002 sets the P0 gate with no exception, so the gate fails (the writing guide's "framed as hypothesis" clause is not in DR-002). Coverage (above) counts verification status, not tier. See the registry header.
-- Anti-hallucination checklist: 14/14 references pass (plus 3 arXiv preprints added 2026-09-26 for S1-4: L60, L61, L66, each read in full)
+- ⚠️ **P0 tier floor not met (2026-09-24):** 3 of 6 P0 entries are below SUPPORTED: S2-2, plus S3-4 and S5-1, which are capped by EMERGING premises. (2026-09-26: S4-1/S4-2/S4-4 withdrawn, S1-4 moved to P1, S1-1/S1-2 raised to SUPPORTED; #38.) DR-002 sets the P0 gate with no exception, so the gate fails (the writing guide's "framed as hypothesis" clause is not in DR-002). Coverage (above) counts verification status, not tier. See the registry header.
+- Anti-hallucination checklist: 14/14 references pass (2026-09-26: +11 sources for S1-1/S1-2/S1-4/S2-2, each Crossref/arXiv-verified and read in full; VANRA is a web source)
 - Peer review simulation: scored 3.95/5.0 (upper "Minor revision")
 - Manuscript revisions based on review findings
 - DOI verification for all references

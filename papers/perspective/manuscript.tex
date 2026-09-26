@@ -39,7 +39,8 @@ challenges---confidence inflation, scope creep, and fluent prose that
 obscures reasoning gaps---that existing tools do not address.  This gap
 is compounded by a structural absence in reporting guidelines: the
 EQUATOR Network maintains nearly 700 guidelines for empirical health
-research, yet no equivalent exists for non-empirical paper types.
+research, yet to our knowledge no consensus-based equivalent exists for
+non-empirical paper types.
 Drawing on Gregor's (2006) theory-type taxonomy, we identify two
 fundamentally non-empirical theory types for which argument quality,
 rather than factual accuracy, is the primary verification challenge.  We
@@ -60,7 +61,7 @@ guidelines, verification, argumentation, non-empirical research
 \textbf{Key Points:}
 \begin{itemize}
 \item AI writing tools create verification challenges beyond citation hallucination, including confidence inflation and argument degradation.
-\item EQUATOR provides nearly 700 guidelines for empirical research; non-empirical papers have no equivalent infrastructure.
+\item EQUATOR provides nearly 700 guidelines for empirical research; to our knowledge, non-empirical papers have no consensus-based equivalent.
 \item We propose typed verification distinguishing claims, arguments, and propositions, each with distinct procedures.
 \item Applying the wrong verification procedure to a unit type may produce false failures.
 \end{itemize}
@@ -102,21 +103,22 @@ knowledge alone because they refer to works that do not exist.  Citation
 hallucination has received considerable attention, and tools designed to
 detect it are emerging.
 
-% S1-2: Confidence inflation (CLAIM, P0, EMERGING)
+% S1-2: Confidence inflation (CLAIM, P0, SUPPORTED)
 However, citation hallucination may be only the most visible failure
 mode.  A second, potentially more insidious risk is what we term
-\emph{confidence inflation}: AI writing assistants may state speculative claims with the
-same certainty as well-established findings, using language such as
-``demonstrates'' or ``confirms'' where ``suggests'' or ``may indicate''
-would be more appropriate.  In academic writing, the distinction between
-``demonstrates'' and ``suggests'' carries substantial epistemic
-weight---it signals to readers whether a claim rests on strong evidence
-or preliminary findings.  When AI-generated prose conflates these
-registers, the resulting text can misrepresent the state of evidence
-without containing any factually incorrect statements.  \citet{liang2024}
-found that LLM-generated feedback on research papers catches surface
-issues but struggles with the kind of deep argument analysis that would
-detect such confidence miscalibration.
+\emph{confidence inflation}: AI writing assistants may express more
+certainty than the evidence warrants.  LLMs verbalise high confidence
+even on questions they answer wrongly \citep{xiong2024,zhou2024relying},
+and LLM summaries of scientific work generalise findings beyond what the
+original studies claim \citep{peters2025}.  Whether this reaches
+academic prose is less clear: in one corpus of applied-linguistics
+abstracts, ChatGPT used boosters such as ``shows'' at twice the human
+rate, but also more hedges \citep{eldakhs2025}, and to our knowledge no
+study yet measures boosters against the strength of the evidence.  The stakes
+are epistemic: ``demonstrates'' and ``suggests'' tell readers whether a
+claim rests on strong evidence or preliminary findings, so inflated prose
+can misrepresent the state of evidence without containing a single
+factually incorrect statement.
 
 % S1-5: Calculation errors (CLAIM, P1, EMERGING)
 A third risk applies specifically to technical and empirical papers:
@@ -150,7 +152,9 @@ check a manuscript's references, internal consistency, and causal
 language against study design \citep{samsonau2026}, workflows that pair
 each drafted claim with an evidence packet and route unsupported claims
 back to the author \citep{chen2026}, and disciplines that bind every
-reported quantity to a sealed provenance trail \citep{zhou2026}.  Each
+reported quantity to a sealed provenance trail \citep{zhou2026}; a
+checklist that verifies cited assertions in narrative reviews is in
+development \citep{vanra2026}.  Each
 asks whether evidence exists, supports a claim, or suffices.  To our
 knowledge, none distinguishes claims from arguments and propositions
 and applies a procedure suited to each---the gap that matters most for
@@ -191,15 +195,21 @@ guidelines represent the most mature infrastructure for structured
 verification in academic publishing.
 
 % S2-2: No guidelines for non-empirical papers (CLAIM, P0, EMERGING)
-However, an examination of the EQUATOR database reveals a structural
+However, an examination of the EQUATOR database suggests a structural
 gap.  Virtually all of its nearly 700 guidelines address empirical
 research: studies that collect, analyse, and report data.  Systematic
 reviews, covered by PRISMA \citep{page2021}, represent a partial
 exception---they are structured and methodical but synthesise rather than
 generate primary data.  Beyond this partial exception, to our knowledge,
-no EQUATOR or equivalent guidelines exist for theoretical papers, design
-science contributions, perspective articles, or methodological papers
-that do not report empirical findings.
+no published consensus-based guideline of the EQUATOR type exists for
+theoretical, design-science, perspective, or conceptual papers.  Even
+for narrative reviews, the best-known instrument is described by its
+developers as ``a critical appraisal tool and not a reporting
+guideline'' \citep{baethge2019}.  Guidelines are only now being developed for
+neighbouring types: concept analysis in nursing \citep{nashwan2026} and
+a verification-oriented checklist for narrative reviews
+\citep{vanra2026}.  None addresses how arguments or propositions, as
+distinct from cited statements, are to be verified.
 
 % S2-3: Gregor's theory types (CLAIM, P1, EMERGING)
 This absence is not accidental.  It reflects a fundamental difference in
@@ -403,17 +413,12 @@ to a perspective-paper contribution.
 
 % S4-3: External validation (CLAIM, P1, EMERGING)
 The design rationale draws on independent research on structured
-verification for AI-assisted scholarly work.  \citet{peerarg2024}
-developed PeerArg, a framework that combines formal argumentation
-structure with LLM-based review analysis; their results suggest that
-structured representation of support and attack relations improves
-review aggregation compared to end-to-end LLM approaches.  Similarly,
-\citet{gupta2024} found that prompting LLMs with Toulmin's argument
-model significantly improves argument extraction compared to generic
-prompts.  Both findings suggest that combining structured frameworks
-with LLM capabilities may outperform LLM capabilities alone---a
-principle consistent with the process-level verification approach
-proposed here.
+verification.  Results suggest that representing support and attack
+relations formally improves LLM review aggregation over end-to-end
+approaches \citep{peerarg2024}, and that prompting with Toulmin's model
+improves LLM argument extraction over generic prompts \citep{gupta2024}.  Both
+suggest that structured frameworks combined with LLMs may outperform
+LLMs alone, a principle consistent with the approach proposed here.
 
 The proposal is offered as a model for the scholarly community to test,
 adapt, and evaluate.  Whether typed verification provides genuine value
@@ -430,7 +435,7 @@ empirical question.
 % S5-1: The proposition (PROPOSITION, P0, EMERGING)
 AI writing assistance creates verification challenges that extend beyond
 citation hallucination (Section~1), yet EQUATOR's nearly 700 reporting
-guidelines address empirical research exclusively---leaving non-empirical
+guidelines address empirical research almost exclusively---leaving non-empirical
 paper types without systematic verification support (Section~2).  On the
 basis of this gap, and of the argument that claims, arguments, and
 propositions each need their own verification procedure (Section~3),
@@ -505,9 +510,9 @@ evaluation.
 The EQUATOR Network has spent two decades building nearly 700
 reporting guidelines for empirical health research.  These guidelines
 have measurably improved the quality and transparency of published
-research \citep{turner2012, glasziou2014}.  To our knowledge, essentially no equivalent guidelines exist
+research \citep{turner2012, glasziou2014}.  To our knowledge, no consensus-based equivalent exists
 for non-empirical papers---theoretical contributions, design science
-research, perspective articles, and methodological proposals.  As AI
+research, perspective articles, and conceptual papers.  As AI
 writing tools make it easier to produce fluent academic prose, the gap
 between what is published and what is rigorously verified may widen.  We
 suggest it is time to begin building the verification infrastructure for
@@ -553,7 +558,7 @@ in a single recommendation.
 \textbf{ID} & \textbf{Type} & \textbf{Priority} & \textbf{Confidence} & \textbf{Status} \\
 \midrule
 S1-1 & Claim      & P0 & Supported   & Verified \\
-S1-2 & Claim      & P0 & Emerging    & Verified \\
+S1-2 & Claim      & P0 & Supported   & Verified \\
 S1-3 & Claim      & P1 & Emerging    & Verified \\
 S1-4 & Claim      & P1 & Emerging    & Verified \\
 S1-5 & Claim      & P1 & Emerging    & Verified \\
@@ -626,7 +631,8 @@ distinguishing claims, arguments, and propositions.
 \emph{How}---per-type checklists adapted from Toulmin (arguments) and
 Whetten (propositions), with confidence-to-language mapping.
 \emph{Why}---EQUATOR provides nearly 700 guidelines for empirical
-research (S2-1) while non-empirical papers have none (S2-2), each unit
+research (S2-1) while, to our knowledge, non-empirical papers have no
+consensus-based equivalent (S2-2), each unit
 type needs its own verification procedure (S3-4), and AI writing
 amplifies the verification challenge.  \emph{Boundary
 conditions}---applies to academic papers intended for peer-reviewed
