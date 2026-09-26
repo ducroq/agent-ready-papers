@@ -242,8 +242,8 @@ def _floor_registry(tmp_path, *tiers, header_confidence="Confidence"):
         "**CLAIMs:**\n\n"
         f"| ID | Statement | Priority | {header_confidence} | Source | Source Tier | Status |\n"
         "|----|-----------|----------|------------|--------|-------------|--------|\n"
-        f"{rows}\n"
-        "| S1-99 | a P1 below the floor is not P0 | P1 | SPECULATIVE | s | A | [x] |\n",
+        + (f"{rows}\n" if rows else "")  # an empty line here would END the table
+        + "| S1-99 | a P1 below the floor is not P0 | P1 | SPECULATIVE | s | A | [x] |\n",
         encoding="utf-8",
     )
     return path
@@ -325,3 +325,52 @@ def test_tier_floor_with_no_p0_says_not_evaluated(tmp_path):
     assert "NOT evaluated" in report.to_markdown()
     assert "meets" not in report._tier_floor_line()
     assert report.to_dict()["p0_tier_floor"]["evaluated"] is False
+
+
+# --------------------------------------------------------------------------
+# a marker whose table cannot be read is a parse failure, not an empty table
+# --------------------------------------------------------------------------
+
+_HEADER = "| ID | Statement | Priority | Confidence | Status |\n|----|----|----|----|----|\n"
+_ROW = "| S1-1 | a | P0 | EMERGING | [x] |\n"
+
+
+@pytest.mark.parametrize(
+    "content",
+    [
+        pytest.param("**CLAIMs:**\n\nSome prose first.\n\n" + _HEADER + _ROW, id="prose-between-marker-and-table"),
+        pytest.param("**CLAIMs:**\n\n", id="marker-at-end-of-file"),
+        pytest.param("**CLAIMs:**\n\n" + _HEADER.replace("Priority", "Prio") + _ROW, id="renamed-priority-header"),
+        pytest.param("**CLAIMs:**\n\n" + _HEADER.replace("Status", "State") + _ROW, id="renamed-status-header"),
+    ],
+)
+def test_unreadable_sub_table_raises_instead_of_dropping_its_rows(tmp_path, content):
+    path = tmp_path / "r.md"
+    path.write_text(content, encoding="utf-8")
+    with pytest.raises(ValueError, match="dropped from coverage and the P0 tier floor"):
+        check_coverage(path)
+    assert main([str(path), "--strict"]) == 2
+
+
+@pytest.mark.parametrize("marker", ["**Claims:**", "### **CLAIMs:**", "**CLAIM (Toulmin):**"])
+def test_a_registry_whose_only_marker_is_unrecognised_is_an_error(tmp_path, marker):
+    """Review 2026-09-26: an unrecognised marker silently dropped its sub-table,
+    and with nothing else parsed --strict exited 0 with the floor NOT evaluated."""
+    path = tmp_path / "r.md"
+    path.write_text(marker + "\n\n" + _HEADER + _ROW.replace("[x]", "[ ]"), encoding="utf-8")
+    with pytest.raises(ValueError, match="never legitimately empty"):
+        check_coverage(path)
+    assert main([str(path), "--strict"]) == 2
+
+
+def test_renaming_a_priority_header_no_longer_turns_strict_green(tmp_path, paper1_registry):
+    """The measured route (2026-09-26): on Paper 1, whose P0 floor genuinely
+    fails, renaming the Priority headers dropped every row from coverage and
+    the floor, which then printed NOT evaluated while --strict exited 0."""
+    content = paper1_registry.read_text(encoding="utf-8")
+    renamed = content.replace("| ID | Statement | Priority |", "| ID | Statement | Prio |")
+    assert renamed != content, "fixture no longer has the header this test renames"
+    path = tmp_path / "r.md"
+    path.write_text(renamed, encoding="utf-8")
+    assert main([str(paper1_registry), "--strict"]) == 1
+    assert main([str(path), "--strict"]) == 2

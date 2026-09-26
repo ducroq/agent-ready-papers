@@ -129,9 +129,10 @@ Column semantics for the PROVOCATION sub-table below differ from the other sub-t
 
 <!-- Keep this paragraph ABOVE the sub-table marker, not between the marker and
      the table header. `tools/coverage.py` skips only blank lines after a marker
-     before expecting a table row; any prose there makes it abandon the sub-table
-     silently. Until 2026-08-13 this paragraph sat below the marker, and the
-     shipped template's PROVOCATION rows were invisible to the shipped tool —
+     before expecting a table row; any prose there makes it stop with an error
+     (exit 2) — and before 2026-09-26 it abandoned the sub-table silently.
+     Until 2026-08-13 this paragraph sat below the marker, and the shipped
+     template's PROVOCATION rows were invisible to the shipped tool —
      found by the repo-wide sweep, which ran the tool against the template
      instead of reading it. -->
 

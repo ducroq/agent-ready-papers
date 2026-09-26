@@ -316,20 +316,34 @@ def _iter_registry_rows(content: str) -> Iterator[_RegistryRow]:
             continue
 
         unit_type = marker.group(1).upper()
+        marker_line = i
         i += 1
         while i < len(lines) and not lines[i].strip():
             i += 1
-        if i >= len(lines):
-            break
 
-        header = _split_row(lines[i])
+        # A marker whose table cannot be read used to be skipped in silence,
+        # dropping every row under it from coverage AND the P0 tier floor —
+        # so renaming one `Priority` header made `--strict` exit 0 on a
+        # registry whose floor genuinely fails (measured 2026-09-26). A
+        # marker promises a sub-table; one that is not there is a parse
+        # failure, not an empty sub-table.
+        header = _split_row(lines[i]) if i < len(lines) else None
         if header is None:
-            continue
+            raise ValueError(
+                f"{registry_line_no(marker_line)}: sub-table marker "
+                f"{lines[marker_line].strip()!r} is not followed by a table — its rows "
+                "would be dropped from coverage and the P0 tier floor. Put the table "
+                "directly under the marker (prose goes above it)."
+            )
 
         cols = _find_bucket_and_status_columns(header, unit_type)
         if cols is None:
-            i += 1
-            continue
+            raise ValueError(
+                f"{registry_line_no(i)}: the {unit_type} sub-table's header has no "
+                f"{'Tier or ' if unit_type == 'PROVOCATION' else ''}Priority column or no "
+                "Status column, so none of its rows can be counted — they would be dropped "
+                f"from coverage and the P0 tier floor. Header: {lines[i].strip()[:120]}"
+            )
         bucket_col, axis, status_col = cols
         id_col = _find_column(header, "id")
         tier_col = _find_column(header, "confidence")
@@ -414,6 +428,16 @@ def check_coverage(
 
     content = registry_path.read_text(encoding="utf-8")
     counts = _parse_registry(content)
+    if not counts:
+        # Zero rows is never a legitimate registry, and it is what every
+        # unrecognised marker reduces to (`**Claims:**`, `### **CLAIMs:**`):
+        # before this, --strict passed over it with the P0 floor "NOT
+        # evaluated". Same rule as `tools.check_registry`.
+        raise ValueError(
+            f"no registry rows parsed from {registry_path} — a registry is never "
+            "legitimately empty, so this is a parse failure rather than a clean run. "
+            "Sub-table markers must read exactly like `**CLAIMs:**` on their own line."
+        )
     p0_tiers = tuple(
         (row.entry_id, row.tier)
         for row in _iter_registry_rows(content)

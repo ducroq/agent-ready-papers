@@ -55,11 +55,11 @@ When you write a constraint to protect a check, enumerate **mechanisms, not inte
 
 Concretely: find the places where your checker decides an item is *not counted* — a `continue`, a `None` return, a header or path lookup that misses, a glob — and write one clause per branch. Then **execute each one** rather than reasoning about it.
 
-This was derived here from `tools/coverage.py`, where four branches drop an item from the denominator and three were unguarded; the one intent this repo *had* guarded against turned out not to work at all.
+This was derived here from `tools/coverage.py`, where four branches drop an item from the denominator and three were unguarded (two of those now raise instead, since 2026-09-26); the one intent this repo *had* guarded against turned out not to work at all.
 
 **Where to look first: wherever a check discovers its own inputs.** The general form is broader than a glob: **any place a check decides what it is about, using a fact it did not derive from the thing it is checking.** A line number ("frontmatter starts on line 1"), a hardcoded path list ("these are the directories the rules cover"), a `pwd -P` prefix strip ("the logical path equals the physical path"), a column-header lookup ("the bucket column is called `Priority`") — all the same failure, and all invisible in the output. Where a check is instead *handed* its inputs (a pinned fixture, an explicit argument), it has fewer such surfaces.
 
-**Fewer is not none, and this repo is the example.** Its pytest suite is fixture-pinned and the enumeration over it found no real defect — but `tools/coverage.py` has a discovery surface and it **fails open**: the sub-table header lookup decides what the tool is about, and when it misses, the whole sub-table is skipped and the report comes back with zero rows and `meets_targets: True`. That instance is three paragraphs below, in the gaming table. So the honest reading of the negative result is *the leading-bytes surface is absent here* — CRLF and BOM were tested and are clean — **not** *the class is absent here*. A count of discovery surfaces is the useful number; the suite has almost none and the tool has one, and the one it has is unguarded.
+**Fewer is not none, and this repo is the example.** Its pytest suite is fixture-pinned and the enumeration over it found no real defect — but `tools/coverage.py` has a discovery surface, and until 2026-09-26 it **failed open**: the sub-table header lookup decides what the tool is about, and when it missed, the whole sub-table was skipped and the report came back with zero rows and `meets_targets: True`. That instance is three paragraphs below, in the gaming table. It now fails closed on a missed header and on zero rows; the marker lookup, one step earlier, still fails open for a single sub-table. So the honest reading of the negative result is *the leading-bytes surface is absent here* — CRLF and BOM were tested and are clean — **not** *the class is absent here*. A count of discovery surfaces is the useful number; the suite has almost none and the tool has one, and the one it has is guarded only in part.
 
 Two claims come out of this and they have very different strength, so they are stated separately:
 
@@ -84,16 +84,16 @@ One data point on whether hooks earn their slot, from the same project: a struct
 
 **The green-at-any-cost loop.** An agent told to make a check pass will sometimes weaken the check. In this repo that has a specific and dangerous shape: **the cheapest way to make `--strict` pass is to remove the failing claim from the count.** Coverage goes green and verification has been quietly gutted — the exact failure the framework exists to catch, produced by the framework's own tooling.
 
-The routes were measured against `papers/perspective/vv/claims/claim_registry.md` with one P0 claim flipped to unverified (baseline: `--strict` exits 1):
+The routes were measured against `papers/perspective/vv/claims/claim_registry.md` with one P0 claim flipped to unverified (baseline: `--strict` exits 1). ⚠️ **Re-measured 2026-09-26, after `--strict` gained the DR-002 P0 tier floor (75f928c).** Paper 1's floor fails on its own (7 of 8 P0 entries below SUPPORTED), which makes every route exit non-zero there and isolates nothing. The table therefore reports a copy of the registry with every P0 tier raised to SUPPORTED, so that only the flipped claim can fail:
 
 | Edit | Result | Why |
 |------|--------|-----|
 | Reclassify the claim P0 → P2 | **exit 1** — still fails | `meets_targets` checks *every* bucket; re-tiering moves the failure rather than hiding it |
 | Delete the row | **exit 0** — passes | the claim leaves the denominator |
 | **Blank the Priority cell** (delete two characters; the row stays, still marked `[ ]`) | **exit 0** — passes | `coverage.py` skips rows with no bucket |
-| **Rename the `Priority` column header** | **exit 0** — passes | the whole sub-table is skipped, and the report comes back with zero rows |
+| Rename the `Priority` column header | **exit 2** — tooling error | closed 2026-09-26: a sub-table marker whose table has no Priority or Status column now raises instead of being skipped. Until then it exited **0**; with *every* header renamed it also emptied the P0 floor, which passed as "NOT evaluated" even on a registry whose floor fails. ⚠️ Renaming the **marker** instead (`**Claims:**`) still drops that one sub-table silently; it is an error only when no sub-table parses at all |
 
-The two most dangerous are the last two, because the claim is still visibly sitting in the registry marked unverified while the tool reports green. Note that the obvious attack — downgrading a tier — is the one that *doesn't* work here; a constraint written only against downgrading would guard the wrong door.
+The most dangerous open route is blanking the Priority cell, because the claim is still visibly sitting in the registry marked unverified while the tool reports green. (Renaming the header was the other one, and is now closed.) Note that the obvious attack — downgrading a tier — is the one that *doesn't* work here; a constraint written only against downgrading would guard the wrong door.
 
 If you wire the coverage hook, add the matching Hard Constraint to `CLAUDE.md` the same day, not after you find the first vanished claim:
 
