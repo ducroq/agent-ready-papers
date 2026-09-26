@@ -535,6 +535,25 @@ def test_empty_registry_is_an_error_not_a_clean_run(tmp_path):
         check_registry(path)
 
 
+def test_a_freshly_started_registry_is_empty_not_an_error(tmp_path):
+    """Same rule as tools.coverage: recognised markers over empty tables is a
+    new project, not a parse failure (release review 2026-09-26)."""
+    path = tmp_path / "r.md"
+    path.write_text(CLAIM_TABLE.split("| S1-1")[0], encoding="utf-8")
+    report = check_registry(path)
+    assert report.entries == ()
+    assert report.ok is True
+
+
+def test_an_empty_example_in_a_code_fence_does_not_count_as_a_registry(tmp_path):
+    """Only the zero-entries guard consults quoting: a fenced example with no
+    rows, and no real marker elsewhere, is a parse failure, not a new project."""
+    path = tmp_path / "r.md"
+    path.write_text("```\n" + CLAIM_TABLE.split("| S1-1")[0] + "```\n**Claims:**\n", encoding="utf-8")
+    with pytest.raises(ValueError, match="no sub-table marker recognised"):
+        check_registry(path)
+
+
 def test_report_leads_with_counts(tmp_path):
     path = tmp_path / "r.md"
     path.write_text(CLAIM_TABLE + "\n" + ARGUMENT_TABLE, encoding="utf-8")

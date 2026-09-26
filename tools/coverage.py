@@ -70,6 +70,60 @@ _MARKER_REGEX = re.compile(
     r"\s*:?\s*$"
 )
 
+
+_FENCE_REGEX = re.compile(r"^ {0,3}(`{3,}|~{3,})(.*)$")
+
+
+def _quoted_lines(lines: list[str]) -> list[bool]:
+    """True for each line inside a fenced code block or an HTML comment.
+
+    Used ONLY by `_has_marker`, i.e. only to decide whether a file that parsed
+    to zero rows had any real marker at all. It deliberately does not affect
+    row parsing: a heuristic that decided what counts would, on a `<!--`
+    inside a table cell, hide every marker below it and drop real rows
+    (measured in review 2026-09-26). Here the worst a misreading can do is
+    change the wording of an error on a file that counted nothing.
+    """
+    quoted: list[bool] = []
+    fence: str | None = None
+    in_comment = False
+    for line in lines:
+        if fence is not None:
+            quoted.append(True)
+            close = _FENCE_REGEX.match(line)
+            # CommonMark: a closing fence uses the same character, is at least
+            # as long as the opener, and carries no info string.
+            if (
+                close
+                and close.group(1)[0] == fence[0]
+                and len(close.group(1)) >= len(fence)
+                and not close.group(2).strip()
+            ):
+                fence = None
+            continue
+        if in_comment:
+            quoted.append(True)
+            in_comment = "-->" not in line
+            continue
+        opener = _FENCE_REGEX.match(line)
+        if opener and not (opener.group(1)[0] == "`" and "`" in opener.group(2)):
+            fence = opener.group(1)
+            quoted.append(True)
+            continue
+        # The comment state at the end of the line decides the next one:
+        # `--> ... <!--` reopens, `<!-- ... -->` closes.
+        opens, closes = line.rfind("<!--"), line.rfind("-->")
+        in_comment = opens != -1 and opens > closes
+        quoted.append(in_comment)
+    return quoted
+
+
+def _has_marker(content: str) -> bool:
+    """Whether any unquoted line is a sub-table marker."""
+    lines = content.splitlines()
+    return any(not q and _MARKER_REGEX.match(line) for line, q in zip(lines, _quoted_lines(lines), strict=True))
+
+
 _SEPARATOR_REGEX = re.compile(r"^\s*\|[\s\-:|]+\|\s*$")
 _STATUS_VERIFIED_REGEX = re.compile(r"^\s*\[\s*x\s*\]", re.IGNORECASE)
 _ENTRY_ID_REGEX = re.compile(r"^\W*S\d+-\d+\W*$")
@@ -468,15 +522,17 @@ def check_coverage(
 
     content = registry_path.read_text(encoding="utf-8")
     counts = _parse_registry(content)
-    if not counts:
-        # Zero rows is never a legitimate registry, and it is what every
-        # unrecognised marker reduces to (`**Claims:**`, `### **CLAIMs:**`):
-        # before this, --strict passed over it with the P0 floor "NOT
-        # evaluated". Same rule as `tools.check_registry`.
+    if not counts and not _has_marker(content):
+        # No recognised marker at all is what an unrecognised one reduces to
+        # (`**Claims:**`, `### **CLAIMs:**`): before this, --strict passed over
+        # it with the P0 floor "NOT evaluated". Recognised markers over empty
+        # tables are different — a freshly started registry, which the README
+        # bootstrap creates — and report zero rows without error. (A marker
+        # whose table is missing or malformed already raised above.)
         raise ValueError(
-            f"no registry rows parsed from {registry_path} — a registry is never "
-            "legitimately empty, so this is a parse failure rather than a clean run. "
-            "Sub-table markers must read exactly like `**CLAIMs:**` on their own line."
+            f"no sub-table marker recognised in {registry_path}, so nothing was counted — "
+            "this is a parse failure rather than a clean run. Sub-table markers must read "
+            "exactly like `**CLAIMs:**` on their own line."
         )
     p0_tiers = tuple(
         (row.entry_id, row.tier)

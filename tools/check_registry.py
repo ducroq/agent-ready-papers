@@ -43,7 +43,9 @@ Checks:
 
 Every check reports a count rather than a bare pass, per the rule in
 `docs/verification-hooks.md`: a check that cannot be told apart from an
-absent check is not a check. Zero rows is a failure, not a clean run.
+absent check is not a check. A file with no recognised sub-table marker is a
+failure, not a clean run; a freshly started registry (markers over empty
+tables) reports zero examined.
 
 Public API:
     check_registry(registry_path, *, manuscript_path=None, budget=None)
@@ -56,7 +58,7 @@ CLI:
 Exit codes:
     0  all enabled checks passed
     1  at least one finding
-    2  tooling error (file missing, no entries parsed)
+    2  tooling error (file missing, no recognised sub-table marker)
 """
 
 from __future__ import annotations
@@ -72,7 +74,7 @@ from pathlib import Path
 # Reused rather than reimplemented: `_split_row` carries the escaped-pipe
 # fix from v2.2.4, and duplicating that here would mean duplicating the bug
 # it fixed. Same package, same file format, one parser.
-from tools.coverage import _MARKER_REGEX, _SEPARATOR_REGEX, _split_row
+from tools.coverage import _MARKER_REGEX, _SEPARATOR_REGEX, _has_marker, _split_row
 
 ANCHOR_REGEX = re.compile(r"^%\s*(S\d+-\d+)\s*:", re.MULTILINE)
 _ANCHOR_LINE_REGEX = re.compile(r"^%\s*(S\d+-\d+)\s*:(.*)$")
@@ -742,16 +744,21 @@ def check_registry(
 
     Raises:
         FileNotFoundError: if a given path does not exist
-        ValueError: if the registry parses to zero entries — a legitimate
-            registry is never empty, so that is a failure, not a clean run
+        ValueError: if the file has no recognised sub-table marker at all —
+            nothing was parsed, so that is a failure, not a clean run. A
+            freshly started registry (markers over empty tables) is not an
+            error; the report says it examined zero entries.
     """
     if not registry_path.is_file():
         raise FileNotFoundError(registry_path)
-    entries = _parse_entries(registry_path.read_text(encoding="utf-8"))
-    if not entries:
+    content = registry_path.read_text(encoding="utf-8")
+    entries = _parse_entries(content)
+    if not entries and not _has_marker(content):
+        # Same rule as tools.coverage, so a freshly started registry passes
+        # both tools and a file whose markers are all unrecognised fails both.
         raise ValueError(
-            f"no registry entries parsed from {registry_path} — a registry is never "
-            "legitimately empty, so this is a parse failure rather than a clean run"
+            f"no sub-table marker recognised in {registry_path}, so nothing was parsed — "
+            "this is a parse failure rather than a clean run"
         )
 
     findings: list[Finding] = []

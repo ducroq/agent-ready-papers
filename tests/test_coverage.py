@@ -359,9 +359,20 @@ def test_a_registry_whose_only_marker_is_unrecognised_is_an_error(tmp_path, mark
     and with nothing else parsed --strict exited 0 with the floor NOT evaluated."""
     path = tmp_path / "r.md"
     path.write_text(marker + "\n\n" + _HEADER + _ROW.replace("[x]", "[ ]"), encoding="utf-8")
-    with pytest.raises(ValueError, match="never legitimately empty"):
+    with pytest.raises(ValueError, match="no sub-table marker recognised"):
         check_coverage(path)
     assert main([str(path), "--strict"]) == 2
+
+
+def test_a_freshly_started_registry_is_empty_not_an_error(tmp_path):
+    """The README bootstrap creates empty per-type sub-tables. Release review
+    2026-09-26: the zero-row guard made that exit 2 on every new project."""
+    path = tmp_path / "r.md"
+    path.write_text("**CLAIMs:**\n\n" + _HEADER + "\n**ARGUMENTs** (Toulmin):\n\n" + _HEADER, encoding="utf-8")
+    report = check_coverage(path)
+    assert report.rows == ()
+    assert "NOT evaluated" in report.to_markdown()
+    assert main([str(path)]) == 0
 
 
 def test_renaming_a_priority_header_no_longer_turns_strict_green(tmp_path, paper1_registry):
@@ -446,3 +457,53 @@ def test_a_row_blanked_down_to_its_id_is_not_a_divider(tmp_path, row):
     path.write_text("**CLAIMs:**\n\n" + _HEADER + _ROW + row, encoding="utf-8")
     with pytest.raises(ValueError, match="no Priority"):
         check_coverage(path)
+
+
+@pytest.mark.parametrize(
+    "wrap",
+    [
+        pytest.param(("```\n", "```\n"), id="fenced"),
+        pytest.param(("<!-- example:\n", "-->\n"), id="html-comment"),
+    ],
+)
+def test_a_quoted_example_marker_does_not_make_a_miscased_registry_look_empty(tmp_path, wrap):
+    """Review 2026-09-26: an example sub-table (marker + header, no rows) in a
+    guide section counted as a recognised marker, so the real sub-table under a
+    miscased marker was skipped and --strict exited 0 over an unverified P0."""
+    opening, closing = wrap
+    path = tmp_path / "r.md"
+    path.write_text(
+        opening + "**CLAIMs:**\n\n" + _HEADER + closing + "\n**Claims:**\n\n" + _HEADER + _ROW.replace("[x]", "[ ]"),
+        encoding="utf-8",
+    )
+    with pytest.raises(ValueError, match="no sub-table marker recognised"):
+        check_coverage(path)
+    assert main([str(path), "--strict"]) == 2
+
+
+def test_a_comment_opened_inside_a_cell_does_not_drop_rows(tmp_path, paper1_registry):
+    """Review 2026-09-26: when quoting also governed parsing, a `<!--` in a
+    Statement cell hid every marker below it and dropped P0 rows. Quoting now
+    only informs the zero-rows guard, so parsing matches the plain registry."""
+    content = paper1_registry.read_text(encoding="utf-8")
+    injected = content.replace("| S1-1 |", "| S1-1 <!-- note |", 1)
+    assert injected != content
+    path = tmp_path / "r.md"
+    path.write_text(injected, encoding="utf-8")
+    assert sum(r.total for r in check_coverage(path).rows) == 19
+
+
+@pytest.mark.parametrize(
+    "lines, expected",
+    [
+        pytest.param(["````", "```", "**CLAIMs:**", "````", "x"], [True, True, True, True, False], id="4-tick-fence"),
+        pytest.param(["```", "```py", "```", "x"], [True, True, True, False], id="info-string-not-a-close"),
+        pytest.param(["``x`` y", "**CLAIMs:**"], [False, False], id="inline-code-not-a-fence"),
+        pytest.param(["a --> b <!-- c", "**CLAIMs:**", "-->"], [True, True, True], id="reopened-comment"),
+        pytest.param(["<!-- a -->", "**CLAIMs:**"], [False, False], id="closed-comment"),
+    ],
+)
+def test_quoted_lines_follows_commonmark_fences_and_comments(lines, expected):
+    from tools.coverage import _quoted_lines
+
+    assert _quoted_lines(lines) == expected
