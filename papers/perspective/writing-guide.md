@@ -124,7 +124,7 @@ Confidence progression for framework components:
 | ID | Statement | Type | Tier | Appropriate Language |
 |----|-----------|------|------|---------------------|
 | S2-1 | EQUATOR maintains ~700 reporting guidelines | CLAIM | ESTABLISHED | "The EQUATOR Network maintains nearly 700 reporting guidelines" — verified: 699 guidelines (2026-03-03) |
-| S2-2 | No consensus-based guideline for non-empirical papers | CLAIM | EMERGING | "To our knowledge, no published consensus-based guideline of the EQUATOR type exists" — name SANRA, Nashwan, VANRA |
+| S2-2 | No consensus-based guideline for non-empirical papers | CLAIM | EMERGING | "To our knowledge, no published consensus-based guideline of the EQUATOR type exists" — name Jaakkola, SANRA, Nashwan, VANRA |
 | S2-3 | Gregor's Type I and V are non-empirical | CLAIM | EMERGING | "Gregor (2006) identified five theory types, two of which — analytic (Type I) and design (Type V) — are fundamentally non-empirical" |
 | S2-4 | Argument quality is the primary verification challenge | CLAIM | EMERGING | "For non-empirical papers, the primary verification challenge may be argument quality rather than factual accuracy" |
 
