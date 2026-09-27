@@ -154,6 +154,31 @@ Sources consulted during the development of this project, particularly for DR-00
 |----|-----------|------|-------|-------|------|--------|
 | L64 | Li | 2026 | Decomposing LLM Self-Correction: The Accuracy-Correction Paradox and Error Depth Hypothesis | arXiv | [li-2026-self-correction](sources/li-2026-self-correction.md) | READ (abstract) |
 
+### AI-Text Detection
+
+<!-- Seeded 2026-09-27 from the detector scan (docs/work-items/ai-detector-scan.md).
+     Detectors are out of every gate by decision; these back the README's adopter-risk
+     note and a possible Paper 1 sentence. Vendor rows are tier D: never support. -->
+
+| ID | Author(s) | Year | Title | Venue | File | Status |
+|----|-----------|------|-------|-------|------|--------|
+| L67 | Liang, Yuksekgonul, Mao, Wu & Zou | 2023 | GPT detectors are biased against non-native English writers | Patterns | [liang-2023-detector-bias](sources/liang-2023-detector-bias.md) | READ (2026-09-27) |
+| L68 | Weber-Wulff et al. | 2023 | Testing of detection tools for AI-generated text | Int. J. Educational Integrity | [weber-wulff-2023](sources/weber-wulff-2023.md) | READ (2026-09-27) |
+| L69 | Dugan et al. | 2024 | RAID: A Shared Benchmark for Robust Evaluation of Machine-Generated Text Detectors | ACL | [dugan-2024-raid](sources/dugan-2024-raid.md) | READ (2026-09-27) |
+| L70 | Krishna, Song, Karpinska, Wieting & Iyyer | 2023 | Paraphrasing evades detectors of AI-generated text, but retrieval is an effective defense | NeurIPS | [krishna-2023-paraphrase](sources/krishna-2023-paraphrase.md) | READ (2026-09-27) |
+| L71 | Jabarian & Imas | 2025 | Artificial Writing and Automated Detection | NBER WP (not peer-reviewed) | [jabarian-imas-2025](sources/jabarian-imas-2025.md) | READ (2026-09-27) |
+| L72 | Russell, Karpinska & Iyyer | 2025 | People who frequently use ChatGPT for writing tasks are accurate and robust detectors of AI-generated text | ACL | [russell-2025-expert-detectors](sources/russell-2025-expert-detectors.md) | READ (2026-09-27) |
+| L73 | Emi & Spero (Pangram Labs) | 2024 | Technical Report on the Pangram AI-Generated Text Classifier | arXiv (vendor) | [emi-spero-2024-pangram](sources/emi-spero-2024-pangram.md) | READ (2026-09-27) |
+| L74 | Mitchell et al. | 2023 | DetectGPT | ICML | [detector-mechanisms](sources/detector-mechanisms.md) | READ (method) |
+| L75 | Hans et al. | 2024 | Spotting LLMs With Binoculars | ICML | [detector-mechanisms](sources/detector-mechanisms.md) | READ (method) |
+| L76 | Kirchenbauer et al. | 2023 | A Watermark for Large Language Models | ICML | [detector-mechanisms](sources/detector-mechanisms.md) | READ (method) |
+| L77 | ICMJE | 2026 | Recommendations §V: Use of AI in Publishing | icmje.org | [detector-policies-2026](sources/detector-policies-2026.md) | READ (2026-09-27) |
+| L78 | COPE Council | 2023/2024 | Authorship and AI tools | publicationethics.org | [detector-policies-2026](sources/detector-policies-2026.md) | READ (archived copy) |
+| L79 | Springer Nature | 2025 | AI-text integrity tool; Nature Portfolio AI policy | springernature.com / nature.com | [detector-policies-2026](sources/detector-policies-2026.md) | READ (2026-09-27) |
+| L80 | Elsevier | 2026 | Generative AI policies for journals | elsevier.com | [detector-policies-2026](sources/detector-policies-2026.md) | READ (2026-09-27) |
+| L81 | Kobak, González-Márquez, Horvát & Lause | 2025 | Delving into LLM-assisted writing in biomedical publications through excess vocabulary | Science Advances | [kobak-2025-excess-vocabulary](sources/kobak-2025-excess-vocabulary.md) | READ (2026-09-27) |
+| L82 | WikiProject AI Cleanup | 2026 | Wikipedia:Signs of AI writing (rev. 1376889964) | en.wikipedia.org (community guide, tier D) | [wikipedia-signs-of-ai-writing](sources/wikipedia-signs-of-ai-writing.md) | READ (2026-09-27) |
+
 ## Key Insight
 
 EQUATOR has ~700 reporting guidelines for empirical health research (704 as of 2026-09-14; 699 when first checked 2026-03-03). Essentially **zero** exist for theoretical, design science, perspective, or methodological papers. This gap is where this project can make its most distinctive contribution.

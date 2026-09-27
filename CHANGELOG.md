@@ -72,6 +72,19 @@ Token economy: what a session reads at start (`CLAUDE.md` plus the memory index 
 - **Paper 1 framework pin v2.6.0 → v4.0.0.** The v3.0.0 Required items were already in force.
 - **`tests/`**: Paper 1 counts updated. The comment-in-cell test now compares against the plain parse. `conftest.py` names the pinning tests rather than restating counts.
 
+- **AI-text detector scan: 14 source IDs added, L67–L80** (9 files) (`literature/README.md` § AI-Text Detection). Covered: independent accuracy and bias evaluations, detector mechanisms, one vendor report (tier D), and ICMJE/COPE/publisher policy. Step 0 passed for all; key figures re-checked against the PDFs. Detectors stay out of every gate.
+- **README, Common Questions: "Will an AI-text detector flag my paper?"** Detector accuracy is condition-dependent and was biased against non-native writers in a 2023 pilot; the policies read judge disclosure; keep the verification record as the answer to a flag.
+
+- **DR-022 (Proposed): formula repetition as a readability lens, not a detector.** It is staged in `extensions/`, following the DR-018 precedent:
+  - `formula_scan.py`: an advisory locator for rhythm, paragraph uniformity, negation-contrast turns, triad share, stock style words with per-item provenance, recurring phrases and openers, and section-template features. It exits 0 whenever it reports (2 on a tooling error), is English-only and says so, and handles LaTeX only for `.tex` files (preamble and non-prose environments skipped).
+  - `formula-review.md`: a judgement pass that never judges authorship or truth.
+  - `effect-profiles.md`: a voice layer with a device register (dose cap and variation per device) and five effect profiles.
+  - `make formula-scan`; `extensions/` is now linted.
+  - 42 tests, each signal seeded both ways. In two manual mutation passes (not scripted; the mutant lists are in the maintainer's work item), every non-equivalent breakage (30 of 31) turned a test red; the 31st is equivalent (a `UnicodeDecodeError` is a `ValueError`).
+  - L81 (Kobak et al. 2025) and L82 (Wikipedia "Signs of AI writing", tier D) supply the word-list provenance.
+  - First run on Paper 1: "to our knowledge" recurs in 8 paragraphs.
+  - DR-022 also records, for adopters, the decision to keep detectors out of every gate.
+
 **Adopter notes**: no adopter action required. The scripts read this repo's own layout.
 
 ## v4.0.0 (2026-09-26)

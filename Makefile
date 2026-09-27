@@ -1,17 +1,17 @@
-.PHONY: test lint format check coverage check-dois check-metadata verify-bib check-registry drift dr-status gotcha-stats
+.PHONY: test lint format check coverage check-dois check-metadata verify-bib check-registry formula-scan drift dr-status gotcha-stats
 
 test:  ## Run tests
 	pytest tests/ -x -q
 
 lint:  ## Run linter
-	ruff check tools/ tests/
+	ruff check tools/ tests/ extensions/
 
 format:  ## Auto-format code
-	ruff format tools/ tests/
-	ruff check --fix tools/ tests/
+	ruff format tools/ tests/ extensions/
+	ruff check --fix tools/ tests/ extensions/
 
 check:  ## Run all checks (lint + test)
-	ruff check tools/ tests/
+	ruff check tools/ tests/ extensions/
 	pytest tests/ -x -q
 
 coverage:  ## Coverage report against Paper 1 registry
@@ -29,6 +29,9 @@ verify-bib:  ## Field-level verification of Paper 1 references.bib (the stronger
 check-registry:  ## Registry/manuscript internal consistency for Paper 1
 	python -m tools.check_registry papers/perspective/vv/claims/claim_registry.md \
 		--manuscript papers/perspective/manuscript.tex --budget 5000
+
+formula-scan:  ## Advisory formula/readability locator (PROPOSED, DR-022); FILE=<path>, default Paper 1
+	python extensions/formula_scan.py "$(or $(FILE),papers/perspective/manuscript.tex)"
 
 drift:  ## Session-start drift check: companion pin, global skills, self and paper stamps
 	bash scripts/drift.sh

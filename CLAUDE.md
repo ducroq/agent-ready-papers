@@ -14,7 +14,7 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 | Picking up where the last session left off | `memory/MEMORY.md`: the index only, not the topic files it lists. Nothing else loads it, so keep this row first. |
 | Starting any session | `make drift`: companion pin vs latest release, global skills vs the pinned reference install, this repo's stamp vs `CHANGELOG.md`, paper pins (a tracked paper behind counts as drift; a gitignored sub-project is only reported). Surface any drift before starting work, and don't auto-update: run `/update-drift`, and adopting is the engineer's call. With no local clone, compare against https://github.com/ducroq/agent-ready-projects/blob/master/CHANGELOG.md. |
 | Working on Paper 1 (Perspective) | `papers/perspective/CLAUDE.md` |
-| Making scope or methodology decisions | `decisions/`. `make dr-status` lists each DR's status; only Accepted DRs bind. DR-019 and DR-020 both modify Step Z: whichever is accepted second must re-read that section first. DR-021 states its own acceptance condition. <!-- verify: cd "$(git rev-parse --show-toplevel)" && n=$(ls decisions/DR-*.md \| wc -l); echo "decisions/ holds $n DR files"; [ "$n" -eq 21 ] \|\| { echo "CLAIM REFUTED: expected 21"; exit 1; } --> |
+| Making scope or methodology decisions | `decisions/`. `make dr-status` lists each DR's status; only Accepted DRs bind. DR-019 and DR-020 both modify Step Z: whichever is accepted second must re-read that section first. DR-021 states its own acceptance condition. <!-- verify: cd "$(git rev-parse --show-toplevel)" && n=$(ls decisions/DR-*.md \| wc -l); echo "decisions/ holds $n DR files"; [ "$n" -eq 22 ] \|\| { echo "CLAIM REFUTED: expected 22"; exit 1; } --> |
 | Template / DR / verification-gate design work | `memory/dead-ends.md`: proposals already concluded as don't-retry |
 | Adding or verifying literature sources | `literature/README.md` |
 | Checking a registry or bibliography | `make coverage` (add `--strict` via `python -m tools.coverage <registry> --strict` to enforce the P0/P1/P2 thresholds and the DR-002 P0 floor), `make check-dois`, `make verify-bib` (fields vs Crossref/DataCite), `make check-registry` (anchors, tier agreement, schema, premise graph, budget). A resolving DOI is not a correct entry. These tools check consistency, never whether a tier is the right one. Flags and limits: `tools/README.md`. |
@@ -61,7 +61,7 @@ agent-ready-papers/
 ├── agents/                <- portable role prompts (equation-checker, review-prompt)
 ├── templates/             <- fill-in templates for new paper projects
 ├── decisions/             <- DR-001 … (status: `make dr-status`)
-├── extensions/            <- staged, not-yet-accepted agent surfaces
+├── extensions/            <- staged, not-yet-accepted surfaces (agent prompts, a tool, a template)
 ├── literature/            <- source registry; pdfs/ gitignored
 ├── docs/                  <- framework summary, thresholds, verification hooks; work-items/ on demand
 ├── tools/                 <- Python registry tooling (coverage, DOIs, metadata, consistency); see tools/README.md
