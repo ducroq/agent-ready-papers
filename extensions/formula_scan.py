@@ -13,7 +13,7 @@ STYLE_WORDS for per-item provenance), and the formula devices that voice
 guides mandate without a dose cap.
 
 Every flag is for the author to decide. A deliberate template can be the
-point: a paradox box that closes every essay is a design choice, and the
+point: a closing device that ends every essay can be a design choice, and the
 scanner can only say that it recurs, not that it should not. The thresholds
 are SPECULATIVE defaults (docs/THRESHOLDS.md convention), not calibrated
 constants; they decide what gets *shown*, never a pass or fail.
@@ -35,7 +35,7 @@ Signals:
               such as a stock closer shows up here without any word list.
   openers     Sentence openings that recur.
   template    Section-level features shared by most sections: the same
-              opening words, the same closing label ("Ask:"), a closing
+              opening words, the same closing label ("Takeaway:"), a closing
               question, a one-sentence closing paragraph. This is the
               "one section template repeated seven times" case.
 
@@ -723,7 +723,7 @@ def _template(sections: list[Section], flags: list[Flag], metrics: dict, skipped
         flags.append(Flag("template", f"{len(v)} of {n} sections {k}", [line for _, line in v]))
 
 
-# Function words of the other language in this corpus, for a positive check on short texts.
+# Dutch function words, for a positive non-English check on short texts.
 DUTCH_STOPWORDS = frozenset(
     "de het een en van dat die zijn niet met voor op te aan er ook als maar om dan wat nog wel bij door naar uit zo wij ze".split()
 )

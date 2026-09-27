@@ -39,14 +39,14 @@ def _messages(report, signal: str) -> list[str]:
 
 
 # Seven sections built on one template: same opener, a negation-contrast
-# turn, a triad, uniform short sentences, and an "Ask:" closer.
+# turn, a triad, uniform short sentences, and a "Takeaway:" closer.
 SECTION = """## Part {n}
 
-Here is the thing about {topic}. It is not a tool. It is a mirror. You use it, you trust it, and you forget it.
+Here is the thing about {topic}. It is not a rule. It is a habit. You use it, you trust it, and you forget it.
 
 The pattern is simple. The pattern is old. The pattern is everywhere. The pattern is quiet. The pattern is yours.
 
-*Ask:* When did you last notice {topic}?
+*Takeaway:* When did you last notice {topic}?
 """
 TOPICS = ["habits", "maps", "clocks", "ledgers", "rituals", "forms", "badges"]
 FORMULAIC = "# Title\n\n" + "\n".join(SECTION.format(n=i, topic=t) for i, t in enumerate(TOPICS, 1))
@@ -91,7 +91,7 @@ def test_formulaic_text_flags_every_structural_signal(tmp_path):
     r = fs.scan(_write(tmp_path, FORMULAIC))
     assert {"rhythm", "contrast", "lists", "phrases", "openers", "template"} <= _signals(r)
     msgs = _messages(r, "template")
-    assert any('label "Ask:"' in m for m in msgs)
+    assert any('label "Takeaway:"' in m for m in msgs)
     assert any("close on a question" in m for m in msgs)
     assert any('open with "here is"' in m for m in msgs)
 
@@ -258,7 +258,7 @@ def test_abbreviations_do_not_split_but_no_does(tmp_path):
 
 
 def test_non_english_text_is_flagged(tmp_path):
-    dutch = "Het is geen gereedschap. Het is een spiegel. Wij gebruiken het elke dag en vergeten het daarna weer.\n"
+    dutch = "Het regent al de hele week en de rivier staat hoog. Wij blijven binnen en lezen een boek.\n"
     assert "language" in _signals(fs.scan(_write(tmp_path, dutch)))
     assert "language" not in _signals(fs.scan(_write(tmp_path, VARIED, "en.md")))
 
