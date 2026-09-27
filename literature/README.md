@@ -179,6 +179,24 @@ Sources consulted during the development of this project, particularly for DR-00
 | L81 | Kobak, González-Márquez, Horvát & Lause | 2025 | Delving into LLM-assisted writing in biomedical publications through excess vocabulary | Science Advances | [kobak-2025-excess-vocabulary](sources/kobak-2025-excess-vocabulary.md) | READ (2026-09-27) |
 | L82 | WikiProject AI Cleanup | 2026 | Wikipedia:Signs of AI writing (rev. 1376889964) | en.wikipedia.org (community guide, tier D) | [wikipedia-signs-of-ai-writing](sources/wikipedia-signs-of-ai-writing.md) | READ (2026-09-27) |
 
+### Readability, Engagement and Homogenisation
+
+<!-- Seeded 2026-09-27 from the readability half of the detector scan (work item point 3).
+     Bears on DR-022's H1. One lay-reader preference study (L85) cuts against "AI-assisted =
+     boring"; the formula penalty so far appears to come from expert readers (L72, L86, L88). -->
+
+| ID | Author(s) | Year | Title | Venue | File | Status |
+|----|-----------|------|-------|-------|------|--------|
+| L83 | Doshi & Hauser | 2024 | Generative AI enhances individual creativity but reduces the collective diversity of novel content | Science Advances | [doshi-hauser-2024](sources/doshi-hauser-2024.md) | READ (main text) |
+| L84 | Padmakumar & He | 2024 | Does Writing with Language Models Reduce Content Diversity? | ICLR | [padmakumar-he-2024](sources/padmakumar-he-2024.md) | READ (2026-09-27) |
+| L85 | Porter & Machery | 2024 | AI-generated poetry is indistinguishable from human-written poetry and is rated more favorably | Scientific Reports | [porter-machery-2024](sources/porter-machery-2024.md) | READ (2026-09-27) |
+| L86 | Chakrabarty, Laban & Wu | 2025 | Can AI writing be salvaged? Mitigating Idiosyncrasies … through Edits | CHI | [chakrabarty-2025-salvaged](sources/chakrabarty-2025-salvaged.md) | READ (2026-09-27) |
+| L87 | Reinhart et al. | 2025 | Do LLMs write like humans? Variation in grammatical and rhetorical styles | PNAS | [reinhart-2025-pnas](sources/reinhart-2025-pnas.md) | READ (main text) |
+| L88 | Chakrabarty et al. | 2024 | Art or Artifice? Large Language Models and the False Promise of Creativity | CHI | [chakrabarty-2024-art-artifice](sources/chakrabarty-2024-art-artifice.md) | READ (main text) |
+| L89 | Hyland | 2005 | Stance and engagement: a model of interaction in academic discourse | Discourse Studies | [hyland-2005-stance-engagement](sources/hyland-2005-stance-engagement.md) | PARTIAL (abstract) |
+| L90 | Sword | 2012 | Stylish Academic Writing | Harvard UP | [sword-2012](sources/sword-2012.md) | PARTIAL (publisher sample) |
+| L91 | Jiang & Hyland | 2025 | Does ChatGPT Write Like a Student? Engagement Markers in Argumentative Essays | Written Communication | [jiang-hyland-2025](sources/jiang-hyland-2025.md) | READ (accepted MS) |
+
 ## Key Insight
 
 EQUATOR has ~700 reporting guidelines for empirical health research (704 as of 2026-09-14; 699 when first checked 2026-03-03). Essentially **zero** exist for theoretical, design science, perspective, or methodological papers. This gap is where this project can make its most distinctive contribution.

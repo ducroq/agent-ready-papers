@@ -84,6 +84,8 @@ Token economy: what a session reads at start (`CLAUDE.md` plus the memory index 
   - L81 (Kobak et al. 2025) and L82 (Wikipedia "Signs of AI writing", tier D) supply the word-list provenance.
   - First run on Paper 1: "to our knowledge" recurs in 8 paragraphs.
   - DR-022 also records, for adopters, the decision to keep detectors out of every gate.
+- **Readability literature: L83–L91** (`literature/README.md` § Readability, Engagement and Homogenisation). Lay readers preferred AI poems (L85); the formula penalty so far appears to come from expert readers (L72, L86, L88); AI assistance made texts by different authors more alike (L83, L84). Hyland 2005 and Sword 2012 are read only in part.
+- **DR-022 revised on that evidence:** H1 is narrowed to expert or repeat-exposed readers from the intended audience; a multi-file mode (not yet built) is required before acceptance; engagement-marker density is proposed (not built) for the academic profile; the Evidence Base records that triads, "not X but Y" and rhythm rest on L72 alone.
 
 **Adopter notes**: no adopter action required. The scripts read this repo's own layout.
 
