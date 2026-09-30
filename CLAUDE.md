@@ -5,7 +5,7 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 - **Type**: Guide + templates + active paper projects
 - **Companion**: [agent-ready-projects](https://github.com/ducroq/agent-ready-projects) (for code)
 - **agent-ready-projects**: v1.49.2 <!-- A number, not a status: never write "current" beside it. Adoption record: memory/MEMORY.md Current State. Check with `make drift`. -->
-- **agent-ready-papers** (this repo): v4.0.0 <!-- Release notes: CHANGELOG.md. -->
+- **agent-ready-papers** (this repo): v4.1.0 <!-- Release notes: CHANGELOG.md. -->
 
 ## Before You Start
 

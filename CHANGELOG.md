@@ -45,53 +45,71 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
        ("No adopter action required.") rather than omitting the subsection.
 -->
 
-## Unreleased
+## v4.1.0 (2026-09-30)
 
-Token economy: what a session reads at start (`CLAUDE.md` plus the memory index its first row points to) is cut from ~107k characters to ~19k (`wc -m`). Companion pin v1.42.0 → v1.49.0.
+Readability joins verification. A new optional template gives two prompts against compressed, hard-to-read AI prose. Two Proposed decisions stage tools for it: DR-022 (formula repetition as a readability lens, never a detector) and DR-023 (a translation step where agent text reaches a person, with a check that the rewrite kept its numbers and certainty). A token-economy pass cuts what a session reads at start from ~107k characters to ~19k. **MINOR**: new template and DRs, nothing an adopter must do.
 
-- **`CLAUDE.md` 34,712 → 11,567 characters.** Edit histories and restated counts are removed; instructions, Key Paths and every Hard Constraint's operative clause stay. A review lens checked the Hard Constraints clause by clause against the old text, and the five clauses it found weakened were restored. The removed text is in git history. New Hard Constraint, *Token economy*: cut at least as much as you add, and keep no edit histories in per-session files.
-- **New `scripts/` + Makefile targets** replace prose that went stale by hand. `scripts/**` is a HIGH review tier with its own guarantee.
-  - `make drift`: exit 0 no drift, 1 drift, 2 cannot verify. It checks the companion pin against the latest release, the global skills byte for byte against the reference install at the pinned tag (`cmp`), this repo's stamp against this file, and paper pins. A failed fetch, a missing pin tag or no clone gives 2, never 0. A tracked paper pinned behind counts as drift, so **Paper 1 (v2.6.0) makes it exit 1 today**; gitignored sub-projects are only reported.
-  - `make dr-status`: DRs grouped by the `status:` in their frontmatter block, not the body. Portable awk (mawk tested).
-  - `make gotcha-stats`: entry count and sizes, fence-aware.
-  - Every exit path above was exercised on a seeded fixture.
-- **Companion adoption, v1.43.0–v1.49.0 (9 tags): 2 adopt / 1 decline / 0 n-a / 6 already in force.**
-  - Adopted: v1.43.0 `tagfree` in the project-local `/release`, whose old tag check exited 0 whether or not the tag existed. Offline, no argument, or an unsubstituted `vX.Y.Z` now give 2, never free.
-  - Adopted: v1.47.0's size signals, a project file flagged above ~15k characters and a memory archive pass above ~300k.
-  - Declined: v1.45.1's cheaper HIGH review tier. Upstream offers it as not the default (n=2), and it drops lenses this repo's tool guarantees rely on.
-  - The four global skills are byte-identical to v1.49.0.
-- **`/release` also fixed**: its command block ran `make coverage`, which never enforces the thresholds (no `--strict`), against its own precondition 4. It now runs `tools.coverage --strict`.
-- **Maintainer-local `memory/`**: the index went from 71,895 to ~7k characters. Everything outside `archive/` went from 417k to 151k. Sessions before 2026-09, release history, resolved gotchas and resolved hypotheses move to `memory/archive/`.
-- **Companion pin v1.49.0 → v1.49.2.** Both are PATCH releases, and the four global skills are byte-identical to v1.49.2, so there was nothing to adopt. `make drift` exits 0.
-- **Paper 1 P0 tier gate: 1 of 8 → 3 of 6** (#38). Commits `9c759a3`, `657a302`, `a618f83`, `7cecf42`.
-  - S4-1, S4-2 and S4-4 are withdrawn: they had no manuscript text. S5-1 is re-grounded on S2-1, S2-2 and S3-4.
-  - S1-4 is reworded against prior art and demoted to P1. The prior art is Chen et al. 2026, Zhou & Yu 2026, sciwrite-lint (L66), and the VANRA registration at EQUATOR.
-  - S1-1 and S1-2 are now SUPPORTED, with new sources read in full. S1-2 is reworded to what its evidence shows.
-  - S2-2 is narrowed to "no published consensus-based guideline", and stays EMERGING.
-  - S3-4 and S5-1 are capped by tier-monotonicity, because their premises are EMERGING. No DR was needed: DR-004 already defines tiers per entry type.
-- **Paper 1 framework pin v2.6.0 → v4.0.0.** The v3.0.0 Required items were already in force.
-- **`tests/`**: Paper 1 counts updated. The comment-in-cell test now compares against the plain parse. `conftest.py` names the pinning tests rather than restating counts.
+Fourteen commits since v4.0.0: the readability template, two Proposed DRs with staged tools in `extensions/`, 25 literature IDs (L67–L91), three maintenance scripts, a companion adoption (pin v1.42.0 → v1.49.2), and Paper 1 P0 work. The test suite went from 173 to 274.
 
-- **AI-text detector scan: 14 source IDs added, L67–L80** (9 files) (`literature/README.md` § AI-Text Detection). Covered: independent accuracy and bias evaluations, detector mechanisms, one vendor report (tier D), and ICMJE/COPE/publisher policy. Step 0 passed for all; key figures re-checked against the PDFs. Detectors stay out of every gate.
+### Templates
+
+- **New `templates/readability.md`** (optional). *Explain like I'm 18* states problem, findings, conclusions and next steps in full sentences, with how sure each conclusion is. *Write for a reader* sets rules for manuscript prose: one idea per sentence, a concrete subject, the point stated outright at the strength its registry tier allows, and a tier guard that overrides every other rule. A three-step workflow and two worked before/after examples.
+- **`templates/CLAUDE.md`**: one tree line for `readability.md`.
+- **`templates/hypothesis-log.md`**: once the log grows long, resolved entries may move to a separate `hypothesis-log-resolved.md`, leaving a pointer under `## Resolved`. Optional.
+
+### Decisions
+
+- **DR-022 (Proposed): formula repetition as a readability lens, not a detector.** It records, for adopters, the decision to keep AI-text detectors out of every gate. Revised on the readability literature: H1 is narrowed to expert or repeat-exposed readers from the intended audience; a multi-file mode (not yet built) is required before acceptance; engagement-marker density is proposed (not built) for the academic profile; the Evidence Base records that triads, "not X but Y" and rhythm rest on one source (L72).
+- **DR-023 (Proposed): two registers, and a translation step where text reaches a person.** Files an agent reads stay compact. Generated text a person reads (reports, CHANGELOG entries, issue bodies) is rewritten in a fresh context, with what the reader must decide first; a translation of a DR or paper is a proposal the author approves. A two-part check reports and never gates. Acceptance test: 10 real reports, two raters, partly blind (#42).
+
+### Extensions (staged, not accepted)
+
+Staged in `extensions/` under the DR-018 precedent; each file carries a PROPOSED banner.
+
+- **DR-022**: `formula_scan.py`, an advisory locator for rhythm, paragraph uniformity, negation-contrast turns, triad share, stock style words with per-item provenance, recurring phrases and openers, and section-template features. It exits 0 whenever it reports (2 on a tooling error), is English-only and says so, and handles LaTeX only for `.tex` files. `formula-review.md` is a judgement pass that never judges authorship or truth; `effect-profiles.md` a voice layer with a device register and five effect profiles. `make formula-scan`. 42 tests, each signal seeded both ways. First run on Paper 1: "to our knowledge" recurs in 8 paragraphs.
+- **DR-023**: `preservation_check.py` compares a source text with its rewrite. It reports numbers and ISO dates that went missing or appeared, and tier words that went missing or moved up a band (read at run time from the Language Calibration table in `templates/writing-guide.md`; exit 2 if the table cannot be read). Beyond the DR, it also reports dropped hedges and added absolutes, and says so. Numbers are checked for presence only: two numbers that swap places pass. `translation-prompts.md` holds Prompt T (rewrite for a person, decision first, only if the source asks for one) and Prompt C (list the assertions a rewrite adds or drops, which the script cannot see). `make preservation-check SRC=… TRN=… [LINK=…]`. 59 tests, including one that pins the blind spot Prompt C covers. A one-report pilot: the script raised 1 flag; Prompt C found 5 items, two of them errors the script cannot see ("not refuted" rendered "passed", and a miscount).
+
+### Docs and README
+
 - **README, Common Questions: "Will an AI-text detector flag my paper?"** Detector accuracy is condition-dependent and was biased against non-native writers in a 2023 pilot; the policies read judge disclosure; keep the verification record as the answer to a flag.
+- **`CLAUDE.md` 34,670 → 11,570 characters.** Edit histories and restated counts are removed; instructions, Key Paths and every Hard Constraint's operative clause stay (a review lens checked them clause by clause, and restored five it found weakened). New Hard Constraint, *Token economy*: cut at least as much as you add, and keep no edit histories in per-session files.
+- **`vv/hypothesis-log.md` 34,521 → 19,199 characters**: its two resolved entries move word for word to `vv/hypothesis-log-resolved.md`; `docs/THRESHOLDS.md` points there.
+- `tools/README.md` notes that repo-maintenance checks live in `scripts/`.
 
-- **DR-022 (Proposed): formula repetition as a readability lens, not a detector.** It is staged in `extensions/`, following the DR-018 precedent:
-  - `formula_scan.py`: an advisory locator for rhythm, paragraph uniformity, negation-contrast turns, triad share, stock style words with per-item provenance, recurring phrases and openers, and section-template features. It exits 0 whenever it reports (2 on a tooling error), is English-only and says so, and handles LaTeX only for `.tex` files (preamble and non-prose environments skipped).
-  - `formula-review.md`: a judgement pass that never judges authorship or truth.
-  - `effect-profiles.md`: a voice layer with a device register (dose cap and variation per device) and five effect profiles.
-  - `make formula-scan`; `extensions/` is now linted.
-  - 42 tests, each signal seeded both ways. In two manual mutation passes (not scripted; the mutant lists are in the maintainer's work item), every non-equivalent breakage (30 of 31) turned a test red; the 31st is equivalent (a `UnicodeDecodeError` is a `ValueError`).
-  - L81 (Kobak et al. 2025) and L82 (Wikipedia "Signs of AI writing", tier D) supply the word-list provenance.
-  - First run on Paper 1: "to our knowledge" recurs in 8 paragraphs.
-  - DR-022 also records, for adopters, the decision to keep detectors out of every gate.
-- **Readability literature: L83–L91** (`literature/README.md` § Readability, Engagement and Homogenisation). Lay readers preferred AI poems (L85); the formula penalty so far appears to come from expert readers (L72, L86, L88); AI assistance made texts by different authors more alike (L83, L84). Hyland 2005 and Sword 2012 are read only in part.
-- **DR-022 revised on that evidence:** H1 is narrowed to expert or repeat-exposed readers from the intended audience; a multi-file mode (not yet built) is required before acceptance; engagement-marker density is proposed (not built) for the academic profile; the Evidence Base records that triads, "not X but Y" and rhythm rest on L72 alone.
-- **New `templates/readability.md`**: two prompts against compressed, hard-to-read AI prose, for sentence-level comprehension (DR-022 covers formula repetition). *Explain like I'm 18* states problem, findings, conclusions and next steps in full sentences, with how sure each conclusion is. *Write for a reader* sets the rules for manuscript prose: one idea per sentence, a concrete subject, the point stated outright at the strength its registry tier allows. A three-step workflow and two worked before/after examples. Optional; no adopter action.
-- **DR-023 (Proposed): two registers, and a translation step where text reaches a person.** Files an agent reads stay compact (token economy). Generated text a person reads (reports, CHANGELOG entries, issue bodies) is rewritten in a fresh context, with what the reader must decide first; a translation of a DR or paper is a proposal the author approves. A two-part check, which reports and never gates, flags missing numbers and tier words, any tier word that moved up a band, and any assertion the source does not make. Acceptance test: 10 real reports, two raters, partly blind.
-- **`vv/hypothesis-log.md`**: the two resolved entries (third-party verification ceiling, SPLIT; dsp-workshop pilot, HELD) move word for word to the new `vv/hypothesis-log-resolved.md`, which cuts the open log from 34,521 to 19,199 characters. `docs/THRESHOLDS.md` and the two open entries that cite them now point there. `CLAUDE.md` loses a disclaimer for a phrase it no longer uses, gotcha-format rules the log's own header holds, and the Makefile list in its tree; *Cross-Repo Evidence* becomes a Before You Start row. `templates/hypothesis-log.md` now allows the same separate resolved file, as an option; no adopter action.
-- **DR-023's check and prompts, staged in `extensions/`** (still Proposed; #42). `extensions/preservation_check.py` compares a source text with its rewrite and reports numbers and dates that went missing or appeared, tier words (read at run time from the Language Calibration table in `templates/writing-guide.md`) that went missing or moved up a band, dropped hedges and added absolutes (the last two go beyond the DR's specification, and say so). Numbers are checked for presence only: two numbers that swap places pass, which is one reason Prompt C exists. It reports and never gates; it fails with exit 2 when it cannot read an input or the table. `make preservation-check SRC=… TRN=… [LINK=…]`. `extensions/translation-prompts.md` holds Prompt T (rewrite for a person, decision first) and Prompt C (list assertions the rewrite adds or drops, which the script cannot see). New tests in `tests/test_preservation_check.py`, including one that pins the blind spot Prompt C covers. Optional; no adopter action.
+### Tooling (this repo's maintenance)
 
-**Adopter notes**: no adopter action required. The scripts read this repo's own layout.
+- **New `scripts/`**, replacing prose that went stale by hand; each exit path was exercised on a seeded fixture:
+  - `make drift`: 0 no drift, 1 drift, 2 cannot verify. Checks the companion pin against the latest release, the global skills byte for byte against the reference install at the pinned tag, this repo's stamp against this file, and paper pins. A failed fetch, a missing pin tag or no clone gives 2, never 0. A tracked paper pinned behind counts as drift.
+  - `make dr-status`: DRs grouped by the `status:` in their frontmatter.
+  - `make gotcha-stats`: entry count and sizes.
+- **`/release`** (project-local, gitignored): adopts the companion's `tagfree` check, and its coverage precondition now runs `tools.coverage --strict` instead of `make coverage`, which never enforced the thresholds.
+
+### Literature
+
+- **AI-text detection, L67–L82**: independent accuracy and bias evaluations, detector mechanisms, one vendor report (tier D), ICMJE/COPE/publisher policy, and the word-list provenance for `formula_scan.py` (L81 Kobak et al. 2025; L82 Wikipedia "Signs of AI writing", tier D). Step 0 passed for all; key figures re-checked against the PDFs.
+- **Readability, engagement and homogenisation, L83–L91.** Lay readers preferred AI poems (L85); the formula penalty so far appears to come from expert readers (L72, L86, L88); AI assistance made texts by different authors more alike (L83, L84). Hyland 2005 and Sword 2012 are read only in part.
+
+### Paper 1
+
+- **P0 tier floor: 1 of 8 → 3 of 6** (#38). S4-1, S4-2 and S4-4 are withdrawn (no manuscript text); S5-1 is re-grounded on S2-1, S2-2 and S3-4. S1-4 is reworded against prior art and demoted to P1. S1-1 and S1-2 are now SUPPORTED, with new sources read in full. S2-2 is narrowed to "no published consensus-based guideline" and stays EMERGING. S3-4 and S5-1 are capped by tier-monotonicity, because their premises are EMERGING. **`coverage --strict` still fails on the floor** (S2-2, S3-4, S5-1), as disclosed at v4.0.0; this release ships over it.
+- Framework pin v2.6.0 → v4.0.0; the v3.0.0 Required items were already in force.
+
+### Companion adoption
+
+| From | What | Landed as |
+|------|------|-----------|
+| agent-ready-projects v1.43.0 | `tagfree`: offline, no argument or an unsubstituted `vX.Y.Z` gives 2, never "free" | Project-local `/release` |
+| agent-ready-projects v1.47.0 | Size signals: project file above ~15k characters, memory archive pass above ~300k | In force through the global `/curate` and `/audit-context` |
+| agent-ready-projects v1.45.1 | Cheaper HIGH review tier | **Declined**: offered upstream as not the default (n=2), and it drops lenses this repo's tool guarantees rely on |
+| agent-ready-projects v1.44.0–v1.49.2, other tags | Already in force, or PATCH with nothing to adopt | Pin only; the four global skills are byte-identical to v1.49.2 |
+
+### Adopter notes
+
+No adopter action required. Everything new is optional: `templates/readability.md` can be copied into a paper project, and the `extensions/` files stay staged until their DRs are accepted. If you copy the hypothesis-log template, the separate resolved file is an option, not a change you must make. The scripts in `scripts/` read this repo's own layout.
+
+### Versioning rationale
+
+Step 2 rule 1 does not fire: no existing consumer must act. Rule 2 fires on a new template (`templates/readability.md`) and two new DRs, so MINOR, following v2.6.0 and v2.5.0.
 
 ## v4.0.0 (2026-09-26)
 

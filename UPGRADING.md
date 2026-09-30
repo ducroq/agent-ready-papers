@@ -11,6 +11,22 @@ The full release notes are in [`CHANGELOG.md`](CHANGELOG.md). This file is the q
 - **PATCH** version bumps are docs-only / clarifications, or backward-compatible bug fixes (e.g. a tooling fix that changes no public interface). Usually no action required; a bug fix may be worth adopting if you hit the bug.
 - Every release entry in `CHANGELOG.md` includes an "Adopter notes" / "Adopter action" subsection. This file aggregates them per version for quick lookup.
 
+## v4.1.0 (2026-09-30)
+
+**From v4.0.0 — what to review when you bump your pin to v4.1.0:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| **New: `templates/readability.md`** | **Optional.** Two prompts against hard-to-read AI prose, *Explain like I'm 18* and *Write for a reader*. Copy it into your paper project if your prose or your reports read as compressed. Its tier guard keeps each claim at its registry tier. |
+| `templates/CLAUDE.md` — one tree line for `readability.md` | None. Add the line only if you copy the template. |
+| `templates/hypothesis-log.md` — resolved entries may move to a separate file | None. Optional; the `## Resolved` section still works as before. Your log is a journal: never re-copy the template over it. |
+| `decisions/DR-022`, `DR-023` (both **Proposed**) | None — Proposed DRs do not bind. DR-022 records the decision to keep AI-text detectors out of every gate. |
+| `extensions/` — `formula_scan.py`, `formula-review.md`, `effect-profiles.md` (DR-022); `preservation_check.py`, `translation-prompts.md` (DR-023) | None. Staged, not accepted. Try them if you like; they report and never gate. |
+| README — *Will an AI-text detector flag my paper?* | None. Reference only. |
+| `scripts/` (`make drift`, `make dr-status`, `make gotcha-stats`) | None. They read this repo's own layout, not yours. |
+
+**Breaking changes:** none.
+
 ## v4.0.0 (2026-09-26)
 
 **From v3.0.0 — what to review when you bump your pin to v4.0.0:**
