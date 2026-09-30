@@ -112,7 +112,7 @@ Adopt the framework on a new paper in five steps (~10 minutes to set up):
 | Tier | Files | When |
 |------|-------|------|
 | **Required for first use** | `templates/CLAUDE.md`, `templates/claim-registry.md`, `templates/anti-hallucination.md`, `templates/writing-guide.md` | From day one |
-| **Useful once the paper grows** | `agents/review-prompt.md`, `agents/equation-checker.md`, `templates/decision-record.md`, `templates/glossary.md`, `templates/vv-framework.md`, `templates/cost-log.md`, `templates/hypothesis-log.md` | After ~20 registry entries, or once you hit a decision / cost-tracking / pre-registered bet worth recording |
+| **Useful once the paper grows** | `agents/review-prompt.md`, `agents/equation-checker.md`, `templates/decision-record.md`, `templates/glossary.md`, `templates/vv-framework.md`, `templates/cost-log.md`, `templates/hypothesis-log.md`, `templates/readability.md` | After ~20 registry entries, or once you hit a decision / cost-tracking / pre-registered bet worth recording, or a draft that is hard to read |
 | **Reference / background only** | `templates/key-quotes.md` | When you want context, not before |
 
 ### Driving it with your agent
@@ -458,6 +458,7 @@ Fill-in templates in [`templates/`](templates/) — the files you copy, populate
 - **[`glossary.md`](templates/glossary.md)** — Cross-domain terminology reference
 - **[`cost-log.md`](templates/cost-log.md)** — Per-operation token-cost log; copy to your paper's `vv/cost-log.md` (since v1.6.0)
 - **[`hypothesis-log.md`](templates/hypothesis-log.md)** — Provisional positions whose evidence lives in the future (`Position` / `Method` / `Revisit trigger` / `Review by`); resolves to closed or promoted to DR (since v1.7.0; adopted from agent-ready-projects v1.10.0)
+- **[`readability.md`](templates/readability.md)** — Two prompts against compressed, hard-to-read AI prose (*Explain like I'm 18*, *Write for a reader*) and a draft-then-check workflow
 - **[`work-item.md`](templates/work-item.md)** — Savepoint for work spanning several sessions; create in `docs/work-items/` and point at it from your in-progress list (adopted from agent-ready-projects v1.11.0)
 - **[`key-quotes.md`](templates/key-quotes.md)** — Reference quotes with page pins; the tier-3 "reference / background only" template from the adoption table above
 

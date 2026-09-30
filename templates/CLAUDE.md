@@ -127,6 +127,7 @@
 ├── writing-guide.md             <- Claim-to-section mapping
 ├── anti-hallucination.md        <- Citation verification
 ├── hypothesis-log.md            <- Provisional positions awaiting future evidence
+├── readability.md               <- Prompts against hard-to-read prose (optional)
 ├── DR-*.md                      <- Decision records
 ├── docs/
 │   └── work-items/              <- Multi-session savepoints (created on demand)
