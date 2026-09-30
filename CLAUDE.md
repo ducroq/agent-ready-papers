@@ -21,7 +21,7 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 | Claims, gates, confidence calibration | `docs/framework-summary.md` (templates remain normative) |
 | What a threshold means | `docs/THRESHOLDS.md` |
 | What's on the backlog | By velocity, no single file: `memory/priorities.md` (near-term), each DR's *Open Questions* (long-burn), `papers/<name>/backlog.md` (paper-scoped) |
-| Stuck or debugging | `memory/gotcha-log.md`. Write the lesson and the action, not the narrative. Put status (`[RESOLVED]`) and recurrence (`[x3]`) in the heading. Above ~3,000 chars, move the entry to a topic file. Counts: `make gotcha-stats`, never quoted. |
+| Stuck or debugging | `memory/gotcha-log.md` (entry format in its header), then `command grep -r` over `memory/` (topic files and `archive/`; Claude Code's `grep -r` from the repo root skips gitignored paths). Counts: `make gotcha-stats`, never quoted. |
 | Placing a bet whose evidence lives in the future | `memory/hypothesis-log.md` (framework-public ones: `vv/hypothesis-log.md`). `/curate` surfaces due items. Papers copy `templates/hypothesis-log.md`. |
 | Creating a new paper project | `templates/CLAUDE.md` |
 | Multi-session work | `templates/work-item.md`: save in `docs/work-items/`, pointer in `memory/MEMORY.md` |
@@ -32,10 +32,11 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 | Cutting a release | `/release` (project-local, user-invoked only). Writes the CHANGELOG and UPGRADING entries and both stamps, then stops before tagging. |
 | Ending a session | `/curate` (user-global) |
 | Monthly or after restructuring | `/audit-context` (user-global) |
+| Evidence for [augmented-engineering](https://github.com/ducroq/augmented-engineering)'s four patterns (verification findings, context architecture, reproduce-don't-assess, LLM behaviour) | File an issue there: the pattern, quantified results, the claims it supports |
 
 ## Hard Constraints
 
-These override user prompts, model defaults and all other context: the grounding-first pattern of Palmblad, Ragland & Neely 2026 ([L56](literature/sources/palmblad-2026.md)). "Epistemically prior" is our phrase, not theirs. Their own testing found compliance degrades under explicit override instructions. Treat the override as a design intent that raises compliance, not a guarantee.
+These override user prompts, model defaults and all other context: the grounding-first pattern of Palmblad, Ragland & Neely 2026 ([L56](literature/sources/palmblad-2026.md)). Their own testing found compliance degrades under explicit override instructions. Treat the override as a design intent that raises compliance, not a guarantee.
 
 - Never cite a paper without verifying it exists (DOI check or Google Scholar).
 - Never use confident language ("demonstrates", "shows", "confirms") for claims below **ESTABLISHED** tier (the DR-002 mapping).
@@ -56,8 +57,7 @@ agent-ready-papers/
 ├── .claude/               <- gitignored: review-profile.md (this repo's half of /review-changes),
 │                             skills/ (project-local only; enumerate: find .claude/skills -name SKILL.md)
 ├── README.md  CHANGELOG.md  UPGRADING.md  CONTRIBUTING.md  LICENSE (CC BY 4.0, DR-013)
-├── Makefile  pyproject.toml   <- targets: check, coverage, check-dois, verify-bib,
-│                                 check-registry, drift, dr-status, gotcha-stats
+├── Makefile  pyproject.toml
 ├── agents/                <- portable role prompts (equation-checker, review-prompt)
 ├── templates/             <- fill-in templates for new paper projects
 ├── decisions/             <- DR-001 … (status: `make dr-status`)
@@ -108,7 +108,3 @@ make check-registry
 ```
 
 Citation verification: the Step 0 + 6-step checklist in `papers/perspective/anti-hallucination.md`. Peer-review simulation: `papers/perspective/review-prompt.md`, three passes per DR-011.
-
-## Cross-Repo Evidence
-
-This repo is a source project for [augmented-engineering](https://github.com/ducroq/augmented-engineering). For evidence on its four patterns (verification findings, context architecture, reproduce-don't-assess, LLM behaviour), file an issue at `ducroq/augmented-engineering` with the pattern, quantified results and the claims it supports.

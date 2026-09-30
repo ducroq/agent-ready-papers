@@ -112,7 +112,7 @@ Paper 1 ("The Verification Gap") hit 100% on all tiers (19 entries) and scored 3
 
 ### Scope: these thresholds assume you can close your own claims
 
-*(Added 2026-08-16 on the resolution of a registered bet; see `vv/hypothesis-log.md`. **Tier is per row, not per table** — see the n column below. The document's own SPECULATIVE status is unchanged: this section observes an assumption the thresholds were making, and does not raise the tier of any threshold. Both audits behind it are unpublished and gitignored, so — per the standard `templates/vv-framework.md` §3 sets for exactly this case — **treat the pattern as directional and measure your own registry rather than checking against these numbers**.)*
+*(Added 2026-08-16 on the resolution of a registered bet; see `vv/hypothesis-log-resolved.md`. **Tier is per row, not per table** — see the n column below. The document's own SPECULATIVE status is unchanged: this section observes an assumption the thresholds were making, and does not raise the tier of any threshold. Both audits behind it are unpublished and gitignored, so — per the standard `templates/vv-framework.md` §3 sets for exactly this case — **treat the pattern as directional and measure your own registry rather than checking against these numbers**.)*
 
 Every number above presumes a **self-authored** project, where an unverified claim is work the author has not done yet. Applied to a document the project did not write, coverage measures something different, and two audits run in this repo put a usable bound on how different.
 
