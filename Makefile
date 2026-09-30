@@ -1,4 +1,4 @@
-.PHONY: test lint format check coverage check-dois check-metadata verify-bib check-registry formula-scan drift dr-status gotcha-stats
+.PHONY: test lint format check coverage check-dois check-metadata verify-bib check-registry formula-scan preservation-check drift dr-status gotcha-stats
 
 test:  ## Run tests
 	pytest tests/ -x -q
@@ -32,6 +32,10 @@ check-registry:  ## Registry/manuscript internal consistency for Paper 1
 
 formula-scan:  ## Advisory formula/readability locator (PROPOSED, DR-022); FILE=<path>, default Paper 1
 	python extensions/formula_scan.py "$(or $(FILE),papers/perspective/manuscript.tex)"
+
+preservation-check:  ## Did a translation keep numbers and certainty? (PROPOSED, DR-023); SRC=<source> TRN=<translation> [LINK=<source link>]
+	@[ -n "$(SRC)" ] && [ -n "$(TRN)" ] || { echo "usage: make preservation-check SRC=<source> TRN=<translation> [LINK=<source link>]"; exit 2; }
+	python extensions/preservation_check.py "$(SRC)" "$(TRN)" $(if $(LINK),--link "$(LINK)")
 
 drift:  ## Session-start drift check: companion pin, global skills, self and paper stamps
 	bash scripts/drift.sh

@@ -61,7 +61,7 @@ agent-ready-papers/
 ├── agents/                <- portable role prompts (equation-checker, review-prompt)
 ├── templates/             <- fill-in templates for new paper projects
 ├── decisions/             <- DR-001 … (status: `make dr-status`)
-├── extensions/            <- staged, not-yet-accepted surfaces (agent prompts, a tool, a template)
+├── extensions/            <- staged, not-yet-accepted surfaces (agent prompts, two tools, a template)
 ├── literature/            <- source registry; pdfs/ gitignored
 ├── docs/                  <- framework summary, thresholds, verification hooks; work-items/ on demand
 ├── tools/                 <- Python registry tooling (coverage, DOIs, metadata, consistency); see tools/README.md
