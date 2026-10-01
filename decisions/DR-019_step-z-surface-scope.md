@@ -1,8 +1,9 @@
 # DR-019: Step Z Surface Scope — Naming Framework Prose, Not Sweeping It
 
 ---
-status: Proposed
+status: Accepted
 date: 2026-08-13
+accepted: 2026-10-01
 superseded_by:
 ---
 
@@ -77,8 +78,8 @@ The defensible residual claim is narrower: **no shipped check *names* framework 
 
 **Option D**, with the recurring obligation explicitly withheld.
 
-1. **Step Z gains a surface axis.** *(NOT IMPLEMENTED — see Status below.)* Its scope line names both axes — project types *and* surfaces — and states that where a repo ships framework or methodology prose, that prose is in scope. Stating the axis is the fix for the mechanism this DR is about.
-2. **Point at the instruments that already work**, rather than creating one. `agents/review-prompt.md` has demonstrated 3–4 load-bearing findings on this surface; `agents/equation-checker.md` owns the numerical-inconsistency class that F1 actually belongs to. Both ship.
+1. **Step Z gains a surface axis.** Its scope line names both axes — project types *and* surfaces — and states that where a repo ships framework or methodology prose, that prose is in scope. Stating the axis is the fix for the mechanism this DR is about.
+2. **Point at the instruments that already work**, rather than creating one. `agents/review-prompt.md` has produced 3–4 load-bearing findings on this surface (one run, 2026-06-11); `agents/equation-checker.md` owns the numerical-inconsistency class that F1 actually belongs to. Both ship.
 3. **One backlog sweep**, not a cadence. Sampled rather than cherry-picked: include at least one stale *claim-sparse* document (3 of 5 files in `docs/` have zero evidence markers) so the yield estimate is not drawn from the densest case again.
 4. **Pre-register before that sweep**: the load-bearing rubric, and an adjudicator who did not write the prose. Both were missing this time and both changed the result when supplied.
 5. **Re-evaluate after the backlog sweep** against a named trigger — the next `/audit-context` run — not "later".
@@ -87,7 +88,7 @@ The defensible residual claim is narrower: **no shipped check *names* framework 
 
 ## Consequences
 
-- `templates/anti-hallucination.md` Step Z **would gain** a surface-scope statement. **Adopter-facing** — MINOR bump plus an `UPGRADING.md` row *when this DR is accepted*. **None of this has been done**: `templates/anti-hallucination.md` still scopes Step Z as "Applies to all project types", and no CHANGELOG or UPGRADING entry exists. This DR is `status: Proposed`, and per `CLAUDE.md` only Accepted DRs bind — shipping a template change on an unaccepted decision would be the defect, not the fix.
+- `templates/anti-hallucination.md` Step Z gains a surface-scope statement. **Adopter-facing**: MINOR bump plus an `UPGRADING.md` row at the next release.
 - **The F1 defect is fixed in `docs/THRESHOLDS.md` independently of this DR** (arithmetic correction, break point stated as the 25–50% range it actually is, enforcement asymmetry documented). **The normative surfaces still carry the bare ≥85%** — README Gate 2, `templates/vv-framework.md` §3, `templates/claim-registry.md`, and each paper registry inheriting from it. Documenting a defect in the rationale file while leaving it in the four places adopters read is not a fix, and this DR does not pretend otherwise. Repairing them is a separate change.
 - F2's residual and F3 remain open in `docs/THRESHOLDS.md`, flagged in-place. Both need a decision about what the actual justification for the 70% and 3.5 thresholds is — content work, not an editing pass.
 - `/audit-context` is **user-global**, so a papers-specific sweep step cannot be added to the skill without affecting every repo. The sweep is a documented local procedure, or an upstream proposal.
@@ -125,9 +126,9 @@ Ten reviewers over the shipped surface (`templates/`, `agents/`, README normativ
 
 ## Implementation status
 
-**Nothing in the Decision section has been implemented.** Recorded explicitly because a 2026-08-13 review found this document reading as though it had. What exists today: the Context, the two-stage evidence, and the sweep result. What does not: the Step Z surface axis, the CHANGELOG entry, the `UPGRADING.md` row.
+Accepted 2026-10-01. Decision item 1 is Step Z's scope line in `templates/anti-hallucination.md`; the "When to Use" summary is deliberately unchanged, since a cadence there would be the standing obligation this DR withholds. Item 2 is the same scope line's pointer to `agents/review-prompt.md` and `agents/equation-checker.md`. Items 3 and 4 ran on 2026-08-13 (*Sweep result*: rubric pre-registered, independent adjudicator). Item 5 named the next `/audit-context` run as its trigger; the maintainer's acceptance on the sweep result replaces it. The `UPGRADING.md` row is written at the next release. Paper-local copies of `anti-hallucination.md` take the change when each paper re-syncs.
 
-<!-- verify: cd "$(git rev-parse --show-toplevel)" && grep -q 'Applies to all project types' templates/anti-hallucination.md && echo 'DR-019 correctly unimplemented: Step Z still has no surface axis' || { echo 'CLAIM REFUTED: DR-019 has been partly implemented — update this section and the Status field'; exit 1; } -->
+<!-- verify: cd "$(git rev-parse --show-toplevel)" && grep -q 'and to every surface that states claims' templates/anti-hallucination.md && echo 'DR-019 implemented: Step Z names the surface axis' || { echo 'CLAIM REFUTED: the surface axis is missing from Step Z'; exit 1; } -->
 
 <!-- The `||` above is deliberately UNescaped. The `\|` form is correct only
      inside a markdown table cell, where a bare pipe would split the row and

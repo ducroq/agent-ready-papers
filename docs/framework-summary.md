@@ -80,7 +80,7 @@ Two checks apply across unit types rather than to one type (both verification pa
 
 | Check | Question | Scope | Normative source |
 |-------|----------|-------|------------------|
-| Step Z (inverse hallucination) | Does any sentence's language tier exceed the tier its evidence supports? | All projects (PROVOCATION reclassification is a speculative-design sub-case) | `templates/anti-hallucination.md` → "Step Z" |
+| Step Z (inverse hallucination) | Does any sentence's language tier exceed the tier its evidence supports? | All projects and all claim-stating surfaces, the project's own methodology prose included (DR-019); PROVOCATION reclassification is a speculative-design sub-case | `templates/anti-hallucination.md` → "Step Z" |
 | Scope Drift (declared vs delivered) | Does the paper deliver what its abstract / stated contributions promised? | All papers | `templates/vv-framework.md` §4.6 |
 
 Both were generalized/adapted from agent-ready-assessment into the framework in v2.3.0 (see DR-017).

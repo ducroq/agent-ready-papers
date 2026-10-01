@@ -52,7 +52,7 @@ Both recorded instances were adjudicated as **tier** problems and repaired by **
 - **`DR-009`** — Accepted. CALCULATION is a verification *procedure* running alongside the registry. Untouched here.
 - **`DR-017`** — Accepted. Generalised Step Z to all project types. This extends the same instrument along a different axis.
 - **`DR-018`** — Proposed. Rejected folding a second lens into the equation-checker (its Option B). Its deeper principle — *one lens per instrument* — cuts against this DR too, and is engaged under Option D.
-- **`DR-019`** — Proposed. Also edits Step Z, along the *surface* axis. Orthogonal and composable; see *Consequences*.
+- **`DR-019`** — Accepted 2026-10-01. Edited Step Z along the *surface* axis; this DR adds a detection limb, and the two compose. See *Consequences*.
 - **`memory/dead-ends.md`** — *don't promote a new verification procedure to a registry unit type.* This is a check, and a limb of an existing one. The door stays closed.
 
 ## Options Considered
@@ -121,7 +121,7 @@ Proposed text, to sit in `templates/anti-hallucination.md` under Step Z's *Gener
 - **A named sub-check, not a gate obligation.** No Gate in `templates/vv-framework.md` changes. Deliberate: obliging action on this evidence is what `DR-019` withheld.
 - `agents/equation-checker.md` is **not modified**, and the `CIRCULAR` category in the triggering audit stays a project-local extension.
 - **Vocabulary.** The limb says "at the floor" (SPECULATIVE), not "null". ⚠ An earlier draft invented a null tier; `templates/writing-guide.md` maps four tiers with SPECULATIVE as the floor, no shipped surface can consume a fifth, and the triggering audit's own Step Z table recorded the affected entry as SPECULATIVE — its own instance never used the tier the draft proposed.
-- **Sequencing with `DR-019`:** both edit Step Z; whichever lands second should re-read the section rather than patching blind.
+- **Sequencing with `DR-019`:** `DR-019` was accepted on 2026-10-01 and changed Step Z's scope line. Re-read the section before implementing this, rather than patching blind.
 - `agent-ready-research` vendors this layer under `DR-017` and should be offered it if accepted, with the n=2 caveat.
 
 ## Evidence Base
@@ -139,6 +139,8 @@ Proposed text, to sit in `templates/anti-hallucination.md` under Step Z's *Gener
 **What this does not establish.** Two instances, three days apart, one maintainer, one model family. No cross-vendor pass. No prospective run. No adopter evidence.
 
 ## Revisit If
+
+**Acceptance condition** (maintainer decision 2026-10-01: wait). Accept when either (a) a third instance of circular evidence is found, or (b) the Reuse check is run once prospectively, on a derivation it was not built from, and its hit or miss is recorded. Until then this DR stays Proposed.
 
 - **A third instance appears in prose rather than a derivation** — the limb's derivation-graph framing would then be too narrow.
 - **The Reuse match fires on legitimate internal consistency checks** — the iterative-solve and same-equation/different-observable rows of the Known limits table. Those are the most likely false-positive routes and the sharpest known weakness. Equally: if the two false-negative rows turn out to be the common shape in practice, the match is catching the easy case only and Option D should be revisited.

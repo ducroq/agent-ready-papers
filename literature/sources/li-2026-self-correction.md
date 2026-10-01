@@ -27,7 +27,7 @@ The most valuable find in this batch for the *repo* as distinct from the paper.
 - **DR-020 (circular evidence)** declares both its gap and its remedy EMERGING. The correlated-error account is **external, independent support for the gap half**: it explains *why* AI-verified AI output is weak evidence, rather than merely asserting that it is. It supplies nothing for the remedy half.
 - **DR-011 Pass 3 (cross-vendor)** is argued here on first principles. This literature turns it into the load-bearing pass rather than the optional high-stakes extra: if failure-mode independence is what makes verification informative, then same-vendor passes are near-redundant and the cross-vendor pass is where the evidence actually comes from.
 - **The third-party-audit-ceiling position** (resolved SPLIT, 2026-08) — bears directly; re-read alongside.
-- ⚠ DR-019 modifies the same Step Z section as DR-020. Whichever is touched second should re-read that section rather than patching blind (per the root CLAUDE.md routing row).
+- ⚠ DR-019 (accepted) changed the Step Z section that DR-020 would extend; re-read it before implementing DR-020 (per the root CLAUDE.md routing row).
 
 ## Caveats (tier discipline)
 - Preprint, three models, benchmark tasks → tier **B**. EMERGING at most.

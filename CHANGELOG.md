@@ -16,6 +16,11 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
 
 ## Unreleased
 
+### Templates (adopter-facing)
+
+- **DR-019 accepted: Step Z's scope names surfaces, not only project types.** `templates/anti-hallucination.md` now says Step Z applies to every surface that states claims, including a project's own methodology prose (docs, decision records, project instructions, changelog rationale). It sets no cadence and creates no standing sweep (the *When to Use* summary is unchanged); it points at instruments that already exist, `agents/review-prompt.md` and `agents/equation-checker.md`. `README.md` and `docs/framework-summary.md` say the same. Adopter action: optional, since nothing new is obliged; re-sync a paper's local `anti-hallucination.md` to take it. Release as MINOR with an `UPGRADING.md` row: the new scope is normative, but no gate, checker or cadence enforces it, so v3.0.0's "obliges action" rule does not fire. Issue #33.
+- DR-020 stays Proposed, with an acceptance condition: a third instance of circular evidence, or one prospective run of its Reuse check.
+
 ### Tooling (this repo's maintenance)
 
 - **New `make check-counts`** (`scripts/check-counts.sh`): checks the counts stated in the top CHANGELOG section against the repo. A `` `path` A → B characters `` claim must match the file now; "N tests" must match the collected tests of the one module the item names; "the suite went from A to N" must match the whole suite. Exit 0 all match, 1 stale, 2 cannot verify. A count in a near-miss shape (an ASCII arrow, "chars", a "k" abbreviation, "added N tests") is reported UNPARSED and exits 2, and so does a section with no counts. It narrows stale counts; it does not close them: a count spelled out, or in a table cell, can still pass. Three review rounds. The shapes seeded in review are now `tests/test_check_counts.py`, one case per shape with its expected exit; removing either fail-closed branch turns cases red. The test suite now takes seconds rather than under one, since each case runs the script. `/release` Step 4 runs it on the new entry (project-local skill, gitignored).
