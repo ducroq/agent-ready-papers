@@ -124,6 +124,18 @@ def test_undecodable_filename_is_listed_not_a_crash(tmp_path):
     assert r.returncode == 0 and "10,001" in r.stdout, r.stderr
 
 
+@pytest.mark.skipif(os.geteuid() == 0, reason="root reads a mode-000 file")
+def test_unreadable_file_cannot_verify(tmp_path):
+    _seed(tmp_path, {"memory/a.md": "ab"})
+    f = tmp_path / "memory" / "a.md"
+    f.chmod(0)
+    try:
+        r = _run(tmp_path)
+        assert r.returncode == 2 and "Permission denied" in r.stderr and "crash:" not in r.stderr
+    finally:
+        f.chmod(0o644)
+
+
 def test_non_utf8_file_cannot_verify(tmp_path):
     (tmp_path / "memory").mkdir()
     (tmp_path / "memory" / "a.md").write_bytes(b"\xff\xfe")
