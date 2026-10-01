@@ -1,0 +1,424 @@
+# Upgrading archive
+
+Adopter actions for v3.0.0 and earlier, moved word for word from [`UPGRADING.md`](UPGRADING.md) on 2026-10-01. Newest first: start with the release after your pin, work up to v3.0.0, then continue with v4.0.0 in `UPGRADING.md`.
+
+## v3.0.0 (2026-08-13)
+
+**From v2.6.1 — what to review when you bump your pin to v3.0.0:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| `templates/anti-hallucination.md` — **Step 0's decision rule replaced** | **Required — re-read Step 0 and update your paper-local copy.** It required **both** Google Scholar *and* DOI resolution to proceed, which marked every DOI-less source HIGH RISK: books, standards, reports, and any website — including the sources the file's own WebFetch ladder exists to verify. It now gates on DOI **presence**: *if a DOI is cited it must resolve; if none is cited, a Scholar / publisher / ISBN record suffices.* Note this is stricter in one direction — a cited DOI that 404s is now HIGH RISK **even when Scholar confirms a paper of that name**, because that is the wrong-DOI case and Scholar cannot see it. |
+| `templates/vv-framework.md` — **Gate 2 gains `P2 entries 70% verified`** | **Required — a paper that passed Gate 2 may no longer pass.** The 70% P2 target was already documented in `docs/THRESHOLDS.md` and the README Gate 2 checklist; only the template's own checklist omitted it. If your P2 entries are under 70% verified, you now have an unchecked Gate 2 box. `python -m tools.coverage <registry> --strict` has always enforced this target, so a project gating on the tool is unaffected. |
+| `templates/CLAUDE.md` + `templates/writing-guide.md` — **confident-language floor moves from below-SUPPORTED to below-ESTABLISHED** | **Required — re-audit your prose.** "demonstrates", "shows" and "confirms" were barred only *below* SUPPORTED, which permitted them **at** SUPPORTED; the DR-002 mapping reserves them for ESTABLISHED. Prose that was compliant is no longer. The pre-submission checklist in `writing-guide.md` had the same hole, so ticking that box previously certified the violation. Grep your manuscript for the three words and check each against its registered tier. |
+| `templates/vv-framework.md` — P1 tier floor marked as a **manual** check | **Know what your green `--strict` does not cover.** `tools/coverage.py` reads only the Status checkbox and never the Confidence column, so `--strict` reports the P1 gate met for a registry whose P1 rows are all verified and all SPECULATIVE. Priority and confidence are deliberately orthogonal axes; the tool measures one of them. |
+| `templates/claim-registry.md` — PROVOCATION sub-table now parses | **Check yours if you use PROVOCATION.** Any prose between a sub-table marker (`**PROVOCATIONs**`) and its table header makes `tools/coverage.py` abandon that sub-table silently — the rows vanish from the report and `--strict` passes because there is nothing left to fail. If your registry has explanatory text under a marker, move it above the marker. |
+| `templates/anti-hallucination.md` — worked example rewritten as a **failing** example | None, but worth reading. The example previously scored a citation PASS on every step and concluded "Safe to use"; the citation carried a DOI that 404s and attributed a device's measurement to human anatomy. It now scores Steps 4 and 6 FAIL and rejects the citation. |
+| `decisions/DR-009` (Accepted) — Key Insight corrected | None. The decision is unchanged; the supporting observation is now stated with its confound disclosed (vendor, prompt and inference mode varied together, so it does not isolate the prompt). If you cited DR-009 for "the prompt matters more than the model", that claim is weaker than it read. |
+| `agents/review-prompt.md` — recommendation bands | None. `3.5–3.9` → `3.5–<4.0` and `2.5–3.4` → `2.5–<3.5`, closing two ranges that fell in no band. |
+| `tools/check_dois.py` — trailing `}` stripped | None, and re-run it if you gave it a `.bib` file. Every BibTeX `doi = {…}` field previously produced a false 404. |
+| `decisions/DR-019` (Proposed) — Step Z surface scope | None — it is **Proposed and unimplemented**, and says so. Only Accepted DRs bind. |
+
+**Breaking changes:** three, all listed above as *Required* — Step 0's decision rule, Gate 2's P2 line, and the confident-language floor. Each changes what a compliant project must do; none removes an artifact. If you maintain paper-local copies of `anti-hallucination.md` or `writing-guide.md`, they keep the old rules until you refresh them.
+
+## v2.6.1 (2026-08-13)
+
+**From v2.6.0 — what to review when you bump your pin to v2.6.1:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| `templates/CLAUDE.md` — the *Ending a session* row no longer hardcodes `../../memory/gotcha-log.md` | **Check yours if your paper project is not exactly two levels deep.** `../../` assumes a `papers/<name>/` layout; in a single-paper repo where the paper *is* the root it resolves nowhere, and the row silently pointed at nothing. The template now says `<repo-root>/memory/gotcha-log.md` and gives both concrete forms. Your existing copy keeps working — this is a correction to what new projects scaffold from. |
+| Root `CLAUDE.md` — new Hard Constraint documenting the `<!-- placeholder -->` marker for paths never meant to resolve | **Optional, and it is not ours to give you** — the convention ships in `agent-ready-projects` v1.23.0, which is where you adopt it from. Worth knowing if you run `/audit-context`: without markers, instructional and cross-repo paths are re-reported as broken on every run forever. Two gotchas if you do adopt it: the marker is **span-scoped** (it covers the nearest backticked path *before* it, not the whole line), and a marker on a path that resolves anywhere — **including by filename suffix** — is reported as a stale marker, which makes template placeholders unmarkable in a repo that also ships instances of that template. |
+| `README.md` — adoption-tier table qualifies template filenames with their `templates/` path | None. The middle row already did; the other two now match, so a bare name no longer means "source file" in one row and "file in your project" in another. |
+| `.gitignore` — `memory/`, `audits/`, `docs/work-items/` anchored to the repo root (landed after v2.6.0, versioned here) | None for you, but **worth copying the reasoning** if you keep unpublished manuscripts in a public repo. Unanchored, those patterns match at any depth; anchored, they mean what they look like they mean. |
+| Reference-integrity caveat | **Read a `/audit-context` Step 4 report as a candidate list, not a defect list.** As of companion v1.25.0 it has no doc-relative rung, so a correct relative link inside a nested project file is reported as a collision — 42 of this repo's 102 findings were exactly that. Re-resolve a finding against the referencing document's own directory before acting. Tracked upstream as [projects#54](https://github.com/ducroq/agent-ready-projects/issues/54), with [#55](https://github.com/ducroq/agent-ready-projects/issues/55) and [#56](https://github.com/ducroq/agent-ready-projects/issues/56). |
+
+**No breaking changes.** PATCH: nothing new to adopt; every change is confined to an existing artifact. Companion pin unchanged at v1.25.0. Paper pins are not bumped by a framework release — that is the paper author's deliberate act, and the drift row surfaces it at session start.
+
+## v2.6.0 (2026-08-12)
+
+**From v2.5.0 — what to review when you bump your pin to v2.6.0:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| **`memory/gotcha-log.md` — the 2-3 line cap shipped in v2.5.0 is withdrawn.** It was unenforceable: a markdown source line has no length limit, so entries passed by lines while running 700–1,200 characters. Restated at ~200 characters it would flag 88–92% of entries across three logs and 277 entries — a bulk false-positive generator, not a rule | **Stop applying it, and if you were already ignoring it, you were right to.** This supersedes the v2.5.0 row below. What replaces it: act above **~3,000 characters**, where an entry has become a page and belongs in a topic file or a DR. Note the threshold is inherited from the companion's 277-entry measurement — in this framework's own log, median is ~1,050 and nothing has reached 3,000. Measure your own log before assuming it bites. |
+| `templates/CLAUDE.md` — new **`## Active work`** section, plus a work-item row in Before You Start, a Key Files row, and a Directory Structure entry | **Decide once, then act.** If you keep an in-repo memory index, **delete the section** — two in-progress lists disagree, and an audit that finds both reports it. If you do not, this is where a `docs/work-items/` pointer goes; without it you can have work-item files and nowhere the pointer could live. Do not read the section as proof your `CLAUDE.md` is always loaded: Copilot CLI does not auto-read it at session start, and Cursor and Continue read their own rules files. |
+| `templates/hypothesis-log.md` — write the entry **at the moment you make the claim**, not at session end | **Recommended, no file change needed.** A hypothesis reconstructed hours later reconstructs a refutation criterion that was live at the time, which is post-hoc rationalization in the log's format — the failure the `Method` field exists to prevent. |
+| Root `CLAUDE.md` — new session-start row pointing at the memory index; the two drift rows merged into one; `/update-drift` given a route | **Worth copying the pattern.** If your project file has more than one row beginning with the same trigger phrase and disambiguated by a parenthetical category, they collide as triggers — merge them or rename to a situation. If your memory index has no row pointing at it, nothing loads it and nothing tells you. |
+| `/review-changes` — new Step 1.5 structural pre-check, and a merged measurable-claim rule in the adversarial lens (maintainer-local skill, not shipped) | None — the skill is gitignored and was never shipped. **If you maintain your own copy, the two worth taking are portable.** Step 1.5: a `\|` inside a markdown table cell pushes cells past the end of the row and GFM drops the excess silently, which no content-reading lens catches. The lens rule: a claim that needs a measurement gets one, gets hedged, or is not ready — covering negatives and absolutes-in-descriptions. Both are stated with their own limits, including three false-positive shapes and a CRLF blind spot. |
+| `/release` — hardened tag selector, refresh-after-tag-is-live step (maintainer-local, not shipped) | None. Relevant only if you cut versioned releases of your own fork. If you do: `git tag --sort=-v:refname \| head -1` is silently won by a scratch tag, a prerelease, or a tag on an unmerged branch. |
+| `docs/verification-hooks.md`, `decisions/DR-017` — one withdrawn-rule reference and one row-name reference corrected | None. Wording only; no hook semantics and no decision semantics changed. |
+| `vv/cost-log.md` — an unescaped `\|H(z)\|` in a table cell was truncating a row when rendered | None. Framework-internal. Mentioned because the defect class is worth knowing: it is invisible in a diff and wrong only when rendered. |
+
+**No breaking changes.** MINOR: a new documented template section (`## Active work`). Companion pin bumped v1.18.0 → v1.25.0 (seven releases; most already in force — see the adoption table in `CHANGELOG.md`).
+
+## v2.5.0 (2026-08-08)
+
+**From v2.4.0 — what to review when you bump your pin to v2.5.0:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| `templates/CLAUDE.md` — new `agent-ready-papers: vX.Y.Z` pin line in the header, plus a framework-drift row as the first Before You Start entry | **Recommended.** Add `- **agent-ready-papers:** v2.5.0` to your paper's `CLAUDE.md` header if it has no pin line. The framework has always told your agent to compare that line against the CHANGELOG at session start — until now the template it scaffolds from didn't contain one, so the check read nothing and passed. |
+| **Skill scope** — a user-global skill silently shadows a project-local one of the same name (new Hard Constraint in the framework's root `CLAUDE.md`) | **Check once.** If you installed `curate` or `audit-context` into your paper repo's `.claude/skills/` *and* also have `~/.claude/skills/<same>/`, the local copy is inert and has never loaded. Delete it, don't reconcile it. If you customized the local one, that customization was never in effect — move the content into your project's `CLAUDE.md`. |
+| `docs/verification-hooks.md` (new) — which of this framework's checks are worth firing automatically after an edit, and three ways a hook fails | Optional reading. **If you wire a `coverage --strict` hook, add the matching Hard Constraint the same day**: claims are never downgraded, deleted, or re-tiered to make a coverage check pass. The cheapest way to turn that check green is to reclassify a P0 claim as P2 — coverage passes and verification is gutted. |
+| `/review-changes` magnitude gate + rebuilt risk tiers (maintainer-local skill, not shipped) | None — the skill is gitignored and was never shipped. **If you maintain your own copy, do not copy this repo's tier table**; it names this repo's paths. Copy the *semantics*: `**` crosses directory levels, a leading `/` anchors, most specific wins, unmatched paths default to MEDIUM and get named under "Unclassified". |
+| `/release` skill (new, maintainer-local, not shipped) | None. Relevant only if you cut versioned releases of your own framework fork. |
+| `memory/gotcha-log.md` — new entries capped at 2-3 lines | Optional. Applies to *new* entries; retrofitting an existing log is a separate decision, not something to do while writing an unrelated entry. |
+| De-identification: a private repository name removed from `decisions/DR-011`, `tools/README.md`, `UPGRADING.md`; four dead `agent-ready-assessment` links de-linked | None — descriptors only. No evidence, reasoning, or cross-reference substance changed. |
+| Root `CLAUDE.md` — new skill-scope Hard Constraint, corrected not-shipped table, new Before You Start rows | None for paper projects. Framework-level; paper-project `CLAUDE.md` files are unaffected except for the pin line in row 1 above. |
+
+**No breaking changes.** MINOR: new doc + new maintainer skill + new documented pin convention. Companion pin bumped v1.12.0 → v1.17.0 (nine releases; see the adoption table in `CHANGELOG.md`).
+
+## v2.4.0 (2026-07-28)
+
+**From v2.3.1 — what to review when you bump your pin to v2.4.0:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| `templates/work-item.md` (new) — multi-session work savepoints | Optional — copy to your project if you want structured savepoints for work spanning multiple sessions. Save as `docs/work-items/[slug].md`. |
+| Root `CLAUDE.md` — epistemic-priority preamble on Hard Constraints, agent-write boundary | None for paper projects. Framework-level constraint changes; paper-project CLAUDE.md files are unaffected. |
+| `README.md` — "agents adhere to guidelines" framing | None — documentation-only. |
+| New literature L56 (Palmblad 2026 GROUNDING.md) + L50 matured | None — literature additions. |
+
+**No breaking changes.** MINOR: new opt-in template. Companion pin bumped v1.10.3 → v1.12.0 (internal).
+
+## v2.3.1 (2026-06-24)
+
+**From v2.3.0 — what to review when you bump your pin to v2.3.1:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| [DR-017](decisions/DR-017_typed-verification-core-ownership.md) + CHANGELOG — provenance correction: v2.3.0 over-credited `agent-ready-assessment` as inventor of the backported refinements; assessment's own issues show most were imported *from* agent-ready-papers. Attribution narrative fixed; **no template content changed.** | None — documentation-only. The v2.3.0 capabilities (generalized Step Z, §4.6 Scope Drift, +5 failure-pattern rows, named tier-monotonicity) are unchanged. |
+| Root `CLAUDE.md` self-pin bumped v2.3.0 → v2.3.1 | None — metadata only. |
+
+**No breaking changes.** PATCH: provenance/attribution correction only.
+
+## v2.3.0 (2026-06-24)
+
+**From v2.2.4 — what to review when you bump your pin to v2.3.0:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| `templates/anti-hallucination.md` — **Step Z generalized** from a PROVOCATION-only check to the general *tier-monotonicity violation* check (does any sentence's language tier exceed the tier its evidence supports?), applying to **all project types**; the speculative-design diegetic-artefact case is preserved as a labelled sub-case | **Review if you previously skipped Step Z as "PROVOCATION-only."** You now run it as a general pre-submission pass — it catches empirical overclaiming too (single-run-as-measurement, uncited performance numbers, no-protocol timing claims). No registry-structure change; PROVOCATION projects keep the diegetic sub-case unchanged. |
+| `templates/anti-hallucination.md` — failure-pattern table +5 rows (number invention uncited, index drift, single-run-as-measurement, library version drift, missing model/checkpoint card) | Reference only — extends the existing pattern catalogue. |
+| `templates/vv-framework.md` → v2.5 — new **§4.6 Scope Drift Check** (declared scope vs delivered sections: classify each abstract/contribution promise Delivered / Acknowledged-non-delivery / Silent) | **Optional new pre-submission pass.** Lightweight; no new registry fields. Adapted from agent-ready-assessment's SCOPE DRIFT (which uses a Plan-of-Approach) to authoring, where the abstract + stated contributions play that role. |
+| `docs/framework-summary.md` — new **Cross-Cutting Checks** section (generalized Step Z + Scope Drift) and an explicit statement of tier-monotonicity | Reference only — reference-card surface for the two cross-type checks. |
+| [DR-017](decisions/DR-017_typed-verification-core-ownership.md) (**Accepted**) — this repo is custodian of the operationalized typed layer; siblings **vendor with provenance**, not fork | **If you vendor the typed layer** (Whetten/Toulmin checklists, typed registry) into another repo, add an `imported-from: agent-ready-papers v2.3.0` note. Otherwise reference only. |
+| [DR-014](decisions/DR-014_provocation-layered-as-opt-in-extension.md) reconciliation (still Proposed) — Step Z **decoupled** from PROVOCATION; it stays in core (generalized) and the proposed `extensions/anti-hallucination-step-z.md` is withdrawn; PROVOCATION extraction unaffected | Reference only — relevant if you were tracking DR-014's proposed extension layout. |
+| Root `CLAUDE.md` self-pin bumped v2.2.4 → v2.3.0 | None — metadata only. |
+
+**No breaking changes.** MINOR release: additive concepts (Scope Drift Check, Cross-Cutting Checks) plus one generalization of an existing check (Step Z); no registry-structure change. The only adopter-facing behaviour change is that Step Z now applies to all project types, not just PROVOCATION ones.
+
+## v2.2.4 (2026-06-12)
+
+**From v2.2.3 — what to review when you bump your pin to v2.2.4:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| `tools/coverage.py` — `_split_row()` now honors backslash-escaped pipes (`\|`) in registry cells; magnitude notation like `\|H(z)\|` no longer corrupts column parsing or coverage counts | **Recommended if you run the coverage tool on registries with `\|` in cell text** (math-heavy claims). Such rows previously miscounted silently; they now parse correctly. No registry edits required — re-run `python -m tools.coverage` for correct numbers. The templates already prescribed `\|`; this makes the tool honor that contract. |
+| `vv/hypothesis-log.md` + `vv/cost-log.md` — dsp-workshop dog-fooding records (syllabus pilot resolved HELD; whole-repo sweep; basics claim-registry run, 526 claims) | Reference only — a worked example of applying the portable verification surface (equation-checker + per-page registry + citation check) to a non-paper teaching repo, with the lightweight-profile tier and a cost-per-finding figure. |
+| `literature/README.md` — new source L48 (Elsevier *Researcher of the Future* 2025: 84% AI adoption, 22% trust) | Reference only — direct quantitative support for the verification-gap framing; industry-self-published tier caveats noted in the source file. |
+| Root `CLAUDE.md` self-pin bumped v2.2.3 → v2.2.4 | None — metadata only. |
+
+**No breaking changes.** PATCH release: a backward-compatible tooling bug fix plus public-log and literature additions; no template surface, no DR semantics changed.
+
+## v2.2.3 (2026-06-11)
+
+**From v2.2.2 — what to review when you bump your pin to v2.2.3:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| `decisions/DR-011_multi-model-review-pattern.md` *Open Questions* — new *External-ground-truth ρ calibration (ICLR/OpenReview)* entry naming Stanford Agentic Reviewer's published 0.42 ≈ 0.41 ICLR-reviewer correlation as the ceiling reference; sketches a 30-paper calibration run bounded at ~€44 + maintainer-day; cross-references a parallel thread in a sibling project (private) | Reference only — if your paper project runs its own DR-011 batteries on a content type with available human ground truth (ICLR-like ratings, peer-review scores, calibration sets), the entry sketches a methodology you can mirror. The aggregate-ρ evidence type is complementary to DR-011's per-pass disjoint-coverage mechanism evidence; neither dominates the other. |
+| Root `CLAUDE.md` + `README.md` self-pin bumped v2.2.2 → v2.2.3 | None — metadata only. |
+
+**No breaking changes.** PATCH release: single DR Open Questions extension + cross-reference add.
+
+## v2.2.2 (2026-06-11)
+
+**From v2.2.1 — what to review when you bump your pin to v2.2.2:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| `decisions/DR-015_rebutting-undercutting-defeater-distinction.md` — new Proposed DR adding an optional `rebuttal-type: rebutting \| undercutting` sub-field on ARGUMENT rows (Pollock's defeasible-reasoning distinction); no template touch yet | Reference only — DR is Proposed, not Accepted. Three Pending Assessment checks gate promotion. If you run your own DR-011 batteries, classifying reviewer findings as `rebutting \| undercutting \| mixed` is one of the three checks; data points contribute to whether DR-015 promotes. |
+| `vv/hypothesis-log.md` — new Open entry registering the framework-level bet behind DR-015 (low-cost borrowings from philosophical logic earn their place in registry shape); names deferred candidates (dialogical logic for DR-016, Dung argumentation frameworks for future) so they aren't lost | Reference only — if you write framework-level Warrants of your own, mirror the bet-registration pattern: pair a static Warrant with a hypothesis-log entry naming the dynamic counter. |
+| `decisions/DR-011_multi-model-review-pattern.md` *Open Questions* — new deferred-candidate entry for a dialogical-logic *Underlying Form* subsection (would recast Pass 1/2/3 as a Proponent-Opponent attack-defense game, parallel to the Functorial Composition rationale); pickup would be DR-016, not in-place DR-011 edit | Reference only — surfaces the framework's distributed-backlog discipline for deferred conceptual work. |
+| `vv/cost-log.md` — new row for the 2026-06-11 literature-survey + DR-015-draft operation; **tokens not measured** (main session, no `/status` snapshots); logged for record-completeness | Reference only — future similar operations (literature survey + DR draft) should bracket the work with `/status` snapshots to capture deltas, matching DR-011 Pass 1/2 subagent `total_tokens` discipline. |
+| Root `CLAUDE.md` + `README.md` self-pin bumped v2.2.1 → v2.2.2 | None — metadata only. |
+
+**No breaking changes.** PATCH release: new Proposed DR + cross-reference adds; no template surface, no DR semantics, no consumer behaviour changed.
+
+## v2.2.1 (2026-06-11)
+
+**From v2.2.0 — what to review when you bump your pin to v2.2.1:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| `templates/anti-hallucination.md` Step 6 — new *Human-in-loop anchor* bullet naming the circularity of self-verification | **Recommended** — mirror in your own paper project's `anti-hallucination.md`. The bullet names a constraint that was implicit in the checklist structure; making it explicit reduces the risk of delegating Step 6 to the same agent that introduced the citation. |
+| `README.md` — *Toulmin form* and *Whetten checklist* gain first-mention author/year attribution + component lists + links to existing `literature/sources/` entries | Reference only — clarifications against the framework's own citing-sources discipline. If your project uses Toulmin or Whetten vocabulary, mirror the pattern. |
+| `decisions/DR-011_multi-model-review-pattern.md` *Evidence Base* — paper-scale cross-vendor data point (Pass 3 via Gemini CLI; 3-4 novel + 4 overlap with Pass 2) | Reference only — strengthens DR-011's evidence base; surfaces the two-tier empirical pattern (intra-family disjoint; cross-vendor partial-overlap-with-novelty). |
+| `decisions/DR-011_multi-model-review-pattern.md` *Open Questions* — new "Pass 3 ↔ Pass 2 overlap at cross-vendor" entry flagging the sequencing question | Reference only — if you run your own DR-011 batteries, note whether the overlap pattern replicates. |
+| `vv/cost-log.md` gains Pass 3 row + two-tier *Notable findings* entry + *Aggregation* row | Reference only — methodological caveat: Pass 3's cost is not directly comparable to Pass 1+2 due to delivery-mechanism asymmetry (inline content vs. multi-round file navigation). |
+| Root `CLAUDE.md` + `README.md` self-pin bumped v2.2.0 → v2.2.1 | None — metadata only. |
+
+**No breaking changes.** PATCH release: evidence-base extension + clarifications against the framework's own discipline.
+
+## v2.2.0 (2026-06-11)
+
+**From v2.1.2 — what to review when you bump your pin to v2.2.0:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| New `vv/` top-level directory with `vv/cost-log.md` + `vv/hypothesis-log.md` — framework self-application surface | **Optional** — adopt the pattern if your own paper project has load-bearing arguments whose validity depends on future evidence (mirror `vv/hypothesis-log.md` at your paper's root) or runs named framework-scale operations worth cost-tracking (mirror `vv/cost-log.md` as a framework-level companion to your paper-level cost log). No action required if neither applies. |
+| README *The Argument, Structurally* — new *Dynamic counter to the Warrant* note pointing at `vv/hypothesis-log.md` | Reference only — the central Warrant is now registered as a falsifiable bet rather than papered over. If you write your own framework-level Warrants, mirror the pattern: pair the static reading of a Warrant with a hypothesis-log entry naming the dynamic counter. |
+| README *Driving it with your agent* opening sentence — "delegate most" → "delegate four of the five steps" with Step 3 human-judgement note | Reference only — language matches what the prompts actually claim. |
+| README *Three tiers of adoption* table — `templates/` paths explicit; `agents/review-prompt.md` and `agents/equation-checker.md` correctly prefixed (was a v2.1.0-move artefact) | **Recommended** — if you copied the v2.1.x adoption tiers into your own README, mirror the prefix fix so adopters can locate the files. |
+| README *verify-citation* Quickstart prompt — gains "re-read the checklist from the source file at each invocation" | Reference only — addresses agent-caching risk. Mirror in your own prompt templates if you have any. |
+| `agents/README.md` "What does not live here" rewritten as a *primary mode of use* principle (paste-as-system-prompt vs. author-edited-over-project-lifetime) with explicit edge-case discussion | Reference only — clarifies the principle behind the `agents/` vs `templates/` split. If you maintain a parallel agents/ directory in your own project, use the same heuristic. |
+| Root `CLAUDE.md` + `templates/CLAUDE.md` Hard Constraint narrowed: principle applies most directly to agents with cross-project user-level memory (Claude Code, ChatGPT, Gemini); CLI/IDE agents with project-level rules files only inherit it vacuously | **Recommended** — if you mirrored the v2.1.0 Hard Constraint into your own paper project's `CLAUDE.md`, update the wording to the narrowed form. |
+| `docs/non-claude-setup.md` gains *Last verified: 2026-06-11* date marker | Reference only — adopters can now assess freshness of per-tool entry points. |
+| CHANGELOG v2.1.1 entry — *Why this is a separate release from v2.1.0* rewritten as *Sequence relative to v2.1.0* (drops the "over-cautious scoping" value judgement) | Reference only — the v2.1.0 → v2.1.1 sequence is now described factually rather than as motivated retrospection. |
+| CHANGELOG v2.1.2 entry — closing pointer to `docs/non-claude-setup.md` made a markdown link (was prose-only) | Reference only — discoverability. |
+| DR-011 *Evidence Base* gains 2026-06-11 paper-scale prose data point: first paper-scale replication of disjoint-coverage; zero overlap between Pass 1 (Haiku, 5 findings) and Pass 2 (Opus, 5 findings) | Reference only — strengthens DR-011's within-family disjoint-coverage claim. If you run your own DR-011 batteries, note results here for cross-project aggregation. |
+| Root `CLAUDE.md` + `README.md` self-pin bumped v2.1.2 → v2.2.0 | None — metadata only. |
+
+**No breaking changes.** MINOR release per the SemVer convention: new public structural pattern (`vv/` directory), renamed-and-clarified principle for `agents/` vs `templates/`, plus targeted argument-shape and discovery fixes from a two-pass DR-011 review.
+
+## v2.1.2 (2026-06-11)
+
+**From v2.1.1 — what to review when you bump your pin to v2.1.2:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| `README.md` — new `### Driving it with your agent` subsection in Quickstart, with four copy-paste prompts (bootstrap / register-while-drafting / verify-citation / peer-review-pass) | **Recommended reading** — closes the implicit assumption that adopters know how to delegate the Quickstart steps to an agent. The prompts work as-is across Claude Code, Copilot CLI, Cursor, Continue, web chat (per `docs/non-claude-setup.md`). Mirror in your own paper project's README if useful. |
+| Root `CLAUDE.md` + `README.md` self-pin bumped v2.1.1 → v2.1.2 | None — metadata only. |
+
+**No breaking changes.** PATCH release: README-only Quickstart addition, no template / DR / tool surface change.
+
+## v2.1.1 (2026-06-11)
+
+**From v2.1.0 — what to review when you bump your pin to v2.1.1:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| New `docs/non-claude-setup.md` — universal pattern + per-tool entry points (Copilot CLI, Cursor, Continue, Aider, web chat) for using the framework with an agent other than Claude Code | **Recommended reading** for adopters whose verification workflow uses any agent other than Claude Code. Document covers the framework's three agent-facing surfaces (`CLAUDE.md`, `agents/`, `memory/`), the universal four-step pattern, tool-specific entry points, things-to-verify-per-tool checklist, and a what-you-do-not-need-to-do section. |
+| Root `CLAUDE.md` — new Before You Start row pointing at `docs/non-claude-setup.md` | Reference only — discoverability fix. If you maintain a paper-project `CLAUDE.md` and have non-Claude collaborators, mirror the row. |
+| `README.md` — *Agent-Role Prompts* closing paragraph gains a pointer at `docs/non-claude-setup.md` | Reference only — discoverability. |
+| Root `CLAUDE.md` + `README.md` self-pin bumped v2.1.0 → v2.1.1 | None — metadata only. |
+
+**No breaking changes.** PATCH release: new doc + discoverability fixes, no template / DR / tool surface change.
+
+## v2.1.0 (2026-06-11)
+
+**From v2.0.2 — what to review when you bump your pin to v2.1.0:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| New top-level `agents/` directory; `templates/equation-checker.md` → `agents/equation-checker.md` (`git mv`, history preserved) | **Path update required** if your project's docs, scripts, or CLAUDE.md reference `templates/equation-checker.md` — change to `agents/equation-checker.md`. File contents unchanged. |
+| `templates/review-prompt.md` → `agents/review-prompt.md` (`git mv`) | **Path update required** if your project references `templates/review-prompt.md` — change to `agents/review-prompt.md`. File contents unchanged. Paper-local copies in adopter projects are unaffected — those stay where they are; the rename is in the framework only. |
+| New `agents/README.md` documenting the agents/ vs templates/ distinction | Reference only — read once to understand the convention. The line: templates are fill-in (copy + populate over project lifetime); agent-role prompts are single-shot (paste into agent system-prompt slot). |
+| Root `CLAUDE.md` + `templates/CLAUDE.md` — Hard Constraint about in-repo `memory/` generalised. Now reads "any agent's user-level auto-memory" rather than naming only Claude Code | **Recommended** — if you mirrored the v1.6.2 / v1.7.0 Hard Constraint into your own paper project's CLAUDE.md, update the wording to match (Claude Code retained as the named instance; Cursor / GitHub Copilot CLI / etc. named as parallel cases). |
+| Root `CLAUDE.md` Before You Start — new row for `agents/` directory | Reference only — pattern source if you maintain your own paper CLAUDE.md. |
+| `templates/CLAUDE.md` (adopter template) Before You Start — *Reviewing before submission* row now mentions both paper-local copy and framework's `agents/review-prompt.md`; new row for `agents/equation-checker.md` | **Optional but recommended** — if you start a new paper project from the v2.1.0 template, you inherit these rows. Existing paper projects: copy the rows if you want to make the agent-role-prompt path discoverable to future sessions. |
+| `templates/CLAUDE.md` Directory Structure — `review-prompt.md` removed from the paper-local listing | Reference only — adopters can now reference the framework's `agents/review-prompt.md` rather than keeping a paper-local copy, but the paper-local option remains valid (Paper 1 still uses it). |
+| DR-009, DR-011, DR-013 inline references updated to `agents/` paths; DR-013 *Markdown templates* list split into *Markdown templates* + *Agent-role prompts* sub-bullets | Reference only — license scope unchanged (CC BY 4.0 applies to both groups). |
+| Root `CLAUDE.md` + `README.md` self-pin bumped v2.0.2 → v2.1.0 | None — metadata only. |
+
+**No breaking changes to template contracts.** Path-level break only for the two moved files, and only for adopters who reference them by path. MINOR release per the SemVer convention used by this repo (path moves are not MAJOR when the file contracts are unchanged and the rename is a single mechanical step documented in UPGRADING).
+
+## v2.0.2 (2026-06-11)
+
+**From v2.0.1 — what to review when you bump your pin to v2.0.2:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| `README.md` — `## The Argument, Structurally` closing sentence now clarifies type discipline (Toulmin block = ARGUMENT view; R-1 in registered section = PROPOSITION view; two views of the same case, each verified by its own checklist) | Reference only — surfaces the framework's argument/proposition distinction explicitly where the v2.0.1 wording had let them blur. |
+| `README.md` — R-3 source narrowed to "Hallucination literature as cited in `templates/anti-hallucination.md`" (removes maintainer-local "replicated in own audits" pointer, since `audits/` was scrubbed from the public repo in v2.0.0) | Reference only — public readers can now follow every source pointer in the registered section. If you copied the v2.0.1 R-3 phrasing into your own README, mirror the tightening. |
+| `README.md` — R-4 source narrowed to DR-009 + `templates/equation-checker.md` (removes maintainer-local Gemini-vs-Sonnet comparison pointer that lives in gitignored `memory/gotcha-log.md`) | Reference only — same as R-3: source pointers are now all publicly verifiable. |
+| `README.md` — new format-note paragraph above the registered table acknowledging the CLAIM-style single-table layout is a README-brevity compression, not the framework's normative per-type sub-tables; points adopters at `templates/claim-registry.md` for actual paper registries | Reference only — preempts a likely adopter question and prevents the README single-table from being mistaken for the canonical layout. |
+| Root `CLAUDE.md` + `README.md` self-pin bumped v2.0.1 → v2.0.2 | None — metadata only. |
+
+**No breaking changes.** PATCH release: README-only self-audit fixes following the v2.0.1 logic-application pass.
+
+## v2.0.1 (2026-06-10)
+
+**From v2.0.0 — what to review when you bump your pin to v2.0.1:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| `README.md` — new `## The Argument, Structurally` section (Toulmin block) between *The Approach* and *When-Worth-It* | Reference only — makes the README's central argument inspectable. No template, DR, or tool surface changed. |
+| `README.md` — confidence-language calibration sweep across seven spots ("catches" → "designed to catch", "prevents" → "constrains" / "guards against", "for everything" → "regardless of tier", "will re-propose" → "repeatedly re-propose across sessions", and similar) | Reference only — README's own language now sits at or below the tier of the underlying claim. If you've copied any of these specific phrasings into your own README or supporting docs, consider mirroring the downshift. |
+| `README.md` — `## When This Framework Is Worth The Overhead` and `## When It Is Overkill` rewritten as yes/no-answerable testable boundary conditions | Reference only — you can now answer each bullet for your specific project, not just match it as a vibe. Useful when explaining to a collaborator whether the framework fits their work. |
+| `README.md` — new `## This README, registered` section (seven entries R-1…R-7 with priority, type, confidence tier, source, and section anchors) | **Recommended pattern** — applying the framework to its own home document is a low-cost credibility move. Mirror in your own paper project's README (or top of `CLAUDE.md`) with your project's load-bearing claims registered. |
+| Root `CLAUDE.md` + `README.md` self-pin bumped v2.0.0 → v2.0.1 | None — metadata only. |
+
+**No breaking changes.** PATCH release: README-only logic-application pass, no functional change to templates, DRs, or tooling.
+
+## v2.0.0 (2026-06-10)
+
+**From v1.7.x — what to review when you bump your pin to v2.0.0:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| `templates/physics-verification/` removed (nine files) | **BREAKING.** If your project depended on this template family, either freeze on v1.7.1 (`git checkout v1.7.1 -- templates/physics-verification/`) and copy the files into your own project, or replace with your own equivalents. The conceptual methodology (mechanical reproduction, dimensional checking, limiting-case analysis, two-paths consistency) is portable; what's gone is this repo's hosting of the templates. |
+| `docs/METHODOLOGY.md` removed | **BREAKING** if you linked to it. The framework is now described entirely by README + templates + DRs. Adopter docs that pointed at METHODOLOGY should re-target the README. |
+| `audits/` directory no longer published | Reference only — adopters did not need this directory in the first place. The framework's public artifact is now smaller and self-contained. |
+| README restructured (Problem → Approach → When-worth → When-overkill → Common Questions → Quickstart → details) | Reference only — front-of-file orientation changes; no template or DR contracts changed. |
+| Paper 1 manuscript Section 4 (Preliminary Evidence) rewritten to "Related Work and Design Rationale"; specific source-project audit findings removed | Reference only — affects Paper 1's content, not the templates. |
+| Templates' source-project examples genericised (Step Z worked example, equation-checker origin comment, claim-registry inverse-hallucination note, hypothesis-log example tags, vv-framework Gate 2.7 pointer) | Reference only — template contracts (fields, structure, gate semantics) are unchanged. The minor textual edits don't affect adopter projects that have already copied these templates. |
+| DRs (004, 006–014) had audit references and source-project names removed from their evidence sections | Reference only — the decisions themselves stand; only the evidence narratives were genericised. |
+
+**Breaking** flagged on the two removed surfaces (`templates/physics-verification/` and `docs/METHODOLOGY.md`). Everything else is content-level scrubbing that does not change template contracts.
+
+## v1.7.1 (2026-06-09)
+
+**From v1.7.0 — what to review when you bump your pin to v1.7.1:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| Root `CLAUDE.md` — companion pin advanced `agent-ready-projects: v1.10.2 → v1.10.3` | Reference only — upstream v1.10.3 added maintainer-only structural-lint self-tests. No template surface change; nothing to adopt unless you separately decide the lint pattern would help your own repo. |
+| `README.md` + `CLAUDE.md` self-pin bumped v1.7.0 → v1.7.1 | None — metadata only. |
+
+**No breaking changes.** PATCH release: companion-pin acknowledgment, no functional change.
+
+---
+
+## v1.7.0 (2026-06-09)
+
+**From v1.6.3 — what to review when you bump your pin to v1.7.0:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| New template `templates/hypothesis-log.md` — provisional positions with `Position` / `Method` / `Revisit trigger` / `Review by`. Adopted from agent-ready-projects v1.10.0. | **Optional** — copy `templates/hypothesis-log.md` to your paper project root (or wherever you keep `gotcha-log.md` / `dead-ends.md`). Add the new Before You Start row from updated `templates/CLAUDE.md`: *"Placing a bet whose evidence lives in the future"* → routes to your local `hypothesis-log.md`. Best fit: pre-registered forecasts about Pass-3 outcomes, S1-5 calculation predictions, PROVOCATION calibration bets — anywhere a position needs future evidence to resolve. |
+| Root `CLAUDE.md` — new Hard Constraint: self-verifying memory posture. New state claims in `memory/` may embed `<!-- verify: cmd -->` comments; `/curate` runs them on read. | **Optional, incremental.** Adopt for new state claims going forward. No retrofit required. The posture is documented; the discipline scales as you find it useful. Companion to agent-ready-projects v1.9.0 (self-verifying memory) and v1.10.0 (/curate Step 0 sub-step 5). |
+| `templates/CLAUDE.md` (paper-project template) — three edits to surface hypothesis-log: new Before You Start row, Key Files row, Directory Structure entry | **Recommended for projects spawned from this template after v1.7.0** — these are inherited automatically. Projects predating v1.7.0 should copy the three edits manually if they adopt the hypothesis-log. |
+| Root `CLAUDE.md` — companion pin advanced `agent-ready-projects: v1.7.0` → `v1.10.2` (your own pin can advance if it tracked this repo's) | Reference only — drift-check row will continue to surface upstream drift naturally. Adopting upstream v1.10.2 changes in your code projects is your call independent of this framework's pin. |
+
+**No breaking changes.** MINOR release per SemVer: new opt-in template + new Hard Constraint posture (documents new-write convention, doesn't require retrofit).
+
+## v1.6.3 (2026-06-08)
+
+**From v1.6.2 — what to review when you bump your pin to v1.6.3:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| Root `CLAUDE.md` — new Before You Start row pointing at the three existing backlog locations (`memory/MEMORY.md` priorities + DR *Open Questions* + GitHub Issues) | Reference only — if you've ever asked yourself *"where's the backlog?"* in your own framework adoption, mirror the row in your project's `CLAUDE.md` with paths adjusted for your project's three locations (e.g., your paper's `backlog.md` + your DRs + your issue tracker). |
+
+**No breaking changes.** PATCH release: discoverability row only, no functional change.
+
+## v1.6.2 (2026-06-08)
+
+**From v1.6.1 — what to review when you bump your pin to v1.6.2:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| Root `CLAUDE.md` + `templates/CLAUDE.md` — new Hard Constraint: project state goes in `memory/` (in-repo), not in user-level Claude Code auto-memory | **Recommended** — if you use Claude Code: mirror the constraint in your own paper project's `CLAUDE.md` so future agent sessions inherit the rule. The constraint is per-repo enforced; there's no global way to ship it from this framework. If your project predates v1.6.2 the Hard Constraint bullet must be copied manually; projects spawned from `templates/CLAUDE.md` after v1.6.2 inherit it. |
+
+**No breaking changes.** PATCH release: framework convention codification.
+
+## v1.6.1 (2026-06-08)
+
+**From v1.6.0 — what to review when you bump your pin to v1.6.1:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| `README.md` — *"What's in this repo"* Framework row now lists `tools/`; new *## Tools* section threads `coverage.py` / `check_dois.py` / cost data into the adopter-facing entry point; *Templates* index gains a `cost-log.md` row; Anti-Hallucination section gains an automated-companion note pointing at `tools/check_dois.py` | Reference only — README discoverability fix; same principle as v1.5.1's CLAUDE.md fix. |
+
+**No breaking changes.** PATCH release: README docs-only, no functional change.
+
+## v1.6.0 (2026-06-08)
+
+**From v1.5.1 — what to review when you bump your pin to v1.6.0:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| New template `templates/cost-log.md` for operation token-cost logging | **Optional** — adopt if you want empirical cost data for framework operations. Copy to `vv/cost-log.md` in your paper project; log `/status` deltas after named operations (review passes, `/curate`, etc.). |
+| `decisions/DR-011_multi-model-review-pattern.md` Evidence Base extended with N=2 token-cost replication (Pass 1 mean 36.8k tokens / 0 load-bearing findings; Pass 2 mean 52.5k tokens / 2 load-bearing findings) | Reference only — quantitative cost-per-Pass data added; Open Questions now names paper-scale cost-tier calibration as the next data point. If you've been applying DR-011, your own Pass 1/2 costs are now a meaningful contribution to N. |
+| `templates/CLAUDE.md` + `papers/perspective/CLAUDE.md` — Before You Start row added pointing at `vv/cost-log.md` | Reference only — agent-orientation; mirror in your own paper project's CLAUDE.md if you adopt the cost-log convention. |
+
+**No breaking changes.** MINOR release per SemVer: new opt-in template and convention, no existing template-surface changes.
+
+## v1.5.1 (2026-06-08)
+
+**From v1.5.0 — what to review when you bump your pin to v1.5.1:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| Root `CLAUDE.md` — architecture diagram + two new Before You Start rows (`tools/` for coverage/DOI checks, `docs/THRESHOLDS.md` for threshold rationale); How to Work Here now uses `python -m tools.coverage` instead of the stale "manual P0/P1/P2 count" comment | Reference only — agent-orientation fix in this repo. If you maintain your own paper project's `CLAUDE.md`, copy the pattern. |
+| `papers/perspective/CLAUDE.md` — Before You Start row added pointing at tools with the correct registry path for Paper 1 | Reference only — Paper 1 self-application. |
+| `templates/CLAUDE.md` — Before You Start row added with adopter-facing path placeholders | **Recommended** — new paper projects created from this template now point at the tools by default. Existing paper projects: add the equivalent row to your own CLAUDE.md. |
+
+**No breaking changes.** PATCH release: discoverability only, no functional change.
+
+## v1.5.0 (2026-06-08)
+
+**From v1.4.0 — what to review when you bump your pin to v1.5.0:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| `tools/` directory added — two stdlib-only CLIs: `coverage.py` (registry coverage reporter) and `check_dois.py` (DOI resolver) | Optional — if you maintain a `claim_registry.md`, run `python -m tools.coverage <registry.md>` and `python -m tools.check_dois <registry.md>` from your own clone. No template changes. |
+| `Makefile`, `pyproject.toml`, `.gitignore` Python patterns added | Reference only — first Python footprint in the repo. The `.gitignore` Python patterns may be useful if your paper project also runs Python tooling. |
+| `tests/` directory added — shape-pin and edge-case tests against the Paper 1 fixture | Reference only — pattern source if you want to add tests against your own registry. |
+| `tools/README.md` documents known limits (escaped pipes in cells, no HTTP proxy support, sequential HEAD scaling, line-anchored marker recognition) | **Read before adopting** if your registry uses escaped pipes, you sit behind a corporate HTTPS proxy, or your registry has >50 DOIs. |
+
+**No breaking changes.** This is a MINOR release per the SemVer convention: new opt-in tooling, no template-surface changes.
+
+## v1.4.0 (2026-06-08)
+
+**From v1.3.0 — what to review when you bump your pin to v1.4.0:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| `LICENSE` file added (CC BY 4.0 per [DR-013](decisions/DR-013_license-choice.md)) | Reference only — formalises licence terms that were previously implicit. New contributions to this repo are CC BY 4.0 from v1.4.0 forward. |
+| `CONTRIBUTING.md` added | Reference only — formalises the contribution process. If you contribute upstream, read it. The multi-issue commit-keyword convention (`Closes #A. Closes #B.`) is documented there. |
+| `UPGRADING.md` added (this file) | Reference only — adopter convenience. If you maintain your own per-project `UPGRADING.md`, this is the template format. |
+| `docs/THRESHOLDS.md` added — rationale for the 100/90/70/85 coverage and 3.5/5.0 peer-review thresholds, tagged SPECULATIVE | Reference only — explains thresholds you already use. Quality gates unchanged. |
+| **DR-014 (Proposed)** — PROVOCATION layering as opt-in extension | **No action.** Template files NOT changed in v1.4.0. Promotion to Accepted requires Paper 1 audit + speculative-design adopter check + version-impact decision. |
+| README front-of-file restructured (Quickstart + 3-layer map + adoption scorecard near top, expanded DR-011 in *What Doesn't Work*, new Audits index, Contributing & Support pointer) | Reference only — additive; nothing removed. |
+| CLAUDE.md: gitignored maintainer-local paths now explicitly labelled (`.claude/skills/`, `memory/`); new *What is intentionally not shipped* section | Reference only — clarifies what is and isn't shipped publicly. No template changes. |
+| CHANGELOG header: maintainer release process numbered + *Adopter notes* convention codified | Reference only — formalises an existing pattern. If you use this repo as a reference for your own release process, adopt the same convention. |
+| 4 GitHub Releases cut retroactively from v1.0.0–v1.3.0 tags | Reference only — `git checkout vX.Y.Z` and `git diff vX.Y.Z..vX.Y+1.0 -- templates/` work the same. The Releases page now makes pinned versions easier to discover. |
+
+**No breaking changes.** This is a MINOR release per the SemVer convention: new docs and new DRs (DR-013 Accepted, DR-014 Proposed), no template-surface changes.
+
+## v1.3.0 (2026-06-01)
+
+**From v1.2.0 — what to review when you bump your pin to v1.3.0:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| Anti-hallucination "WebFetch Fallback Discipline" added | Optional — adopt if you use WebFetch for source verification. Names subpage-blindspot and transport-failure modes. |
+| Claim registry adds Coverage-by-Type cut | Recommended — update your registry's Coverage Summary to include the by-type cut at next major revision. Type-level Gate 2 expectation: every registered ARGUMENT and PROPOSITION should be `[x]` before gating. |
+| DR-012 names decision-support as a third opt-in application class | Optional — relevant only if your project is decision-support work. Inherits unchanged from paper-application class except for paper-specific scaffolding (page budgets, LaTeX, journal style, etc.). |
+
+**From v1.0.0 or v1.1.0 → v1.3.0:** review the v1.2.0 entry below as well.
+
+## v1.2.0 (2026-05-29)
+
+**From v1.1.0 — what to review when you bump your pin to v1.2.0:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| Claim registry migrated from legacy single-mixed-type table to **per-type sub-tables** (CLAIMs / ARGUMENTs / PROPOSITIONs / PROVOCATIONs) | Pre-existing registries with the legacy table still work; migration is mechanical and recommended at next major revision. Per-type sub-tables align verification fields with the unit type they apply to. |
+| **DR-011** Multi-Pass Review Pattern + Step 7 in `anti-hallucination.md` | Pass 1 + Pass 2 are recommended-but-not-required workflow improvements; Pass 3 high-stakes only with mandatory style filter. |
+| Writing-guide **tier-monotonicity** principle added | Optional — review your writing guide for explicit tier-monotonicity check (manuscript language must sit at or below the registered confidence tier). |
+| Review-prompt requires "Style/voice rules to filter against" field | Adopt if you use the three-pass pattern (mandatory for Pass 3, optional for Pass 1 / Pass 2). |
+| DR-005 — Nanoarguments added as argument-layer peer | Reference only — affects argument modelling for grant-style work. |
+| `docs/category-theory-as-design-lens.md` added | Reference only. Names the structural lens implicit across DR-004, DR-011, and the layered memory system. Templates remain free of category-theory terminology. |
+
+## v1.1.0 (2026-05-10)
+
+**From v1.0.0 — what to review when you bump your pin to v1.1.0:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| **DR-010** + PROVOCATION as fifth opt-in unit type | **Opt-in.** Projects without speculative-design content can ignore the new unit type entirely. The standard CLAIM / ARGUMENT / PROPOSITION trio remains unchanged. |
+| **Step Z** in `anti-hallucination.md` (Inverse Hallucination Check) | Opt-in — applies only to projects with PROVOCATION entries. Catches the failure mode where speculation is presented as if sourced. |
+| Three project-conditional gates added | Opt-in. Each gate activates only when its condition is met: |
+| → Gate 2.6 — Reflexivity | When PROVOCATION entries exist |
+| → Gate 2.7 — Ethical Review | When the project engages contested topics |
+| → Gate 2.8 — Voice Consistency | When voice-driven work where register is part of the contribution |
+| Tier 1 / Tier 2 / Tier 3 adoption-readiness discipline introduced | Reference only. The discipline is a convention adopters may reuse locally for staged feature promotion. |
+
+## v1.0.0 (2026-05-09)
+
+Baseline. No prior version to upgrade from.

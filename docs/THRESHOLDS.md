@@ -154,5 +154,5 @@ A coverage calculator (planned per [#17](https://github.com/ducroq/agent-ready-p
 
 - Coverage targets — [`templates/vv-framework.md`](../templates/vv-framework.md) §3 "Coverage Targets"; [Gate 2](../README.md#gate-2-verification-complete) in the README.
 - Peer-review threshold — [`agents/review-prompt.md`](../agents/review-prompt.md) "Recommendation thresholds"; [Gate 3](../README.md#gate-3-review-complete) in the README.
-- Paper 1 measured values — [`papers/perspective/vv/claims/claim_registry.md`](../papers/perspective/vv/claims/claim_registry.md); [`CHANGELOG.md`](../CHANGELOG.md) v1.0.0.
+- Paper 1 measured values — [`papers/perspective/vv/claims/claim_registry.md`](../papers/perspective/vv/claims/claim_registry.md); [`CHANGELOG-archive.md`](../CHANGELOG-archive.md#v100-2026-05-09) v1.0.0.
 - External feedback that prompted this doc — [#16](https://github.com/ducroq/agent-ready-papers/issues/16).
