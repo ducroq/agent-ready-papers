@@ -198,6 +198,8 @@ Sources consulted during the development of this project, particularly for DR-00
 | L91 | Jiang & Hyland | 2025 | Does ChatGPT Write Like a Student? Engagement Markers in Argumentative Essays | Written Communication | [jiang-hyland-2025](sources/jiang-hyland-2025.md) | READ (accepted MS) |
 | L92 | Larsen et al. | 2025 | Validity in Design Science | MIS Quarterly | [larsen-2025-validity-design-science](sources/larsen-2025-validity-design-science.md) | READ (author version) |
 | L93 | Ralph et al. | 2020 | Empirical Standards for Software Engineering Research | arXiv / ACM SIGSOFT | [ralph-2020-empirical-standards](sources/ralph-2020-empirical-standards.md) | READ (standard text) |
+| L94 | Gregor & Hevner | 2013 | Positioning and Presenting Design Science Research for Maximum Impact | MIS Quarterly | [gregor-hevner-2013](sources/gregor-hevner-2013.md) | READ |
+| L95 | Dinter & Krawatzeck | 2015 | Towards a Configurative Publication Schema for Design Science Research | ICIS (Research-in-Progress) | [dinter-krawatzeck-2015](sources/dinter-krawatzeck-2015.md) | READ |
 
 ## Key Insight
 

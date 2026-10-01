@@ -120,7 +120,7 @@ This is the framework eating its own dog food. Any friction, gaps, or false fail
 - P2 verification: 2/2 verified (100%)
 - Overall: 17/17 (100% coverage — all coverage targets exceeded; the P0 *tier* target is not met, see below)
 - ⚠️ **P0 tier floor not met (2026-09-24):** 3 of 6 P0 entries are below SUPPORTED: S2-2, plus S3-4 and S5-1, which are capped by EMERGING premises. (2026-10-01: S2-2 reworded around the ACM SIGSOFT standards and Larsen 2025; a raise to SUPPORTED was refuted in review. 2026-09-26: S4-1/S4-2/S4-4 withdrawn, S1-4 moved to P1, S1-1/S1-2 raised to SUPPORTED; #38.) DR-002 sets the P0 gate with no exception, so the gate fails (the writing guide's "framed as hypothesis" clause is not in DR-002). Coverage (above) counts verification status, not tier. See the registry header.
-- Anti-hallucination checklist: all 25 Literature Sources rows in the registry pass (2026-10-01: +2 for S2-2, Larsen 2025 and Ralph 2020; +2 for S1-6, Krishna 2023 and Dugan 2024; 2026-09-26: +12 sources for S1-1/S1-2/S1-4/S2-2, each Crossref/arXiv-verified and read in full; VANRA is a web source)
+- Anti-hallucination checklist: all 27 Literature Sources rows in the registry pass (2026-10-01: +4 for S2-2, Larsen 2025, Ralph 2020, Gregor & Hevner 2013, Dinter & Krawatzeck 2015; +2 for S1-6, Krishna 2023 and Dugan 2024; 2026-09-26: +12 sources for S1-1/S1-2/S1-4/S2-2, each Crossref/arXiv-verified and read in full; VANRA is a web source)
 - Peer review simulation: scored 3.95/5.0 (upper "Minor revision")
 - Manuscript revisions based on review findings
 - DOI verification for all references

@@ -116,7 +116,7 @@ Confidence progression for framework components:
 
 ### 2. The Landscape Gap
 
-**Purpose:** Establish the specific gap: EQUATOR covers empirical papers comprehensively; nothing covers non-empirical paper types. Ground this in Gregor's theory types to show the gap is structural, not accidental.
+**Purpose:** Establish the specific gap: EQUATOR covers empirical papers comprehensively; no consensus-based guideline covers non-empirical paper types, and the closest instruments (the SIGSOFT standards) ask for valid arguments without a procedure for checking them. Ground this in Gregor's theory types to suggest the gap may be structural (S2-3 is EMERGING).
 
 **Word budget:** ~700 words
 
