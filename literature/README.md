@@ -196,6 +196,8 @@ Sources consulted during the development of this project, particularly for DR-00
 | L89 | Hyland | 2005 | Stance and engagement: a model of interaction in academic discourse | Discourse Studies | [hyland-2005-stance-engagement](sources/hyland-2005-stance-engagement.md) | PARTIAL (abstract) |
 | L90 | Sword | 2012 | Stylish Academic Writing | Harvard UP | [sword-2012](sources/sword-2012.md) | PARTIAL (publisher sample) |
 | L91 | Jiang & Hyland | 2025 | Does ChatGPT Write Like a Student? Engagement Markers in Argumentative Essays | Written Communication | [jiang-hyland-2025](sources/jiang-hyland-2025.md) | READ (accepted MS) |
+| L92 | Larsen et al. | 2025 | Validity in Design Science | MIS Quarterly | [larsen-2025-validity-design-science](sources/larsen-2025-validity-design-science.md) | READ (author version) |
+| L93 | Ralph et al. | 2020 | Empirical Standards for Software Engineering Research | arXiv / ACM SIGSOFT | [ralph-2020-empirical-standards](sources/ralph-2020-empirical-standards.md) | READ (standard text) |
 
 ## Key Insight
 

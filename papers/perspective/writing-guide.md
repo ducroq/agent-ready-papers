@@ -125,7 +125,7 @@ Confidence progression for framework components:
 | ID | Statement | Type | Tier | Appropriate Language |
 |----|-----------|------|------|---------------------|
 | S2-1 | EQUATOR maintains ~700 reporting guidelines | CLAIM | ESTABLISHED | "The EQUATOR Network maintains nearly 700 reporting guidelines" — verified: 699 guidelines (2026-03-03) |
-| S2-2 | No consensus-based guideline for non-empirical papers | CLAIM | EMERGING | "To our knowledge, no published consensus-based guideline of the EQUATOR type exists" — name Jaakkola, SANRA, Nashwan, VANRA |
+| S2-2 | No consensus-based guideline for non-empirical papers | CLAIM | EMERGING | "To our knowledge, no consensus-based guideline of the EQUATOR type exists" for theoretical, perspective, conceptual; Jaakkola and Larsen for the gaps; the SIGSOFT standards as "come closest", never as absent; "none sets out how to verify" (a procedure), not "none addresses" |
 | S2-3 | Gregor's Type I and V are non-empirical | CLAIM | EMERGING | "Gregor (2006) identified five theory types, two of which — analytic (Type I) and design (Type V) — are fundamentally non-empirical" |
 | S2-4 | Argument quality is the primary verification challenge | CLAIM | EMERGING | "For non-empirical papers, the primary verification challenge may be argument quality rather than factual accuracy" |
 
@@ -248,7 +248,7 @@ Confidence progression for framework components:
 | S1-3 | Scope creep | CLAIM | EMERGING | "may expand", "without constraints" |
 | S1-5 | Calculation errors in AI-generated equations | CLAIM | EMERGING | "can contain", "survive plausibility review" |
 | S1-4 | No per-type procedure in existing infrastructure (P1) | CLAIM | EMERGING | "to our knowledge, none distinguishes claims from arguments and propositions" |
-| S2-2 | No consensus-based non-empirical guidelines | CLAIM | EMERGING | "to our knowledge, no published consensus-based guideline" |
+| S2-2 | No consensus-based non-empirical guidelines | CLAIM | EMERGING | "to our knowledge, no consensus-based guideline"; "come closest" for SIGSOFT |
 | S2-3 | Gregor Type I and V non-empirical | CLAIM | EMERGING | "identified five types, two of which" |
 | S2-4 | Argument quality is primary challenge | CLAIM | EMERGING | "may be the primary challenge" |
 | S3-1 | Toulmin operationalizable | CLAIM | EMERGING | "may provide a basis for" |
