@@ -1,4 +1,4 @@
-.PHONY: test lint format check coverage check-dois check-metadata verify-bib check-registry formula-scan preservation-check drift dr-status gotcha-stats
+.PHONY: test lint format check coverage check-dois check-metadata verify-bib check-registry formula-scan preservation-check drift dr-status gotcha-stats check-counts
 
 test:  ## Run tests
 	pytest tests/ -x -q
@@ -45,3 +45,6 @@ dr-status:  ## Decision records grouped by status (only Accepted binds)
 
 gotcha-stats:  ## Gotcha-log entry count and sizes (maintainer-local memory/)
 	bash scripts/gotcha-stats.sh
+
+check-counts:  ## Character and test counts stated in the top CHANGELOG section vs the repo (run before /release)
+	bash scripts/check-counts.sh

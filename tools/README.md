@@ -43,7 +43,7 @@ make check-dois    # DOI verification against Paper 1
 make check         # lint + tests
 ```
 
-Repo-maintenance checks are shell scripts in `scripts/`, not `tools/`: `make drift` (framework stamps, 0/1/2), `make dr-status`, `make gotcha-stats`.
+Repo-maintenance checks are shell scripts in `scripts/`, not `tools/`: `make drift` (framework stamps, 0/1/2), `make dr-status`, `make gotcha-stats`, `make check-counts` (CHANGELOG counts, 0/1/2).
 
 ## Exit codes
 

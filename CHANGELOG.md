@@ -45,6 +45,17 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
        ("No adopter action required.") rather than omitting the subsection.
 -->
 
+## Unreleased
+
+### Tooling (this repo's maintenance)
+
+- **New `make check-counts`** (`scripts/check-counts.sh`): checks the counts stated in the top CHANGELOG section against the repo. A `` `path` A → B characters `` claim must match the file now; "N tests" must match the collected tests of the one module the item names; "the suite went from A to N" must match the whole suite. Exit 0 all match, 1 stale, 2 cannot verify. A count in a near-miss shape (an ASCII arrow, "chars", a "k" abbreviation, "added N tests") is reported UNPARSED and exits 2, and so does a section with no counts. It narrows stale counts; it does not close them: a count spelled out, or in a table cell, can still pass. Two review rounds; every reviewer fixture gives the expected exit.
+- `make gotcha-stats` finds the repo root from its own path, so it works from inside `memory/` (its own git repo, where `git rev-parse` returned the wrong root), and with `CDPATH` set; a crash or a non-UTF-8 log exits 2.
+
+### Adopter notes
+
+No adopter action required. Both scripts read this repo's own layout.
+
 ## v4.1.0 (2026-09-30)
 
 Readability joins verification. A new optional template gives two prompts against compressed, hard-to-read AI prose. Two Proposed decisions stage tools for it: DR-022 (formula repetition as a readability lens, never a detector) and DR-023 (a translation step where agent text reaches a person, with a check that the rewrite kept its numbers and certainty). A token-economy pass cuts what a session reads at start from ~107k characters to ~19k. **MINOR**: new template and DRs, nothing an adopter must do.

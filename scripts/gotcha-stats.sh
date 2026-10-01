@@ -4,12 +4,15 @@
 # `## Promoted` and `## Mechanized` tables are not entries; a `#` inside a code fence is
 # not a heading. Unit: characters.
 set -euo pipefail
-f="${1:-$(git rev-parse --show-toplevel)/memory/gotcha-log.md}"
+f="${1:-$(CDPATH='' cd -- "$(dirname -- "$0")/.." >/dev/null && pwd -P)/memory/gotcha-log.md}"  # not git rev-parse: memory/ is its own repo
 [ -f "$f" ] && [ -r "$f" ] || { echo "CANNOT READ: $f" >&2; exit 2; }
 # Exit: 0 counted · 1 no entries found · 2 unreadable log.
-python3 - "$f" <<'EOF'
+python3 - "$f" <<'EOF' || { rc=$?; [ "$rc" -le 2 ] || rc=2; exit "$rc"; }
 import re, statistics, sys
-lines = open(sys.argv[1], encoding="utf-8").read().split("\n")
+try:
+    lines = open(sys.argv[1], encoding="utf-8").read().split("\n")
+except (OSError, UnicodeDecodeError) as e:
+    print(f"CANNOT READ: {e}", file=sys.stderr); sys.exit(2)
 sizes, cur, fence = [], None, None
 for l in lines:
     f = re.match(r" {0,3}(`{3,}|~{3,})", l)
