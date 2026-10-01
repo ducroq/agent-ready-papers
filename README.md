@@ -8,7 +8,7 @@ Companion to [agent-ready-projects](https://github.com/ducroq/agent-ready-projec
 
 **Status:** A working framework we use on our own papers. Broader empirical validation across other authors and domains is an open question — adopt it as a structured starting point, not as a tested method.
 
-**Current release:** v4.1.0 (2026-09-30) — see [`CHANGELOG.md`](CHANGELOG.md). Pin your project with `agent-ready-papers: v4.1.0` in your CLAUDE.md and surface drift at session start; [`templates/CLAUDE.md`](templates/CLAUDE.md) now carries that line for you.
+**Current release:** v4.1.0 (2026-09-30) — see [`CHANGELOG.md`](CHANGELOG.md). Pin your project with `agent-ready-papers: v4.1.0` in your CLAUDE.md and surface drift at session start; [`templates/CLAUDE.md`](templates/CLAUDE.md) carries that line for you.
 
 ## The Core Problem
 
@@ -248,7 +248,7 @@ Before accepting any literature claim from an AI agent:
 
 This is non-negotiable. Run it for every new citation the agent introduces. Agents can and will invent plausible-sounding papers with real-sounding author names. Step 0 catches fabrications in seconds; the full checklist takes 2 minutes per citation. Catching a hallucinated citation in review takes 2 weeks.
 
-**Automated companion (since v1.5.0):** `python -m tools.check_dois <registry.md>` extracts every DOI from your claim registry, HEADs against `doi.org`, and reports the unresolved ones — Step 0 at scale, useful before phase gates and in CI. ⚠️ **This paragraph called that "whole-registry verification" until 2026-09-14, and it is not.** A resolving DOI is not a correct entry: a real paper miscaptioned with the wrong author or year resolves cleanly. `python -m tools.check_metadata <file.bib|registry.md>` (since v3.0.0+) compares the FIELDS against Crossref/DataCite and is what closes that gap. Pair both with the manual checklist for the content-level steps (4, 5, 6), where machine verification cannot substitute for reading the source. See [Tools](#tools) below.
+**Automated companion:** `python -m tools.check_dois <registry.md>` extracts every DOI from your claim registry, HEADs against `doi.org`, and reports the unresolved ones — Step 0 at scale, useful before phase gates and in CI. **It is not whole-registry verification.** A resolving DOI is not a correct entry: a real paper miscaptioned with the wrong author or year resolves cleanly. `python -m tools.check_metadata <file.bib|registry.md>` compares the FIELDS against Crossref/DataCite and is what closes that gap. Pair both with the manual checklist for the content-level steps (4, 5, 6), where machine verification cannot substitute for reading the source. See [Tools](#tools) below.
 
 **Inverse hallucination — Step Z.** Beyond a fabricated source, an agent can present a *speculation, estimate, or single observation* as if it were a sourced or stable result — the inverse of standard fabrication, where Steps 0–6 "fail to fail" because there is no false citation to catch. Step Z is the general **tier-monotonicity** check: *does any sentence's language tier exceed the tier its evidence supports?* It applies to all project types (single-run-as-measurement, uncited performance numbers, no-protocol timing claims). For speculative-design / design-fiction work it adds a sub-case: reclassify a diegetic artefact cited as if real as a PROVOCATION rather than chasing a missing source. See [`templates/anti-hallucination.md`](templates/anti-hallucination.md) → Step Z, [DR-017](decisions/DR-017_typed-verification-core-ownership.md), and [DR-010](decisions/DR-010_provocation-unit-type.md).
 
@@ -318,7 +318,7 @@ See [`templates/glossary.md`](templates/glossary.md).
 
 Each gate must pass before proceeding.
 
-> The numerical thresholds in Gate 2 (100% P0 / 90% P1 / 70% P2 / ≥85% overall coverage) and Gate 3 (≥3.5/5.0 simulated peer review) are **SPECULATIVE-tier heuristics** chosen on internal reasoning, not on a calibration dataset. See [`docs/THRESHOLDS.md`](docs/THRESHOLDS.md) for the rationale per threshold and what would harden them.
+> The numerical thresholds in Gate 2 (100% P0 / 90% P1 / 70% P2 / ≥85% overall coverage) and Gate 3 (≥3.5/5.0 simulated peer review) are **SPECULATIVE-tier heuristics** chosen on internal reasoning, not on a calibration dataset. See [`docs/THRESHOLDS.md`](docs/THRESHOLDS.md) for the rationale per threshold and what would harden them. Adjust them per project as you accrue evidence.
 
 ### Gate 1: Draft Complete
 - [ ] All sections drafted to page budget
@@ -443,8 +443,6 @@ You know it's failing when:
 - You're re-explaining the paper's scope every session
 - Terminology is inconsistent across sections
 
-The specific numbers behind the success signals (85% overall coverage, 100% P0, 3.5/5.0 peer-review) are SPECULATIVE-tier heuristics — defensible defaults, not calibrated constants. Adjust them per project as you accrue evidence.
-
 ## Templates
 
 Fill-in templates in [`templates/`](templates/) — the files you copy, populate, and keep iterating on as the paper grows. (For single-shot agent system prompts, see [Agent-Role Prompts](#agent-role-prompts) below.)
@@ -456,10 +454,10 @@ Fill-in templates in [`templates/`](templates/) — the files you copy, populate
 - **[`decision-record.md`](templates/decision-record.md)** — Lightweight ADR for scope and methodology decisions
 - **[`anti-hallucination.md`](templates/anti-hallucination.md)** — Citation verification checklist
 - **[`glossary.md`](templates/glossary.md)** — Cross-domain terminology reference
-- **[`cost-log.md`](templates/cost-log.md)** — Per-operation token-cost log; copy to your paper's `vv/cost-log.md` (since v1.6.0)
-- **[`hypothesis-log.md`](templates/hypothesis-log.md)** — Provisional positions whose evidence lives in the future (`Position` / `Method` / `Revisit trigger` / `Review by`); resolves to closed or promoted to DR (since v1.7.0; adopted from agent-ready-projects v1.10.0)
+- **[`cost-log.md`](templates/cost-log.md)** — Per-operation token-cost log; copy to your paper's `vv/cost-log.md`
+- **[`hypothesis-log.md`](templates/hypothesis-log.md)** — Provisional positions whose evidence lives in the future (`Position` / `Method` / `Revisit trigger` / `Review by`); resolves to closed or promoted to DR
 - **[`readability.md`](templates/readability.md)** — Two prompts against compressed, hard-to-read AI prose (*Explain like I'm 18*, *Write for a reader*) and a draft-then-check workflow
-- **[`work-item.md`](templates/work-item.md)** — Savepoint for work spanning several sessions; create in `docs/work-items/` and point at it from your in-progress list (adopted from agent-ready-projects v1.11.0)
+- **[`work-item.md`](templates/work-item.md)** — Savepoint for work spanning several sessions; create in `docs/work-items/` and point at it from your in-progress list
 - **[`key-quotes.md`](templates/key-quotes.md)** — Reference quotes with page pins; the tier-3 "reference / background only" template from the adoption table above
 
 Copy what you need, delete the comments, fill in your specifics.
@@ -473,7 +471,7 @@ Portable agent-role prompts in [`agents/`](agents/) — copy each as a system pr
 | [`equation-checker.md`](agents/equation-checker.md) | Mechanical equation & numerical verifier — substitute values, compute, flag discrepancies (not plausibility review) | When any equation or derived value is load-bearing; paired with the source equations for cross-reference |
 | [`review-prompt.md`](agents/review-prompt.md) | Peer-review simulator with multi-pass bias-escape semantics ([DR-011](decisions/DR-011_multi-model-review-pattern.md)) | Before submission; once per pass — Pass 1 intra-family small, Pass 2 intra-family large, Pass 3 cross-vendor (high-stakes only, with style/voice filter) |
 
-See [`agents/README.md`](agents/README.md) for the directory's purpose and the line between agent-role prompts (here) and fill-in templates (in [`templates/`](templates/)). Convention mirrored from `agent-ready-assessment`'s `agents/` directory (not publicly resolvable); new here in v2.1.0. For practical setup with a non-Claude-Code agent (Copilot CLI, Cursor, Continue, web chat), see [`docs/non-claude-setup.md`](docs/non-claude-setup.md).
+See [`agents/README.md`](agents/README.md) for the directory's purpose and the line between agent-role prompts (here) and fill-in templates (in [`templates/`](templates/)). For practical setup with a non-Claude-Code agent (Copilot CLI, Cursor, Continue, web chat), see [`docs/non-claude-setup.md`](docs/non-claude-setup.md).
 
 ## Tools
 
@@ -524,14 +522,14 @@ Tier vocabulary matches the [Confidence-to-Language Mapping](#confidence-to-lang
 | R-1 | PROPOSITION | P0 | EMERGING | Process-level verification infrastructure (templates + gates + decision records + registry) catches a class of AI-augmented-writing failure modes that tool-level checkers and model-level techniques do not fully address. Boundary: the four When-Worth-It tests; reduces to overhead for the When-Overkill cases. | Own use on three application classes (academic-paper, speculative-design, decision-support); Paper 1 (this repo) is the perspective article arguing the gap | [The Approach](#the-approach), [The Argument, Structurally](#the-argument-structurally) |
 | R-2 | ARGUMENT | P0 | SUPPORTED | The systems-engineering identity (claims-as-components, sources-as-tests, coverage-as-measurable) operationalises verification rather than just metaphorising it. Warrant: typed registry + tier-monotonic language calibration + per-priority coverage targets are each independently tractable. Rebuttal addressed: the mapping is most natural for argumentative/empirical non-fiction and stretches for purely literary or oral genres. | [DR-007](decisions/DR-007_se-identity-upgrade.md) | [The Approach → SE mapping](#the-approach) |
 | R-3 | CLAIM | P1 | SUPPORTED | LLMs introduce plausible-but-fabricated citations at rates high enough that unverified citations can survive into submission-ready drafts. | Hallucination literature as cited in [`templates/anti-hallucination.md`](templates/anti-hallucination.md) | [The Core Problem → Hallucinated citations](#the-core-problem), [Anti-Hallucination Checklist](#anti-hallucination-checklist) |
-| R-4 | CLAIM | P1 | EMERGING | Plausibility-based review of calculations misses arithmetic errors that mechanical reproduction catches. | [DR-009](decisions/DR-009_calculation-verification.md) (rationale; cites no external literature). Single observation, N=1, single-site — and model, prompt and inference mode varied together, so it does not isolate the mechanism. Retiered SUPPORTED→EMERGING 2026-08-13: the earlier SUPPORTED rested on one source plus the artifact the claim recommends, which is circular. | [Verification Registry → CALCULATION](#verification-registry-the-foundation), [`agents/equation-checker.md`](agents/equation-checker.md) |
-| R-5 | PROPOSITION | P1 | EMERGING | A three-pass review pattern (intra-family small → intra-family large → cross-vendor) escapes biases a single pass cannot — sunk-cost-from-session, review-character convergence, training-prior alignment. Boundary: demonstrated at code-tooling scale within one model family (N=2 within Claude); paper-scale prose and cross-family generality remain untested. | [DR-011](decisions/DR-011_multi-model-review-pattern.md) (Status: Proposed) | [Peer Review Simulation](#peer-review-simulation), [Tools → cost data](#tools) |
+| R-4 | CLAIM | P1 | EMERGING | Plausibility-based review of calculations misses arithmetic errors that mechanical reproduction catches. | [DR-009](decisions/DR-009_calculation-verification.md) (rationale; cites no external literature). Single observation, N=1, single-site — and model, prompt and inference mode varied together, so it does not isolate the mechanism. Not SUPPORTED: the only other support is the artifact the claim recommends, which would be circular. | [Verification Registry → CALCULATION](#verification-registry-the-foundation), [`agents/equation-checker.md`](agents/equation-checker.md) |
+| R-5 | PROPOSITION | P1 | EMERGING | A three-pass review pattern (intra-family small → intra-family large → cross-vendor) escapes biases a single pass cannot — sunk-cost-from-session, review-character convergence, training-prior alignment. Boundary: observed at code-tooling scale within one model family (N=2 within Claude); paper-scale prose and cross-family generality remain untested. | [DR-011](decisions/DR-011_multi-model-review-pattern.md) (Status: Proposed) | [Peer Review Simulation](#peer-review-simulation), [Tools → cost data](#tools) |
 | R-6 | CLAIM | P1 | SPECULATIVE | The numerical thresholds in Gate 2 (100% P0 / 90% P1 / 70% P2 / ≥85% overall) and Gate 3 (≥3.5/5.0 simulated peer review) are defensible defaults, not calibrated constants. | [`docs/THRESHOLDS.md`](docs/THRESHOLDS.md) (self-declared SPECULATIVE at top of file) | [Quality Gates](#quality-gates), [Measuring Success](#measuring-success) |
 | R-7 | PROPOSITION | P2 | EMERGING | Speculative-design / design-fiction work creates an "inverse hallucination" risk — designed speculation presented as if it had a citable source — which Steps 0–6 of the standard anti-hallucination checklist will not catch. Boundary: opt-in extension for PROVOCATION-using projects only; standard academic papers can ignore. | [DR-010](decisions/DR-010_provocation-unit-type.md) | [Verification Registry → PROVOCATION](#verification-registry-the-foundation), [Anti-Hallucination Checklist → Step Z](#anti-hallucination-checklist) |
 
 **Coverage note.** Type cut: 3 CLAIMs / 1 ARGUMENT / 3 PROPOSITIONs. Tier cut: 0 ESTABLISHED / 2 SUPPORTED / 4 EMERGING / 1 SPECULATIVE. The absence of an ESTABLISHED tier is intentional — the README does not yet have validated claims about its own efficacy, and forcing one would be the exact confidence-inflation failure the framework is supposed to catch.
 
-**Why this section exists.** Two reasons. (1) The framework's strongest credibility move available post-scope-tightening is applying itself to its own home document — readers can audit the README's load-bearing claims using the apparatus the README proposes. (2) The exercise forces honest tiers: R-1 reads as EMERGING (not SUPPORTED), R-6 reads as SPECULATIVE (not SUPPORTED), and the README's earlier undifferentiated confidence tone hid that.
+**Why this section exists.** Readers can audit the README's load-bearing claims with the apparatus the README proposes, and the exercise forces honest tiers: R-1 is EMERGING and R-6 SPECULATIVE, not SUPPORTED.
 
 ## Further Reading
 
