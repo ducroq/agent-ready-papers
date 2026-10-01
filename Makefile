@@ -1,4 +1,4 @@
-.PHONY: test lint format check coverage check-dois check-metadata verify-bib check-registry formula-scan preservation-check drift dr-status gotcha-stats check-counts read-surface
+.PHONY: test lint format check coverage check-dois check-metadata verify-bib check-registry formula-scan preservation-check drift dr-status gotcha-stats check-counts read-surface check-profile
 
 test:  ## Run tests
 	pytest tests/ -x -q
@@ -51,3 +51,6 @@ check-counts:  ## Character and test counts stated in the top CHANGELOG section 
 
 read-surface:  ## Characters in memory/ and docs/work-items/ outside archive/ vs a budget (maintainer-local)
 	bash scripts/read-surface.sh
+
+check-profile:  ## Review profile invariants: tier/guarantee both ways, ignored patterns, targets and scripts named (maintainer-local)
+	bash scripts/check-profile.sh
