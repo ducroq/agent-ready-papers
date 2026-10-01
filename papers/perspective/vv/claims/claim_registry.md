@@ -7,7 +7,7 @@
      Update this living document throughout the writing process. -->
 
 **Paper:** The Verification Gap: Why AI-Augmented Academic Writing Needs Reporting Guidelines Beyond Citation Checking
-**Last Updated:** 2026-09-24 (eight Confidence tiers corrected to DR-002 criteria — S1-1, S1-2, S2-2, S2-3, S2-4, S3-1, S3-2, S4-3, each with a ⚠️ note; manuscript anchors and appendix table now agree with the registry); 2026-03-03 (P0 + P1 + P2 verification complete; 100% overall coverage)
+**Last Updated:** 2026-10-01 (S1-6 added, P2). 2026-09-24 (eight Confidence tiers corrected to DR-002 criteria — S1-1, S1-2, S2-2, S2-3, S2-4, S3-1, S3-2, S4-3, each with a ⚠️ note; manuscript anchors and appendix table now agree with the registry); 2026-03-03 (P0 + P1 + P2 verification complete; 100% overall coverage)
 **Thesis:** The scholarly community lacks verification infrastructure for non-empirical papers written with AI assistance; we propose typed verification (CLAIM/ARGUMENT/PROPOSITION) with per-type checklists.
 
 ---
@@ -20,17 +20,17 @@
 |----------|-------|---------|----------|----------------|----------|
 | P0 | 6 | 6 | 6 | 0 | 100% |
 | P1 | 9 | 9 | 9 | 0 | 100% |
-| P2 | 1 | 1 | 1 | 0 | 100% |
-| **Total** | **16** | **16** | **16** | **0** | **100%** |
+| P2 | 2 | 2 | 2 | 0 | 100% |
+| **Total** | **17** | **17** | **17** | **0** | **100%** |
 
 **Coverage by Type**
 
 | Type | Total | Verified | Coverage |
 |------|-------|----------|----------|
-| CLAIM | 14 | 14 | 100% |
+| CLAIM | 15 | 15 | 100% |
 | ARGUMENT | 1 | 1 | 100% |
 | PROPOSITION | 1 | 1 | 100% |
-| **Total** | **16** | **16** | **100%** |
+| **Total** | **17** | **17** | **100%** |
 
 ⚠️ **P0 tier floor (2026-09-24; S4-1 withdrawn and S1-4 moved to P1, 2026-09-26): 3 of 6 P0 entries are below SUPPORTED** (S2-2; S3-4 and S5-1, capped by EMERGING premises; S1-1, S1-2 and S2-1 meet it). **The P0 gate therefore fails.** DR-002 (Accepted, binding) sets it as "all SUPPORTED or ESTABLISHED (no EMERGING/SPECULATIVE)" with no exception; the "or explicitly framed as hypothesis" clause in `papers/perspective/writing-guide.md`'s checklist is not in DR-002 and cannot waive it. Remedies are stronger sources, re-prioritisation, or an explicit decision — not a reading of the exception. The 100% figures below are *verification coverage* (Status column), not tier. `tools.coverage` reports the floor separately, below its coverage table (it reports 3 of 6 meeting it), and `--strict` fails on it (added in 75f928c, #37).
 
@@ -69,6 +69,7 @@
 
 | ID | Claim | Risk if Wrong |
 |----|-------|---------------|
+| S1-6 | AI-text detection is no substitute for verification: detection asks who wrote a text, verification asks whether it holds (definitional). Detectors are fragile: accuracy varies with generation settings, and paraphrase can collapse it | P2 | SUPPORTED | Two peer-reviewed sources agree that detectors are fragile (DR-002); each supports one half. Dugan et al. 2024 (ACL, DOI: 10.18653/v1/2024.acl-long.674): repetition penalty cuts accuracy by up to 32 points; changing generator, decoding or settings gives up to 95+% error; detectors "not yet robust enough for widespread deployment or high-stakes use" (§7). Paraphrase effects in RAID are mixed (Table 6: accuracy rose for 3 of 6 detectors), so Dugan is not cited for paraphrase. Krishna et al. 2023 (NeurIPS, arXiv:2303.13408): DIPPER paraphrase of GPT2-XL generations cut DetectGPT 70.3 → 4.6 and watermark detection 100 → 57.2 at 1% FPR (Table 1); a retrieval defence still detected 80–97%. Both test 2023–24 detectors | A | [x] |
 | S5-2 | Next steps: discipline-specific templates, integration with AI tools, empirical validation | Minor — forward-looking, low risk |
 
 ---
@@ -88,6 +89,7 @@ Each section uses per-type sub-tables (one each for CLAIMs / ARGUMENTs / PROPOSI
 | S1-3 | Without architectural constraints (page budgets, section specifications), AI agents expand arguments beyond evidence, add unnecessary sections, and exceed page budgets | P1 | EMERGING | README.md "Architecture Blueprints"; hedged with "may" | F | [x] |
 | S1-4 | Existing verification infrastructure for AI-assisted writing — citation and consistency linters, claim–evidence adjudication, provenance disciplines — checks whether evidence exists, supports or suffices, and some of it audits language against empirical study design; to our knowledge none distinguishes claims from arguments and propositions and applies a procedure suited to each, and none targets papers whose contribution is reasoning rather than fact | P1 | EMERGING | L66 Samsonau 2026 (arXiv:2604.08501): 23-check manuscript linter incl. causal-language-vs-design and citation-purpose checks, experimental claim-typing by type/testability/scope; no warrant analysis or per-kind procedure; calibrated on empirical papers only. L60 Chen et al. 2026 (arXiv:2607.26512): four support relations routed back to the author; no warrant, calibration or boundary check. L61 Zhou & Yu 2026 (arXiv:2608.10858): provenance discipline with a claim–evidence index and a sampled sufficiency audit; standing tiers attach to its metrics, not to manuscript claims. Adjacent: L62 WarrantScore scores warrants in peer-review comments, not manuscripts. VANRA (EQUATOR registration 2026-09-02) verifies cited assertions in tiers for narrative reviews, which covers cited statements only. All three read in full 2026-09-26. ⚠️ **Reworded and P0 → P1 2026-09-26:** the earlier "no process-level verification infrastructure exists" is falsified by L60, L61 and L66. As a positioning claim the paper does not collapse without it (its case rests on S2-2, S3-4 and S5-1). It remains a hedged negative, so it stays EMERGING. | B | [x] |
 | S1-5 | AI-generated equations can contain arithmetic errors that survive plausibility review but are caught by mechanical numerical reproduction | P1 | EMERGING | Internal experiments comparing LLM reviews prompted to "assess soundness" vs LLM reviews prompted to "numerically reproduce every calculation" show systematic difference in error detection. | F | [x] |
+| S1-6 | Detection is no substitute for verification: independent evaluations indicate that AI-text detector accuracy depends on generation settings and degrades under paraphrase; detection asks who wrote a text, verification asks whether it holds | P2 | SUPPORTED | Krishna et al. 2023 (NeurIPS, arXiv:2303.13408): DIPPER paraphrase cut DetectGPT 70.3 → 4.6 and watermark detection 100 → 57.2 at 1% FPR (Table 1). Dugan et al. 2024 (ACL, DOI: 10.18653/v1/2024.acl-long.674): repetition penalty cuts accuracy by up to 32 points, generation settings produce up to 95+% error, detectors "not yet robust enough for widespread deployment or high-stakes use" (§7). Two agreeing peer-reviewed sources (DR-002). Both test 2023–24 detectors | A | [x] |
 
 ### Section 2: The Landscape Gap
 
@@ -162,6 +164,8 @@ Each section uses per-type sub-tables (one each for CLAIMs / ARGUMENTs / PROPOSI
 | Whetten 1989 (AMR) | S3-2 | Verified: What/How/Why/Who-Where-When; DOI 10.5465/amr.1989.4308371 | [x] |
 | Gupta et al. 2024 (ACL) | S3-1, S4-3 | Verified: Toulmin-based zero-shot prompting outperforms generic; DOI 10.18653/v1/2024.acl-long.552 | [x] |
 | PeerArg 2024 (NeLaMKRR@KR) | S4-3 | Verified: PeerArg outperforms end-to-end LLM baseline; arXiv:2409.16813 | [x] |
+| Krishna et al. 2023 (NeurIPS) | S1-6 | Verified 2026-09-27 (NeurIPS proceedings page + arXiv:2303.13408 v2, §4 and Table 1 read): paraphrase cuts detection sharply (DetectGPT 70.3 → 4.6 at 1% FPR); no publisher DOI, arXiv DOI 10.48550/arXiv.2303.13408 | [x] |
+| Dugan et al. 2024 (ACL) | S1-6 | Verified 2026-09-27 (full text, §7 and Tables 4–6): accuracy depends on generation settings and attacks (paraphrase mixed, Table 6); detectors "not yet robust enough for … high-stakes use"; DOI 10.18653/v1/2024.acl-long.674 | [x] |
 | Mugaanyi et al. 2024 (JMIR) | S1-1 | Verified: 62–89% DOI fabrication rates; DOI 10.2196/52935 | [x] |
 | Walters & Wilder 2023 (Sci Rep) | S1-1 | Verified 2026-09-26 (Crossref + full text): 55% GPT-3.5 / 18% GPT-4 citations fabricated; DOI 10.1038/s41598-023-41032-5 | [x] |
 | Liang et al. 2024 (NEJM AI) | — (was S1-2; no longer cited, 2026-09-26) | Verified: LLMs catch surface issues but struggle with deep argument analysis; DOI 10.1056/AIoa2400196 | [x] |

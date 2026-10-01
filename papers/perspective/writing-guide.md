@@ -5,7 +5,7 @@
      editing any section. -->
 
 **Paper:** The Verification Gap: Why AI-Augmented Academic Writing Needs Reporting Guidelines for Reasoning
-**Last Updated:** 2026-03-16 (added Framework Component Language special case, PROPOSITION pre-submission items, negative claim hedging)
+**Last Updated:** 2026-10-01 (S1-6 rows). 2026-03-16 (added Framework Component Language special case, PROPOSITION pre-submission items, negative claim hedging)
 
 ---
 
@@ -100,6 +100,7 @@ Confidence progression for framework components:
 | S1-3 | Scope creep without architectural constraints | CLAIM | EMERGING | "Without structural constraints, AI-assisted drafts may expand beyond what evidence supports" |
 | S1-5 | AI-generated equations contain arithmetic errors surviving plausibility review | CLAIM | EMERGING | "AI-generated equations can contain arithmetic errors that survive review because they produce plausible-looking results" |
 | S1-4 | No existing infrastructure applies a verification procedure per unit type (P1) | CLAIM | EMERGING | "To our knowledge, none distinguishes claims from arguments and propositions" — name L60, L61, L66 first |
+| S1-6 | AI-text detection is no substitute for verification (P2) | CLAIM | SUPPORTED | Lead with the definitional point; cite each source only for its half (Dugan: settings; Krishna: paraphrase); "varies", "can collapse", never "shows" (2023–24 detectors) |
 
 **Key sources:**
 - `literature/sources/liang-2024.md` — AI hallucination evidence
@@ -238,6 +239,7 @@ Confidence progression for framework components:
 | S2-1 | EQUATOR ~700 guidelines | CLAIM | ESTABLISHED | EQUATOR website (699, 2026-03-03) |
 | S1-1 | AI citation hallucination | CLAIM | SUPPORTED | Mugaanyi 2024; Walters & Wilder 2023 |
 | S1-2 | Confidence inflation | CLAIM | SUPPORTED | Xiong 2024; Zhou 2024; Peters & Chin-Yee 2025 |
+| S1-6 | AI-text detection is no substitute for verification | CLAIM | SUPPORTED | Dugan 2024 (settings); Krishna 2023 (paraphrase) |
 
 ### EMERGING — Appropriately Hedged
 

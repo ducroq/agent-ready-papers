@@ -70,7 +70,7 @@ guidelines, verification, argumentation, non-empirical research
 
 % ===============================================================
 % SECTION 1 — THE PROBLEM
-% Registry entries: S1-1, S1-2, S1-5, S1-3, S1-4
+% Registry entries: S1-1, S1-2, S1-5, S1-3, S1-4, S1-6
 % ===============================================================
 \section{Introduction: The Problem}
 
@@ -146,8 +146,8 @@ tools that automatically check whether references exist, along with
 model-level approaches such as retrieval-augmented generation (in which
 the model is given access to source documents during text generation),
 address
-the factual accuracy dimension of AI-assisted writing.  These are
-valuable contributions, and recent systems go further: linters that
+the factual accuracy dimension of AI-assisted writing.  Recent systems
+go further: linters that
 check a manuscript's references, internal consistency, and causal
 language against study design \citep{samsonau2026}, workflows that pair
 each drafted claim with an evidence packet and route unsupported claims
@@ -159,6 +159,12 @@ asks whether evidence exists, supports a claim, or suffices.  To our
 knowledge, none distinguishes claims from arguments and propositions
 and applies a procedure suited to each---the gap that matters most for
 papers whose contribution is reasoning rather than fact.
+
+% S1-6: AI-text detection is no substitute for verification (CLAIM, P2, SUPPORTED)
+AI-text detection is no substitute: it asks who wrote a text,
+verification whether it holds.  Detectors are fragile: accuracy
+varies with generation settings \citep{dugan2024}; paraphrase can
+collapse it \citep{krishna2023}.
 
 The failure modes described above are not primarily failures of the AI
 model.  They are failures of the writing process---failures that occur
@@ -543,15 +549,15 @@ independently verify.
 
 \subsection*{Registry summary}
 
-Table~\ref{tab:registry} presents all 16 registered entries.  The
-distribution across types---14 claims, 1 argument, 1
+Table~\ref{tab:registry} presents all 17 registered entries.  The
+distribution across types---15 claims, 1 argument, 1
 proposition---reflects the paper's structure: a perspective article
 grounded primarily in verifiable facts and reasoning chains, culminating
 in a single recommendation.
 
 \begin{table}[htbp]
 \centering
-\caption{Complete verification registry for this manuscript (16 entries).}
+\caption{Complete verification registry for this manuscript (17 entries).}
 \label{tab:registry}
 \footnotesize
 \begin{tabular}{@{}lllll@{}}
@@ -563,6 +569,7 @@ S1-2 & Claim      & P0 & Supported   & Verified \\
 S1-3 & Claim      & P1 & Emerging    & Verified \\
 S1-4 & Claim      & P1 & Emerging    & Verified \\
 S1-5 & Claim      & P1 & Emerging    & Verified \\
+S1-6 & Claim      & P2 & Supported   & Verified \\
 S2-1 & Claim      & P0 & Established & Verified \\
 S2-2 & Claim      & P0 & Emerging    & Verified \\
 S2-3 & Claim      & P1 & Emerging    & Verified \\
