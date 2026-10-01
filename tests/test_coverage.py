@@ -54,9 +54,9 @@ def test_paper1_registry_coverage_shape(paper1_registry):
     # Every row in Paper 1 is on the priority axis (no PROVOCATION entries).
     assert all(row.axis == PRIORITY_AXIS for row in report.rows)
 
-    # Total entries across the registry: 16 (S4-1, S4-2, S4-4 withdrawn, #38).
-    assert sum(r.total for r in report.rows) == 16
-    assert sum(r.verified for r in report.rows) == 16
+    # Total entries across the registry: 17 (S4-1, S4-2, S4-4 withdrawn, #38; S1-6 added 2026-10-01).
+    assert sum(r.total for r in report.rows) == 17
+    assert sum(r.verified for r in report.rows) == 17
 
     unit_types = {r.unit_type for r in report.rows}
     assert unit_types == {"CLAIM", "ARGUMENT", "PROPOSITION"}
