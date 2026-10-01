@@ -4,7 +4,7 @@
 # A status line in the body does not count; values are case-normalised (`accepted` = `Accepted`).
 # Only Accepted DRs bind. Exit 1 if a DR has no frontmatter status, or none exist.
 set -uo pipefail
-cd "$(git rev-parse --show-toplevel)" || exit 2
+cd "$(CDPATH='' cd -- "$(dirname -- "$0")/.." >/dev/null && pwd -P)" || exit 2  # not git rev-parse: memory/ is its own repo
 shopt -s nullglob
 files=(decisions/DR-*.md)
 [ "${#files[@]}" -gt 0 ] || { echo "NO DRs found in decisions/"; exit 1; }

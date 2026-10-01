@@ -65,7 +65,7 @@ agent-ready-papers/
 ├── literature/            <- source registry; pdfs/ gitignored
 ├── docs/                  <- framework summary, thresholds, verification hooks; work-items/ on demand
 ├── tools/                 <- Python registry tooling (coverage, DOIs, metadata, consistency); see tools/README.md
-├── scripts/               <- shell mechanisation (drift, dr-status, gotcha-stats)
+├── scripts/               <- shell mechanisation; listed in tools/README.md
 ├── tests/                 <- tests for tools/
 ├── papers/perspective/    <- Paper 1 "The Verification Gap"; other papers/* are gitignored sub-projects
 ├── vv/                    <- framework self-application (cost log, public hypothesis log)

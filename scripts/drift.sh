@@ -7,7 +7,7 @@
 # Triage stays with /update-drift; this only says whether there is anything to triage.
 # Exit: 0 no drift · 1 drift · 2 cannot verify (no clone, fetch failed, pin tag missing, no stamp).
 set -uo pipefail
-R=$(git rev-parse --show-toplevel) || exit 2
+R=$(CDPATH='' cd -- "$(dirname -- "$0")/.." >/dev/null && pwd -P) || exit 2  # not git rev-parse: memory/ is its own repo
 FRAMEWORK=${FRAMEWORK:-$HOME/repos/agent-ready-projects}
 rc=0
 flag() { [ "$rc" -eq 2 ] || rc=$1; }

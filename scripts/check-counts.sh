@@ -10,8 +10,8 @@
 # (an ASCII arrow, "added 5 tests", two files in one sentence) is UNPARSED: exit 2, so a
 # reworded claim is caught in the shapes measured. Counts marked ~ are approximate.
 # Limit: this narrows the class, it does not close it; a count in a shape neither scan
-# knows (spelled out, a table cell) can still pass. The shapes were seeded by hand in
-# review (2026-10-01); they are not yet a test file.
+# knows (spelled out, a table cell) can still pass. Each shape seeded in review is a
+# case in tests/test_check_counts.py.
 # Only the top `## ` section is read: older sections describe files that have moved on.
 # Unit: Unicode characters, line endings kept, as `wc -m` in a UTF-8 locale.
 set -euo pipefail
