@@ -57,6 +57,7 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
 
 ### Docs
 
+- P16 leftovers from the 2026-09-14 review battery. DR-021 no longer contradicts itself: its Context and Option A's con name the *prose* half as unsupported (the graph half has `check_registry.py`); the `S4-*` line no longer says all rest on tier F (three were withdrawn, S4-3 cites PeerArg and Gupta); the prediction that acceptance would break the DR-count probe is replaced, since the probe counts files. `tools/README.md` splits the decidability row: the premise graph is checked here; the prose is locatable but not decidable, and only proposed (DR-021). `literature/sources/equator-gap.md` hedges two claims about four unread guidelines. `literature/README.md` names GhostCite's authors (Xu et al.). `topaz-2026.md` adds the ratios the stated rates give (6.2×, 10.2×) beside the press figure of ~12-fold.
 - `docs/verification-hooks.md`, *The adjacent measurement*: adds the follow-up count (adjacency in 4 of 64 findings over three review batteries, about 6%, or 5 with a borderline case). The shape stays EMERGING; the count is a share of findings, not a recurrence rate.
 - New `docs/adopter-feedback/argument-project-2026-09-14.md`: feedback from an argument-shaped adopter (v3.0.0), in a generic form. Four findings: PROVOCATION scoped to one device with an abuse tripwire, a deliberative gate turned into a search, **internal evidential contradiction** as a possible sibling of §4.6 scope drift, and a rule-versus-prose ledger. Not yet filed as issues.
 

@@ -14,7 +14,7 @@
 Audit of ~2.5 million open-access biomedical papers on PubMed Central and 97.1 million references, published 2023-01-01 to 2026-02-18. 4,046 references across 2,810 papers were classified as fabricated. The authors used automated tooling to separate genuine fabrications from formatting artifacts such as informally abbreviated titles.
 
 ## Key Findings
-- Prevalence of papers containing ≥1 fabricated reference: **1 in 2,828 (2023) → 1 in 458 (2025) → 1 in 277 (first seven weeks of 2026)** — reported as a ~12-fold increase over two years
+- Prevalence of papers containing ≥1 fabricated reference: **1 in 2,828 (2023) → 1 in 458 (2025) → 1 in 277 (first seven weeks of 2026)** — reported as a ~12-fold increase over two years. The three rates as stated give 6.2× (2023 to 2025) and 10.2× (2023 to early 2026), so the 12-fold figure is unchecked against the paper (press coverage only)
 - Sharpest inflection located in **mid-2024**, which the authors note coincides with the uptake of AI writing tools
 - Scale: 97.1M references evaluated, 4,046 judged fake across 2,810 papers
 

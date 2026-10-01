@@ -7,7 +7,7 @@ date: 2026-09-14
 
 ## Context
 
-Tier-monotonicity is the rule the confidence-tier table is an instance of: *prose language tier ≤ the registered confidence tier for the same entry* (`docs/framework-summary.md`). Citation drift, overclaiming and Step Z are all the same failure — language climbing above the evidence. It is the framework's most load-bearing rule and the only major one with **no mechanical support whatsoever**.
+Tier-monotonicity is the rule the confidence-tier table is an instance of: *prose language tier ≤ the registered confidence tier for the same entry* (`docs/framework-summary.md`). Citation drift, overclaiming and Step Z are all the same failure — language climbing above the evidence. It is the framework's most load-bearing rule and the only major one whose prose half has **no mechanical support** (the graph half has `check_registry.py`).
 
 The inputs for a mechanical scan all exist already, which is what makes the question live rather than speculative:
 
@@ -60,7 +60,7 @@ Four failure sources, none of them marginal:
 ### Option A: Status quo — Step Z stays entirely manual
 - (+) Zero new surface; no false-positive risk; no new failure mode.
 - (+) Honours the `verification-hooks.md` position as written.
-- (-) Leaves the framework's central rule with no mechanical support, while every adjacent rule has some.
+- (-) Leaves the prose half of the framework's central rule with no mechanical support (the graph half has `check_registry.py`), while every adjacent rule has some.
 - (-) The 2026-03 retrofit audit found over-confident language in 6 of 22 entries — a single-audit figure registered at EMERGING (`S3-3`), not a calibrated rate, but the only measurement the repo has. Manual-only is what produced it.
 
 ### Option B: A gate — fail the build on any tier-word above the registered tier
@@ -98,9 +98,9 @@ Accepting this DR also requires a scope qualifier on the `docs/verification-hook
 
 - The framework gains mechanical support for its central rule without claiming a decision procedure for it. The claim stays exactly as strong as the evidence: *here are the sentences worth re-reading*.
 - `docs/verification-hooks.md` gains a qualifier; until it does, two shipped docs disagree.
-- A measurement becomes possible that the framework currently lacks. Run the locator over Paper 1, adjudicate every candidate by hand, and record precision. That number decides whether this ever leaves `extensions/` — and it is the sort of own-data evidence the `S4-*` entries currently lack, all of which rest on tier F ("own design rationale").
+- A measurement becomes possible that the framework currently lacks. Run the locator over Paper 1, adjudicate every candidate by hand, and record precision. That number decides whether this ever leaves `extensions/` — and it is the sort of own-data evidence the `S4-*` entries lack: S4-1, S4-2 and S4-4 were withdrawn on 2026-09-26, and the remaining S4-3 cites two external sources (PeerArg 2024, Gupta et al. 2024).
 - Span attribution is now a known-unsound input. If it proves to be the dominant noise source, the fix is in the *manuscript* format (an end-marker convention), not in the locator — and that would be a separate DR, touching a shipped template.
-- Accepting this adds a 21st decision record, which breaks the self-verifying count probe in `CLAUDE.md`'s decisions row. That probe is doing its job; the row needs updating as part of acceptance.
+- Acceptance changes no decision-record count: the probe in `CLAUDE.md`'s decisions row counts DR files.
 
 ## Revisit If
 

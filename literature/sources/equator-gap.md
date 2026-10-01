@@ -23,7 +23,7 @@ The EQUATOR Network maintains ~700 reporting guidelines for health research (CON
 
 ## The AI reporting-guideline landscape (added 2026-09-14)
 
-Three-plus AI-specific reporting guidelines now exist that did not feature in the original gap analysis. **None is a counterexample to the gap claim — all sharpen it.**
+Four AI-specific reporting guidelines now exist that did not feature in the original gap analysis. **From their published descriptions, none looks like a counterexample to the gap claim, and all four would sharpen it.** All four are unread, so this reading is EMERGING until each is checked against its text.
 
 | Guideline | Covers | Status here |
 |-----------|--------|-------------|
@@ -32,7 +32,7 @@ Three-plus AI-specific reporting guidelines now exist that did not feature in th
 | CHART | Chatbot assessment | UNVERIFIED — not read |
 | LLM checklist for behavioural science (Nat Hum Behav, 2026) | Reporting LLM use in behavioural studies | UNVERIFIED — not read |
 
-All govern the same two things: *disclose that you used AI*, and *report your method if your study is about an AI system*. None asks whether a warrant licenses an inference, whether confidence language tracks evidence strength, or whether a proposition states boundary conditions.
+As described, all four appear to govern the same two things: *disclose that you used AI*, and *report your method if your study is about an AI system*. None is described as asking whether a warrant licenses an inference, whether confidence language tracks evidence strength, or whether a proposition states boundary conditions.
 
 **Consequence for the manuscript:** the gap claim must now be stated against this landscape rather than into a vacuum. A reviewer who knows CANGARU exists will read an unqualified "no guidelines exist for AI-assisted writing" as uninformed. The defensible framing: *the field has built disclosure infrastructure and calls it verification infrastructure.*
 

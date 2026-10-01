@@ -119,9 +119,10 @@ That line is the whole design, and it is worth stating precisely because the two
 | Question | Decidable? | Where it lives |
 |----------|-----------|----------------|
 | Is the registered tier right, given the evidence? | No — judgment | Step Z, a human-and-agent pass |
-| Given the registered tier, is the prose / graph consistent with it? | Yes | Here |
+| Given the registered tier, is the premise graph consistent with it? | Yes | Here |
+| Given the registered tier, is the prose consistent with it? | Locatable, not decidable (span attribution is unsound) | Proposed in DR-021, as a locator that would be staged in `extensions/`; not shipped |
 
-`docs/framework-summary.md` states tier-monotonicity as *"prose language tier ≤ the registered confidence tier for the same entry"* — the second form. This tool implements the graph half of it.
+`docs/framework-summary.md` states tier-monotonicity as *"prose language tier ≤ the registered confidence tier for the same entry"* — the form in the last row. This tool implements its graph analogue (the middle row), not the prose rule itself.
 
 ```bash
 python -m tools.check_registry <registry.md> [--manuscript <file.tex>] [--budget N]

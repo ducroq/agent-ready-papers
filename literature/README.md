@@ -129,7 +129,7 @@ Sources consulted during the development of this project, particularly for DR-00
 |----|-----------|------|-------|-------|------|--------|
 | L57 | Topaz et al. | 2026 | Fabricated citations: an audit across 2·5 million biomedical papers | The Lancet | [topaz-2026](sources/topaz-2026.md) | PARTIAL — press coverage only |
 | L58 | Rao & Callison-Burch | 2026 | BibTeX Citation Errors in Scientific Publishing Agents: Evaluation and Mitigation | arXiv | [rao-callison-burch-2026](sources/rao-callison-burch-2026.md) | READ (abstract) |
-| L59 | *(authors unconfirmed)* | 2026 | GhostCite: A Large-Scale Analysis of Citation Validity in the Age of Large Language Models | arXiv | [ghostcite-2026](sources/ghostcite-2026.md) | TO VERIFY — not read |
+| L59 | Xu et al. | 2026 | GhostCite: A Large-Scale Analysis of Citation Validity in the Age of Large Language Models | arXiv | [ghostcite-2026](sources/ghostcite-2026.md) | TO VERIFY — not read |
 
 ### Verification Infrastructure for AI-Assisted Writing (prior art)
 
