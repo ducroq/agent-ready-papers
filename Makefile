@@ -1,4 +1,4 @@
-.PHONY: test lint format check coverage check-dois check-metadata verify-bib check-registry formula-scan preservation-check drift dr-status gotcha-stats check-counts
+.PHONY: test lint format check coverage check-dois check-metadata verify-bib check-registry formula-scan preservation-check drift dr-status gotcha-stats check-counts read-surface
 
 test:  ## Run tests
 	pytest tests/ -x -q
@@ -48,3 +48,6 @@ gotcha-stats:  ## Gotcha-log entry count and sizes (maintainer-local memory/)
 
 check-counts:  ## Character and test counts stated in the top CHANGELOG section vs the repo (run before /release)
 	bash scripts/check-counts.sh
+
+read-surface:  ## Characters in memory/ and docs/work-items/ outside archive/ vs a budget (maintainer-local)
+	bash scripts/read-surface.sh

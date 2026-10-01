@@ -9,7 +9,7 @@
 
      USAGE, per text:
      1. Save the source where it will not be edited (proposed in DR-023:
-        docs/work-items/reports/, gitignored).
+        docs/work-items/archive/reports/, gitignored).
      2. Prompt T, in a FRESH context: give it the source only.
      3. python extensions/preservation_check.py <source> <translation> --link <the link from Prompt T step 4>
         (make preservation-check SRC=... TRN=... LINK=...). For public text

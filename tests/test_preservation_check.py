@@ -149,9 +149,9 @@ def test_an_added_absolute_is_flagged():
 
 def test_the_link_to_the_source_is_checked_only_when_asked():
     assert "link-missing" not in _kinds("A.", "A.")
-    assert "link-missing" in _kinds("A.", "A.", link="docs/work-items/reports/r1.md")
+    assert "link-missing" in _kinds("A.", "A.", link="docs/work-items/archive/reports/r1.md")
     assert "link-missing" not in _kinds(
-        "A.", "A. Source: docs/work-items/reports/r1.md", link="docs/work-items/reports/r1.md"
+        "A.", "A. Source: docs/work-items/archive/reports/r1.md", link="docs/work-items/archive/reports/r1.md"
     )
 
 
@@ -294,7 +294,7 @@ def test_the_guide_section_may_be_the_last_one(tmp_path):
 def test_dates_and_digits_inside_paths_are_identifiers():
     # From the 2026-09-30 pilot: a plain-text source link read as a new date.
     src = "The review found 2 warnings."
-    trn = "The review found 2 warnings.\n\nSource: docs/work-items/reports/2026-09-30-review-memory-lens.md"
+    trn = "The review found 2 warnings.\n\nSource: docs/work-items/archive/reports/2026-09-30-review-memory-lens.md"
     assert _kinds(src, trn) == []
     assert _kinds("See 2026-09-30-notes.md.", "See the notes.") == []
 

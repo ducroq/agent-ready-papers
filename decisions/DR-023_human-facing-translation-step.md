@@ -44,7 +44,7 @@ One risk shapes every option: rewriting for plainness can make claims stronger. 
 3. **A preservation check after each translation**, in two parts. Both report and never gate.
    - **A script.** It flags any number or tier word from the source that is missing from the translation, and any tier word that moved up a band. Digits inside identifiers (DR-022, L86, #41) do not count as numbers. The bands are the Language Calibration table in `templates/writing-guide.md` (DR-002). Identifiers are not required to survive, since step 2 drops them, but the link to the source is.
    - **A claim comparison in a fresh context.** It lists every assertion in the translation that is not in the source. The script cannot do this: the two cases of 2026-09-30 added claims without any tier word.
-4. **The source is kept.** Report and CHANGELOG sources go to a stable, gitignored path (proposed: `docs/work-items/reports/`) and are not edited after translation, so they serve as a record. For documents, the translation becomes the document and git history holds the source.
+4. **The source is kept.** Report and CHANGELOG sources go to a stable, gitignored path (proposed: `docs/work-items/archive/reports/`) and are not edited after translation, so they serve as a record. For documents, the translation becomes the document and git history holds the source.
 5. **A reader lens in `/review-changes`.** It marks every sentence a newcomer would have to read twice, and runs on human-facing files only.
 
 ## Hypothesis and Test (acceptance condition)
