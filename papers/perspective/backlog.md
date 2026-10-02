@@ -42,7 +42,7 @@ Tiers were re-derived from DR-002; the registry header states the consequence. D
   - Appendix A self-demonstration
   - S1-5 calculation verification as a failure mode
 - [ ] Handoff note with Decisions A and B (P0 floor) drafted 2026-10-01: `handoff-coauthor.md`, kept out of git; the maintainer reviews and sends it
-- [ ] Two overfull lines: Section 2 (`manuscript.tex` 259-272, 2.5pt) and Section 3 (289-302, 27pt); `turner2012` has an issue number but no volume (bibtex warning)
+- [x] Two overfull lines (Section 2 paragraph: `\sloppy` scoped to it; Section 3 table: `\footnotesize`) and `turner2012`'s missing volume (`volume = {2012}`, Cochrane's "2012, Issue 11"; Crossref lists 2013(1)), 2026-10-02
 - [ ] Decide submission article type: "Original Article" or "Opinion"
 - [ ] Consider pre-submission enquiry to LP editor (Laura Dormer or Michelle Urberg)
 

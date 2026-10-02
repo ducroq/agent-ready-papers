@@ -7,7 +7,7 @@ This paper argues that the scholarly community lacks verification infrastructure
 - **Target:** Learned Publishing (primary), Research Integrity and Peer Review (backup)
 - **Deadline:** TBD
 - **Status:** Phase 3 — Writing (first draft complete)
-- **agent-ready-papers:** v4.0.0 <!-- A number, not a status. Bump deliberately after reading UPGRADING.md. v2.6.0 -> v4.0.0 reconciled 2026-09-26: all v3.0.0 Required items were already in force here (Step 0 rule, P2 70% target, confident-language floor below ESTABLISHED); v4.0.0's P0 floor is the known red gate (#38). Earlier reconciliation notes: git history. -->
+- **agent-ready-papers:** v4.2.0 <!-- A number, not a status. Bump deliberately after reading UPGRADING.md. v4.0.0 -> v4.2.0 reconciled 2026-10-02: neither release has a required item; the optional readability template and DR-019's Step Z scope line are not taken yet. v4.0.0's P0 floor is the known red gate (#38). Earlier reconciliation notes: git history. -->
 
 <!-- This paper lives inside the framework repo, so the pin above tracks the
      framework's own version by construction. It is stated anyway: this is the
