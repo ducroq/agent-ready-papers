@@ -14,7 +14,11 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
      backward-compatible fix. Every entry has an "Adopter notes" or "Adopter action" subsection,
      saying "No adopter action required." when there is none. -->
 
-## Unreleased
+## v4.2.0 (2026-10-02)
+
+DR-019 is accepted: Step Z's scope now names the surfaces it covers, including a project's own methodology prose, without adding any cadence or sweep. Paper 1 gains S1-6, rewords S2-2 and builds again; three maintenance scripts arrive. **MINOR**: a template's normative scope changes, but nothing obliges an adopter to act.
+
+Fourteen commits since v4.1.0. The test suite went from 274 to 364.
 
 ### Templates (adopter-facing)
 
@@ -26,6 +30,7 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
 - **S1-6 (new, P2, SUPPORTED):** AI-text detection is no substitute for verification; Dugan et al. 2024 cited for generation settings and Krishna et al. 2023 for paraphrase only (RAID's paraphrase results are mixed).
 - **S2-2 reworded, stays EMERGING:** names the ACM SIGSOFT standards (a design-science checklist, and a Meta-Science standard that asks for "clear, valid arguments" without a procedure) as coming closest, and cites Larsen et al. 2025, Gregor & Hevner 2013 and Dinter & Krawatzeck 2015. A raise to SUPPORTED was refuted in review: the peer-reviewed gap statements cover design science (two agreeing) and conceptual papers (one), not theory or perspective papers. New literature entries L92–L95.
 - S2-3's opener is hedged to its tier ("may reflect", was "is not accidental").
+- **The PDF builds again.** The committed `manuscript.pdf` dated from 2026-06-10. Building it failed: `@misc{equator}` had no year, so natbib's author-year mode stopped with an error and fell back to numbered citations while still writing a PDF. The entry now has `year = {n.d.}`, and its one citation uses a natbib alias (`\citepalias`), because apalike strips the periods from the label and printed "nd". `check_registry`'s word count rises from 3,499 to 3,503, because it counts the preamble, which now holds the alias definition; the body text is unchanged.
 - The P0 tier floor stays at 3 of 6. S3-4 is capped by its premises S3-1 to S3-3, all EMERGING. S3-1 and S3-2 can be raised with sources, but S3-3 is the paper's own proposal, so sources alone cannot close the gate; S5-1 rests on S2-2 and S3-4. The rest needs a decision about how DR-002 treats a paper's own contribution (#38).
 
 ### Tooling (this repo's maintenance)
@@ -39,14 +44,20 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
 ### Docs
 
 - `README.md` loses its inline edit histories (version provenance notes, the 2026-09-14 "whole-registry verification" correction, and R-4's dated retier note: R-4 went SUPPORTED → EMERGING on 2026-08-13) and a restated thresholds paragraph; the per-project adjustment advice moves to the *Quality Gates* note. R-5's boundary says "observed" instead of "demonstrated", which an EMERGING row may not use.
-- **Release history split at the current MAJOR (P23, #40).** v3.0.0 and earlier moved word for word to `CHANGELOG-archive.md` and `UPGRADING-archive.md`. `UPGRADING.md` 61,512 → 7,281 characters; `CHANGELOG.md` shrank from ~149k to ~27k (it grows with each entry). The release-process header comment is shorter; the steps `/release` cites by number keep their numbers. Adopters pinned before v4.0.0 read the archive from their pin up to v3.0.0. Two links in `agents/README.md` now point into the archive.
+- **Release history split at the current MAJOR (P23, #40).** v3.0.0 and earlier moved word for word to `CHANGELOG-archive.md` and `UPGRADING-archive.md`. `UPGRADING.md` went from 61,512 to ~7,281 characters at the split; `CHANGELOG.md` shrank from ~149k to ~27k (it grows with each entry). The release-process header comment is shorter; the steps `/release` cites by number keep their numbers. Adopters pinned before v4.0.0 read the archive from their pin up to v3.0.0. Two links in `agents/README.md` now point into the archive.
 - P16 leftovers from the 2026-09-14 review battery. DR-021 no longer contradicts itself: its Context and Option A's con name the *prose* half as unsupported (the graph half has `check_registry.py`); the `S4-*` line no longer says all rest on tier F (three were withdrawn, S4-3 cites PeerArg and Gupta); the prediction that acceptance would break the DR-count probe is replaced, since the probe counts files. `tools/README.md` splits the decidability row: the premise graph is checked here; the prose is locatable but not decidable, and only proposed (DR-021). `literature/sources/equator-gap.md` hedges two claims about four unread guidelines. `literature/README.md` names GhostCite's authors (Xu et al.). `topaz-2026.md` adds the ratios the stated rates give (6.2×, 10.2×) beside the press figure of ~12-fold.
 - `docs/verification-hooks.md`, *The adjacent measurement*: adds the follow-up count (adjacency in 4 of 64 findings over three review batteries, about 6%, or 5 with a borderline case). The shape stays EMERGING; the count is a share of findings, not a recurrence rate.
 - New `docs/adopter-feedback/argument-project-2026-09-14.md`: feedback from an argument-shaped adopter (v3.0.0), in a generic form. Four findings: PROVOCATION scoped to one device with an abuse tripwire, a deliberative gate turned into a search, **internal evidential contradiction** as a possible sibling of §4.6 scope drift, and a rule-versus-prose ledger. Not yet filed as issues.
 
 ### Adopter notes
 
-No adopter action required. `check-counts.sh` and `read-surface.sh` read this repo's own layout.
+No adopter action required. New adopters get the new Step Z scope line in `templates/anti-hallucination.md`.
+
+Existing adopters who want it in a paper-local `anti-hallucination.md`: do not re-copy the template over an adapted copy. Replace the italic scope line under *Step Z: Inverse Hallucination Check* with the template's. A current copy contains the strings `and to every surface that states claims` and `it sets no cadence and requires no standing sweep`. The three new scripts (`check-counts.sh`, `read-surface.sh`, `check-profile.sh`) read this repo's own layout and are not for adopters.
+
+### Versioning rationale
+
+Rule 1 does not fire: no consumer must act to keep working, since no gate, checker or cadence enforces the new scope. Rule 2 fires: an Accepted DR changes a template's normative scope, which is new documented behaviour, so MINOR. Precedent: v4.1.0 (MINOR for a new template and DRs, nothing an adopter must do).
 
 ## v4.1.0 (2026-09-30)
 

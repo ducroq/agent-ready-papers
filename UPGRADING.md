@@ -11,6 +11,19 @@ The full release notes are in [`CHANGELOG.md`](CHANGELOG.md). This file is the q
 - **PATCH** version bumps are docs-only / clarifications, or backward-compatible bug fixes (e.g. a tooling fix that changes no public interface). Usually no action required; a bug fix may be worth adopting if you hit the bug.
 - Every release entry in `CHANGELOG.md` includes an "Adopter notes" / "Adopter action" subsection. This file aggregates them per version for quick lookup.
 
+## v4.2.0 (2026-10-02)
+
+**From v4.1.0 — what to review when you bump your pin to v4.2.0:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| **`templates/anti-hallucination.md` — Step Z's scope names surfaces** (DR-019, now Accepted) | **Optional.** Step Z now also covers a project's own methodology prose (docs, decision records, `CLAUDE.md`, changelog rationale). It sets no cadence and no standing sweep. To take it in a paper-local copy, replace the italic scope line under *Step Z* with the template's; don't re-copy over an adapted file. A current copy contains `and to every surface that states claims`. |
+| `decisions/DR-019` Accepted; DR-020 stays Proposed | None beyond the row above. Proposed DRs do not bind. |
+| `scripts/` (`make check-counts`, `make read-surface`, `make check-profile`) | None. They read this repo's own layout, not yours. |
+| Release history split: v3.0.0 and earlier in `CHANGELOG-archive.md` and `UPGRADING-archive.md` | None. If you were pinned before v4.0.0, start in the archive. |
+
+**Breaking changes:** none.
+
 ## v4.1.0 (2026-09-30)
 
 **From v4.0.0 — what to review when you bump your pin to v4.1.0:**
