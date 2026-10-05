@@ -39,6 +39,8 @@ For each flag in the scanner report, classify it:
 - **Deliberate template**: declared in the profile, and marked in the prose.
 - **False positive**: e.g. a defined term, a quoted title, a legitimately parallel list.
 
+A house-list hit (source H, `--house-words`) is the project's own style rule, not formula: replace the word unless it is quoted or a name.
+
 ### 2. What the scanner cannot see
 Check these by reading. They are the cue categories expert readers use (Russell et al. 2025, L72, Table 17) that no count captures:
 - **Originality**: safe, unsurprising passages; the obvious example where a specific one was available.

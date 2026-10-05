@@ -1,6 +1,6 @@
 # Paper 1 — Backlog
 
-Last updated: 2026-10-01
+Last updated: 2026-10-05
 
 ## Done
 
@@ -19,6 +19,7 @@ Last updated: 2026-10-01
 - [x] Update claim registry (S1-5, coverage 19/19)
 - [x] Full framework reflection (2026-03-16): sync Paper 1 files with templates, DR-009, gotcha log cleanup
 - [x] Migrate Paper 1 registry to per-type sub-tables (v1.3.0, closes #11) — self-eating-dog-food restored
+- [x] Prose rewrite for readability under the house voice (2026-10-05, `e7e444d`): no em-dashes or "rather than", hedges varied, claims and tiers unchanged; reviewed in two rounds (round-1 report: `docs/work-items/archive/reports/2026-10-05-review-5.md`, local)
 
 ## Active (Paper 1)
 
@@ -41,6 +42,7 @@ Tiers were re-derived from DR-002; the registry header states the consequence. D
   - Title broadening: "Reporting Guidelines for Reasoning"
   - Appendix A self-demonstration
   - S1-5 calculation verification as a failure mode
+  - The 2026-10-05 prose rewrite (house voice; claims and tiers unchanged). `handoff-coauthor.md` predates it
 - [ ] Handoff note with Decisions A and B (P0 floor) drafted 2026-10-01: `handoff-coauthor.md`, kept out of git; the maintainer reviews and sends it
 - [x] Two overfull lines (Section 2 paragraph: `\sloppy` scoped to it; Section 3 table: `\footnotesize`) and `turner2012`'s missing volume (`volume = {2012}`, Cochrane's "2012, Issue 11"; Crossref lists 2013(1)), 2026-10-02
 - [ ] Decide submission article type: "Original Article" or "Opinion"

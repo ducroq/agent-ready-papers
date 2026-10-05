@@ -149,15 +149,16 @@ This is the framework eating its own dog food. Any friction, gaps, or false fail
 - Added fifth future direction in Section 5 (numerical reproduction as distinct verification procedure)
 - Integrated calculation verification into framework README
 - Registry updated: 19/19 entries, 16 CLAIMs, 2 ARGUMENTs, 1 PROPOSITION
+- Prose rewritten for readability (2026-10-05, `e7e444d`): em-dashes 43 to 0 (scanner count; 44 with a table cell), "rather than" 11 to 0, "to our knowledge" 8 to 3 (other absence claims keep a hedge); same claims and tiers, check-registry clean, 3,494 words, abstract 152. Two declared changes in the opening paragraph: "is transforming" dropped, a fabricated-citation example added (S1-1)
 - `equator` bib entry given `year = {n.d.}` (2026-10-01): without a year, natbib's author-year mode errors and falls back to numbered citations while still writing a PDF. Its one citation uses `\citepalias` (alias defined in the preamble), because apalike strips the periods from the label and prints "nd"
 
 **Note:** Gate 2.5 (Internal Consistency) was introduced after Paper 1 passed Gate 2. Appendix A values were manually cross-checked against main text during the Appendix A addition (2026-03-06), which satisfies the Gate 2.5 intent retroactively.
 
 **Next priorities:**
-1. Co-author review (Gate 3) — title change + Appendix A + S1-5 are significant additions to discuss; the handoff note (Decisions A and B on the P0 floor) is drafted, see `backlog.md`
+1. Co-author review (Gate 3) — title change + Appendix A + S1-5 + the 2026-10-05 prose rewrite are significant changes to discuss; the handoff note (Decisions A and B on the P0 floor) is drafted, see `backlog.md`
 2. Decide submission article type: "Original Article" or "Opinion" (LP uses "Opinion" for perspective-type pieces)
 3. Pre-submission enquiry to LP editor (optional)
 
 ---
 
-*Last updated: 2026-10-01*
+*Last updated: 2026-10-05*
