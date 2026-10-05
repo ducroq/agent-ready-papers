@@ -389,3 +389,83 @@ def test_long_comma_run_stays_fast(tmp_path):
 def test_style_phrase_matches_across_extra_whitespace(tmp_path, monkeypatch):
     monkeypatch.setattr(fs, "STYLE_WORDS", {"in summary": "W"})
     assert fs.scan(_write(tmp_path, "In  summary, it works.\n")).metrics["style_words"] == 1
+
+
+def test_not_x_but_rather_y_is_a_contrast(tmp_path):
+    text = "The challenge may not be the data but rather the argument.\n"
+    assert fs.scan(_write(tmp_path, text)).metrics["negation_contrast"] == 1
+
+
+def test_rather_than_is_counted_apart_and_flagged_only_by_rate(tmp_path):
+    one = "We chose words rather than numbers, and the long report went on for many pages without it. "
+    filler = "The committee met on a Tuesday and read every page of the draft with care. " * 40  # ~600 words
+    r = fs.scan(_write(tmp_path, one + filler))
+    assert r.metrics["rather_than"] == 1 and r.metrics["negation_contrast"] == 0
+    assert "rather" not in _signals(r)  # below the rate
+    dense = "Words rather than numbers. Ideas rather than data. Speed rather than care.\n"
+    r2 = fs.scan(_write(tmp_path, dense, "b.md"))
+    assert r2.metrics["rather_than"] == 3
+    assert "rather" in _signals(r2) and "contrast" not in _signals(r2)
+
+
+def test_em_dashes_counted_in_markdown_and_latex(tmp_path):
+    md = "The tool\u2014which is new\u2014works. A hyphen-word and a range 3\u20135 are not dashes.\n"
+    r = fs.scan(_write(tmp_path, md))
+    assert r.metrics["em_dashes"] == 2 and "dashes" in _signals(r)
+    tex = "\\section{A}\nThe tool---which is new---works, pages 3--5.\n"
+    assert fs.scan(_write(tmp_path, tex, "m.tex")).metrics["em_dashes"] == 2
+    calm = "The tool\u2014new\u2014works. " + "Plain words follow here in a long and quiet sentence. " * 60
+    r3 = fs.scan(_write(tmp_path, calm, "c.md"))
+    assert r3.metrics["em_dashes"] == 2 and "dashes" not in _signals(r3)  # below the rate
+
+
+def test_house_words_are_reported_as_source_h(tmp_path, monkeypatch, capsys):
+    monkeypatch.setattr(fs, "STYLE_WORDS", {"crucial": "K"})
+    house = _write(tmp_path, "\ufeff# house list\n\nload-bearing\nQuietly   # trailing note\ncrucial\n", "house.txt")
+    words = fs.load_house_words(house)
+    assert words == {"load-bearing": "H", "quietly": "H", "crucial": "H"}  # BOM, case, comment handled
+    doc = _write(tmp_path, "This load-bearing step quietly matters. It is crucial.\n")
+    r = fs.scan(doc, words)
+    assert r.sources == {"load-bearing": "H", "quietly": "H", "crucial": "K"}  # evidence source wins
+    assert r.metrics["style_words"] == 1 and r.metrics["house_words"] == 2  # counted apart
+    assert r.metrics["house_list_entries"] == 3 and "house" in _signals(r)
+    md = r.to_markdown()
+    assert "| load-bearing | H | 1 |" in md and "| crucial | K | 1 |" in md
+    plain = fs.scan(doc)
+    assert "load-bearing" not in plain.vocabulary and "house_words" not in plain.metrics  # off unless asked for
+    assert fs.main([str(doc), "--house-words", str(house)]) == 0
+    assert "| quietly | H |" in capsys.readouterr().out
+    assert fs.main([str(doc), "--house-words", str(tmp_path / "missing.txt")]) == 2
+    assert "house list" in capsys.readouterr().err
+    assert fs.main([str(doc), "--house-words", ""]) == 2  # an empty path is an error, not ignored
+
+
+def test_house_phrase_cannot_take_an_evidence_hit(tmp_path, monkeypatch):
+    monkeypatch.setattr(fs, "STYLE_WORDS", {"pivotal": "K", "in summary": "W"})
+    house = fs.load_house_words(_write(tmp_path, "a pivotal role\nIn  Summary\n", "h.txt"))
+    assert house == {"a pivotal role": "H", "in summary": "H"}  # whitespace normalised
+    r = fs.scan(_write(tmp_path, "It plays a pivotal role. In summary, it works.\n"), house)
+    assert r.sources == {"pivotal": "K", "in summary": "W"}
+    assert r.metrics["style_words"] == 2 and r.metrics["house_words"] == 0
+
+
+def test_empty_house_list_is_visible(tmp_path):
+    r = fs.scan(_write(tmp_path, "Plain words here.\n"), fs.load_house_words(_write(tmp_path, "# only\n", "h.txt")))
+    assert r.metrics["house_list_entries"] == 0
+
+
+def test_latex_urls_and_verb_dashes_are_not_counted_but_textemdash_is(tmp_path):
+    tex = "\\section{A}\nSee \\url{http://x.org/a---b} and \\verb|a---b| and the tool\\textemdash here---works.\n"
+    assert fs.scan(_write(tmp_path, tex, "m.tex")).metrics["em_dashes"] == 2
+
+
+def test_markdown_ascii_dashes_are_noted_not_counted(tmp_path):
+    r = fs.scan(_write(tmp_path, "The tool -- which is new -- works.\n"))
+    assert r.metrics["em_dashes"] == 0 and "em_dashes" in r.not_evaluated
+    calm = "Pages 10 - 12 are fine. Run `make -- check` now.\n"  # a hyphen and code are not dashes
+    assert "em_dashes" not in fs.scan(_write(tmp_path, calm, "c.md")).not_evaluated
+
+
+@pytest.mark.parametrize("sentence", ["This cannot be data but rather argument.", "It isn't data but rather argument."])
+def test_contracted_negation_but_rather(tmp_path, sentence):
+    assert fs.scan(_write(tmp_path, sentence + "\n")).metrics["negation_contrast"] == 1

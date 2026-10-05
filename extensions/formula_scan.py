@@ -27,10 +27,21 @@ Signals:
               length".
   paragraphs  Paragraph-length variation ("paragraphs of similar length").
   contrast    The negation-contrast turn: "It's not X. It's Y.", "not just X
-              but Y", "not only ... but also".
+              but Y", "not only ... but also", "not X but rather Y". The
+              reversed form, "Y rather than X" (Wikipedia, L82), is counted
+              apart as signal "rather": academic prose uses it honestly, so
+              its rate is what matters.
+  dashes      Em-dashes per 1,000 words (Wikipedia, L82: LLM output uses
+              them where a writer would use a comma, colon or parentheses).
+              Counted from U+2014, LaTeX --- and \\textemdash; a Markdown file
+              that writes dashes as " -- " is noted, not counted.
   lists       Share of comma lists with exactly three items ("consistently
               listing three items").
   vocabulary  Stock style words per 1,000 words, each hit located.
+  house       Optional: a project's own word list (--house-words), reported
+              as source H, a style rule and not evidence. It is matched after
+              the evidence list and counted apart, so it never takes or
+              inflates an evidence hit.
   phrases     Word n-grams (3-6) recurring across paragraphs: a house tic
               such as a stock closer shows up here without any word list.
   openers     Sentence openings that recur.
@@ -63,7 +74,7 @@ Known limits (the review pass triages them; they are why this never gates):
     are terms, not tics.
 
 CLI:
-    python extensions/formula_scan.py <file> [--json]
+    python extensions/formula_scan.py <file> [--json] [--house-words FILE]
 
 Exit codes:
     0  report emitted (whatever it finds: this is a locator, not a gate)
@@ -96,6 +107,8 @@ OPENER_MIN = 4
 MIN_SECTIONS = 3
 TEMPLATE_SHARE = 0.4  # a feature shared by this share of sections (a closing label: any 3+)
 CONTRAST_PER_1000 = 2.0
+RATHER_THAN_PER_1000 = 2.0
+EM_DASH_PER_1000 = 5.0
 MIN_ENGLISH_STOPWORD_SHARE = 0.2  # below this the text is probably not English ...
 MIN_WORDS_FOR_LANGUAGE = 300  # ... but only judged on this many words or more
 
@@ -108,6 +121,8 @@ MIN_WORDS_FOR_LANGUAGE = 300  # ... but only judged on this many words or more
 # are left out, because on a single paper they would mostly flag honest use.
 # Both W and R warn that one hit proves nothing; density is the signal.
 # Matched as whole words, case-insensitive, with simple inflections.
+# A house list (--house-words) adds words with source H: a project's own
+# style rule, never mixed into this evidence list.
 STYLE_WORDS: dict[str, str] = {
     "delve": "K,W,R",
     "underscore": "K,W,R",
@@ -184,12 +199,16 @@ AFFIRM_OPENER_RE = re.compile(
 )
 INLINE_CONTRAST_RES = (
     re.compile(r"\bnot\s+(?:just|only|merely|simply)\b[^.;!?]{1,80}?\bbut\b", re.I),
+    re.compile(r"(?:\b(?:not|cannot)\b|n't\b|n\u2019t\b)[^.;!?]{1,80}?\bbut\s+rather\b", re.I),
     re.compile(
         r"\b(?:is|are|was|were)(?:n't|n\u2019t|\s+not)\b[^.;!?]{1,60}?[,;\u2014\u2013]\s*"
         r"(?:it|this|that|they)(?:'s|\u2019s|'re|\u2019re|\s+(?:is|are|was|were))\b",
         re.I,
     ),
 )
+RATHER_THAN_RE = re.compile(r"\brather\s+than\b", re.I)
+EM_DASH = "\u2014"
+ASCII_DASH_RE = re.compile(r"\s---?\s")  # " -- " or " --- " in Markdown prose
 # Items before the conjunction (comma-separated), an optional last item with no
 # serial comma, then the final item. Validated in _list_items.
 LIST_RE = re.compile(
@@ -264,6 +283,7 @@ class ScanReport:
     phrases: list[tuple[str, int, list[int]]]
     openers: list[tuple[str, int]]
     not_evaluated: dict[str, str] = field(default_factory=dict)
+    sources: dict[str, str] = field(default_factory=dict)
 
     def to_dict(self) -> dict:
         d = asdict(self)
@@ -298,7 +318,7 @@ class ScanReport:
         if self.vocabulary:
             out += ["", "## Style vocabulary hits", "", "| Word | Source | Count | Lines |", "|---|---|---|---|"]
             for w, lines in sorted(self.vocabulary.items(), key=lambda kv: -len(kv[1])):
-                out.append(f"| {w} | {STYLE_WORDS.get(w, '?')} | {len(lines)} | {', '.join(map(str, lines[:10]))} |")
+                out.append(f"| {w} | {self.sources.get(w, STYLE_WORDS.get(w, '?'))} | {len(lines)} | {', '.join(map(str, lines[:10]))} |")
         if self.phrases:
             out += ["", "## Recurring phrases (across paragraphs)", "", "| Phrase | Paragraphs | Lines |", "|---|---|---|"]
             for p, n, lines in self.phrases:
@@ -316,6 +336,9 @@ class ScanReport:
 def _clean_line(line: str, latex: bool = False, strip_bullet: bool = True) -> str:
     if latex:
         line = re.sub(r"(?<!\\)%.*$", "", line)  # LaTeX comment ("50%" in Markdown is prose)
+        line = re.sub(r"\\(?:url|href)\{[^}]*\}", " ", line)  # URLs: their dashes are not prose
+        line = re.sub(r"\\verb\*?([^A-Za-z\s]).*?\1", " ", line)
+        line = re.sub(r"\\textemdash\b\s?", "\u2014", line)
         line = line.replace("---", "\u2014").replace("--", "\u2013")  # LaTeX dashes
         line = re.sub(r"\\(?:cite[pt]?|ref|eqref|label|autoref|cref)\*?(\[[^\]]*\])?\{[^}]*\}", "", line)
         line = re.sub(r"\\(?:emph|textit|textbf|textsc|footnote)\*?(\[[^\]]*\])?\{([^}]*)\}", r"\2", line)
@@ -576,6 +599,25 @@ def _contrast(sentences: list[Sentence], words: int, flags: list[Flag], metrics:
     metrics["negation_contrast_per_1000"] = rate
     if lines and rate >= CONTRAST_PER_1000:
         flags.append(Flag("contrast", f"{len(lines)} negation-contrast turns ({rate} per 1,000 words)", lines))
+    rather = [s.line_of(m.start()) for s in sentences for m in RATHER_THAN_RE.finditer(s.text)]
+    rate = round(1000 * len(rather) / words, 2) if words else 0.0
+    metrics["rather_than"] = len(rather)
+    metrics["rather_than_per_1000"] = rate
+    if rather and rate >= RATHER_THAN_PER_1000:
+        flags.append(Flag("rather", f'{len(rather)} "rather than" turns ({rate} per 1,000 words)', rather))
+
+
+def _dashes(sentences: list[Sentence], words: int, flags: list[Flag], metrics: dict, skipped: dict) -> None:
+    lines = [s.line_of(i) for s in sentences for i, ch in enumerate(s.text) if ch == EM_DASH]
+    ascii_dashes = sum(len(ASCII_DASH_RE.findall(re.sub(r"`[^`]*`", " ", s.text))) for s in sentences)
+    if ascii_dashes:
+        skipped["em_dashes"] = f'{ascii_dashes} spaced ASCII dash(es) such as " -- " not counted'
+
+    rate = round(1000 * len(lines) / words, 2) if words else 0.0
+    metrics["em_dashes"] = len(lines)
+    metrics["em_dashes_per_1000"] = rate
+    if lines and rate >= EM_DASH_PER_1000:
+        flags.append(Flag("dashes", f"{len(lines)} em-dashes ({rate} per 1,000 words)", sorted(set(lines))))
 
 
 def _list_items(m: re.Match[str]) -> list[str] | None:
@@ -618,10 +660,17 @@ def _lists(paragraphs: list[Paragraph], flags: list[Flag], metrics: dict, skippe
         flags.append(Flag("lists", f"{sizes.count(3)} of {len(sizes)} lists have exactly three items", triad_lines))
 
 
-def _vocabulary(sentences: list[Sentence], words: int, flags: list[Flag], metrics: dict) -> dict[str, list[int]]:
+def _vocabulary(
+    sentences: list[Sentence], words: int, flags: list[Flag], metrics: dict, house: dict[str, str] | None = None
+) -> dict[str, list[int]]:
     hits: dict[str, list[int]] = {}
-    # Phrases first, longest first; a word inside a matched phrase is not counted again.
-    order = sorted(STYLE_WORDS, key=lambda w: (-len(w.split()), -len(w)))
+    # Evidence list first, then the house list, so a house phrase can never take an
+    # evidence hit. Within each: phrases first, longest first; a word inside a matched
+    # phrase is not counted again.
+    def by_length(ws: object) -> list[str]:
+        return sorted(ws, key=lambda w: (-len(w.split()), -len(w)))
+
+    order = by_length(STYLE_WORDS) + by_length(w for w in (house or {}) if w not in STYLE_WORDS)
     texts = [s.text.replace("\u2019", "'") for s in sentences]
     for w in order:
         pat = _word_pattern(w)
@@ -631,11 +680,19 @@ def _vocabulary(sentences: list[Sentence], words: int, flags: list[Flag], metric
                 return "\x00" * len(m.group(0))
 
             texts[idx] = pat.sub(mask, texts[idx])
-    total = sum(len(v) for v in hits.values())
+    evidence = {w: v for w, v in hits.items() if w in STYLE_WORDS}
+    total = sum(len(v) for v in evidence.values())
     metrics["style_words"] = total
     metrics["style_words_per_1000"] = round(1000 * total / words, 2) if words else 0.0
     if total:
-        flags.append(Flag("vocabulary", f"{total} stock style word(s), {len(hits)} distinct; see table"))
+        flags.append(Flag("vocabulary", f"{total} stock style word(s), {len(evidence)} distinct; see table"))
+    if house is not None:
+        own = {w: v for w, v in hits.items() if w not in STYLE_WORDS}
+        n = sum(len(v) for v in own.values())
+        metrics["house_list_entries"] = len(house)
+        metrics["house_words"] = n
+        if n:
+            flags.append(Flag("house", f"{n} house-list word(s), {len(own)} distinct (source H, a style rule); see table"))
     return hits
 
 
@@ -736,7 +793,17 @@ def _stopword_shares(sentences: list[Sentence]) -> tuple[float, float, int]:
     return sum(t in STOPWORDS for t in toks) / len(toks), sum(t in DUTCH_STOPWORDS for t in toks) / len(toks), len(toks)
 
 
-def scan(path: str | Path) -> ScanReport:
+def load_house_words(path: str | Path) -> dict[str, str]:
+    """One word or phrase per line; blank lines and anything after # are ignored."""
+    out: dict[str, str] = {}
+    for line in Path(path).read_text(encoding="utf-8-sig").splitlines():
+        w = " ".join(line.split("#", 1)[0].lower().split())
+        if w:
+            out[w] = "H"
+    return out
+
+
+def scan(path: str | Path, house_words: dict[str, str] | None = None) -> ScanReport:
     p = Path(path)
     text = p.read_text(encoding="utf-8")
     notes: list[str] = []
@@ -756,8 +823,8 @@ def scan(path: str | Path) -> ScanReport:
         flags.append(
             Flag(
                 "language",
-                f"text looks non-English (English function words {en:.0%}); the contrast, list, vocabulary "
-                "and phrase signals are English-only, so their zeros mean nothing here",
+                f"text looks non-English (English function words {en:.0%}); the contrast, list, vocabulary, "
+                "phrase and house-word signals are English-only, so their zeros mean nothing here",
             )
         )
     for note in notes:
@@ -765,8 +832,9 @@ def scan(path: str | Path) -> ScanReport:
     _rhythm(sentences, flags, metrics, skipped)
     _paragraphs(paragraphs, flags, metrics, skipped)
     _contrast(sentences, words, flags, metrics)
+    _dashes(sentences, words, flags, metrics, skipped)
     _lists(paragraphs, flags, metrics, skipped)
-    vocab = _vocabulary(sentences, words, flags, metrics)
+    vocab = _vocabulary(sentences, words, flags, metrics, house_words)
     phrases = _phrases(paragraphs, flags)
     openers = _openers(sentences, flags)
     _template(sections, flags, metrics, skipped)
@@ -782,6 +850,7 @@ def scan(path: str | Path) -> ScanReport:
         phrases=phrases,
         openers=openers,
         not_evaluated=skipped,
+        sources={w: STYLE_WORDS.get(w, "H") for w in vocab},
     )
 
 
@@ -789,9 +858,15 @@ def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description="Advisory formula-repetition scan (PROPOSED, DR-022).")
     ap.add_argument("file")
     ap.add_argument("--json", action="store_true", help="emit JSON instead of Markdown")
+    ap.add_argument("--house-words", metavar="FILE", help="a project's own word list, one per line (source H)")
     args = ap.parse_args(argv)
     try:
-        report = scan(args.file)
+        house = load_house_words(args.house_words) if args.house_words is not None else None
+    except (OSError, UnicodeDecodeError) as exc:
+        print(f"error: house list {args.house_words}: {exc}", file=sys.stderr)
+        return 2
+    try:
+        report = scan(args.file, house)
     except (OSError, UnicodeDecodeError, ValueError) as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 2
