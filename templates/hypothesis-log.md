@@ -76,11 +76,11 @@ These illustrate what a useful entry looks like in this domain. Delete this sect
 
 ### [2026-06-01] DR-011 cross-family generality holds at paper scale
 
-**Position (provisional):** The disjoint-coverage prediction between Pass 1 (intra-family small) and Pass 2 (intra-family large) replicates at paper scale (Paper 1) and *also* cross-family (Pass 3 cross-vendor finds ≥1 load-bearing item that neither intra-family pass found). N=2 within-Claude at code-tooling scale (2026-06-08); cross-family untested.
+**Position (provisional):** The disjoint-coverage prediction between Pass 1 (intra-family small) and Pass 2 (intra-family large) replicates at paper scale (Paper 1) and *also* cross-family (Pass 3 cross-vendor finds ≥1 material item that neither intra-family pass found). N=2 within-Claude at code-tooling scale (2026-06-08); cross-family untested.
 
-**Alternative:** Pass 3 finds zero load-bearing items beyond what Pass 1+2 caught, OR cross-family finds duplicates of intra-family findings rather than independent ones. Either would suggest cross-family pass is ceremony, not bias-escape.
+**Alternative:** Pass 3 finds zero material items beyond what Pass 1+2 caught, OR cross-family finds duplicates of intra-family findings rather than independent ones. Either would suggest cross-family pass is ceremony, not bias-escape.
 
-**Method:** When Paper 1 reaches a Pass-3 trigger, run Pass 3 with the documented cross-vendor style/voice filter. Classify each finding as: (a) duplicate of Pass 1/2 finding, (b) load-bearing new, (c) noise. Compare *load-bearing new* count to the in-DR forecast.
+**Method:** When Paper 1 reaches a Pass-3 trigger, run Pass 3 with the documented cross-vendor style/voice filter. Classify each finding as: (a) duplicate of Pass 1/2 finding, (b) material new, (c) noise. Compare *material new* count to the in-DR forecast.
 
 **Revisit trigger:** Paper 1 Gate 3 produces a Pass-3 trigger AND user picks up the Paper 1 paper-writing track (currently deferred — see MEMORY.md *Direction 2026-06-09*).
 

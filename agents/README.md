@@ -7,7 +7,7 @@ Portable agent-role prompts that operate on paper artefacts. Each file is a comp
 | File | Role | Input | Output |
 |------|------|-------|--------|
 | [`equation-checker.md`](equation-checker.md) | Equation & numerical verifier — mechanical reproduction, not plausibility | A paper section with equations / derived values; optionally the source equations for cross-reference | Per-equation reproduction result with discrepancies flagged |
-| [`review-prompt.md`](review-prompt.md) | Peer-review simulator — multi-pass with bias-escape semantics per [DR-011](../decisions/DR-011_multi-model-review-pattern.md) | Manuscript section(s); pass number (Pass 1 intra-family small / Pass 2 intra-family large / Pass 3 cross-vendor) | Scored review against rubric + load-bearing findings |
+| [`review-prompt.md`](review-prompt.md) | Peer-review simulator — multi-pass with bias-escape semantics per [DR-011](../decisions/DR-011_multi-model-review-pattern.md) | Manuscript section(s); pass number (Pass 1 intra-family small / Pass 2 intra-family large / Pass 3 cross-vendor) | Scored review against rubric + material findings |
 
 ## The principle: primary mode of use
 
@@ -45,4 +45,4 @@ Vendor names appear only where they describe *empirical scope* of testing or the
 
 ## Convention origin
 
-Pattern mirrored from `agent-ready-assessment`'s `agents/` directory (not publicly resolvable). Introduced in agent-ready-papers v2.1.0 — see [CHANGELOG-archive.md](../CHANGELOG-archive.md#v210-2026-06-11) for the framing rationale. Principle clarified in v2.2.0 after DR-011 Pass 2 review surfaced the edge cases above — see [CHANGELOG-archive.md](../CHANGELOG-archive.md#v220-2026-06-11).
+Pattern mirrored from `agent-ready-assessment`'s `agents/` directory (not publicly resolvable). Introduced in agent-ready-papers v2.1.0 — see [CHANGELOG-archive.md](../CHANGELOG-archive.md#v210-2026-06-11) for the framing rationale. Principle clarified in v2.2.0 after DR-011 Pass 2 review found the edge cases above — see [CHANGELOG-archive.md](../CHANGELOG-archive.md#v220-2026-06-11).

@@ -96,4 +96,4 @@ Two senses appear in this repo. Don't conflate:
 
 The framework sits **downstream** of model-layer grounding (see `README.md` opening). Even a well-grounded model can produce un-warranted arguments, mis-calibrated confidence, or PROVOCATIONs without the required reflexive marker. Grounding addresses *did the source say this*; the framework adds *is the reasoning valid, is the confidence calibrated, is the speculation held ethically*.
 
-Other grounding senses from AI literature — *temporal* (current-state retrieval), *symbolic* (word-to-referent correspondence), *multimodal* (cross-sensory anchoring) — are noted here only to prevent confusion when reading source literature; they are not load-bearing for this framework.
+Other grounding senses from AI literature — *temporal* (current-state retrieval), *symbolic* (word-to-referent correspondence), *multimodal* (cross-sensory anchoring) — are noted here only to prevent confusion when reading source literature; the framework does not rest on them.

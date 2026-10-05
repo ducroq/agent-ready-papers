@@ -56,7 +56,7 @@ A **decision-support artefact** is a structured V&V scaffold built around a cons
 
 The framework was applied first time without paper-specific adaptation when the following five conditions held in the worked example:
 
-1. There is at least one load-bearing PROPOSITION whose grounding chain can be traced.
+1. There is at least one central PROPOSITION whose grounding chain can be traced.
 2. Claims have external evidence (literature, vendor docs, market data, public reporting) that varies in credibility and benefits from typing + tiering.
 3. The output is mostly prose / structured tables (not code, not media).
 4. The cost of being wrong on the PROPOSITION exceeds the cost of running V&V.

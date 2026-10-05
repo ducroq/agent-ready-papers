@@ -37,7 +37,7 @@ Two cuts of the same row set. Both should be filled when a registry contains mor
 
 A combined Priority × Type matrix is optional for papers with many of both axes.
 
-**Targets:** ≥85% overall, 100% P0, 90% P1, 70% P2. Type-level targets are project-conditional — for example, every registered ARGUMENT and PROPOSITION should be `[x]` before Gate 2, because each is load-bearing for the contribution.
+**Targets:** ≥85% overall, 100% P0, 90% P1, 70% P2. Type-level targets are project-conditional — for example, every registered ARGUMENT and PROPOSITION should be `[x]` before Gate 2, because the contribution rests on each.
 
 ---
 
@@ -131,8 +131,8 @@ Column semantics for the PROVOCATION sub-table below differ from the other sub-t
      the table header. `tools/coverage.py` skips only blank lines after a marker
      before expecting a table row; any prose there makes it stop with an error
      (exit 2) — and before 2026-09-26 it abandoned the sub-table silently.
-     Until 2026-08-13 this paragraph sat below the marker, and the shipped
-     template's PROVOCATION rows were invisible to the shipped tool —
+     Until 2026-08-13 this paragraph sat below the marker, and the released
+     template's PROVOCATION rows were invisible to the released tool —
      found by the repo-wide sweep, which ran the tool against the template
      instead of reading it. -->
 
@@ -270,7 +270,7 @@ Verification questions (adapted from Auger 2013, *Digital Creativity* 24:1):
 
 1. **Plausible** — Could this exist in some adjacent world consistent enough that a reader holds it seriously inside the fiction?
 2. **Generative** — Does the surrounding prose reach into the artefact (taking it as material to develop) rather than around it?
-3. **Reflexive** — Is a marker visible *in the prose* (not only in the registry) at every load-bearing moment, signalling fictionality?
+3. **Reflexive** — Is a marker visible *in the prose* (not only in the registry) at every key moment, signalling fictionality?
 4. **Ethically held** — Has potential for harm been considered, with a DR-level pre-commitment binding for chapter writing?
 
 **Reflexive marker** — required field for every PROVOCATION:

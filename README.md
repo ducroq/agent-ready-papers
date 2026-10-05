@@ -26,7 +26,7 @@ There is a structural reason this works. Agents are poor at noticing when they'r
 
 ## The Approach
 
-The fix borrows a vocabulary from systems engineering: if claims are the paper's components, then sources are tests, coverage is measurable, and quality gates can prevent defective work from shipping.
+The fix borrows a vocabulary from systems engineering: if claims are the paper's components, then sources are tests, coverage is measurable, and quality gates can prevent defective work from going out.
 
 <details>
 <summary><strong>Mental model: the SE mapping</strong></summary>
@@ -71,7 +71,7 @@ Each test can be answered yes / no for your specific project — they're meant a
 
 - **Hallucination cost exceeds review cost.** A hallucinated citation surviving into your output would cost more than an hour of your time to retract or correct downstream.
 - **Context cannot fit in a single session.** The work spans multiple sessions (a paper, a grant, a long-form decision) — no one conversation holds it all, so handoff state has to live in files.
-- **At least one claim is load-bearing.** You have an argument or proposition the reader will scrutinise — being wrong about it would cost a co-author conversation or a reviewer round.
+- **At least one claim carries the argument.** You have an argument or proposition the reader will scrutinise — being wrong about it would cost a co-author conversation or a reviewer round.
 - **Confidence language is read as a signal.** "Demonstrates" vs. "suggests" will be parsed by your reader (reviewer, regulator, decision-maker) as a calibrated weighting, not interchangeable hedging.
 
 ## When It Is Overkill
@@ -103,7 +103,7 @@ Adopt the framework on a new paper in five steps (~10 minutes to set up):
 
 1. **Bootstrap session continuity.** Copy [`templates/CLAUDE.md`](templates/CLAUDE.md) into your paper project as `CLAUDE.md`. Fill in the paper identity, target journal, deadline.
 2. **Copy the minimum-viable adoption files.** [`templates/claim-registry.md`](templates/claim-registry.md), [`templates/anti-hallucination.md`](templates/anti-hallucination.md), and [`templates/writing-guide.md`](templates/writing-guide.md). These three plus CLAUDE.md are enough to start.
-3. **Register your first claims.** In `claim-registry.md`, list 5–10 of your paper's load-bearing factual statements. Assign each a priority (P0 / P1 / P2), confidence tier (ESTABLISHED / SUPPORTED / EMERGING / SPECULATIVE), and a source.
+3. **Register your first claims.** In `claim-registry.md`, list 5–10 of your paper's key factual statements. Assign each a priority (P0 / P1 / P2), confidence tier (ESTABLISHED / SUPPORTED / EMERGING / SPECULATIVE), and a source.
 4. **Verify each citation.** Run the Step 0 + 6-step checklist in `anti-hallucination.md` on every AI-introduced citation. Step 0 (Scholar + DOI) catches fabrications in seconds.
 5. **Run one review pass.** Before sharing the draft, ask a *fresh session* of a smaller model in the same family (e.g., Haiku, GPT-4o-mini, Gemini-Flash) to review the manuscript against your review prompt. A fresh session escapes the sunk-cost bias of the session that wrote the draft. See [`agents/review-prompt.md`](agents/review-prompt.md) for the prompt template and [DR-011](decisions/DR-011_multi-model-review-pattern.md) for the full three-pass pattern (intra-family small → intra-family large → cross-vendor).
 
@@ -117,7 +117,7 @@ Adopt the framework on a new paper in five steps (~10 minutes to set up):
 
 ### Driving it with your agent
 
-The five steps above describe *what* gets set up. In practice you delegate four of the five steps to the agent — the framework is for AI-augmented writing, not for the human applying a checklist on their own. (Step 3's *initial selection* of which 5–10 claims are load-bearing remains a human-judgement call the prompts don't claim; the agent registers what you point at, doesn't decide what's load-bearing.) Four common operations as one-shot prompts you can copy and adapt; replace `<framework>` with the path to your `agent-ready-papers` checkout and `<paper>` with your paper's directory.
+The five steps above describe *what* gets set up. In practice you delegate four of the five steps to the agent — the framework is for AI-augmented writing, not for the human applying a checklist on their own. (Step 3's *initial selection* of which 5–10 claims are key remains a human-judgement call the prompts don't claim; the agent registers what you point at, doesn't decide what's key.) Four common operations as one-shot prompts you can copy and adapt; replace `<framework>` with the path to your `agent-ready-papers` checkout and `<paper>` with your paper's directory.
 
 **Bootstrap a new paper project** (once, at project start):
 
@@ -133,7 +133,7 @@ The five steps above describe *what* gets set up. In practice you delegate four 
 
 **Run a peer-review pass** (in a *fresh session of a different model* — see [DR-011](decisions/DR-011_multi-model-review-pattern.md)):
 
-> You are a peer reviewer. Read `<framework>/agents/review-prompt.md` and apply it as your system prompt to `<paper>/manuscript.tex`. This is Pass [1 intra-family small / 2 intra-family large / 3 cross-vendor]; the style/voice filter is [target journal's style guide / project's voice rules]. Use the scoring rubric in the role prompt and report scored assessments per dimension plus load-bearing findings. Do not propose rewrites — only flag findings I can act on.
+> You are a peer reviewer. Read `<framework>/agents/review-prompt.md` and apply it as your system prompt to `<paper>/manuscript.tex`. This is Pass [1 intra-family small / 2 intra-family large / 3 cross-vendor]; the style/voice filter is [target journal's style guide / project's voice rules]. Use the scoring rubric in the role prompt and report scored assessments per dimension plus material findings. Do not propose rewrites — only flag findings I can act on.
 
 For non-Claude-Code agents (GitHub Copilot CLI, Cursor, Continue, web chat), see [`docs/non-claude-setup.md`](docs/non-claude-setup.md) for the universal four-step pattern and tool-specific entry points — the prompts above work as-is across vendors.
 
@@ -345,7 +345,7 @@ These are manual cross-checks not covered by the automated static checks in Gate
 
 ### Gate 2.6: Reflexivity *(conditional — only when PROVOCATIONs are present)*
 
-For projects with PROVOCATION entries (see [DR-010](decisions/DR-010_provocation-unit-type.md)). Walk every PROVOCATION; confirm the required prose marker for its tier (GROUNDED / EXTRAPOLATED / PROVOCATIVE / CRITICAL) is visible in the manuscript itself, at every load-bearing moment — not only in the registry. Without the marker, authoritative-toned speculation can be misread as a claim. Entries failing this audit are rewritten or downgraded to EMERGING CLAIM with additional sources.
+For projects with PROVOCATION entries (see [DR-010](decisions/DR-010_provocation-unit-type.md)). Walk every PROVOCATION; confirm the required prose marker for its tier (GROUNDED / EXTRAPOLATED / PROVOCATIVE / CRITICAL) is visible in the manuscript itself, at every key moment — not only in the registry. Without the marker, authoritative-toned speculation can be misread as a claim. Entries failing this audit are rewritten or downgraded to EMERGING CLAIM with additional sources.
 
 ### Gate 2.7: Ethical Review *(conditional — only for contested topics)*
 
@@ -390,7 +390,7 @@ as related-work pointers.
 ## Revisit If
 - Page budget increases (journal offers extended format).
 - Reviewer feedback specifically requests the survey framing.
-- A new result makes one of the excluded mechanisms load-bearing.
+- A new result makes one of the excluded mechanisms essential.
 ```
 
 Without DRs, agents repeatedly re-propose excluded approaches across sessions. "Should we widen the scope to all three mechanisms?" gets answered once in DR-001, not every session.
@@ -468,7 +468,7 @@ Portable agent-role prompts in [`agents/`](agents/) — copy each as a system pr
 
 | Prompt | Role | When to run |
 |--------|------|-------------|
-| [`equation-checker.md`](agents/equation-checker.md) | Mechanical equation & numerical verifier — substitute values, compute, flag discrepancies (not plausibility review) | When any equation or derived value is load-bearing; paired with the source equations for cross-reference |
+| [`equation-checker.md`](agents/equation-checker.md) | Mechanical equation & numerical verifier — substitute values, compute, flag discrepancies (not plausibility review) | When any equation or derived value carries a conclusion; paired with the source equations for cross-reference |
 | [`review-prompt.md`](agents/review-prompt.md) | Peer-review simulator with multi-pass bias-escape semantics ([DR-011](decisions/DR-011_multi-model-review-pattern.md)) | Before submission; once per pass — Pass 1 intra-family small, Pass 2 intra-family large, Pass 3 cross-vendor (high-stakes only, with style/voice filter) |
 
 See [`agents/README.md`](agents/README.md) for the directory's purpose and the line between agent-role prompts (here) and fill-in templates (in [`templates/`](templates/)). For practical setup with a non-Claude-Code agent (Copilot CLI, Cursor, Continue, web chat), see [`docs/non-claude-setup.md`](docs/non-claude-setup.md).
@@ -490,7 +490,7 @@ Invoke as `python -m tools.coverage <registry.md>` or via Makefile (`make covera
 
 We ran the DR-011 two-pass review on this repo's own `tools/` code (`coverage.py` + `check_dois.py`, ~620 LOC) and logged the token cost. Treat as a back-of-envelope reference, not as a published benchmark — it covers one type of artefact (Python code) at one scale, reviewed within one model family (Claude):
 
-| Operation | N | Mean total tokens | Findings that would have shipped broken |
+| Operation | N | Mean total tokens | Findings that would have gone out broken |
 |-----------|---|-------------------|------------------------------------------|
 | Pass 1 (Haiku) | 2 | 36,812 | 0 / 2 rounds |
 | Pass 2 (Opus) | 2 | 52,540 (~1.4× Pass 1) | 2 / 2 rounds |
@@ -511,7 +511,7 @@ See [`decisions/DR-006_publication-roadmap.md`](decisions/DR-006_publication-roa
 
 ## This README, registered
 
-Applying the framework to its own home document. The seven entries below are the README's load-bearing claims, arguments, and propositions — registered with priority, type, confidence tier, and source. Coverage is not 100%: a README is a guide, not a paper, and not every sentence is registered. The load-bearing ones are.
+Applying the framework to its own home document. The seven entries below are the README's key claims, arguments, and propositions — registered with priority, type, confidence tier, and source. Coverage is not 100%: a README is a guide, not a paper, and not every sentence is registered. The key ones are.
 
 Tier vocabulary matches the [Confidence-to-Language Mapping](#confidence-to-language-mapping) above; type vocabulary matches the [Verification Registry](#verification-registry-the-foundation).
 
@@ -529,7 +529,7 @@ Tier vocabulary matches the [Confidence-to-Language Mapping](#confidence-to-lang
 
 **Coverage note.** Type cut: 3 CLAIMs / 1 ARGUMENT / 3 PROPOSITIONs. Tier cut: 0 ESTABLISHED / 2 SUPPORTED / 4 EMERGING / 1 SPECULATIVE. The absence of an ESTABLISHED tier is intentional — the README does not yet have validated claims about its own efficacy, and forcing one would be the exact confidence-inflation failure the framework is supposed to catch.
 
-**Why this section exists.** Readers can audit the README's load-bearing claims with the apparatus the README proposes, and the exercise forces honest tiers: R-1 is EMERGING and R-6 SPECULATIVE, not SUPPORTED.
+**Why this section exists.** Readers can audit the README's key claims with the apparatus the README proposes, and the exercise forces honest tiers: R-1 is EMERGING and R-6 SPECULATIVE, not SUPPORTED.
 
 ## Further Reading
 

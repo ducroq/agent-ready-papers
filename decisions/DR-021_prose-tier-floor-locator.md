@@ -7,7 +7,7 @@ date: 2026-09-14
 
 ## Context
 
-Tier-monotonicity is the rule the confidence-tier table is an instance of: *prose language tier ≤ the registered confidence tier for the same entry* (`docs/framework-summary.md`). Citation drift, overclaiming and Step Z are all the same failure — language climbing above the evidence. It is the framework's most load-bearing rule and the only major one whose prose half has **no mechanical support** (the graph half has `check_registry.py`).
+Tier-monotonicity is the rule the confidence-tier table is an instance of: *prose language tier ≤ the registered confidence tier for the same entry* (`docs/framework-summary.md`). Citation drift, overclaiming and Step Z are all the same failure — language climbing above the evidence. It is the framework's most important rule and the only major one whose prose half has **no mechanical support** (the graph half has `check_registry.py`).
 
 The inputs for a mechanical scan all exist already, which is what makes the question live rather than speculative:
 
@@ -19,7 +19,7 @@ So a scan is constructible today: for each anchored span, flag any tier-word ran
 
 ### The ambiguity this DR has to resolve first
 
-Two shipped documents state the rule differently, and the difference decides the whole question:
+Two framework documents state the rule differently, and the difference decides the whole question:
 
 | Source | Statement | Decidable? |
 |---|---|---|
@@ -34,7 +34,7 @@ The hooks sentence is not wrong — it is unqualified. Whatever this DR conclude
 
 - **DR-002** — Accepted. Supplies the four tiers and the word map this would scan for.
 - **DR-017** — Accepted. Generalised Step Z into the framework; this DR proposes tooling *under* Step Z, not a replacement for it.
-- **DR-018** — Proposed. Precedent for staging a mechanical checker in `extensions/` rather than shipping it into `agents/` or `tools/` on first proposal.
+- **DR-018** — Proposed. Precedent for staging a mechanical checker in `extensions/` rather than adding it to `agents/` or `tools/` on first proposal.
 - **DR-020** — Proposed. Its first draft proposed a mechanical circularity test that was rejected outright; the rejection reasoning governs this DR and is quoted below.
 - **`tools/check_registry.py`** — the graph half of tier-monotonicity (a conclusion may not outrank its weakest premise) is already implemented and fully decidable. This DR concerns only the *prose* half.
 
@@ -90,16 +90,16 @@ Three properties are normative and not negotiable in implementation:
 2. **It never gates.** Not in `make check`, not as a verification hook, not as a Gate 2 precondition. Exit code is 0 whenever it ran successfully, whatever it found.
 3. **It does not discharge Step Z.** Its output is an input to the human pass. Any documentation of it says so in the same breath as describing it.
 
-Staged in `extensions/` rather than shipped, per the DR-018 precedent, until the measurement below exists.
+Staged in `extensions/` rather than made normative, per the DR-018 precedent, until the measurement below exists.
 
 Accepting this DR also requires a scope qualifier on the `docs/verification-hooks.md` sentence, distinguishing *prose vs. evidence* (not decidable) from *prose vs. registered tier* (decidable, and what this locates).
 
 ## Consequences
 
 - The framework gains mechanical support for its central rule without claiming a decision procedure for it. The claim stays exactly as strong as the evidence: *here are the sentences worth re-reading*.
-- `docs/verification-hooks.md` gains a qualifier; until it does, two shipped docs disagree.
+- `docs/verification-hooks.md` gains a qualifier; until it does, two framework docs disagree.
 - A measurement becomes possible that the framework currently lacks. Run the locator over Paper 1, adjudicate every candidate by hand, and record precision. That number decides whether this ever leaves `extensions/` — and it is the sort of own-data evidence the `S4-*` entries lack: S4-1, S4-2 and S4-4 were withdrawn on 2026-09-26, and the remaining S4-3 cites two external sources (PeerArg 2024, Gupta et al. 2024).
-- Span attribution is now a known-unsound input. If it proves to be the dominant noise source, the fix is in the *manuscript* format (an end-marker convention), not in the locator — and that would be a separate DR, touching a shipped template.
+- Span attribution is now a known-unsound input. If it proves to be the dominant noise source, the fix is in the *manuscript* format (an end-marker convention), not in the locator — and that would be a separate DR, touching a normative template.
 - Acceptance changes no decision-record count: the probe in `CLAUDE.md`'s decisions row counts DR files.
 
 ## Revisit If

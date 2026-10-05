@@ -115,7 +115,7 @@ Both papers will be written using the agent-ready-papers framework itself:
 - Decision records for scope choices
 - Peer review simulation in a fresh session
 
-This serves as both methodology and additional evaluation evidence ("the framework was used to write the paper describing the framework, and the process surfaced N issues that would have been missed without it").
+This serves as both methodology and additional evaluation evidence ("the framework was used to write the paper describing the framework, and the process found N issues that would have been missed without it").
 
 ## Consequences
 

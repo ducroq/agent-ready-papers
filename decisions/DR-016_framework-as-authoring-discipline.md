@@ -19,7 +19,7 @@ The repo already self-describes as "verification infrastructure for AI-augmented
 A pre-registered control comparison was run on an external **published** document (a maintainer-local audit, 2026-06-16 — genericised here because the audited document is a named third party; see *Evidence Base*). Three fresh agents in clean contexts: (a) the full framework run, (b) a single generic-prompt reviewer ("review rigorously, verify citations, flag problems"), (c) an independent primary-source verifier. The success criterion for "the framework adds review value" was committed **before** the control output was seen.
 
 **Result, against the pre-registration:**
-- The generic one-prompt reviewer **matched the framework on findings** and **beat it on one load-bearing argument-quality point** the framework run missed.
+- The generic one-prompt reviewer **matched the framework on findings** and **beat it on one material argument-quality point** the framework run missed.
 - The framework's *only* finding-level edge was **citation exhaustiveness** (verify-all vs the control's sampling caught two metadata errors the control skipped).
 - A deep primary-source read (verifier) caught a defect *both* the framework and the control missed.
 
@@ -61,7 +61,7 @@ The honest position softens the "rather than": it is **primarily an authoring / 
 
 ### Option D: Keep the insight in `memory/` only; change nothing public
 - (+) Lowest cost.
-- (-) The decision trail loses a load-bearing positioning question; future sessions re-litigate it.
+- (-) The decision trail loses a central positioning question; future sessions re-litigate it.
 
 ## Proposed Decision (pending replication)
 
@@ -101,14 +101,14 @@ If Rejected (replication overturns the comparative claim):
 Before promotion from Proposed to Accepted:
 
 1. **Replicate the control comparison on ≥2 more external documents.** Framework run vs single generic-prompt reviewer, pre-registered, blinded adjudication where feasible. Tally findings unique to each, **separating *insight* from *coverage***. Position holds if the generic prompt keeps matching/beating on insight while the framework keeps winning only on coverage.
-2. **Preventive test (the load-bearing one).** Have an agent draft a claim-bearing passage twice — once under the framework's register-and-verify discipline, once under a generic "be rigorous, cite real sources" prompt — and compare fabricated/overclaimed citations that *survive to output*. The position ("authoring discipline") is only vindicated if the **preventive** arm shows a clear edge here, even though the **evaluative** arm did not. If the preventive arm *also* shows no edge, the framework is mostly process overhead — a much bigger finding.
+2. **Preventive test (the decisive one).** Have an agent draft a claim-bearing passage twice — once under the framework's register-and-verify discipline, once under a generic "be rigorous, cite real sources" prompt — and compare fabricated/overclaimed citations that *survive to output*. The position ("authoring discipline") is only vindicated if the **preventive** arm shows a clear edge here, even though the **evaluative** arm did not. If the preventive arm *also* shows no edge, the framework is mostly process overhead — a much bigger finding.
 3. **Peer-review-sim specific.** Across the replications, does Rubric A/B surface findings a generic prompt misses? Consistent *no* → demote it to a documented convenience wrapper. Consistent *yes* → the evaluative half earns its place after all and this DR narrows.
 
 These mirror the Open bet registered in `memory/hypothesis-log.md` (2026-06-16).
 
 ## Key Insight
 
-**The framework's wins are preventive; its losses are evaluative.** The clean axis is not authoring-vs-reviewer (a dichotomy the evidence doesn't support) but **preventive-vs-evaluative**. It shapes output *as it is made*; it does not reliably *judge* output once it exists better than a sharp generic prompt does. A corollary the control surfaced: a verification framework should ship an explicit **naive open-read pass**, precisely because its own checklists induce the blind spots that lost it the one argument-quality point.
+**The framework's wins are preventive; its losses are evaluative.** The clean axis is not authoring-vs-reviewer (a dichotomy the evidence doesn't support) but **preventive-vs-evaluative**. It shapes output *as it is made*; it does not reliably *judge* output once it exists better than a sharp generic prompt does. A corollary the control revealed: a verification framework should include an explicit **naive open-read pass**, precisely because its own checklists induce the blind spots that lost it the one argument-quality point.
 
 ## Evidence Base
 
@@ -125,7 +125,7 @@ These mirror the Open bet registered in `memory/hypothesis-log.md` (2026-06-16).
 
 ## Revisit If
 
-- Replication (Pending Assessment #1) shows the framework consistently surfaces *load-bearing* findings a generic prompt misses (not just more citations) → it is a competitive reviewer after all; narrow or close this DR.
+- Replication (Pending Assessment #1) shows the framework consistently produces *material* findings a generic prompt misses (not just more citations) → it is a competitive reviewer after all; narrow or close this DR.
 - The preventive test (#2) shows **no** authoring edge over a generic rigor prompt → escalate: the framework is largely process overhead, a finding bigger than this DR's scope.
-- A future external adopter reports the coverage gates being used as grades on finished work → the THRESHOLDS scope note is load-bearing; prioritise landing it independently.
+- A future external adopter reports the coverage gates being used as grades on finished work → the THRESHOLDS scope note is essential; prioritise landing it independently.
 - DR-011 receives evidence that isolates framework-scaffolding value from cross-family-model value → reconcile the two positions.

@@ -4,7 +4,7 @@
 
 **SPECULATIVE on the benefit, concrete on the mechanism.** Which commands this repo can wire, and how each tool wires them, are checkable facts. The claim that closing the edit → check → fix loop *reduces* correction cost has not been measured here; it is a working position, held for the reason given below. Treat the tool table as the part to verify against current docs — this area moves fast.
 
-Adapted from [agent-ready-projects](https://github.com/ducroq/agent-ready-projects) v1.14.0 (`docs/GUIDE.md`, *Verification Hooks*), narrowed to the checks this repo actually ships.
+Adapted from [agent-ready-projects](https://github.com/ducroq/agent-ready-projects) v1.14.0 (`docs/GUIDE.md`, *Verification Hooks*), narrowed to the checks this repo actually includes.
 
 ## What a verification hook is
 
@@ -45,7 +45,7 @@ Two corollaries worth applying to any gate, not just hooks:
 
 - **Assert non-emptiness wherever zero items is not a legitimate state.** This repo cannot legitimately have zero registry entries or zero decision records; a check that passes over them has not run.
 - **A vacuous pass is a distinct outcome from a pass.** If your check can return clean over nothing, give it a third exit state, or an explicit count, or both.
-- **A zero is a diagnosis, not something to whitelist.** The obvious objection to printing counts is that you will accumulate legitimately-zero cases and start suppressing them. Where this has been tried, that is not what happened: of two zeros surfaced, one was a glob that could never be non-zero and should simply not have existed, and the other *looked* legitimate and was in fact the bug — whitelisting it would have permanently blessed a rule that skipped four directories. **A zero tells you the pattern is either wrong or unnecessary, and you have to work out which.** That is a step of work, not a suppression.
+- **A zero is a diagnosis, not something to whitelist.** The obvious objection to printing counts is that you will accumulate legitimately-zero cases and start suppressing them. Where this has been tried, that is not what happened: of two zeros found, one was a glob that could never be non-zero and should simply not have existed, and the other *looked* legitimate and was in fact the bug — whitelisting it would have permanently blessed a rule that skipped four directories. **A zero tells you the pattern is either wrong or unnecessary, and you have to work out which.** That is a step of work, not a suppression.
 
 *(Formulated by the agent-ready-research session, 2026-08-08, after running the mechanism-enumeration below over an 8-rule lint suite. Adopted here because the framing is more general than the instances that produced it.)*
 
@@ -82,7 +82,7 @@ There is a second, sneakier version: **the hook config itself is gitignored.** A
 
 One data point on whether hooks earn their slot, from the same project: a structural-lint hook fired **four times during the session that adopted it, and each firing was a genuine defect rather than noise.** That is n=1, on a different repo, self-reported — not a measurement of this framework. It is included because the *method* generalises: a hook that fires only on real defects and a hook that never fires look identical from the outside, so counting the firings and classifying each one is the cheapest way to tell a working hook from a decorative one.
 
-**The green-at-any-cost loop.** An agent told to make a check pass will sometimes weaken the check. In this repo that has a specific and dangerous shape: **the cheapest way to make `--strict` pass is to remove the failing claim from the count.** Coverage goes green and verification has been quietly gutted — the exact failure the framework exists to catch, produced by the framework's own tooling.
+**The green-at-any-cost loop.** An agent told to make a check pass will sometimes weaken the check. In this repo that has a specific and dangerous shape: **the cheapest way to make `--strict` pass is to remove the failing claim from the count.** Coverage goes green and verification has been silently gutted — the exact failure the framework exists to catch, produced by the framework's own tooling.
 
 The routes were measured against `papers/perspective/vv/claims/claim_registry.md` with one P0 claim flipped to unverified (baseline: `--strict` exits 1). ⚠️ **Re-measured 2026-09-26, after `--strict` gained the DR-002 P0 tier floor (75f928c).** Paper 1's floor fails on its own (7 of 8 P0 entries below SUPPORTED), which makes every route exit non-zero there and isolates nothing. The table therefore reports a copy of the registry with every P0 tier raised to SUPPORTED, so that only the flipped claim can fail:
 
@@ -146,8 +146,8 @@ That last row is the honest position: **an instruction is a request; a hook is a
 
 The Claude Code row is the cautionary one. The obvious configuration — run the check, let it exit however it exits — is precisely the silent hook above. It looks wired up, it runs on every edit, and it feeds the agent nothing.
 
-## Why this repo ships no hook configuration
+## Why this repo includes no hook configuration
 
-`.claude/settings.json` is not committed here, and no hook is prescribed. Two reasons. The registry path a coverage hook must match is per-paper (`papers/perspective/vv/claims/claim_registry.md` today), so a shipped matcher would be wrong for every adopter. And the green-at-any-cost risk above means wiring the coverage hook is a decision that should be made deliberately, alongside its Hard Constraint — not inherited silently from a template.
+`.claude/settings.json` is not committed here, and no hook is prescribed. Two reasons. The registry path a coverage hook must match is per-paper (`papers/perspective/vv/claims/claim_registry.md` today), so a released matcher would be wrong for every adopter. And the green-at-any-cost risk above means wiring the coverage hook is a decision that should be made deliberately, alongside its Hard Constraint — not inherited silently from a template.
 
 Note the difference between *not committed* and *cannot be committed*. Right now no `settings.json` exists, so nothing is silently broken; but `.gitignore` line 1 ignores `.claude/` wholesale, so the moment someone writes one it is untracked by default. **If you decide to commit a hook config here, add the allowlist exception in the same change** — `.gitignore` is a HIGH-tier path in `/review-changes` for exactly this reason.

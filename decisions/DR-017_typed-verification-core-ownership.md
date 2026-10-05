@@ -47,7 +47,7 @@ Whetten (the PROPOSITION schema: constructs, relationships, **boundary condition
 | agent-ready-assessment | `Reproduction_Verification_Prompt.md`, `issues/005-typed-claim-registry.md`, `issues/003`, `memory/` | **Imported from papers** (downstream consumer — see *Drift* §; its issues say "imported from agent-ready-papers") |
 | agent-ready-research | — | **Absent** |
 
-Both reviewers who checked this table confirmed every cell reproduces. **But the narrative needs one correction they also surfaced:** it is the *Whetten name and verified source* that are papers-exclusive — **not the typed model in general.** The broader CLAIM/ARGUMENT/PROPOSITION model and Toulmin breakdowns are *live, in active use* in projects (`docs/verifying-what-we-write.md`, `docs/vv/claims/claim_registry.md`), not merely archived. Only the Whetten *citation* retreated to `LANDSCAPE.md` there.
+Both reviewers who checked this table confirmed every cell reproduces. **But the narrative needs one correction they also raised:** it is the *Whetten name and verified source* that are papers-exclusive — **not the typed model in general.** The broader CLAIM/ARGUMENT/PROPOSITION model and Toulmin breakdowns are *live, in active use* in projects (`docs/verifying-what-we-write.md`, `docs/vv/claims/claim_registry.md`), not merely archived. Only the Whetten *citation* retreated to `LANDSCAPE.md` there.
 
 This sharpens rather than weakens the layering:
 - The **generic typed concepts** (the *idea* of typing statements, Toulmin for ARGUMENTs, tiers) are co-used and legitimately live one level up, in **projects** (the generic substrate).
@@ -55,7 +55,7 @@ This sharpens rather than weakens the layering:
 
 ### Drift is mostly one-directional (papers → assessment), with a small backflow
 
-> **Provenance correction (2026-06-24, shipped as v2.3.1).** The first version of this section claimed assessment had *invented* tier-monotonicity, Step Z, the failure-pattern table, the WebFetch ladder, and SCOPE DRIFT, and framed the flow as "bidirectional drift." Reading assessment's own issue records while doing the v2.3.0 reciprocal actions falsified most of that — assessment's issues explicitly say these were **imported from agent-ready-papers**. The corrected picture below *strengthens* the custody thesis (assessment is clearly the downstream consumer) and narrows what genuinely flowed back. The v2.3.0 CHANGELOG carried the same overstatement; corrected in v2.3.1.
+> **Provenance correction (2026-06-24, released as v2.3.1).** The first version of this section claimed assessment had *invented* tier-monotonicity, Step Z, the failure-pattern table, the WebFetch ladder, and SCOPE DRIFT, and framed the flow as "bidirectional drift." Reading assessment's own issue records while doing the v2.3.0 reciprocal actions falsified most of that — assessment's issues explicitly say these were **imported from agent-ready-papers**. The corrected picture below *strengthens* the custody thesis (assessment is clearly the downstream consumer) and narrows what genuinely flowed back. The v2.3.0 CHANGELOG carried the same overstatement; corrected in v2.3.1.
 
 The flow is overwhelmingly **papers → assessment** — confirmed by assessment's own issue trail:
 
@@ -122,7 +122,7 @@ The repos stay separate. Do **not** hoist the operationalized typed layer into p
 
 A feasibility review confirmed **zero `.gitmodules` anywhere in the family**; the established pattern is copy-with-version-header (research's `heritage:` block already pins `agent-ready-papers v1.7.0` and imports primitives on demand). Therefore:
 
-- **Default: vendor with an `imported-from: agent-ready-papers vX.Y.Z` note**, drift surfaced at session start via the existing version-drift Before-You-Start row.
+- **Default: vendor with an `imported-from: agent-ready-papers vX.Y.Z` note**, drift reported at session start via the existing version-drift Before-You-Start row.
 - **Rejected: git submodule** — it would be the only submodule in four repos, would pin a public repo into an institutional one (breaking assessment's confidentiality posture), and would break the cross-tool portability the framework advertises (`docs/non-claude-setup.md`: Cursor/Copilot/web-chat adopters can't resolve submodules).
 
 ### Backport — full, but adapted to the authoring context
@@ -154,7 +154,7 @@ The vendor direction (papers → siblings) is CC-BY-clean with attribution. The 
 A DR in this repo can record an intention but cannot bind another repo's contents:
 
 - `agent-ready-assessment`: an answering note recording that its typed core is vendored from agent-ready-papers vX.Y.Z; relabel `issues/005`/`issues/010` as adoption-from-upstream once the backport lands.
-- `agent-ready-research`: its `heritage:` block already cites papers v1.7.0 — re-pin to the version this DR's backport ships in.
+- `agent-ready-research`: its `heritage:` block already cites papers v1.7.0 — re-pin to the version this DR's backport is released in.
 
 ### What stays unchanged
 
@@ -175,7 +175,7 @@ If Rejected:
 ## Evidence Base
 
 - **2026-06-24 cross-repo diff (this session).** File-level grep for Whetten / Toulmin / PROPOSITION across all four repos; full read of `equation-checker.md` (125 lines) and `Reproduction_Verification_Prompt.md` (892 lines); upstream-version headers; research `heritage:` block. **Not pre-registered** — a structural finding from reading artifacts, not an experiment.
-- **2026-06-24 review battery (6 independent agents).** Adversarial skeptic, reproduction-mode evidence auditor, framework-lens self-application, cross-DR consistency, peer-review simulation (own rubric), implementation feasibility. Convergent outcome: the *direction* is sound (no agent rejected it); the evidence narrative and backport scope needed the corrections folded into this revision. The evidence auditor **reproduced all factual claims** (Whetten table, version pins, the 892-line count, issue-file existence, DR-004 as origin). The skeptic + auditor jointly surfaced the projects-co-use correction now in §"The decisive evidence". Peer-review sim: **4.35/5.0, accept with minor revisions**. Framework-lens: **framework-clean**, PROPOSITION 4.5/5 Whetten at a correctly-assigned SUPPORTED tier.
+- **2026-06-24 review battery (6 independent agents).** Adversarial skeptic, reproduction-mode evidence auditor, framework-lens self-application, cross-DR consistency, peer-review simulation (own rubric), implementation feasibility. Convergent outcome: the *direction* is sound (no agent rejected it); the evidence narrative and backport scope needed the corrections folded into this revision. The evidence auditor **reproduced all factual claims** (Whetten table, version pins, the 892-line count, issue-file existence, DR-004 as origin). The skeptic + auditor jointly raised the projects-co-use correction now in §"The decisive evidence". Peer-review sim: **4.35/5.0, accept with minor revisions**. Framework-lens: **framework-clean**, PROPOSITION 4.5/5 Whetten at a correctly-assigned SUPPORTED tier.
 - **Provenance gap the battery missed (corrected v2.3.1).** The auditor verified that the claimed facts *exist* (issue files, sources, versions) but did **not** verify the *direction of flow* for the "assessment inventions." Reading assessment's own `issues/005/006/010/012` during the reciprocal actions showed most of those capabilities were imported papers → assessment, not invented in assessment. The "bidirectional drift" framing was an overstatement that survived the battery because no agent was tasked with checking provenance direction. Lesson: a reproduction-mode auditor must be told to verify *direction*, not just *existence*. Corrected in the *Drift* section above and in CHANGELOG v2.3.1.
 - **Custody half — not contingent.** That the Whetten name + verified sources are papers-exclusive is readable off the repos; needs no replication.
 - **Backport *value* — untested.** That the adapted inventions improve the framework *in use* is asserted from design, not measured. Logged to `memory/hypothesis-log.md` with a revisit trigger; tied to DR-016's open question about whether components earn their keep.

@@ -4,7 +4,7 @@ Registry-verification tooling for agent-ready-papers. Closes [#17](https://githu
 
 **Four tools**, all stdlib-only, all deterministic, all designed to run in CI. ⚠️ This
 section said *"Two tools"* until 2026-09-14, two releases after the third and fourth
-shipped — re-derive with `ls tools/*.py` rather than trusting the count here.
+were released — re-derive with `ls tools/*.py` rather than trusting the count here.
 
 | Tool | Purpose |
 |------|---------|
@@ -120,7 +120,7 @@ That line is the whole design, and it is worth stating precisely because the two
 |----------|-----------|----------------|
 | Is the registered tier right, given the evidence? | No — judgment | Step Z, a human-and-agent pass |
 | Given the registered tier, is the premise graph consistent with it? | Yes | Here |
-| Given the registered tier, is the prose consistent with it? | Locatable, not decidable (span attribution is unsound) | Proposed in DR-021, as a locator that would be staged in `extensions/`; not shipped |
+| Given the registered tier, is the prose consistent with it? | Locatable, not decidable (span attribution is unsound) | Proposed in DR-021, as a locator that would be staged in `extensions/`; not released |
 
 `docs/framework-summary.md` states tier-monotonicity as *"prose language tier ≤ the registered confidence tier for the same entry"* — the form in the last row. This tool implements its graph analogue (the middle row), not the prose rule itself.
 
@@ -151,7 +151,7 @@ The premise tier check is the one worth having. It is tier-monotonicity applied 
 
 Documented here so adopters hit informed surfaces rather than silent miscounts. None are blockers for the current Paper 1 fixture or the canonical templates; each is captured for the next adopter.
 
-- ~~**Escaped pipes in cells (`\|`) are not supported.**~~ **Fixed 2026-06-12.** `_split_row` in `coverage.py` now honors backslash-escaped pipes (`\|`) — common in magnitude notation like `|H(z)|` — restoring them as literal `|` in the cell value instead of splitting the row into spurious columns. Regression tests in `tests/test_coverage.py` (`test_split_row_honors_escaped_pipes`, `test_parse_registry_counts_correctly_with_escaped_pipes`). Surfaced by dog-fooding the tool on the math-heavy dsp-workshop z-domain registry, where the old behavior silently miscounted coverage (read 5/7 where the data was 8/8).
+- ~~**Escaped pipes in cells (`\|`) are not supported.**~~ **Fixed 2026-06-12.** `_split_row` in `coverage.py` now honors backslash-escaped pipes (`\|`) — common in magnitude notation like `|H(z)|` — restoring them as literal `|` in the cell value instead of splitting the row into spurious columns. Regression tests in `tests/test_coverage.py` (`test_split_row_honors_escaped_pipes`, `test_parse_registry_counts_correctly_with_escaped_pipes`). Found by dog-fooding the tool on the math-heavy dsp-workshop z-domain registry, where the old behavior silently miscounted coverage (read 5/7 where the data was 8/8).
 - **No HTTP proxy support.** `check_dois.py` uses `http.client.HTTPSConnection` directly and does not honor `https_proxy` / `HTTPS_PROXY`. This is fine for CI runners and most direct connections; fails opaquely for adopters behind a corporate proxy. If this matters, switch the HEAD path to `urllib.request` (which respects proxy env vars).
 - **Sequential, single-retry HTTP.** No concurrency, no backoff. ≤20 DOIs runs in single-digit seconds; ~50 DOIs takes ~30s; 200+ DOIs becomes minute-scale. Concurrency is a follow-up, not a current need.
 - **A marker whose table cannot be read is an error (exit 2), not an empty sub-table.** Since 2026-09-26, `coverage.py` raises when a `**CLAIMs:**`-style marker is followed by prose or end of file, or by a table with no Priority (or, for PROVOCATION, Tier) column or no Status column. A file in which **no marker is recognised at all** is an error too, in both `coverage.py` and `check_registry.py`. For that test only, a marker inside a fenced code block or an HTML comment is an example and does not count; quoting never affects which rows are parsed, so a stray `<!--` in a cell cannot hide a sub-table. Recognised markers over empty tables — a freshly started registry — report zero rows cleanly, and `--strict` then exits 0 with the P0 floor `NOT evaluated`. Until then an unreadable sub-table was skipped in silence, dropping its rows from coverage **and** the P0 tier floor: renaming every `Priority` header turned `--strict` green on Paper 1, whose floor genuinely fails. Still open: a marker the regex does not recognise (`**Claims:**`, `### **CLAIMs:**`) silently drops *its* sub-table while the others parse — it is an error only when no other marker is recognised; and deleting a row, which no parser can see. Closed the same day: a row with content but a blank Priority is an error too — only a section divider may lack one, meaning nothing after its first cell and that cell not an `S#-#` entry ID, so `| S2-1 |` is not a divider at any width (an ID the pattern misses, like `S2-1 (dup)`, still is); a blank Status counts as unverified instead of leaving the denominator; priority buckets normalise (`p0`, `**P0**` → `P0`), and a bucket that is neither P0/P1/P2 nor a configured target (`-`, `TBD`) fails `meets_targets` and shows `NO — not a priority`. See `docs/verification-hooks.md`.
@@ -185,5 +185,5 @@ Tools live inside the agent-ready-papers repo and inherit its licence (CC BY 4.0
 
 1. Implement `coverage.py` sub-table parser. Tests against `papers/perspective/vv/claims/claim_registry.md` (19 entries, 100% verified — known-good fixture).
 2. Implement `check_dois.py` extractor + resolver. Tests against the same fixture; offline mode verified against a hand-curated DOI/non-DOI fixture file.
-3. ~~PROVOCATION axis support in `coverage.py`~~ — **shipped.** `axis="provocation_tier"` buckets GROUNDED / EXTRAPOLATED / PROVOCATIVE / CRITICAL (see [DR-010](../decisions/DR-010_provocation-unit-type.md), [DR-014](../decisions/DR-014_provocation-layered-as-opt-in-extension.md)). Note the rows are *reported but not gated* unless `provocation_targets` is supplied, so `--strict` gates them on neither axis by default.
+3. ~~PROVOCATION axis support in `coverage.py`~~ — **done.** `axis="provocation_tier"` buckets GROUNDED / EXTRAPOLATED / PROVOCATIVE / CRITICAL (see [DR-010](../decisions/DR-010_provocation-unit-type.md), [DR-014](../decisions/DR-014_provocation-layered-as-opt-in-extension.md)). Note the rows are *reported but not gated* unless `provocation_targets` is supplied, so `--strict` gates them on neither axis by default.
 4. Add `tools/` to repo CI once a real fixture suite exists.

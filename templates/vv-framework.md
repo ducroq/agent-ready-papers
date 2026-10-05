@@ -147,7 +147,7 @@ PROVOCATION: "[Artefact — diegetic prototype, reflexive Ask, paradox box, etc.
 Verification questions (adapted from Auger 2013, *Digital Creativity* 24:1):
 1. Is the artefact internally consistent — could it exist in some adjacent world such that a reader holds it seriously?
 2. Does subsequent prose reach into the artefact (generative) rather than around it?
-3. Is a reflexive marker visible in the prose at every load-bearing moment, not only in the registry?
+3. Is a reflexive marker visible in the prose at every key moment, not only in the registry?
 4. Has potential for harm been considered, with mitigations binding for chapter writing?
 5. Is the tier (GROUNDED / EXTRAPOLATED / PROVOCATIVE / CRITICAL) assigned, with the required prose marker present?
 
@@ -268,7 +268,7 @@ For projects with PROVOCATION entries (see DR-010). Skip entirely if the registr
 
 - [ ] Walk every PROVOCATION in the registry
 - [ ] For each one, locate the required prose marker for its tier (GROUNDED / EXTRAPOLATED / PROVOCATIVE / CRITICAL) in the manuscript itself, not only in the registry
-- [ ] Marker is present at every load-bearing moment, not only on first introduction
+- [ ] Marker is present at every key moment, not only on first introduction
 - [ ] No authoritative-toned speculation slides silently into apparent claim
 - [ ] Entries failing this audit are rewritten (marker added) or downgraded to EMERGING CLAIM with additional sources
 

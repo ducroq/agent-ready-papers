@@ -47,15 +47,15 @@ Operations not worth logging individually:
 |------|-----------|--------------|---------|----------|------------|------------|-------|
 | [YYYY-MM-DD] | [e.g., DR-011 Pass 1 (Haiku) on §4 revision] | [N] | [N] | [N] | [N] | [Ns or Nm] | [findings, value notes] |
 
-If a column has no data (e.g., subagent total only), leave it blank. Total is the load-bearing number; the others sharpen accounting when available.
+If a column has no data (e.g., subagent total only), leave it blank. Total is the number that matters; the others sharpen accounting when available.
 
 ## Aggregation (after ~10 entries)
 
 Summarize by operation type for use in decision-record evidence bases:
 
-| Operation type | N | Mean total tokens | Load-bearing findings (or value delivered) | Notes |
+| Operation type | N | Mean total tokens | Material findings (or value delivered) | Notes |
 |----------------|---|-------------------|--------------------------------------------|-------|
 | [e.g., DR-011 Pass 1 Haiku] | [N] | [mean] | [e.g., "0 / N rounds — Pass 2 catches what Pass 1 misses at this scope"] | |
-| [e.g., DR-011 Pass 2 Opus] | [N] | [mean] | [e.g., "M load-bearing design findings across N rounds"] | |
+| [e.g., DR-011 Pass 2 Opus] | [N] | [mean] | [e.g., "M material design findings across N rounds"] | |
 
-When the aggregation table has enough N to be load-bearing, the data point belongs in a DR's Evidence Base (with a back-pointer to this log file as the primary source).
+When the aggregation table has enough N to carry weight, the data point belongs in a DR's Evidence Base (with a back-pointer to this log file as the primary source).

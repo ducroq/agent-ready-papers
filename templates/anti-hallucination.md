@@ -90,7 +90,7 @@ For each new citation, verify ALL six points:
 
 **Verdict:** Citation **rejected**. The paper is real and the numbers are real, but they describe the authors' apparatus, not human anatomy — an **attribution error** (row 61 above). Two fixes are available: cite the device figure for what it is, or follow the paper's reference [16] to the human measurement and cite *that* source directly. Never cite Lim et al. for a claim about human chests.
 
-> **This example is itself a corrected defect, kept visible rather than replaced.** Until 2026-08-13 this table shipped a wrong DOI (`…3410652`, which 404s, for the correct `…3429422`) — the two differ in four digits, so this was a mis-recorded identifier, not a digit transposition and scored Steps 4–6 **PASS**, concluding "Citation verified. Safe to use." Both errors survived every review this framework had run on itself, in the file that defines the check, and were found only when a reviewer resolved the DOI instead of reading the row. The lesson is the one Step 6 already states and this table previously contradicted: **a number being present in the paper is not the same as the paper supporting your claim.** Steps 0–3 all passed here. Only reading the source caught it.
+> **This example is itself a corrected defect, kept visible rather than replaced.** Until 2026-08-13 this table carried a wrong DOI (`…3410652`, which 404s, for the correct `…3429422`) — the two differ in four digits, so this was a mis-recorded identifier, not a digit transposition and scored Steps 4–6 **PASS**, concluding "Citation verified. Safe to use." Both errors survived every review this framework had run on itself, in the file that defines the check, and were found only when a reviewer resolved the DOI instead of reading the row. The lesson is the one Step 6 already states and this table previously contradicted: **a number being present in the paper is not the same as the paper supporting your claim.** Steps 0–3 all passed here. Only reading the source caught it.
 
 ---
 
@@ -122,13 +122,13 @@ Before concluding "topic absent from primary source," walk the ladder:
    - WebFetch the homepage `/` (the site index may link to the topic)
    - WebSearch `"<topic>" site:<example.org>` (returns the canonical URL on the site if any)
    - WebFetch `/sitemap.xml` (the structured site map names every indexed page)
-3. **Only after the ladder returns empty,** conclude "topic absent from this source." Frame the registry note as *"not surfaced in pages we checked"* rather than *"primary source does not carry the topic."* The distinction is honest about the search bounds.
+3. **Only after the ladder returns empty,** conclude "topic absent from this source." Frame the registry note as *"not found in pages we checked"* rather than *"primary source does not carry the topic."* The distinction is honest about the search bounds.
 
 ### Worked examples (grant application, 2026-05-22)
 
-**Constructive Institute Algorithm.** Initial WebFetch of `https://constructiveinstitute.org/` returned "no Constructive News Algorithm mentioned anywhere on their public homepage." This nearly demoted a sharp differentiation claim to a soft fallback. Step 2 of the ladder (WebSearch `site:constructiveinstitute.org`) surfaced `/constructive-news-algorithm/`. WebFetching that page returned verbatim primary-source content with much stronger detail than the original framing (since 2019, GNI + EBU + EU funding, EBU "A European Perspective" consortium, in testing with newsrooms, *not openly available*). The claim was promoted from `[~]` to `[x]` ESTABLISHED with verbatim quotes.
+**Constructive Institute Algorithm.** Initial WebFetch of `https://constructiveinstitute.org/` returned "no Constructive News Algorithm mentioned anywhere on their public homepage." This nearly demoted a sharp differentiation claim to a soft fallback. Step 2 of the ladder (WebSearch `site:constructiveinstitute.org`) found `/constructive-news-algorithm/`. WebFetching that page returned verbatim primary-source content with much stronger detail than the original framing (since 2019, GNI + EBU + EU funding, EBU "A European Perspective" consortium, in testing with newsrooms, *not openly available*). The claim was promoted from `[~]` to `[x]` ESTABLISHED with verbatim quotes.
 
-**Solutions Journalism Network impact figures.** Initial WebFetch of `https://www.solutionsjournalism.org/impact/explore-our-impact` returned no numbers. Step 2 of the ladder (try the `/impact` root) surfaced verbatim *"102,300 Journalists, educators and students trained and using SJN tools."* The claim was recovered.
+**Solutions Journalism Network impact figures.** Initial WebFetch of `https://www.solutionsjournalism.org/impact/explore-our-impact` returned no numbers. Step 2 of the ladder (try the `/impact` root) found verbatim *"102,300 Journalists, educators and students trained and using SJN tools."* The claim was recovered.
 
 Both failures share the same mechanism: the first URL chosen does not carry the claim, even though the site does. Without the ladder, both would have failed silently — the agent concludes "absent from source" and the downstream prose softens or strikes the claim.
 
@@ -146,7 +146,7 @@ The ladder structure is stable across applications. A companion failure mode (tr
 
 ## Step Z: Inverse Hallucination Check (tier-monotonicity violation)
 
-*Applies to all project types, and to every surface that states claims. That includes the manuscript and the registry, and also, where a project ships them, its own methodology prose: docs, decision records, project instructions such as `CLAUDE.md`, and changelog rationale. That prose states the project's own findings, so it is held to the same tiers. This names the scope; it sets no cadence and requires no standing sweep. Instruments that already exist can cover that prose when you choose to check it: the framework's `agents/review-prompt.md` (or your paper-local copy) for overclaiming, and `agents/equation-checker.md` for its numbers. Steps 0–6 catch a fabricated or misread source; Step Z catches the inverse — language whose confidence tier exceeds what the evidence supports. This is the same tier-monotonicity rule the writing-guide states for prose, run here as a verification pass. (Generalized from a PROVOCATION-only check in v2.3.0 — see DR-017; the speculative-design form is now a sub-case below.)*
+*Applies to all project types, and to every surface that states claims. That includes the manuscript and the registry, and also, where a project publishes them, its own methodology prose: docs, decision records, project instructions such as `CLAUDE.md`, and changelog rationale. That prose states the project's own findings, so it is held to the same tiers. This names the scope; it sets no cadence and requires no standing sweep. Instruments that already exist can cover that prose when you choose to check it: the framework's `agents/review-prompt.md` (or your paper-local copy) for overclaiming, and `agents/equation-checker.md` for its numbers. Steps 0–6 catch a fabricated or misread source; Step Z catches the inverse — language whose confidence tier exceeds what the evidence supports. This is the same tier-monotonicity rule the writing-guide states for prose, run here as a verification pass. (Generalized from a PROVOCATION-only check in v2.3.0 — see DR-017; the speculative-design form is now a sub-case below.)*
 
 Steps 0–6 guard against the standard hallucination: an agent invents (or misreads) a source for a real-sounding statement. Step Z surfaces the *inverse* failure mode: an agent presents a speculation, estimate, or single observation *as if* it were a sourced or stable result. Steps 0–6 *fail to fail* on these — there is often no false citation to catch — so the entry looks like a verifiable CLAIM that merely needs more sourcing. The fix is re-classification or downshift, not source-hunting.
 
@@ -189,7 +189,7 @@ For every entry in a project with PROVOCATION enabled, before running Steps 0–
 | Step Z.3 | Tier: **CRITICAL** — the fiction critiques DSM diagnostic reification by imitating its form | — |
 | Step Z.4 | Required prose marker for CRITICAL: *"By imitating this DSM form we ask…"* | Add to manuscript |
 
-**Result:** the citation is removed, the entry is reclassified as PROVOCATION (CRITICAL), and the chapter prose is rewritten so the diagnostic form is held seriously *inside the fiction* while the reflexive marker signals fictionality to the reader at every load-bearing moment.
+**Result:** the citation is removed, the entry is reclassified as PROVOCATION (CRITICAL), and the chapter prose is rewritten so the diagnostic form is held seriously *inside the fiction* while the reflexive marker signals fictionality to the reader at every key moment.
 
 A naive Steps 0–6 audit would have flagged this as a missing source and prompted a literature search. Step Z catches that the entry is a category error, not a sourcing error.
 
@@ -221,7 +221,7 @@ The three-pass structure and style-filter requirement are stable; specific cost-
 - **Spot-check:** Step 0 as initial filter; if it passes, continue with Steps 4–6 at minimum
 - **Re-verify:** When an agent changes the claim wording for an existing citation — Steps 4–6
 - **Skip only:** For citations you personally retrieved from the source paper
-- **Step Z:** Run on every load-bearing entry, all project types — does the language tier exceed the evidence tier? The PROVOCATION sub-case (reclassify a diegetic artefact, before Steps 0–6) applies to speculative-design projects only
+- **Step Z:** Run on every key entry, all project types — does the language tier exceed the evidence tier? The PROVOCATION sub-case (reclassify a diegetic artefact, before Steps 0–6) applies to speculative-design projects only
 - **Step 7:** Run before publish / submission. Pass 1 every publish; Pass 2 per the scale guidance above; Pass 3 only for high-stakes content with the style filter active
 
 ---

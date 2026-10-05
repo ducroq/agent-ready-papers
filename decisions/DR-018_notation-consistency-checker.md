@@ -22,7 +22,7 @@ None of these covers a fourth, distinct exposition lens: **is every mathematical
 
 The equation-checker's internal-consistency step does **not** catch these, because it audits whether *values* are consistent, not whether *symbols* are introduced. The two are disjoint: one is about the numbers a symbol carries, the other about whether the reader knows what the symbol means. A `44/44` correctness pass can sit on top of a paper whose first equation uses two undefined-in-prose symbols.
 
-This DR was triggered by a dog-fooding run on an external adopter paper (see *Evidence Base*): a 47-symbol sweep surfaced a real glossary-vs-body symbol-name inconsistency that the equation-checker had passed clean, plus several lower-severity gaps. The class of defect is real, recurrent in equation-heavy papers, and currently has no home in the framework.
+This DR was triggered by a dog-fooding run on an external adopter paper (see *Evidence Base*): a 47-symbol sweep found a real glossary-vs-body symbol-name inconsistency that the equation-checker had passed clean, plus several lower-severity gaps. The class of defect is real, recurrent in equation-heavy papers, and currently has no home in the framework.
 
 ### Status of related work
 
@@ -62,7 +62,7 @@ The agent is drafted and staged at **`extensions/notation-checker.md`** (staged,
 
 This DR is **Proposed**, not Accepted. Promotion is contingent on the checks in *Pending Assessment*.
 
-### The boundary vs. equation-checker (the load-bearing distinction)
+### The boundary vs. equation-checker (the key distinction)
 
 > **Equation-checker checks that VALUES agree across the document. Notation-checker checks that SYMBOLS are defined before use.** Different objects; no overlap.
 

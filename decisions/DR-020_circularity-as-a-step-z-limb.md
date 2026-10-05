@@ -10,16 +10,16 @@ date: 2026-08-16
 superseded_by:
 ---
 
-**Evidence tier: the gap is EMERGING, the remedy is EMERGING.** Both are weaker than a first draft of this document claimed, and the reasons are recorded rather than quietly repaired — see *Draft history*.
+**Evidence tier: the gap is EMERGING, the remedy is EMERGING.** Both are weaker than a first draft of this document claimed, and the reasons are recorded rather than silently repaired — see *Draft history*.
 
-- **The gap** — that a result can be arithmetically correct and evidentially empty, with **no shipped instrument helping an auditor notice it** — rests on **n=2**: one in-repo instance found by the DR-019 backlog sweep (2026-08-13) and one external document audited three days later. One is self-application. Two instances three days apart, surfaced by the same maintainer with the same instruments, is a pattern worth naming and **not** a measured recurrence rate.
+- **The gap** — that a result can be arithmetically correct and evidentially empty, with **no released instrument helping an auditor notice it** — rests on **n=2**: one in-repo instance found by the DR-019 backlog sweep (2026-08-13) and one external document audited three days later. One is self-application. Two instances three days apart, found by the same maintainer with the same instruments, is a pattern worth naming and **not** a measured recurrence rate.
 - **The remedy** is now a single mechanical test on a derivation graph. It has been run once, retrospectively, where it caught a real defect. It has never been run prospectively.
 
 ## Context
 
-Across this repo's **shipped normative surfaces** — `templates/`, `agents/`, and the README's verification registry — circularity is touched in four places. Three are judgment calls; the fourth is a different failure mode entirely.
+Across this repo's **released normative surfaces** — `templates/`, `agents/`, and the README's verification registry — circularity is touched in four places. Three are judgment calls; the fourth is a different failure mode entirely.
 
-*(The population is stated because the count is otherwise unfalsifiable. Outside it, `decisions/DR-004` carries the same falsification checkbox, and DRs, CHANGELOG, UPGRADING and paper instances carry further mentions; none is a shipped check.)*
+*(The population is stated because the count is otherwise unfalsifiable. Outside it, `decisions/DR-004` carries the same falsification checkbox, and DRs, CHANGELOG, UPGRADING and paper instances carry further mentions; none is a released check.)*
 
 | Surface | Form | Scope |
 |---|---|---|
@@ -39,13 +39,13 @@ An earlier draft proposed a two-limb "provenance trace" and called it Step Z's f
 
 Where a derivation graph is available, this is decidable by inspecting it rather than by weighing the physics. In the external instance it matched a real defect: an energy comparison reported as confirmation, where the two quantities had been set equal earlier in order to solve for a third. **That is not independent evidence** — the test was constructed from that instance, so it has been run zero times prospectively.
 
-⚠ **Step Z's rule already covers the case; what is missing is the noticing.** `templates/anti-hallucination.md` says *if language > evidence, that is a Step Z finding*, and a circular result offered as confirmation is exactly that. An earlier draft of this DR said three times that *no shipped check names it*, which is false and overstates the gap. The honest claim is narrower and weakens the case against Option A accordingly.
+⚠ **Step Z's rule already covers the case; what is missing is the noticing.** `templates/anti-hallucination.md` says *if language > evidence, that is a Step Z finding*, and a circular result offered as confirmation is exactly that. An earlier draft of this DR said three times that *no released check names it*, which is false and overstates the gap. The honest claim is narrower and weakens the case against Option A accordingly.
 
 ### Why Step Z rather than the equation-checker
 
 Both recorded instances were adjudicated as **tier** problems and repaired by **retiering**, which is Step Z's job. Circular evidence is not a new kind of finding under Step Z's rule; it is a mechanism by which the evidence tier is lower than the prose implies.
 
-⚠ **The counter-precedent, stated because an earlier draft omitted it.** `DR-019`'s F1 adjudication moved a finding *out* of Step Z on the ground that *"Step Z tests language-tier > evidence-tier; F1 is *false*, not under-evidenced, and neither Step Z remediation repairs it. It is an `agents/equation-checker.md` finding (INCONSISTENT/NUMERICAL) — an instrument already shipped."* That is a precedent for routing mechanical findings toward the equation-checker, and this DR proposes the opposite direction. The distinction relied on: F1 was a **false** value, which the equation-checker can adjudicate alone; a reused equation produces a **true** value whose evidential weight is the thing in question, and only Step Z compares weight against prose. This is a real tension and the reader should weigh it, not take it as settled.
+⚠ **The counter-precedent, stated because an earlier draft omitted it.** `DR-019`'s F1 adjudication moved a finding *out* of Step Z on the ground that *"Step Z tests language-tier > evidence-tier; F1 is *false*, not under-evidenced, and neither Step Z remediation repairs it. It is an `agents/equation-checker.md` finding (INCONSISTENT/NUMERICAL) — an instrument already released."* That is a precedent for routing mechanical findings toward the equation-checker, and this DR proposes the opposite direction. The distinction relied on: F1 was a **false** value, which the equation-checker can adjudicate alone; a reused equation produces a **true** value whose evidential weight is the thing in question, and only Step Z compares weight against prose. This is a real tension and the reader should weigh it, not take it as settled.
 
 ### Status of related work
 
@@ -68,7 +68,7 @@ Both recorded instances were adjudicated as **tier** problems and repaired by **
 
 ### Option C: A Reuse limb under Step Z *(proposed)*
 - (+) Lands where both instances were actually adjudicated and where the repair already happens.
-- (+) Reuses a shipped instrument rather than adding one — the move `DR-019` found productive.
+- (+) Reuses a released instrument rather than adding one — the move `DR-019` found productive.
 - (+) The matching step is mechanical where a derivation graph exists — no physics judgment in the comparison itself.
 - (−) That is narrower than "mechanical". Constructing the derivation graph for a third-party document is judgment-laden, deciding whether two written equations are *the same* up to rearrangement is judgment, and the scope gate reads intent. **This is a noticing heuristic, not an adjudicator**; an earlier draft called it Step Z's "first mechanical trigger" and used that to beat Options A, B and D.
 - (−) Step Z is already the longest section in `templates/anti-hallucination.md`.
@@ -120,19 +120,19 @@ Proposed text, to sit in `templates/anti-hallucination.md` under Step Z's *Gener
 - **MINOR is correct only because the limb obliges nothing.** An earlier draft's text foreclosed Step Z remediation (b) — *supplying more apparatus* — which `templates/anti-hallucination.md` currently permits. Removing a permitted remediation **is** an obligation change, and by this repo's own v3.0.0 precedent (*"three adopter-installed templates now oblige action … rule 1 fires"*) that would make the bump **MAJOR**, not MINOR. The foreclosure has been removed rather than the classification raised, because the narrowest version is what the evidence supports. If a future revision reinstates it, the bump must be reclassified in the same edit.
 - **A named sub-check, not a gate obligation.** No Gate in `templates/vv-framework.md` changes. Deliberate: obliging action on this evidence is what `DR-019` withheld.
 - `agents/equation-checker.md` is **not modified**, and the `CIRCULAR` category in the triggering audit stays a project-local extension.
-- **Vocabulary.** The limb says "at the floor" (SPECULATIVE), not "null". ⚠ An earlier draft invented a null tier; `templates/writing-guide.md` maps four tiers with SPECULATIVE as the floor, no shipped surface can consume a fifth, and the triggering audit's own Step Z table recorded the affected entry as SPECULATIVE — its own instance never used the tier the draft proposed.
+- **Vocabulary.** The limb says "at the floor" (SPECULATIVE), not "null". ⚠ An earlier draft invented a null tier; `templates/writing-guide.md` maps four tiers with SPECULATIVE as the floor, no released surface can consume a fifth, and the triggering audit's own Step Z table recorded the affected entry as SPECULATIVE — its own instance never used the tier the draft proposed.
 - **Sequencing with `DR-019`:** `DR-019` was accepted on 2026-10-01 and changed Step Z's scope line. Re-read the section before implementing this, rather than patching blind.
 - `agent-ready-research` vendors this layer under `DR-017` and should be offered it if accepted, with the n=2 caveat.
 
 ## Evidence Base
 
-**Instance 1 — in-repo, 2026-08-13.** `README.md:522`, row R-4, retiered SUPPORTED → EMERGING: *"the earlier SUPPORTED rested on one source plus the artifact the claim recommends, which is circular."* Surfaced by the `DR-019` sweep, whose adjudicator listed *"a registry row at SUPPORTED on one circular source"* among four upheld findings.
+**Instance 1 — in-repo, 2026-08-13.** `README.md:522`, row R-4, retiered SUPPORTED → EMERGING: *"the earlier SUPPORTED rested on one source plus the artifact the claim recommends, which is circular."* Found by the `DR-019` sweep, whose adjudicator listed *"a registry row at SUPPORTED on one circular source"* among four upheld findings.
 
 > **These are one finding, not two.** Same date, same row, same description. A first draft counted them separately and reported n=3.
 
 **Instance 2 — external, 2026-08-16.** An unpublished third-party quantitative note audited under the framework; the project directory is gitignored and the author is not named here, per the standing rule that a critique of work this project did not author is never version-controlled. What generalises:
 
-- One check was a clean Reuse case: an energy reported as agreeing with a quantity it had been *set equal to* in order to solve for a third. No shipped instrument names this, and the proposed limb catches it by inspection.
+- One check was a clean Reuse case: an energy reported as agreeing with a quantity it had been *set equal to* in order to solve for a third. No released instrument names this, and the proposed limb catches it by inspection.
 - ⚠ **The four checks that audit labelled `CIRCULAR` are not four instances of one defect.** On review: two are genuine circularity, one is an *idle wheel* (the posited entity drops out — a different failure), and one turned out to be the first result multiplied by a geometric constant. A first draft of this DR reported "4 of 14 mechanical checks were circular"; that line is withdrawn. The conservative n=2 framing was right and the inflated figure inside it was not.
 - ⚠ **The audit's own mechanical reproducer could not encode the finding.** `verify_claims.py` emits `ASSUMPTION` on those checks and prints that all checks agree with the audit — certifying the arithmetic, not the adjudication. That is direct evidence *against* any strong mechanicality claim, and it is why this DR now proposes one narrow test rather than a general procedure.
 
@@ -152,10 +152,10 @@ Proposed text, to sit in `templates/anti-hallucination.md` under Step Z's *Gener
 
 The first draft of this DR (2026-08-16, superseded the same day) proposed a **two-limb provenance trace** and claimed it gave Step Z its **first mechanical trigger** — the argument used to beat Options A, B and D. A DR-011 Pass 1 / Pass 2 battery refuted it. Kept visible rather than rewritten away, because the failure is the most useful evidence in this document:
 
-1. **The Cancellation limb was unsound.** "Substitute every definition back and see which symbols survive" flags ordinary derived constants: the three checked — Rydberg, Bohr radius, Chandrasekhar mass — all vanish under reduction to primitives, which is enough to make cancellation unreliable as a test. (The unhedged form, *every* defined constant vanishes, shipped in the first draft and is withdrawn: it is either trivially true of any constant defined in the chosen basis, or false of one taken as primitive. Three examples of one kind do not license a universal, and this sentence is the sole argument that killed the limb.) A determinate-but-invalid test is worse than an acknowledged judgment call, because it manufactures confident false positives with procedural authority. **Dropped.**
+1. **The Cancellation limb was unsound.** "Substitute every definition back and see which symbols survive" flags ordinary derived constants: the three checked — Rydberg, Bohr radius, Chandrasekhar mass — all vanish under reduction to primitives, which is enough to make cancellation unreliable as a test. (The unhedged form, *every* defined constant vanishes, appeared in the first draft and is withdrawn: it is either trivially true of any constant defined in the chosen basis, or false of one taken as primitive. Three examples of one kind do not license a universal, and this sentence is the sole argument that killed the limb.) A determinate-but-invalid test is worse than an acknowledged judgment call, because it manufactures confident false positives with procedural authority. **Dropped.**
 2. **The mechanicality claim was overstated** for the surviving limb too: its scope gate reads intent.
 3. **Two supporting arguments were false** — that Option B "strands the finding", and that the equation-checker would return `OK` (it returns `ASSUMPTION`, as the DR's own Context conceded two sections earlier).
-4. **A tier was invented** that no shipped surface can consume, and that the DR's own instance had not used.
+4. **A tier was invented** that no released surface can consume, and that the DR's own instance had not used.
 5. **`DR-019`'s F1 counter-precedent was omitted** while `DR-019` was cited four times in support.
 
 This document is the response. Its scope is roughly a quarter of the first draft's.
@@ -180,4 +180,4 @@ This document is the response. Its scope is roughly a quarter of the first draft
 
 ## Provenance
 
-Triggered by an external third-party audit on 2026-08-16; the in-repo instance it matched was surfaced by the `DR-019` sweep on 2026-08-13. First draft and this revision both written in one session by one model family. Tracked publicly as [#35](https://github.com/ducroq/agent-ready-papers/issues/35). **Review coverage: DR-011 Pass 1 (Haiku-class, checklist) and Pass 2 (Opus-class, adversarial) have run on the triggering audit, and Pass 2 additionally on the first draft of this DR — every substantive objection above came from it. No cross-vendor Pass 3** (no cross-vendor CLI installed), so this document has had no training-prior escape. **This revision has not itself been reviewed.**
+Triggered by an external third-party audit on 2026-08-16; the in-repo instance it matched was found by the `DR-019` sweep on 2026-08-13. First draft and this revision both written in one session by one model family. Tracked publicly as [#35](https://github.com/ducroq/agent-ready-papers/issues/35). **Review coverage: DR-011 Pass 1 (Haiku-class, checklist) and Pass 2 (Opus-class, adversarial) have run on the triggering audit, and Pass 2 additionally on the first draft of this DR — every substantive objection above came from it. No cross-vendor Pass 3** (no cross-vendor CLI installed), so this document has had no training-prior escape. **This revision has not itself been reviewed.**

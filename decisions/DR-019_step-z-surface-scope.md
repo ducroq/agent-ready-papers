@@ -28,19 +28,19 @@ Registered as a bet in `memory/hypothesis-log.md` (2026-08-08), filed publicly a
 
 A two-arm run on 2026-08-13, then a five-reviewer battery on the run itself. Reporting both, because the second changed the conclusion.
 
-**The original premise was too strong and is now corrected.** The claim was that *no* shipped check runs over framework prose. That is false. `agents/review-prompt.md` is shipped, and `memory/hypothesis-log.md` records it run over framework prose on 2026-06-11 — README, `docs/non-claude-setup.md`, `agents/README.md`, CHANGELOG — returning **3–4 novel load-bearing findings**. The surface is not unreachable by shipped instruments; it has already been reached successfully.
+**The original premise was too strong and is now corrected.** The claim was that *no* released check runs over framework prose. That is false. `agents/review-prompt.md` is released, and `memory/hypothesis-log.md` records it run over framework prose on 2026-06-11 — README, `docs/non-claude-setup.md`, `agents/README.md`, CHANGELOG — returning **3–4 novel material findings**. The surface is not unreachable by released instruments; it has already been reached successfully.
 
-The defensible residual claim is narrower: **no shipped check *names* framework prose in its scope.** Coverage there is incidental — it happens when someone points a general reviewer at the surface, not because any procedure says to.
+The defensible residual claim is narrower: **no released check *names* framework prose in its scope.** Coverage there is incidental — it happens when someone points a general reviewer at the surface, not because any procedure says to.
 
-**The run did not meet its own criterion on-protocol.** The registered Method reads: *"on the next release that … substantially edits `docs/`, run Step Z over the **changed** methodology prose."* Only Arm A (the v2.6.0..v2.6.1 diff) satisfies that, and Arm A returned **1 lite, 0 load-bearing**. Arm B ran on `docs/THRESHOLDS.md`, a document not in the release at all — an unregistered extension of the protocol, not a satisfaction of it.
+**The run did not meet its own criterion on-protocol.** The registered Method reads: *"on the next release that … substantially edits `docs/`, run Step Z over the **changed** methodology prose."* Only Arm A (the v2.6.0..v2.6.1 diff) satisfies that, and Arm A returned **1 lite, 0 material**. Arm B ran on `docs/THRESHOLDS.md`, a document not in the release at all — an unregistered extension of the protocol, not a satisfaction of it.
 
 **Arm B's three findings did not survive review**, and the surviving one belongs elsewhere:
 
 | ID | Claimed | After review |
 |----|---------|--------------|
-| F1 | 85% envelope's "clears automatically" property is arithmetically false | **Real defect, wrong instrument.** Step Z tests language-tier > evidence-tier; F1 is *false*, not under-evidenced, and neither Step Z remediation repairs it. It is an `agents/equation-checker.md` finding (INCONSISTENT/NUMERICAL) — an instrument already shipped. Severity also downgraded: latent, not live. No registry is near the failure regime (5.3% and 0% against a break point of 25–50%). |
+| F1 | 85% envelope's "clears automatically" property is arithmetically false | **Real defect, wrong instrument.** Step Z tests language-tier > evidence-tier; F1 is *false*, not under-evidenced, and neither Step Z remediation repairs it. It is an `agents/equation-checker.md` finding (INCONSISTENT/NUMERICAL) — an instrument already released. Severity also downgraded: latent, not live. No registry is near the failure regime (5.3% and 0% against a break point of 25–50%). |
 | F2 | flat mechanism claim contradicted two lines later | **Refuted.** Equivocation on "signal": one referent is the registry-discipline signal, the other an empirical predictive correlation named in its own sentence. All four `What would change this:` blocks name external validating evidence, never a retraction — four for four. The weaker residual (flat mechanism, no measurement anywhere) stands. |
-| F3 | rubric band edge transferred to real reviewer behaviour | **Cosmetic.** Only the token "real" is unsupported, and the document disclaims it two lines later. Deleting the sentence changes nothing shipped. |
+| F3 | rubric band edge transferred to real reviewer behaviour | **Cosmetic.** Only the token "real" is unsupported, and the document disclaims it two lines later. Deleting the sentence changes nothing released. |
 
 **Net: the criterion was met once at most, on a document the pre-registration excluded, by an instrument other than the one under discussion.**
 
@@ -78,13 +78,13 @@ The defensible residual claim is narrower: **no shipped check *names* framework 
 
 **Option D**, with the recurring obligation explicitly withheld.
 
-1. **Step Z gains a surface axis.** Its scope line names both axes — project types *and* surfaces — and states that where a repo ships framework or methodology prose, that prose is in scope. Stating the axis is the fix for the mechanism this DR is about.
-2. **Point at the instruments that already work**, rather than creating one. `agents/review-prompt.md` has produced 3–4 load-bearing findings on this surface (one run, 2026-06-11); `agents/equation-checker.md` owns the numerical-inconsistency class that F1 actually belongs to. Both ship.
+1. **Step Z gains a surface axis.** Its scope line names both axes — project types *and* surfaces — and states that where a repo publishes framework or methodology prose, that prose is in scope. Stating the axis is the fix for the mechanism this DR is about.
+2. **Point at the instruments that already work**, rather than creating one. `agents/review-prompt.md` has produced 3–4 material findings on this surface (one run, 2026-06-11); `agents/equation-checker.md` owns the numerical-inconsistency class that F1 actually belongs to. Both are already released.
 3. **One backlog sweep**, not a cadence. Sampled rather than cherry-picked: include at least one stale *claim-sparse* document (3 of 5 files in `docs/` have zero evidence markers) so the yield estimate is not drawn from the densest case again.
-4. **Pre-register before that sweep**: the load-bearing rubric, and an adjudicator who did not write the prose. Both were missing this time and both changed the result when supplied.
+4. **Pre-register before that sweep**: the rubric for material findings (named "load-bearing" when first registered), and an adjudicator who did not write the prose. Both were missing this time and both changed the result when supplied.
 5. **Re-evaluate after the backlog sweep** against a named trigger — the next `/audit-context` run — not "later".
 
-**No standing obligation is created by this DR.** If the backlog sweep yields load-bearing findings in claim-sparse prose, that is the evidence a cadence would need, and it can be proposed then.
+**No standing obligation is created by this DR.** If the backlog sweep yields material findings in claim-sparse prose, that is the evidence a cadence would need, and it can be proposed then.
 
 ## Consequences
 
@@ -96,7 +96,7 @@ The defensible residual claim is narrower: **no shipped check *names* framework 
 
 ## Sweep result (2026-08-13) — the backlog sweep in decision item 3 has run
 
-Ten reviewers over the shipped surface (`templates/`, `agents/`, README normative sections) and `literature/`, plus one independent adjudicator over the judgement calls. Rubric pre-registered before any file was read; every reviewer required to report words scanned.
+Ten reviewers over the released surface (`templates/`, `agents/`, README normative sections) and `literature/`, plus one independent adjudicator over the judgement calls. Rubric pre-registered before any file was read; every reviewer required to report words scanned.
 
 **Yield by surface, findings per 1,000 words:**
 
@@ -109,17 +109,17 @@ Ten reviewers over the shipped surface (`templates/`, `agents/`, README normativ
 | small templates + `agents/` | 0.43 |
 | cross-surface invariants | **12 of 68 comparable disagreed — 17.6%** |
 
-**The discriminating question is answered: yes.** Load-bearing findings appeared in claim-**sparse** prose — the two most severe literature findings (a phrase attributed to Hevner that belongs to Venable; a paper's own degradation caveat omitted from the entry the Hard Constraints rest on) carry no numbers at all. The pre-registered prediction that risk would concentrate in numeric-dense entries **failed in all four literature slices**: the densest entry in the repo verified to the page number, while prose characterisations leaked. **Option A is therefore proposable** on this evidence — that call is the maintainer's, and this DR does not make it.
+**The discriminating question is answered: yes.** Material findings appeared in claim-**sparse** prose — the two most severe literature findings (a phrase attributed to Hevner that belongs to Venable; a paper's own degradation caveat omitted from the entry the Hard Constraints rest on) carry no numbers at all. The pre-registered prediction that risk would concentrate in numeric-dense entries **failed in all four literature slices**: the densest entry in the repo verified to the page number, while prose characterisations leaked. **Option A is therefore proposable** on this evidence — that call is the maintainer's, and this DR does not make it.
 
 **What the sweep found, in one sentence:** the framework's machinery is consistent (unit types, tiers, gates and source weights verified identical across 6–8 surfaces each; zero fabricated sources, zero invented authors, zero invented numbers across 25 literature entries; 41/41 DOIs resolve), and its defects cluster in **worked examples**, **cross-surface propagation**, and **quote fidelity**.
 
-**The adjudicator's cross-cutting diagnosis is the finding this DR should carry forward:** four separate upheld findings were one failure mode — *the framework's normative surfaces stated its own findings at a higher tier than its own Step Z would allow.* A checklist that certified the violation DR-002 exists to prevent; a registry row at SUPPORTED on one circular source; two unverifiable ranges shipped as calibration bands; and a confound concealed inside a binding Accepted DR. That is the strongest evidence yet for this DR's premise — and it was produced by pointing existing instruments at framework prose, not by inventing a new one, which supports Decision item 2 over Option A.
+**The adjudicator's cross-cutting diagnosis is the finding this DR should carry forward:** four separate upheld findings were one failure mode — *the framework's normative surfaces stated its own findings at a higher tier than its own Step Z would allow.* A checklist that certified the violation DR-002 exists to prevent; a registry row at SUPPORTED on one circular source; two unverifiable ranges released as calibration bands; and a confound concealed inside a binding Accepted DR. That is the strongest evidence yet for this DR's premise — and it was produced by pointing existing instruments at framework prose, not by inventing a new one, which supports Decision item 2 over Option A.
 
 **Cost:** ~1.1M tokens, 11 agents. Logged in `vv/cost-log.md`.
 
 ## Revisit If
 
-- ~~**The backlog sweep yields load-bearing findings in claim-sparse prose**~~ — **fired 2026-08-13, see above.** A cadence is now proposable; whether the recurrence rate justifies one is still unmeasured, since this sweep drained an accumulated backlog and says nothing about the increment.
+- ~~**The backlog sweep yields material findings in claim-sparse prose**~~ — **fired 2026-08-13, see above.** A cadence is now proposable; whether the recurrence rate justifies one is still unmeasured, since this sweep drained an accumulated backlog and says nothing about the increment.
 - ~~**It yields nothing outside claim-dense documents**~~ — **falsified.** The narrower "numerically dense methodology prose" scope suggested during the run is wrong and should not be adopted.
 - An adopter reports the check produces mostly false positives on prose written outside this repo's house style. All evidence here is self-application, which is this framework's weakest external-validity position.
 - DR-016 is promoted to Accepted — the authoring-vs-reviewer tension stops being a caveat and starts being binding.

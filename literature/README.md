@@ -123,7 +123,7 @@ Sources consulted during the development of this project, particularly for DR-00
 
 <!-- Seeded 2026-09-14 from a state-of-the-art scan. These are the empirical
      warrant for the paper's motivating problem; L57 is the strongest and the
-     least read. Reading status is per-row and load-bearing — see each file. -->
+     least read. Reading status is per-row and matters — see each file. -->
 
 | ID | Author(s) | Year | Title | Venue | File | Status |
 |----|-----------|------|-------|-------|------|--------|

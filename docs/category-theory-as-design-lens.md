@@ -12,7 +12,7 @@ This note is a design-discussion artifact, not a code-style guide. CT vocabulary
 
 ## Two ideas that do most of the work
 
-**Composition is the load-bearing notion.** Pay attention to how the pieces of a system compose. Most of the structural information you need is there. Implementations should be analysed by how their pieces compose, not by what is inside them.
+**Composition is the key notion.** Pay attention to how the pieces of a system compose. Most of the structural information you need is there. Implementations should be analysed by how their pieces compose, not by what is inside them.
 
 **Labels are about equations satisfied.** Whether a morphism is "an inverse", "a projection", "a verification" is determined by which equations it satisfies relative to other morphisms. The morphism itself is just data. Two arrows that satisfy the same equations play the same role.
 

@@ -7,7 +7,7 @@ date: 2026-05-10
 
 ## Context
 
-DR-004 (2026-03-02) added three registry unit types — CLAIM, ARGUMENT, PROPOSITION — and reserved DESIGN PRINCIPLE, PROCEDURE, and SYNTHESIS as slots to activate when the framework was applied to non-empirical work. DR-006 (publication roadmap) anticipated such a project. Applying the framework to a speculative-design book scaffolding (April–May 2026) surfaced a class of registry units that none of the existing or reserved types describes:
+DR-004 (2026-03-02) added three registry unit types — CLAIM, ARGUMENT, PROPOSITION — and reserved DESIGN PRINCIPLE, PROCEDURE, and SYNTHESIS as slots to activate when the framework was applied to non-empirical work. DR-006 (publication roadmap) anticipated such a project. Applying the framework to a speculative-design book scaffolding (April–May 2026) revealed a class of registry units that none of the existing or reserved types describes:
 
 - A DSM-form *diagnostic entry* — a fictional clinical category, held with seriousness inside the fiction while the reader knows it is fictional (a *diegetic prototype* in Kirby's sense).
 - A reflexive *Ask* directed at the reader.
@@ -15,7 +15,7 @@ DR-004 (2026-03-02) added three registry unit types — CLAIM, ARGUMENT, PROPOSI
 
 These are designed artefacts that make no truth claim. Verifying them as CLAIMs is incoherent (no source applies). They are not ARGUMENTs (no inferential bridge from grounds to conclusion). They are not PROPOSITIONs (no recommendation prescribing action). DESIGN PRINCIPLE in the Hevner sense suggests something empirically testable; PROVOCATIONs specifically refuse that claim.
 
-A literature search surfaced Auger (2013, *Digital Creativity* 24:1) on speculative-design verification: artefacts hold up when they are **plausible, generative, reflexive, and ethically held**. This is not a claim-verification procedure but a *quality-of-speculation* procedure — the right axis for designed artefacts that aren't trying to be true.
+A literature search found Auger (2013, *Digital Creativity* 24:1) on speculative-design verification: artefacts hold up when they are **plausible, generative, reflexive, and ethically held**. This is not a claim-verification procedure but a *quality-of-speculation* procedure — the right axis for designed artefacts that aren't trying to be true.
 
 ## Options Considered
 
@@ -55,7 +55,7 @@ A **PROVOCATION** is a designed artefact that makes no truth claim. It includes:
 |-----------|----------|--------------------------|
 | **Plausible** | Could this exist in some adjacent world consistent enough that a reader holds it seriously? | Internally consistent details; no genre-breaking elements |
 | **Generative** | Does the artefact open new questions or interpretive moves that the surrounding prose develops? | Subsequent prose reaches into the artefact, not around it |
-| **Reflexive** | Does the artefact, or its framing, signal its own fictionality? | Visible reflexive marker in the prose at every load-bearing moment |
+| **Reflexive** | Does the artefact, or its framing, signal its own fictionality? | Visible reflexive marker in the prose at every key moment |
 | **Ethically held** | Has the artefact's potential for harm been considered, with mitigations binding for chapter writing? | DR-level pre-commitment; harm consideration documented |
 
 ### Confidence Tiers — separate axis

@@ -119,9 +119,9 @@ Before this DR can be promoted from Proposed to Accepted, three checks are neede
 
 1. **Paper 1 reference audit.** Grep `papers/perspective/` for `PROVOCATION`, `Step Z`, and `GROUNDED` / `EXTRAPOLATED` / `PROVOCATIVE` / `CRITICAL` (in the confidence-tier sense, not as ordinary English). Confirm no broken references after the restructure. Paper 1 does not currently use PROVOCATION entries (per CHANGELOG v1.2.0: registry migrated to CLAIM / ARGUMENT / PROPOSITION sub-tables), so the audit should be clean — but checking before changing templates is the discipline this framework exists for.
 2. **Speculative-design adopter check.** If a speculative-design adopter has locally-adapted templates that inline PROVOCATION content, confirm whether the extension-as-separate-doc structure is acceptable from the adopter side before committing the restructure.
-3. **Version-impact decision.** Decide whether the restructure ships as **v1.4.0** (MINOR — behaviour unchanged from adopter perspective, content relocated) or **v2.0.0** (MAJOR — template surface visibly changed). This affects how the change is described in `UPGRADING.md` and whether existing pinned consumers are expected to review the new extension docs.
+3. **Version-impact decision.** Decide whether the restructure is released as **v1.4.0** (MINOR — behaviour unchanged from adopter perspective, content relocated) or **v2.0.0** (MAJOR — template surface visibly changed). This affects how the change is described in `UPGRADING.md` and whether existing pinned consumers are expected to review the new extension docs.
 
-The DR ships as Proposed so the layering decision is visible and discussable without forcing template changes in this session.
+The DR is filed as Proposed so the layering decision is visible and discussable without forcing template changes in this session.
 
 ## Open Questions Carried Forward
 

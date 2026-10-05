@@ -82,7 +82,7 @@
      the session narrative that blows this file's size budget.
 
      Format — keep the example inside this comment, not below it, or every
-     fresh adoption ships a live pointer to a file that does not exist and the
+     fresh adoption includes a live pointer to a file that does not exist and the
      reference check reports it, correctly, as broken:
        - [Short description] → docs/work-items/slug.md [in progress]
 
