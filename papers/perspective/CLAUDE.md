@@ -39,7 +39,7 @@ We propose a typed verification model: CLAIMs (source-verifiable facts), ARGUMEN
 | When | Read |
 |------|------|
 | Writing or editing prose | `writing-guide.md` — claim-to-section mapping with language calibration |
-| Writing or editing prose for a reader | `../../vv/voice-profile.md`: house voice and what to leave out; then `make formula-scan` from the repo root (tier language in `writing-guide.md` still wins) |
+| Writing or editing prose for a reader | The maintainer's private house-voice profile (maintainer-local; ask for it), then `make formula-scan` from the repo root (tier language in `writing-guide.md` still wins) |
 | Adding or verifying citations | `vv/claims/claim_registry.md` — all claims with priority and status |
 | Checking coverage or DOIs for this paper | From repo root: `python -m tools.coverage papers/perspective/vv/claims/claim_registry.md` and `python -m tools.check_dois papers/perspective/vv/claims/claim_registry.md` (or `make coverage` / `make check-dois`). Prefer the tool to manually counting P0/P1/P2 percentages or eyeballing DOIs in `references.bib`. See `../../tools/README.md` for flags and known limits. |
 | Logging token cost of an operation | `vv/cost-log.md` — record `/status` deltas (or subagent `total_tokens`) after named, repeatable operations (review passes, `/curate`, `/audit-context`, batch verification, full Gate sweeps). Bootstrap data from 2026-06-08 already present. See `../../templates/cost-log.md` for the convention. |
