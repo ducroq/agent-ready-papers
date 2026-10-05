@@ -30,8 +30,9 @@ check-registry:  ## Registry/manuscript internal consistency for Paper 1
 	python -m tools.check_registry papers/perspective/vv/claims/claim_registry.md \
 		--manuscript papers/perspective/manuscript.tex --budget 5000
 
-formula-scan:  ## Advisory formula/readability locator (PROPOSED, DR-022); FILE=<path>, default Paper 1
-	python extensions/formula_scan.py "$(or $(FILE),papers/perspective/manuscript.tex)"
+HOUSE_WORDS ?= vv/house-words.txt
+formula-scan:  ## Advisory formula/readability locator (PROPOSED, DR-022); FILE=<path>, default Paper 1; HOUSE_WORDS=<list>, HOUSE_WORDS= for none
+	python extensions/formula_scan.py "$(or $(FILE),papers/perspective/manuscript.tex)" $(if $(HOUSE_WORDS),--house-words "$(HOUSE_WORDS)")
 
 preservation-check:  ## Did a translation keep numbers and certainty? (PROPOSED, DR-023); SRC=<source> TRN=<translation> [LINK=<source link>]
 	@[ -n "$(SRC)" ] && [ -n "$(TRN)" ] || { echo "usage: make preservation-check SRC=<source> TRN=<translation> [LINK=<source link>]"; exit 2; }

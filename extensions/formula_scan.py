@@ -336,7 +336,7 @@ class ScanReport:
 def _clean_line(line: str, latex: bool = False, strip_bullet: bool = True) -> str:
     if latex:
         line = re.sub(r"(?<!\\)%.*$", "", line)  # LaTeX comment ("50%" in Markdown is prose)
-        line = re.sub(r"\\(?:url|href)\{[^}]*\}", " ", line)  # URLs: their dashes are not prose
+        line = re.sub(r"\\(?:url|href)\{(?:[^{}]|\{[^{}]*\})*\}", " ", line)  # URLs: their dashes are not prose
         line = re.sub(r"\\verb\*?([^A-Za-z\s]).*?\1", " ", line)
         line = re.sub(r"\\textemdash\b\s?", "\u2014", line)
         line = line.replace("---", "\u2014").replace("--", "\u2013")  # LaTeX dashes
@@ -794,10 +794,11 @@ def _stopword_shares(sentences: list[Sentence]) -> tuple[float, float, int]:
 
 
 def load_house_words(path: str | Path) -> dict[str, str]:
-    """One word or phrase per line; blank lines and anything after # are ignored."""
+    """One word or phrase per line. A # at the line start or after a space starts a comment,
+    so "c#" stays an entry."""
     out: dict[str, str] = {}
     for line in Path(path).read_text(encoding="utf-8-sig").splitlines():
-        w = " ".join(line.split("#", 1)[0].lower().split())
+        w = " ".join(re.split(r"(?:^|\s)#", line, maxsplit=1)[0].lower().split())
         if w:
             out[w] = "H"
     return out

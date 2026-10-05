@@ -1,6 +1,6 @@
 # House word list for this repo's own prose (formula_scan.py --house-words).
 # A style rule set by the maintainer (2026-10-05), not evidence: reported as source H.
-# One word or phrase per line; anything after # is ignored. The scanner adds endings
+# One word or phrase per line; a # at the line start or after a space starts a comment. The scanner adds endings
 # (s, es, ed, d, ing, ly) to an entry as written, so "ships" does not match "shipped".
 # The bare verb "ship" is left out: it is also a noun.
 # Left out on purpose: "surface" (also an ordinary noun here), "land" (also a noun),

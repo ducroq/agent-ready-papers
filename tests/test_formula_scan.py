@@ -469,3 +469,13 @@ def test_markdown_ascii_dashes_are_noted_not_counted(tmp_path):
 @pytest.mark.parametrize("sentence", ["This cannot be data but rather argument.", "It isn't data but rather argument."])
 def test_contracted_negation_but_rather(tmp_path, sentence):
     assert fs.scan(_write(tmp_path, sentence + "\n")).metrics["negation_contrast"] == 1
+
+
+def test_hash_inside_a_word_is_not_a_comment(tmp_path):
+    words = fs.load_house_words(_write(tmp_path, "c#\n# whole-line note\nquietly # trailing note\n", "h.txt"))
+    assert words == {"c#": "H", "quietly": "H"}
+
+
+def test_latex_url_with_nested_braces_is_dropped_whole(tmp_path):
+    tex = "\\section{A}\nSee \\url{http://a.b/{x}---c} for the tool---here.\n"
+    assert fs.scan(_write(tmp_path, tex, "m.tex")).metrics["em_dashes"] == 1
