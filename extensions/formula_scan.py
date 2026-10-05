@@ -107,8 +107,11 @@ OPENER_MIN = 4
 MIN_SECTIONS = 3
 TEMPLATE_SHARE = 0.4  # a feature shared by this share of sections (a closing label: any 3+)
 CONTRAST_PER_1000 = 2.0
+# Checked 2026-10-05 against 29 papers in literature/pdfs (pdftotext, references included):
+# em-dashes max 5.3 per 1,000 words (a style guide, 2012), median about 0.3; "rather than"
+# max 1.3 in the four pre-2023 papers, 4.5 in one 2026 paper. Still SPECULATIVE: 29 papers.
 RATHER_THAN_PER_1000 = 2.0
-EM_DASH_PER_1000 = 5.0
+EM_DASH_PER_1000 = 6.0
 MIN_ENGLISH_STOPWORD_SHARE = 0.2  # below this the text is probably not English ...
 MIN_WORDS_FOR_LANGUAGE = 300  # ... but only judged on this many words or more
 

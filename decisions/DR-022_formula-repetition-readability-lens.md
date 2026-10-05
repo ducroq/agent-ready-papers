@@ -69,7 +69,7 @@ L67–L71 (detector reliability and bias), L73 (vendor report), L74–L76 (detec
 
 ## Open Questions
 
-- Are the SPECULATIVE thresholds (sentence CV 0.35, triad share 0.8, template share 0.4) anywhere near useful? Calibrate them on real works (test step 2) before acceptance.
+- Are the SPECULATIVE thresholds (sentence CV 0.35, triad share 0.8, template share 0.4) anywhere near useful? Calibrate them on real works (test step 2) before acceptance. A first check on 29 published papers in `literature/pdfs/` (2026-10-05): em-dashes ran from 0 to 5.3 per 1,000 words (median about 0.3; the 5.3 is a 2012 style-guide sample), so the em-dash threshold sits at 6; "rather than" stayed at or below 1.3 in the four pre-2023 papers, so 2 stays, although one 2026 paper reached 4.5. Triad share ran from 0.40 to 0.94, with the pre-2023 papers at 0.63 to 0.71, so it does not separate these papers and 0.8 is unchanged.
 - Where does the multi-file mode draw the unit: a directory, a manifest list, or the book's build order?
 - Should the device register live in the voice manifest (per project) or in the writing guide? Proposed: the manifest, since devices are per work.
 - Is recurring *terminology* in papers separable from recurring *rhetoric* mechanically, for example with a glossary allow-list? Until then the review pass triages it.
