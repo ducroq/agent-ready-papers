@@ -155,10 +155,10 @@ This is the framework eating its own dog food. Any friction, gaps, or false fail
 **Note:** Gate 2.5 (Internal Consistency) was introduced after Paper 1 passed Gate 2. Appendix A values were manually cross-checked against main text during the Appendix A addition (2026-03-06), which satisfies the Gate 2.5 intent retroactively.
 
 **Next priorities:**
-1. Co-author review (Gate 3) — title change + Appendix A + S1-5 + the 2026-10-05 prose rewrite are significant changes to discuss; the handoff note (Decisions A and B on the P0 floor) is drafted, see `backlog.md`
+1. Decisions A and B taken 2026-10-09 (see `backlog.md`): gap claim stays broad at EMERGING; next, draft the DR scoped in `backlog.md`, and add a manuscript sentence stating the gate result until it is accepted. Gate 3 review: by the maintainer unless a co-author is found; it should still cover the title change, Appendix A, S1-5 and the 2026-10-05 rewrite
 2. Decide submission article type: "Original Article" or "Opinion" (LP uses "Opinion" for perspective-type pieces)
 3. Pre-submission enquiry to LP editor (optional)
 
 ---
 
-*Last updated: 2026-10-05*
+*Last updated: 2026-10-09*
