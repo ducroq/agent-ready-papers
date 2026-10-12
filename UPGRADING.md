@@ -11,6 +11,20 @@ The full release notes are in [`CHANGELOG.md`](CHANGELOG.md). This file is the q
 - **PATCH** version bumps are docs-only / clarifications, or backward-compatible bug fixes (e.g. a tooling fix that changes no public interface). Usually no action required; a bug fix may be worth adopting if you hit the bug.
 - Every release entry in `CHANGELOG.md` includes an "Adopter notes" / "Adopter action" subsection. This file aggregates them per version for quick lookup.
 
+## v4.3.0 (2026-10-12)
+
+**From v4.2.0 — what to review when you bump your pin to v4.3.0:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| **New tools: `tools/check_quotes.py`** (does a quote occur in its source) **and `tools/registry_edit.py`** (edit one registry row by ID, safely) | **Optional.** Run them from a framework clone, e.g. `python -m tools.check_quotes <source> "quoted phrase"`. See `tools/README.md` for flags and exit codes. |
+| Tool fixes: `coverage` (PROVOCATION tier column), `check_metadata` (letters such as ł, ø, ß), `check_registry` (marker scope, `\input` in `--manuscript`), `check_quotes` (pdf2htmlEX HTML) | None. Interfaces unchanged. Findings on your registry may change where one of these bugs applied. |
+| `decisions/DR-024` Accepted: `tools/check_experiments.py`, `vv/experiments/`, `make check-experiments` (now part of `make check`) | None. It reads this repo's own layout. Papers have no experiment registry yet. |
+| `decisions/DR-012` Accepted (decision-support artefacts); DR-003 and DR-005 Accepted as deferrals; DR-014 and DR-021 Withdrawn; DR-025 Proposed | None. README *What It Applies To* lists the three application classes. |
+| Templates, DRs and docs: "load-bearing", "shipped", "surfaced", "quietly" replaced by plainer words | None. Meaning unchanged; don't re-copy a template over an adapted copy for this. |
+
+**Breaking changes:** none.
+
 ## v4.2.0 (2026-10-02)
 
 **From v4.1.0 — what to review when you bump your pin to v4.2.0:**

@@ -14,6 +14,48 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
      backward-compatible fix. Every entry has an "Adopter notes" or "Adopter action" subsection,
      saying "No adopter action required." when there is none. -->
 
+## v4.3.0 (2026-10-12)
+
+Three new tools for checks that were done by hand: whether a quote occurs in its source, a safe one-row registry edit, and an experiment registry whose numbers must trace to tracked evidence (DR-024, accepted). The maintainer also settled five open DRs: DR-003, DR-005 and DR-012 accepted, DR-014 and DR-021 withdrawn. **MINOR**: new tools and accepted DRs, with nothing an adopter must do.
+
+Seventeen commits since v4.2.0. The test suite went from 364 to 539.
+
+### Tooling (adopter-facing)
+
+- **New `tools/check_quotes.py`** (#48): does a quoted phrase occur, in order, in a source's full text? It reads PDF (three readings, including column by column), epub (with printed page markers) and plain text. Numbers keep their marks and every maths sign must match, so "p < 0.05" is not found against "p > 0.05". A match that needs a lenient reading is CHECK, not FOUND; a scanned PDF is NO TEXT LAYER. A FOUND means the words occur in order, not that they support the citing sentence. Exit 0 / 1 / 2. Covered by 24 tests in `tests/test_check_quotes.py`.
+- **New `tools/registry_edit.py`**: edits one claim-table row by ID (append to the statement, set Status, replace text), and refuses unless exactly one claim-table row matches. Covered by 10 tests in `tests/test_registry_edit.py`.
+- **New `tools/check_experiments.py`** (DR-024), run by `make check-experiments` and now by `make check`. It checks `vv/experiments/registry.jsonl`: the schema, the id order, that every artifact is tracked by git and sits inside `vv/evidence/`, and that every metric occurs standing alone in its evidence (`41` does not match `#41`, `4` does not match `4 October`). A preregistration, the checker's own saved output and commit messages are never evidence. Its docstring lists what it cannot see. The 105 tests in `tests/test_check_experiments.py` include every seeded positive in DR-024's Acceptance Condition. It reads this repo's layout; papers do not have a registry yet (DR-024, Open Questions).
+- **Fixes** (#39, #44, #50, #57, #58): `coverage` buckets a PROVOCATION sub-table on its tier column first; `check_metadata` folds letters such as ł, ø and ß, and their LaTeX spellings, before comparing; `check_registry` reads a sub-table marker as covering only the table under it, and with `--manuscript` follows `\input` and `\include`; `check_quotes` handles pdf2htmlEX HTML, where every match is CHECK. No interface changed. If you run these tools on your own registry, expect different findings where you were hit by one of these bugs.
+
+### Decisions
+
+- **DR-024 accepted** (experiment registry, ported from llm-distillery and tightened). One entry so far: EXP-001, preregistered, which tests whether a review by a second model finds method-level problems a same-family reader panel misses (#53). The bet itself is in `vv/hypothesis-log.md`.
+- **DR-012 accepted**: decision-support artefacts are the third application class. `README.md` gains *What It Applies To*, which lists the three classes and what does not carry over to decision-support work.
+- **DR-003 and DR-005 accepted as deferrals**; their revisit triggers stand.
+- **DR-014 and DR-021 withdrawn.** DR-014's checks went unrun for four months after DR-017 took Step Z out of its scope; DR-021 was never built, and Step Z's manual pass covers it.
+- **DR-025 proposed**: an AI-use disclosure statement as framework output, with a worked example from Paper 1's tool runs. Proposed DRs do not bind.
+- DR-022's scanner (still Proposed, in `extensions/`) also counts em-dashes, "rather than" contrasts and a project's own word list; its thresholds stay SPECULATIVE.
+
+### Templates and docs
+
+- **Plainer words, same meaning.** "load-bearing", "shipped", "surfaced" and "quietly" are replaced in templates, DRs, `README.md` and docs ("load-bearing finding" is now "material finding", "every load-bearing moment" is now "every key moment"). No rule or tier changed. Logs, records and the changelogs keep their wording.
+- `README.md` opening line names all three application classes.
+
+### Paper 1
+
+- Prose rewritten under the maintainer's house voice, with the same claims and tiers (em-dashes and "rather than" contrasts removed; opening paragraph tested on two fresh readers).
+- The maintainer's Decisions A and B on the P0 floor are recorded in its `CLAUDE.md` and backlog. The P0 tier floor still fails, at 3 of 6 (S2-2, S3-4, S5-1; #38), and this release goes out over it, as v4.1.0 and v4.2.0 did.
+
+### Adopter notes
+
+No adopter action required. New adopters get the plainer wording and the new tools.
+
+Existing adopters: the three new tools are optional; run them as `python -m tools.check_quotes` and `python -m tools.registry_edit` from a framework clone. Do not re-copy a template over an adapted paper-local copy for the wording change; nothing in it changes what a rule requires. The experiment registry and `make check-experiments` read this repo's own layout and are not for adopters.
+
+### Versioning rationale
+
+Rule 1 does not fire: no template, gate or registry structure changed in a way an adopter must follow, and the tool fixes keep their interfaces. Rule 2 fires: three new tools and newly Accepted DRs, so MINOR. Precedent: v4.2.0 (MINOR for an Accepted DR and new scripts).
+
 ## v4.2.0 (2026-10-02)
 
 DR-019 is accepted: Step Z's scope now names the surfaces it covers, including a project's own methodology prose, without adding any cadence or sweep. Paper 1 gains S1-6, rewords S2-2 and builds again; three maintenance scripts arrive. **MINOR**: a template's normative scope changes, but nothing obliges an adopter to act.
