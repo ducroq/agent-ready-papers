@@ -191,3 +191,64 @@ def test_zero_width_overlay_attaches():
     text = columns_text(_attach_overlays(words), 200)
     assert not find("k = 0 next", [[Page("pdf p. 1", text)]]).found
     assert find("k \u2260 0 next", [[Page("pdf p. 1", text)]]).found
+
+
+_PDF2HTMLEX = (
+    '<html><head><meta name="generator" content="pdf2htmlEX"/></head><body>'
+    '<div id="pf1" class="pf" data-page-no="1"><div class="t">Front matter, nothing here.</div></div>'
+    '<div id="pfdd" class="pf" data-page-no="dd"><div class="t">These tec<span class="_0">h</span>niques '
+    '<span>ha</span> <span>v</span>e <span>b</span>ecome <span>p</span>o <span>w</span>erful tools.</div></div>'
+    "</body></html>"
+)
+
+
+def test_pdf2htmlex_split_words_are_check_not_found_or_missing(tmp_path, capsys):
+    """#57: pdf2htmlEX spans split words, so a true quote came back MISSING."""
+    src = tmp_path / "ch6.html"
+    src.write_text(_PDF2HTMLEX, encoding="utf-8")
+    (hit,) = [find("these techniques have become powerful tools", load(src))]
+    assert hit.found and hit.note and "spaces ignored" in hit.note
+    assert hit.page == "pdf p. 221"
+    assert find("these methods have become weak", load(src)).found is False
+    assert main([str(src), "these techniques have become powerful tools"]) == 1
+    out = capsys.readouterr().out
+    assert out.startswith("CHECK") and "pdf2htmlEX" in out
+
+
+def test_spaces_are_ignored_only_for_pdf2htmlex(tmp_path):
+    src = tmp_path / "plain.html"
+    src.write_text(_PDF2HTMLEX.replace("pdf2htmlEX", "other"), encoding="utf-8")
+    assert find("these techniques have become powerful tools", load(src)).found is False
+
+
+def test_a_strict_match_in_pdf2htmlex_is_check_too(tmp_path):
+    """Review of #57: a span boundary inside a word reads as a space, so "the<span>rapist"
+    gave a plain FOUND for "the rapist"."""
+    src = tmp_path / "t.html"
+    src.write_text(
+        "<html><head><meta content='pdf2htmlEX' name='generator'/><style>.x{}</style></head><body>"
+        '<div class="pf" data-page-no="2">we saw the<span>rapist</span> today</div></body></html>',
+        encoding="utf-8",
+    )
+    hit = find("saw the rapist today", load(src))
+    assert hit.found and hit.note and "word boundary" in hit.note
+    assert main([str(src), "saw the rapist today"]) == 1
+
+
+def test_a_spaceless_check_shows_the_match_not_the_page_start(tmp_path):
+    src = tmp_path / "long.html"
+    filler = " ".join(f"word{i}" for i in range(120))
+    src.write_text(_PDF2HTMLEX.replace("These tec", filler + " These tec"), encoding="utf-8")
+    hit = find("these techniques have become powerful tools", load(src))
+    assert hit.note and "tec h niques" in hit.context
+
+
+def test_a_page_that_only_mentions_pdf2htmlex_is_plain_html(tmp_path):
+    src = tmp_path / "about.html"
+    src.write_text(
+        '<html><head><meta property="og:description" content="pdf2htmlEX converts PDF"/></head>'
+        "<body>we saw the therapist today</body></html>",
+        encoding="utf-8",
+    )
+    hit = find("saw the therapist today", load(src))
+    assert hit.found and hit.note is None

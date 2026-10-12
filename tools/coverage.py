@@ -329,17 +329,25 @@ def _find_bucket_and_status_columns(header: list[str], unit_type: str) -> tuple[
     column inherited from the CLAIM / ARGUMENT / PROPOSITION sub-tables;
     a naive substring match on "tier" would silently bucket against the
     wrong column. We require the column name to start with "tier" (so
-    "Source Tier" — which starts with "source" — is excluded) or to
-    contain "provocation".
+    "Source Tier" — which starts with "source" — is excluded), then one
+    containing both "provocation" and "tier", and fall back to a name
+    containing "provocation" only when neither exists: a
+    `| ID | Provocation | Tier |` or `| ID | Provocation | Provocation tier |`
+    header holds the text in "Provocation" (#39).
     """
     bucket_col: int | None = None
     bucket_axis: str | None = None
     status_col: int | None = None
 
     if unit_type == "PROVOCATION":
-        for idx, name in enumerate(header):
-            normalized = name.lower().strip()
-            if normalized.startswith("tier") or "provocation" in normalized:
+        names = [name.lower().strip() for name in header]
+        for match in (
+            lambda n: n.startswith("tier"),
+            lambda n: "provocation" in n and "tier" in n,
+            lambda n: "provocation" in n,
+        ):
+            idx = next((i for i, n in enumerate(names) if match(n)), None)
+            if idx is not None:
                 bucket_col, bucket_axis = idx, PROVOCATION_TIER_AXIS
                 break
 

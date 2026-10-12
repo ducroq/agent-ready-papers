@@ -143,6 +143,31 @@ def test_find_columns_provocation_canonical_template():
     )
 
 
+def test_find_columns_provocation_prefers_tier_over_a_provocation_text_column():
+    """#39: `| ID | Provocation | Tier |` holds the text in 'Provocation'."""
+    header = ["ID", "Provocation", "Tier", "Status"]
+    assert _find_bucket_and_status_columns(header, "PROVOCATION") == (2, PROVOCATION_TIER_AXIS, 3)
+
+
+def test_find_columns_provocation_prefers_a_provocation_tier_column_over_the_text():
+    """Review of #39: 'Provocation tier' after a 'Provocation' text column."""
+    header = ["ID", "Provocation", "Provocation tier", "Status"]
+    assert _find_bucket_and_status_columns(header, "PROVOCATION") == (2, PROVOCATION_TIER_AXIS, 3)
+
+
+def test_a_blank_tier_next_to_a_provocation_column_raises(tmp_path):
+    """#39 repro: V2's blank Tier was never seen, because rows were bucketed by
+    their Provocation text."""
+    path = tmp_path / "r.md"
+    path.write_text(
+        "**PROVOCATIONs:**\n\n| ID | Provocation | Tier | Status |\n|---|---|---|---|\n"
+        "| V1 | x | P1 | [x] |\n| V2 | y |  | [ ] |\n",
+        encoding="utf-8",
+    )
+    with pytest.raises(ValueError, match="no Tier"):
+        check_coverage(path)
+
+
 def test_find_columns_returns_none_when_required_missing():
     header = ["ID", "Statement", "Confidence", "Source"]  # no Priority, no Status
     assert _find_bucket_and_status_columns(header, "CLAIM") is None

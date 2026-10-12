@@ -89,8 +89,39 @@ _VERDICT_ORDER = {"ok": 0, "warn": 1, "unchecked": 2, "mismatch": 3, "unresolved
 # --------------------------------------------------------------------------
 
 
+# Letters NFKD leaves whole, so the ASCII fold in `_normalise` would drop them:
+# Crossref's `Miłkowski` became `mi kowski` against the local `Mi{\l}kowski` (#44).
+# Folded to the same letters `_LATEX_LETTERS` gives the LaTeX forms.
+_UNDECOMPOSED = str.maketrans(
+    {
+        "ł": "l",
+        "Ł": "L",
+        "ø": "o",
+        "Ø": "O",
+        "đ": "d",
+        "Đ": "D",
+        "ß": "ss",
+        "æ": "ae",
+        "Æ": "AE",
+        "œ": "oe",
+        "Œ": "OE",
+        "ı": "i",
+        "ð": "d",
+        "Ð": "D",
+        "þ": "th",
+        "Þ": "Th",
+        "ħ": "h",
+        "Ħ": "H",
+        "ŋ": "ng",
+        "Ŋ": "NG",
+        "ŧ": "t",
+        "Ŧ": "T",
+    }
+)
+
+
 def _strip_accents(text: str) -> str:
-    decomposed = unicodedata.normalize("NFKD", text)
+    decomposed = unicodedata.normalize("NFKD", text.translate(_UNDECOMPOSED))
     return "".join(c for c in decomposed if not unicodedata.combining(c))
 
 
@@ -98,8 +129,8 @@ def _strip_accents(text: str) -> str:
 # like \"u or \'e are handled by rule; these have no non-backslash form.
 _LATEX_LETTERS = {
     r"\\ss": "ss",
-    r"\\aa": "aa",
-    r"\\AA": "AA",
+    r"\\aa": "a",  # as Unicode å folds; "aa" made {\AA}ngstr{\"o}m differ from Crossref's Ångström
+    r"\\AA": "A",
     r"\\ae": "ae",
     r"\\AE": "AE",
     r"\\oe": "oe",
@@ -110,6 +141,16 @@ _LATEX_LETTERS = {
     r"\\L": "L",
     r"\\i": "i",
     r"\\j": "j",
+    # The letters `_UNDECOMPOSED` folds, in their LaTeX spelling: without these
+    # `Gu{\dh}mundsson` lost the letter while Crossref's `Guðmundsson` kept it.
+    r"\\dh": "d",
+    r"\\DH": "D",
+    r"\\th": "th",
+    r"\\TH": "Th",
+    r"\\dj": "d",
+    r"\\DJ": "D",
+    r"\\ng": "ng",
+    r"\\NG": "NG",
 }
 
 

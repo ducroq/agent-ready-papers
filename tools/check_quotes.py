@@ -8,13 +8,15 @@ dropped) is reported CHECK and counts as not found for the exit code. An elided 
 text left out) is not matched as one: check its parts separately. Quotes
 shorter than three words are refused. Two-column PDFs are tried
 in both pdftotext reading orders and once split into columns. A scan without a text layer is reported as NO TEXT LAYER, never as
-a miss.
+a miss. HTML made by pdf2htmlEX splits words across positioned spans ("p o w erful"), so a
+space in its text may not be a word break: every match in it is CHECK, never FOUND, and a quote it misses is
+retried with all spaces ignored (#57).
 
     python -m tools.check_quotes SOURCE "quote one" "quote two"
     python -m tools.check_quotes SOURCE --quotes-file quotes.txt   # one quote per line
     python -m tools.check_quotes SOURCE "..." --json
 
-SOURCE: .pdf (needs `pdftotext` from poppler), .epub, .txt, .md, .html/.xhtml.
+SOURCE: .pdf (needs `pdftotext` from poppler), .epub, .txt, .md, .html/.htm/.xhtml.
 Exit: 0 every quote found; 1 at least one quote not found or only found as CHECK; 2 a tooling error (source or quotes file
 unreadable, no text layer, a quote under three words). A FOUND says the words and numbers occur in
 that order, punctuation aside; it does not say they mean what the citing sentence claims. Pages: printed page numbers where the source carries them (epub page markers),
@@ -107,6 +109,7 @@ TEXT_SUFFIXES = (".txt", ".md", ".html", ".xhtml", ".htm")  # shorter quotes mat
 class Page:
     label: str  # "p. 23" (printed) or "pdf p. 4"
     text: str
+    split_words: bool = False  # pdf2htmlEX output: spaces inside words, so matching ignores spaces
 
 
 @dataclass
@@ -226,6 +229,27 @@ def _html_to_pages(markup: str, start: str) -> tuple[list[Page], str]:
     return [p for p in pages if p.text.strip()], label
 
 
+_PDF2HTMLEX = re.compile(
+    r"<meta\b(?=[^>]*\bname\s*=\s*[\"']generator[\"'])[^>]*\bcontent\s*=\s*[\"']pdf2htmlEX", re.I
+)
+_STYLE_SCRIPT = re.compile(r"<(style|script)\b.*?</\1\s*>", re.I | re.S)
+_PDF2HTMLEX_PAGE = re.compile(r'<div\b[^>]*\bdata-page-no="([0-9a-f]+)"[^>]*>', re.I)
+
+
+def _pdf2htmlex_pages(markup: str) -> list[Page]:
+    """One page per pdf2htmlEX page div; `data-page-no` is the PDF page index, in hex."""
+    markup = _STYLE_SCRIPT.sub(" ", markup)
+    starts = list(_PDF2HTMLEX_PAGE.finditer(markup)) or [None]
+    pages = []
+    for k, m in enumerate(starts):
+        end = starts[k + 1].start() if k + 1 < len(starts) else len(markup)
+        label = f"pdf p. {int(m.group(1), 16)}" if m else "page 1"
+        text = html.unescape(re.sub(r"<[^>]+>", " ", markup[m.end() if m else 0:end]))
+        if text.strip():
+            pages.append(Page(label, text, split_words=True))
+    return pages
+
+
 def _epub_pages(path: Path) -> list[Page]:
     with zipfile.ZipFile(path) as z:
         opf_name = next(n for n in z.namelist() if n.endswith(".opf"))
@@ -261,6 +285,8 @@ def load(path: Path) -> list[list[Page]]:
         raise RuntimeError(f"unsupported file type {suffix or '(none)'}; convert it to .txt or .epub first")
     text = path.read_text(encoding="utf-8", errors="ignore")
     if suffix in (".html", ".xhtml", ".htm"):
+        if _PDF2HTMLEX.search(text):
+            return [_pdf2htmlex_pages(text)]
         return [_html_to_pages(text, "page 1")[0]]
     return [[Page("text", text)]]
 
@@ -276,37 +302,52 @@ def has_text_layer(readings: list[list[Page]]) -> bool:
     return thin < (2 / 3) * len(pages)
 
 
-def _search(target: str, pages: list[Page], lenient: bool) -> tuple[Page, str] | None:
-    """Find target in the pages read as one text; return the page the match starts on."""
+def _search(target: str, pages: list[Page], lenient: bool, spaceless: bool = False) -> tuple[Page, str] | None:
+    """Find target in the pages read as one text; return the page the match starts on.
+
+    `spaceless` drops every space from target and text, so word boundaries no longer count."""
     norm = [(p, normalise(p.text, lenient)) for p in pages]
+    norm = [(p, n.replace(" ", "") if spaceless else n) for p, n in norm]
     norm = [(p, n) for p, n in norm if n]  # an empty page (a full-page figure) adds no gap
     joined = " " + " ".join(n for _, n in norm) + " "
-    i = joined.find(" " + target + " ")
+    i = joined.replace(" ", "").find(target.replace(" ", "")) if spaceless else joined.find(" " + target + " ")
     if i < 0:
         return None
-    offset = 1
+    offset = 0 if spaceless else 1
     for page, n in norm:
         if i < offset + len(n):
             return page, n
-        offset += len(n) + 1
+        offset += len(n) + (0 if spaceless else 1)
     return None
 
 
 def find(quote: str, readings: list[list[Page]]) -> Result:
-    for lenient in (False, True):
+    for lenient, spaceless in ((False, False), (True, False), (False, True)):
         target = normalise(quote, lenient)
         if not target:
             return Result(quote, False, None, None)
         for pages in readings:
-            hit = _search(target, pages, lenient)
+            if spaceless and not any(p.split_words for p in pages):
+                continue
+            hit = _search(target, pages, lenient, spaceless)
             if hit:
                 page = hit[0]
                 flat = re.sub(r"\s+", " ", page.text).strip()
                 words = sorted(re.findall(r"\w{4,}", quote), key=len, reverse=True)
                 anchor = flat.lower().find(words[0].lower()) if words else -1
+                if anchor < 0 and words and page.split_words:  # "tec h niques": search without spaces
+                    squeezed = [k for k, ch in enumerate(flat) if not ch.isspace()]
+                    at_sq = "".join(flat[k] for k in squeezed).lower().find(words[0].lower())
+                    anchor = squeezed[at_sq] if at_sq >= 0 else -1
                 at = max(0, anchor - 80) if anchor >= 0 else 0
                 note = ("matched only leniently (a ':' read as '.', a footnote marker dropped, or"
                         " '11, 000' joined); check the page") if lenient else None
+                if spaceless:
+                    note = ("matched only with spaces ignored (pdf2htmlEX splits words across spans);"
+                            " check the page")
+                elif page.split_words and not note:
+                    note = ("pdf2htmlEX output, whose spans can also break a word in two, so a word"
+                            " boundary here is not certain; check the page")
                 return Result(quote, True, page.label, flat[at:at + 220], note)
     return Result(quote, False, None, None)
 
@@ -356,6 +397,9 @@ def main(argv: list[str] | None = None) -> int:
         if a.source.suffix.lower() == ".pdf" and thin and not all(r.found and not r.note for r in results):
             print(f"note: {len(thin)} page(s) have little or no text and may be scans, not searched in"
                   f" effect: {', '.join(thin[:12])}{' ...' if len(thin) > 12 else ''}")
+        if any(p.split_words for p in readings[0]):
+            print("note: pdf2htmlEX output; its spans split words, so a quote can match only with spaces"
+                  " ignored (CHECK), and a MISSING may still be on the page")
         print(f"{sum(r.found and not r.note for r in results)} of {len(results)} found in {a.source.name}")
     return 0 if all(r.found and not r.note for r in results) else 1
 

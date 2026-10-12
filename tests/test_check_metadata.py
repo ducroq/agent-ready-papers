@@ -71,6 +71,50 @@ def test_normalise_folds_latex_accents_to_base_letters(raw, expected):
     assert _normalise(raw) == expected
 
 
+@pytest.mark.parametrize(
+    ("raw", "expected"),
+    [
+        ("Miłkowski", "milkowski"),
+        ("Hrøbjartsson", "hrobjartsson"),
+        ("Straße", "strasse"),
+        ("Đoković", "dokovic"),
+        ("Guðmundsson", "gudmundsson"),
+        ("Þórsson", "thorsson"),
+        ("Ångström", "angstrom"),
+        (r"{\AA}ngstr{\"o}m", "angstrom"),
+        (r"Gu{\dh}mundsson", "gudmundsson"),
+        (r"{\TH}orsteinsson", "thorsteinsson"),
+        (r"{\DJ}okovi{\'c}", "dokovic"),
+        (r"Lu{\ng}", "lung"),
+    ],
+)
+def test_normalise_folds_letters_nfkd_keeps_whole(raw, expected):
+    """#44: NFKD does not decompose ł, ø, ß or đ, so the ASCII fold dropped them."""
+    assert _normalise(raw) == expected
+
+
+def test_crossref_polish_surname_matches_its_latex_form():
+    """#44, with 10.1111/cogs.12867's Crossref record (fetched 2026-10-12) as fixture."""
+    record = _record_from_crossref(
+        {
+            "title": ["Unification by Fiat: Arrested Development of Predictive Processing"],
+            "author": [{"given": "Piotr", "family": "Litwin"}, {"given": "Marcin", "family": "Miłkowski"}],
+            "issued": {"date-parts": [[2020, 6, 27]]},
+            "container-title": ["Cognitive Science"],
+        }
+    )
+    checks = _compare_bib(
+        _bib_entry(
+            author=r"Litwin, Piotr and Mi{\l}kowski, Marcin",
+            title="Unification by Fiat: Arrested Development of Predictive Processing",
+            year="2020",
+            journal="Cognitive Science",
+        ),
+        record,
+    )
+    assert _worst(checks) == "ok"
+
+
 def test_split_authors_handles_both_bibtex_name_orders():
     assert _split_authors("Whetten, David A. and Toulmin, Stephen") == ("whetten", "toulmin")
     assert _split_authors("David A. Whetten and Stephen Toulmin") == ("whetten", "toulmin")

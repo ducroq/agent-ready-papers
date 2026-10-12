@@ -107,6 +107,8 @@ _AFTER_ANCHOR_PAREN_REGEX = re.compile(r"\s*(%.*)?$")
 _TEX_MACRO_REGEX = re.compile(r"\\[a-zA-Z]+\*?(\[[^\]]*\])?")
 _ID_TOKEN_REGEX = re.compile(r"(?<![\w-])S\d+-\d+(?![\w-])")
 ENTRY_ID_REGEX = re.compile(r"^S\d+-\d+$")
+_INPUT_REGEX = re.compile(r"\\(input|include)(?:\s*\{([^{}]+)\}|\s+([^\s{}\\]+))")
+_INPUT_PATH_REGEX = re.compile(r"\\def\s*\\input@path\s*\{((?:\{[^{}]*\})+)\}")
 _PREMISE_ID_REGEX = re.compile(r"S\d+-\d+")
 _VERIFIED_REGEX = re.compile(r"^\s*\[\s*x\s*\]", re.IGNORECASE)
 
@@ -252,9 +254,13 @@ def _parse_entries(content: str) -> tuple[Entry, ...]:
 
         cells = _split_row(line)
         if cells is None:
-            # A blank line ends a sub-table; prose between tables does too.
-            if not line.strip():
-                header = None
+            # The first line after the marker's table that is not a row ends
+            # the marker's reach, as in `tools.coverage`, which reads only the
+            # table under a marker. Carrying it on read the template's unmarked
+            # `## Out of Scope` / `## Parked` tables as the last marker's type:
+            # 19 parked CLAIM rows as ARGUMENTs, 57 schema findings (#50).
+            if header is not None:
+                unit_type = header = None
             continue
         if header is None:
             header = [c.lower() for c in cells]
@@ -281,9 +287,119 @@ def _parse_entries(content: str) -> tuple[Entry, ...]:
     return tuple(entries)
 
 
+def _stray_rows(content: str) -> list[Finding]:
+    """Entry rows cut off from their marker's table, which neither this tool nor coverage reads.
+
+    A blank or comment line inside a table ends it, so the rows below are read by
+    nothing, and a P0 there drops out of the tier floor in silence. Rows under a
+    heading are a deliberately unmarked section (`## Out of Scope`) and are left alone.
+    """
+    findings: list[Finding] = []
+    state = "none"  # "table": inside a marker's table · "after": that table ended, no heading yet
+    for lineno, line in enumerate(content.splitlines(), start=1):
+        if _MARKER_REGEX.match(line):
+            state = "marker"
+            continue
+        if re.match(r"^ {0,3}#{1,6}(\s|$)", line):
+            state = "none"
+            continue
+        cells = _split_row(line)
+        if state == "marker" and cells is not None:
+            state = "table"
+        elif state == "table" and cells is None:
+            state = "after"
+        elif state == "after" and cells and ENTRY_ID_REGEX.match(cells[0]):
+            findings.append(
+                Finding(
+                    "schema",
+                    "finding",
+                    cells[0],
+                    f"registry line {lineno}: entry row outside its marker's table (a blank or comment "
+                    "line above ends the table), so neither this check nor coverage reads it",
+                )
+            )
+    return findings
+
+
 # --------------------------------------------------------------------------
 # checks
 # --------------------------------------------------------------------------
+
+
+def _read_manuscript(path: Path) -> tuple[str, list[tuple[str, int]], list[str]]:
+    r"""Read a manuscript with its `\input` and `\include` files inlined.
+
+    Reading only the main file reported every entry of a multi-file manuscript
+    as unanchored: 131 findings for a registry whose anchors were all present
+    (#58). Paths resolve against the main file's directory, as LaTeX run there
+    resolves them, then against each `\input@path` directory the main file sets
+    with `\def` (`\def\input@path{{drafts/}}`); `.tex` is added when the name
+    has no suffix. A commented-out command is left alone; one inside `\iffalse`
+    or a `comment` environment is not. Not followed: `\subfile`, `\import`,
+    `\InputIfFileExists`.
+
+    Returns the expanded text, the (file, line) each of its lines came from,
+    and every input that could not be resolved (missing, or a cycle).
+    """
+    root = path.parent
+    found = _INPUT_PATH_REGEX.search(_TEX_COMMENT_REGEX.sub("", path.read_text(encoding="utf-8")))
+    dirs = (root, *(root / d for d in re.findall(r"\{([^{}]*)\}", found.group(1)))) if found else (root,)
+    lines: list[str] = []
+    origins: list[tuple[str, int]] = []
+    unresolved: list[str] = []
+
+    def _resolve(name: str) -> Path | None:
+        for base in dirs:
+            target = base / name
+            if not target.suffix:
+                target = target.with_suffix(".tex")
+            if target.is_file():
+                return target
+        return None
+
+    def _expand(file: Path, seen: frozenset[Path]) -> None:
+        label = file.relative_to(root).as_posix() if file.is_relative_to(root) else str(file)
+        for lineno, line in enumerate(file.read_text(encoding="utf-8").split("\n"), start=1):
+            cut = _TEX_COMMENT_REGEX.search(line)
+            code, comment = (line[: cut.start()], line[cut.start() :]) if cut else (line, "")
+            pos = 0
+            for m in _INPUT_REGEX.finditer(code):
+                name = (m.group(2) or m.group(3)).strip()
+                target = _resolve(name)
+                if target is None or target.resolve() in seen:
+                    why = "not found" if target is None else "a cycle"
+                    unresolved.append(f"{label}:{lineno}: \\{m.group(1)}{{{name}}} ({why})")
+                    continue
+                lines.append(code[pos : m.start()])
+                origins.append((label, lineno))
+                _expand(target, seen | {target.resolve()})
+                pos = m.end()
+            # After an `\input`, a lone space keeps a trailing comment off the
+            # start of its line, where it would read as an anchor.
+            lines.append((code[pos:] or (" " if pos else "")) + comment)
+            origins.append((label, lineno))
+
+    _expand(path, frozenset({path.resolve()}))
+    return "\n".join(lines), origins, unresolved
+
+
+_LINE_REF_REGEX = re.compile(r"(?<!registry )\bline (\d+)")
+
+
+def _relocate(message: str, origins: list[tuple[str, int]]) -> str:
+    """Turn "line N" of the expanded text into "line M of file" when inputs were inlined.
+
+    Backticked spans quote the manuscript and are left alone."""
+
+    def _sub(m: re.Match) -> str:
+        n = int(m.group(1))
+        if not 1 <= n <= len(origins):
+            return m.group(0)
+        file, line = origins[n - 1]
+        return f"line {line} of {file}"
+
+    parts = message.split("`")
+    return "`".join(_LINE_REF_REGEX.sub(_sub, p) if k % 2 == 0 else p for k, p in enumerate(parts))
 
 
 def _check_anchors(entries: tuple[Entry, ...], manuscript: str) -> tuple[list[Finding], int]:
@@ -325,7 +441,7 @@ def _anchor_tiers(manuscript: str) -> tuple[list[tuple[str, str, str]], list[Fin
     """
     copies: list[tuple[str, str, str]] = []
     notes: list[Finding] = []
-    for lineno, line in enumerate(manuscript.splitlines(), start=1):
+    for lineno, line in enumerate(manuscript.split("\n"), start=1):  # as `_read_manuscript` counts lines
         match = _ANCHOR_LINE_REGEX.match(line)
         if not match:
             continue
@@ -766,6 +882,7 @@ def check_registry(
     checks: list[str] = []
 
     schema_findings, schema_count = _check_schema(entries)
+    schema_findings += _stray_rows(content)
     findings += schema_findings
     counts["schema"] = schema_count
     checks.append("schema")
@@ -778,14 +895,24 @@ def check_registry(
     if manuscript_path is not None:
         if not manuscript_path.is_file():
             raise FileNotFoundError(manuscript_path)
-        manuscript = manuscript_path.read_text(encoding="utf-8")
+        manuscript, origins, unresolved = _read_manuscript(manuscript_path)
+        multi_file = len({file for file, _ in origins}) > 1
 
         anchor_findings, anchor_count = _check_anchors(entries, manuscript)
+        # An input that did not resolve hides its anchors: say so, or its rows
+        # read as unanchored for the wrong reason.
+        anchor_findings += [
+            Finding("anchors", "note", "", f"input not read, so its anchors were not seen: {u}") for u in unresolved
+        ]
         findings += anchor_findings
         counts["anchors"] = anchor_count
         checks.append("anchors")
 
         tier_findings, tier_count = _check_tiers(entries, manuscript)
+        if multi_file:
+            tier_findings = [
+                Finding(f.check, f.severity, f.entry_id, _relocate(f.message, origins)) for f in tier_findings
+            ]
         findings += tier_findings
         counts["tiers"] = tier_count
         checks.append("tiers")

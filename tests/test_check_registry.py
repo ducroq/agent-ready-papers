@@ -82,6 +82,28 @@ def test_parse_entries_marks_unverified_status():
     assert entries[1].verified is False
 
 
+def test_a_heading_ends_the_last_markers_reach():
+    """#50: a parked table under `## Parked` has no marker, and coverage does not
+    count it; inheriting ARGUMENT made each parked CLAIM row three schema findings."""
+    parked = "\n## Parked for the book\n\n" + CLAIM_TABLE.split("\n", 2)[2].replace("S1-", "S9-")
+    content = CLAIM_TABLE + "\n" + ARGUMENT_TABLE + parked
+    entries = _parse_entries(content)
+    assert [e.entry_id for e in entries] == ["S1-1", "S1-2", "S2-1"]
+    assert _check_schema(entries)[0] == []
+
+
+def test_prose_after_a_table_ends_the_markers_reach():
+    """Review of #50: a bold prose line, not a heading, separated the parked table."""
+    parked = "\n**Parked for the book**\n\n" + CLAIM_TABLE.split("\n", 2)[2].replace("S1-", "S9-")
+    assert [e.entry_id for e in _parse_entries(ARGUMENT_TABLE + parked)] == ["S2-1"]
+
+
+def test_a_heading_between_marker_and_table_does_not_drop_the_table():
+    """Review of #50: resetting at any heading dropped a marker's own table in silence."""
+    table = ARGUMENT_TABLE.replace("**ARGUMENTs** (Toulmin):\n", "**ARGUMENTs** (Toulmin):\n\n### Section 2\n")
+    assert [e.unit_type for e in _parse_entries(table)] == ["ARGUMENT"]
+
+
 def test_parse_entries_ignores_non_entry_rows():
     noise = "| Priority | Total | Verified |\n|---|---|---|\n| P0 | 8 | 8 |\n\n"
     assert len(_parse_entries(noise + CLAIM_TABLE)) == 2
@@ -639,3 +661,76 @@ def test_unrankable_own_tier_is_reported_not_skipped():
     entries = (_arg("S1-2", "", ("S1-1",)), _arg("S1-1", "SPECULATIVE"))
     findings, _ = _check_premises(entries)
     assert any("could NOT be checked" in f.message for f in findings)
+
+
+def test_anchors_follow_input_and_include(tmp_path):
+    """#58: a manuscript whose sections are `\\input` files reported every entry unanchored."""
+    reg = tmp_path / "r.md"
+    reg.write_text(CLAIM_TABLE, encoding="utf-8")
+    (tmp_path / "sections").mkdir()
+    (tmp_path / "sections" / "s1.tex").write_text("% S1-1: x (CLAIM, P0, ESTABLISHED)\n\\input{sections/s2}\n")
+    (tmp_path / "sections" / "s2.tex").write_text("% S1-2: y (CLAIM, P1, EMERGING)\n\\input{sections/s1}\n")
+    man = tmp_path / "m.tex"
+    man.write_text("\\begin{document}\n\\include{sections/s1.tex}\n% \\input{missing}\n\\end{document}\n")
+    report = check_registry(reg, manuscript_path=man)
+    found = [(f.check, f.severity, f.message) for f in report.findings if f.check in ("anchors", "tiers")]
+    assert found == [
+        (
+            "anchors",
+            "note",
+            "input not read, so its anchors were not seen: sections/s2.tex:2: \\input{sections/s1} (a cycle)",
+        )
+    ]
+
+
+def test_an_unresolved_input_is_named_and_tier_findings_point_into_the_input(tmp_path):
+    """Review of #58: a missing input was silent, and a tier finding's line counted
+    the expanded text, so 'line 23' was not in any file."""
+    reg = tmp_path / "r.md"
+    reg.write_text(CLAIM_TABLE, encoding="utf-8")
+    (tmp_path / "pre.tex").write_text("\n" * 19 + "% preamble\n")
+    (tmp_path / "s1.tex").write_text("x\n% S1-1: x (CLAIM, P0, EMERGING)\n% S1-2: y (CLAIM, P1, EMERGING)\n")
+    man = tmp_path / "m.tex"
+    man.write_text("\\input{pre}\n\\input s1\n\\input{gone}\n")
+    report = check_registry(reg, manuscript_path=man)
+    messages = [f.message for f in report.findings]
+    assert any("m.tex:3: \\input{gone} (not found)" in m for m in messages)
+    (tier,) = [f.message for f in report.findings if f.check == "tiers"]
+    assert "registry line 5 `ESTABLISHED`; manuscript anchor line 2 of s1.tex `EMERGING`" in tier
+
+
+def test_anchors_follow_input_through_input_at_path(tmp_path):
+    """#58's real case: sections live in drafts/, found through `\\input@path`."""
+    reg = tmp_path / "r.md"
+    reg.write_text(CLAIM_TABLE, encoding="utf-8")
+    (tmp_path / "drafts").mkdir()
+    (tmp_path / "drafts" / "s1.tex").write_text("% S1-1: x (CLAIM, P0, ESTABLISHED)\n% S1-2: y (CLAIM, P1, EMERGING)\n")
+    man = tmp_path / "m.tex"
+    man.write_text("\\makeatletter\\def\\input@path{{drafts/}}\\makeatother\n\\input{s1}\n")
+    report = check_registry(reg, manuscript_path=man)
+    assert [f for f in report.findings if f.check == "anchors"] == []
+
+
+def test_a_row_cut_off_from_its_table_is_a_finding_but_a_parked_one_is_not(tmp_path):
+    """Round-2 review of #50: a comment line inside a table ended it, and the P0 row
+    below was read by neither this tool nor coverage, in silence."""
+    cut = CLAIM_TABLE.replace("| S1-2 |", "<!-- moved -->\n| S1-2 |")
+    path = tmp_path / "r.md"
+    path.write_text(cut, encoding="utf-8")
+    stray = [f for f in check_registry(path).findings if f.entry_id == "S1-2"]
+    assert len(stray) == 1 and "outside its marker's table" in stray[0].message
+    parked = CLAIM_TABLE + "\n## Out of Scope\n\n" + CLAIM_TABLE.split("\n", 2)[2].replace("S1-", "S9-")
+    path.write_text(parked, encoding="utf-8")
+    assert check_registry(path).findings == ()
+
+
+def test_relocation_leaves_quoted_text_and_a_comment_after_input_is_not_an_anchor(tmp_path):
+    reg = tmp_path / "r.md"
+    reg.write_text(CLAIM_TABLE, encoding="utf-8")
+    (tmp_path / "a.tex").write_text("% S1-1: x (CLAIM, P0, see line 2)\n")
+    man = tmp_path / "m.tex"
+    man.write_text("\\input{a}% S1-2: y (CLAIM, P1, EMERGING)\n% S1-2: y (CLAIM, P1, EMERGING)\n")
+    report = check_registry(reg, manuscript_path=man)
+    (note,) = [f.message for f in report.findings if f.entry_id == "S1-1"]
+    assert "`see line 2`" in note and "line 1 of a.tex" in note
+    assert not any(f.entry_id == "S1-2" for f in report.findings)
