@@ -1,4 +1,4 @@
-.PHONY: test lint format check coverage check-dois check-metadata verify-bib check-registry formula-scan preservation-check drift dr-status gotcha-stats check-counts read-surface check-profile
+.PHONY: test lint format check coverage check-dois check-metadata verify-bib check-registry formula-scan preservation-check check-experiments drift dr-status gotcha-stats check-counts read-surface check-profile
 
 test:  ## Run tests
 	pytest tests/ -x -q
@@ -37,6 +37,9 @@ formula-scan:  ## Advisory formula/readability locator (PROPOSED, DR-022); FILE=
 preservation-check:  ## Did a translation keep numbers and certainty? (PROPOSED, DR-023); SRC=<source> TRN=<translation> [LINK=<source link>]
 	@[ -n "$(SRC)" ] && [ -n "$(TRN)" ] || { echo "usage: make preservation-check SRC=<source> TRN=<translation> [LINK=<source link>]"; exit 2; }
 	python extensions/preservation_check.py "$(SRC)" "$(TRN)" $(if $(LINK),--link "$(LINK)")
+
+check-experiments:  ## Experiment registry: schema, tracked artifacts, metric traceability (PROPOSED, DR-024)
+	python extensions/check_experiments.py
 
 drift:  ## Session-start drift check: companion pin, global skills, self and paper stamps
 	bash scripts/drift.sh

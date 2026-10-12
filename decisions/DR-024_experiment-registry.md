@@ -49,7 +49,7 @@ The checker is weaker than "verbatim" suggests. Read on 2026-10-10, it tests whe
    - The checker is `check_experiments.py` with `make check-experiments`. While this DR is Proposed it is staged in `extensions/` (rule 6); on acceptance it moves to `tools/`, and `make check` runs it. Its tests go in `tests/`.
 2. **Keep from llm-distillery unchanged:**
    - the `EXP-NNN` ids;
-   - the decision values (`kept`, `parked`, `rejected`, `rolled_back`, `superseded`);
+   - the decision values (`kept`, `parked`, `rejected`, `rolled_back`, `superseded`), plus a sixth, `preregistered`, for an entry written before any result is seen; a later entry concludes it by naming its id (added 2026-10-12, maintainer's choice, so that Acceptance Condition 2 has an entry to check);
    - the append-only rule: correct an entry by appending a new one that references it;
    - the rule that a metric must appear in an artifact, or be `null`;
    - the warning to ask the checker, not the prose;
@@ -59,9 +59,10 @@ The checker is weaker than "verbatim" suggests. Read on 2026-10-10, it tests whe
    - `population` describes drafts, claims or registry rows, not datasets.
    - `spend_usd` covers model and API cost and stays a number, so totals can be summed. A new field, `cost_ref`, points to the entry in `vv/cost-log.md` for the same operation, or is `null`. It is a pointer only: the cost log records tokens, not dollars, and its rows have no ids, so the checker cannot compare the two.
 4. **Tighten the checker** (the weaknesses in Context):
-   - an artifact must be tracked by git (`git ls-files --error-unmatch`), not merely exist on disk;
+   - an artifact must be tracked by git (`git ls-files --error-unmatch`), not merely exist on disk, and must sit inside `vv/evidence/` (added 2026-10-12, after review: a folder holding the registry made the registry its own evidence);
    - a numeric metric must not match by accident. This DR does not fix the algorithm. The port must pass seeded tests in which each of these is the only occurrence and the metric does not match: `4` in "4 October", `41` in "#41" or "DR-041", `0.35` in "+0.350". It may reuse the identifier exclusions of `extensions/preservation_check.py`. How fractions ("76/83") and intervals are matched is an open question;
-   - folders are also searched in `.tex` and `.csv` files.
+   - folders are also searched in `.tex` and `.csv` files;
+   - commit messages are not searched (llm-distillery searched them), and neither are a `PREREGISTRATION.md` or the checker's saved output, which hold predictions and the failing numbers it printed (added 2026-10-12, after review).
 5. **Leave out** what belongs only to llm-distillery: its GPU-host data rules and its production-site protocol. Keep the idea behind that protocol as one line in the README: preregister what the end reader will see, not only whether the gate passes.
 6. **Public repo, private papers.** Evidence from a gitignored paper enters only as an anonymised summary in `vv/evidence/`, the way #51 describes its paper. Such a summary is written to contain its numbers, so the check that a metric appears in it is circular. To keep it honest:
    - the summary records the SHA-256 of each private file it draws on. This gives the maintainer tamper evidence, dated by the commit that added the hash. It gives no one else a check, since they cannot read the file, and it says nothing about whether the summary reports the source correctly;
@@ -74,7 +75,7 @@ The checker is weaker than "verbatim" suggests. Read on 2026-10-10, it tests whe
 
 - **First entries.** Experiment 1 above would be preregistered in `vv/evidence/` before the next full draft of that paper is reviewed, and its hypothesis would move from the paper's log to `vv/hypothesis-log.md`, anonymised. Experiments 2 and 3 follow if the maintainer decides to run them.
 - **No backfill.** Past experiments are not retro-registered, because their evidence was not kept in a form the checker can verify.
-- **`CLAUDE.md`** needs one row in *Before You Start*: "Concluding an experiment, or 'did we ever test X?'". The DR count in its verify comment changes from 23 to 24. Both are edits to `CLAUDE.md` and need the maintainer's approval.
+- **`CLAUDE.md`** needs one row in *Before You Start*: "Concluding an experiment, or 'did we ever test X?'". Its DR-count verify comment already counts this DR. The row is an edit to `CLAUDE.md` and needs the maintainer's approval.
 - **`UPGRADING.md` and `CHANGELOG.md`** get an entry at the next release. Adopters are not required to do anything; papers may adopt the registry later (see Open Questions).
 - **Cost:** about 400 lines to maintain, and, after acceptance, one checker run in `make check`. `make check` runs only ruff and pytest today, so the new target must be added as its prerequisite.
 - **Risk:** the registry goes unused, because experiments end in a session without anyone registering them. Mitigation: `/curate` could ask "did an experiment conclude this session?". That skill is user-global, so it needs an issue at agent-ready-projects.

@@ -1,0 +1,5 @@
+$ make check-experiments   # 2026-10-12, before the commit that adds EXP-001
+entries 1   metrics checked 0   untraceable 0
+spend recorded: $0.00
+open preregistrations: EXP-001
+PASS
