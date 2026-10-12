@@ -1,9 +1,12 @@
 # DR-014: PROVOCATION as Explicit Opt-In Extension Over Core Unit Types
 
 ---
-status: Proposed
+status: Withdrawn
 date: 2026-06-08
+withdrawn: 2026-10-12
 ---
+
+**Withdrawn 2026-10-12** by the maintainer. DR-017 (2026-06-24) had already taken Step Z out of its scope, and the three pending checks for the rest were not run in four months. A speculative-design adopter who needs PROVOCATION layered out of the core opens a new DR.
 
 ## Context
 

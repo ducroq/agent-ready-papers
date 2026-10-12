@@ -1,9 +1,12 @@
 # DR-003: Reserve "Narrative Engineering" as a Future Layer
 
 ---
-status: Proposed
+status: Accepted
 date: 2026-03-02
+accepted: 2026-10-12
 ---
+
+**Accepted 2026-10-12** by the maintainer, as a deferral: narrative engineering stays a reserved future layer, not a template. DR-022 (formula repetition as a readability lens) and DR-023 (a translation step for readers), both Proposed, would take part of its ground; the *Revisit If* triggers stand.
 
 ## Context
 

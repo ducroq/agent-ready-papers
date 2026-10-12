@@ -1,9 +1,12 @@
 # DR-021: Prose Tier-Floor Scanning as a Locator, Not a Gate
 
 ---
-status: Proposed
+status: Withdrawn
 date: 2026-09-14
+withdrawn: 2026-10-12
 ---
+
+**Withdrawn 2026-10-12** by the maintainer. The locator was never built. Step Z's manual pass covers the ground (the formula scanner of DR-022 checks style, not tier), and building it would add a surface to maintain. The scope qualifier this DR asked for in `docs/verification-hooks.md` is still owed; it is on the backlog. Reopen if Step Z is found missing tier drift that a locator would have pointed at.
 
 ## Context
 

@@ -1,9 +1,12 @@
 # DR-012: Decision-Support Artefacts as Third Non-Paper Application Class
 
 ---
-status: Proposed
+status: Accepted
 date: 2026-06-01
+accepted: 2026-10-12
 ---
+
+**Accepted 2026-10-12** by the maintainer: decision-support artefacts have been a working application class since June 2026. Open from *Consequences*: the review of whether Paper 2 covers this class (DR-006). The *Revisit If* triggers stand.
 
 ## Context
 

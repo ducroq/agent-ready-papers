@@ -1,6 +1,6 @@
 # Working With AI Agents: Academic & Technical Writing
 
-Verification infrastructure for AI-augmented academic and structured non-fiction writing — templates, quality gates, and session continuity addressing the failure modes automated tools miss. Covers conventional academic papers plus speculative-design work (see [DR-010](decisions/DR-010_provocation-unit-type.md)).
+Verification infrastructure for AI-augmented academic and structured non-fiction writing — templates, quality gates, and session continuity addressing the failure modes automated tools miss. Covers academic papers, speculative-design work and decision-support artefacts (see [What It Applies To](#what-it-applies-to)).
 
 Automated citation checkers (RefChecker, scite.ai) and model-level solutions (RAG, [grounded generation](docs/framework-summary.md#terminology-note-grounding--grounded)) address part of the problem. This guide operates at the **process level** — the workflow templates, decision records, and verification systems that sit between an AI agent and a submission-ready manuscript.
 
@@ -82,6 +82,16 @@ Each test is similarly yes / no — if the description fits, the framework is ov
 - **Correctness verified by execution.** Throwaway code or scripts — running them is the verification.
 - **Audience of one.** Internal scratch notes that only you will read.
 - **Established audit conventions already cover it.** Domains with their own conventions (FDA 21 CFR 820, IEC 62304, ISO 17025, GDPR DPIA, regulated clinical trial reporting) — use those instead.
+
+## What It Applies To
+
+Three kinds of work:
+
+- **Academic papers**: empirical, perspective and review papers. The templates are written for these.
+- **Speculative design and voice-driven non-fiction** ([DR-010](decisions/DR-010_provocation-unit-type.md)): adds the PROVOCATION unit type, for designed artefacts that make no truth claim. The conditional Gates 2.6 (reflexivity) and 2.8 (voice consistency) serve this kind of work.
+- **Decision-support artefacts** ([DR-012](decisions/DR-012_decision-support-artefacts.md)): the written basis for a consequential decision, such as a vendor choice, a hardware purchase or an architecture. The registry, tiers, anti-hallucination checklist and review passes carry over; the paper-specific gate items (page budget, LaTeX and BibTeX, journal style and author guidelines, co-author signoff, submission format) do not. This class rests on one worked example so far.
+
+Not covered yet: how an argument is built across a paper (contribution statement, argument flow, what each section must do). That layer is reserved until at least two paper projects show which patterns deserve a template ([DR-003](decisions/DR-003_narrative-engineering-layer.md)).
 
 ## Common Questions
 

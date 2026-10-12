@@ -1,9 +1,12 @@
 # DR-005: "Agent-Ready" as Machine-Consumable Scholarship
 
 ---
-status: Proposed
+status: Accepted
 date: 2026-03-02
+accepted: 2026-10-12
 ---
+
+**Accepted 2026-10-12** by the maintainer, as a deferral: no export layer is built; the *Revisit If* triggers stand.
 
 ## Context
 
