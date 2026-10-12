@@ -1,9 +1,12 @@
 # DR-024: An Experiment Registry, Ported in Full from llm-distillery
 
 ---
-status: Proposed
+status: Accepted
 date: 2026-10-10
+accepted: 2026-10-12
 ---
+
+**Accepted 2026-10-12** by the maintainer. Acceptance Condition 1: the checker's tests pass, with every seeded positive (`bf8ed36`). Condition 2: EXP-001 is preregistered and its entry passes, with the output committed. Condition 3: the maintainer read the entry and accepted. The checker moved to `tools/` and runs in `make check`. Open from *Consequences* and the *Proposed Decision*: the `CHANGELOG.md` and `UPGRADING.md` entries at the next release, raising Option D upstream, offering the checker fixes to llm-distillery, and the `/curate` question at agent-ready-projects. The *Revisit If* triggers stand.
 
 ## Context
 

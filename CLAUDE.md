@@ -22,7 +22,7 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 | What a threshold means | `docs/THRESHOLDS.md` |
 | What's on the backlog | By velocity, no single file: `memory/priorities.md` (near-term), each DR's *Open Questions* (long-burn), `papers/<name>/backlog.md` (paper-scoped) |
 | Stuck or debugging | `memory/gotcha-log.md` (entry format in its header), then `command grep -r` over `memory/` (topic files and `archive/`; Claude Code's `grep -r` from the repo root skips gitignored paths). Counts: `make gotcha-stats`, never quoted. |
-| Placing a bet whose evidence lives in the future | `memory/hypothesis-log.md` (framework-public ones: `vv/hypothesis-log.md`). `/curate` surfaces due items. Papers copy `templates/hypothesis-log.md`. |
+| Placing a bet whose evidence lives in the future | `memory/hypothesis-log.md` (framework-public ones: `vv/hypothesis-log.md`). `/curate` surfaces due items. Papers copy `templates/hypothesis-log.md`. Did we ever test X: `vv/experiments/`. |
 | Creating a new paper project | `templates/CLAUDE.md` |
 | Multi-session work | `templates/work-item.md`: save in `docs/work-items/`, pointer in `memory/MEMORY.md` |
 | Running a portable agent-role prompt | `agents/` (equation checker, peer reviewer); works in any agent |
@@ -68,7 +68,7 @@ agent-ready-papers/
 ├── scripts/               <- shell mechanisation; listed in tools/README.md
 ├── tests/                 <- tests for tools/
 ├── papers/perspective/    <- Paper 1 "The Verification Gap"; other papers/* are gitignored sub-projects
-├── vv/                    <- framework self-application (cost log, public hypothesis log)
+├── vv/                    <- framework self-application (cost log, hypothesis log, experiments, evidence)
 └── memory/                <- gitignored, local-only git history (no remote); archive/ for retired files
 ```
 

@@ -2,7 +2,7 @@
 
 Registry-verification tooling for agent-ready-papers. Closes [#17](https://github.com/ducroq/agent-ready-papers/issues/17).
 
-**Six tools**, all stdlib-only (`check_quotes` calls `pdftotext` for PDFs), all deterministic, all designed to run in CI. ⚠️ This
+**Seven tools**, all stdlib-only (`check_quotes` calls `pdftotext` for PDFs, `check_experiments` calls `git`), all deterministic, all designed to run in CI. ⚠️ This
 section said *"Two tools"* until 2026-09-14, two releases after the third and fourth
 were released — re-derive with `ls tools/*.py` rather than trusting the count here.
 
@@ -13,6 +13,7 @@ were released — re-derive with `ls tools/*.py` rather than trusting the count 
 | `check_metadata.py` | Compare the bibliographic FIELDS against Crossref/DataCite — a resolving DOI is not a correct entry. |
 | `check_registry.py` | Registry/manuscript internal consistency: anchors, tier agreement across copies, type-conditional schema, premise graph, word budget. |
 | `check_quotes.py` | Does a quoted phrase occur in a source's full text, in order? PDF (three readings, including column by column from word positions), epub (printed page markers), text. Numbers keep their marks (decimal, thousands, ratio), exponents are tokens, and every Unicode maths symbol plus `~ % °` must match, with LaTeX's overlaid "≠" recomposed and a minus read from context; so "p < 0.05" is not found against "p > 0.05". A match needing a lenient reading (`:` as `.`, a glued footnote marker, "11, 000") is CHECK, not FOUND, as is every match in pdf2htmlEX HTML, whose spans split words; there a quote is also retried with spaces ignored ([#57](https://github.com/ducroq/agent-ready-papers/issues/57)). Reports NO TEXT LAYER when two thirds of pages are near-empty. A FOUND means the words occur in order, not that they support the citing sentence. Sources are usually gitignored, so it runs locally, not in CI. Closes [#48](https://github.com/ducroq/agent-ready-papers/issues/48). |
+| `check_experiments.py` | The experiment registry (`vv/experiments/registry.jsonl`, DR-024): schema, id order, artifacts tracked and inside `vv/evidence/`, and each metric found standing alone in its evidence, with dates removed. Exit 0 / 1 / 2 (pass / a failure / registry unreadable, no git, not a work tree). Its docstring lists what it cannot see. Run by `make check`. |
 | `registry_edit.py` | Edit one claim-table row by ID (append to the statement, set Status, replace text), refusing unless exactly one claim-table row (`\| ID \| statement \| P0-P3 \|`) matches; Priority Guide rows, which have no priority column, and rows in code fences are not matched. Refuses `\|` or line breaks in new text and keeps line endings. |
 
 ## Status
@@ -55,7 +56,7 @@ Repo-maintenance checks are shell scripts in `scripts/`, not `tools/`: `make dri
 
 ## Exit codes
 
-All six tools share a code-space (0 / 1 / 2 = success / failure / tooling error) but **default behavior differs**: `coverage.py` only fails the build under `--strict`; `check_dois.py` fails by default whenever a DOI does not resolve. The asymmetry is intentional — coverage targets are policy-configurable and may legitimately be missed mid-draft, while a DOI that fails to resolve is unambiguous.
+All seven tools share a code-space (0 / 1 / 2 = success / failure / tooling error) but **default behavior differs**: `coverage.py` only fails the build under `--strict`; `check_dois.py` fails by default whenever a DOI does not resolve. The asymmetry is intentional — coverage targets are policy-configurable and may legitimately be missed mid-draft, while a DOI that fails to resolve is unambiguous.
 
 | Code | `coverage.py` | `check_dois.py` |
 |------|---------------|-----------------|
@@ -63,11 +64,11 @@ All six tools share a code-space (0 / 1 / 2 = success / failure / tooling error)
 | 1 | `--strict` and at least one target missed, or the P0 tier floor failed | At least one DOI failed to resolve (or, with `--offline`, failed to parse) |
 | 2 | Tooling error (file missing, parse failure) | Tooling error (file missing, parse failure) |
 
-| Code | `check_quotes.py` | `registry_edit.py` |
-|------|-------------------|--------------------|
-| 0 | Every quote found | Row edited (or, with `--dry-run`, would be) |
-| 1 | At least one quote not found, or found only as CHECK (a lenient reading) | Refused: no match or several, OLD not in the statement, or `\|` / a line break in new text |
-| 2 | Tooling error: source or quotes file unreadable, unsupported type, no text layer, a quote under three words | Registry unreadable or unwritable |
+| Code | `check_quotes.py` | `registry_edit.py` | `check_experiments.py` |
+|------|-------------------|--------------------|------------------------|
+| 0 | Every quote found | Row edited (or, with `--dry-run`, would be) | Every entry passes |
+| 1 | At least one quote not found, or found only as CHECK (a lenient reading) | Refused: no match or several, OLD not in the statement, or `\|` / a line break in new text | At least one FAIL: schema, artifact, or a metric not found in its evidence |
+| 2 | Tooling error: source or quotes file unreadable, unsupported type, no text layer, a quote under three words | Registry unreadable or unwritable | Registry unreadable, git cannot run, or not a git work tree |
 
 **The P0 tier floor is reported separately from coverage.** DR-002 requires every P0 entry
 to be SUPPORTED or ESTABLISHED. The coverage table counts the Status column only, so a

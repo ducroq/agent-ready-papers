@@ -1,4 +1,4 @@
-"""Tests for extensions/check_experiments.py (PROPOSED under DR-024).
+"""Tests for tools/check_experiments.py (DR-024).
 
 Every guard is exercised with a planted defect it must fail on, and the
 committed registry must pass. DR-024's Acceptance Condition 1 names the seeded
@@ -17,7 +17,7 @@ from pathlib import Path
 import pytest
 
 ROOT = Path(__file__).resolve().parent.parent
-_SPEC = importlib.util.spec_from_file_location("check_experiments", ROOT / "extensions" / "check_experiments.py")
+_SPEC = importlib.util.spec_from_file_location("check_experiments", ROOT / "tools" / "check_experiments.py")
 ce = importlib.util.module_from_spec(_SPEC)
 _SPEC.loader.exec_module(ce)
 
@@ -370,10 +370,10 @@ def test_exit_codes(repo, tmp_path_factory):
     assert ce.main(["--repo", str(bare), "--registry", str(bare / "r.jsonl")]) == 2
 
 
-def test_help_carries_the_proposed_banner(capsys):
+def test_help_names_the_dr(capsys):
     with pytest.raises(SystemExit):
         ce.main(["--help"])
-    assert "STATUS: PROPOSED under DR-024" in capsys.readouterr().out
+    assert "(DR-024)" in capsys.readouterr().out
 
 
 def test_git_missing_exits_2_not_a_traceback(repo, monkeypatch):

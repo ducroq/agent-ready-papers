@@ -1,7 +1,6 @@
 """Experiment registry check: schema, id order, and that every number traces to its evidence.
 
-STATUS: PROPOSED under DR-024. Staged in extensions/ (the DR-018 precedent);
-it moves to tools/ and into `make check` only when DR-024 is Accepted.
+DR-024 (Accepted 2026-10-12). Run by `make check-experiments` and `make check`.
 
 Checks vv/experiments/registry.jsonl, one JSON object per line (schema:
 vv/experiments/README.md). Ported from llm-distillery's
@@ -321,7 +320,7 @@ def check(registry: Path, repo: Path) -> tuple[list[str], dict]:
 
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(
-        description="[STATUS: PROPOSED under DR-024] Check the experiment registry: schema, id order, "
+        description="Check the experiment registry (DR-024): schema, id order, "
         "tracked artifacts, and that every metric traces to its evidence."
     )
     ap.add_argument("--repo", type=Path, default=REPO, help="git work tree that artifact paths resolve against")

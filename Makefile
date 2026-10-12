@@ -10,7 +10,7 @@ format:  ## Auto-format code
 	ruff format tools/ tests/ extensions/
 	ruff check --fix tools/ tests/ extensions/
 
-check:  ## Run all checks (lint + test)
+check: check-experiments  ## Run all checks (experiment registry + lint + test)
 	ruff check tools/ tests/ extensions/
 	pytest tests/ -x -q
 
@@ -38,8 +38,8 @@ preservation-check:  ## Did a translation keep numbers and certainty? (PROPOSED,
 	@[ -n "$(SRC)" ] && [ -n "$(TRN)" ] || { echo "usage: make preservation-check SRC=<source> TRN=<translation> [LINK=<source link>]"; exit 2; }
 	python extensions/preservation_check.py "$(SRC)" "$(TRN)" $(if $(LINK),--link "$(LINK)")
 
-check-experiments:  ## Experiment registry: schema, tracked artifacts, metric traceability (PROPOSED, DR-024)
-	python extensions/check_experiments.py
+check-experiments:  ## Experiment registry: schema, tracked artifacts, metric traceability (DR-024)
+	python -m tools.check_experiments
 
 drift:  ## Session-start drift check: companion pin, global skills, self and paper stamps
 	bash scripts/drift.sh

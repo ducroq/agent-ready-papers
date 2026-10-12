@@ -26,6 +26,23 @@
 
 ## Open
 
+### [2026-10-10] A second model finds method-level problems that a same-family reader panel misses
+
+**Position (provisional):** A review by a model from a different vendor finds method-level problems in a full draft that the simulated reader panel (four reader roles played by one model family) does not find, because the panel's readers share one model's blind spots. One observation so far, on a private narrative review: after two review passes and three panel rounds, one cross-vendor review raised three method-level problems that the author accepted; the panel had raised part of one. That review also used a different prompt, contained unchecked source summaries, and promised an audit it had not carried out.
+
+**Alternative:** The gain came from the different prompt, or from any fresh reading. With the same prompt, the second model finds nothing method-level that the panel misses, or what it finds mostly fails when checked.
+
+**Method:** EXP-001, preregistered in [`evidence/2026-10-12-cross-model-review/PREREGISTRATION.md`](evidence/2026-10-12-cross-model-review/PREREGISTRATION.md): the same reading copy and prompt (`agents/review-prompt.md`) to both arms, findings judged blind, and the bars fixed there. Its result goes in [`experiments/registry.jsonl`](experiments/registry.jsonl) as an entry that names EXP-001.
+
+**Revisit trigger:** The paper's next full draft is ready for its outside expert reader, before it is sent.
+
+**Review by:** 2026-12-31
+
+**Origin:** Moved here, anonymised, from that paper's own log when DR-024 was accepted (2026-10-12). DR-011 makes Pass 3 (cross-vendor) opt-in and expects it to yield mostly style findings. If confirmed, making Pass 3 the default before a full draft goes to an outside reader, and adding a second-model reader to the panel template, needs a DR. Tracking: [#53](https://github.com/ducroq/agent-ready-papers/issues/53).
+
+**Domain:** Review method (DR-011), reader panels
+**Status:** open (EXP-001 preregistered)
+
 ### [2026-08-16] The third-party ceiling lives in the interpretive layer, not the factual one
 
 **Position (provisional):** Successor to the split entry now in [`hypothesis-log-resolved.md`](hypothesis-log-resolved.md), carrying only the half that survived. **In any third-party audit, coverage of ARGUMENT and PROPOSITION units will be at or near 0%, whatever the CLAIM coverage turns out to be.** The mechanism is Toulmin item 2: an ARGUMENT is verified only when each of its grounds is `[x]`, and its grounds are the audited text's own units. Where those units are closeable by a reader — reproducible arithmetic, checkable references — the CLAIM layer can go high; the interpretive layer still cannot, because the audited author's *inferences* are not reproducible in the way their arithmetic is. Observed twice: 0 of 22 and 0 of 6. The documents share no subject matter — but they share the maintainer, the repo, the instruments, the registry template, the Toulmin criterion and a three-day window, which is everything that governs the measurement. And by the argument below, only the second observation is informative. **Read this as n=1 with a consistent n=2, not as a replication.**

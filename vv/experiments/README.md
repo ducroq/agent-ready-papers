@@ -1,9 +1,6 @@
 # Experiment Registry
 
-<!-- STATUS: PROPOSED under DR-024. Entries may be written while the DR is
-     Proposed; the checker is staged in extensions/ until it is Accepted. -->
-
-This folder records what the framework tested, what it decided, and what it cost. The entries are in `registry.jsonl`, one JSON object per line. This README is the schema and the rules. It holds no entries, so to find an experiment, ask the checker or search the registry, never this file:
+This folder records, under DR-024, what the framework tested, what it decided, and what it cost. The entries are in `registry.jsonl`, one JSON object per line. This README is the schema and the rules. It holds no entries, so to find an experiment, ask the checker or search the registry, never this file:
 
 ```bash
 make check-experiments                                          # entries, metrics, open preregistrations
@@ -54,6 +51,6 @@ Every metric in an entry must appear in a file the entry cites, or be `null`. Th
 
 1. **Preregister before any result is seen.** Commit `vv/evidence/<date>-<name>/PREREGISTRATION.md` and a `preregistered` entry. Say what the end reader will see if the result holds, not only whether a test passes.
 2. **Append only.** To correct or conclude an entry, append a new one that names it in `references`. Editing in place destroys the record of what was once believed.
-3. **Run the checker and commit its output** (DR-024 rule 7). Stage the evidence first (`git add`), since the checker reads only tracked files. While DR-024 is Proposed, save the output in the entry's evidence folder as `check-<date>.txt`.
+3. **Run the checker and commit its output** (DR-024 rule 7). Stage the evidence first (`git add`), since the checker reads only tracked files. Save the output in the entry's evidence folder as `check-<date>.txt`, so the run has a date and a commit. `make check` also runs it.
 4. **Private papers** (DR-024 rule 6). Evidence from a gitignored paper enters only as an anonymised summary in `vv/evidence/`. The summary records the SHA-256 of each private file it draws on, and the entry's `notes` say that its metrics trace to a private source. For a reader without that file, the metric check is circular.
 5. **Scope.** Experiments that test the framework go here. An experiment that concerns one paper only stays in that paper's hypothesis log.
