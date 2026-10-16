@@ -179,6 +179,16 @@ Sources consulted during the development of this project, particularly for DR-00
 | L81 | Kobak, González-Márquez, Horvát & Lause | 2025 | Delving into LLM-assisted writing in biomedical publications through excess vocabulary | Science Advances | [kobak-2025-excess-vocabulary](sources/kobak-2025-excess-vocabulary.md) | READ (2026-09-27) |
 | L82 | WikiProject AI Cleanup | 2026 | Wikipedia:Signs of AI writing (rev. 1376889964) | en.wikipedia.org (community guide, tier D) | [wikipedia-signs-of-ai-writing](sources/wikipedia-signs-of-ai-writing.md) | READ (2026-09-27) |
 
+### Verification Terms and Calibrated Language (v5.0.0 glossary)
+
+<!-- Seeded 2026-10-16 for docs/glossary.md and DR-027 (work item v5-vocabulary). -->
+
+| ID | Author(s) | Year | Title | Venue | File | Status |
+|----|-----------|------|-------|-------|------|--------|
+| L96 | Mastrandrea et al. | 2010 | Guidance Note for Lead Authors of the IPCC AR5 on Consistent Treatment of Uncertainties | IPCC | [mastrandrea-2010-ipcc-guidance](sources/mastrandrea-2010-ipcc-guidance.md) | READ (2026-10-16) |
+| L97 | NASA | 2016 | NASA Systems Engineering Handbook, §2.0 | NASA/SP-2016-6105 Rev2 | [nasa-2016-se-handbook](sources/nasa-2016-se-handbook.md) | PARTIAL (§2.0 web page) |
+| L98 | Santesso et al. | 2020 | GRADE guidelines 26: informative statements | J Clin Epidemiol | [santesso-2020-grade-26](sources/santesso-2020-grade-26.md) | PARTIAL (abstract) |
+
 ### Readability, Engagement and Homogenisation
 
 <!-- Seeded 2026-09-27 from the readability half of the detector scan (work item point 3).
