@@ -37,6 +37,48 @@ Tiers were re-derived from DR-002; the registry header states the consequence. D
 - [x] Writing guide cleaned of the scrubbed audits and the withdrawn S4-1/S4-2/S4-4 (2026-09-26)
 - [ ] S5-1 cites "AI writing amplifies the verification challenge" (manuscript §5 opening and appendix *Why*; registry Reasoning) with no registered premise behind it — register a Section 1 premise or drop the clause (pre-existing; surfaced by review 2026-09-26)
 
+### Draft 1 feedback (maintainer, 2026-10-16, on `paper1-draft-1` = `e7e444d`)
+Source: `feedback/2026-10-16_e7e444d.txt` (gitignored: keep it local). Page numbers refer to the draft-1 PDF. Triaged by Claude; findings checked against the manuscript are marked *checked*.
+
+**A. Possible errors (check first)**
+- [ ] **Toulmin's "claim" collides with our Claim.** *Checked:* in Toulmin, "claim" is the conclusion of an argument; in Table 1 a Claim is a source-verifiable fact; Table 4 then has a "Claim" row inside an Argument. Fix: call Toulmin's component "conclusion" (noting Toulmin's term once), or add a sentence on the two senses
+- [ ] **Rebuttal in Table 4.** *Checked:* not a contradiction. §3 says the operationalisation drops *backing*, not rebuttal, and Table 4 has no backing row. But the parenthesis is easy to misread, and Table 4's rebuttal reads as a limitation, not Toulmin's "conditions under which the claim fails". Make §3 name the five components it keeps; rewrite the rebuttal cell
+- [ ] **Priority is never explained.** *Checked:* the body never mentions priority; it appears only as a column in Table 3. Define P0/P1/P2 (what fails if the entry is wrong; how it is assigned) where Table 3 is introduced, or drop the column
+- [ ] **Worked examples hide how priority and confidence were set.** Add both to the S2-1, S3-4 and S5-1 examples; give the Whetten decomposition (S5-1) a table like Table 4 for Toulmin
+- [ ] **Abbreviations.** *Checked:* LLM is introduced (§1, l. 78) and EQUATOR is expanded at its first body use (§2), but "IS" (§2) is never introduced, and EQUATOR is used unexpanded in the abstract and Key Points. Sweep all of them
+
+**B. Prose and structure (Claude drafts, maintainer approves)**
+- [ ] Shorten §1 and §2
+- [ ] New section names (propose a set)
+- [ ] "AI" vs "generative AI": decide once, apply throughout
+- [ ] p. 8: Toulmin came from jurisprudence/practical argument, not academic writing; one sentence on why it transfers
+- [ ] p. 8: "may be technically feasible" — add that this paper is a first step
+- [ ] p. 8 below (§3, "these three types"): recap the three types before the central argument
+- [ ] p. 9 (§4 opening): explain "typed addition"
+- [ ] p. 10 (§5): drop the EQUATOR name ("yet existing guidelines address…")
+- [ ] Table 3 (registry) adds little next to the worked examples: shrink, move to supplementary material, or drop
+- [ ] Remove "Corrections discovered during verification" (Appendix A)
+- [ ] Acknowledgements: AI-use statement (what AI did; authors take responsibility). DR-025 (Proposed) gives the three-slot structure
+- [ ] Line numbers in review drafts (`lineno`); folded into DR-026 rule 2
+
+**C. Questions the repo can answer (Claude answers with sources, then decide)**
+- [ ] Are the four kinds of paper (§2) exhaustive? (S2-2/S2-3; Gregor's taxonomy; Decision A keeps all four)
+- [ ] Verification vs validation: does the paper use the terms in the SE sense? More SE / V-model framing overall?
+- [ ] Split claim verification into two steps, "source exists" and "source says it" (the anti-hallucination checklist already separates them)
+- [ ] Why can't we find more sources for the EMERGING entries? (searches logged under *Tier remediation* above; #38)
+- [ ] Is tying confidence to wording really original? (hedging / evidentiality literature; S3-3)
+- [ ] Multi-model review is not mentioned: DR-011 is still Proposed, so the paper cannot claim it yet. Same for "the framework is richer than the paper": list what is accepted vs staged
+- [ ] Was the house-voice profile used? The 2026-10-05 rewrite (`e7e444d`) was "under the house voice"; confirm which file
+
+**D. Maintainer decisions**
+- [ ] Sole author, or seek co-authors (Gate 3 currently assumes none found)
+- [ ] Venue route: arXiv preprint first, journal (LP), or both
+- [ ] Cite the public GitHub repo as the first implementation
+- [ ] Publish the full claim registry / traceability for this paper (links to DR-025's "[URL]")
+
+**E. New work (park)**
+- [ ] Journalism: readers judging a story's support from its wording. S5-1's boundary conditions currently *exclude* journalism (Appendix A, §5); a separate paper, so note under DR-006 if pursued
+
 ### Gate 3 — Co-author Review
 - [ ] Co-author review of revised manuscript — significant additions to discuss:
   - Title broadening: "Reporting Guidelines for Reasoning"
