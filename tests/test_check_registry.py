@@ -571,7 +571,7 @@ def test_an_empty_example_in_a_code_fence_does_not_count_as_a_registry(tmp_path)
     """Only the zero-entries guard consults quoting: a fenced example with no
     rows, and no real marker elsewhere, is a parse failure, not a new project."""
     path = tmp_path / "r.md"
-    path.write_text("```\n" + CLAIM_TABLE.split("| S1-1")[0] + "```\n**Claims:**\n", encoding="utf-8")
+    path.write_text("```\n" + CLAIM_TABLE.split("| S1-1")[0] + "```\n**CLAIMS:**\n", encoding="utf-8")
     with pytest.raises(ValueError, match="no sub-table marker recognised"):
         check_registry(path)
 
