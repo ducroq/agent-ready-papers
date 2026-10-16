@@ -8,6 +8,8 @@
 - **ISBN:** 978-0-521-72374-9
 - **DOI:** 10.1017/CBO9780511802034
 
+> ⚠ **Unverified (2026-10-16):** the summary and findings below predate a full-text read; the book is paywalled and only the publisher page has been checked (see Verified quotes at the end), which does not mention critical questions. Do not cite the scheme counts, categories or the six critical questions from this note until the text is read.
+
 ## Summary
 Comprehensive compendium of 96 argumentation schemes -- templates representing common types of defeasible (presumptive) arguments. Each scheme has a pattern (premise-to-conclusion structure) and a set of critical questions that, if not satisfactorily answered, defeat the argument. The critical questions serve as ready-made verification checklists.
 
@@ -23,3 +25,13 @@ The most directly operationalizable model for verification infrastructure. Criti
 
 ## Classification
 - Walton & Macagno (2015). "A classification system for argumentation schemes." Argument & Computation, 6(3), 219-245. DOI: 10.1080/19462166.2015.1123772
+
+## Verified quotes (2026-10-16, for Paper 1 draft 2; checked with `tools/check_quotes`)
+
+Source: literature/pdfs/walton-2008-schemes-publisher.html (Cambridge Core book page; full text paywalled, PARTIAL (publisher page))
+
+Crossref: monograph, published 2008-08-04, ISBN 9780521897907 / 9780521723749 / 9780511802034.
+- "a systematic analysis of many common argumentation schemes and a compendium of 96 schemes"
+- "forms of argument that capture stereotypical patterns of human reasoning"
+- "with notation suitable for computational applications that increasingly make use of argumentation schemes"
+(The publisher description does not mention critical questions.)

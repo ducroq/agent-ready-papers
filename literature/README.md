@@ -189,6 +189,19 @@ Sources consulted during the development of this project, particularly for DR-00
 | L97 | NASA | 2016 | NASA Systems Engineering Handbook, §2.0 | NASA/SP-2016-6105 Rev2 | [nasa-2016-se-handbook](sources/nasa-2016-se-handbook.md) | PARTIAL (§2.0 web page) |
 | L98 | Santesso et al. | 2020 | GRADE guidelines 26: informative statements | J Clin Epidemiol | [santesso-2020-grade-26](sources/santesso-2020-grade-26.md) | PARTIAL (abstract) |
 
+### Draft-2 sources (Paper 1, v5.0.0)
+
+<!-- Seeded 2026-10-16. Wachsmuth et al. 2017 (L09) and Walton, Reed & Macagno 2008 (L02) were also
+     requested for draft 2 but are already registered; they keep their IDs. Wachsmuth's PDF and
+     Walton's publisher page are now in pdfs/; verified quotes were appended to their notes (2026-10-16). -->
+
+| ID | Author(s) | Year | Title | Venue | File | Status |
+|----|-----------|------|-------|-------|------|--------|
+| L99 | Kent | 1964 | Words of Estimative Probability | Studies in Intelligence | [kent-1964-estimative-probability](sources/kent-1964-estimative-probability.md) | READ (2026-10-16) |
+| L100 | Nashwan et al. | 2026 | Preferred Reporting Items for Concept Analysis in nursing: a systematic review | J Res Nurs | [nashwan-2026-concept-analysis-reporting](sources/nashwan-2026-concept-analysis-reporting.md) | READ (JATS XML) |
+| L101 | Hyland | 1998 | Hedging in Scientific Research Articles | John Benjamins (P&BNS 54) | [hyland-1998-hedging-research-articles](sources/hyland-1998-hedging-research-articles.md) | PARTIAL (publisher page) |
+| L102 | Hyland | 1994 | Hedging in academic writing and EAP textbooks | English for Specific Purposes | [hyland-1994-hedging-eap-textbooks](sources/hyland-1994-hedging-eap-textbooks.md) | PARTIAL (record only) |
+
 ### Readability, Engagement and Homogenisation
 
 <!-- Seeded 2026-09-27 from the readability half of the detector scan (work item point 3).

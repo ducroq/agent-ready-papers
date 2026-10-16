@@ -19,3 +19,14 @@ Presents the first holistic taxonomy of argument quality with 15 dimensions acro
 
 ## Relevance to DR-004
 Maps exactly where the current verification infrastructure sits and what's missing. The claim registry covers "local acceptability" (one of 15 dimensions). Extending to non-empirical papers requires at minimum adding local relevance and local sufficiency at the argument level, plus global coherence at the paper level. Provides the theoretical foundation for what "verification beyond factual claims" means.
+
+## Verified quotes (2026-10-16, for Paper 1 draft 2; checked with `tools/check_quotes`)
+
+Source: literature/pdfs/wachsmuth-2017-argquality.pdf (ACL Anthology E17-1017, full text; printed pp. 176-187 = 175 + PDF page)
+
+- "a common understanding of argumentation quality is still missing" (p. 176, abstract)
+- "Logical quality in terms of the cogency or strength of an argument" (p. 177)
+- "Rhetorical quality in terms of the persuasive effect of an argument or argumentation" (p. 177)
+- "Dialectical quality in terms of the reasonableness of argumentation for resolving issues" (p. 177)
+- "A cogent (or logically good) argument has individually acceptable premises that are relevant to the argument’s conclusion and, together, sufficient to draw the conclusion" (p. 177)
+- "agreement of all seven annotators was low for all dimensions" (p. 183; Krippendorff's alpha at most .22). Context: a pilot with "simple initial guidelines"; on the same page the three most-agreeing annotators reached alpha .23–.60. Do not cite it as "argument quality cannot be annotated reliably".
