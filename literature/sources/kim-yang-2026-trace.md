@@ -34,3 +34,8 @@ Concrete touchpoints:
 
 ## Open Questions
 - Does "state validity" have any analogue for arguments without a ground truth? If not, the transfer stops at rhetoric and the source is context rather than support.
+
+## Update 2026-10-16 (S3-1 tier review)
+- Read the abstract and §5 Limitations from the arXiv HTML (`../pdfs/kim-yang-2026-trace.html`, gitignored), which has a text layer. The arXiv comment reads "Accepted at ICML 2026"; no proceedings DOI yet.
+- Verified quotes: "TRACE inspects how arguments are constructed by integrating Toulmin’s argumentation theory with Flavell’s metacognitive framework to assess reasoning structure" (abstract); "TRACE evaluates argumentative structure and cognitive flow, not factual correctness" (§5).
+- For S3-1: it is a peer-reviewed operationalisation of Toulmin for *assessment*, but of LLM chain-of-thought, not academic writing, so it supports only the broader proposition and is not counted for the claim as worded.

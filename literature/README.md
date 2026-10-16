@@ -62,7 +62,7 @@ Sources consulted during the development of this project, particularly for DR-00
 | L35 | Li et al. | 2025 | Large Language Models in Argument Mining: A Survey | arXiv | -- |
 | L36 | Gupta, Zuckerman & O'Connor | 2024 | Harnessing Toulmin's theory for zero-shot argument explication | ACL | [gupta-2024](sources/gupta-2024.md) |
 | L37 | Castagna, Sassoon & Parsons | 2024 | Critical-Questions-of-Thought: Steering LLM reasoning | arXiv | -- |
-| L38 | Stofiana et al. | 2025 | Writing with AI, thinking with Toulmin | ScienceDirect | -- |
+| L38 | Stofiana et al. | 2025 | Writing with AI, thinking with Toulmin | Ampersand | [stofiana-2025-toulmin-ai](sources/stofiana-2025-toulmin-ai.md) |
 | L62 | Mori, Tanaka, Hirasawa, Kozuno, Yoshino & Ushiku | 2026 | WarrantScore: Modeling Warrants between Claims and Evidence for Substantiation Evaluation in Peer Reviews | arXiv | [mori-2026-warrantscore](sources/mori-2026-warrantscore.md) |
 | L63 | Kim & Yang | 2026 | TRACE: Toulmin-based Reasoning Assessment through Constructive Elements for LLM CoT Evaluation | ICML 2026 | [kim-yang-2026-trace](sources/kim-yang-2026-trace.md) |
 
@@ -212,6 +212,18 @@ Sources consulted during the development of this project, particularly for DR-00
 | L103 | Kelly & Weaver | 2004 | The Goal Structuring Notation – A Safety Argument Notation | DSN 2004 Workshop on Assurance Cases | [kelly-2004-gsn](sources/kelly-2004-gsn.md) | READ (2026-10-16) |
 | L104 | Bishop & Bloomfield | 1998 | A Methodology for Safety Case Development | Safety-critical Systems Symposium (Springer) | [bishop-1998-safety-case-methodology](sources/bishop-1998-safety-case-methodology.md) | READ (authors' reprint) |
 | L105 | Bloomfield & Netkachova | 2014 | Building Blocks for Assurance Cases | ISSRE Workshops (IEEE) | [bloomfield-2014-cae-building-blocks](sources/bloomfield-2014-cae-building-blocks.md) | READ (accepted version) |
+
+### Toulmin and Whetten as assessment criteria (Paper 1 draft 2)
+
+<!-- Seeded 2026-10-16 for the S3-1 / S3-2 tier review. L38, L62 and L63 are listed in their original section; their notes now carry the review.
+     Not obtainable without login or past bot walls, so not registered: Stapleton & Wu 2015 (JEAP, 10.1016/j.jeap.2014.11.006, closed),
+     Corley & Gioia 2011 (AMR, closed), Cloutier & Langley 2020 and Reay & Whetten 2011 (Sage, blocked), Crittenden & Peterson 2011 (AMS Review, blocked). -->
+
+| ID | Author(s) | Year | Title | Venue | File | Status |
+|----|-----------|------|-------|-------|------|--------|
+| L106 | Divya & Alamelu | 2026 | Integrating DeepL Write and Claude AI to enhance argumentative writing competence of engineering students in India | Frontiers in Artificial Intelligence | [divya-alamelu-2026-toulmin-rubric](sources/divya-alamelu-2026-toulmin-rubric.md) | READ (method, 2026-10-16) |
+| L107 | Yang | 2022 | An empirical study on the scaffolding Chinese university students' English argumentative writing based on toulmin model | Heliyon | [yang-2022-toulmin-scaffolding](sources/yang-2022-toulmin-scaffolding.md) | READ (JATS XML) |
+| L108 | Farias | 2015 | Reflections on Theoretical Contribution | BAR – Brazilian Administration Review (editorial) | [farias-2015-reflections-contribution](sources/farias-2015-reflections-contribution.md) | READ (full) |
 
 ### Readability, Engagement and Homogenisation
 
