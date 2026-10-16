@@ -202,7 +202,7 @@ different task from the one reporting guidelines support.
 Two well-known frameworks may offer much of what a checklist for
 reasoning needs.  Box~1 gives the terms; the framework's glossary defines them
 from their sources.\footnote{The glossary, the claim registry and the
-checking tools are public at \url{https://github.com/ducroq/agent-ready-papers}.}
+checking tools are public; see Code and Data Availability.}
 
 \begin{center}
 \fbox{\begin{minipage}{0.92\textwidth}
@@ -285,6 +285,18 @@ environment'' \citep[\S2.0]{nasa2016}.  Checking each claim against its grounds
 and warrant is verification in this sense; asking Whetten's questions of
 the contribution is closer to validation.  The mapping is mine.
 
+Verification in this sense needs requirements to check against, and the
+procedure supplies them.  A claim meets its requirements when every item
+it rests on has passed the check for its kind, its warrant holds for the
+paper's readers, and its qualifier is one that its confidence tier
+permits.  The contribution's requirements are Whetten's elements.  The
+registry then works as a traceability record, of the kind systems
+engineers keep for requirements: each link, from the contribution to its
+claims, from a claim to its grounds and from grounds to their sources, is
+written down, so that someone else can follow and check it.  The IPCC
+asks its authors for a ``traceable account'' of their evaluation of
+evidence for the same reason \citep{mastrandrea2010}.
+
 % S3-6: Calibrated language has precedents (descriptive, P1, SUPPORTED)
 % S3-3: Mapping tiers to wording (descriptive, P1, EMERGING)
 % D6: Tier-to-wording mapping is this paper's proposal (assumption, own)
@@ -364,7 +376,11 @@ only that structure combined with LLMs may outperform LLMs alone.
 The tier rule is a simplification.  Counting sources does not measure
 their independence or quality, and it gives no guidance for an inference,
 whose strength lies in its warrant.  And the procedure has one user so
-far: the author of this paper.  This commentary is a first step that
+far: the author of this paper.  Verification by someone other than the
+author would carry more weight.  The closest step so far was a review
+of the first draft by four language models from different vendors, which
+is independent of the drafting session but not of the method, and no
+substitute for human reviewers.  This commentary is a first step that
 proposes a way of checking.  It does not show that the way works, which
 needs authors and reviewers in several fields to use it and a comparison
 with papers checked without it.
@@ -385,7 +401,10 @@ reasoning should be checkable: readers and reviewers should be able to
 see what each claim rests on.  Its grounds are the gap described in Section~2 and the argument of
 Section~3.  A first version could be modest: authors register
 the claims a paper depends on, with their grounds, warrants and
-qualifiers, and publish the register with the paper, as this one does.
+qualifiers, and publish the register with the paper, as this one does.  A first
+implementation exists: templates for the registry and the glossary,
+checks for each kind of grounds, and tools that test a registry against
+its manuscript (see Code and Data Availability).
 
 The proposal applies to academic papers whose contribution is an
 argument, and to the interpretive parts of empirical papers.  The same
@@ -422,6 +441,14 @@ takes full responsibility for the content.
 \textbf{[Verification record, to be filled from the tool runs of the
 submitted version, with their date.]}
 
+
+\section*{Code and data availability}
+
+The framework described here (templates, glossary and checking tools)
+and this paper's claim registry are public under a CC BY 4.0 licence at
+\url{https://github.com/ducroq/agent-ready-papers}.  The version this
+paper describes is release v5.0.0, archived at
+\textbf{[Zenodo DOI, to be added when the release is archived]}.
 
 % ===============================================================
 % APPENDIX
