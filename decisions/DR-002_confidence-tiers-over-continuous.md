@@ -5,6 +5,8 @@ status: Accepted
 date: 2026-03-02
 ---
 
+> **Amended by [DR-027](DR-027_toulmin-whetten-verification-model.md) (2026-10-16):** "Tier" is named **confidence tier**; values and wording unchanged; the P0 floor also covers contributions (DR-027). The source-counting assignment rule is due its own review.
+
 ## Context
 
 The claim registry template uses a continuous 0.0–1.0 confidence scale mapped to language hedging tiers. During reflection, we identified that the decimal precision implies a measurement accuracy that doesn't exist — assigning 0.73 vs 0.68 to a claim is false precision. Meanwhile, the language mapping already uses four discrete bands. The numbers add a step without adding information.

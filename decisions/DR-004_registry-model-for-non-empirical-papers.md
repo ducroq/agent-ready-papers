@@ -1,9 +1,12 @@
 # DR-004: Extending the Registry Model Beyond Factual Claims
 
 ---
-status: Accepted
+status: Partially superseded
+superseded_by: DR-027
 date: 2026-03-02
 ---
+
+> **Amended by [DR-027](DR-027_toulmin-whetten-verification-model.md) (2026-10-16):** Its three unit types are superseded by DR-027's model (one claim, recorded by what it says and what it rests on); its per-type checks survive as the source, warrant and contribution checks.
 
 ## Context
 

@@ -5,6 +5,8 @@ status: Accepted
 date: 2026-06-24
 ---
 
+> **Amended by [DR-027](DR-027_toulmin-whetten-verification-model.md) (2026-10-16):** The custody covers DR-027's model and the glossary (`docs/glossary.md`).
+
 ## Context
 
 The `agent-ready-*` family now has four repos:

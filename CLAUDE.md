@@ -79,7 +79,8 @@ agent-ready-papers/
 | `papers/perspective/CLAUDE.md` | Paper 1 context: start here for paper work |
 | `papers/perspective/manuscript.tex` | Paper 1 LaTeX source |
 | `papers/perspective/vv/claims/claim_registry.md` | Paper 1 claim registry |
-| `decisions/DR-004_registry-model-for-non-empirical-papers.md` | Most consequential DR: typed verification model |
+| `decisions/DR-027_toulmin-whetten-verification-model.md` | Most consequential DR: the verification model (claims recorded by what they say and rest on; supersedes DR-004's types) |
+| `docs/glossary.md` | The framework's terms, from Toulmin, Whetten and their home sources (normative, DR-027) |
 | `decisions/DR-006_publication-roadmap.md` | Publication sequencing (Papers 1-3) |
 | `UPGRADING.md` | Per-version adopter actions: a required release artifact |
 

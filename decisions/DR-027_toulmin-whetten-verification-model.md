@@ -1,8 +1,9 @@
 # DR-027: A Verification Model Grounded in Toulmin and Whetten
 
 ---
-status: Proposed
+status: Accepted
 date: 2026-10-16
+accepted: 2026-10-16
 ---
 
 ## Context
@@ -33,7 +34,7 @@ Scope of impact (measured 2026-10-16): parsing depends on the sub-table marker r
 - (+) Gives theory papers a place for assumptions, definitions and values (the "declared starting points" all four reviewers found missing)
 - (-) Changes the registry schema, both tools that parse it, every template that shows it, and every adopter's registry: a MAJOR release
 
-## Proposed Decision
+## Decision
 
 **Option C.** Terms as defined in `docs/glossary.md`, which becomes normative on acceptance.
 
@@ -50,7 +51,7 @@ Scope of impact (measured 2026-10-16): parsing depends on the sub-table marker r
 
 ### Registry schema (recommended)
 
-Per paper, three tables:
+Per paper, three tables, each introduced by its marker line (`**Contributions:**`, `**Declared starting points:**`, `**Claims:**`) directly above the table, as the tools read markers, not headings:
 
 - **Contributions**: `ID (C1…) | Contribution | Says | Rests on | What | How | Why | Who/Where/When | Objections engaged | Priority | Confidence tier | Status`. Rests on lists `claim:` and `decl:` items (a normative contribution names its value there); Priority is always P0, kept as a column so the tools need no special case.
 - **Declared starting points**: `ID (D1…) | Statement | Kind (assumption / definition / value) | Contestedness (accepted / contested / own) | Status`
@@ -62,9 +63,9 @@ The alternative considered: keep per-section sub-tables keyed by grounds kind. R
 
 ### Tools
 
-- `tools/coverage.py`: reads the Claims, Contributions and Declared tables; coverage by priority, by Says and by grounds type; P0 tier floor unchanged.
+- `tools/coverage.py`: reads the Claims, Contributions and Declared tables; coverage by priority and by Says; contributions always count as P0, with an effective tier no higher than their weakest supporting claim, in the P0 tier floor; declared starting points counted separately.
 - Both tools: ID and anchor regexes accept `C<n>` and `D<n>` as well as `S<n>-<n>`, so contributions and declared starting points can be anchored in the manuscript and are never dropped silently; a row whose ID matches no pattern is reported, not skipped.
-- `tools/check_registry.py`: schema rules for new-schema tables: a claim with `claim:` grounds needs a Warrant; a normative claim needs a Rebuttal (boundary conditions) and a `decl:` value; every `claim:`, `decl:` and Rests-on reference must resolve; premise graph and tier monotonicity over `src:` and `claim:` grounds; a contribution's tier may not exceed its weakest supporting claim. Anchor comments keep three fields: `% S1-1: label (descriptive, P0, SUPPORTED)`, `% C1: label (contribution, P0, EMERGING)`; the tool reads the last field as the tier, as before. Declared starting points are anchored as `% D1: label (value, contested)` and get no tier comparison. A claim combining several sources is not forced to have a Warrant by the tool until the synthesis question below is settled.
+- `tools/check_registry.py`: schema rules for new-schema tables: a claim with `claim:` grounds needs a Warrant; a normative claim needs a Rebuttal (boundary conditions) and a `decl:` value; every `claim:`, `decl:` and Rests-on reference must resolve; premise graph and tier monotonicity over `claim:` grounds; a contribution's tier may not exceed its weakest supporting claim. Anchor comments keep three fields: `% S1-1: label (descriptive, P0, SUPPORTED)`, `% C1: label (contribution, P0, EMERGING)`; the tool reads the last field as the tier, as before. Declared starting points are anchored as `% D1: label (value, contested)` and get no tier comparison. A claim combining several sources is not forced to have a Warrant by the tool until the synthesis question below is settled.
 - **Aliases through v5.x**: registries using `**CLAIMs:**`, `**ARGUMENTs**`, `**PROPOSITIONs**` are read as before, **checked under DR-004's rules** (the new schema rules apply only to new-schema tables), and reported under their old labels with a deprecation note in the output (new-schema rows report as descriptive, normative or contribution). Removal no earlier than v6.0.0, announced in UPGRADING. Migration maps the old columns as a default, to be judged row by row (the constructive-lenses trial found each rule failing somewhere): CLAIM Source → `src:` grounds (a Tier-F source becomes a Warrant or an `own:` item, as above); ARGUMENT Grounds → `claim:` grounds, Warrant and Rebuttal → their columns, Source → Backing if it supports the warrant, `src:` grounds if the claim responds to what that source says; PROPOSITION Premises → `claim:` grounds, Relationship and Reasoning → Warrant, Boundary conditions → Rebuttal, Constructs → `decl:` definitions, Alternatives engaged → Objections engaged only when they are critiques of the claim (competing solutions belong in the paper's discussion of related work, not in the claim's row); a PROPOSITION that recommends gains a declared value, one that says what *can* be done is descriptive.
 - Tests seed positives for each rule, the alias path, and the schema check on mapped rows (guarding the silent `.get()` skip found at `check_registry.py:663`).
 

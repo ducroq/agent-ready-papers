@@ -5,6 +5,8 @@ status: Accepted
 date: 2026-03-02
 ---
 
+> **Amended by [DR-027](DR-027_toulmin-whetten-verification-model.md) (2026-10-16):** Own-data claims record `own:` grounds with their method (DR-027).
+
 ## Context
 
 The framework was originally designed around non-empirical papers; review against empirical paper projects surfaces a recurring issue: the framework needs explicit support for empirical papers where the primary evidence is the authors' own experimental data.

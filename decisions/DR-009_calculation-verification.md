@@ -5,6 +5,8 @@ status: Accepted
 date: 2026-03-06
 ---
 
+> **Amended by [DR-027](DR-027_toulmin-whetten-verification-model.md) (2026-10-16):** Calculation verification applies to claims whose grounds include a computation (DR-027).
+
 ## Context
 
 The framework (DR-004) established three registry unit types: CLAIM, ARGUMENT, and PROPOSITION. Each has a structured verification procedure (source checking, Toulmin, Whetten). This model was developed from non-empirical papers that contain no equations.

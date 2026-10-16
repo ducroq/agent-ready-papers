@@ -1,12 +1,12 @@
 # Glossary
 
-> **Status: DRAFT (2026-10-16), for DR-027.** Not normative until DR-027 is accepted; until then DR-004's vocabulary (CLAIM / ARGUMENT / PROPOSITION) remains binding. Proposed terms are marked *(proposed)*. Reviewed by four models (ChatGPT, DeepSeek, Gemini, Claude Fable; reviews kept in the maintainer's work items, not shipped).
+> **Status: normative since 2026-10-16 (DR-027 accepted).** DR-004's vocabulary (CLAIM / ARGUMENT / PROPOSITION) is superseded; old registries are still read through v5.x. Reviewed by four models (ChatGPT, DeepSeek, Gemini, Claude Fable; reviews kept in the maintainer's work items, not shipped).
 
 The framework's terms, each taken from its home source. Where the framework adapts a term or maps one source onto another, the entry says **framework mapping**. Quotes from Toulmin, Whetten and the IPCC note were checked verbatim against the full texts with `tools/check_quotes`; page numbers are printed pages, except the IPCC note (PDF pages). NASA quotes come from the handbook's web page and the GRADE wording from the abstract; neither was machine-checked. Sources: [Toulmin 2003](../literature/sources/toulmin-1958.md) (L01), [Whetten 1989](../literature/sources/whetten-1989.md) (L11), [NASA 2016](../literature/sources/nasa-2016-se-handbook.md) (L97), [Mastrandrea et al. 2010](../literature/sources/mastrandrea-2010-ipcc-guidance.md) (L96), [Santesso et al. 2020](../literature/sources/santesso-2020-grade-26.md) (L98, abstract only).
 
 Papers derive their own glossary from this one (`templates/glossary.md`) and add their field's terms.
 
-## The model in brief *(proposed)*
+## The model in brief
 
 1. Every statement the paper puts forward and supports is a **claim**. Declared starting points (step 3) are registered alongside claims but adopted, not argued for; provocations in speculative-design work (DR-010) make no truth claim and keep their own table.
 2. Each claim records **what it says**: **descriptive** (how things are) or **normative** (what should be done).
@@ -63,7 +63,7 @@ Whetten's seven reviewer questions (What's new? So what? Why so? Well done? Done
 | **calibrated language** | IPCC: "a common approach and calibrated language" for the degree of certainty in findings. GRADE's practice fixes wording per certainty level *and* effect size, e.g. for a large effect: high "x results in a large reduction", moderate "x likely results in …", low "x may result in …". | Mastrandrea et al.; Santesso et al. (abstract) | DR-002's tier-to-wording table, an adaptation with one axis (certainty) where GRADE has two. | DR-002's wording was not tested with users; GRADE's was surveyed (110 respondents) and workshopped. |
 | **likelihood** | IPCC's probabilistic scale ("Likely 66-100%" etc.), separate from confidence. | Mastrandrea et al. | Not used: the framework has no probabilistic terms. | — |
 
-## 5. Claims in the registry *(proposed)*
+## 5. Claims in the registry
 
 | Term | Definition | Framework use |
 |---|---|---|
@@ -93,7 +93,7 @@ Whetten's seven reviewer questions (What's new? So what? Why so? Well done? Done
 | **coverage** | The share of claims at each priority whose checks are complete. | Targets ≥85% overall, 100% P0, 90% P1, 70% P2 (`templates/claim-registry.md`, `docs/THRESHOLDS.md`). |
 | **check status** | Per claim: not started `[ ]`, in progress `[~]`, complete `[x]`, problem needing attention `[!]` (`templates/claim-registry.md`). | Coverage counts `[x]`. |
 | **Source Tier** | Quality class of a cited work: A peer-reviewed primary research; B peer-reviewed review; C textbook or established reference; D guidelines or standards; E own work published or under review elsewhere. (F, logical inference, is retired under DR-027: an inference is a warrant.) | Recorded per source (`templates/claim-registry.md`); distinct from the confidence tier. |
-| **independent sources** *(proposed)* | Sources that do not derive the point from one another or from a shared origin (same data, same group, one citing the other for it). | What DR-002's counting rule should count. |
+| **independent sources** | Sources that do not derive the point from one another or from a shared origin (same data, same group, one citing the other for it). | What DR-002's counting rule should count. |
 | **evidence** | Informal: what the sources report, taken together. | The formal term is grounds. |
 | **objection** | A claim made against a claim or contribution: logical, empirical or epistemological (Whetten p. 493). | Engaged objections are recorded with the claim they target. Distinct from rebuttal (a stated exception). |
 | **audience** | The readers a paper addresses. | Warrants are judged relative to it; it fixes the field. |

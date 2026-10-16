@@ -5,6 +5,8 @@ status: Accepted
 date: 2026-05-10
 ---
 
+> **Amended by [DR-027](DR-027_toulmin-whetten-verification-model.md) (2026-10-16):** References to CLAIM / PROPOSITION read as DR-027's claims; a PROVOCATION is not a claim and keeps its own table.
+
 ## Context
 
 DR-004 (2026-03-02) added three registry unit types — CLAIM, ARGUMENT, PROPOSITION — and reserved DESIGN PRINCIPLE, PROCEDURE, and SYNTHESIS as slots to activate when the framework was applied to non-empirical work. DR-006 (publication roadmap) anticipated such a project. Applying the framework to a speculative-design book scaffolding (April–May 2026) revealed a class of registry units that none of the existing or reserved types describes:

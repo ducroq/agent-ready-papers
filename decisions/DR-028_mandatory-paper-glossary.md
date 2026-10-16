@@ -1,8 +1,9 @@
 # DR-028: Every Paper Has a Glossary
 
 ---
-status: Proposed
+status: Accepted
 date: 2026-10-16
+accepted: 2026-10-16
 ---
 
 ## Context
@@ -25,7 +26,7 @@ DR-027 introduces a framework glossary (`docs/glossary.md`). A paper's glossary 
 - (+) Absence is caught mechanically
 - (-) One more file per paper and one more check
 
-## Proposed Decision
+## Decision
 
 **Option C.**
 
