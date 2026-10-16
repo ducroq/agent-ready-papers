@@ -1,4 +1,4 @@
-.PHONY: test lint format check coverage check-dois check-metadata verify-bib check-registry formula-scan preservation-check check-experiments drift dr-status gotcha-stats check-counts read-surface check-profile
+.PHONY: test lint format check coverage check-dois check-metadata verify-bib check-registry formula-scan preservation-check check-experiments drift dr-status gotcha-stats check-counts read-surface check-profile paper1-pdf
 
 test:  ## Run tests
 	pytest tests/ -x -q
@@ -37,6 +37,16 @@ formula-scan:  ## Advisory formula/readability locator (PROPOSED, DR-022); FILE=
 preservation-check:  ## Did a translation keep numbers and certainty? (PROPOSED, DR-023); SRC=<source> TRN=<translation> [LINK=<source link>]
 	@[ -n "$(SRC)" ] && [ -n "$(TRN)" ] || { echo "usage: make preservation-check SRC=<source> TRN=<translation> [LINK=<source link>]"; exit 2; }
 	python extensions/preservation_check.py "$(SRC)" "$(TRN)" $(if $(LINK),--link "$(LINK)")
+
+paper1-pdf:  ## Build Paper 1's PDF, stamped on the title page with `git describe` (draft tag, commits since, -dirty)
+	cd papers/perspective || exit 1; \
+	v=$$(git describe --tags --dirty --match 'paper1-*' 2>/dev/null) || \
+	  v="untagged $$(git describe --always --dirty --match 'paper1-*' 2>/dev/null)"; \
+	[ "$$v" != "untagged " ] || v='unversioned build'; \
+	tex="\\def\\paperversion{$$v}\\input{manuscript}"; \
+	pdflatex -interaction=nonstopmode -jobname=manuscript "$$tex" && bibtex manuscript && \
+	pdflatex -interaction=nonstopmode -jobname=manuscript "$$tex" && \
+	pdflatex -interaction=nonstopmode -jobname=manuscript "$$tex"
 
 check-experiments:  ## Experiment registry: schema, tracked artifacts, metric traceability (DR-024)
 	python -m tools.check_experiments

@@ -23,7 +23,8 @@
         \small\textsuperscript{1}[Affiliation]\\
         \small [email]}
 
-\date{}
+% `make paper1-pdf` defines \paperversion on the pdflatex command line (DR-026); a plain build prints "unversioned build".
+\date{\ifdefined\paperversion\paperversion\else unversioned build\fi}
 % ---------------------------------------------------------------
 
 \begin{document}
