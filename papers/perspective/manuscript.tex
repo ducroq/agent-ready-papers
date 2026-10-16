@@ -10,6 +10,7 @@
 \usepackage{url}
 \usepackage{setspace}
 \usepackage{lineno}
+\usepackage{caption}
 
 \doublespacing
 \linenumbers
@@ -22,8 +23,8 @@
        in AI-Assisted Academic Writing}
 
 \author{Jeroen Veen\textsuperscript{1}\\[4pt]
-        \small\textsuperscript{1}[Affiliation]\\
-        \small [email]}
+        \small\textsuperscript{1}HAN University of Applied Sciences, Arnhem and Nijmegen, the Netherlands\\
+        \small jeroen.veen@han.nl}
 
 % `make paper1-pdf` defines \paperversion on the pdflatex command line (DR-026); a plain build prints "unversioned build".
 \date{\ifdefined\paperversion\paperversion\else unversioned build\fi}
@@ -204,26 +205,28 @@ reasoning needs.  Box~1 gives the terms; the framework's glossary defines them
 from their sources.\footnote{The glossary, the claim registry and the
 checking tools are public; see Code and Data Availability.}
 
-\begin{center}
-\fbox{\begin{minipage}{0.92\textwidth}
-\small\singlespacing
-\textbf{Box 1. Terms}\\[3pt]
-\textbf{Claim}: any assertion put forward for acceptance.
-\textbf{Grounds}: what a claim rests on (Toulmin's \emph{data}).
-\textbf{Warrant}: the step from grounds to claim.
-\textbf{Qualifier}: the hedge that states how strong the claim is.
-\textbf{Confidence tier}: the rating (Established, Supported, Emerging,
-Speculative) that decides which qualifiers a claim may carry.
-\textbf{Priority}: how much the paper depends on a claim (P0 to P2).
-\textbf{Rebuttal}: circumstances in which the step no longer holds.
-\textbf{Declared starting point}: an assumption, definition or value the
-paper adopts without arguing for it.
-\textbf{Contribution}: what the paper adds; checked once, as a whole.
-\textbf{Verification}: checking each claim against its grounds and
-warrant.  \textbf{Validation}: checking that the contribution serves its
-readers and purpose.
-\end{minipage}}
-\end{center}
+\begin{table}[htbp]
+\centering
+\caption*{\textbf{Box 1.} Terms used in this paper.}
+\footnotesize
+\begin{tabular}{@{}p{3.6cm}p{11.2cm}@{}}
+\toprule
+\textbf{Term} & \textbf{Meaning} \\
+\midrule
+Claim & Any assertion put forward for acceptance. \\
+Grounds & What a claim rests on (Toulmin's \emph{data}): a source, other claims, a declared starting point, or the author's own observation. \\
+Warrant & The step from grounds to claim. \\
+Qualifier & The hedge that states how strong the claim is. \\
+Confidence tier & The rating (Established, Supported, Emerging, Speculative) that decides which qualifiers a claim may carry. \\
+Priority & How much the paper depends on a claim (P0 to P2). \\
+Rebuttal & Circumstances in which the step from grounds to claim no longer holds. \\
+Declared starting point & An assumption, definition or value the paper adopts without arguing for it. \\
+Contribution & What the paper adds; checked once, as a whole. \\
+Verification & Checking each claim against its grounds and warrant. \\
+Validation & Checking that the contribution serves its readers and purpose. \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 % S3-5: Toulmin's layout and its origin (descriptive, P1, SUPPORTED)
 Toulmin modelled his layout of arguments on jurisprudence.  He called
