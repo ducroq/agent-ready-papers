@@ -202,6 +202,17 @@ Sources consulted during the development of this project, particularly for DR-00
 | L101 | Hyland | 1998 | Hedging in Scientific Research Articles | John Benjamins (P&BNS 54) | [hyland-1998-hedging-research-articles](sources/hyland-1998-hedging-research-articles.md) | PARTIAL (publisher page) |
 | L102 | Hyland | 1994 | Hedging in academic writing and EAP textbooks | English for Specific Purposes | [hyland-1994-hedging-eap-textbooks](sources/hyland-1994-hedging-eap-textbooks.md) | PARTIAL (record only) |
 
+### Assurance cases (Paper 1 draft 2)
+
+<!-- Seeded 2026-10-16. The GSN Community Standard v3 (ACWG, SCSC-141C, 2021) was also requested;
+     its download (scsc.uk/r1386.pdf) requires an SCSC member login, so it is not registered. -->
+
+| ID | Author(s) | Year | Title | Venue | File | Status |
+|----|-----------|------|-------|-------|------|--------|
+| L103 | Kelly & Weaver | 2004 | The Goal Structuring Notation – A Safety Argument Notation | DSN 2004 Workshop on Assurance Cases | [kelly-2004-gsn](sources/kelly-2004-gsn.md) | READ (2026-10-16) |
+| L104 | Bishop & Bloomfield | 1998 | A Methodology for Safety Case Development | Safety-critical Systems Symposium (Springer) | [bishop-1998-safety-case-methodology](sources/bishop-1998-safety-case-methodology.md) | READ (authors' reprint) |
+| L105 | Bloomfield & Netkachova | 2014 | Building Blocks for Assurance Cases | ISSRE Workshops (IEEE) | [bloomfield-2014-cae-building-blocks](sources/bloomfield-2014-cae-building-blocks.md) | READ (accepted version) |
+
 ### Readability, Engagement and Homogenisation
 
 <!-- Seeded 2026-09-27 from the readability half of the detector scan (work item point 3).

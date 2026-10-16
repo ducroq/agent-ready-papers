@@ -81,6 +81,7 @@
 |----|-----------|------|---------|---------|---------|----------|--------------------|----------|-----------------|-------------|--------|
 | S4-3 | Structured verification combined with LLMs may outperform LLMs alone: reported for peer review aggregation (PeerArg 2024) and argument extraction (Gupta et al. 2024) | descriptive | src: PeerArg 2024; src: Gupta et al. 2024 | Two narrow tasks generalised to "structured + LLM beats LLM alone": an extrapolation | | Hedged in the manuscript ("may outperform") | | P1 | EMERGING | A; A | [x] |
 | S4-5 | Argument-quality research distinguishes logical, rhetorical and dialectical quality and catalogues argumentation schemes | descriptive | src: Wachsmuth et al. 2017; src: Walton et al. 2008 (publisher description) |  |  |  |  | P1 | SUPPORTED | A; C | [ ] |
+| S4-6 | Assurance cases from safety engineering are the closest existing practice: explicit claims linked to evidence by arguments, with assumptions stated; the claims–arguments–evidence approach defines arguments as Toulmin's warrants | descriptive | src: Bishop & Bloomfield 1998; src: Kelly & Weaver 2004; src: Bloomfield & Netkachova 2014 | | | | | P1 | SUPPORTED | A; A; A | [ ] |
 
 ### Section 5: Call to Action
 
