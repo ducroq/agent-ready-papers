@@ -39,12 +39,12 @@
 | When | Read |
 |------|------|
 | Starting any session (framework drift) | Compare the `- **agent-ready-papers:** vX.Y.Z` line in this file's header against the framework's [`CHANGELOG.md`](https://github.com/ducroq/agent-ready-papers/blob/master/CHANGELOG.md). If this project is behind, surface the drift before starting work and point at [`UPGRADING.md`](https://github.com/ducroq/agent-ready-papers/blob/master/UPGRADING.md) for what each version asks of you. Don't auto-update — bumping the pin is the author's call. |
-| Writing or editing prose | `writing-guide.md` — claim-to-section mapping with language calibration |
+| Writing or editing prose | `glossary.md` (this paper's terms; it links to the framework glossary, DR-028), then `writing-guide.md`: claim-to-section mapping with language calibration |
 | Adding or verifying citations | `vv/claims/claim_registry.md` — all claims with priority and status |
 | Checking coverage or DOIs for this paper | If your project uses `agent-ready-papers/tools/`: from the framework repo root, run `python -m tools.coverage <path-to-registry>` and `python -m tools.check_dois <path-to-registry>` (or the equivalent `make` targets). Prefer the tool to manually counting P0/P1/P2 percentages or eyeballing DOIs in `references.bib`. See `tools/README.md` in the framework repo for flags and known limits. |
 | Logging token cost of an operation | `vv/cost-log.md` — record `/status` deltas (or subagent `total_tokens`) after named, repeatable operations (review passes, `/curate`, `/audit-context`, batch verification, full Gate sweeps). Don't log incidental tool calls. See `templates/cost-log.md` for the convention. |
 | Making scope or methodology decisions | Latest `DR-*.md` — decision records |
-| Checking terminology | `glossary.md` — cross-domain term definitions |
+| Checking terminology | `glossary.md` |
 | Reviewing before submission | `review-prompt.md` (paper-local copy) or the framework's `agents/review-prompt.md` — peer-review simulator runnable in any agent; pair with the three-pass pattern (DR-011) |
 | Verifying equations or derived numerical values | Framework's `agents/equation-checker.md` — mechanical reproduction (substitute → compute → flag), not plausibility review; works in any agent (since agent-ready-papers v2.1.0) |
 | Stuck or unsure about a claim | `anti-hallucination.md` — citation verification checklist |
@@ -109,7 +109,7 @@
 | `vv/claims/claim_registry.md` | All claims with verification status |
 | `vv/PAPER_VV_FRAMEWORK.md` | V&V methodology |
 | `writing-guide.md` | Confidence-to-language mapping |
-| `glossary.md` | Terminology reference |
+| `glossary.md` | This paper's terms (mandatory, DR-028) |
 | `backlog.md` | Current tasks |
 | `DR-*.md` | Decision records |
 | `hypothesis-log.md` | Provisional positions awaiting future evidence (since agent-ready-papers v1.7.0) |
@@ -123,7 +123,7 @@
 ├── [paper].tex                  <- LaTeX source
 ├── references.bib               <- Bibliography
 ├── backlog.md                   <- Task tracking
-├── glossary.md                  <- Terminology reference
+├── glossary.md                  <- This paper's terms (mandatory, DR-028)
 ├── writing-guide.md             <- Claim-to-section mapping
 ├── anti-hallucination.md        <- Citation verification
 ├── hypothesis-log.md            <- Provisional positions awaiting future evidence
@@ -168,7 +168,8 @@ pdflatex [paper].tex
 ## Methodology
 
 This project uses a verification framework adapted from systems engineering:
-- **Claims** registered and tracked with priority levels (P0/P1/P2)
+- **Claims** registered with what they say and what they rest on (grounds), tracked with priority levels (P0/P1/P2); the checks follow the grounds (DR-027)
+- **Contribution** registered as a root claim and validated once with Whetten's questions
 - **Confidence tiers** (ESTABLISHED / SUPPORTED / EMERGING / SPECULATIVE) mapped to language
 - **Anti-hallucination checklist** for all AI-introduced citations
 - **Quality gates** before each phase transition

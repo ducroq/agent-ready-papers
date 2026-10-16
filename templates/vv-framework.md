@@ -10,9 +10,9 @@
 
 ## 1. Core Principle
 
-Academic papers written with AI assistance require systematic verification to ensure correctness and credibility. The registry tracks three default unit types: **CLAIMs** (factual statements with sources), **ARGUMENTs** (reasoning chains in Discussion/Conclusion), and **PROPOSITIONs** (novel contributions and recommendations). Each needs appropriate verification and language that matches its confidence tier. For papers with quantitative content, a fourth verification procedure — **CALCULATION** (numerical reproduction) — applies alongside the registry but is tracked separately via the equation-checker tool.
+Academic papers written with AI assistance require systematic verification to ensure correctness and credibility. The registry follows DR-027's model (terms: `docs/glossary.md`). Every statement the paper puts forward and supports is a **claim**. Each claim records what it says (descriptive or normative) and its grounds, item by item: sources, other claims, declared starting points, or the author's own work. The checks follow the items, and each claim's qualifier must stay within its confidence tier. Each **contribution** is a root claim, checked once with Whetten's elements and questions. The per-claim checks are **verification**; the contribution check is **validation**. For claims whose grounds include a computation, **calculation verification** (numerical reproduction, DR-009) applies, using the equation-checker; it is a procedure, not a registry unit.
 
-For speculative-design / design-fiction / diegetic-prototype work, an opt-in fifth unit type — **PROVOCATION** (designed artefact making no truth claim) — uses Auger's four-criteria verification on a separate confidence axis (see DR-010, §4.1).
+For speculative-design / design-fiction / diegetic-prototype work, an opt-in table of **provocations** (designed artefacts making no truth claim) uses Auger's four-criteria verification on a separate confidence axis (see DR-010, §4.1).
 
 **Scope:** This framework applies to any outbound technical content — formal papers, but also informal technical communication (emails, messages, reports) containing quantitative claims, equations, or domain-specific terminology. The verification procedures scale down: a 3-equation WhatsApp message to a stakeholder benefits from equation-checker methodology just as a 68-equation theory document does.
 
@@ -22,14 +22,15 @@ For speculative-design / design-fiction / diegetic-prototype work, an opt-in fif
 
 | Verification Layer | What It Checks |
 |-------------------|----------------|
-| Claim verification | Each claim has a verified source and appropriate confidence tier |
-| Coverage | % of claims with verified sources, by priority |
+| Claim verification | Each claim passes the checks its grounds call for and has an appropriate confidence tier |
+| Contribution validation | Each contribution passes the contribution check (Whetten) |
+| Coverage | % of claims whose checks are complete, by priority |
 | Static analysis | Automated checks (BibTeX, word count, structure) |
 | Argument flow | Logical coherence, no contradictions between sections |
 | Expert review | Co-author and domain expert feedback |
 | Oracle comparison | Alignment with author guidelines and exemplar papers |
 | Peer review simulation | Multi-pass structured review across model families (see [DR-011](../decisions/DR-011_multi-model-review-pattern.md)) |
-| Traceability | Claim → Evidence → Audit trail |
+| Traceability | Contribution → claims → grounds → sources (§6) |
 
 ---
 
@@ -37,7 +38,7 @@ For speculative-design / design-fiction / diegetic-prototype work, an opt-in fif
 
 | Priority | Meaning | Verification Required |
 |----------|---------|----------------------|
-| **P0** | Core argument — paper fails without it | Must have verified source OR own data with exact location; SUPPORTED or ESTABLISHED |
+| **P0** | Core argument: paper fails without it. Every contribution is P0 | Checks complete for every grounds item (`own:` items with exact location); SUPPORTED or ESTABLISHED, a contribution no higher than its weakest supporting claim |
 | **P1** | Supporting — strengthens argument | Should be EMERGING or above |
 | **P2** | Context/background — nice to have | SPECULATIVE acceptable, but flag for reader |
 
@@ -52,13 +53,13 @@ For speculative-design / design-fiction / diegetic-prototype work, an opt-in fif
 
 ### Section-Level Coverage Analysis
 
-Overall coverage can mask dramatic section-level variation. In the two audited projects, Discussion-section coverage ran far below Methods/Results. (This previously gave "typically 25–35%" against 100% — a band drawn from two data points whose underlying audits were removed from the repo in v2.0.0, so no reader can reproduce it. Treat the pattern as directional; measure your own sections rather than checking against a number.) This happens because Discussion sections contain ARGUMENTs and PROPOSITIONs that go unregistered when only CLAIMs are tracked.
+Overall coverage can mask dramatic section-level variation. In the two audited projects, Discussion-section coverage ran far below Methods/Results. (This previously gave "typically 25–35%" against 100% — a band drawn from two data points whose underlying audits were removed from the repo in v2.0.0, so no reader can reproduce it. Treat the pattern as directional; measure your own sections rather than checking against a number.) This happens because Discussion sections hold claims resting on other claims, and recommendations, that go unregistered when only sourced statements are tracked.
 
 **At Gate 2, check coverage by section type:**
-- **Factual sections** (Introduction, Methods, Results): expect high CLAIM coverage
-- **Interpretive sections** (Discussion, Conclusion): expect ARGUMENTs and PROPOSITIONs — if these sections show only CLAIMs, check for unregistered reasoning chains
+- **Factual sections** (Introduction, Methods, Results): expect mostly claims on `src:` and `own:` grounds, with high coverage
+- **Interpretive sections** (Discussion, Conclusion): expect claims on `claim:` grounds and normative claims. If these sections show only `src:` grounds, check for unregistered reasoning
 
-See `claim-registry.md` "Detecting Mistyped Entries" for how to identify misclassified entries.
+See `claim-registry.md` "Checks → Recording grounds" for how to spot misrecorded grounds.
 
 ---
 
@@ -66,69 +67,79 @@ See `claim-registry.md` "Detecting Mistyped Entries" for how to identify misclas
 
 ### 4.1 Unit Tests (per registry entry)
 
-**CLAIM** — each factual claim verified independently:
+Each claim gets the checks its grounds call for, one per item. The full checklists are in `claim-registry.md` → "Checks".
+
+**Source check** (each `src:` item). Two steps: the source exists; it says what the claim attributes to it (`anti-hallucination.md` Steps 0–6). Record the Source Tier.
 
 ```markdown
-CLAIM: "[Exact statement from paper]"
-├── Source: [Author et al. Year]
+S1-1: "[Exact statement from paper]"
+├── src: [Author et al. Year]
 ├── Location: [Table X / Figure Y / Section Z / Page N]
 ├── Values: [exact numbers cited]
 ├── DOI: [doi]
+├── Source Tier: [A–E]
 └── Status: [VERIFIED / NEEDS CHECK]
 ```
 
-For own data:
+**Own work** (each `own:` item). The method is named so someone else could repeat it (DR-008):
+
 ```markdown
-CLAIM: "[Exact statement from paper]"
-├── Source: Own experimental data
+S1-2: "[Exact statement from paper]"
+├── own: [what was observed or measured]
+├── Method: [protocol, script or query; date]
 ├── Data file: [path/to/data.csv]
 ├── Analysis: [path/to/script.py]
-├── Figure: [Fig. N]
-└── Status: [OWN DATA]
-```
-
-**ARGUMENT** — each reasoning chain verified using Toulmin checklist:
-
-```markdown
-ARGUMENT: "[Interpretive conclusion from Discussion/Conclusion]"
-├── Grounds: [CLAIMs that serve as evidence — list registry IDs]
-├── Warrant: [Why the evidence supports this conclusion]
-├── Qualifier: [Confidence tier — how strongly stated?]
-├── Counter-arguments: [Strongest objections addressed?]
 └── Status: [VERIFIED / NEEDS CHECK]
 ```
 
-Verification questions (adapted from Toulmin 1958, Walton 2008):
+**Warrant check** (`claim:` grounds, or several sources combined into a point none makes alone), adapted from Toulmin 1958 and Walton 2008:
+
+```markdown
+S4-1: "[Claim drawn from other claims]"
+├── Grounds: [claim: IDs; decl: IDs]
+├── Warrant: [Why the grounds support this claim, for this audience]
+├── Backing: [Support for the warrant, if the audience may not accept it]
+├── Qualifier: [The hedge; within the confidence tier?]
+├── Rebuttal: [When the step fails; strongest objections engaged?]
+└── Status: [VERIFIED / NEEDS CHECK]
+```
+
 1. Is the claim clearly stated?
-2. Are the grounds (evidence) verified CLAIMs in the registry? (SPECULATIVE grounds cannot support SUPPORTED or ESTABLISHED arguments)
+2. Are its `claim:` grounds checked in the registry? **Tier monotonicity:** a claim's tier is no higher than its weakest `claim:` ground, so SPECULATIVE grounds cannot support a SUPPORTED or ESTABLISHED claim.
 3. Is the warrant explicit and valid for the target audience?
-4. Is the qualifier calibrated to evidence strength?
-5. Are the strongest counter-arguments addressed (not strawmen)?
+4. Is the qualifier calibrated to the confidence tier?
+5. Is the rebuttal stated, and are the strongest objections addressed (not strawmen)?
 
-**PROPOSITION** — each novel contribution verified using Whetten checklist:
+**Declared starting points** (each `decl:` item). Stated in the text, Kind and Contestedness recorded; a claim resting on a contested one says so.
+
+**Normative claims** additionally need a `decl:` value among their grounds and boundary conditions in the Rebuttal. Check their quality (see `claim-registry.md` for annotated examples):
+- [ ] Not **tautological**: specific, not restating the claim ("applies when applicable")
+- [ ] Not a **moving target**: stable, not unfalsifiable ("unless future evidence...")
+- [ ] Not **overgeneralized**: bounded, not open-ended ("applies to all X")
+
+**Contribution check** (each contribution, once; validation), adapted from Whetten 1989:
 
 ```markdown
-PROPOSITION: "[Recommendation or novel contribution]"
-├── Constructs: [Key terms defined?]
-├── Relationship: [What is being proposed?]
-├── Reasoning: [Why this holds — logical warrant]
-├── Boundary conditions: [Where does this apply? Where not?]
-└── Status: [VERIFIED / NEEDS CHECK]
+C1: "[What the paper adds]"
+├── Rests on: [claim: IDs; decl: IDs]
+├── What: [Concepts defined, as decl: definitions?]
+├── How: [Their relation stated?]
+├── Why: [Rationale explicit and valid?]
+├── Who/Where/When: [Boundary conditions?]
+├── Objections engaged: [Logical, empirical, epistemological?]
+└── Status: [VALIDATED / NEEDS CHECK]
 ```
 
-Verification questions (adapted from Whetten 1989):
-1. Are all key constructs defined?
-2. Is the relationship clearly stated?
-3. Is the reasoning (warrant) explicit and valid?
-4. Are boundary conditions specified? Check quality (see `claim-registry.md` for annotated examples):
-   - [ ] Not **tautological** — boundary condition is specific, not restating the proposition ("applies when applicable")
-   - [ ] Not a **moving target** — boundary condition is stable, not unfalsifiable ("unless future evidence...")
-   - [ ] Not **overgeneralized** — boundary condition is bounded, not open-ended ("applies to all X")
-5. Does it engage with alternative explanations?
+1. Are all key concepts defined?
+2. Is the relation clearly stated?
+3. Is the rationale (Why) explicit and valid?
+4. Are boundary conditions specified, passing the three quality checks above?
+5. Does it engage objections and alternative explanations?
+6. Whetten's reviewer questions: What's new? So what? Why so? Well done? Done well? Why now? Who cares?
 
-After completing the Whetten checklist, evaluate falsifiability:
+Then evaluate falsifiability:
 - [ ] Criterion is testable (not "if we decide it's false")
-- [ ] Criterion is independent of the proposition (not circular)
+- [ ] Criterion is independent of the contribution (not circular)
 - [ ] Criterion is specific enough to be measurable
 - [ ] Criterion is not a moving target
 
@@ -151,7 +162,7 @@ Verification questions (adapted from Auger 2013, *Digital Creativity* 24:1):
 4. Has potential for harm been considered, with mitigations binding for chapter writing?
 5. Is the tier (GROUNDED / EXTRAPOLATED / PROVOCATIVE / CRITICAL) assigned, with the required prose marker present?
 
-If the marker is absent: rewrite to add it, or downgrade to EMERGING CLAIM with additional sources. PROVOCATIONs without reflexive markers are indistinguishable from authoritative-toned hallucinations.
+If the marker is absent: rewrite to add it, or register the statement as an EMERGING claim with verified sources. A provocation without a reflexive marker is indistinguishable from an authoritative-toned hallucination.
 
 ### 4.2 Static Analysis (Automated Checks)
 
@@ -166,10 +177,11 @@ If the marker is absent: rewrite to add it, or downgrade to EMERGING CLAIM with 
 
 ### 4.3 Integration Tests (Argument Flow)
 
-- CLAIMs connect logically between sections
+- Claims connect logically between sections
 - No contradictions between sections
-- ARGUMENTs in Discussion are grounded in CLAIMs from Results
-- PROPOSITIONs in Conclusion follow from ARGUMENTs in Discussion
+- Claims in Discussion rest on checked claims from Results (`claim:` grounds)
+- Recommendations in Conclusion follow from the claims they rest on
+- Each contribution rests on the claims that support it; the premise graph is acyclic (`tools/check_registry.py`)
 - Core argument flow is coherent end-to-end
 
 ### 4.4 System Tests (Full Paper)
@@ -226,14 +238,18 @@ Reference documents that define "correct" behavior:
 ```
 Paper Goal (Requirement)
     ↓
-Claim (Component)
+Contribution (root claim; validated by the contribution check)
     ↓
-Evidence (Source OR Data)
+Claims (each verified by the checks its grounds call for)
     ↓
-Verification (Audit)
+Grounds (src: / claim: / decl: / own: items)
+    ↓
+Sources and own work (source check, Source Tier; repeatable method)
     ↓
 Status (Pass / Fail)
 ```
+
+Each link is a recorded cell in the registry: a contribution's Rests on, a claim's Grounds, a source's row in the Source Verification Checklist. This is the traceable account IPCC asks of its authors (`docs/glossary.md`, traceability).
 
 ---
 
@@ -241,17 +257,19 @@ Status (Pass / Fail)
 
 ### Gate 1: Draft Complete
 - [ ] All sections drafted to page budget
-- [ ] Registry populated (CLAIMs, ARGUMENTs, PROPOSITIONs identified)
-- [ ] P0 entries identified
+- [ ] Registry populated (claims with their grounds, declared starting points, contributions)
+- [ ] P0 entries identified (every contribution is P0)
 - [ ] Data files organized
 
 ### Gate 2: Verification Complete
-- [ ] P0 entries 100% verified (CLAIMs source-checked; ARGUMENTs Toulmin-checked; PROPOSITIONs Whetten-checked)
+- [ ] P0 entries 100% verified (every grounds item checked: source checks, warrant checks, declared starting points stated, `own:` methods named)
+- [ ] Contribution check done for each contribution (validation; §4.1)
+- [ ] P0 tier floor: every P0 entry, contributions included, at SUPPORTED or ESTABLISHED (`tools/coverage.py --strict`)
 - [ ] P1 entries 90% verified
 - [ ] P1 tier floor: ≥90% at EMERGING or above — **manual check.** `tools/coverage.py` counts coverage from the Status checkbox (`_STATUS_VERIFIED_REGEX`) and reads the Confidence column only for the **P0** tier floor (DR-002), so `--strict` reports this gate met for a registry whose P1 rows are all verified and all SPECULATIVE. Priority and confidence are deliberately orthogonal axes (DR-017); do not read a green `--strict` as covering this line.
 - [ ] P2 entries 70% verified
 - [ ] Coverage checked by section type (see Section 3 — Section-Level Coverage Analysis)
-- [ ] Entry types re-checked (see `claim-registry.md` — Detecting Mistyped Entries)
+- [ ] Grounds re-checked (see `claim-registry.md`, "Checks → Recording grounds")
 - [ ] Coverage report generated from registry dashboard (timestamped snapshot for co-author review)
 - [ ] Static checks pass
 - [ ] Anti-hallucination checklist complete
@@ -270,7 +288,7 @@ For projects with PROVOCATION entries (see DR-010). Skip entirely if the registr
 - [ ] For each one, locate the required prose marker for its tier (GROUNDED / EXTRAPOLATED / PROVOCATIVE / CRITICAL) in the manuscript itself, not only in the registry
 - [ ] Marker is present at every key moment, not only on first introduction
 - [ ] No authoritative-toned speculation slides silently into apparent claim
-- [ ] Entries failing this audit are rewritten (marker added) or downgraded to EMERGING CLAIM with additional sources
+- [ ] Entries failing this audit are rewritten (marker added) or registered as EMERGING claims with verified sources
 
 ### Gate 2.7: Ethical Review (conditional — applies when the project engages contested topics)
 
@@ -297,7 +315,7 @@ For voice-driven work — books, essays, perspective pieces, or any work where t
 ### Gate 3: Review Complete
 - [ ] Co-author signoff
 - [ ] Simulated peer review ≥3.5/5.0
-- [ ] Language matches confidence levels
+- [ ] Language matches confidence levels: no qualifier above its claim's confidence tier (Step Z, `anti-hallucination.md`)
 
 ### Gate 4: Submission Ready
 - [ ] All gates passed
@@ -333,4 +351,4 @@ vv/
 
 ---
 
-*Version: 2.5 — v2.1: Gate 2.5, PROPOSITION boundary condition quality criteria, falsification checklist, Toulmin grounds tier constraint. v2.2: scope note (informal technical communication), section-level coverage analysis, mistype re-check in Gate 2. v2.3: PROVOCATION as opt-in fifth unit type for speculative-design work (DR-010). v2.4: project-conditional Gates 2.6 (Reflexivity), 2.7 (Ethical Review), 2.8 (Voice Consistency) added. v2.5: §4.6 Scope Drift Check (declared vs delivered), adapted from agent-ready-assessment (DR-017).*
+*Version: 3.0. v3.0: DR-027's claim model replaces the three unit types; contribution check (validation) in §4.1 and Gate 2; §6 traceability runs contribution → claims → grounds → sources. v2.1: Gate 2.5, PROPOSITION boundary condition quality criteria, falsification checklist, Toulmin grounds tier constraint. v2.2: scope note (informal technical communication), section-level coverage analysis, mistype re-check in Gate 2. v2.3: PROVOCATION as opt-in fifth unit type for speculative-design work (DR-010). v2.4: project-conditional Gates 2.6 (Reflexivity), 2.7 (Ethical Review), 2.8 (Voice Consistency) added. v2.5: §4.6 Scope Drift Check (declared vs delivered), adapted from agent-ready-assessment (DR-017).*

@@ -13,9 +13,11 @@ Before running the full checklist, do a quick web search to catch obvious halluc
 4. **If no DOI is cited**, a Google Scholar, publisher, or ISBN record is sufficient to proceed.
 5. If **neither** signal confirms the source → **HIGH RISK** of hallucination; investigate before proceeding
 
-   > **Absence of a DOI is not itself a risk signal.** Books, standards, reports and websites are verified by publisher page, ISBN or Scholar record. 12 of the 25 entries in this framework's own `literature/` carry no resolvable DOI (no `10.xxxx/` identifier anywhere in the entry) — including Toulmin (1958), the source underpinning the ARGUMENT unit type. (Corrected twice on 2026-08-13. It first required **both** signals, which classified every DOI-less source as HIGH RISK and contradicted the rule stated 12 lines below, in the Hard Constraints, and in the WebFetch section built for those sources. The first fix made it a plain **either**, which was worse: an adversarial review seeded a positive against it using *this file's own worked example* — `10.1109/JTEHM.2024.3410652` 404s while Scholar returns a real Lim 2024 JTEHM paper, so the conjunctive rule caught it and a disjunctive rule does not. Step 1 only *records* the DOI when Step 0 passes, so nothing downstream re-resolves it. Gating on DOI **presence** rather than DOI **success** keeps the cross-check between two independent signals — which is what Step 0 actually contributes — without failing books and reports.)
+   > **Absence of a DOI is not itself a risk signal.** Books, standards, reports and websites are verified by publisher page, ISBN or Scholar record. 12 of the 25 entries in this framework's own `literature/` carry no resolvable DOI (no `10.xxxx/` identifier anywhere in the entry) — including Toulmin (1958), the source underpinning the warrant check. (Corrected twice on 2026-08-13. It first required **both** signals, which classified every DOI-less source as HIGH RISK and contradicted the rule stated 12 lines below, in the Hard Constraints, and in the WebFetch section built for those sources. The first fix made it a plain **either**, which was worse: an adversarial review seeded a positive against it using *this file's own worked example* — `10.1109/JTEHM.2024.3410652` 404s while Scholar returns a real Lim 2024 JTEHM paper, so the conjunctive rule caught it and a disjunctive rule does not. Step 1 only *records* the DOI when Step 0 passes, so nothing downstream re-resolves it. Gating on DOI **presence** rather than DOI **success** keeps the cross-check between two independent signals — which is what Step 0 actually contributes — without failing books and reports.)
 
 This catches fabricated citations in seconds. The full 6-step checklist below remains necessary for verifying exact claims against the source content.
+
+**This checklist is the source check** for each `src:` item in the claim registry (DR-027). The source check has two steps: the source **exists** (Steps 0–3) and it **says what the claim attributes to it** (Steps 4–6). Record the Source Tier alongside.
 
 ---
 
@@ -148,7 +150,7 @@ The ladder structure is stable across applications. A companion failure mode (tr
 
 *Applies to all project types, and to every surface that states claims. That includes the manuscript and the registry, and also, where a project publishes them, its own methodology prose: docs, decision records, project instructions such as `CLAUDE.md`, and changelog rationale. That prose states the project's own findings, so it is held to the same tiers. This names the scope; it sets no cadence and requires no standing sweep. Instruments that already exist can cover that prose when you choose to check it: the framework's `agents/review-prompt.md` (or your paper-local copy) for overclaiming, and `agents/equation-checker.md` for its numbers. Steps 0–6 catch a fabricated or misread source; Step Z catches the inverse — language whose confidence tier exceeds what the evidence supports. This is the same tier-monotonicity rule the writing-guide states for prose, run here as a verification pass. (Generalized from a PROVOCATION-only check in v2.3.0 — see DR-017; the speculative-design form is now a sub-case below.)*
 
-Steps 0–6 guard against the standard hallucination: an agent invents (or misreads) a source for a real-sounding statement. Step Z surfaces the *inverse* failure mode: an agent presents a speculation, estimate, or single observation *as if* it were a sourced or stable result. Steps 0–6 *fail to fail* on these — there is often no false citation to catch — so the entry looks like a verifiable CLAIM that merely needs more sourcing. The fix is re-classification or downshift, not source-hunting.
+Steps 0–6 guard against the standard hallucination: an agent invents (or misreads) a source for a real-sounding statement. Step Z surfaces the *inverse* failure mode: an agent presents a speculation, estimate, or single observation *as if* it were a sourced or stable result. Steps 0–6 *fail to fail* on these — there is often no false citation to catch — so the entry looks like a sourced claim that merely needs more sourcing. The fix is re-recording its grounds or a downshift, not source-hunting.
 
 The diagnostic is mechanical: classify the sentence's language tier (writing-guide → Language Calibration); classify the tier its evidence actually supports; **if language > evidence, that is a Step Z finding.**
 
@@ -158,23 +160,24 @@ The diagnostic is mechanical: classify the sentence's language tier (writing-gui
 - A performance / timing / accuracy figure with no measurement protocol described.
 - An assertion phrased as if cited ("recent work shows…") with no actual citation.
 - A single estimate or opinion written in fact-shaped language.
+- A claim resting on a *contested* declared starting point whose text does not say so (DR-027).
 
 Remediation: (a) downshift the prose to the supported tier (EMERGING / SPECULATIVE), or (b) supply the missing apparatus (run log, protocol, source) that justifies the higher tier. The first is editorial; the second is engineering.
 
 ### Speculative-design sub-case (PROVOCATION projects only)
 
-*See [DR-010](../decisions/DR-010_provocation-unit-type.md).* In speculative-design / design-fiction / diegetic-prototype work the inverse failure takes a specific form: a fictional artefact presented *with a citation as if sourced* (a diegetic DSM criterion ending in `[Author, Year]`). Here the fix is type re-classification to **PROVOCATION**, not a tier downshift.
+*See [DR-010](../decisions/DR-010_provocation-unit-type.md).* In speculative-design / design-fiction / diegetic-prototype work the inverse failure takes a specific form: a fictional artefact presented *with a citation as if sourced* (a diegetic DSM criterion ending in `[Author, Year]`). Here the fix is re-registering the entry as a **provocation**, not a tier downshift.
 
 For every entry in a project with PROVOCATION enabled, before running Steps 0–6:
 
 1. **Is the source real?** Run Steps 0–6 of the checklist.
-   - If the source verifies → entry is a **CLAIM**; Steps 0–6 are sufficient.
+   - If the source verifies → the entry is a claim on `src:` grounds; Steps 0–6 are sufficient.
    - If the source cannot be verified → continue.
-2. **Could a source apply at all?** Inspect the entry against the unit-type decision tree (`templates/claim-registry.md` → "Detecting Mistyped Entries").
+2. **Could a source apply at all?** Inspect the entry against the red flags in `templates/claim-registry.md` → "Checks → Recording grounds".
    - If a source *should* apply but is fabricated → standard hallucination; remove the citation, search literature, replace with a verified source or downgrade tier.
-   - If no source can apply (the entry is a designed/fictional artefact) → reclassify as **PROVOCATION**; continue.
+   - If no source can apply (the entry is a designed/fictional artefact) → register it as a **provocation**; continue.
 3. **Assign a PROVOCATION tier** (GROUNDED / EXTRAPOLATED / PROVOCATIVE / CRITICAL — see `templates/claim-registry.md` → "PROVOCATION Confidence — Separate Axis").
-4. **Add the tier-required reflexive marker** to the prose. Without the marker, the entry remains indistinguishable from a fabricated CLAIM and must be rewritten or downgraded to EMERGING CLAIM with additional sources.
+4. **Add the tier-required reflexive marker** to the prose. Without the marker, the entry remains indistinguishable from a claim with a fabricated source and must be rewritten, or registered as an EMERGING claim with verified sources.
 
 #### Worked Example (PROVOCATION sub-case)
 

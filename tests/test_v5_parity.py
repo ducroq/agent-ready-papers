@@ -30,7 +30,7 @@ ROOT = Path(__file__).resolve().parents[1]
 #  check_registry exit, check_registry counts, findings as (check, entry_id))
 MASTER = [
     (
-        "templates/claim-registry.md",
+        "tests/fixtures/dr004/template-v4-claim-registry.md",
         None,
         1,
         [("ARGUMENT", "P0", 1, 0), ("CLAIM", "P0", 1, 0), ("CLAIM", "P1", 3, 0), ("PROPOSITION", "P1", 1, 0),
