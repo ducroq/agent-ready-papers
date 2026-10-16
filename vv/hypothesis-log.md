@@ -26,6 +26,18 @@
 
 ## Open
 
+### [2026-10-16] DR-029 predictions: Paper 1's three below-floor P0 items stay EMERGING
+
+**Position (provisional):** Under DR-029 as committed (`63a05e8`), C1, S2-2 and S3-4 all stay at EMERGING. S2-2 and S3-4 get a `partial` warrant check (S2-2: the search and sources do not cover the absence claim across all four paper types; S3-4: one trial migration, no cross-author replication); C1 is capped by S3-4. Predicted by ChatGPT from a prompt holding only the rule and the registry rows, before any re-rating (confidence: high, high, medium). Gemini, given the same prompt separately, predicted the same three outcomes at the same confidence; its stated limiting point for S3-4 (S3-2) is not one of S3-4's grounds. Both answers: `docs/work-items/dr029-trial/` (maintainer-local).
+
+**Alternative:** The blind re-rating gives S2-2 or S3-4 a `pass`, or any of the three reaches SUPPORTED.
+
+**Method:** DR-029 acceptance conditions 2-4: a fresh agent re-rates copies of the two registries from an extract of the rule; compare its outcomes with these predictions row by row.
+
+**Revisit trigger:** The re-rating is done.
+
+**Review by:** 2026-12-31
+
 ### [2026-10-16] Recording grounds item by item surfaces inferences that type labels hide
 
 **Position (provisional):** Migrating a registry from DR-004's types to DR-027's grounds-based model exposes inferences that the old CLAIM label hid. In the Paper 1 trial, 9 of 17 rows that DR-004 typed as plain claims combined sources into a point none of them makes alone (`docs/work-items/archive/2026-10-16-v5-and-draft2/v5-trial/`, maintainer-local); the constructive-lenses trial found 3 more warrants. n=2 registries, both migrated by the framework's own agent.
