@@ -47,6 +47,8 @@ Source: `feedback/2026-10-16_e7e444d.txt` (gitignored: keep it local). Page numb
 - [ ] **Worked examples hide how priority and confidence were set.** Add both to the S2-1, S3-4 and S5-1 examples; give the Whetten decomposition (S5-1) a table like Table 4 for Toulmin
 - [ ] **Abbreviations.** *Checked:* LLM is introduced (§1, l. 78) and EQUATOR is expanded at its first body use (§2), but "IS" (§2) is never introduced, and EQUATOR is used unexpanded in the abstract and Key Points. Sweep all of them
 
+- [ ] **S2-1 tier vs DR-002** (found 2026-10-16 in the glossary review): S2-1 is ESTABLISHED on one source (the EQUATOR website, the primary record), while DR-002's ESTABLISHED requires "multiple independent sources". Either add an independent source, re-tier to SUPPORTED, or record why a primary record counts
+
 **B. Prose and structure (Claude drafts, maintainer approves)**
 - [ ] Shorten §1 and §2
 - [ ] New section names (propose a set)
