@@ -224,6 +224,7 @@ Sources consulted during the development of this project, particularly for DR-00
 | L106 | Divya & Alamelu | 2026 | Integrating DeepL Write and Claude AI to enhance argumentative writing competence of engineering students in India | Frontiers in Artificial Intelligence | [divya-alamelu-2026-toulmin-rubric](sources/divya-alamelu-2026-toulmin-rubric.md) | READ (method, 2026-10-16) |
 | L107 | Yang | 2022 | An empirical study on the scaffolding Chinese university students' English argumentative writing based on toulmin model | Heliyon | [yang-2022-toulmin-scaffolding](sources/yang-2022-toulmin-scaffolding.md) | READ (JATS XML) |
 | L108 | Farias | 2015 | Reflections on Theoretical Contribution | BAR – Brazilian Administration Review (editorial) | [farias-2015-reflections-contribution](sources/farias-2015-reflections-contribution.md) | READ (full) |
+| L109 | McArthur et al.; JBI | 2025; 2026 | Critical appraisal of textual evidence; Checklist for Textual Evidence: Expert Opinion | JBI Evid Synth; JBI | [mcarthur-2025-jbi-textual-evidence](sources/mcarthur-2025-jbi-textual-evidence.md) | PARTIAL (paper abstract; checklist full text) |
 
 ### Readability, Engagement and Homogenisation
 

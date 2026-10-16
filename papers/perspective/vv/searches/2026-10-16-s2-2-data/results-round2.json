@@ -1,0 +1,1730 @@
+[
+ {
+  "id": "E7",
+  "source": "epmc_cited",
+  "query": "TITLE_ABS:(\"reporting guideline\" OR \"reporting guidelines\" OR \"reporting checklist\") AND TITLE_ABS:(conceptual OR theoretical OR perspective OR \"position paper\" OR argument OR reasoning OR opinion OR commentary OR editorial OR essay)",
+  "count": 586,
+  "items": [
+   [
+    "The PRISMA statement for reporting systematic reviews and meta-analyses of studies that evaluate healthcare interventions: explanation and elaboration.",
+    "10.1136/bmj.b2700",
+    "2009",
+    "BMJ"
+   ],
+   [
+    "The PRISMA statement for reporting systematic reviews and meta-analyses of studies that evaluate health care interventions: explanation and elaboration.",
+    "10.1371/journal.pmed.1000100",
+    "2009",
+    "PLoS Med"
+   ],
+   [
+    "The PRISMA statement for reporting systematic reviews and meta-analyses of studies that evaluate health care interventions: explanation and elaboration.",
+    "10.1016/j.jclinepi.2009.06.006",
+    "2009",
+    "J Clin Epidemiol"
+   ],
+   [
+    "The PRISMA statement for reporting systematic reviews and meta-analyses of studies that evaluate health care interventions: explanation and elaboration.",
+    "10.7326/0003-4819-151-4-200908180-00136",
+    "2009",
+    "Ann Intern Med"
+   ],
+   [
+    "Implementation strategies: recommendations for specifying and reporting.",
+    "10.1186/1748-5908-8-139",
+    "2013",
+    "Implement Sci"
+   ],
+   [
+    "Consolidated Health Economic Evaluation Reporting Standards (CHEERS)--explanation and elaboration: a report of the ISPOR Health Economic Evaluation Publication Guidelines Good Reporting Practices Task Force.",
+    "10.1016/j.jval.2013.02.002",
+    "2013",
+    "Value Health"
+   ],
+   [
+    "GRIPP2 reporting checklists: tools to improve reporting of patient and public involvement in research.",
+    "10.1136/bmj.j3453",
+    "2017",
+    "BMJ"
+   ],
+   [
+    "The CARE guidelines: consensus-based clinical case reporting guideline development.",
+    "10.1111/head.12246",
+    "2013",
+    "Headache"
+   ],
+   [
+    "CONSORT 2025 statement: updated guideline for reporting randomised trials.",
+    "10.1136/bmj-2024-081123",
+    "2025",
+    "BMJ"
+   ],
+   [
+    "The CARE Guidelines: Consensus-based Clinical Case Reporting Guideline Development.",
+    "10.7453/gahmj.2013.008",
+    "2013",
+    "Glob Adv Health Med"
+   ],
+   [
+    "The CARE guidelines: consensus-based clinical case reporting guideline development.",
+    "10.1186/1752-1947-7-223",
+    "2013",
+    "J Med Case Rep"
+   ],
+   [
+    "Reporting guideline for the early-stage clinical evaluation of decision support systems driven by artificial intelligence: DECIDE-AI.",
+    "10.1038/s41591-022-01772-9",
+    "2022",
+    "Nat Med"
+   ],
+   [
+    "GRIPP2 reporting checklists: tools to improve reporting of patient and public involvement in research.",
+    "10.1186/s40900-017-0062-2",
+    "2017",
+    "Res Involv Engagem"
+   ],
+   [
+    "The CARE guidelines: consensus-based clinical case report guideline development.",
+    "10.1016/j.jclinepi.2013.08.003",
+    "2014",
+    "J Clin Epidemiol"
+   ],
+   [
+    "SPIRIT 2025 statement: updated guideline for protocols of randomised trials.",
+    "10.1136/bmj-2024-081477",
+    "2025",
+    "BMJ"
+   ],
+   [
+    "Use of Delphi in health sciences research: A narrative review.",
+    "10.1097/md.0000000000032829",
+    "2023",
+    "Medicine (Baltimore)"
+   ],
+   [
+    "Guidelines for reporting non-randomised pilot and feasibility studies.",
+    "10.1186/s40814-019-0499-1",
+    "2019",
+    "Pilot Feasibility Stud"
+   ],
+   [
+    "Reporting randomised trials of social and psychological interventions: the CONSORT-SPI 2018 Extension.",
+    "10.1186/s13063-018-2733-1",
+    "2018",
+    "Trials"
+   ],
+   [
+    "CONSORT 2025 statement: updated guideline for reporting randomised trials.",
+    "10.1016/s0140-6736(25)00672-5",
+    "2025",
+    "Lancet"
+   ],
+   [
+    "Editorial: Review Articles, Systematic Reviews, Meta-Analysis, and the Updated Preferred Reporting Items for Systematic Reviews and Meta-Analyses (PRISMA) 2020 Guidelines.",
+    "10.12659/msm.934475",
+    "2021",
+    "Med Sci Monit"
+   ],
+   [
+    "Global Proportion of Disordered Eating in Children and Adolescents: A Systematic Review and Meta-analysis.",
+    "10.1001/jamapediatrics.2022.5848",
+    "2023",
+    "JAMA Pediatr"
+   ],
+   [
+    "CONSORT 2025 Statement: Updated Guideline for Reporting Randomized Trials.",
+    "10.1001/jama.2025.4347",
+    "2025",
+    "JAMA"
+   ],
+   [
+    "The REporting of Studies Conducted Using Observational Routinely-Collected Health Data (RECORD) Statement: Methods for Arriving at Consensus and Developing Reporting Guidelines.",
+    "10.1371/journal.pone.0125620",
+    "2015",
+    "PLoS One"
+   ],
+   [
+    "CONSORT 2025 statement: updated guideline for reporting randomized trials.",
+    "10.1038/s41591-025-03635-5",
+    "2025",
+    "Nat Med"
+   ],
+   [
+    "Barriers and facilitators to implementing evidence-based guidelines in long-term care: a qualitative evidence synthesis.",
+    "10.1186/s13012-021-01140-0",
+    "2021",
+    "Implement Sci"
+   ],
+   [
+    "A systematic scoping review of adherence to reporting guidelines in health care literature.",
+    "10.2147/jmdh.s43952",
+    "2013",
+    "J Multidiscip Healthc"
+   ],
+   [
+    "Physical Activity and Cognitive Decline Among Older Adults: A Systematic Review and Meta-Analysis.",
+    "10.1001/jamanetworkopen.2023.54285",
+    "2024",
+    "JAMA Netw Open"
+   ],
+   [
+    "Reporting Formative Qualitative Research to Support the Development of Quantitative Preference Study Protocols and Corresponding Survey Instruments: Guidelines for Authors and Reviewers.",
+    "10.1007/s40271-019-00401-x",
+    "2020",
+    "Patient"
+   ],
+   [
+    "The CARE guidelines: consensus-based clinical case reporting guideline development.",
+    "10.1136/bcr-2013-201554",
+    "2013",
+    "BMJ Case Rep"
+   ],
+   [
+    "User-centered design and the development of patient decision aids: protocol for a systematic review.",
+    "10.1186/2046-4053-4-11",
+    "2015",
+    "Syst Rev"
+   ]
+  ]
+ },
+ {
+  "id": "E8",
+  "source": "epmc_cited",
+  "query": "TITLE_ABS:(\"reporting guideline\" OR \"reporting guidelines\" OR checklist) AND TITLE_ABS:(\"non-empirical\" OR \"nonempirical\" OR \"theoretical papers\" OR \"conceptual papers\" OR \"opinion papers\" OR \"position papers\" OR \"perspective articles\")",
+  "count": 59,
+  "items": [
+   [
+    "Critical thinking in nursing clinical practice, education and research: From attitudes to virtue.",
+    "10.1111/nup.12332",
+    "2021",
+    "Nurs Philos"
+   ],
+   [
+    "Patients and Healthcare Providers' Perspectives on Patient Experience Factors and a Model of Patient-Centered Care Communication: A Systematic Review.",
+    "10.3390/healthcare12111090",
+    "2024",
+    "Healthcare (Basel)"
+   ],
+   [
+    "Barriers and facilitators for the inclusion of fertility care in reproductive health policies in Africa: a qualitative evidence synthesis.",
+    "10.1093/humupd/dmab040",
+    "2022",
+    "Hum Reprod Update"
+   ],
+   [
+    "Framing and scientific uncertainty in nicotine vaping product regulation: An examination of competing narratives among health and medical organisations in the UK, Australia and New Zealand.",
+    "10.1016/j.drugpo.2020.102699",
+    "2020",
+    "Int J Drug Policy"
+   ],
+   [
+    "Patient and public involvement in Nordic healthcare research: a scoping review of contemporary practice.",
+    "10.1186/s40900-023-00490-x",
+    "2023",
+    "Res Involv Engagem"
+   ],
+   [
+    "Design, Use, and Effects of Sex Dolls and Sex Robots: Scoping Review.",
+    "10.2196/18551",
+    "2020",
+    "J Med Internet Res"
+   ],
+   [
+    "Determinants influencing the implementation of multifactorial falls risk assessment and multidomain interventions in community- dwelling older people: a systematic review.",
+    "10.1093/ageing/afae123",
+    "2024",
+    "Age Ageing"
+   ],
+   [
+    "Spinal manipulation and mobilisation in the treatment of infants, children, and adolescents: a systematic scoping review.",
+    "10.1186/s12887-022-03781-6",
+    "2022",
+    "BMC Pediatr"
+   ],
+   [
+    "An umbrella review of systematic reviews of the evidence of a causal relationship between periodontal disease and adverse pregnancy outcomes: A position paper from the Canadian Dental Hygienists Association.",
+    "",
+    "2020",
+    "Can J Dent Hyg"
+   ],
+   [
+    "Clinical decision fatigue: a systematic and scoping review with meta-synthesis.",
+    "10.1136/fmch-2024-003033",
+    "2025",
+    "Fam Med Community Health"
+   ],
+   [
+    "Cost-Effectiveness of Treatment Options for Neuropathic Pain: a Systematic Review.",
+    "10.1007/s40273-018-00761-6",
+    "2019",
+    "Pharmacoeconomics"
+   ],
+   [
+    "An umbrella review of systematic reviews of the evidence of a causal relationship between periodontal disease and cardiovascular diseases: Position paper from the Canadian Dental Hygienists Association.",
+    "",
+    "2020",
+    "Can J Dent Hyg"
+   ],
+   [
+    "Concurrent use of prescription drugs and herbal medicinal products in older adults: a systematic review protocol.",
+    "10.1186/s13643-016-0244-2",
+    "2016",
+    "Syst Rev"
+   ],
+   [
+    "The Role of Biotics as a Therapeutic Strategy for Oral Mucositis - A Systematic Review.",
+    "10.1007/s12602-023-10116-z",
+    "2024",
+    "Probiotics Antimicrob Proteins"
+   ],
+   [
+    "Midwives' interventions for reducing fear of childbirth in pregnant women: a scoping review.",
+    "10.11124/jbies-21-00382",
+    "2022",
+    "JBI Evid Synth"
+   ],
+   [
+    "Value in Oral and Maxillofacial Surgery: A Systematic Review of Economic Analyses.",
+    "10.1016/j.joms.2017.05.007",
+    "2017",
+    "J Oral Maxillofac Surg"
+   ],
+   [
+    "A bachelor's degree for entering the nursing profession: A scoping review for supporting informed health care policies.",
+    "10.1016/j.ijnsa.2023.100171",
+    "2024",
+    "Int J Nurs Stud Adv"
+   ],
+   [
+    "Blockchain for Securing AI-Driven Healthcare Systems: A Systematic Review and Future Research Perspectives.",
+    "10.7759/cureus.83136",
+    "2025",
+    "Cureus"
+   ],
+   [
+    "The association between hospital financial performance and the quality of care-a scoping review protocol.",
+    "10.1186/s13643-021-01778-3",
+    "2021",
+    "Syst Rev"
+   ],
+   [
+    "An umbrella review of systematic reviews of the evidence of a causal relationship between periodontal microbes and respiratory diseases: Position paper from the Canadian Dental Hygienists Association.",
+    "",
+    "2020",
+    "Can J Dent Hyg"
+   ],
+   [
+    "A systematic review of patient risk factors for complications following stoma formation among adults undergoing colorectal surgery.",
+    "10.1007/s00384-023-04523-5",
+    "2023",
+    "Int J Colorectal Dis"
+   ],
+   [
+    "Strategies and tools to learn from work that goes well within healthcare patient safety practices: a mixed methods systematic review.",
+    "10.1186/s12913-025-12680-2",
+    "2025",
+    "BMC Health Serv Res"
+   ],
+   [
+    "Monitoring the appropriateness of air medical transports.",
+    "10.1016/s1067-991x(05)80339-6",
+    "1994",
+    "Air Med J"
+   ],
+   [
+    "The role of proinflammatory cytokines in the detection of early pressure ulcer development: a systematic review.",
+    "10.12968/jowc.2023.32.2.83",
+    "2023",
+    "J Wound Care"
+   ],
+   [
+    "Ethical Challenges and Strategies in Nursing Doctoral Supervision: A Systematic Mixed-Method Review.",
+    "10.1111/jan.70298",
+    "2026",
+    "J Adv Nurs"
+   ],
+   [
+    "Tracheostomy care of non-ventilated patients and COVID considerations: A scoping review of clinical practice guidelines and consensus statements.",
+    "10.1111/jocn.17116",
+    "2024",
+    "J Clin Nurs"
+   ],
+   [
+    "Effectiveness of HIV prevention interventions targeting long-distance truck drivers: protocol for a systematic review and meta-analysis of global evidence.",
+    "10.1136/bmjopen-2024-090062",
+    "2024",
+    "BMJ Open"
+   ],
+   [
+    "Air quality self-management in asthmatic patients with COPD: An integrative review for developing nursing interventions to prevent exacerbations.",
+    "10.1016/j.ijnss.2023.12.003",
+    "2024",
+    "Int J Nurs Sci"
+   ],
+   [
+    "Hospitals' financial performance across European countries: a scoping review protocol.",
+    "10.1136/bmjopen-2023-077880",
+    "2024",
+    "BMJ Open"
+   ],
+   [
+    "Clinical deterioration as a nurse sensitive indicator in the out-of-hospital context: A scoping review.",
+    "10.1111/jocn.16925",
+    "2024",
+    "J Clin Nurs"
+   ]
+  ]
+ },
+ {
+  "id": "E9",
+  "source": "epmc_cited",
+  "query": "TITLE_ABS:(\"text and opinion\" OR \"opinion papers\" OR \"expert opinion papers\") AND TITLE_ABS:(appraisal OR checklist OR tool)",
+  "count": 125,
+  "items": [
+   [
+    "Economic aspects of bladder cancer: what are the benefits and costs?",
+    "10.1007/s00345-009-0395-z",
+    "2009",
+    "World J Urol"
+   ],
+   [
+    "Innovations in the systematic review of text and opinion.",
+    "10.1097/xeb.0000000000000060",
+    "2015",
+    "Int J Evid Based Healthc"
+   ],
+   [
+    "Health professionals' experience of teamwork education in acute hospital settings: a systematic review of qualitative literature.",
+    "10.11124/jbisrir-2016-1843",
+    "2016",
+    "JBI Database System Rev Implement Rep"
+   ],
+   [
+    "Preparticipation evaluation: an evidence-based review.",
+    "10.1097/00042752-200405000-00002",
+    "2004",
+    "Clin J Sport Med"
+   ],
+   [
+    "The relationship between specialty nurse certification and patient, nurse and organizational outcomes: A systematic review.",
+    "10.1016/j.ijnurstu.2019.02.001",
+    "2019",
+    "Int J Nurs Stud"
+   ],
+   [
+    "Critical thinking in nursing clinical practice, education and research: From attitudes to virtue.",
+    "10.1111/nup.12332",
+    "2021",
+    "Nurs Philos"
+   ],
+   [
+    "AAPM task group report 273: Recommendations on best practices for AI and machine learning for computer-aided diagnosis in medical imaging.",
+    "10.1002/mp.16188",
+    "2023",
+    "Med Phys"
+   ],
+   [
+    "Monitoring performance of clinical artificial intelligence in health care: a scoping review.",
+    "10.11124/jbies-24-00042",
+    "2024",
+    "JBI Evid Synth"
+   ],
+   [
+    "Patients' involvement in improvement initiatives: a qualitative systematic review.",
+    "10.11124/jbisrir-2015-1452",
+    "2015",
+    "JBI Database System Rev Implement Rep"
+   ],
+   [
+    "Experiences of undergraduate nursing students in peer assisted learning in clinical practice: a qualitative systematic review.",
+    "10.11124/jbisrir-2016-003295",
+    "2018",
+    "JBI Database System Rev Implement Rep"
+   ],
+   [
+    "A systematic review and quality analysis of pediatric traumatic brain injury clinical practice guidelines.",
+    "10.1371/journal.pone.0201550",
+    "2018",
+    "PLoS One"
+   ],
+   [
+    "Barriers and facilitators for the inclusion of fertility care in reproductive health policies in Africa: a qualitative evidence synthesis.",
+    "10.1093/humupd/dmab040",
+    "2022",
+    "Hum Reprod Update"
+   ],
+   [
+    "The importance of academic literacy for undergraduate nursing students and its relationship to future professional clinical practice: A systematic review.",
+    "10.1016/j.nedt.2017.09.020",
+    "2018",
+    "Nurse Educ Today"
+   ],
+   [
+    "Retention strategies and barriers for millennial nurses: a scoping review.",
+    "10.11124/jbies-20-00577",
+    "2022",
+    "JBI Evid Synth"
+   ],
+   [
+    "The future direction of imaging in prostate cancer: MRI with or without contrast injection.",
+    "10.1111/andr.13041",
+    "2021",
+    "Andrology"
+   ],
+   [
+    "The role of morbidity and mortality rounds in medical education: a scoping review.",
+    "10.1111/medu.13234",
+    "2017",
+    "Med Educ"
+   ],
+   [
+    "Framing and scientific uncertainty in nicotine vaping product regulation: An examination of competing narratives among health and medical organisations in the UK, Australia and New Zealand.",
+    "10.1016/j.drugpo.2020.102699",
+    "2020",
+    "Int J Drug Policy"
+   ],
+   [
+    "Factors associated with constructive staff-family relationships in the care of older adults in the institutional setting.",
+    "10.1111/j.1479-6988.2006.00053.x",
+    "2006",
+    "Int J Evid Based Healthc"
+   ],
+   [
+    "Textual evidence systematic reviews series paper 3: critical appraisal of evidence from narrative, opinion, and policy.",
+    "10.11124/jbies-24-00293",
+    "2025",
+    "JBI Evid Synth"
+   ],
+   [
+    "Beyond enrolments: a systematic review exploring the factors affecting the retention of Aboriginal and Torres Strait Islander health students in the tertiary education system.",
+    "10.1186/s12939-019-1038-7",
+    "2019",
+    "Int J Equity Health"
+   ],
+   [
+    "Evaluating Monitoring Guidelines of Clozapine-Induced Adverse Effects: a Systematic Review.",
+    "10.1007/s40263-023-01054-z",
+    "2024",
+    "CNS Drugs"
+   ],
+   [
+    "Determinants influencing the implementation of multifactorial falls risk assessment and multidomain interventions in community- dwelling older people: a systematic review.",
+    "10.1093/ageing/afae123",
+    "2024",
+    "Age Ageing"
+   ],
+   [
+    "Spinal manipulation and mobilisation in the treatment of infants, children, and adolescents: a systematic scoping review.",
+    "10.1186/s12887-022-03781-6",
+    "2022",
+    "BMC Pediatr"
+   ],
+   [
+    "Management of pregnant and postnatal women with pre-existing diabetes or cardiac disease using multi-disciplinary team models of care: a systematic review.",
+    "10.1186/s12884-014-0428-5",
+    "2014",
+    "BMC Pregnancy Childbirth"
+   ],
+   [
+    "Organisational enablers and barriers to the recognition of sexuality in aged care: A systematic review.",
+    "10.1111/jonm.12743",
+    "2019",
+    "J Nurs Manag"
+   ],
+   [
+    "Nurse experiences of medication administration to people with swallowing difficulties living in aged care facilities: a systematic review of qualitative evidence.",
+    "10.11124/jbisrir-2016-003334",
+    "2018",
+    "JBI Database System Rev Implement Rep"
+   ],
+   [
+    "Cost-Effectiveness of Treatment Options for Neuropathic Pain: a Systematic Review.",
+    "10.1007/s40273-018-00761-6",
+    "2019",
+    "Pharmacoeconomics"
+   ],
+   [
+    "Patient experiences of partnering with healthcare professionals for hand hygiene compliance: a systematic review.",
+    "10.11124/jbisrir-2016-003001",
+    "2017",
+    "JBI Database System Rev Implement Rep"
+   ],
+   [
+    "Characteristics and processes of registered nurses' clinical reasoning and factors relating to the use of clinical reasoning in practice: a scoping review.",
+    "10.11124/jbies-21-00373",
+    "2023",
+    "JBI Evid Synth"
+   ],
+   [
+    "Moving Food Assistance into the Digital Age: A Scoping Review.",
+    "10.3390/ijerph19031328",
+    "2022",
+    "Int J Environ Res Public Health"
+   ]
+  ]
+ },
+ {
+  "id": "E10",
+  "source": "epmc_cited",
+  "query": "TITLE_ABS:(\"narrative review\" OR \"narrative reviews\") AND TITLE_ABS:(\"reporting guideline\" OR \"quality assessment\" OR \"appraisal tool\" OR checklist OR \"scale\")",
+  "count": 3361,
+  "items": [
+   [
+    "SANRA-a scale for the quality assessment of narrative review articles.",
+    "10.1186/s41073-019-0064-8",
+    "2019",
+    "Res Integr Peer Rev"
+   ],
+   [
+    "The clinical effectiveness and cost-effectiveness of bariatric (weight loss) surgery for obesity: a systematic review and economic evaluation.",
+    "10.3310/hta13410",
+    "2009",
+    "Health Technol Assess"
+   ],
+   [
+    "Diagnostic Testing for Severe Acute Respiratory Syndrome-Related Coronavirus 2: A Narrative Review.",
+    "10.7326/m20-1301",
+    "2020",
+    "Ann Intern Med"
+   ],
+   [
+    "Annual Research Review: Adolescent mental health in the digital age: facts, fears, and future directions.",
+    "10.1111/jcpp.13190",
+    "2020",
+    "J Child Psychol Psychiatry"
+   ],
+   [
+    "Barthel index for stroke trials: development, properties, and application.",
+    "10.1161/strokeaha.110.598540",
+    "2011",
+    "Stroke"
+   ],
+   [
+    "Implementing Measurement-Based Care in Behavioral Health: A Review.",
+    "10.1001/jamapsychiatry.2018.3329",
+    "2019",
+    "JAMA Psychiatry"
+   ],
+   [
+    "Digital technology for treating and preventing mental disorders in low-income and middle-income countries: a narrative review of the literature.",
+    "10.1016/s2215-0366(17)30096-2",
+    "2017",
+    "Lancet Psychiatry"
+   ],
+   [
+    "Mediterranean diet, cognitive function, and dementia: a systematic review.",
+    "10.1097/ede.0b013e3182944410",
+    "2013",
+    "Epidemiology"
+   ],
+   [
+    "Consumption of ultra-processed foods and health outcomes: a systematic review of epidemiological studies.",
+    "10.1186/s12937-020-00604-1",
+    "2020",
+    "Nutr J"
+   ],
+   [
+    "The Alzheimer's Disease Assessment Scale-Cognitive Subscale (ADAS-Cog): Modifications and Responsiveness in\u00a0Pre-Dementia Populations. A Narrative Review.",
+    "10.3233/jad-170991",
+    "2018",
+    "J Alzheimers Dis"
+   ],
+   [
+    "Compassion fatigue: A meta-narrative review of the healthcare literature.",
+    "10.1016/j.ijnurstu.2017.01.003",
+    "2017",
+    "Int J Nurs Stud"
+   ],
+   [
+    "An update on the evidence for pathogenic mechanisms that may link periodontitis and diabetes.",
+    "10.1111/jcpe.12803",
+    "2018",
+    "J Clin Periodontol"
+   ],
+   [
+    "Global burden of antenatal depression and its association with adverse birth outcomes: an umbrella review.",
+    "10.1186/s12889-020-8293-9",
+    "2020",
+    "BMC Public Health"
+   ],
+   [
+    "Achieving Goal-Concordant Care: A Conceptual Model and Approach to Measuring Serious Illness Communication and Its Impact.",
+    "10.1089/jpm.2017.0459",
+    "2018",
+    "J Palliat Med"
+   ],
+   [
+    "Reporting bias in medical research - a narrative review.",
+    "10.1186/1745-6215-11-37",
+    "2010",
+    "Trials"
+   ],
+   [
+    "The Minderoo-Monaco Commission on Plastics and Human Health.",
+    "10.5334/aogh.4056",
+    "2023",
+    "Ann Glob Health"
+   ],
+   [
+    "Sex differences in the burden of type 2 diabetes and cardiovascular risk across the life course.",
+    "10.1007/s00125-019-4939-5",
+    "2019",
+    "Diabetologia"
+   ],
+   [
+    "[Health professionals facing the coronavirus disease 2019 (COVID-19) pandemic: What are the mental health risks?]",
+    "10.1016/j.encep.2020.04.008",
+    "2020",
+    "Encephale"
+   ],
+   [
+    "Prevalence of perinatal depression and its determinants in Mainland China: A systematic review and meta-analysis.",
+    "10.1016/j.jad.2020.07.046",
+    "2020",
+    "J Affect Disord"
+   ],
+   [
+    "Predicting activities after stroke: what is clinically relevant?",
+    "10.1111/j.1747-4949.2012.00967.x",
+    "2013",
+    "Int J Stroke"
+   ],
+   [
+    "Narrative review of models and success factors for scaling up public health interventions.",
+    "10.1186/s13012-015-0301-6",
+    "2015",
+    "Implement Sci"
+   ],
+   [
+    "The health impact of the 2014-15 Ebola outbreak.",
+    "10.1016/j.puhe.2016.10.020",
+    "2017",
+    "Public Health"
+   ],
+   [
+    "Editorial: Review Articles, Systematic Reviews, Meta-Analysis, and the Updated Preferred Reporting Items for Systematic Reviews and Meta-Analyses (PRISMA) 2020 Guidelines.",
+    "10.12659/msm.934475",
+    "2021",
+    "Med Sci Monit"
+   ],
+   [
+    "Development of medical checklists for improved quality of patient care.",
+    "10.1093/intqhc/mzm062",
+    "2008",
+    "Int J Qual Health Care"
+   ],
+   [
+    "Uses and misuses of the STROBE statement: bibliographic study.",
+    "10.1136/bmjopen-2010-000048",
+    "2011",
+    "BMJ Open"
+   ],
+   [
+    "The effectiveness of Internet-based e-learning on clinician behaviour and patient outcomes: A systematic review.",
+    "10.1016/j.ijnurstu.2016.01.011",
+    "2016",
+    "Int J Nurs Stud"
+   ],
+   [
+    "Obesity or BMI Paradox? Beneath the Tip of the Iceberg.",
+    "10.3389/fnut.2020.00053",
+    "2020",
+    "Front Nutr"
+   ],
+   [
+    "Frailty for Perioperative Clinicians: A Narrative Review.",
+    "10.1213/ane.0000000000004602",
+    "2020",
+    "Anesth Analg"
+   ],
+   [
+    "A review of lesbian, gay, bisexual, trans and intersex (LGBTI) health and healthcare inequalities.",
+    "10.1093/eurpub/cky226",
+    "2019",
+    "Eur J Public Health"
+   ],
+   [
+    "Mentalizing Makes Parenting Work: A Review about Parental Reflective Functioning and Clinical Interventions to Improve It.",
+    "10.3389/fpsyg.2017.00014",
+    "2017",
+    "Front Psychol"
+   ]
+  ]
+ },
+ {
+  "id": "E11",
+  "source": "epmc_cited",
+  "query": "TITLE_ABS:(\"concept analysis\") AND TITLE_ABS:(\"reporting\" OR checklist OR \"quality appraisal\" OR guideline)",
+  "count": 153,
+  "items": [
+   [
+    "Making sense of complexity in context and implementation: the Context and Implementation of Complex Interventions (CICI) framework.",
+    "10.1186/s13012-017-0552-5",
+    "2017",
+    "Implement Sci"
+   ],
+   [
+    "Health information seeking behavior.",
+    "10.1177/1049732307305199",
+    "2007",
+    "Qual Health Res"
+   ],
+   [
+    "A concept analysis of uncertainty in illness.",
+    "10.1111/j.1547-5069.2002.00127.x",
+    "2002",
+    "J Nurs Scholarsh"
+   ],
+   [
+    "Developing a mid-range theory of patient advocacy through concept analysis.",
+    "10.1111/j.1365-2648.2006.04096.x",
+    "2007",
+    "J Adv Nurs"
+   ],
+   [
+    "Reversing frailty in older adults: a scoping review.",
+    "10.1186/s12877-023-04309-y",
+    "2023",
+    "BMC Geriatr"
+   ],
+   [
+    "Clinical judgement in nursing - An evolutionary concept analysis.",
+    "10.1111/jocn.16469",
+    "2023",
+    "J Clin Nurs"
+   ],
+   [
+    "Public involvement in health and social sciences research: A concept analysis.",
+    "10.1111/hex.12825",
+    "2018",
+    "Health Expect"
+   ],
+   [
+    "Postoperative cognitive dysfunction: a concept analysis.",
+    "10.1007/s40520-024-02779-7",
+    "2024",
+    "Aging Clin Exp Res"
+   ],
+   [
+    "Understanding Elderspeak: An Evolutionary Concept Analysis.",
+    "10.1093/geroni/igab023",
+    "2021",
+    "Innov Aging"
+   ],
+   [
+    "A concept analysis of undergraduate nursing students speaking up for patient safety in the patient care environment.",
+    "10.1111/jan.13028",
+    "2016",
+    "J Adv Nurs"
+   ],
+   [
+    "Satisfaction of patients: a right to health indicator?",
+    "10.1016/j.healthpol.2010.11.001",
+    "2011",
+    "Health Policy"
+   ],
+   [
+    "A concept analysis of intimacy.",
+    "10.3109/01612849109058207",
+    "1991",
+    "Issues Ment Health Nurs"
+   ],
+   [
+    "Postpartum sexual health: a principle-based concept analysis.",
+    "10.1111/jan.12692",
+    "2015",
+    "J Adv Nurs"
+   ],
+   [
+    "The meaning of care dependency as shared by care givers and care recipients: a concept analysis.",
+    "10.1111/j.1365-2648.2007.04456.x",
+    "2007",
+    "J Adv Nurs"
+   ],
+   [
+    "Moral sensitivity of nursing students: a systematic review.",
+    "10.1186/s12912-024-01713-6",
+    "2024",
+    "BMC Nurs"
+   ],
+   [
+    "Primary cam morphology; bump, burden or bog-standard? A concept analysis.",
+    "10.1136/bjsports-2020-103308",
+    "2021",
+    "Br J Sports Med"
+   ],
+   [
+    "Transforming acute pain management in children: A concept analysis to develop a new model of nurse, child and parent partnership.",
+    "10.1111/jocn.16625",
+    "2023",
+    "J Clin Nurs"
+   ],
+   [
+    "Infertility-related stress: A concept analysis.",
+    "10.1111/nuf.12683",
+    "2022",
+    "Nurs Forum"
+   ],
+   [
+    "Concept analysis of nurses' identification of pain in demented patients in a nursing home: development of a hybrid model.",
+    "10.1016/j.pmn.2010.05.007",
+    "2011",
+    "Pain Manag Nurs"
+   ],
+   [
+    "Violence against nurses by patients and visitors in the emergency department: A concept analysis.",
+    "10.1111/jonm.13721",
+    "2022",
+    "J Nurs Manag"
+   ],
+   [
+    "The meaning of preparedness for informal caregivers of older adults: A concept analysis.",
+    "10.1111/jan.15999",
+    "2024",
+    "J Adv Nurs"
+   ],
+   [
+    "Stigma among transgender and gender-diverse people accessing healthcare: A concept analysis.",
+    "10.1111/jan.15040",
+    "2022",
+    "J Adv Nurs"
+   ],
+   [
+    "The Factors Influencing Meal Satisfaction in Older Adults: A Systematic Review and Meta-analysis.",
+    "10.1016/j.anr.2019.06.001",
+    "2019",
+    "Asian Nurs Res (Korean Soc Nurs Sci)"
+   ],
+   [
+    "Ethical conflict in nursing: A concept analysis.",
+    "10.1111/jocn.16563",
+    "2023",
+    "J Clin Nurs"
+   ],
+   [
+    "Nurses' knowledge, skills and personal attributes for competent health education practice: An instrument development and psychometric validation study.",
+    "10.1111/jan.14632",
+    "2021",
+    "J Adv Nurs"
+   ],
+   [
+    "Communication challenges in social isolation, subjective cognitive decline, and mental health status in older adults: A scoping review (2019-2021).",
+    "10.1111/ppc.13115",
+    "2022",
+    "Perspect Psychiatr Care"
+   ],
+   [
+    "Introduction to the Online Nursing Education Best Practices Guide.",
+    "10.1177/2377960820937290",
+    "2020",
+    "SAGE Open Nurs"
+   ],
+   [
+    "Self-Efficacy in People With Chronic Disease: An Evolutionary Concept Analysis.",
+    "10.1002/nop2.70276",
+    "2025",
+    "Nurs Open"
+   ],
+   [
+    "Legacy in paediatrics: A concept analysis.",
+    "10.1111/jan.15922",
+    "2024",
+    "J Adv Nurs"
+   ],
+   [
+    "\"What Do We Know about Hope in Nursing Care?\": A Synthesis of Concept Analysis Studies.",
+    "10.3390/healthcare11202739",
+    "2023",
+    "Healthcare (Basel)"
+   ]
+  ]
+ },
+ {
+  "id": "E12",
+  "source": "epmc_cited",
+  "query": "TITLE_ABS:(argument OR argumentation OR warrant OR \"logical reasoning\") AND TITLE_ABS:(checklist OR \"reporting guideline\" OR \"appraisal tool\") AND TITLE_ABS:(manuscript OR \"scientific paper\" OR \"scholarly\" OR \"journal article\")",
+  "count": 4,
+  "items": [
+   [
+    "Efficacy of fetal stem cell transplantation in autism spectrum disorders: an open-labeled pilot study.",
+    "10.3727/096368914x684916",
+    "2014",
+    "Cell Transplant"
+   ],
+   [
+    "Model Development on Adherence to Aspirin in Pregnancy: A Co-Produced Qualitative Systematic Review and Meta-Ethnography.",
+    "10.1111/hex.70703",
+    "2026",
+    "Health Expect"
+   ],
+   [
+    "Custom GPTs to aid in compliance checking for reporting standards in academic publishing.",
+    "10.14573/altex.2601011",
+    "2026",
+    "ALTEX"
+   ],
+   [
+    "A Cross-Sectional Study of Prevalence and Spatial Patterns of Major Limb Loss in the Acholi Sub-Region of Uganda",
+    "10.1101/2020.05.14.095836",
+    "2020",
+    ""
+   ]
+  ]
+ },
+ {
+  "id": "O6",
+  "source": "openalex_title",
+  "query": "conceptual papers||",
+  "count": 102,
+  "items": [
+   [
+    "Conceptual review papers: revisiting existing research to develop and refine theory",
+    "10.1007/s13162-020-00168-7",
+    2020,
+    "AMS Review"
+   ],
+   [
+    "Some Guidelines for the Critical Reviewing of Conceptual Papers",
+    "10.17705/1jais.00167",
+    2008,
+    "Journal of the Association for Information Systems"
+   ],
+   [
+    "Adolescents\u2019 Self-Concordance, School Engagement, and Burnout Predict Their Educational Trajectories 1This paper is part of a series on \u201cYouth Development in Europe: Transitions and Identities\u201d that will appear in the European Psychologist throughout 2008 and 2009. Taken together, the papers aim to make a conceptual contribution to the increasingly important area of youth development, especially within the context of an expanding Europe, by focusing on variations and changes in the transition to adulthood and emerging identities. The series will conclude with a summary by the organizers of the series, Katariina Salmela-Aro (University of Jyv\u00e4skyl\u00e4, Finland) and Ingrid Schoon (University of London, UK).",
+    "10.1027/1016-9040.14.4.332",
+    2009,
+    "European Psychologist"
+   ],
+   [
+    "An overview on recent profile monitoring papers (2008\u20132018) based on conceptual classification scheme",
+    "10.1016/j.cie.2018.10.008",
+    2018,
+    "Computers & Industrial Engineering"
+   ],
+   [
+    "The methodological soundness of requirements engineering papers: a conceptual framework and two case studies",
+    "10.1007/s00766-006-0037-6",
+    2006,
+    "Requirements Engineering"
+   ],
+   [
+    "Novices\u2019 Struggles with Conceptual and Theoretical Framing in Writing Dissertations and Papers for Publication",
+    "10.3390/publications3020104",
+    2015,
+    "Publications"
+   ],
+   [
+    "A conceptual framework for ranking crown fire potential in wildland fuelbedsThis article is one of a selection of papers published in the Special Forum on the Fuel Characteristic Classification System.",
+    "10.1139/x07-102",
+    2007,
+    "Canadian Journal of Forest Research"
+   ],
+   [
+    "PIAAC Problem Solving in Technology-Rich Environments: A Conceptual Framework. OECD Education Working Papers, No. 36.",
+    "",
+    2009,
+    "OECD Publishing (NJ1)"
+   ],
+   [
+    "Highly cited papers in rheumatology: identification and conceptual analysis",
+    "10.1007/s11192-018-2712-z",
+    2018,
+    "Scientometrics"
+   ],
+   [
+    "Group concept mapping \u2013 bridging the gap between conceptual papers and empirical research",
+    "10.1002/joe.22228",
+    2023,
+    "Global Business and Organizational Excellence"
+   ],
+   [
+    "Counting Highly Cited Papers for University Research Assessment: Conceptual and Technical Issues",
+    "10.1371/journal.pone.0047210",
+    2012,
+    "PLoS ONE"
+   ],
+   [
+    "Highly cited papers in Microbiology: identification and conceptual analysis",
+    "10.1093/femsle/fny230",
+    2018,
+    "FEMS Microbiology Letters"
+   ],
+   [
+    "Social and Emotional Skills for Student Success and Well-Being: Conceptual Framework for the OECD Study on Social and Emotional Skills. OECD Education Working Papers, No. 173.",
+    "",
+    2018,
+    ""
+   ],
+   [
+    "Conceptual and Methodological Issues in Cross Cultural Relationship Research: A Commentary on Papers by Ahmed Et Al. and Coviello",
+    "10.1016/s1441-3582(99)70200-4",
+    1999,
+    "Australasian Marketing Journal (AMJ)"
+   ],
+   [
+    "Trends in Conceptual Modeling: Citation Analysis of the ER Conference Papers (1979-2005)",
+    "",
+    2007,
+    ""
+   ],
+   [
+    "PIAAC Literacy: A Conceptual Framework. OECD Education Working Papers, No. 34.",
+    "",
+    2009,
+    "OECD Publishing (NJ1)"
+   ],
+   [
+    "Chicago Linguistic Society 29: Papers From the Parasession on Conceptual Representations",
+    "",
+    1993,
+    ""
+   ],
+   [
+    "Conceptual and empirical contributions to consumer satisfaction and complaining behavior : papers from the Sixth Annual Conference on Consumer Satisfaction, Dissatisfaction, and Complaining Behavior, Indiana University, Bloomington, Indiana, October 1-2, 1981",
+    "",
+    1982,
+    "Medical Entomology and Zoology"
+   ],
+   [
+    "Monetary assets and inflation induced distortions of the national accounts-conceptual issues and correction of sectoral income flows in 5 EEC countries. Economic Papers No. 15, June 1983",
+    "",
+    1983,
+    "Archive of European Integration (AEI) (University of Pittsburgh)"
+   ],
+   [
+    "Developing and assessing conceptual understanding in materials engineering using written research papers and oral poster presentations",
+    "10.1109/fie.2008.4720264",
+    2008,
+    "2022 IEEE Frontiers in Education Conference (FIE)"
+   ],
+   [
+    "Bibliographic Coupling and Conceptual Similarity: Are the Bibliographically Coupled Papers also Conceptually Similar?",
+    "10.5530/jscires.20041115",
+    2024,
+    "Journal of Scientometric Research"
+   ],
+   [
+    "Kimberlite occurrence and origin : a basis for conceptual models in exploration : a seminar organized by the Department of Geology, University of Western Australia, in co-operation with University Extension, University of Western Australia : summary of presented papers",
+    "",
+    1985,
+    "Medical Entomology and Zoology"
+   ],
+   [
+    "Advancing sales theory with conceptual papers: what\u2019s new and what\u2019s next?",
+    "10.1080/08853134.2021.2005613",
+    2021,
+    "Journal of Personal Selling and Sales Management"
+   ],
+   [
+    "Bridging Formal and Conceptual SemanticsSelected papers of BRIDGE-14",
+    "",
+    2017,
+    "d\u00fcsseldorf university press eBooks"
+   ],
+   [
+    "TRANSLATION OF CONCEPTUAL METAPHOR IN THE LEGAL DISCOURSE OF EU WHITE PAPERS",
+    "10.15388/vertstud.2009.2.10604",
+    2017,
+    "Vertimo studijos"
+   ],
+   [
+    "How to Write Conceptual Papers in the Social Sciences",
+    "10.4324/9781003457091",
+    2023,
+    "Routledge eBooks"
+   ],
+   [
+    "Conceptual and Theoretical Papers",
+    "10.4135/9781071802656.n18",
+    2018,
+    "Sage eBooks"
+   ],
+   [
+    "Information retrieval using conceptual index terms for technical papers in a digital library",
+    "10.1002/scj.1047",
+    2001,
+    "Systems and Computers in Japan"
+   ],
+   [
+    "Mapping the conceptual system of an urban theory and its evolution: a text analysis of space syntax conference papers over 20 years",
+    "10.51347/um27.0014",
+    2023,
+    "Urban Morphology"
+   ],
+   [
+    "PIAAC Reading Component: A Conceptual Framework. OECD Education Working Papers, No. 33.",
+    "",
+    2009,
+    "OECD Publishing (NJ1)"
+   ]
+  ]
+ },
+ {
+  "id": "O7",
+  "source": "openalex_title",
+  "query": "theoretical papers||review OR evaluate OR criteria OR guidelines",
+  "count": 26,
+  "items": [
+   [
+    "Entrepreneurial Orientation: Reviewing Three Papers and Implications for Further Theoretical and Methodological Development",
+    "10.1111/j.1540-6520.2011.00483.x",
+    2011,
+    "Entrepreneurship Theory and Practice"
+   ],
+   [
+    "Discourse analysis: theoretical and historical overview and review of papers in the Journal of Advanced Nursing 1996\u20132004",
+    "10.1111/j.1365-2648.2006.03791.x",
+    2006,
+    "Journal of Advanced Nursing"
+   ],
+   [
+    "On Crafting Effective Theoretical Contributions for Empirical Papers in Economics of Information Systems: Some Editorial Reflections",
+    "10.1287/isre.2024.editorial.v35.n3",
+    2024,
+    "Information Systems Research"
+   ],
+   [
+    "Suicide prevention strategies for older persons\u2014An integrative review of empirical and theoretical papers",
+    "10.1002/nop2.789",
+    2021,
+    "Nursing Open"
+   ],
+   [
+    "Can journal reviewers dependably assess rigour, significance, and originality in theoretical papers? Evidence from physics",
+    "10.1093/reseval/rvad018",
+    2023,
+    "Research Evaluation"
+   ],
+   [
+    "Between Centrality and Theoretical Dispersion: Theoretical Frameworks in Spanish Peer-Reviewed Communication Journals. Analysis of Research Papers Published by Five Top-Ranked Journals 2011-2020",
+    "10.15581/003.35.2.155-168",
+    2022,
+    "Communication & Society"
+   ],
+   [
+    "Theoretical, experimental, and numerical contributions to the mechanics of fluids and solids : a collection of papers in honor of Paul M. Naghdi",
+    "",
+    1995,
+    "Birkh\u00e4user-Verlag eBooks"
+   ],
+   [
+    "Graph-Theoretic Concepts in Computer Science : 38th International Workshop, WG 2012, Jerusalem, Israel, June 26-28, 2012, Revised Selcted Papers",
+    "10.1007/978-3-642-34611-8",
+    2012,
+    "Digital Access to Libraries (Universit\u00e9 catholique de Louvain (UCL), l'Universit\u00e9 de Namur (UNamur) and the Universit\u00e9 Saint-Louis (USL-B))"
+   ],
+   [
+    "Quantum interaction: 5th International Symposium, QI 2011, Aberdeen, UK, June 26-29, 2011, Revised Selected Papers (Lecture Notes in Computer Science / Theoretical Computer Science and General Issues)",
+    "",
+    2011,
+    "University of Bedfordshire Repository (University of Bedfordshire)"
+   ],
+   [
+    "Group A: Core Theoretical Papers",
+    "10.5281/zenodo.22037046",
+    2026,
+    "Zenodo (CERN European Organization for Nuclear Research)"
+   ],
+   [
+    "Trail Stop 8: Reviewing Conceptual and Theoretical Papers",
+    "10.5281/zenodo.21687883",
+    2026,
+    "Zenodo (CERN European Organization for Nuclear Research)"
+   ],
+   [
+    "Developing Smart Indicator Papers for Detecting Pharmaceutical Expiry: A Theoretical Approach",
+    "10.6084/m9.figshare.31989999",
+    2026,
+    "Figshare"
+   ],
+   [
+    "AUGMANITAI Mini-Papers Corpus \u2014 20 Methodological & Formal-Theoretic Papers: CHAMP, UCCT, MLTA, SIPT, MGTSA & More (Restricted)",
+    "10.5281/zenodo.20060906",
+    2026,
+    "Zenodo (CERN European Organization for Nuclear Research)"
+   ],
+   [
+    "The Nat as Ontological Unit: An Information-Theoretic Framework for Life, Consciousness, and Mind \u2014 Complete Suite (17 Papers)",
+    "10.5281/zenodo.19609161",
+    2026,
+    "Zenodo (CERN European Organization for Nuclear Research)"
+   ],
+   [
+    "AUG-WP-144: Systematic Linguistic Externalisation \u2014 Amendments, Demonstrations, and Theoretical Boundaries (SLE Update to Papers 1-5)",
+    "10.5281/zenodo.19436917",
+    2026,
+    "Zenodo (CERN European Organization for Nuclear Research)"
+   ],
+   [
+    "From theoretical papers to textbooks",
+    "10.31862/0130-3414-2020-6-88-100",
+    2020,
+    "Literature at School"
+   ],
+   [
+    "Collected Papers of the XI International Scientific and Theoretical Conference: Communication Strategies of Information Society, Peter the Great St. Petersburg Polytechnic University, 2019.",
+    "",
+    2019,
+    "PhilPapers (PhilPapers Foundation)"
+   ],
+   [
+    "A Theoretical and Methodological Evaluation of Academics Papers Related to Terrorism",
+    "10.13140/rg.2.2.12008.42243",
+    2019,
+    "SSRN Electronic Journal"
+   ],
+   [
+    "Theoretical, applied, or position papers",
+    "10.4324/9781315197258-8",
+    2017,
+    "Routledge eBooks"
+   ],
+   [
+    "Preface to special issue of selected papers from Theoretical, Experimental, and Computational Mechanics (TECM)",
+    "10.1016/j.apm.2017.03.051",
+    2017,
+    "Applied Mathematical Modelling"
+   ],
+   [
+    "The Economics of State Aid for the Rescue and Restructuring of Firms in Difficulty: Theoretical Considerations, Empirical Analysis and Proposals for Reform. Bruges European Economic Research (BEER) Papers 27/September 2013",
+    "",
+    2013,
+    ""
+   ],
+   [
+    "Methods of Theoretical Contribution of Quantitative Researches in Public Relations:A Content Analysis of Quantitative Papers in Public Relations Review and Journal of Public Relations Research",
+    "",
+    2012,
+    "Journal of International Communication"
+   ],
+   [
+    "[Development of critical reading on theoretical papers. Criticism of the teaching performance].",
+    "",
+    2010,
+    "PubMed"
+   ],
+   [
+    "Empirical and Theoretical Issues in the Analysis of Education Policy: A Discussion of the Papers by Raquel",
+    "10.1017/cbo9780511610257.004",
+    2010,
+    "Cambridge University Press eBooks"
+   ],
+   [
+    "Vertentes te\u00f3rio-metodol\u00f3gicas norteadoras dos Trabalhos de Conclus\u00e3o de Curso de Pedagogia da FURB no per\u00edodo de 2001 a 2006/Methodological and theoretical guidelines in the end of term papers of the pedagogy course at FURB University from 2001 to 2006",
+    "",
+    2008,
+    "DOAJ (DOAJ: Directory of Open Access Journals)"
+   ],
+   [
+    "I. General and Theoretical Papers: Oil-Producing Horizons of Gulf Coast in Texas and Louisiana",
+    "",
+    1936,
+    ""
+   ]
+  ]
+ },
+ {
+  "id": "O8",
+  "source": "openalex_title",
+  "query": "reporting guideline||theoretical OR conceptual OR argument OR non-empirical",
+  "count": 29,
+  "items": [
+   [
+    "CONSORT 2025 statement: updated guideline for reporting randomised trials",
+    "10.1136/bmj-2024-081123",
+    2025,
+    "BMJ"
+   ],
+   [
+    "CONSORT 2025 statement: updated guideline for reporting randomised trials",
+    "10.1016/s0140-6736(25)00672-5",
+    2025,
+    "The Lancet"
+   ],
+   [
+    "CONSORT 2025 statement: updated guideline for reporting randomized trials",
+    "10.1038/s41591-025-03635-5",
+    2025,
+    "Nature Medicine"
+   ],
+   [
+    "Developmental Dysplasia of the Hip Practice Guideline: Technical Report",
+    "10.1542/peds.105.4.e57",
+    2000,
+    "PEDIATRICS"
+   ],
+   [
+    "CONSORT 2025 statement: Updated guideline for reporting randomised trials",
+    "10.1371/journal.pmed.1004587",
+    2025,
+    "PLoS Medicine"
+   ],
+   [
+    "Improving the use of research evidence in guideline development: 14. Reporting guidelines",
+    "10.1186/1478-4505-4-26",
+    2006,
+    "Health Research Policy and Systems"
+   ],
+   [
+    "Protocol for the development of a CONSORT-equity guideline to improve reporting of health equity in randomized trials",
+    "10.1186/s13012-015-0332-z",
+    2015,
+    "Implementation Science"
+   ],
+   [
+    "Taking an integrated knowledge translation approach in research to develop the CONSORT-Equity 2017 reporting guideline: an observational study",
+    "10.1136/bmjopen-2018-026866",
+    2019,
+    "BMJ Open"
+   ],
+   [
+    "Impact of the SCARE guideline on the reporting of surgical case reports: A before and after study",
+    "10.1016/j.ijsu.2017.07.099",
+    2017,
+    "International Journal of Surgery"
+   ],
+   [
+    "Improving medication adherence research reporting: ESPACOMP Medication Adherence Reporting Guideline (EMERGE)",
+    "10.1177/1474515119830298",
+    2019,
+    "European Journal of Cardiovascular Nursing"
+   ],
+   [
+    "Towards improving the reporting quality of clinical case reports in complementary medicine: Assessing and illustrating the need for guideline development",
+    "10.1016/j.ctim.2015.01.009",
+    2015,
+    "Complementary Therapies in Medicine"
+   ],
+   [
+    "Reporting and Publishing Guidelines: Article 12 in Integrating and Coordinating Efforts in COPD Guideline Development. An Official ATS/ERS Workshop Report",
+    "10.1513/pats.201208-065st",
+    2012,
+    "Proceedings of the American Thoracic Society"
+   ],
+   [
+    "CONSORT 2025 statement: Updated guideline for reporting randomised trials",
+    "10.17615/y62g-ks55",
+    2025,
+    "Carolina Digital Repository (University of North Carolina at Chapel Hill)"
+   ],
+   [
+    "Physiotherapist- and patient-reported barriers to guideline implementation of active physiotherapeutic management of low back pain: A theory-informed qualitative study",
+    "10.1016/j.msksp.2024.103129",
+    2024,
+    "Musculoskeletal Science and Practice"
+   ],
+   [
+    "(Mis-)understanding external validity \u2013 A narrative literature review with guideline synthesis on how to report reliability in sport and health science",
+    "10.1016/j.footst.2025.100011",
+    2025,
+    "Football Studies"
+   ],
+   [
+    "Development of a Reporting Guideline for Trochim\u2019s Concept Mapping",
+    "10.3390/mps8020024",
+    2025,
+    "Methods and Protocols"
+   ],
+   [
+    "Pneumocystis jirovecii Pneumonia in Patients With Metastatic Prostate Cancer on Corticosteroids for Malignant Spinal Cord Compression: Two Case Reports and a Guideline Review.",
+    "",
+    2020,
+    "PubMed"
+   ],
+   [
+    "Studies on the Seismic Buckling Design Guideline of FBR Main Vessels. 1st Report. Outline of the Seismic Buckling Design Guideline.",
+    "10.1299/kikaia.60.1690",
+    1994,
+    "TRANSACTIONS OF THE JAPAN SOCIETY OF MECHANICAL ENGINEERS Series A"
+   ],
+   [
+    "A Practical 19-Step Guideline for Conducting and Reporting Systematic Reviews Without Meta-Analysis: The Hawler Medical University Approach",
+    "10.15218/zjms.2026.060",
+    2026,
+    "Zanco Journal of Medical Sciences"
+   ],
+   [
+    "CONSORT-A 2026: An Extended Reporting Guideline for Acupuncture Randomized Controlled Trials",
+    "10.1016/j.imr.2026.101405",
+    2026,
+    "Integrative Medicine Research"
+   ],
+   [
+    "CONSORT 2025 statement: updated guideline for reporting randomised trials",
+    "10.17615/as2m-4x82",
+    2026,
+    "UNC Libraries"
+   ],
+   [
+    "Towards a SPIRIT-Ayurveda Extension: A Methodological Framework for Reporting Guideline Development",
+    "10.21203/rs.3.rs-10187620/v1",
+    2026,
+    "Research Square"
+   ],
+   [
+    "A Reporting Guideline for Clinical Research Methods that are Readable by Humans and Interpretable by Large Language Models",
+    "10.2139/ssrn.6029414",
+    2026,
+    "SSRN Electronic Journal"
+   ],
+   [
+    "CONSORT 2025 statement: Updated guideline for reporting randomised trials",
+    "",
+    2025,
+    "UCL Discovery (University College London)"
+   ],
+   [
+    "A Guideline for Reporting Stimulation Parameters in TMS Studies - A Delphi Consensus Study",
+    "10.17605/osf.io/vbup2",
+    2025,
+    "Open Science Framework"
+   ],
+   [
+    "Application of the Consolidated Standards of Reporting Trials (CONSORT) Statement Guideline in Nursing Studies: Analytical Review",
+    "10.36321/kjns.vi20212.2052",
+    2021,
+    "kufa journal for nursing sciences"
+   ],
+   [
+    "P1897Prescription of guideline recommended oral anticoagulation and reasons reported for non-use of OAC in patients with atrial fibrillation: Data from the German AFNET-2 Registry",
+    "10.1093/eurheartj/ehz748.0644",
+    2019,
+    "European Heart Journal"
+   ],
+   [
+    "Re: Challenges with Implementing the Centers for Disease Control and Prevention Opioid Guideline: A Consensus Panel Report",
+    "10.1093/pm/pnz175",
+    2019,
+    "Pain Medicine"
+   ],
+   [
+    "Developing effective invasive cardiology services. Guideline report.",
+    "",
+    1988,
+    "PubMed"
+   ]
+  ]
+ },
+ {
+  "id": "O9",
+  "source": "openalex_title",
+  "query": "argument quality||manuscript OR paper OR review",
+  "count": 118,
+  "items": [
+   [
+    "Enhancing the quality of argumentation in school science",
+    "10.1002/tea.20035",
+    2004,
+    "Journal of Research in Science Teaching"
+   ],
+   [
+    "Pedagogical content knowledge of argumentation: Using classroom contexts to assess high\u2010quality PCK rather than pseudoargumentation",
+    "10.1002/tea.21252",
+    2015,
+    "Journal of Research in Science Teaching"
+   ],
+   [
+    "The Quality of Tribute Cloth: The Place of Evidence in Archaeological Argument",
+    "10.2307/281834",
+    1996,
+    "American Antiquity"
+   ],
+   [
+    "Consumers\u2019 self-reported and brain responses to advertising post on Instagram: the effect of number of followers and argument quality",
+    "10.1108/ejm-09-2020-0719",
+    2022,
+    "European Journal of Marketing"
+   ],
+   [
+    "SELENIUM TOXICITY TO AQUATIC LIFE: AN ARGUMENT FOR SEDIMENT-BASED WATER QUALITY CRITERIA",
+    "10.1002/etc.5620160622",
+    1997,
+    "Environmental Toxicology and Chemistry"
+   ],
+   [
+    "Using Argument Mining to Assess the Argumentation Quality of Essays",
+    "",
+    2016,
+    "University of Groningen research database (University of Groningen / Centre for Information Technology)"
+   ],
+   [
+    "A normative framework for argument quality: argumentation schemes with a Bayesian foundation",
+    "10.1007/s11229-015-0815-0",
+    2015,
+    "Synthese"
+   ],
+   [
+    "Understanding the role of argument quality in the adoption of online reviews",
+    "10.1108/oir-05-2015-0149",
+    2015,
+    "Online Information Review"
+   ],
+   [
+    "Why Are You Sharing Others\u2019 Tweets?: The Impact of Argument Quality and Source Credibility on Information Sharing Behavior",
+    "",
+    2011,
+    "International Conference on Information Systems"
+   ],
+   [
+    "Investigating moderating roles of goals, reviewer similarity, and self-disclosure on the effect of argument quality of online consumer reviews on attitude formation",
+    "10.1016/j.chb.2017.07.024",
+    2017,
+    "Computers in Human Behavior"
+   ],
+   [
+    "THE DEMOCRATIC QUALITIES OF COURTS: A CRITICAL ANALYSIS OF THREE ARGUMENTS",
+    "10.1080/00344893.2013.830485",
+    2013,
+    "Representation"
+   ],
+   [
+    "Rhetoric, Logic, and Dialectic: Advancing Theory-based Argument Quality Assessment in Natural Language Processing",
+    "10.18653/v1/2020.coling-main.402",
+    2020,
+    "International Conference on Computational Linguistics"
+   ],
+   [
+    "Defining Quality in Dispute Resolution: Taxonomies and Anti-Taxonomies of Quality Arguments",
+    "",
+    1989,
+    "bepress Legal Repository"
+   ],
+   [
+    "Quantity versus quality of nonresident father involvement: Deconstructing the argument that quantity doesn\u2019t matter",
+    "10.1080/15379418.2018.1437002",
+    2018,
+    "Journal of Child Custody"
+   ],
+   [
+    "The Impact of Electronic Word of Mouth on Tourists Visit Intention to Saudi Arabia: Argument Quality and Source Credibility as Mediators",
+    "10.46222/ajhtl.19770720.154",
+    2021,
+    "African Journal of Hospitality Tourism and Leisure"
+   ],
+   [
+    "Argumentation: Content, Structure, and Relationship with Essay Quality",
+    "10.18653/v1/w16-2808",
+    2016,
+    "Workshop on Argument Mining (ArgMining)"
+   ],
+   [
+    "Powerful qualities, the conceivability argument and the nature of the physical",
+    "10.1007/s11098-016-0774-4",
+    2016,
+    "Philosophical Studies"
+   ],
+   [
+    "Applying Argumentation Analysis to Assess the Quality of University Oceanography Students' Scientific Writing",
+    "10.5408/1089-9995-50.1.40",
+    2002,
+    "Journal of Geoscience Education"
+   ],
+   [
+    "Argument Quality and Cultural Difference",
+    "10.1023/a:1026466310894",
+    1999,
+    "Argumentation"
+   ],
+   [
+    "Learning From Revisions: Quality Assessment of Claims in Argumentation at Scale",
+    "10.18653/v1/2021.eacl-main.147",
+    2021,
+    ""
+   ],
+   [
+    "How persuasive is AI-generated argumentation? An analysis of the quality of an argumentative text produced by the GPT-3 AI text generator",
+    "10.3233/aac-210026",
+    2022,
+    "Argument & Computation"
+   ],
+   [
+    "Comparison of the Quality of Written Scientific Arguments in Different Laboratory Environments",
+    "10.1007/s10763-020-10147-w",
+    2021,
+    "International Journal of Science and Mathematics Education"
+   ],
+   [
+    "Are Large Language Models Reliable Argument Quality Annotators?",
+    "10.1007/978-3-031-63536-6_8",
+    2024,
+    "Lecture notes in computer science"
+   ],
+   [
+    "Intrinsic Quality Assessment of Arguments",
+    "10.18653/v1/2020.coling-main.592",
+    2020,
+    "International Conference on Computational Linguistics"
+   ],
+   [
+    "Extending the Conversational Argument Coding Scheme in Studies of Argument Quality in Group Deliberations",
+    "10.1080/19312451003680525",
+    2010,
+    "Communication Methods and Measures"
+   ],
+   [
+    "Improving Pre-Service Science Teachers\u2019 Content Knowledge and Argumentation Quality through Socio-Scientific Issues-Based Modules: An Action Research Study",
+    "10.17509/jsl.v4i1.23378",
+    2020,
+    "Journal of Science Learning"
+   ],
+   [
+    "Exploring Teacher Contributions to Student Argumentation Quality",
+    "10.5817/sp2019-4-8",
+    2019,
+    "Studia paedagogica"
+   ],
+   [
+    "Product Liability: Beyond Loss Control\u2013An Argument for Quality Assurance",
+    "10.1080/10686967.2008.11918063",
+    2008,
+    "Quality Management Journal"
+   ],
+   [
+    "Transparent assessment of information quality of online reviews using formal argumentation theory",
+    "10.1016/j.is.2022.102107",
+    2022,
+    "Information Systems"
+   ],
+   [
+    "[Questionnaires on the quality of life in other than the Dutch language used in the Nederlands Tijdschrift voor Geneeskunde (Dutch Journal of Medicine): the translation procedure and arguments for the choice of the questionnaire].",
+    "",
+    2006,
+    "PubMed"
+   ]
+  ]
+ },
+ {
+  "id": "A1",
+  "source": "arxiv",
+  "query": "all:\"reporting guideline\" AND (all:argument OR all:reasoning OR all:conceptual OR all:theoretical)",
+  "count": "2",
+  "items": [
+   [
+    "Guidelines for the estimation and reporting of plasmid conjugation rates",
+    "2303.00803v1",
+    "2023",
+    "arXiv"
+   ],
+   [
+    "Claims, Designs, and Guarantees: A Critical Narrative Review of Statistical Inference Reform and Practice, 2016--2026",
+    "2603.22594v3",
+    "2026",
+    "arXiv"
+   ]
+  ]
+ },
+ {
+  "id": "A2",
+  "source": "arxiv",
+  "query": "all:checklist AND all:argument AND (all:manuscript OR all:\"scientific paper\" OR all:\"position paper\")",
+  "count": "1",
+  "items": [
+   [
+    "On Degrees of Freedom in Defining and Testing Natural Language Understanding",
+    "2305.15130v1",
+    "2023",
+    "arXiv"
+   ]
+  ]
+ }
+]

@@ -1,0 +1,16 @@
+E1	epmc	"reporting guideline" AND (conceptual OR theoretical OR perspective OR "position paper" OR argument OR reasoning)
+E2	epmc	TITLE:"reporting guideline" AND (TITLE:conceptual OR TITLE:theoretical OR TITLE:perspective OR TITLE:"position paper" OR TITLE:argument OR TITLE:reasoning OR TITLE:opinion OR TITLE:commentary OR TITLE:editorial OR TITLE:"narrative review")
+E3	epmc	checklist AND "argument quality" AND (manuscript OR paper)
+E4	epmc	"reporting guideline" AND "non-empirical"
+E5	epmc	(checklist OR "critical appraisal") AND ("opinion papers" OR "text and opinion" OR "expert opinion") AND (logic OR argument)
+E6	epmc	("conceptual paper" OR "conceptual papers" OR "theoretical paper" OR "theoretical papers" OR "perspective article") AND (checklist OR guideline OR guidelines OR criteria)
+O1	openalex	reporting guideline conceptual theoretical paper argument
+O2	openalex	checklist argument quality manuscript
+O3	openalex	guidelines for reviewing conceptual papers
+O4	openalex	reporting guideline non-empirical
+O5	openalex	evaluating theoretical contribution conceptual article criteria
+C1	crossref	reporting guideline conceptual theoretical perspective position paper argument reasoning
+C2	crossref	checklist argument quality manuscript paper
+C3	crossref	reporting guideline non-empirical
+C4	crossref	guidelines for reviewing conceptual papers
+C5	crossref	critical appraisal checklist text and opinion papers
