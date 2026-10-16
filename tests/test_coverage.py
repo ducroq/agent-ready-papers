@@ -378,7 +378,7 @@ def test_unreadable_sub_table_raises_instead_of_dropping_its_rows(tmp_path, cont
     assert main([str(path), "--strict"]) == 2
 
 
-@pytest.mark.parametrize("marker", ["**Claims:**", "### **CLAIMs:**", "**CLAIM (Toulmin):**"])
+@pytest.mark.parametrize("marker", ["**CLAIMS:**", "### **CLAIMs:**", "**CLAIM (Toulmin):**"])
 def test_a_registry_whose_only_marker_is_unrecognised_is_an_error(tmp_path, marker):
     """Review 2026-09-26: an unrecognised marker silently dropped its sub-table,
     and with nothing else parsed --strict exited 0 with the floor NOT evaluated."""
@@ -498,7 +498,7 @@ def test_a_quoted_example_marker_does_not_make_a_miscased_registry_look_empty(tm
     opening, closing = wrap
     path = tmp_path / "r.md"
     path.write_text(
-        opening + "**CLAIMs:**\n\n" + _HEADER + closing + "\n**Claims:**\n\n" + _HEADER + _ROW.replace("[x]", "[ ]"),
+        opening + "**CLAIMs:**\n\n" + _HEADER + closing + "\n**CLAIMS:**\n\n" + _HEADER + _ROW.replace("[x]", "[ ]"),
         encoding="utf-8",
     )
     with pytest.raises(ValueError, match="no sub-table marker recognised"):

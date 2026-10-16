@@ -29,7 +29,15 @@ Checks:
   schema     Type-conditional column completeness. ARGUMENT rows need
              Grounds, Warrant and Rebuttal; PROPOSITION rows need
              Constructs, Relationship, Boundary conditions and
-             Alternatives engaged. Presence only — never quality.
+             Alternatives engaged (DR-004 tables, deprecated, read through
+             v5.x). DR-027 tables: Says is descriptive/normative; every
+             Grounds / Rests-on item is typed (`src:`, `claim:`, `decl:`,
+             `own:` with its method); `claim:` grounds need a Warrant; a
+             normative claim or contribution needs boundary conditions and
+             a `decl:` value; a contribution is P0; a declared starting
+             point has a valid Kind and Contestedness. A row with content
+             whose ID matches no pattern is a finding. Presence only —
+             never quality.
 
   premises   The premise graph resolves: every referenced ID exists, is
              itself verified, and the graph is acyclic. Then the property
@@ -41,6 +49,15 @@ Checks:
   budget     Word count against a declared budget (a Hard Constraint that
              has until now been checked by eye).
 
+  glossary   With --glossary (DR-028): the file exists, is not empty and no
+             longer carries the template's `**Paper:** [Title]`. Without the
+             flag the report says "glossary: not checked".
+
+IDs: `S<n>-<n>` (optionally `S2-3a`), `C<n>` (contribution), `D<n>` (declared
+starting point; anchored as `% D1: label (kind, contestedness)`, no tier).
+In DR-027 tables the premise graph is the `claim:` items; `decl:` items must
+resolve to D rows; `src:` and `own:` items are not edges.
+
 Every check reports a count rather than a bare pass, per the rule in
 `docs/verification-hooks.md`: a check that cannot be told apart from an
 absent check is not a check. A file with no recognised sub-table marker is a
@@ -48,12 +65,13 @@ failure, not a clean run; a freshly started registry (markers over empty
 tables) reports zero examined.
 
 Public API:
-    check_registry(registry_path, *, manuscript_path=None, budget=None)
+    check_registry(registry_path, *, manuscript_path=None, budget=None,
+                   glossary_path=None)
         -> RegistryReport
 
 CLI:
     python -m tools.check_registry <registry.md>
-        [--manuscript <file.tex>] [--budget N] [--json]
+        [--manuscript <file.tex>] [--budget N] [--glossary <glossary.md>] [--json]
 
 Exit codes:
     0  all enabled checks passed
@@ -74,10 +92,26 @@ from pathlib import Path
 # Reused rather than reimplemented: `_split_row` carries the escaped-pipe
 # fix from v2.2.4, and duplicating that here would mean duplicating the bug
 # it fixed. Same package, same file format, one parser.
-from tools.coverage import _MARKER_REGEX, _SEPARATOR_REGEX, _has_marker, _split_row
+from tools.coverage import (
+    _MARKER_REGEX,
+    _SEPARATOR_REGEX,
+    CLAIMS_TABLE,
+    CONTRIBUTION,
+    CONTRIBUTIONS_TABLE,
+    DECLARED,
+    DECLARED_TABLE,
+    _has_marker,
+    _split_row,
+    deprecation_notes,
+    marker_kind,
+    says_unit_type,
+)
 
-ANCHOR_REGEX = re.compile(r"^%\s*(S\d+-\d+)\s*:", re.MULTILINE)
-_ANCHOR_LINE_REGEX = re.compile(r"^%\s*(S\d+-\d+)\s*:(.*)$")
+# Entry IDs: `S2-3` or `S2-3a` (a claim, by manuscript section), `C1` (a
+# contribution), `D1` (a declared starting point; DR-027).
+_ID = r"(?:S\d+-\d+[a-z]?|[CD]\d+)"
+ANCHOR_REGEX = re.compile(rf"^%\s*({_ID})\s*:", re.MULTILINE)
+_ANCHOR_LINE_REGEX = re.compile(rf"^%\s*({_ID})\s*:(.*)$")
 _TRAILING_PAREN_REGEX = re.compile(r"\(([^()]*)\)\s*$")
 # `%` starts a comment unless escaped as `\%`; `\\%` is a row break then a comment.
 _TEX_COMMENT_REGEX = re.compile(r"(?<!(?<!\\)\\)%.*$", re.M)
@@ -105,11 +139,24 @@ _NESTED_TABLE_REGEX = re.compile(r"\\begin\{(tabular\*?|tabularx|longtable\*?)\}
 _ANCHOR_PAREN_REGEX = re.compile(r"\(([^()]*)\)")
 _AFTER_ANCHOR_PAREN_REGEX = re.compile(r"\s*(%.*)?$")
 _TEX_MACRO_REGEX = re.compile(r"\\[a-zA-Z]+\*?(\[[^\]]*\])?")
-_ID_TOKEN_REGEX = re.compile(r"(?<![\w-])S\d+-\d+(?![\w-])")
-ENTRY_ID_REGEX = re.compile(r"^S\d+-\d+$")
+# Tier-carrying IDs only: a declared starting point has no tier to print.
+_ID_TOKEN_REGEX = re.compile(r"(?<![\w-])(?:S\d+-\d+[a-z]?|C\d+)(?![\w-])")
+ENTRY_ID_REGEX = re.compile(rf"^{_ID}$")
 _INPUT_REGEX = re.compile(r"\\(input|include)(?:\s*\{([^{}]+)\}|\s+([^\s{}\\]+))")
 _INPUT_PATH_REGEX = re.compile(r"\\def\s*\\input@path\s*\{((?:\{[^{}]*\})+)\}")
-_PREMISE_ID_REGEX = re.compile(r"S\d+-\d+")
+_PREMISE_ID_REGEX = re.compile(rf"(?<![\w-]){_ID}(?![\w-])")
+# A DR-027 grounds / Rests-on item: `src: Author Year`, `claim: S1-2`, `decl: D1`,
+# or `own: <method or query>` (the author's own observation, experiment or measurement;
+# not a reference, not a graph edge, not a source).
+_GROUNDS_ITEM_REGEX = re.compile(r"^(src|claim|decl|own)\s*:\s*(.*)$", re.IGNORECASE | re.S)
+_MISSING_VALUES = {"", "-", "--", "—", "TBD", "N/A"}
+DR027 = "DR-027"
+DR004 = "DR-004"
+DECLARED_KINDS = ("assumption", "definition", "value")
+CONTESTEDNESS = ("accepted", "contested", "own")
+# The ID prefix each DR-027 table holds.
+_TABLE_ID_PREFIX = {CLAIMS_TABLE: "S", CONTRIBUTIONS_TABLE: "C", DECLARED_TABLE: "D"}
+GLOSSARY_PLACEHOLDER = "**Paper:** [Title]"
 _VERIFIED_REGEX = re.compile(r"^\s*\[\s*x\s*\]", re.IGNORECASE)
 
 # Strongest first. A conclusion may not outrank its weakest premise.
@@ -171,7 +218,11 @@ class Entry:
     verified: bool
     line_number: int
     columns: dict
-    premises: tuple[str, ...]
+    premises: tuple[str, ...]  # `claim:` references (DR-004: IDs in Grounds / Premises)
+    schema: str = DR004  # DR004 or DR027: which rules check this row
+    decls: tuple[str, ...] = ()  # DR-027 `decl:` references
+    # DR-027 grounds / Rests-on items as (kind, value); kind "" when untyped.
+    items: tuple[tuple[str, str], ...] = ()
 
 
 @dataclass(frozen=True)
@@ -181,6 +232,8 @@ class RegistryReport:
     findings: tuple[Finding, ...]
     checks_run: tuple[str, ...]
     counts: dict
+    deprecations: tuple[str, ...] = ()
+    glossary_checked: bool = False
 
     @property
     def ok(self) -> bool:
@@ -196,6 +249,8 @@ class RegistryReport:
             "count_findings": sum(1 for f in self.findings if f.severity == "finding"),
             "count_notes": sum(1 for f in self.findings if f.severity == "note"),
             "ok": self.ok,
+            "deprecations": list(self.deprecations),
+            "glossary": "checked" if self.glossary_checked else "not checked",
         }
 
     def to_markdown(self) -> str:
@@ -208,6 +263,12 @@ class RegistryReport:
             found = sum(1 for f in self.findings if f.check == check and f.severity == "finding")
             lines.append(f"| {check} | {self.counts.get(check, 0)} | {found} |")
         lines.append("")
+        # Not findings: neither changes the exit code.
+        extra = [f"Deprecation: this registry {note}." for note in self.deprecations]
+        if not self.glossary_checked:
+            extra.append("glossary: not checked (pass --glossary to check the paper's glossary, DR-028)")
+        if extra:
+            lines += extra + [""]
 
         if not self.findings:
             lines.append(f"No findings across {len(self.entries)} registry entries.")
@@ -231,20 +292,91 @@ class RegistryReport:
 # --------------------------------------------------------------------------
 
 
+def _missing(value: str | None) -> bool:
+    """The missing-value convention: empty, `-`, `--`, `—`, `TBD`, `N/A`."""
+    return (value or "").strip() in _MISSING_VALUES
+
+
+def _clean_id(raw: str) -> str:
+    """`` `S1-2` `` or `**S1-2**` -> `S1-2`: strip cell decoration around a referenced ID."""
+    return raw.strip().strip("*`_ ").strip()
+
+
+def _first_word(raw: str) -> str:
+    """`accepted in the field` -> `accepted`; decoration stripped, lower-cased."""
+    words = raw.strip().strip("*`_ ").lower().split()
+    return words[0].strip(".,;:()") if words else ""
+
+
+def _grounds_items(text: str) -> tuple[tuple[str, str], ...]:
+    """Split a DR-027 Grounds / Rests-on cell into (kind, value) items; kind "" when untyped."""
+    if _missing(text):
+        return ()
+    items: list[tuple[str, str]] = []
+    for raw in text.split(";"):
+        item = raw.strip()
+        if not item:
+            continue
+        typed = _GROUNDS_ITEM_REGEX.match(item)
+        items.append((typed.group(1).lower(), typed.group(2).strip()) if typed else ("", item))
+    return tuple(items)
+
+
+def _new_schema_entry(entry_id: str, table: str, columns: dict, lineno: int) -> Entry:
+    """Build an entry from a DR-027 Claims, Contributions or Declared starting points row."""
+    if table == CLAIMS_TABLE:
+        unit_type = says_unit_type(columns.get("says", ""))
+        items = _grounds_items(columns.get("grounds", ""))
+    elif table == CONTRIBUTIONS_TABLE:
+        unit_type = CONTRIBUTION
+        items = _grounds_items(columns.get("rests on", ""))
+    else:
+        unit_type = DECLARED
+        items = ()
+    # Only a well-formed single ID becomes an edge; anything else is a schema finding.
+    claims = [_clean_id(v) for k, v in items if k == "claim" and ENTRY_ID_REGEX.match(_clean_id(v))]
+    decls = [_clean_id(v) for k, v in items if k == "decl" and ENTRY_ID_REGEX.match(_clean_id(v))]
+    tier = "" if table == DECLARED_TABLE else (columns.get("confidence tier") or columns.get("confidence") or "")
+    return Entry(
+        entry_id=entry_id,
+        unit_type=unit_type,
+        tier=tier.strip().upper(),
+        verified=bool(_VERIFIED_REGEX.match(columns.get("status", ""))),
+        line_number=lineno,
+        columns=columns,
+        premises=tuple(dict.fromkeys(claims)),
+        schema=DR027,
+        decls=tuple(dict.fromkeys(decls)),
+        items=items,
+    )
+
+
 def _parse_entries(content: str) -> tuple[Entry, ...]:
     """Parse per-type sub-tables into one entry per registry row.
 
     `tools.coverage` aggregates these to counts; this keeps the row, since
     every check here is about an individual entry's relationships.
     """
+    return _walk_registry(content)[0]
+
+
+def _walk_registry(content: str) -> tuple[tuple[Entry, ...], list[Finding]]:
+    """Return (entries, findings for rows with content whose ID matches no pattern).
+
+    Until v5.0.0 a row whose first cell was not `S<n>-<n>` was skipped in
+    silence (a `C1` contribution, a `**S1-1**` ID, an `S1.2` typo): it left
+    every check while still sitting visibly in the registry. A section divider
+    (`| **PART TWO** |`, nothing after its first cell) is the only row skipped.
+    """
     entries: list[Entry] = []
+    unmatched: list[Finding] = []
     unit_type: str | None = None
     header: list[str] | None = None
 
     for lineno, line in enumerate(content.splitlines(), start=1):
         marker = _MARKER_REGEX.match(line)
         if marker:
-            unit_type = marker.group(1).upper()
+            unit_type = marker_kind(marker)
             header = None
             continue
         if unit_type is None:
@@ -266,12 +398,25 @@ def _parse_entries(content: str) -> tuple[Entry, ...]:
             header = [c.lower() for c in cells]
             continue
         if not cells or not ENTRY_ID_REGEX.match(cells[0]):
+            if any(cells[1:]):
+                unmatched.append(
+                    Finding(
+                        "schema",
+                        "finding",
+                        cells[0][:40],
+                        f"registry line {lineno}: row has content but its ID `{cells[0][:40] or '(blank)'}` "
+                        "matches no entry-ID pattern (S<n>-<n>, S<n>-<n>a, C<n>, D<n>), so no check reads it",
+                    )
+                )
             continue
 
         # strict=False deliberately: a row with fewer cells than its header
         # is a truncated row, and the right response is for the schema check
         # to report the missing columns, not for the tool to raise.
         columns = dict(zip(header, cells, strict=False))
+        if unit_type in _TABLE_ID_PREFIX:
+            entries.append(_new_schema_entry(cells[0], unit_type, columns, lineno))
+            continue
         premise_text = columns.get("premises", "") or columns.get("grounds", "")
         entries.append(
             Entry(
@@ -284,7 +429,7 @@ def _parse_entries(content: str) -> tuple[Entry, ...]:
                 premises=tuple(dict.fromkeys(_PREMISE_ID_REGEX.findall(premise_text))),
             )
         )
-    return tuple(entries)
+    return tuple(entries), unmatched
 
 
 def _stray_rows(content: str) -> list[Finding]:
@@ -446,6 +591,10 @@ def _anchor_tiers(manuscript: str) -> tuple[list[tuple[str, str, str]], list[Fin
         if not match:
             continue
         entry_id, rest = match.groups()
+        if entry_id.startswith("D"):
+            # `% D1: label (value, contested)`: a declared starting point has
+            # no tier (DR-027), so there is nothing to compare and nothing to note.
+            continue
         # The tier is the first parenthesis followed only by whitespace or a
         # `% comment`. First, not last: in `(…, SUPPORTED) % raised from
         # (…, EMERGING)` the tail is history, and reading it would hide the
@@ -656,10 +805,89 @@ def _check_tiers(entries: tuple[Entry, ...], manuscript: str) -> tuple[list[Find
     return findings, examined
 
 
+def _schema_dr027(entry: Entry, by_id: dict[str, Entry]) -> list[str]:
+    """DR-027 schema rules for one new-schema row; returns the finding messages.
+
+    Presence and form only, never quality: that a Warrant exists, not that it
+    licenses the step. Reference resolution is the premises check's job.
+    """
+    out: list[str] = []
+    cols = entry.columns
+    eid = entry.entry_id
+
+    if entry.unit_type == DECLARED:
+        if not eid.startswith("D"):
+            out.append("row in the Declared starting points table has a non-D ID (expected D<n>)")
+        kind = _first_word(cols.get("kind", ""))
+        if kind not in DECLARED_KINDS:
+            out.append(f"Kind is `{cols.get('kind', '').strip() or '(blank)'}`; expected one of {', '.join(DECLARED_KINDS)}")
+        contested = _first_word(cols.get("contestedness", ""))
+        if contested not in CONTESTEDNESS:
+            out.append(
+                f"Contestedness is `{cols.get('contestedness', '').strip() or '(blank)'}`; "
+                f"expected one of {', '.join(CONTESTEDNESS)}"
+            )
+        return out
+
+    is_contribution = entry.unit_type == CONTRIBUTION
+    label = "contribution" if is_contribution else "claim"
+    expected = "C" if is_contribution else "S"
+    if not eid.startswith(expected):
+        table = "Contributions" if is_contribution else "Claims"
+        out.append(f"row in the {table} table has an ID that is not {expected}…")
+    says = cols.get("says", "")
+    if says_unit_type(says) not in ("DESCRIPTIVE", "NORMATIVE"):
+        out.append(f"Says is `{says.strip() or '(blank)'}`; expected descriptive or normative")
+    if is_contribution and (cols.get("priority", "") or "").strip().strip("*`_ ").upper() != "P0":
+        out.append(
+            f"Priority is `{(cols.get('priority') or '').strip() or '(blank)'}`; a contribution is P0 by "
+            "definition (DR-027) and counts in the P0 tier floor whatever this cell says"
+        )
+
+    grounds_col = "rests on" if is_contribution else "grounds"
+    if not entry.items:
+        out.append(f"{label} records no **{grounds_col}** — every {label} rests on typed items (DR-027)")
+    for kind, value in entry.items:
+        if not kind:
+            out.append(
+                f"{grounds_col} item `{value[:60]}` is untyped — prefix it with `src:`, `claim:`, `decl:` or `own:`"
+            )
+        elif kind == "own":
+            if not value:
+                out.append("a bare `own:` item names no method or query — write e.g. `own: corpus count, query Q1`")
+        elif kind == "src" and is_contribution:
+            out.append(f"Rests on lists `src: {value[:60]}`; a contribution rests on `claim:` and `decl:` items")
+        elif kind == "src" and not value:
+            out.append("a bare `src:` item names no source")
+        elif kind in ("claim", "decl") and not ENTRY_ID_REGEX.match(_clean_id(value)):
+            out.append(f"`{kind}: {value[:60]}` does not name a single entry ID")
+
+    if not is_contribution and entry.premises and _missing(cols.get("warrant")):
+        out.append("claim rests on other claims (`claim:` grounds) but has no **warrant** to join them")
+
+    if entry.unit_type == "NORMATIVE" or (is_contribution and says_unit_type(says) == "NORMATIVE"):
+        bounds = "who/where/when" if is_contribution else "rebuttal"
+        if _missing(cols.get(bounds)):
+            out.append(f"normative {label} has no **{bounds}** (its boundary conditions, DR-027)")
+        values = [
+            d
+            for d in entry.decls
+            if d in by_id and by_id[d].unit_type == DECLARED and _first_word(by_id[d].columns.get("kind", "")) == "value"
+        ]
+        if not values:
+            out.append(f"normative {label} names no declared value — add a `decl:` item whose D-row Kind is value")
+    return out
+
+
 def _check_schema(entries: tuple[Entry, ...]) -> tuple[list[Finding], int]:
     findings: list[Finding] = []
     examined = 0
+    by_id = {e.entry_id: e for e in entries}
     for entry in entries:
+        if entry.schema == DR027:
+            examined += 1
+            findings += [Finding("schema", "finding", entry.entry_id, m) for m in _schema_dr027(entry, by_id)]
+            continue
         required = REQUIRED_COLUMNS.get(entry.unit_type)
         if not required:
             continue
@@ -707,9 +935,33 @@ def _check_premises(entries: tuple[Entry, ...]) -> tuple[list[Finding], int]:
     examined = 0
 
     for entry in entries:
-        if not entry.premises:
+        if not entry.premises and not entry.decls:
             continue
         examined += 1
+        # DR-027 `decl:` references resolve to a declared starting point; they
+        # are not premise-graph edges (a starting point has no tier).
+        for decl_id in entry.decls:
+            target = by_id.get(decl_id)
+            if target is None:
+                findings.append(
+                    Finding(
+                        "premises",
+                        "finding",
+                        entry.entry_id,
+                        f"cites declared starting point `{decl_id}`, which is not in the registry",
+                    )
+                )
+            elif target.unit_type != DECLARED:
+                findings.append(
+                    Finding(
+                        "premises",
+                        "finding",
+                        entry.entry_id,
+                        f"`decl: {decl_id}` names a row that is not a declared starting point — use `claim:`",
+                    )
+                )
+        if not entry.premises:
+            continue
         weakest_rank = -1
         weakest_id = ""
         for premise_id in entry.premises:
@@ -721,6 +973,16 @@ def _check_premises(entries: tuple[Entry, ...]) -> tuple[list[Finding], int]:
                         "finding",
                         entry.entry_id,
                         f"cites premise `{premise_id}`, which is not in the registry",
+                    )
+                )
+                continue
+            if premise.unit_type == DECLARED:
+                findings.append(
+                    Finding(
+                        "premises",
+                        "finding",
+                        entry.entry_id,
+                        f"rests on `{premise_id}` as a claim, but it is a declared starting point — use `decl:`",
                     )
                 )
                 continue
@@ -821,6 +1083,32 @@ def count_words(tex: str) -> int:
     return len(tex.split())
 
 
+def _check_glossary(path: Path) -> list[Finding]:
+    """DR-028: the paper's glossary exists, is not empty, and is no longer the template.
+
+    Presence only: whether its definitions are right is a reading pass. An
+    unreadable file is a finding, not a tooling error, as a missing one is.
+    """
+    try:
+        text = path.read_text(encoding="utf-8")
+    except FileNotFoundError:
+        return [Finding("glossary", "finding", "", f"glossary file not found: {path}")]
+    except (OSError, UnicodeDecodeError) as exc:
+        return [Finding("glossary", "finding", "", f"glossary file could not be read ({exc.__class__.__name__}): {path}")]
+    if not text.strip():
+        return [Finding("glossary", "finding", "", f"glossary file is empty: {path}")]
+    if GLOSSARY_PLACEHOLDER in text:
+        return [
+            Finding(
+                "glossary",
+                "finding",
+                "",
+                f"glossary still carries the template placeholder `{GLOSSARY_PLACEHOLDER}` — it was copied, not filled in",
+            )
+        ]
+    return []
+
+
 def _check_budget(manuscript: str, budget: int) -> tuple[list[Finding], int]:
     words = count_words(manuscript)
     if words > budget:
@@ -849,6 +1137,7 @@ def check_registry(
     *,
     manuscript_path: Path | None = None,
     budget: int | None = None,
+    glossary_path: Path | None = None,
 ) -> RegistryReport:
     """Run every applicable internal-consistency check.
 
@@ -857,6 +1146,9 @@ def check_registry(
         manuscript_path: optional manuscript; enables the anchor and tier
             checks (and the budget check, which needs a word count)
         budget: optional word budget; requires manuscript_path
+        glossary_path: optional paper glossary (DR-028); missing, empty or
+            still-template is a finding. Absent, the report says "glossary:
+            not checked".
 
     Raises:
         FileNotFoundError: if a given path does not exist
@@ -868,7 +1160,7 @@ def check_registry(
     if not registry_path.is_file():
         raise FileNotFoundError(registry_path)
     content = registry_path.read_text(encoding="utf-8")
-    entries = _parse_entries(content)
+    entries, unmatched = _walk_registry(content)
     if not entries and not _has_marker(content):
         # Same rule as tools.coverage, so a freshly started registry passes
         # both tools and a file whose markers are all unrecognised fails both.
@@ -883,6 +1175,7 @@ def check_registry(
 
     schema_findings, schema_count = _check_schema(entries)
     schema_findings += _stray_rows(content)
+    schema_findings += unmatched
     findings += schema_findings
     counts["schema"] = schema_count
     checks.append("schema")
@@ -891,6 +1184,11 @@ def check_registry(
     findings += premise_findings
     counts["premises"] = premise_count
     checks.append("premises")
+
+    if glossary_path is not None:
+        findings += _check_glossary(glossary_path)
+        counts["glossary"] = 1
+        checks.append("glossary")
 
     if manuscript_path is not None:
         if not manuscript_path.is_file():
@@ -930,6 +1228,8 @@ def check_registry(
         findings=tuple(findings),
         checks_run=tuple(checks),
         counts=counts,
+        deprecations=deprecation_notes(content),
+        glossary_checked=glossary_path is not None,
     )
 
 
@@ -945,6 +1245,12 @@ def _build_argparser() -> argparse.ArgumentParser:
         "--manuscript", type=Path, default=None, help="Manuscript source; enables the anchor, tier and budget checks"
     )
     p.add_argument("--budget", type=int, default=None, help="Word budget; requires --manuscript")
+    p.add_argument(
+        "--glossary",
+        type=Path,
+        default=None,
+        help="The paper's glossary (DR-028); missing, empty or still the template is a finding",
+    )
     p.add_argument("--json", action="store_true", help="Emit JSON instead of Markdown")
     return p
 
@@ -955,7 +1261,9 @@ def main(argv: list[str] | None = None) -> int:
         print("error: --budget requires --manuscript", file=sys.stderr)
         return 2
     try:
-        report = check_registry(args.registry, manuscript_path=args.manuscript, budget=args.budget)
+        report = check_registry(
+            args.registry, manuscript_path=args.manuscript, budget=args.budget, glossary_path=args.glossary
+        )
     except FileNotFoundError as exc:
         print(f"error: file not found: {exc}", file=sys.stderr)
         return 2
