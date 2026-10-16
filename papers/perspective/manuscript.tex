@@ -483,27 +483,34 @@ records each claim's grounds, warrant, qualifier, confidence tier and
 priority, plus the paper's declared starting points and its one
 contribution.  Three entries show how it works.
 
-\paragraph{A claim resting on sources (S1-1).}
-``AI citation hallucination is a distinct failure mode.''  Grounds: two
-sources, \citet{mugaanyi2024} and \citet{walters2023}, each checked in
-both steps.  Priority P0: the paper's opening argument fails without it.
-Tier: Supported, because two peer-reviewed sources agree; the qualifier
-in the text is a reported finding (``found''), not ``shows''.
+Table~\ref{tab:examples} shows three entries side by side: a claim
+resting on sources, a claim resting on an inference, and the
+contribution.
 
-\paragraph{A claim resting on an inference (S2-4).}
-``For non-empirical papers, argument quality \ldots{} is the primary
-verification challenge, not factual accuracy.''  Grounds: \citet{toulmin2003} and \citet{whetten1989}.
-Neither says this; the step from what they say to the claim is mine, and
-the registry records it as a warrant.  Priority P1: it strengthens the
-argument for a reasoning check but the paper does not fail without it.
-Tier: Emerging, so the text says ``may''.  Under the earlier version of the framework this entry was
-typed as a sourced claim, and the inference was invisible.
+\begin{table}[htbp]
+\centering
+\caption{Three registry entries: what each rests on, how it was checked, and how its priority and confidence tier were set.}
+\label{tab:examples}
+\footnotesize
+\begin{tabular}{@{}p{2.3cm}p{4.1cm}p{4.1cm}p{4.1cm}@{}}
+\toprule
+ & \textbf{S1-1} & \textbf{S2-4} & \textbf{C1 (contribution)} \\
+\midrule
+Statement & AI citation hallucination is a distinct failure mode. & For non-empirical papers, argument quality is the primary verification challenge. & The community should develop verification infrastructure for non-empirical papers. \\
+Says & descriptive & descriptive & normative \\
+Grounds & two sources: \citet{mugaanyi2024}, \citet{walters2023} & two sources (\citealp{toulmin2003}; \citealp{whetten1989}) and an inference from them & three claims (S2-1, S2-2, S3-4), one declared value (D1), three declared definitions \\
+Check & source check, both steps, for each source & source checks; warrant check, because neither source states the claim & warrant check; boundary conditions and value stated; Whetten's elements (Table~\ref{tab:whetten}) \\
+Priority & P0: the opening argument fails without it & P1: strengthens the case for a reasoning check; the paper stands without it & P0 by definition: it is what the paper contributes \\
+Confidence tier & Supported & Emerging & Emerging \\
+How the tier was set & two peer-reviewed sources agree on the same proposition (Table~1) & the step from the sources to the claim is the author's inference, so the tier cannot exceed Emerging & no higher than its weakest supporting claim (S2-2 and S3-4 are Emerging) \\
+Qualifier in the text & reported findings (``found'') & ``may'' & ``I propose'' \\
+\bottomrule
+\end{tabular}
+\end{table}
 
-\paragraph{The contribution (C1).}
-Table~\ref{tab:whetten} applies Whetten's elements.  The contribution
-rests on three claims, S2-1 (Supported), S2-2 (Emerging) and S3-4
-(Emerging), on one declared value (D1) and on three declared
-definitions (D2--D4), so its tier is Emerging.
+Under the earlier version of the framework, S2-4 was typed as a sourced
+claim and its inference was invisible; recording the warrant is what
+lowered its tier to Emerging.
 
 \begin{table}[htbp]
 \centering
