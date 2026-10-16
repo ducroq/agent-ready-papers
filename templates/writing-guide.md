@@ -215,7 +215,7 @@ Certain claim categories are systematically overclaimed. Watch for these pattern
 ## Pre-Submission Checklist
 
 ### Every claim
-- [ ] All P0 claims and the contribution at SUPPORTED or ESTABLISHED (or explicitly framed as hypothesis)
+- [ ] All P0 claims and the contribution at SUPPORTED or ESTABLISHED. Framing a claim as a hypothesis does not waive the P0 floor: the gate records the failure (DR-027 step 6)
 - [ ] Language matches confidence tiers throughout
 - [ ] All quotes verified against source
 - [ ] "Own work" claims clearly marked with status

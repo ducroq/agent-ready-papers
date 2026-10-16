@@ -105,10 +105,13 @@ S4-1: "[Claim drawn from other claims]"
 ```
 
 1. Is the claim clearly stated?
-2. Are its `claim:` grounds checked in the registry? **Tier monotonicity:** a claim's tier is no higher than its weakest `claim:` ground, so SPECULATIVE grounds cannot support a SUPPORTED or ESTABLISHED claim.
-3. Is the warrant explicit and valid for the target audience?
-4. Is the qualifier calibrated to the confidence tier?
-5. Is the rebuttal stated, and are the strongest objections addressed (not strawmen)?
+2. Are the grounds checked? Every `claim:` item must be `[x]` in its own row.
+3. Is the warrant explicit and valid for the paper's audience?
+4. Where the audience may not accept the warrant, is there backing?
+5. Does the qualifier stay within the claim's confidence tier (Step Z)?
+6. Is the rebuttal stated: the circumstances in which the step no longer holds? Are the strongest objections engaged, not strawmen?
+
+**Tier monotonicity:** a claim's confidence tier is no higher than the weakest claim among its `claim:` grounds, so SPECULATIVE grounds cannot support a SUPPORTED or ESTABLISHED claim. (Same items, same numbers as `claim-registry.md` → "Warrant check".)
 
 **Declared starting points** (each `decl:` item). Stated in the text, Kind and Contestedness recorded; a claim resting on a contested one says so.
 

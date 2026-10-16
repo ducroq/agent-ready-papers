@@ -256,7 +256,7 @@ Confidence progression for framework components:
 ## Pre-Submission Checklist
 
 ### Every claim
-- [ ] All P0 claims and C1 at SUPPORTED or ESTABLISHED, or the gap stated in the text (C1, S2-2, S3-4 are EMERGING; the appendix says so)
+- [ ] All P0 claims and C1 at SUPPORTED or ESTABLISHED. Where not (C1, S2-2, S3-4 are EMERGING), the appendix says so and the gate records the failure; framing does not waive the floor
 - [ ] Language matches confidence tiers throughout
 - [ ] All quotes verified against source
 - [ ] "Own work" claims clearly marked with status

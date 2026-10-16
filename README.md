@@ -215,7 +215,7 @@ The **registry** tracks all of this in one place: a living record of every claim
 
 ### One row, concretely
 
-Two populated claims from Paper 1's registry (columns abridged):
+Two populated claims from Paper 1's registry (statements and warrant abridged, columns omitted):
 
 | ID | Statement | Says | Grounds | Warrant | Priority | Confidence tier | Source Tier | Status |
 |----|-----------|------|---------|---------|----------|-----------------|-------------|--------|
@@ -534,7 +534,7 @@ Tier vocabulary matches the [Confidence-to-Language Mapping](#confidence-to-lang
 
 | ID | Says | Priority | Confidence | Statement | Grounds / Anchor | Where it appears |
 |----|------|----------|------------|-----------|------------------|------------------|
-| R-1 | contribution | P0 | EMERGING | Process-level verification infrastructure (templates + gates + decision records + registry) catches a class of AI-augmented-writing failure modes that tool-level checkers and model-level techniques do not fully address. Boundary: the four When-Worth-It tests; reduces to overhead for the When-Overkill cases. | Own use on three application classes (academic-paper, speculative-design, decision-support); Paper 1 (this repo) is the perspective article arguing the gap | [The Approach](#the-approach), [The Argument, Structurally](#the-argument-structurally) |
+| R-1 | contribution | P0 | EMERGING | Process-level verification infrastructure (templates + gates + decision records + registry) catches a class of AI-augmented-writing failure modes that tool-level checkers and model-level techniques do not fully address. Boundary: the four When-Worth-It tests; reduces to overhead for the When-Overkill cases. | claim: R-2; claim: R-3; claim: R-4; claim: R-5; claim: R-7 | [The Approach](#the-approach), [The Argument, Structurally](#the-argument-structurally) |
 | R-2 | descriptive | P0 | SUPPORTED | The systems-engineering identity (claims-as-components, sources-as-tests, coverage-as-measurable) operationalises verification rather than just metaphorising it. Warrant: typed registry + tier-monotonic language calibration + per-priority coverage targets are each independently tractable. Rebuttal addressed: the mapping is most natural for argumentative/empirical non-fiction and stretches for purely literary or oral genres. | [DR-007](decisions/DR-007_se-identity-upgrade.md) | [The Approach → SE mapping](#the-approach) |
 | R-3 | descriptive | P1 | SUPPORTED | LLMs introduce plausible-but-fabricated citations at rates high enough that unverified citations can survive into submission-ready drafts. | Hallucination literature as cited in [`templates/anti-hallucination.md`](templates/anti-hallucination.md) | [The Core Problem → Hallucinated citations](#the-core-problem), [Anti-Hallucination Checklist](#anti-hallucination-checklist) |
 | R-4 | descriptive | P1 | EMERGING | Plausibility-based review of calculations misses arithmetic errors that mechanical reproduction catches. | [DR-009](decisions/DR-009_calculation-verification.md) (rationale; cites no external literature). Single observation, N=1, single-site — and model, prompt and inference mode varied together, so it does not isolate the mechanism. Not SUPPORTED: the only other support is the artifact the claim recommends, which would be circular. | [Verification Registry → CALCULATION](#verification-registry-the-foundation), [`agents/equation-checker.md`](agents/equation-checker.md) |

@@ -16,7 +16,7 @@ Every statement the paper puts forward and supports is a **claim**. Each records
 | `decl:` a declared starting point | Stated in the text, contestedness recorded | Assumption, definition or value |
 | `own:` own work | A method someone else could repeat | DR-008 |
 
-A normative claim also needs boundary conditions and a declared value. Each **contribution** is a root claim: P0, tier no higher than its weakest supporting claim, checked once by the **contribution check** (Whetten: What/How/Why/Who-Where-When). Per-claim checks are verification; the contribution check is validation. DR-004 registries (CLAIM / ARGUMENT / PROPOSITION sub-tables) are read as aliases until v6.0.0.
+A normative claim also needs boundary conditions and a declared value. Each **contribution** is a root claim: P0, tier no higher than its weakest supporting claim, checked once by the **contribution check** (Whetten: What/How/Why/Who-Where-When). Per-claim checks are verification; the contribution check is validation. DR-004 registries (CLAIM / ARGUMENT / PROPOSITION sub-tables) are read as aliases through v5.x; removal no earlier than v6.0.0.
 
 For claims whose grounds include a computation (a procedure, not a registry unit):
 
