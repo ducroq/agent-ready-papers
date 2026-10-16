@@ -36,8 +36,10 @@ Checks:
              normative claim or contribution needs boundary conditions and
              a `decl:` value; a contribution is P0; a declared starting
              point has a valid Kind and Contestedness. A row with content
-             whose ID matches no pattern is a finding. Presence only —
-             never quality.
+             whose ID matches no pattern is a finding in a DR-027 table.
+             DR-004/PROVOCATION tables give v4.3.0's findings exactly;
+             v5 adds only notes there (tests/test_v5_parity.py). Presence
+             only — never quality.
 
   premises   The premise graph resolves: every referenced ID exists, is
              itself verified, and the graph is acyclic. Then the property
@@ -100,9 +102,11 @@ from tools.coverage import (
     CONTRIBUTIONS_TABLE,
     DECLARED,
     DECLARED_TABLE,
+    DR004_STRICT_ID_REGEX,
     _has_marker,
     _split_row,
     deprecation_notes,
+    has_dr027_marker,
     marker_kind,
     near_miss_markers,
     says_unit_type,
@@ -146,10 +150,9 @@ ENTRY_ID_REGEX = re.compile(rf"^{_ID}$")
 DR004_KINDS = ("CLAIM", "ARGUMENT", "PROPOSITION")
 _INPUT_REGEX = re.compile(r"\\(input|include)(?:\s*\{([^{}]+)\}|\s+([^\s{}\\]+))")
 _INPUT_PATH_REGEX = re.compile(r"\\def\s*\\input@path\s*\{((?:\{[^{}]*\})+)\}")
-# DR-004 Grounds / Premises are free text: only S-IDs are references there, as
-# before v5.0.0 (`Smith's model C2` is not a premise). A suffix (`S2-3a`) is read
-# only when it ends the token, so every master match still matches.
-_PREMISE_ID_REGEX = re.compile(r"S\d+-\d+(?:[a-z](?!\w))?")
+# DR-004 Grounds / Premises are free text: only S-IDs are references there,
+# read exactly as before v5.0.0 (`Smith's model C2` is not a premise).
+_PREMISE_ID_REGEX = re.compile(r"S\d+-\d+")  # master's, unchanged: DR-004 parity
 # A DR-027 grounds / Rests-on item: `src: Author Year`, `claim: S1-2`, `decl: D1`,
 # or `own: <method or query>` (the author's own observation, experiment or measurement;
 # not a reference, not a graph edge, not a source).
@@ -162,27 +165,32 @@ DECLARED_KINDS = ("assumption", "definition", "value")
 CONTESTEDNESS = ("accepted", "contested", "own")
 # The ID prefix each DR-027 table holds.
 _TABLE_ID_PREFIX = {CLAIMS_TABLE: "S", CONTRIBUTIONS_TABLE: "C", DECLARED_TABLE: "D"}
-# Placeholder tokens of templates/glossary.md (DR-028: a glossary that still
-# contains any of them was copied, not filled in). Prefixes where the template's
-# bracket carries an example (`[Domain 1]`, `[meaning in field A]`).
+# Placeholder strings of templates/glossary.md, exactly as the template writes
+# them (DR-028: a glossary that still contains any of them was copied, not
+# filled in). Exact strings, not prefixes: a filled glossary may cite `[VIM 2.3]`
+# or use `[N]` in a definition. `tests/test_v5_review.py` checks every string
+# still occurs in the template, so a template edit cannot silently orphan one.
 GLOSSARY_PLACEHOLDERS = (
-    "[Title]",
-    "[e.g., metrology",
-    "[Domain ",
-    "[term]",
+    "**Paper:** [Title]",
+    "**Domains:** [e.g., metrology, simulation science, medical education]",
+    "## [Domain 1]",
+    "## [Domain 2]",
+    "## [Domain 3]",
+    "| [term] |",
     "[formal definition]",
-    "[VIM",
+    "[VIM / GUM / ISO / etc.]",
     "[accessible explanation]",
-    "[definition]",
-    "[field]",
-    "[disambiguation",
-    "[notes]",
-    "[meaning in field",
-    "[which meaning",
-    "[abbr]",
-    "[full form]",
-    "[date]",
-    "[N]",
+    "| [definition] |",
+    "| [field] |",
+    "[disambiguation, common confusions]",
+    "| [notes] |",
+    "[meaning in field A]",
+    "[meaning in field B]",
+    "[which meaning we use and why]",
+    "| [abbr] |",
+    "| [full form] |",
+    "*Created: [date]*",
+    "*Version: [N]*",
 )
 _VERIFIED_REGEX = re.compile(r"^\s*\[\s*x\s*\]", re.IGNORECASE)
 
@@ -396,10 +404,14 @@ def _walk_registry(content: str) -> tuple[tuple[Entry, ...], list[Finding]]:
     (`| **PART TWO** |`, nothing after its first cell) is the only row skipped.
     """
     entries: list[Entry] = []
+    # A near-miss is a finding in a registry that uses DR-027 markers; in an
+    # all-DR-004 registry it is a note, so an unmigrated registry keeps master's
+    # findings and exit code (alias parity).
+    near_severity = "finding" if has_dr027_marker(content) else "note"
     unmatched: list[Finding] = [
         Finding(
             "schema",
-            "finding",
+            near_severity,
             "",
             f"registry line {n}: near-miss marker `{text}` — a known table name in marker shape that is not "
             "a recognised marker, so its table is read by nothing",
@@ -453,32 +465,40 @@ def _walk_registry(content: str) -> tuple[tuple[Entry, ...], list[Finding]]:
                 if dr027_cols:
                     dr027_under_dr004(lineno, f"its header has {', '.join(dr027_cols)}")
             continue
+        new_table = unit_type in _TABLE_ID_PREFIX
         if len(cells) > len(header):
             # As in tools.coverage: GFM discards the excess cells and every
-            # column read from this row would shift. Report, never mis-read.
+            # column read from this row would shift. DR-027 tables: a finding,
+            # and the row is not read. DR-004/PROVOCATION tables: a note, and
+            # the row is read as master read it (alias parity).
             unmatched.append(
                 Finding(
                     "schema",
-                    "finding",
+                    "finding" if new_table else "note",
                     cells[0][:40],
                     f"registry line {lineno}: row has {len(cells)} cells but the header defines {len(header)} — "
-                    "an unescaped `|` (escape it as `\\|`, also inside backticks) shifts every column, so this "
-                    "row was NOT checked",
+                    "an unescaped `|` (escape it as `\\|`, also inside backticks) shifts every column"
+                    + (", so this row was NOT checked" if new_table else ", so its columns are read shifted"),
                 )
             )
-            continue
-        if not cells or not ENTRY_ID_REGEX.match(cells[0]):
+            if new_table:
+                continue
+        id_regex = ENTRY_ID_REGEX if new_table else DR004_STRICT_ID_REGEX
+        if not cells or not id_regex.match(cells[0]):
             if any(cells[1:]):
-                # DR-004 tables: a note, so an unmigrated registry keeps its exit
-                # code; DR-027 tables: a finding.
-                new_table = unit_type in _TABLE_ID_PREFIX
+                # DR-004/PROVOCATION tables: a note, so an unmigrated registry
+                # keeps master's exit code; DR-027 tables: a finding.
                 unmatched.append(
                     Finding(
                         "schema",
                         "finding" if new_table else "note",
                         cells[0][:40],
                         f"registry line {lineno}: row has content but its ID `{cells[0][:40] or '(blank)'}` "
-                        "matches no entry-ID pattern (S<n>-<n>, S<n>-<n>a, C<n>, D<n>), so no check reads it",
+                        + (
+                            "matches no entry-ID pattern (S<n>-<n>, S<n>-<n>a, C<n>, D<n>), so no check reads it"
+                            if new_table
+                            else "is not S<n>-<n> (the DR-004 pattern), so no check reads it"
+                        ),
                     )
                 )
             continue
@@ -516,9 +536,12 @@ def _stray_rows(content: str) -> list[Finding]:
     """
     findings: list[Finding] = []
     state = "none"  # "table": inside a marker's table · "after": that table ended, no heading yet
+    id_regex = DR004_STRICT_ID_REGEX  # after a DR-004 marker, master's pattern (alias parity)
     for lineno, line in enumerate(content.splitlines(), start=1):
-        if _MARKER_REGEX.match(line):
+        marker = _MARKER_REGEX.match(line)
+        if marker:
             state = "marker"
+            id_regex = ENTRY_ID_REGEX if marker_kind(marker) in _TABLE_ID_PREFIX else DR004_STRICT_ID_REGEX
             continue
         if re.match(r"^ {0,3}#{1,6}(\s|$)", line):
             state = "none"
@@ -528,7 +551,7 @@ def _stray_rows(content: str) -> list[Finding]:
             state = "table"
         elif state == "table" and cells is None:
             state = "after"
-        elif state == "after" and cells and ENTRY_ID_REGEX.match(cells[0]):
+        elif state == "after" and cells and id_regex.match(cells[0]):
             findings.append(
                 Finding(
                     "schema",
@@ -664,6 +687,20 @@ def _check_anchors(entries: tuple[Entry, ...], manuscript: str) -> tuple[list[Fi
     anchored = set(ANCHOR_REGEX.findall(manuscript))
     registered = {e.entry_id for e in entries}
     findings: list[Finding] = _decl_anchor_findings(entries, manuscript)
+    if not any(e.schema == DR027 for e in entries):
+        # An all-DR-004 registry: anchors master did not read (`% C1:`, `% S2-3a:`)
+        # are notes, and the counts stay master's (alias parity).
+        extra = {a for a in anchored if not DR004_STRICT_ID_REGEX.match(a)}
+        anchored -= extra
+        findings += [
+            Finding(
+                "anchors",
+                "note",
+                entry_id,
+                "anchored in the manuscript with a DR-027 ID, but this registry has no DR-027 tables",
+            )
+            for entry_id in sorted(extra - registered)
+        ]
 
     for entry_id in sorted(registered - anchored):
         findings.append(
@@ -885,7 +922,10 @@ def _check_tiers(entries: tuple[Entry, ...], manuscript: str) -> tuple[list[Find
     anchor_copies, findings = _anchor_tiers(manuscript)
     table_copies, table_notes = _table_tiers(manuscript)
     findings += table_notes
+    dr027 = any(e.schema == DR027 for e in entries)
     for entry_id, where, raw in anchor_copies + table_copies:
+        if not dr027 and not DR004_STRICT_ID_REGEX.match(entry_id):
+            continue  # an ID master did not read, in an all-DR-004 registry (alias parity)
         copies.setdefault(entry_id, []).append((where, raw))
 
     examined = 0
@@ -996,8 +1036,12 @@ def _check_schema(entries: tuple[Entry, ...]) -> tuple[list[Finding], int]:
     findings: list[Finding] = []
     examined = 0
     by_id = {e.entry_id: e for e in entries}
+    # Duplicates among DR-027 rows only: in DR-004 an ID registered in two
+    # sub-tables is one entry, as before (tools/README.md).
     seen: dict[str, int] = {}
     for entry in entries:
+        if entry.schema != DR027:
+            continue
         if entry.entry_id in seen:
             findings.append(
                 Finding(

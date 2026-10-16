@@ -58,7 +58,16 @@ def test_near_miss_forms_are_caught_beside_a_valid_marker(tmp_path, line):
         check_coverage(path)
 
 
-@pytest.mark.parametrize("line", ["**Claims with a Warrant**", "```\n**claims:**\n```", "**Coverage by Type**"])
+@pytest.mark.parametrize(
+    "line",
+    [
+        "**Claims with a Warrant**",
+        "```\n**claims:**\n```",
+        "    **claims:**",
+        "**Arguments**\n\nProse follows, no table.",
+        "**Claim (S1-1):**\n\nThe statement in prose.",
+    ],
+)
 def test_bold_prose_and_quoted_examples_are_not_near_misses(tmp_path, line):
     path = write(tmp_path, line + "\n\n" + registry(claims=claim_row()))
     assert check_coverage(path).rows
@@ -105,12 +114,21 @@ def test_unclassified_rows_are_counted_and_fail_strict(tmp_path):
     assert coverage_main([str(path), "--strict"]) == 1
 
 
-def test_unmatched_ids_are_counted_and_fail_strict(tmp_path):
-    path = write(tmp_path, OLD_REGISTRY.replace("| S2-1 | x |", "| SN-1 | x |"))
+def test_unmatched_ids_in_dr027_tables_are_counted_and_fail_strict(tmp_path):
+    path = write(tmp_path, registry(claims=claim_row() + claim_row("SN-1"), contribs=contrib_row()))
     report = check_coverage(path)
     assert report.unmatched_ids == ("SN-1",)
     assert report.meets_targets and report.meets_tier_floor
     assert coverage_main([str(path), "--strict"]) == 1
+
+
+def test_unmatched_ids_in_dr004_tables_are_a_note_and_do_not_fail_strict(tmp_path):
+    """Round 2, item 1: the template's SN-1…SN-4 must not fail --strict."""
+    path = write(tmp_path, OLD_REGISTRY.replace("| S2-1 | x |", "| SN-1 | x |"))
+    report = check_coverage(path)
+    assert report.unmatched_ids == ()
+    assert any("SN-1" in n for n in report.notes)
+    assert coverage_main([str(path), "--strict"]) == 0
 
 
 # 4. zero cases ---------------------------------------------------------------
@@ -155,7 +173,7 @@ def test_dr004_grounds_read_only_s_ids_as_premises():
 def test_unmatched_id_in_a_dr004_table_keeps_the_exit_code(tmp_path):
     path = write(tmp_path, OLD_REGISTRY.replace("| S2-1 | x |", "| SN-1 | x |"))
     report = check_registry(path)
-    assert [f.severity for f in report.findings if "matches no entry-ID pattern" in f.message] == ["note"]
+    assert [f.severity for f in report.findings if "so no check reads it" in f.message] == ["note"]
     assert report.ok
 
 
@@ -170,16 +188,23 @@ def test_unmatched_id_in_a_dr004_table_keeps_the_exit_code(tmp_path):
     ],
 )
 def test_dr027_table_under_a_dr004_marker_is_a_finding(tmp_path, header_extra, grounds):
-    text = (
-        "**ARGUMENTs** (Toulmin):\n\n"
-        f"| ID | Statement |{header_extra} Grounds | Warrant | Rebuttal | Priority | Confidence | Status |\n"
-        "|---|---|---|---|---|---|---|---|---|\n"
-        f"| S1-1 | x | descriptive | {grounds} | w | r | P1 | EMERGING | [x] |\n"
-        "| S1-2 | x | descriptive | S1-1 | w | r | P1 | EMERGING | [x] |\n"
-    )
+    """One finding per table (two triggering rows: deduped), and the flag resets at
+    the next marker (a second triggering table: a second finding)."""
+
+    def table(marker, a, b):
+        return (
+            f"{marker}\n\n"
+            f"| ID | Statement |{header_extra} Grounds | Warrant | Rebuttal | Priority | Confidence | Status |\n"
+            "|---|---|---|---|---|---|---|---|---|\n"
+            f"| {a} | x | descriptive | {grounds} | w | r | P1 | EMERGING | [x] |\n"
+            f"| {b} | x | descriptive | {grounds} | w | r | P1 | EMERGING | [x] |\n\n"
+        )
+
+    text = table("**ARGUMENTs** (Toulmin):", "S1-1", "S1-2") + table("**CLAIMs:**", "S2-1", "S2-2")
     report = check_registry(write(tmp_path, text))
     hits = [f for f in report.findings if "DR-027 table under a DR-004 marker" in f.message]
-    assert len(hits) == 1 and hits[0].severity == "finding"
+    assert [f.severity for f in hits] == ["finding", "finding"]
+    assert "registry line 3" in hits[0].message or "registry line 5" in hits[0].message
 
 
 # 7. excess cells ----------------------------------------------------------------
@@ -199,11 +224,16 @@ def test_excess_cells_are_a_finding_not_a_column_shift(tmp_path):
     [
         pytest.param(registry(claims=claim_row() + claim_row()), id="claims"),
         pytest.param(registry(decls=decl_row() + decl_row(kind="definition")), id="declared"),
-        pytest.param(OLD_REGISTRY.replace("| S2-1 | x |", "| S1-1 | x |"), id="dr004-across-tables"),
     ],
 )
 def test_duplicate_ids_are_a_finding(tmp_path, text):
     assert any("duplicate ID" in m for m in schema_messages(tmp_path, text))
+
+
+def test_an_id_in_two_dr004_sub_tables_is_one_entry_not_a_duplicate(tmp_path):
+    """Round 2, item 2: DR-004 keeps master's rule (tools/README.md)."""
+    report = check_registry(write(tmp_path, OLD_REGISTRY.replace("| S2-1 | x |", "| S1-1 | x |")))
+    assert not any("duplicate ID" in f.message for f in report.findings)
 
 
 # 9 / 12. Rests-on item types -------------------------------------------------------
@@ -228,7 +258,7 @@ def test_glossary_template_with_only_the_paper_line_edited_fails(tmp_path):
     gloss = write(tmp_path, template.replace("**Paper:** [Title]", "**Paper:** The Verification Gap"), "glossary.md")
     reg = write(tmp_path, registry(claims=claim_row()))
     hits = [f for f in check_registry(reg, glossary_path=gloss).findings if f.check == "glossary"]
-    assert len(hits) == 1 and "`[term]`" in hits[0].message and "[Title]" not in hits[0].message
+    assert len(hits) == 1 and "`| [term] |`" in hits[0].message and "[Title]" not in hits[0].message
 
 
 def test_glossary_that_is_a_directory_is_a_finding(tmp_path):

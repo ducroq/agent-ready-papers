@@ -119,13 +119,14 @@ def test_suffixed_and_new_ids_parse(tmp_path):
     assert entries["C1"].premises == ("S2-3b",)
 
 
-def test_old_premise_regex_reads_suffixed_ids():
+def test_dr004_premise_regex_is_masters():
+    """Alias parity (round 2): DR-004 Grounds are read with master's `S<n>-<n>`."""
     table = (
         "**ARGUMENTs** (Toulmin):\n\n| ID | Statement | Priority | Confidence | Grounds | Warrant | Rebuttal | Status |\n"
         "|---|---|---|---|---|---|---|---|\n| S2-1 | x | P0 | EMERGING | S1-1a; S1-2 | w | r | [x] |\n"
     )
     (entry,) = _parse_entries(table)
-    assert entry.premises == ("S1-1a", "S1-2")
+    assert entry.premises == ("S1-1", "S1-2")
 
 
 @pytest.mark.parametrize(
@@ -139,7 +140,7 @@ def test_a_row_whose_id_matches_no_pattern_is_reported_not_dropped(tmp_path, fir
         f"| {first_cell} | b | P1 | EMERGING | s | A | [x] |\n"
     )
     report = check_registry(write(tmp_path, old))
-    hits = [f for f in report.findings if "matches no entry-ID pattern" in f.message]
+    hits = [f for f in report.findings if "so no check reads it" in f.message]
     # A DR-004 table: reported as a note, so an unmigrated registry keeps master's exit code.
     assert len(hits) == 1 and hits[0].severity == "note"
     assert report.ok is True

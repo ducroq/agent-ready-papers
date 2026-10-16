@@ -129,9 +129,10 @@ def says_unit_type(raw: str) -> str:
 # A marker-shaped line with a known name in the wrong case or form
 # (`**CONTRIBUTIONS:**`, `### **CLAIMs:**`, `**claims**`). Until v5.0.0 such a
 # line dropped its table in silence whenever another marker in the file was
-# recognised. Shape only: bold prose like `**Claims with a Warrant**` is not one.
+# recognised. Shape only: bold prose like `**Claims with a Warrant**` is not one,
+# and neither is a marker-shaped label with no table under it (`near_miss_markers`).
 _NEAR_MISS_REGEX = re.compile(
-    r"^\s*(?:#{1,6}\s*)?\*\*\s*"
+    r"^ {0,3}(?:#{1,6}\s*)?\*\*\s*"
     r"(?:claims?|arguments?|propositions?|provocations?|contributions?|declared\s+starting\s+points?)"
     r"\s*(?:\([^)]*\))?\s*:?\s*\*\*"
     r"(?:\s*\([^)]*\))?"
@@ -140,16 +141,37 @@ _NEAR_MISS_REGEX = re.compile(
 )
 
 
+_NEAR_MISS_LOOKAHEAD = 3
+
+
 def near_miss_markers(content: str) -> list[tuple[int, str]]:
     """(line number, line) for every unquoted near-miss marker: a known table name
-    in marker shape that `_MARKER_REGEX` does not accept. Its table would be read by
-    nothing. Quoted lines (fences, HTML comments) are examples, as in `_has_marker`."""
+    in marker shape that `_MARKER_REGEX` does not accept, with a table row (`|`)
+    within the next three non-blank lines. That table would be read by nothing.
+    A label with no table under it (`**Arguments**`, `**Claim (S1-1):**`) is prose.
+    Quoted lines (fences, HTML comments) and 4-space-indented code are examples."""
     lines = content.splitlines()
-    return [
-        (n, line.strip())
-        for n, (line, quoted) in enumerate(zip(lines, _quoted_lines(lines), strict=True), start=1)
-        if not quoted and _NEAR_MISS_REGEX.match(line) and not _MARKER_REGEX.match(line)
-    ]
+    quoted = _quoted_lines(lines)
+    found: list[tuple[int, str]] = []
+    for i, line in enumerate(lines):
+        if quoted[i] or not _NEAR_MISS_REGEX.match(line) or _MARKER_REGEX.match(line):
+            continue
+        following = [nxt for nxt in lines[i + 1 :] if nxt.strip()][:_NEAR_MISS_LOOKAHEAD]
+        for nxt in following:
+            if _MARKER_REGEX.match(nxt):
+                break  # the table below belongs to that recognised marker
+            if nxt.lstrip().startswith("|"):
+                found.append((i + 1, line.strip()))
+                break
+    return found
+
+
+def has_dr027_marker(content: str) -> bool:
+    """Whether any line opens a DR-027 table (Claims, Contributions, Declared)."""
+    return any(
+        m and marker_kind(m) in (CLAIMS_TABLE, CONTRIBUTIONS_TABLE, DECLARED_TABLE)
+        for m in map(_MARKER_REGEX.match, content.splitlines())
+    )
 
 
 def deprecation_notes(content: str) -> tuple[str, ...]:
@@ -221,10 +243,15 @@ def _has_marker(content: str) -> bool:
 _SEPARATOR_REGEX = re.compile(r"^\s*\|[\s\-:|]+\|\s*$")
 _STATUS_VERIFIED_REGEX = re.compile(r"^\s*\[\s*x\s*\]", re.IGNORECASE)
 _ENTRY_ID_REGEX = re.compile(r"^\W*(?:S\d+-\d+[a-z]?|[CD]\d+)\W*$")
+# DR-004 and PROVOCATION tables keep master's patterns exactly (alias parity).
+_DR004_ENTRY_ID_REGEX = re.compile(r"^\W*S\d+-\d+\W*$")
+DR004_STRICT_ID_REGEX = re.compile(r"^S\d+-\d+$")
+DR027_UNIT_TYPES = ("DESCRIPTIVE", "NORMATIVE", "UNCLASSIFIED", "CONTRIBUTION", "DECLARED")
 # An entry ID exactly as both tools accept it (no decoration): S2-3, S2-3a, C1, D1.
 STRICT_ID_REGEX = re.compile(r"^(?:S\d+-\d+[a-z]?|[CD]\d+)$")
 # A `claim:` item naming one ID, in a Rests-on cell.
 _CLAIM_ITEM_REGEX = re.compile(r"^\s*claim\s*:\s*[*`_ ]*(S\d+-\d+[a-z]?|C\d+)[*`_ ]*\s*$", re.IGNORECASE)
+_CLAIM_PREFIX_REGEX = re.compile(r"^\s*claim\s*:\s*(.*)$", re.IGNORECASE)
 _TIER_ORDER = ("ESTABLISHED", "SUPPORTED", "EMERGING", "SPECULATIVE")
 
 # DR-002: "all SUPPORTED or ESTABLISHED (no EMERGING/SPECULATIVE)".
@@ -255,6 +282,7 @@ class _RegistryRow:
     entry_id: str
     tier: str
     refs: tuple[str, ...] = ()  # a contribution's `claim:` Rests-on IDs
+    bad_refs: tuple[str, ...] = ()  # `claim:` items that are not exactly one S/C ID
 
 
 @dataclass(frozen=True)
@@ -291,6 +319,8 @@ class CoverageReport:
     notes: tuple[str, ...] = ()
     # Only Declared rows were found: nothing coverage or the floor could evaluate.
     evaluated_nothing: bool = False
+    # (contribution ID, effective-tier text) — why each contribution sits where it does.
+    effective_tiers: tuple[tuple[str, str], ...] = ()
 
     @property
     def passes_strict(self) -> bool:
@@ -370,6 +400,7 @@ class CoverageReport:
             "unmatched_ids": list(self.unmatched_ids),
             "notes": list(self.notes),
             "evaluated_nothing": self.evaluated_nothing,
+            "contribution_effective_tiers": {eid: text for eid, text in self.effective_tiers},
         }
 
     def to_markdown(self) -> str:
@@ -392,6 +423,9 @@ class CoverageReport:
             )
         lines.append("")
         lines.append(self._tier_floor_line())
+        for eid, text in self.effective_tiers:
+            lines.append("")
+            lines.append(f"{eid}: effective {text}")
         if self.declared_total:
             lines.append("")
             lines.append(
@@ -662,12 +696,22 @@ def _iter_registry_rows(content: str) -> Iterator[_RegistryRow]:
                 if not any(row[1:]) and not _ENTRY_ID_REGEX.match(first):
                     i += 1
                     continue
-                refs = ()
-                if rests_col is not None:
-                    found = (_CLAIM_ITEM_REGEX.match(item) for item in row[rests_col].split(";"))
-                    refs = tuple(dict.fromkeys(m.group(1) for m in found if m))
+                refs: list[str] = []
+                bad: list[str] = []
+                for item in [] if rests_col is None else row[rests_col].split(";"):
+                    if not _CLAIM_PREFIX_REGEX.match(item):
+                        continue
+                    good = _CLAIM_ITEM_REGEX.match(item)
+                    (refs if good else bad).append(good.group(1) if good else _CLAIM_PREFIX_REGEX.match(item).group(1))
                 yield _RegistryRow(
-                    CONTRIBUTION, axis, "P0", row[status_col], first, "" if tier_col is None else row[tier_col], refs
+                    CONTRIBUTION,
+                    axis,
+                    "P0",
+                    row[status_col],
+                    first,
+                    "" if tier_col is None else row[tier_col],
+                    tuple(dict.fromkeys(refs)),
+                    tuple(bad),
                 )
                 i += 1
                 continue
@@ -687,7 +731,8 @@ def _iter_registry_rows(content: str) -> Iterator[_RegistryRow]:
             # is not skipped either: `_parse_registry` counts it as unverified.
             if not bucket:
                 first = row[0 if id_col is None else id_col]
-                is_divider = not any(row[1:]) and not _ENTRY_ID_REGEX.match(first)
+                id_regex = _ENTRY_ID_REGEX if unit_type == CLAIMS_TABLE else _DR004_ENTRY_ID_REGEX
+                is_divider = not any(row[1:]) and not id_regex.match(first)
                 if not is_divider:
                     raise ValueError(
                         f"{registry_line_no(i)}: row has content but no "
@@ -751,16 +796,18 @@ def check_coverage(
             "exactly like `**Claims:**` (or DR-004's `**CLAIMs:**`) on their own line."
         )
     near = near_miss_markers(content)
-    if near:
-        listed = "; ".join(f"line {n}: `{text}`" for n, text in near)
+    listed = "; ".join(f"line {n}: `{text}`" for n, text in near)
+    dr027 = has_dr027_marker(content)
+    if near and dr027:
         raise ValueError(
             f"near-miss marker {listed} — a known table name in marker shape that is not a recognised "
             "marker, so its table would be dropped from coverage and the P0 tier floor. Write it exactly "
             "as `**Claims:**`, `**Contributions:**`, `**Declared starting points:**` (or DR-004's `**CLAIMs:**`)."
         )
     all_rows = tuple(_iter_registry_rows(content))
+    effective = {r.entry_id: _effective_tier(r, all_rows) for r in all_rows if r.unit_type == CONTRIBUTION}
     p0_tiers = tuple(
-        (row.entry_id, _effective_tier(row, all_rows) if row.unit_type == CONTRIBUTION else row.tier)
+        (row.entry_id, effective[row.entry_id] if row.unit_type == CONTRIBUTION else row.tier)
         for row in all_rows
         if row.axis == PRIORITY_AXIS
         # `**P0**` is still P0: an undecorated compare would drop it from the floor.
@@ -770,12 +817,32 @@ def check_coverage(
     )
     declared = [row for row in all_rows if row.axis == DECLARED_AXIS]
     unclassified = tuple(dict.fromkeys(r.entry_id for r in all_rows if r.unit_type == UNCLASSIFIED))
-    unmatched = tuple(dict.fromkeys(r.entry_id or "(blank)" for r in all_rows if not STRICT_ID_REGEX.match(r.entry_id)))
+    # DR-027 tables: an ID no pattern accepts is counted and fails --strict.
+    # DR-004 and PROVOCATION tables: a note only, so their exit code stays master's.
+    unmatched = tuple(
+        dict.fromkeys(
+            r.entry_id or "(blank)"
+            for r in all_rows
+            if r.unit_type in DR027_UNIT_TYPES and not STRICT_ID_REGEX.match(r.entry_id)
+        )
+    )
+    old_unmatched = tuple(
+        dict.fromkeys(
+            r.entry_id or "(blank)"
+            for r in all_rows
+            if r.unit_type not in DR027_UNIT_TYPES and not DR004_STRICT_ID_REGEX.match(r.entry_id)
+        )
+    )
     notes: list[str] = []
-    kinds = {marker_kind(m) for m in map(_MARKER_REGEX.match, content.splitlines()) if m}
-    if kinds & {CLAIMS_TABLE, CONTRIBUTIONS_TABLE, DECLARED_TABLE} and not any(
-        r.unit_type == CONTRIBUTION for r in all_rows
-    ):
+    if near:
+        # Only reached in a registry with no DR-027 marker: a note, never an exit code.
+        notes.append(f"near-miss marker {listed} — its table is read by nothing")
+    if old_unmatched:
+        notes.append(
+            f"DR-004/PROVOCATION rows whose ID is not S<n>-<n>: {len(old_unmatched)} "
+            f"({', '.join(old_unmatched)}); counted above, never read by check_registry"
+        )
+    if dr027 and not any(r.unit_type == CONTRIBUTION for r in all_rows):
         notes.append(
             "no contributions registered — a DR-027 registry names its contribution (C1…) as a P0 root "
             "claim, and the P0 tier floor covers it"
@@ -804,6 +871,9 @@ def check_coverage(
         unmatched_ids=unmatched,
         notes=tuple(notes),
         evaluated_nothing=evaluated_nothing,
+        effective_tiers=tuple(
+            (eid, text) for eid, text in effective.items() if types is None or CONTRIBUTION in {t.upper() for t in types}
+        ),
     )
 
 
@@ -822,7 +892,9 @@ def _effective_tier(row: _RegistryRow, all_rows: tuple[_RegistryRow, ...]) -> st
             tiers.setdefault(other.entry_id, []).append(_normalise_tier(other.tier))
     own = _normalise_tier(row.tier)
     if own not in _TIER_ORDER:
-        return row.tier
+        return f"UNREADABLE (own tier `{row.tier.strip() or 'blank'}` is not a confidence tier)"
+    if row.bad_refs:
+        return f"UNREADABLE (Rests-on item `claim: {row.bad_refs[0]}` is not exactly one S/C ID)"
     worst, worst_id = _TIER_ORDER.index(own), ""
     for ref in row.refs:
         copies = tiers.get(ref)
@@ -834,8 +906,8 @@ def _effective_tier(row: _RegistryRow, all_rows: tuple[_RegistryRow, ...]) -> st
             if _TIER_ORDER.index(tier) > worst:
                 worst, worst_id = _TIER_ORDER.index(tier), ref
     if not worst_id:
-        return row.tier
-    return f"{_TIER_ORDER[worst]} (effective: weakest claim {worst_id}; own {own})"
+        return f"{own} (own; no weaker claim)"
+    return f"{_TIER_ORDER[worst]} (weakest claim {worst_id}; own {own})"
 
 
 def _build_argparser() -> argparse.ArgumentParser:
