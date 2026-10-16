@@ -28,7 +28,8 @@ verify-bib:  ## Field-level verification of Paper 1 references.bib (the stronger
 
 check-registry:  ## Registry/manuscript internal consistency for Paper 1
 	python -m tools.check_registry papers/perspective/vv/claims/claim_registry.md \
-		--manuscript papers/perspective/manuscript.tex --budget 5000
+		--manuscript papers/perspective/manuscript.tex --budget 4000 \
+		--glossary papers/perspective/glossary.md
 
 HOUSE_WORDS ?= vv/house-words.txt
 formula-scan:  ## Advisory formula/readability locator (PROPOSED, DR-022); FILE=<path>, default Paper 1; HOUSE_WORDS=<list>, HOUSE_WORDS= for none

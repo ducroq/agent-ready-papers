@@ -4,9 +4,9 @@ This paper argues that the scholarly community lacks verification infrastructure
 
 **Core Argument:** AI writing tools are proliferating and citation checkers exist, but the scholarly infrastructure for verifying *argument quality* — not just factual accuracy — is missing. We propose typed verification (CLAIM/ARGUMENT/PROPOSITION) with per-type checklists adapted from Toulmin and Whetten.
 
-- **Target:** Learned Publishing (primary), Research Integrity and Peer Review (backup)
+- **Target:** Learned Publishing, Opinion (1,000–4,000 words; decided 2026-10-16 after four model reviews), Research Integrity and Peer Review Comment (backup)
 - **Deadline:** TBD
-- **Status:** Phase 3 — Writing (first draft complete)
+- **Status:** Phase 3 — Writing (draft 2 on branch `v5-migration`, 2026-10-16; draft 1 = tag `paper1-draft-1`)
 - **agent-ready-papers:** v4.3.0 <!-- A number, not a status. Bump deliberately after reading UPGRADING.md. v4.2.0 -> v4.3.0 reconciled 2026-10-12: no required item; the new tools are optional and the wording change alters no rule. Still not taken: the optional readability template and DR-019's Step Z scope line. v4.0.0's P0 floor is the known red gate (#38). Earlier reconciliation notes: git history. -->
 
 <!-- This paper lives inside the framework repo, so the pin above tracks the
@@ -38,7 +38,7 @@ We propose a typed verification model: CLAIMs (source-verifiable facts), ARGUMEN
 
 | When | Read |
 |------|------|
-| Writing or editing prose | `writing-guide.md` — claim-to-section mapping with language calibration |
+| Writing or editing prose | `glossary.md` (this paper's terms; framework terms in `../../docs/glossary.md`, DR-027/028), then `writing-guide.md` — claim-to-section mapping with language calibration |
 | Writing or editing prose for a reader | The maintainer's private house-voice profile (maintainer-local; ask for it), then `make formula-scan` from the repo root (tier language in `writing-guide.md` still wins) |
 | Adding or verifying citations | `vv/claims/claim_registry.md` — all claims with priority and status |
 | Checking coverage or DOIs for this paper | From repo root: `python -m tools.coverage papers/perspective/vv/claims/claim_registry.md` and `python -m tools.check_dois papers/perspective/vv/claims/claim_registry.md` (or `make coverage` / `make check-dois`). Prefer the tool to manually counting P0/P1/P2 percentages or eyeballing DOIs in `references.bib`. See `../../tools/README.md` for flags and known limits. |

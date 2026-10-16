@@ -41,7 +41,7 @@ MASTER = [
         [],
     ),
     (
-        "papers/perspective/vv/claims/claim_registry.md",
+        "tests/fixtures/dr004/paper1-v4-registry.md",
         None,
         1,
         [("ARGUMENT", "P0", 1, 1), ("CLAIM", "P0", 4, 4), ("CLAIM", "P1", 9, 9), ("CLAIM", "P2", 2, 2),
@@ -52,14 +52,14 @@ MASTER = [
         [],
     ),
     (
-        "papers/perspective/vv/claims/claim_registry.md",
-        "papers/perspective/manuscript.tex",
+        "tests/fixtures/dr004/paper1-v4-registry.md",
+        "tests/fixtures/dr004/paper1-v4-manuscript.tex",
         1,
         [("ARGUMENT", "P0", 1, 1), ("CLAIM", "P0", 4, 4), ("CLAIM", "P1", 9, 9), ("CLAIM", "P2", 2, 2),
          ("PROPOSITION", "P0", 1, 1)],
         (3, 6),
         0,
-        {"anchors": 17, "budget": 3494, "premises": 2, "schema": 2, "tiers": 17},
+        {"anchors": 17, "budget": 3496, "premises": 2, "schema": 2, "tiers": 17},
         [],
     ),
     (
