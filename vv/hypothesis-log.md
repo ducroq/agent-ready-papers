@@ -26,6 +26,42 @@
 
 ## Open
 
+### [2026-10-16] Recording grounds item by item surfaces inferences that type labels hide
+
+**Position (provisional):** Migrating a registry from DR-004's types to DR-027's grounds-based model exposes inferences that the old CLAIM label hid. In the Paper 1 trial, 9 of 17 rows that DR-004 typed as plain claims combined sources into a point none of them makes alone (`docs/work-items/archive/2026-10-16-v5-and-draft2/v5-trial/`, maintainer-local); the constructive-lenses trial found 3 more warrants. n=2 registries, both migrated by the framework's own agent.
+
+**Alternative:** The warrants were added because the migrating agent expected to find them; a migration by someone else would record far fewer.
+
+**Method:** The next registry migrated to DR-027 by its own author (not the framework agent): count rows that gain a warrant and how many of those the author judges real inferences.
+
+**Revisit trigger:** The next adopter migrates a registry to the v5 schema.
+
+**Review by:** 2027-03-31
+
+### [2026-10-16] Deriving an inference's tier from its warrant check removes the gate paradox without lowering the bar
+
+**Position (provisional):** Under DR-002's counting rule every inference is capped at Emerging, so every argument-based paper fails the P0 gate by construction (four model referees on Paper 1 draft 2, 2026-10-16). A tier for inferences taken from a warrant check with stated criteria (planned DR-029) lets such a paper pass when its warrants survive the check, while claims resting on sources keep DR-002's rule.
+
+**Alternative:** The paradox moves instead of disappearing: either most warrants pass (the bar is effectively lowered) or most fail (the gate still fails every argument-based paper).
+
+**Method:** Re-run Paper 1's self-application under DR-029 and record how many P0 inferences pass and why; the same four referees on draft 3 are asked whether the gate problem is resolved.
+
+**Revisit trigger:** DR-029 accepted and Paper 1 draft 3 reviewed.
+
+**Review by:** 2027-01-31
+
+### [2026-10-16] A mandatory per-paper glossary reduces terminology complaints in review
+
+**Position (provisional):** With a glossary that defines the paper's terms against the framework's (DR-028), reviewers raise fewer terminology problems. Baseline: Paper 1 draft 1 drew terminology objections from the author and three of four model reviewers (claim vs Toulmin's claim, proposition vs Whetten's, undefined verification); draft 2, with the glossary, drew one narrower point (grounds as an extension of Toulmin's data).
+
+**Alternative:** The drop came from the vocabulary rewrite (DR-027), not from the glossary; a paper without the rewrite gains little from a glossary alone.
+
+**Method:** Count terminology objections in the reviews of the next two papers that adopt DR-028, against their pre-glossary drafts where available.
+
+**Revisit trigger:** Two papers have been reviewed with a DR-028 glossary.
+
+**Review by:** 2027-06-30
+
 ### [2026-10-10] A second model finds method-level problems that a same-family reader panel misses
 
 **Position (provisional):** A review by a model from a different vendor finds method-level problems in a full draft that the simulated reader panel (four reader roles played by one model family) does not find, because the panel's readers share one model's blind spots. One observation so far, on a private narrative review: after two review passes and three panel rounds, one cross-vendor review raised three method-level problems that the author accepted; the panel had raised part of one. That review also used a different prompt, contained unchecked source summaries, and promised an audit it had not carried out.
@@ -37,6 +73,8 @@
 **Revisit trigger:** The paper's next full draft is ready for its outside expert reader, before it is sent.
 
 **Review by:** 2026-12-31
+
+**Related observation (2026-10-16), not EXP-001's protocol:** three cross-vendor panels (DeepSeek, Gemini, GPT-6, Claude) on Paper 1 draft 1, the glossary and draft 2 each produced points no other reviewer raised (e.g. assurance cases, the JBI checklist lead, the gate paradox's cause), alongside unanimous ones. Same prompt per panel; no same-family reader panel to compare against, so it does not test this position.
 
 **Origin:** Moved here, anonymised, from that paper's own log when DR-024 was accepted (2026-10-12). DR-011 makes Pass 3 (cross-vendor) opt-in and expects it to yield mostly style findings. If confirmed, making Pass 3 the default before a full draft goes to an outside reader, and adding a second-model reader to the panel template, needs a DR. Tracking: [#53](https://github.com/ducroq/agent-ready-papers/issues/53).
 
