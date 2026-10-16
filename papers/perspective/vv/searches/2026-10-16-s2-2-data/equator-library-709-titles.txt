@@ -1,0 +1,709 @@
+# EQUATOR library, all records listed at https://www.equator-network.org/reporting-guidelines/ on 2026-10-16 ("Displaying 709 reporting guidelines found"); 708 unique titles below (one title occurs twice).
+CONsensus-based  Process evaluation reporting guideline for public  HEalth  intervention Studies  (CONPHES)  conducted alongside an effectiveness trial
+Consensus Guidelines on the Conduct and Reporting of Studies on the Environmental Consequences of Healthcare
+Transparent reporting for metabolomic epidemiology
+Strengthening the Reporting of Observational Studies in Epidemiology Enhanced Prevalence and Incidence Criteria  (STROBE-EPIC)
+Standard Elements in Studies of Adverse Events and Medical Error: the  SESAME  statement
+The vaccine clinical study reporting guideline
+Enhancing reporting of process evaluations in healthcare: A preliminary Checklist for RepOrting Process evaluations  (CROP)  , a Delphi study
+PRISMA-Children  and Adolescents
+Standards for reporting research methods, interventions, and Outcomes in Surgical Prehabilitation studies
+SPIRIT-Children  and Adolescents
+CONSORT-Children  and Adolescents
+Consensus-based reporting guideline for participatory development and evaluation of digital health interventions
+Reporting  GUideline  for Intervention  DEscription  in Rehabilitation  (GUIDE-Rehab)
+An Extension of the  CARE  Guidelines for Dry Needling Case Reports  (CARE-DN)
+Reporting guidelines for physiotherapy case reports: a consensus-based development  (PhyCARE)
+TIDieR-C
+Reporting of perinatal pharmacoepidemiology studies
+STARBIV  : A standard to report biological variation data studies
+Reporting qualitative Methods in Mental Health Research
+Guidelines for Reporting on Norm  -Referenced  and Criterion  -Referenced  Scores
+CARE  extension guideline for acupuncture case reports
+Guidelines for Intersectional Analysis in Science and Technology
+STROBE-EQUITY
+Evidence  -Based  Practice Quality Improvement Reporting Guidelines
+The  STARD-AI  reporting guideline for diagnostic accuracy studies using artificial intelligence
+Reporting guidelines for qualitative research: a values-based approach
+Reporting of Children’s Footwear Research  (CHILD-SHOE)
+RIGHTCARE-PR  : Reporting guidelines for human rights in child and adolescent psychiatry
+STROBE-metagenomics  : a  STROBE  extension statement to guide the reporting of metagenomics studies
+Statistical Analysis and Reporting of Cardiac Output Method Comparison Studies  (COMPARE)  Statement
+Reporting guidelines for tear fluid research
+Reporting Guidelines for the Early  -Phase  Clinical Evaluation of Applications Using Extended Reality:  RATE-XR
+Standards for Rapid Evaluation and Appraisal Methods  (STREAM)
+Transparent reporting of observational studies emulating a target trial: the  TARGET  Statement
+Reporting guideline for Chatbot Health Advice studies: the  CHART  statement
+ELEVATE-GenAI
+The  LEADING  guideline
+Reporting guideline for the use of Generative Artificial intelligence tools in  MEdical  Research: the  GAMER  Statement
+DID-METAB  Checklist
+Endo  -STAR
+Development, Evaluation, and Assessment of Large Language Models  (DEAL)  Checklist
+Guidelines for reporting artificial intelligence studies in medicines, pharmacotherapy, and pharmaceutical services: Medin  AI  development, validation and stat
+Clinician-informed explainable artificial intelligence evaluation checklist with metrics  (CLIX-M)  for  AI-powered  clinical decision support systems
+The  GREENBEAN  checklist for reporting studies evaluating the effectiveness of  EEG-based  biomarkers
+SQUIRE-SIM   (Standards  for Quality Improvement Reporting Excellence for  SIMulation)  : Publication Guidelines for Simulation  -Based  Quality Improvement Pro
+Development of  GROVE  : A Guideline for RepOrting Vignette Experiments conducted in a healthcare context
+ITRUSST  consensus on standardised reporting for transcranial ultrasound stimulation
+Standardised reporting of burden of disease studies: the  STROBOD  statement
+Development of a Reporting Guideline for Trochim’s Concept Mapping
+Reporting of cluster randomised crossover trials: extension of the  CONSORT  2010 statement with explanation and elaboration
+Guidelines for Reporting Oral Epidemiologic Studies to Inform Burden Estimation  (GROESBE)
+Extension of the  PRISMA  2020 statement for living systematic reviews  (PRISMA-LSR)  : checklist and explanation
+Developing the  TIDieR-Rehab  checklist: a modified Delphi process to extend the Template for Intervention Description and Replication  (TIDieR)  for rehabilita
+The  TRIPOD-LLM  reporting guideline for studies using large language models
+A child-centred research checklist to improve the design and reporting of paediatric research studies: A descriptive mixed methods study
+Reporting guidelines for randomised controlled trial reports of implantable neurostimulation devices: the  CONSORT-iNeurostim  extension
+Reporting guidelines for protocols of randomised controlled trials of implantable neurostimulation devices: the  SPIRIT-iNeurostim  extension
+Guidelines for reporting research using systematic coding of observed human behaviour  (SCOBe)
+STROBE-GEMA  : a  STROBE  extension for reporting of geographically explicit ecological momentary assessment studies
+Reflexology specific guidance for using the template for the intervention description and replication  (TIDieR)  : A delphi study
+Delphi studies in social and health sciences  -Recommendations  for an interdisciplinary standardized reporting  (DELPHISTAR)  . Results of a Delphi study
+LETter  To the EditoR Standards  (LETTERS)  : Considerations for Authors, Reviewers, and Editors
+CAse-BAsed   REview  sTandards  (CABARET)  : Considerations for Authors, Reviewers, and Editors
+A consensus guideline on preferred items for reporting case series in homeopathy: The  PITCH  statement
+Reporting guidelines for evidence-based practice projects: A Delphi study and publication checklist
+REFORMS  : Consensus-based Recommendations for Machine-learning-based Science
+Moving Forward on Tumor Pathology Research Reporting: A Guide for Pathologists From the World Health Organization Classification of Tumors Living Evidence Gap M
+Guideline for  RSA  and  CT-RSA  implant migration measurements: an update of standardizations and recommendations
+Publication guidelines for human heart rate and heart rate variability studies in psychophysiology  -Part  1: Physiological underpinnings and foundations of mea
+Standardized reporting on studies of psychiatric pharmacist interventions
+PRIDASE  2024 guidelines for reporting diagnostic accuracy studies in endodontics: A consensus-based development
+Enhancing the quality of evidence, comparability, and reproducibility in ventriculoatrial shunt research for normal pressure hydrocephalus: A systematic review 
+Development and validation of observational and qualitative study protocol reporting checklists for novice researchers  (ObsQual  checklist)
+Chec  KAP  : A Checklist for Reporting a Knowledge, Attitude, and Practice  (KAP)  Study
+A Reporting Checklist for Discrete Choice Experiments in Health: The  DIRECT  Checklist
+Improving laboratory animal genetic reporting:  LAG-R  guidelines
+The  OHStat  Guidelines for Reporting Observational Studies and Clinical Trials in Oral Health Research: Manuscript Checklist
+Reporting Conflicts of Interest and Funding in Health Care Guidelines: The  RIGHT-COI  &F Checklist
+Reporting guidelines for precision medicine research of clinical relevance: the Be  PRECISE  checklist
+Reporting of surrogate endpoints in randomised controlled trial reports  (CONSORT-Surrogate)  : extension checklist with explanation and elaboration
+Reporting of surrogate endpoints in randomised controlled trial protocols  (SPIRIT-Surrogate)  : extension checklist with explanation and elaboration
+Supporting best practice in reflexive thematic analysis reporting in Palliative Medicine: A review of published research and introduction to the Reflexive Thema
+TRIPLE  C reporting principles for case study evaluations of the role of context in complex interventions
+Guideline for reporting systematic reviews of outcome measurement instruments  (OMIs)  :  PRISMA-COSMIN  for  OMIs  2024
+Consolidated Health Economic Evaluation Reporting Standards for Interventions that use Artificial Intelligence  (CHEERS-AI)
+The Reporting of a Disproportionality Analysis for Drug Safety Signal Detection Using Individual Case Safety Reports in PharmacoVigilance  (READUS-PV)  : Develo
+The Reporting Recommendations Intended for Pharmaceutical Risk Minimization Evaluation Studies: Standards for Reporting of Implementation Studies Extension  (RI
+Consensus reporting guidelines to address gaps in descriptions of ultra-rare genetic conditions
+Biofield therapies: Guidelines for reporting clinical trials
+The  PICOTS-ComTeC  Framework for Defining Digital Health Interventions: An  ISPOR  Special Interest Group Report
+REPORT-SCS  : minimum reporting standards for spinal cord stimulation studies in spinal cord injury
+CARE-radiology  statement explanation and elaboration: reporting guideline for radiological case reports
+Trial Forge Guidance 4: a guideline for reporting the results of randomised Studies Within A Trial  (SWATs)
+The  RETRIEVE  Checklist for Studies Reporting the Elicitation of Stated Preferences for Child Health  -Related  Quality of Life
+We don’t know what you did last summer. On the importance of transparent reporting of reaction time data pre-processing
+Introducing So  NHR-Reporting  guidelines for Social Networks In Health Research
+Reporting standard for describing first responder systems, smartphone alerting systems, and  AED  networks
+The reporting checklist for Chinese patent medicine guidelines:  RIGHT  for  CPM
+The  SHARE  :  SHam  Acupuncture  REporting  guidelines and a checklist in clinical trials
+REPCAN  : Guideline for  REporting  Population-based  CANcer  Registry Data
+The Test Adaptation Reporting Standards  (TARES)  : reporting test adaptations
+ACCORD   (ACcurate   COnsensus  Reporting Document): A reporting guideline for consensus methods in biomedicine developed via a modified Delphi
+Consolidated Reporting Guidelines for Prognostic and Diagnostic Machine Learning Modeling Studies: Development and Validation
+Development of the Reporting Infographics and Visual Abstracts of Comparative studies  (RIVA-C)  checklist and guide
+Preliminary guideline for reporting bibliometric reviews of the biomedical literature  (BIBLIO)  : a minimum requirements
+Appropriate design and reporting of superiority, equivalence and non-inferiority clinical trials incorporating a benefit-risk assessment: the  BRAINS  study inc
+Preferred Reporting Items for Resistance Exercise Studies  (PRIRES)  : A Checklist Developed Using an Umbrella Review of Systematic Reviews
+ENLIGHT  : A consensus checklist for reporting laboratory-based studies on the non-visual effects of light in humans
+Consensus Statement for Protocols of Factorial Randomized Trials: Extension of the  SPIRIT  2013 Statement
+Reporting of Factorial Randomized Trials: Extension of the  CONSORT  2010 Statement
+Adjusting for Treatment Switching in Oncology Trials: A Systematic Review and Recommendations for Reporting
+Modeling Infectious Diseases in Healthcare Network  (MInD-Healthcare)  Framework for Describing and Reporting Multidrug-resistant Organism and Healthcare  -Asso
+LEVEL   (Logical  Explanations & Visualizations of Estimates in Linear mixed models): recommendations for reporting multilevel data and analyses
+Data linkage in pharmacoepidemiology: A call for rigorous evaluation and reporting
+Expert consensus document: Reporting checklist for quantification of pulmonary congestion by lung ultrasound in heart failure
+Commentary: minimum reporting standards should be expected for preclinical radiobiology irradiators and dosimetry in the published literature
+Best practice guidelines for citizen science in mental health research: systematic review and evidence synthesis
+Evaluating the quality of studies reporting on clinical applications of stromal vascular fraction: A systematic review and proposed reporting guidelines  (CLINI
+Enhancing reporting quality and impact of early phase dose-finding clinical trials:  CONSORT  Dose-finding Extension  (CONSORT-DEFINE)  guidance
+Enhancing quality and impact of early phase dose-finding clinical trial protocols:  SPIRIT  Dose-finding Extension  (SPIRIT-DEFINE)  guidance
+ESMO  Guidance for Reporting Oncology real  -World  evidence  (GROW)
+A systematic review and cluster analysis approach of 103 studies of high-intensity interval training on cardiorespiratory fitness
+Generate Analysis  -Ready  Data for Real-world Evidence: Tutorial for Harnessing Electronic Health Records With Advanced Informatic Technologies
+Developing Consensus  -Based  Guidelines for Case Reporting in Aesthetic Medicine: Enhancing Transparency and Standardization
+MINIMAR   (MINimum  Information for Medical  AI  Reporting): Developing reporting standards for artificial intelligence in health care
+Presenting artificial intelligence, deep learning, and machine learning studies to clinicians and healthcare stakeholders: an introductory reference with a guid
+Data Processing Strategies to Determine Maximum Oxygen Uptake: A Systematic Scoping Review and Experimental Comparison with Guidelines for Reporting
+Improving the Rigor of Mechanistic Behavioral Science: The Introduction of the Checklist for Investigating Mechanisms in Behavior  -Change  Research  (CLIMBR)
+An analysis of reporting practices in the top 100 cited health and medicine-related bibliometric studies from 2019 to 2021 based on a proposed guidelines
+Improving the Reporting of Primary Care Research: Consensus Reporting Items for Studies in Primary Care-the  CRISP  Statement
+Checklist for studies of  HIV  drug resistance prevalence or incidence: rationale and recommended use
+Community-developed checklists for publishing images and image analyses
+Systematic Development of Standards for Mixed Methods Reporting in Rehabilitation Health Sciences Research
+Minimal reporting guideline for research involving eye tracking (2023 edition)
+CHEERS  Value of Information  (CHEERS-VOI)  Reporting Standards – Explanation and Elaboration
+Initial Standardized Framework for Reporting Social Media Analytics in Emergency Care Research
+The adapted Autobiographical interview: A systematic review and proposal for conduct and reporting
+Paediatric Ureteroscopy  (P-URS)  reporting checklist: a new tool to aid studies report the essential items on paediatric ureteroscopy for stone disease
+Adult Ureteroscopy  (A-URS)  Checklist: A New Tool To Standardise Reporting in Endourology
+Recommendations for the development, implementation, and reporting of control interventions in efficacy and mechanistic trials of physical, psychological, and s
+Reporting Eye-tracking Studies In  DEntistry   (RESIDE)  checklist
+AdVi  SHE  : A Validation  -Assessment  Tool of Health  -Economic  Models for Decision Makers and Model Users
+i  CHECK-DH  : Guidelines and Checklist for the Reporting on Digital Health Implementations
+New reporting items and recommendations for randomized trials impacted by  COVID-  19 and force majeure events: a targeted approach
+Development, explanation, and presentation of the Physical Literacy Interventions Reporting Template  (PLIRT)
+Reporting guidelines for allergy and immunology survey research
+CheckList for EvaluAtion of Radiomics research  (CLEAR)  : a step-by-step reporting guideline for authors and reviewers endorsed by  ESR  and EuSo  MII
+Transparent reporting of multivariable prediction models for individual prognosis or diagnosis: checklist for systematic reviews and meta-analyses  (TRIPOD-SRMA
+Preferred Reporting Items for Complex Sample Survey Analysis  (PRICSSA)
+Defining measures of kidney function in observational studies using routine health care data: methodological and reporting considerations
+CORE-CERT  Items as a Minimal Requirement for Replicability of Exercise Interventions: Results From Application to Exercise Studies for Breast Cancer Patients
+Recommendations for Reporting Machine Learning Analyses in Clinical Research
+ACURATE  : A guide for reporting sham controls in trials using acupuncture
+Checklist for Artificial Intelligence in Medical Imaging  (CLAIM)  : 2024 Update
+STandards  for Reporting Interventions in Clinical Trials Of Tuina/Massage  (STRICTOTM)  : Extending the  CONSORT  statement
+Transparent reporting of multivariable prediction models developed or validated using clustered data:  TRIPOD-Cluster  checklist
+The  SUPER  reporting guideline suggested for reporting of surgical technique
+Guidelines for Reporting Outcomes in Trial Reports: The  CONSORT-Outcomes  2022 Extension
+Guidelines for Reporting Outcomes in Trial Protocols: The  SPIRIT-Outcomes  2022 Extension
+PROBE  2023 guidelines for reporting observational studies in Endodontics: A consensus-based development study
+CONFERD-HP  : recommendations for reporting  COmpeteNcy  FramEwoRk Development in health professions
+Development of the  ASSESS  tool: a comprehenSive tool to Support rEporting and critical appraiSal of qualitative, quantitative, and mixed methods implementatio
+Guiding document analyses in health professions education research
+Evidence-based statistical analysis and methods in biomedical research  (SAMBR)  checklists according to design features
+Social Accountability Reporting for Research  (SAR  4Research): checklist to strengthen reporting on studies on social accountability in the literature
+How to Report Data on Bilateral Procedures and Other Issues with Clustered Data: The  CLUDA  Reporting Guidelines
+Best practice guidance and reporting items for the development of scoping review protocols
+Establishing reporting standards for participant characteristics in post-stroke aphasia research: An international e  -Delphi  exercise and consensus meeting
+STARTER  Checklist for Antimalarial Therapeutic Efficacy Reporting
+Best Practice in the chemical characterisation of extracts used in pharmacological and toxicological research  -The  ConPhy  MP-Guidelines
+Advising on Preferred Reporting Items for patient-reported outcome instrument development: the  PRIPROID
+Recommendations for reporting the results of studies of instrument and scale development and testing
+Methodical approaches to determine the rate of radial muscle displacement using tensiomyography: A scoping review and new reporting guideline
+Methods for developing and reporting living evidence synthesis
+Bayesian Analysis Reporting Guidelines
+Reporting guideline for overviews of reviews of healthcare interventions: development of the  PRIOR  statement
+The Do  CTRINE  Guidelines: Defined Criteria To Report  INnovations  in Education
+Development of guidelines to reduce, handle and report missing data in palliative care trials: A multi-stakeholder modified nominal group technique
+The  RIPI-f   (Reporting  Integrity of Psychological Interventions delivered face-to-face) checklist was developed to guide reporting of treatment integrity in 
+The Intraoperative Complications Assessment and Reporting with Universal Standards  (ICARUS)  Global Surgical Collaboration Project: Development of Criteria for
+CODE-EHR  best-practice framework for the use of structured electronic health-care records in clinical research
+A Reporting Tool for Adapted Guidelines in Health Care: The  RIGHT-Ad@pt  Checklist
+Development of a reporting guideline for systematic reviews of animal experiments in the field of traditional Chinese medicine
+TIDieR-telehealth  : precision in reporting of telehealth interventions used in clinical trials – unique considerations for the Template for the Intervention De
+Towards better reporting of the proportion of days covered method in cardiovascular medication adherence: A scoping review and new tool  TEN-SPIDERS
+Murine models of radiation cardiotoxicity: a systematic review and recommendations for future studies
+Systematic Review and Meta  -Analysis  of Outcomes After Operative Treatment of Aberrant Subclavian Artery Pathologies and Suggested Reporting Items
+Reporting standards for psychological network analyses in cross-sectional data
+Reporting ChAracteristics of cadaver training and sUrgical studies: The  CACTUS  guidelines
+EULAR  points to consider for minimal reporting requirements in synovial tissue research in rheumatology
+Methods and Applications of Social Media Monitoring of Mental Health During Disasters: Scoping Review
+Position Statement on Exercise Dosage in Rheumatic and Musculoskeletal Diseases: The Role of the  IMPACT-RMD  Toolkit
+A checklist for assessing the methodological quality of concurrent t  ES-fMRI  studies  (ContES  checklist): a consensus study and statement
+Application of Mixed Methods in Health Services Management Research: A Systematic Review
+Methodological standards for conducting and reporting meta-analyses: Ensuring the replicability of meta-analyses of pharmacist-led medication review
+A scoping review of the use of ethnographic approaches in implementation research and recommendations for reporting
+The Chest Wall Injury Society Recommendations for Reporting Studies of Surgical Stabilization of Rib Fractures
+How to Report Light Exposure in Human Chronobiology and Sleep Research Experiments
+Reporting guideline for the early-stage clinical evaluation of decision support systems driven by artificial intelligence:  DECIDE-AI
+Use of actigraphy for assessment in pediatric sleep research
+EULAR  points to consider when analysing and reporting comparative effectiveness research using observational data in rheumatology
+International Consensus Based Review and Recommendations for Minimum Reporting Standards in Research on Transcutaneous Vagus Nerve Stimulation  (Version  2020)
+Refining the  CRiSPHe  (checklist for reporting research using a simulated patient methodology in Health): a Delphi study
+Conceptual Ambiguity Surrounding Gamification and Serious Games in Health Care: Literature Review and Development of Game  -Based  Intervention Reporting Guidel
+Improving Reporting of Clinical Studies Using the  POSEIDON  Criteria:  POSORT  Guidelines
+Six practical recommendations for improved implementation outcomes reporting
+Recommendations and publication guidelines for studies using frequency domain and time-frequency domain analyses of neural time series
+EVIDENCE  Publication Checklist for Studies Evaluating Connected Sensor Technologies: Explanation and Elaboration
+An extension of the  RIGHT  statement for introductions and interpretations of clinical practice guidelines:  RIGHT  for  INT
+Rasch Reporting Guideline for Rehabilitation Research  (RULER)  : The  RULER  Statement
+Using qualitative research to develop an elaboration of the  TIDieR  checklist for interventions to enhance vaccination communication: short report
+Preliminary Minimum Reporting Requirements for In  -Vivo  Neural Interface Research: I. Implantable Neural Interfaces
+Standardized Reporting of Machine Learning Applications in Urology: The  STREAM-URO  Framework
+Guidance for publishing qualitative research in informatics
+Guidelines for reporting on animal fecal transplantation  (GRAFT)  studies: recommendations from a systematic review of murine transplantation protocols
+A Scoping Review of Four Decades of Outcomes in Nonsurgical Root Canal Treatment, Nonsurgical Retreatment, and Apexification Studies: Part 3  -A  Proposed Frame
+Health  -Economic  Analyses of Diagnostics: Guidance on Design and Reporting
+Reporting guidelines for human microbiome research: the  STORMS  checklist
+Smartphone  -Delivered  Ecological Momentary Interventions Based on Ecological Momentary Assessments to Promote Health Behaviors: Systematic Review and Adapted 
+A Systematic Review of Methods and Procedures Used in Ecological Momentary Assessments of Diet and Physical Activity Research in Youth: An Adapted  STROBE  Chec
+Reporting Data on Auditory Brainstem Responses  (ABR)  in Rats: Recommendations Based on Review of Experimental Protocols and Literature
+Heterogeneity in the Identification of Potential Drug  -Drug  Interactions in the Intensive Care Unit: A Systematic Review, Critical Appraisal, and Reporting Re
+Development of the  CLARIFY   (CheckList  stAndardising the Reporting of Interventions For Yoga) guidelines: a Delphi study
+Early phase clinical trials extension to guidelines for the content of statistical analysis plans
+PRESENT  2020: Text Expanding on the Checklist for Proper Reporting of Evidence in Sport and Exercise Nutrition Trials
+Intraoperative fluorescence diagnosis in the brain: a systematic review and suggestions for future standards on reporting diagnostic accuracy and clinical utili
+Checklist for Theoretical Report in Epidemiological Studies  (CRT-EE)  : explanation and elaboration
+STAndard  Reporting of  CAries  Detection and Diagnostic Studies  (STARCARDDS)
+Implementing the 27  PRISMA  2020 Statement items for systematic reviews in the sport and exercise medicine, musculoskeletal rehabilitation and sports science f
+Strengthening the Reporting of Observational Studies in Epidemiology Using Mendelian Randomization: The  STROBE-MR  Statement
+Recommended reporting items for epidemic forecasting and prediction research: The  EPIFORGE  2020 guidelines
+Extending the  CONSORT  Statement to moxibustion
+Consensus-based recommendations for case report in Chinese medicine  (CARC)
+Reporting Guidelines for Whole  -Body  Vibration Studies in Humans, Animals and Cell Cultures: A Consensus Statement from an International Group of Experts
+Guidelines for cellular and molecular pathology content in clinical trial protocols: the  SPIRIT-Path  extension
+A Guideline for Reporting Mediation Analyses of Randomized Trials and Observational Studies: The  AGReMA  Statement
+Social Innovation For Health Research  (SIFHR)  : Development of the  SIFHR  Checklist
+How to write a guideline: a proposal for a manuscript template that supports the creation of trustworthy guidelines
+REPORT-PFP  : a consensus from the International Patellofemoral Research Network to improve  REPORTing  of quantitative PatelloFemoral Pain studies
+Reporting stAndards for research in PedIatric Dentistry  (RAPID)  : an expert consensus-based statement
+Improving the reporting quality of reliability generalization meta-analyses: The  REGEMA  checklist
+Evaluation of post-introduction  COVID-  19 vaccine effectiveness: Summary of interim guidance of the World Health Organization
+Journal article reporting standards for quantitative research in psychology: The  APA  Publications and Communications Board task force report
+Guidelines for Reporting Trial Protocols and Completed Trials Modified Due to the  COVID-  19 Pandemic and Other Extenuating Circumstances: The  CONSERVE  2021 
+Describing deprescribing trials better: an elaboration of the  CONSORT  statement
+Comprehensive reporting of pelvic floor muscle training for urinary incontinence:  CERT-PFMT
+International Olympic Committee Consensus Statement: Methods for Recording and Reporting of Epidemiological Data on Injury and Illness in Sports 2020  (Includin
+RIGHT  for Acupuncture: An Extension of the  RIGHT  Statement for Clinical Practice Guidelines on Acupuncture
+The  APOSTEL  2.0 Recommendations for Reporting Quantitative Optical Coherence Tomography Studies
+Room Indirect Calorimetry Operating and Reporting Standards  (RICORS  1.0): A Guide to Conducting and Reporting Human Whole  -Room  Calorimeter Studies
+COSMIN  reporting guideline for studies on measurement properties of patient-reported outcome measures
+Ensuring best practice in genomics education and evaluation: reporting item standards for education and its evaluation in genomics  (RISE  2 Genomics)
+A Consensus  -Based  Checklist for Reporting of Survey Studies  (CROSS)
+CONSORT  extension for the reporting of randomised controlled trials conducted using cohorts and routinely collected data  (CONSORT-ROUTINE)  : checklist with e
+Preferred reporting items for journal and conference abstracts of systematic reviews and meta-analyses of diagnostic test accuracy studies  (PRISMA-DTA  for Abs
+An analysis of preclinical efficacy testing of antivenoms for sub  -Saharan  Africa: Inadequate independent scrutiny and poor-quality reporting are barriers to 
+Artificial intelligence in dental research: Checklist for authors, reviewers, readers
+EULAR  recommendations for the reporting of ultrasound studies in rheumatic and musculoskeletal diseases  (RMDs)
+PRIASE  2021 guidelines for reporting animal studies in Endodontology: a consensus-based development
+The reporting checklist for public versions of guidelines:  RIGHT-PVG
+SQUIRE-EDU   (Standards  for  QUality  Improvement Reporting Excellence in Education): Publication Guidelines for Educational Improvement
+PRISMA-S  : an extension to the  PRISMA  Statement for Reporting Literature Searches in Systematic Reviews
+Anaesthesia Case Report  (ACRE)  checklist: a tool to promote high-quality reporting of cases in peri-operative practice
+Strengthening tRansparent reporting of reseArch on uNfinished nursing  CARE  : The  RANCARE  guideline
+Journal article reporting standards for qualitative primary, qualitative meta-analytic, and mixed methods research in psychology: The  APA  Publications and Com
+Defining Group Care Programs: An Index of Reporting Standards
+Stakeholder analysis in health innovation planning processes: A systematic scoping review
+PRISMA  extension for moxibustion 2020: recommendations, explanation, and elaboration
+PRISMA   (Preferred  Reporting Items for Systematic Reviews and Meta  -Analyses)  Extension for Chinese Herbal Medicines 2020  (PRISMA-CHM  2020)
+Reporting gaps in immunization costing studies: Recommendations for improving the practice
+The  RIGHT  Extension Statement for Traditional Chinese Medicine: Development, Recommendations, and Explanation
+Proposed Requirements for Cardiovascular Imaging  -Related  Machine Learning Evaluation  (PRIME)  : A Checklist: Reviewed by the American College of Cardiology 
+Benefit  -Risk  Assessment of Vaccines. Part  II  : Proposal Towards Consolidated Standards of Reporting Quantitative Benefit  -Risk  Models Applied to Vaccines
+BIAS  : Transparent reporting of biomedical image analysis challenges
+Minimum information about clinical artificial intelligence modeling: the  MI-CLAIM  checklist
+STrengthening  the Reporting Of Pharmacogenetic Studies: Development of the  STROPS  guideline
+TIDieR-Placebo  : a guide and checklist for reporting placebo and sham controls
+Guidelines for clinical trial protocols for interventions involving artificial intelligence: the  SPIRIT-AI  Extension
+Reporting guidelines for clinical trial reports for interventions involving artificial intelligence: the  CONSORT-AI  Extension
+The  IDEAL  Reporting Guidelines: A Delphi Consensus Statement Stage specific recommendations for reporting the evaluation of surgical innovation
+The adaptive designs  CONSORT  extension  (ACE)  statement: a checklist with explanation and elaboration guideline for reporting randomised trials that use an a
+Reporting Guideline for Priority Setting of Health Research  (REPRISE)
+Consensus on the reporting and experimental design of clinical and cognitive-behavioural neurofeedback studies  (CRED-nf  checklist)
+PRICE  2020 guidelines for reporting case reports in Endodontics: a consensus-based development
+PRIRATE  2020 guidelines for reporting randomized trials in Endodontics: a consensus-based development
+Guidance for reporting intervention development studies in health research  (GUIDED)  : an evidence-based consensus study
+Standard Protocol Items for Clinical Trials with Traditional Chinese Medicine 2018: Recommendations, Explanation and Elaboration  (SPIRIT-TCM  Extension 2018)
+SPIRIT  extension and elaboration for n-of-1 trials:  SPENT  2019 checklist
+Standards for reporting interventions in clinical trials of cupping  (STRICTOC)  : extending the  CONSORT  statement
+Pa  CIR  : A tool to enhance pharmacist patient care intervention reporting
+Synthesis without meta-analysis  (SWiM)  in systematic reviews: reporting guideline
+Guidelines for reporting case studies and series on drug-induced  QT  interval prolongation and its complications following acute overdose
+Criteria for describing and evaluating training interventions in healthcare professions –  CRe-DEPTH
+CONSORT  extension for reporting  N-of-  1 trials for traditional Chinese medicine  (CENT  for  TCM)  : Recommendations, explanation and elaboration
+Reporting items for systematic reviews and meta-analyses of acupuncture: the  PRISMA  for acupuncture checklist
+Consolidated criteria for strengthening reporting of health research involving indigenous peoples: the  CONSIDER  statement
+Checklist for the preparation and review of pain clinical trial publications: a pain-specific supplement to  CONSORT
+Reporting guidelines on remotely collected electronic mood data in mood disorder (e  MOOD)-recommendations
+CONSORT  2010 statement: extension to randomised crossover trials
+Reporting of Multi  -Arm  Parallel  -Group  Randomized Trials: Extension of the  CONSORT  2010 Statement
+Microbiology Investigation Criteria for Reporting Objectively  (MICRO)  : a framework for the reporting and interpretation of clinical microbiology data
+Core Outcome Set  -STAndardised  Protocol Items: the  COS-STAP  Statement
+The Reporting on  ERAS  Compliance, Outcomes, and Elements Research  (RECOvER)  Checklist: A Joint Statement by the  ERAS  ® and  ERAS  ®  USA  Societies
+Reporting of stepped wedge cluster randomised trials: extension of the  CONSORT  2010 statement with explanation and elaboration
+Improving reporting of Meta  -Ethnography  : The e  MERGe  Reporting Guidance
+The Reporting Items for Patent Landscapes statement
+Reporting guidelines on how to write a complete and transparent abstract for overviews of systematic reviews of health care interventions
+The reporting of studies conducted using observational routinely collected health data statement for pharmacoepidemiology  (RECORD-PE)
+PRISMA  Extension for Scoping Reviews  (PRISMA-ScR)  : Checklist and Explanation
+Systems Perspective of Amazon Mechanical Turk for Organizational Research: Review and Recommendations
+ESPACOMP  Medication Adherence Reporting Guideline  (EMERGE)
+Reporting randomised trials of social and psychological interventions: the  CONSORT-SPI  2018 Extension
+Reporting guidelines for implementation research on nurturing care interventions designed to promote early childhood development
+Strengthening the reporting of empirical simulation studies: Introducing the  STRESS  guidelines
+TIDieR-PHP  : a reporting guideline for population health and policy interventions
+Guidelines for Inclusion of Patient  -Reported  Outcomes in Clinical Trial Protocols: The  SPIRIT-PRO  Extension
+Preferred Reporting Items for a Systematic Review and Meta-analysis of Diagnostic Test Accuracy Studies: The  PRISMA-DTA  Statement
+Structural brain development: A review of methodological approaches and best practices
+Improving the Development, Monitoring and Reporting of Stroke Rehabilitation Research: Consensus  -Based  Core Recommendations from the Stroke Recovery and Reha
+Variability in the Reporting of Serum Urate and Flares in Gout Clinical Trials: Need for Minimum Reporting Requirements
+Methodology of assessment and reporting of safety in anti-malarial treatment efficacy studies of uncomplicated falciparum malaria in pregnancy: a systematic lit
+Standards for  UNiversal  reporting of patient Decision Aid Evaluation studies: the development of  SUNDAE  Checklist
+Consideration of Sex Differences in Design and Reporting of Experimental Arterial Pathology Studies  -Statement  From  ATVB  Council
+Guidelines for the Content of Statistical Analysis Plans in Clinical Trials
+RECORDS  : Improved reporting of Monte Carlo Radiation transport studies: Report of the  AAPM  Research Committee Task Group 268
+Ten simple rules for neuroimaging meta-analysis
+CONSORT-Equity  2017 extension and elaboration for better reporting of health equity in randomised trials
+Preferred Reporting Items for Overviews of systematic reviews including harms checklist: A pilot tool to be used for balanced reporting of benefits and harms
+Reporting Guidelines for the Use of Expert Judgement in Model  -Based  Economic Evaluations
+Standards for reporting chronic periodontitis prevalence and severity in epidemiologic studies: Proposed standards from the Joint  EU  /  USA  Periodontal Epide
+Graphics and statistics for cardiology: designing effective tables for presentation and publication
+Guidelines for reporting meta-epidemiological methodology research
+Reporting to Improve Reproducibility and Facilitate Validity Assessment for Healthcare Database Studies V1.0
+Characteristics of funding of clinical trials: cross-sectional survey and proposed guidance
+Guidelines for Reporting on Latent Trajectory Studies  (GRoLTS)
+AMWA  ‒  EMWA  ‒  ISMPP  Joint Position Statement on the Role of Professional Medical Writers
+The  STROCSS  2024 guideline: strengthening the reporting of cohort, cross-sectional and case-control studies in surgery
+Unique identification of research resources in the biomedical literature: the Resource Identification Initiative  (RRID)
+Checklist for One Health Epidemiological Reporting of Evidence  (COHERE)
+STARD  for Abstracts: essential items for reporting diagnostic accuracy studies in journal or conference abstracts
+GRIPP  2 reporting checklists: tools to improve reporting of patient and public involvement in research
+Single organ cutaneous vasculitis: Case definition & guidelines for data collection, analysis, and presentation of immunization safety data
+Improving the reporting of clinical trials of infertility treatments  (IMPRINT)  : modifying the  CONSORT  statement
+Improving the reporting of therapeutic exercise interventions in rehabilitation research
+Guidance to develop individual dose recommendations for patients on chronic hemodialysis
+A literature review of applied adaptive design methodology within the field of oncology in randomised controlled trials and a proposed extension to the  CONSORT
+AHRQ  Series on Complex Intervention Systematic Reviews – Paper 6:  PRISMA-CI  Extension Statement & Checklist
+Adaptation of the  CARE  Guidelines for Therapeutic Massage and Bodywork Publications: Efforts To Improve the Impact of Case Reports
+A review of published analyses of case-cohort studies and recommendations for future reporting
+Guidelines for reporting evaluations based on observational methodology
+Reporting and Guidelines in Propensity Score Analysis: A Systematic Review of Cancer and Cancer Surgical Studies
+Minimum Information for Studies Evaluating Biologics in Orthopaedics  (MIBO)  : Platelet  -Rich  Plasma and Mesenchymal Stem Cells
+CONSORT  2010 statement: extension checklist for reporting within person randomised trials
+CONSORT  Extension for Chinese Herbal Medicine Formulas 2017: Recommendations, Explanation, and Elaboration
+Methods and processes of developing the strengthening the reporting of observational studies in epidemiology – veterinary  (STROBE-Vet)  statement
+CONSORT  2025 Statement: updated guideline for reporting randomised trials
+STARD  2015: An Updated List of Essential Items for Reporting Diagnostic Accuracy Studies
+SPIRIT  2025 Statement: Defining standard protocol items for clinical trials
+Best Practices in Data Analysis and Sharing in Neuroimaging using  MRI
+Latent Class Analysis: An example for reporting results
+Guidelines for Developing and Reporting Machine Learning Predictive Models in Biomedical Research: A Multidisciplinary View
+Clarity in Reporting Terminology and Definitions of Set End Points in Resistance Training
+An introduction to using Bayesian linear regression with clinical data
+Making economic evaluations more helpful for treatment choices in haemophilia
+Guideline for Reporting Interventions on Spinal Manipulative Therapy: Consensus on Interventions Reporting Criteria List for Spinal Manipulative Therapy  (CIRCL
+Guidance on Conducting and  REporting   DElphi  Studies  (CREDES)  in palliative care: Recommendations based on a methodological systematic review
+STARD-BLCM  : Standards for the Reporting of Diagnostic accuracy studies that use Bayesian Latent Class Models
+A Reporting Tool for Practice Guidelines in Health Care: The  RIGHT  Statement
+The  AGREE  Reporting Checklist: a tool to improve reporting of clinical practice guidelines
+The  REFLECT  statement: methods and processes of creating reporting guidelines for randomized controlled trials for livestock and food safety by modifying the 
+Reporting Items for Updated Clinical Guidelines: Checklist for the Reporting of Updated Guidelines  (CheckUp)
+Preferred Reporting Items for the Development of Evidence-based Clinical Practice Guidelines in Traditional Medicine  (PRIDE-CPG-TM)  : Explanation and elaborat
+Standards for Reporting Implementation Studies  (StaRI)  Statement
+Preferred Reporting Of Case Series in Surgery  (PROCESS)  2023 guidelines
+Consensus on Exercise Reporting Template  (CERT)  : Modified Delphi Study
+Development of the Anatomical Quality Assurance  (AQUA)  Checklist: guidelines for reporting original anatomical studies
+CONSORT  2010 statement: extension to randomised pilot and feasibility trials
+Core Outcome Set  -STAndards  for Reporting: The  COS-STAR  Statement
+Improving the reporting quality of nonrandomized evaluations of behavioral and public health interventions: the  TREND  statement
+Evaluation of response after pre-operative radiotherapy in soft tissue sarcomas; the European Organisation for Research and Treatment of Cancer  -Soft  Tissue a
+Standardization of pathologic evaluation and reporting of postneoadjuvant specimens in clinical trials of breast cancer: recommendations from an international w
+Image-guided Tumor Ablation: Standardization of Terminology and Reporting Criteria—A 10  -Year  Update
+Irreversible Electroporation  (IRE)  : Standardization of Terminology and Reporting Criteria for Analysis and Comparison
+Recommendations for improving the quality of reporting clinical electrochemotherapy studies based on qualitative systematic review
+METastasis  Reporting and Data System for Prostate Cancer: Practical Guidelines for Acquisition, Interpretation, and Reporting of Whole-body Magnetic Resonance 
+Reporting Magnetic Resonance Imaging in Men on Active Surveillance for Prostate Cancer: The  PRECISE  Recommendations  -A  Report of a European School of Oncolo
+Transcription factor  HIF  1A: downstream targets, associated pathways, polymorphic hypoxia response element  (HRE)  sites, and initiative for standardization o
+Eliciting the child’s voice in adverse event reporting in oncology trials: Cognitive interview findings from the Pediatric Patient  -Reported  Outcomes version 
+CONSISE  statement on the reporting of Seroepidemiologic Studies for influenza  (ROSES-I  statement): an extension of the  STROBE  statement
+REporting  recommendations for tumour  MARKer  prognostic studies  (REMARK)
+Recommendations to improve adverse event reporting in clinical trial publications: a joint pharmaceutical industry/journal editor perspective
+Reporting studies on time to diagnosis: proposal of a guideline by an international panel  (REST)
+A Checklist for Reporting Valuation Studies of Multi  -Attribute  Utility  -Based  Instruments  (CREATE)
+Strengthening the Reporting of Observational Studies in Epidemiology for Newborn Infection  (STROBE-NI)  : an extension of the  STROBE  statement for neonatal i
+The  SCARE  2023 Guideline: Updating Consensus Surgical  CAse   REport   (SCARE)  Guidelines
+Development and validation of the guideline for reporting evidence-based practice educational interventions and teaching  (GREET)
+Using theory of change to design and evaluate public health interventions: a systematic review
+Homeopathic clinical case reports: Development of a supplement  (HOM-CASE)  to the  CARE  clinical case reporting guideline
+Reporting Guidelines for Health Care Simulation Research: Extensions to the  CONSORT  and  STROBE  Statements
+Guidelines for Reporting Articles on Psychiatry and Heart rate variability  (GRAPH)  : recommendations to advance research communication
+RAMESES   II  reporting standards for realist evaluations
+Guidelines for Accurate and Transparent Health Estimates Reporting: the  GATHER  statement
+Medical abortion reporting of efficacy: the  MARE  guidelines.
+Strengthening the Reporting of Observational Studies in Epidemiology—Nutritional Epidemiology  (STROBE-nut)  : An Extension of the  STROBE  Statement
+Sex and Gender Equity in Research: rationale for the  SAGER  guidelines and recommended use
+The Single  -Case  Reporting Guideline In  BEhavioural  Interventions  (SCRIBE)  2016 Statement
+Consensus on Recording Deep Endometriosis Surgery: the  CORDES  statement
+Developing the Clarity and Openness in Reporting: E3-based  (CORE)  reference user manual for creation of clinical study reports in the era of clinical trial tr
+SCCT  guidelines for the interpretation and reporting of coronary  CT  angiography: a report of the Society of Cardiovascular Computed Tomography Guidelines Com
+Definition and classification of intraoperative complications  (CLASSIC)  : Delphi study and pilot evaluation
+Improving research practice in rat orthotopic and partial orthotopic liver transplantation: a review, recommendation, and publication guide
+Methodology used in studies reporting chronic kidney disease prevalence: a systematic literature review
+Standardized outcomes reporting in metabolic and bariatric surgery
+Consensus guidelines on plasma cell myeloma minimal residual disease analysis and reporting
+DELTA  2 guidance on choosing the target difference and undertaking and reporting the sample size calculation for a randomised controlled trial
+Transparent reporting of data quality in distributed data networks
+Quality of methods reporting in animal models of colitis
+Guidelines for reporting of health interventions using mobile phones: mobile health (mHealth) evidence reporting and assessment (m  ERA)  checklist
+Quality of pain intensity assessment reporting:  ACTTION  systematic review and recommendations
+An extension of  STARD  statements for reporting diagnostic accuracy studies on liver fibrosis tests: the Liver  -FibroSTARD  standards
+STROBE-AMS  : recommendations to optimise reporting of epidemiological studies on antimicrobial resistance and informing improvement in antimicrobial stewardshi
+Reporting guidelines for population pharmacokinetic analyses
+Recommendations for the improved effectiveness and reporting of telemedicine programs in developing countries: results of a systematic literature review
+Guidelines for the reporting of treatment trials for alcohol use disorders
+Development of the Standards of Reporting of Neurological Disorders  (STROND)  checklist: A guideline for the reporting of incidence and prevalence studies in n
+A review of 40 years of enteric antimicrobial resistance research in Eastern Africa: what can be done better?
+Ensuring consistent reporting of clinical pharmacy services to enhance reproducibility in practice: an improved version of  DEPICT
+RiGoR: reporting guidelines to address common sources of bias in risk model development
+Reporting standards for guideline-based performance measures
+Utstein-style guidelines on uniform reporting of in-hospital cardiopulmonary resuscitation in dogs and cats
+Guidelines for reporting embedded recruitment trials
+PRISMA  harms checklist: improving harms reporting in systematic reviews
+Developing a methodological framework for organisational case studies: a rapid review and consensus development process
+The  PRISMA  2020 statement: An updated guideline for reporting systematic reviews
+The Strengthening the Reporting of Observational Studies in Epidemiology  (STROBE)  Statement: guidelines for reporting observational studies
+A checklist to improve reporting of group-based behaviour-change interventions
+The  REporting  of studies Conducted using Observational Routinely-collected health Data  (RECORD)  Statement
+Preferred reporting items for studies mapping onto preference-based outcome measures: The  MAPS  statement
+A call for transparent reporting to optimize the predictive value of preclinical research
+Guidelines for uniform reporting of body fluid biomarker studies in neurologic disorders
+The  PRISMA  Extension Statement for Reporting of Systematic Reviews Incorporating Network Meta-analyses of Health Care Interventions: Checklist and Explanation
+Setting number of decimal places for reporting risk ratios: rule of four
+Too many digits: the presentation of numerical data
+The  CONSORT  Statement: Application within and adaptations for orthodontic trials
+A structured approach to documenting a search strategy for publication: a 12 step guideline for authors
+Standards of reporting for  MRI-targeted  biopsy studies  (START)  of the prostate: recommendations from an International Working Group
+Standardized reporting guidelines for emergency department syncope risk-stratification research
+Designing and reporting case series in plastic surgery
+Disaster medicine reporting: the need for new guidelines and the  CONFIDE  statement
+Development and validation of reporting guidelines for studies involving data linkage
+A reporting guide for studies on individual differences in traffic safety
+Translating trial-based molecular monitoring into clinical practice: importance of international standards and practical considerations for community practition
+Canadian Association of Gastroenterology consensus guidelines on safety and quality indicators in endoscopy
+A tool to analyze the transferability of health promotion interventions
+A new manner of reporting pressure results after glaucoma surgery
+Do the media provide transparent health information? A cross-cultural comparison of public information about the  HPV  vaccine
+Recommendations for the reporting of foot and ankle models
+An introduction to standardized clinical nomenclature for dysmorphic features: the Elements of Morphology project
+Strengthening the Reporting of Observational Studies in Epidemiology for Respondent  -Driven  Sampling Studies: ‘  STROBE-RDS  ’ Statement.
+CONSORT  extension for reporting  N-of-  1 trials  (CENT)  2015 Statement
+A protocol format for the preparation, registration and publication of systematic reviews of animal intervention studies
+Reporting standards for literature searches and report inclusion criteria: making research syntheses more transparent and easy to replicate
+Preferred Reporting Items for Systematic Review and Meta  -Analyses  of individual participant data: the  PRISMA-IPD  Statement
+Evaluating complex interventions in end of life care: the  MORECare  statement on good practice generated by a synthesis of transparent expert consultations and
+Biospecimen reporting for improved study quality  (BRISQ)
+Developing a guideline to standardize the citation of bioresources in journal articles  (CoBRA)
+Reporting Guidelines for Clinical Pharmacokinetic Studies: The Clin  PK  Statement
+Using the spinal cord injury common data elements
+Guidelines for assessment of bone microstructure in rodents using micro-computed tomography
+Instrumental variable methods in comparative safety and effectiveness research
+Protecting the power of interventions through proper reporting
+Reporting of data from out-of-hospital cardiac arrest has to involve emergency medical dispatching – taking the recommendations on reporting  OHCA  the Utstein 
+A position paper on standardizing the nonneoplastic kidney biopsy report
+Using qualitative methods for attribute development for discrete choice experiments: issues and recommendations
+Reporting of interaction
+Head, neck, and brain tumor embolization guidelines
+Reporting outcomes of back pain trials: a modified Delphi study
+A common language in neoadjuvant breast cancer clinical trials: proposals for standard definitions and endpoints
+Viscerotropic disease: case definition and guidelines for collection, analysis, and presentation of immunization safety data
+Diarrhea: case definition and guidelines for collection, analysis, and presentation of immunization safety data
+Immunization site pain: case definition and guidelines for collection, analysis, and presentation of immunization safety data
+Can the Brighton Collaboration case definitions be used to improve the quality of Adverse Event Following Immunization  (AEFI)  reporting? Anaphylaxis as a case
+Definitions, methodological and statistical issues for phase 3 clinical trials in chronic myeloid leukemia: a proposal by the European LeukemiaNet
+A new standardized format for reporting hearing outcome in clinical trials
+A consensus approach toward the standardization of back pain definitions for use in prevalence studies
+A proposed taxonomy of terms to guide the clinical trial recruitment process
+Minimum data elements for research reports on  CFS
+Reporting standards for angiographic evaluation and endovascular treatment of cerebral arteriovenous malformations
+How to report low-level laser therapy  (LLLT)  /photomedicine dose and beam parameters in clinical and laboratory studies
+Common data elements for posttraumatic stress disorder research
+American College of Medical Genetics standards and guidelines for interpretation and reporting of postnatal constitutional copy number variants
+Completeness of reporting of radiation therapy planning, dose, and delivery in veterinary radiation oncology manuscripts from 2005 to 2010
+Criteria for Reporting the Development and Evaluation of Complex Interventions in healthcare: revised guideline  (CReDECI  2)
+TRIPOD  +  AI  statement: updated guidance for reporting clinical prediction models that use regression or machine learning methods
+Preferred Reporting Items for Systematic Review and Meta  -Analysis  Protocols  (PRISMA-P)  2015 statement
+Reporting guidance for violence risk assessment predictive validity studies: the  RAGEE  Statement
+Standards for reporting qualitative research: a synthesis of recommendations
+A systematic review of systematic reviews and meta-analyses of animal experiments with guidelines for reporting
+Systematic reviews and meta-analysis of preclinical studies: why perform them and how to appraise them critically
+Guidelines for reporting case studies on extracorporeal treatments in poisonings: methodology
+Reporting standards for studies of diagnostic test accuracy in dementia: The  STARDdem  Initiative.
+Strengthening the reporting of molecular epidemiology for infectious diseases  (STROME-ID)  : an extension of the  STROBE  statement
+Better reporting of interventions: template for intervention description and replication  (TIDieR)  checklist and guide
+Launch of a checklist for reporting longitudinal observational drug studies in rheumatology: a  EULAR  extension of  STROBE  guidelines based on experience from
+CONSORT  Harms 2022 statement, explanation, and elaboration: updated guideline for the reporting of harms in randomized trials
+The  CARE  Guidelines: Consensus-based Clinical Case Reporting Guideline Development
+Documenting Clinical and Laboratory Images in Publications: The  CLIP  Principles
+ICMJE  : Uniform Format for Disclosure of Competing Interests in  ICMJE  Journals
+Selection and presentation of imaging figures in the medical literature
+Neuroimaging standards for research into small vessel disease and its contribution to ageing and neurodegeneration
+Finding What Works in Health Care: Standards for Systematic Reviews. Chapter 5 – Standards for Reporting Systematic Reviews
+Systematic Reviews.  CRD  ’s guidance for undertaking reviews in health care
+The Hu  GENet  ™ Hu  GE  Review Handbook, version 1.0. Guidelines for systematic review and meta-analysis of gene disease association studies
+Cochrane Handbook for Systematic Reviews of Interventions Version 6.1
+Writing for Publication in Veterinary Medicine. A Practical Guide for Researchers and Clinicians
+Publication of population data for forensic purposes
+Publication of population data of linearly inherited  DNA  markers in the International Journal of Legal Medicine
+Proposed definitions and criteria for reporting time frame, outcome, and complications for clinical orthopedic studies in veterinary medicine
+Recommended guidelines for the conduct and evaluation of prognostic studies in veterinary oncology
+Update of the stroke therapy academic industry roundtable preclinical recommendations
+Good laboratory practice: preventing introduction of bias at the bench
+Consensus-based reporting standards for diagnostic test accuracy studies for paratuberculosis in ruminants
+A gold standard publication checklist to improve the quality of animal studies, to fully integrate the Three Rs, and to make systematic reviews more feasible
+The  ARRIVE  Guidelines 2.0: updated guidelines for reporting animal research
+International Society for Medical Publication Professionals Code of Ethics
+Proposed best practice for statisticians in the reporting and publication of pharmaceutical industry-sponsored clinical trials
+What should be done to tackle ghostwriting in the medical literature?
+Electrodermal activity at acupoints: literature review and recommendations for reporting clinical trials
+Systematic review to determine best practice reporting guidelines for  AFO  interventions in studies involving children with cerebral palsy
+EANM  Dosimetry Committee guidance document: good practice of clinical dosimetry reporting
+ASAS  recommendations for collecting, analysing and reporting  NSAID  intake in clinical trials/epidemiological studies in axial spondyloarthritis
+International Spinal Cord Injury Core Data Set (version 3.0) – including standardization of reporting
+Risk of recurrent venous thromboembolism after stopping treatment in cohort studies: recommendation for acceptable rates and standardized reporting
+The importance of uniform venous terminology in reports on varicose veins
+Recommendations for reporting perioperative transoesophageal echo studies
+Guidelines for reporting an f  MRI  study
+Society for Cardiovascular Magnetic Resonance guidelines for reporting cardiovascular magnetic resonance examinations
+Criteria for evaluation of novel markers of cardiovascular risk
+American Society of Transplantation recommendations for screening, monitoring and reporting of infectious complications in immunosuppression trials in recipient
+Research reporting standards for radioembolization of hepatic malignancies
+Research reporting standards for image-guided ablation of bone and soft tissue tumors
+EANM  procedure guidelines for brain neurotransmission  SPECT  using  I-labelled  dopamine transporter ligands, version 2
+Transcatheter Therapy for Hepatic Malignancy: Standardization of Terminology and Reporting Criteria
+Reporting standards for percutaneous thermal ablation of renal cell carcinoma
+Research reporting standards for percutaneous vertebral augmentation
+Reporting standards for percutaneous interventions in dialysis access
+Reporting standards for clinical evaluation of new peripheral arterial revascularization devices
+Guidelines for the reporting of renal artery revascularization in clinical trials
+Reporting standards for carotid interventions from the Society for Vascular Surgery
+Reporting standards for carotid artery angioplasty and stent placement
+Standardized definitions and clinical endpoints in carotid artery and supra-aortic trunk revascularization trials
+Setting the standards for reporting ruptured abdominal aortic aneurysm
+Endovascular repair compared with operative repair of traumatic rupture of the thoracic aorta: a nonsystematic review and a plea for trauma-specific reporting g
+Reporting standards for thoracic endovascular aortic repair  (TEVAR)
+Research reporting standards for endovascular treatment of pelvic venous insufficiency
+Reporting standards for endovascular treatment of pulmonary embolism
+Reporting Standards for Endovascular Repair of Saccular Intracranial Cerebral Aneurysms
+Trial design and reporting standards for intra-arterial cerebral thrombolysis for acute ischemic stroke
+Target registration and target positioning errors in computer-assisted neurosurgery: proposal for a standardized reporting of error assessment
+Recommended guidelines for reporting on emergency medical dispatch when conducting research in emergency medicine: the Utstein style
+Recommended guidelines for reviewing, reporting, and conducting research on post-resuscitation care: the Utstein style
+Utstein-style guidelines for uniform reporting of laboratory  CPR  research
+Recommendations for uniform reporting of data following major trauma–the Utstein style
+Recommended guidelines for reviewing, reporting, and conducting research on in-hospital resuscitation: the in-hospital ‘Utstein style’
+Standardization of uveitis nomenclature for reporting clinical data. Results of the First International Workshop
+EACTS  /  ESCVS  best practice guidelines for reporting treatment results in the thoracic aorta
+Consensus statement: Defining minimal criteria for reporting the systemic inflammatory response to cardiopulmonary bypass
+Guidelines for reporting data and outcomes for the surgical treatment of atrial fibrillation
+Recommendations for reporting morbid events after heart valve surgery
+Standards for reporting results of refractive surgery
+Quality of study methods in individual- and group-level  HIV  intervention research: critical reporting elements
+Quality of reporting in evaluations of surgical treatment of trigeminal neuralgia: recommendations for future reports
+Guidelines for reporting case series of tumours of the colon and rectum
+Guidance on reporting ultrasound exposure conditions for bio-effects studies
+American College of Cardiology Clinical Expert Consensus Document on Standards for Acquisition, Measurement and Reporting of Intravascular Ultrasound Studies  (
+Standardized reporting of bleeding complications for clinical investigations in acute coronary syndromes: a proposal from the academic bleeding consensus  (ABC)
+Standardized reporting guidelines for studies evaluating risk stratification of  ED  patients with potential acute coronary syndromes
+Calibration methods used in cancer simulation models and suggested reporting guidelines
+Preschool vision screening: what should we be detecting and how should we report it? Uniform guidelines for reporting results of preschool vision screening stud
+The lessons of  QUANTEC  : recommendations for reporting and gathering data on dose-volume dependencies of treatment outcome
+A reporting guideline for clinical platelet transfusion studies from the  BEST  Collaborative
+Clinical trials focusing on cancer pain educational interventions: core components to include during planning and reporting
+Reporting disease activity in clinical trials of patients with rheumatoid arthritis:  EULAR  /  ACR  collaborative recommendations
+Exercise therapy and low back pain: insights and proposals to improve the design, conduct, and reporting of clinical trials
+Eligibility and outcomes reporting guidelines for clinical trials for patients in the state of a rising prostate-specific antigen: recommendations from the Pros
+Consensus guidelines for the conduct and reporting of clinical trials in systemic light-chain amyloidosis
+Diagnosis and management of acute myeloid leukemia in adults: recommendations from an international expert panel, on behalf of the European LeukemiaNet
+Revised recommendations of the International Working Group for Diagnosis, Standardization of Response Criteria, Treatment Outcomes, and Reporting Standards for 
+Methodological challenges when using actigraphy in research
+Draft  STROBE  checklist for conference abstracts
+Conflict of Interest in Peer  -Reviewed  Medical Journals
+Financial Conflicts of Interest Checklist 2010 for clinical research studies
+Professional medical associations and their relationships with industry: a proposal for controlling conflict of interest
+How to formulate research recommendations
+Suggestions for improving the reporting of clinical research: the role of narrative
+The case for structuring the discussion of scientific papers
+More medical journals should inform their contributors about three key principles of graph construction
+Figures in clinical trial reports: current practice & scope for improvement
+Recommendations for the assessment and reporting of multivariable logistic regression in transplantation literature
+Reporting results of latent growth modeling and multilevel modeling analyses: some recommendations for rehabilitation psychology
+Multiple imputation for missing data in epidemiological and clinical research: potential and pitfalls
+Assessing and reporting heterogeneity in treatment effects in clinical trials: a proposal
+Statistics in medicine–reporting of subgroup analyses in clinical trials
+Seven items were identified for inclusion when reporting a Bayesian analysis of a clinical study
+Bayesian methods in health technology assessment: a review
+Basic Statistical Reporting for Articles Published in Biomedical Journals: The “Statistical Analyses and Methods in the Published Literature” or The  SAMPL  Gui
+Establishing a knowledge trail from molecular experiments to clinical trials
+Preparing raw clinical data for publication: guidance for journal editors, authors, and peer reviewers
+Best practices in the reporting of participatory action research: Embracing both the forest and the trees
+A comprehensive checklist for reporting the use of  OSCEs
+Quality of standardised patient research reports in the medical education literature: review and recommendations
+Development and use of reporting guidelines for assessing the quality of validation studies of health administrative data
+Perspective: Guidelines for reporting team-based learning activities in the medical and health sciences education literature
+Authors’ Submission Toolkit: a practical guide to getting your research published
+Good Publication Practice  (GPP)  Guidelines for Company  -Sponsored  Biomedical Research: 2022 Update
+Standardized reporting of clinical practice guidelines: a proposal from the Conference on Guideline Standardization
+A new structure for quality improvement reports
+Guidelines for conducting and reporting economic evaluation of fall prevention strategies
+Design, execution, interpretation, and reporting of economic evaluation studies in obstetrics
+Economic evaluation using decision analytical modelling: design, conduct, analysis, and reporting
+Reporting format for economic evaluation. Part  II  : Focus on modelling studies
+Increasing the generalizability of economic evaluations: recommendations for the design, analysis, and reporting of studies
+Good research practices for cost-effectiveness analysis alongside clinical trials: the  ISPOR   RCT-CEA  Task Force report
+Recommendations for Conduct, Methodological Practices, and Reporting of Cost-effectiveness Analyses: Second Panel on Cost  -Effectiveness  in Health and Medicin
+The quality of mixed methods studies in health services research
+Qualitative research review guidelines –  RATS
+Evolving guidelines for publication of qualitative research studies in psychology and related fields
+Revealing the wood and the trees: reporting qualitative research
+Qualitative research: standards, challenges, and guidelines
+RAMESES  publication standards: meta-narrative reviews
+RAMESES  publication standards: realist syntheses
+Meta-analysis of observational studies in epidemiology: a proposal for reporting. Meta-analysis Of Observational Studies in Epidemiology  (MOOSE)  group
+Meta-analysis of individual participant data: rationale, conduct, and reporting
+PRISMA-Equity  2012 Extension: Reporting Guidelines for Systematic Reviews with a Focus on Health Equity
+PRISMA  2020 for Abstracts: Reporting Systematic Reviews in Journal and Conference Abstracts
+The  STARD  statement for reporting diagnostic accuracy studies: application to the history and physical examination
+Capturing momentary, self-report data: a proposal for reporting guidelines
+Improving the quality of Web surveys: the Checklist for Reporting Results of Internet  E-Surveys   (CHERRIES)
+Guidelines for field surveys of the quality of medicines: a proposal
+A guide for the design and conduct of self-administered surveys of clinicians
+Good practice in the conduct and reporting of survey research
+Reporting genetic results in research studies: summary and recommendations of an  NHLBI  working group
+Recommendations for biomarker identification and qualification in clinical proteomics
+Missing covariate data within cancer prognostic studies: a review of current reporting and proposed guidelines
+Gene expression-based prognostic signatures in lung cancer: ready for clinical use?
+Anecdotes as evidence
+Recommendations for reporting adverse drug reactions and adverse events of traditional Chinese medicine
+Guidelines for submitting adverse event reports for publication
+Guidelines for clinical case reports in behavioral clinical psychology
+Instructions to authors for case reporting are limited: a review of a core journal list
+Reporting participation in case-control studies
+Conducting and reporting case series and audits–author guidelines for acupuncture in medicine
+Appropriate use and reporting of uncontrolled case series in the medical literature
+Improving the reporting of clinical case series
+EULAR  points to consider when establishing, analysing and reporting safety data of biologics registers in rheumatology
+Preliminary core set of domains and reporting requirements for longitudinal observational studies in rheumatology
+A community standard for immunogenomic data reporting and analysis: proposal for a  STrengthening  the  REporting  of Immunogenomic Studies statement
+STrengthening  the Reporting of  OBservational  studies in Epidemiology – Molecular Epidemiology  (STROBE-ME)  : An extension of the  STROBE  statement
+STrengthening  the  REporting  of Genetic Association Studies  (STREGA)  : An Extension of the  STROBE  Statement.
+Guidelines for conducting and reporting mixed research in the field of counseling and beyond
+Reporting experiments in homeopathic basic research  (REHBaR)  – a detailed guideline for authors
+Guidelines for the design, conduct and reporting of human intervention studies to evaluate the health benefits of foods
+Good research practices for comparative effectiveness research: Defining, reporting and interpreting nonrandomized studies of treatment effects using secondary 
+Guidelines for reporting non-randomised studies
+Setting the bar in phase  II  trials: the use of historical data for determining “go/no go” decision for definitive phase  III  testing
+GNOSIS  : Guidelines for Neuro  -Oncology  : Standards for Investigational Studies – reporting of surgically based therapeutic clinical trials
+The standard of reporting of health-related quality of life in clinical cancer trials
+A systematic review of the reporting of Data Monitoring Committees’ roles, interim analysis and early termination in pediatric clinical trials
+“Brimful of  STARLITE  ”: toward standards for reporting literature searches
+Systematic prioritization of the  STARE-HI  reporting items. An application to short conference papers on health informatics evaluation
+CONSORT-EHEALTH  : improving and standardizing evaluation reports of Web-based and mobile health interventions
+Reporting of patient-reported outcomes in randomized trials: the  CONSORT   PRO  extension
+Consolidated Health Economic Evaluation Reporting Standards 2022  (CHEERS  2022) Statement: Updated Reporting Guidance for Health Economic Evaluations
+Enhancing transparency in reporting the synthesis of qualitative research:  ENTREQ
+Inadequate planning and reporting of adjudication committees in clinical trials: recommendation proposal
+Relevance of  CONSORT  reporting criteria for research on eHealth interventions
+Reporting guidelines for music-based interventions
+Reporting whole-body vibration intervention studies: recommendations of the International Society of Musculoskeletal and Neuronal Interactions
+Reporting standards for studies of tailored interventions
+Reporting data on homeopathic treatments  (RedHot)  : A supplement to  CONSORT
+Evaluating the quality of reporting occupational therapy randomized controlled trials by expanding the  CONSORT  criteria
+WIDER  recommendations for reporting of behaviour change interventions
+Evidence-based behavioral medicine: what is it and how do we achieve it?
+The  CONSORT  statement checklist in allergen-specific immunotherapy: a  GA  2  LEN  paper
+Improving the reporting of pragmatic trials: an extension of the  CONSORT  statement
+CONSORT  for reporting randomised trials in journal and conference abstracts
+CONSORT  Statement for Randomized Trials of Nonpharmacologic Treatments: A 2017 Update and a  CONSORT  Extension for Nonpharmacologic Trial Abstracts
+Reporting randomized, controlled trials of herbal interventions: an elaborated  CONSORT  Statement
+Consort 2010 statement: extension to cluster randomised trials
+Reporting of noninferiority and equivalence randomized trials: extension of the  CONSORT  2010 statement
+Revised  STandards  for Reporting Interventions in Clinical Trials of Acupuncture  (STRICTA)  : extending the  CONSORT  statement
+STARE-HI  – Statement on reporting of evaluation studies in Health Informatics
+The  ORION  statement: guidelines for transparent reporting of Outbreak Reports and Intervention studies Of Nosocomial infection
+Consensus recommendations for the uniform reporting of clinical trials: report of the International Myeloma Workshop Consensus Panel 1
+Economic evaluation alongside randomised controlled trials: design, conduct, analysis, and reporting
+Reporting and presenting information retrieval processes: the need for optimizing common practice in health technology assessment
+Guidelines for reporting reliability and agreement studies  (GRRAS)  were proposed
+SQUIRE  2.0  (Standards  for  QUality  Improvement Reporting Excellence): revised publication guidelines from a detailed consensus process
+Refining a checklist for reporting patient populations and service characteristics in hospice and palliative care research
+Point and interval estimates of effect sizes for the case-controls design in neuropsychology: rationale, methods, implementations, and proposed reporting standa
+Recommended guidelines for uniform reporting of pediatric advanced life support: the pediatric Utstein style
+Consolidated criteria for reporting qualitative research  (COREQ)  : a 32-item checklist for interviews and focus groups
+Guidelines for reporting results of quality of life assessments in clinical trials
+Recommendations for reporting economic evaluations of haemophilia prophylaxis
+Overview of methods used in cross-cultural comparisons of menopausal symptoms and their determinants: Guidelines for Strengthening the Reporting of Menopause an
+Strengthening the reporting of Genetic  RIsk  Prediction Studies: the  GRIPS  Statement
+GNOSIS  : guidelines for neuro-oncology: standards for investigational studies-reporting of phase 1 and phase 2 clinical trials
+Standard guidelines for publication of deep brain stimulation studies in Parkinson’s disease  (Guide  4  DBS-PD)

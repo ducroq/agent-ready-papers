@@ -34,16 +34,16 @@ The fix borrows a vocabulary from systems engineering: if claims are the paper's
 | Engineered System | Paper |
 |-------------------|-------|
 | System requirements | Paper goals (what must the paper demonstrate?) |
-| Components | Claims (individual statements of fact or data) |
-| Unit tests | Claim verification (source exists, data supports claim) |
-| Test coverage | % of claims with verified sources |
+| Components | Claims (every statement the paper puts forward and supports) |
+| Unit tests | The checks each claim's grounds call for (source check, warrant check) |
+| Test coverage | % of claims whose checks are complete |
 | SIL classification | Claim priority (P0 / P1 / P2) |
 | Static analysis | Build checks (LaTeX compile, word count, DOI validation) |
 | Integration tests | Argument flow (claims connect logically, no contradictions) |
 | HIL testing | Expert review (co-author, domain expert) |
 | Digital twin oracle | Reference documents (author guidelines, exemplar papers) |
-| Stakeholder validation | Peer review simulation |
-| Traceability matrix | Claim → Evidence → Audit trail |
+| Stakeholder validation | Contribution check (Whetten) and peer review simulation |
+| Traceability matrix | Contribution → claims → grounds → sources |
 
 Every concept on the right maps to a concrete artifact in the project — a template, a checklist, a registry entry. The rest of this guide explains each one.
 
@@ -61,7 +61,7 @@ Stating the case in [Toulmin form](literature/sources/toulmin-1958.md) — *Clai
 | **Qualifier** | **EMERGING.** We use this framework on our own papers; broader empirical validation across other authors and domains is an open question. |
 | **Rebuttal** | The framework is overhead with no return in the cases listed in *[When It Is Overkill](#when-it-is-overkill)* below — one-shot prose, throwaway code, internal notes, and domains with their own established compliance audit conventions. |
 
-This Toulmin block decomposes the **argument** the framework rests on; R-1 in [*This README, registered*](#this-readme-registered) below states the **proposition** the argument supports — registered with its own boundary conditions, per the framework's [Whetten checklist](literature/sources/whetten-1989.md) (*Constructs / Premises / Reasoning / Boundary conditions / Alternatives engaged*, from Whetten's *What Constitutes a Theoretical Contribution?*, AMR 1989). The two views coexist by design: argument verifies the reasoning chain; proposition verifies the recommendation; same case, two checklists. Six further entries (R-2…R-7) cover supporting CLAIMs / ARGUMENTs / PROPOSITIONs from the rest of this file.
+This Toulmin layout shows how the claim rests on its grounds through a warrant. R-1 in [*This README, registered*](#this-readme-registered) below registers the same case as the README's **contribution**, the root claim, which is checked once with [Whetten's elements](literature/sources/whetten-1989.md) (*What / How / Why / Who-Where-When*, from Whetten's *What Constitutes a Theoretical Contribution?*, AMR 1989). The warrant check verifies the reasoning; the contribution check validates what the whole adds. Six further entries (R-2…R-7) register supporting claims from the rest of this file. Terms: [`docs/glossary.md`](docs/glossary.md).
 
 **Dynamic counter to the Warrant.** A reasonable objection: "tool-level + model-level techniques are improving fast; RAG with citation-grounded generation plus reasoning-step verification could close most of the gap as capability rises." The Warrant above claims a **structural** distinction (process layer is the locus of the failure modes), not a **static** one (today's tools don't reach it). The structural claim is empirically open — registered as a falsifiable position in [`vv/hypothesis-log.md`](vv/hypothesis-log.md) with a Method (apply the framework's apparatus to a frontier-model-RAG-produced manuscript and count residual process-level findings) and a Revisit trigger (frontier-model RAG pipeline with reasoning-step verification becomes available, applied to a ≥5,000-word manuscript with ≥10 citations). Reading this and disagreeing? File an issue or contact the maintainer; "the position fails if residual process-level findings drop below 3" is concrete enough to test.
 
@@ -71,7 +71,7 @@ Each test can be answered yes / no for your specific project — they're meant a
 
 - **Hallucination cost exceeds review cost.** A hallucinated citation surviving into your output would cost more than an hour of your time to retract or correct downstream.
 - **Context cannot fit in a single session.** The work spans multiple sessions (a paper, a grant, a long-form decision) — no one conversation holds it all, so handoff state has to live in files.
-- **At least one claim carries the argument.** You have an argument or proposition the reader will scrutinise — being wrong about it would cost a co-author conversation or a reviewer round.
+- **At least one claim carries the argument.** You have a claim or recommendation the reader will scrutinise, and being wrong about it would cost a co-author conversation or a reviewer round.
 - **Confidence language is read as a signal.** "Demonstrates" vs. "suggests" will be parsed by your reader (reviewer, regulator, decision-maker) as a calibrated weighting, not interchangeable hedging.
 
 ## When It Is Overkill
@@ -88,7 +88,7 @@ Each test is similarly yes / no — if the description fits, the framework is ov
 Three kinds of work:
 
 - **Academic papers**: empirical, perspective and review papers. The templates are written for these.
-- **Speculative design and voice-driven non-fiction** ([DR-010](decisions/DR-010_provocation-unit-type.md)): adds the PROVOCATION unit type, for designed artefacts that make no truth claim. The conditional Gates 2.6 (reflexivity) and 2.8 (voice consistency) serve this kind of work.
+- **Speculative design and voice-driven non-fiction** ([DR-010](decisions/DR-010_provocation-unit-type.md)): adds a table of provocations, designed artefacts that make no truth claim. The conditional Gates 2.6 (reflexivity) and 2.8 (voice consistency) serve this kind of work.
 - **Decision-support artefacts** ([DR-012](decisions/DR-012_decision-support-artefacts.md)): the written basis for a consequential decision, such as a vendor choice, a hardware purchase or an architecture. The registry, tiers, anti-hallucination checklist and review passes carry over; the paper-specific gate items (page budget, LaTeX and BibTeX, journal style and author guidelines, co-author signoff, submission format) do not. This class rests on one worked example so far.
 
 Not covered yet: how an argument is built across a paper (contribution statement, argument flow, what each section must do). That layer is reserved until at least two paper projects show which patterns deserve a template ([DR-003](decisions/DR-003_narrative-engineering-layer.md)).
@@ -97,9 +97,9 @@ Not covered yet: how an argument is built across a paper (contribution statement
 
 **Doesn't this add overhead?** Yes — roughly 10 minutes of setup plus ongoing claim logging as you draft. The trade is overhead against the cost of being wrong. If a hallucinated citation or a confidence-inflated claim could survive to submission, the overhead pays back the first time it catches one.
 
-**What if my paper has only a few claims?** Then the registry is short. The point is verification discipline, not registry size. Even 5–10 entries benefit from typed verification — type-checking each entry forces you to articulate what kind of statement it is and what would falsify it.
+**What if my paper has only a few claims?** Then the registry is short. The point is verification discipline, not registry size. Even 5–10 entries benefit: recording each claim's grounds forces you to say what it rests on and what would falsify it.
 
-**How is this different from a reference manager (Zotero, Mendeley)?** Reference managers track *citations*; this tracks the *structure of your argument*. A claim has a confidence tier; an argument has a warrant; a proposition has boundary conditions. Reference managers don't model those, and they don't enforce confidence-to-language calibration.
+**How is this different from a reference manager (Zotero, Mendeley)?** Reference managers track *citations*; this tracks the *structure of your argument*. A claim has grounds and a confidence tier; a claim drawn from other claims has a warrant; a recommendation has boundary conditions. Reference managers don't model those, and they don't enforce confidence-to-language calibration.
 
 **Can I use this without an AI agent?** Yes. The framework was designed for AI-augmented writing — that's where hallucination and confidence inflation are most acute — but registry discipline, decision records, and quality gates work fine for any structured non-fiction. The anti-hallucination checklist is most useful when an agent is introducing claims; the rest applies regardless.
 
@@ -112,8 +112,8 @@ Not covered yet: how an argument is built across a paper (contribution statement
 Adopt the framework on a new paper in five steps (~10 minutes to set up):
 
 1. **Bootstrap session continuity.** Copy [`templates/CLAUDE.md`](templates/CLAUDE.md) into your paper project as `CLAUDE.md`. Fill in the paper identity, target journal, deadline.
-2. **Copy the minimum-viable adoption files.** [`templates/claim-registry.md`](templates/claim-registry.md), [`templates/anti-hallucination.md`](templates/anti-hallucination.md), and [`templates/writing-guide.md`](templates/writing-guide.md). These three plus CLAUDE.md are enough to start.
-3. **Register your first claims.** In `claim-registry.md`, list 5–10 of your paper's key factual statements. Assign each a priority (P0 / P1 / P2), confidence tier (ESTABLISHED / SUPPORTED / EMERGING / SPECULATIVE), and a source.
+2. **Copy the minimum-viable adoption files.** [`templates/claim-registry.md`](templates/claim-registry.md), [`templates/anti-hallucination.md`](templates/anti-hallucination.md), [`templates/writing-guide.md`](templates/writing-guide.md) and [`templates/glossary.md`](templates/glossary.md) (mandatory, [DR-028](decisions/DR-028_mandatory-paper-glossary.md)). These four plus CLAUDE.md are enough to start.
+3. **Register your first claims.** In `claim-registry.md`, list 5–10 of your paper's key claims and its contribution. For each claim record what it says (descriptive or normative), its grounds (`src:`, `claim:`, `decl:` or `own:` items), a priority (P0 / P1 / P2) and a confidence tier (ESTABLISHED / SUPPORTED / EMERGING / SPECULATIVE).
 4. **Verify each citation.** Run the Step 0 + 6-step checklist in `anti-hallucination.md` on every AI-introduced citation. Step 0 (Scholar + DOI) catches fabrications in seconds.
 5. **Run one review pass.** Before sharing the draft, ask a *fresh session* of a smaller model in the same family (e.g., Haiku, GPT-4o-mini, Gemini-Flash) to review the manuscript against your review prompt. A fresh session escapes the sunk-cost bias of the session that wrote the draft. See [`agents/review-prompt.md`](agents/review-prompt.md) for the prompt template and [DR-011](decisions/DR-011_multi-model-review-pattern.md) for the full three-pass pattern (intra-family small → intra-family large → cross-vendor).
 
@@ -121,8 +121,8 @@ Adopt the framework on a new paper in five steps (~10 minutes to set up):
 
 | Tier | Files | When |
 |------|-------|------|
-| **Required for first use** | `templates/CLAUDE.md`, `templates/claim-registry.md`, `templates/anti-hallucination.md`, `templates/writing-guide.md` | From day one |
-| **Useful once the paper grows** | `agents/review-prompt.md`, `agents/equation-checker.md`, `templates/decision-record.md`, `templates/glossary.md`, `templates/vv-framework.md`, `templates/cost-log.md`, `templates/hypothesis-log.md`, `templates/readability.md` | After ~20 registry entries, or once you hit a decision / cost-tracking / pre-registered bet worth recording, or a draft that is hard to read |
+| **Required for first use** | `templates/CLAUDE.md`, `templates/claim-registry.md`, `templates/anti-hallucination.md`, `templates/writing-guide.md`, `templates/glossary.md` | From day one |
+| **Useful once the paper grows** | `agents/review-prompt.md`, `agents/equation-checker.md`, `templates/decision-record.md`, `templates/vv-framework.md`, `templates/cost-log.md`, `templates/hypothesis-log.md`, `templates/readability.md` | After ~20 registry entries, or once you hit a decision / cost-tracking / pre-registered bet worth recording, or a draft that is hard to read |
 | **Reference / background only** | `templates/key-quotes.md` | When you want context, not before |
 
 ### Driving it with your agent
@@ -131,11 +131,11 @@ The five steps above describe *what* gets set up. In practice you delegate four 
 
 **Bootstrap a new paper project** (once, at project start):
 
-> Start a paper project using the agent-ready-papers framework at `<framework>` (currently v4.3.0). Topic: [X]. Target journal: [Y]. Deadline: [Z]. Do this: (1) Create `papers/<name>/`. (2) Copy `<framework>/templates/CLAUDE.md`, `claim-registry.md`, `anti-hallucination.md`, `writing-guide.md` into it. (3) Fill `CLAUDE.md` with the paper identity. (4) Initialise the registry with empty per-type sub-tables for each anticipated section. (5) Commit. From now on, read `papers/<name>/CLAUDE.md` at the start of every session.
+> Start a paper project using the agent-ready-papers framework at `<framework>` (currently v4.3.0). Topic: [X]. Target journal: [Y]. Deadline: [Z]. Do this: (1) Create `papers/<name>/`. (2) Copy `<framework>/templates/CLAUDE.md`, `claim-registry.md`, `anti-hallucination.md`, `writing-guide.md`, `glossary.md` into it. (3) Fill `CLAUDE.md` with the paper identity and start `glossary.md`. (4) Initialise the registry with its Contributions and Declared starting points tables and an empty Claims table for each anticipated section. (5) Commit. From now on, read `papers/<name>/CLAUDE.md` at the start of every session.
 
 **Register claims as I draft** (background companion mode for every writing session):
 
-> As I draft, when I make a factual claim, argument, or proposition, register it in `<paper>/vv/claims/claim_registry.md` using the per-type sub-tables and the priority / tier conventions in CLAUDE.md. Don't ask permission for routine entries — just register them and report a running coverage summary at section end. Flag anything you're unsure about: CLAIMs that look like ARGUMENTs, PROPOSITIONs missing boundary conditions, SPECULATIVE claims phrased as ESTABLISHED. When I introduce a citation, run Step 0 of `<framework>/templates/anti-hallucination.md` immediately and tell me if it's verifiable or likely fabricated.
+> As I draft, when I put forward a claim, register it in `<paper>/vv/claims/claim_registry.md` with what it says, its typed grounds, and the priority / tier conventions in CLAUDE.md; register assumptions, definitions and values as declared starting points. Don't ask permission for routine entries: register them and report a running coverage summary at section end. Flag anything you're unsure about: a claim combining sources with no Warrant, a normative claim missing a value or boundary conditions, SPECULATIVE claims phrased as ESTABLISHED. When I introduce a citation, run Step 0 of `<framework>/templates/anti-hallucination.md` immediately and tell me if it's verifiable or likely fabricated.
 
 **Verify a single citation** (one-shot lookup):
 
@@ -155,25 +155,26 @@ The full template index is in the [Templates](#templates) section near the botto
 
 ## Verification Registry: The Foundation
 
-The registry tracks three unit types:
+The registry follows one model ([DR-027](decisions/DR-027_toulmin-whetten-verification-model.md); terms in [`docs/glossary.md`](docs/glossary.md)). Every statement the paper puts forward and supports is a **claim**. Each claim records **what it says** (descriptive or normative) and its **grounds**, item by item. The checks follow the items:
+
+| Grounds item | What it is | Check |
+|--------------|-----------|-------|
+| `src:` | What a cited work reports | **Source check**: the source exists; it says what is attributed |
+| `claim:` | Another claim, joined by a warrant | **Warrant check**: does the step hold for the audience? |
+| `decl:` | A declared starting point: an assumption, definition or value the paper adopts | Stated in the text, contestedness recorded |
+| `own:` | The author's own observation, experiment or measurement | A method someone else could repeat |
+
+A normative claim also needs boundary conditions and a declared value. Every claim carries a **qualifier** (its hedge), which its confidence tier must permit. Each **contribution** is a root claim, P0, with a tier no higher than its weakest supporting claim, checked once with Whetten's elements (the **contribution check**, a validation step). Registries in the older CLAIM / ARGUMENT / PROPOSITION format are still read through v5.x.
+
+For claims whose grounds include a computation (equations, derived values, numerical tables), a further procedure applies:
 
 | Type | What it is | Where it appears | Verification |
 |------|-----------|-----------------|--------------|
-| **CLAIM** (default) | Factual statement with a source | All sections | Does the source exist and say this? |
-| **ARGUMENT** | Reasoning chain combining evidence + inference | Discussion, Conclusion | Warrant valid? Evidence sufficient? Counter-arguments addressed? |
-| **PROPOSITION** | Novel recommendation or contribution | Conclusion, Recommendations | Premises verified? Reasoning valid? Boundaries stated? |
-
-Most entries are CLAIMs. ARGUMENTs and PROPOSITIONs appear in Discussion and Conclusion sections — the parts reviewers scrutinize most. All three share the same priority, confidence, and language calibration system.
-
-For papers with quantitative content (equations, derived values, numerical tables), a fourth verification procedure applies:
-
-| Type | What it is | Where it appears | Verification |
-|------|-----------|-----------------|--------------|
-| **CALCULATION** | Derived numerical value from a stated formula | Methods, Results, technical appendices | Does the stated result follow from stated inputs? |
+| **Calculation verification** | Derived numerical value from a stated formula | Methods, Results, technical appendices | Does the stated result follow from stated inputs? |
 
 Calculation verification uses **mechanical reproduction** — substituting values into formulas and computing step by step — rather than plausibility assessment. The rationale: a formula with correct units, reasonable magnitude, and coherent surrounding prose will pass plausibility review even when the arithmetic is wrong. Reproducing the calculation is designed to surface what assessment misses. See [DR-009](decisions/DR-009_calculation-verification.md) for the verification procedure.
 
-For speculative-design / design-fiction / diegetic-prototype work, an opt-in fifth unit type applies:
+For speculative-design / design-fiction / diegetic-prototype work, an opt-in table applies:
 
 | Type | What it is | Where it appears | Verification |
 |------|-----------|-----------------|--------------|
@@ -206,20 +207,22 @@ PROVOCATIONs use a separate confidence axis (GROUNDED / EXTRAPOLATED / PROVOCATI
 | B | Peer-reviewed review article | 0.8 |
 | C | Textbook / established reference | 0.9 |
 | D | Guidelines / industry standards | 0.7 |
-| E | Own unpublished work (under review) | 0.6 |
-| F | Logical inference | 0.2 |
+| E | Own work published or under review elsewhere | 0.6 |
 
-The **registry** tracks all of this in one place — a living table of every claim, argument, and proposition with its type, priority, confidence tier, source, and verification status. See [`templates/claim-registry.md`](templates/claim-registry.md).
+Tier F ("logical inference") is retired: an inference is a warrant, an own observation an `own:` item.
+
+The **registry** tracks all of this in one place: a living record of every claim, declared starting point and contribution with what it rests on, priority, confidence tier and check status. See [`templates/claim-registry.md`](templates/claim-registry.md).
 
 ### One row, concretely
 
-A populated CLAIM entry looks like this:
+Two populated claims from Paper 1's registry (statements and warrant abridged, columns omitted):
 
-| ID | Type | Priority | Confidence | Source | Source Tier | Status |
-|----|------|----------|------------|--------|-------------|--------|
-| S1-1 | CLAIM | P0 | SUPPORTED | Mugaanyi et al. 2024 (JMIR, DOI: 10.2196/52935): 62–89% DOI fabrication rates across disciplines | A | [x] |
+| ID | Statement | Says | Grounds | Warrant | Priority | Confidence tier | Source Tier | Status |
+|----|-----------|------|---------|---------|----------|-----------------|-------------|--------|
+| S1-1 | AI citation hallucination is a distinct failure mode | descriptive | src: Mugaanyi et al. 2024; src: Walters & Wilder 2023 | | P0 | SUPPORTED | A; A | [x] |
+| S1-7 | AI-assisted prose can be fluent and cite only real sources while its reasoning is weak | descriptive | claim: S1-1; claim: S1-2; claim: S1-4 | Hallucination checks catch false citations; confidence inflation and unchecked warrants pass them | P1 | EMERGING | | [ ] |
 
-The same row for an ARGUMENT carries additional fields (Grounds / Warrant / Rebuttal); a PROPOSITION carries Constructs / Relationship / Premises / Reasoning / Boundary conditions / Alternatives engaged. The per-type sub-table layout in [`templates/claim-registry.md`](templates/claim-registry.md) makes the type-specific fields explicit.
+The full table adds Backing, Rebuttal and Objections engaged; contributions and declared starting points have tables of their own. See [`templates/claim-registry.md`](templates/claim-registry.md).
 
 ### Cross-reference rules
 
@@ -313,14 +316,15 @@ See [`agents/review-prompt.md`](agents/review-prompt.md) for a structured review
 
 ## Terminology References
 
-For interdisciplinary papers, create a **glossary** that serves as the single source of truth for terminology:
+Every paper has a **glossary** ([DR-028](decisions/DR-028_mandatory-paper-glossary.md)), the single source of truth for that paper's terms. It links to the framework glossary ([`docs/glossary.md`](docs/glossary.md), at the release tag you pin) for the framework's terms, never copies it, and defines the rest:
 
+- Every abbreviation, before the manuscript uses it, and every definition registered as a declared starting point
 - Group terms by the domain they come from
 - Include plain-language equivalents alongside formal definitions
 - Note where terms overlap or conflict across fields
 - Reference the standard each term comes from (VIM, GUM, ISO, APA, etc.)
 
-This guards against terminology drift — for instance, agents using "accuracy" when they mean "trueness" (a VIM distinction), or using a domain-specific term with its colloquial meaning where the formal meaning is required. Point the agent to the glossary in your project file (CLAUDE.md) so it's consulted before writing.
+This guards against terminology drift: for instance, agents using "accuracy" when they mean "trueness" (a VIM distinction), or using a domain-specific term with its colloquial meaning where the formal meaning is required. Point the agent to the glossary in your project file (CLAUDE.md) so it's consulted before writing. `python -m tools.check_registry <registry> --glossary <paper>/glossary.md` fails when the glossary is missing, empty or still the unfilled template.
 
 See [`templates/glossary.md`](templates/glossary.md).
 
@@ -332,15 +336,16 @@ Each gate must pass before proceeding.
 
 ### Gate 1: Draft Complete
 - [ ] All sections drafted to page budget
-- [ ] Claim registry populated with all factual statements
+- [ ] Claim registry populated: every claim with its grounds, declared starting points, the contribution
 - [ ] P0 claims identified and prioritized
 
 ### Gate 2: Verification Complete
 - [ ] P0 claims 100% verified
 - [ ] P1 claims 90% verified
 - [ ] Overall coverage ≥85%
-- [ ] Coverage checked by section type (Factual sections vs Discussion/Conclusion) — Discussion sections typically have lower coverage and need ARGUMENTs/PROPOSITIONs, not just CLAIMs
-- [ ] Entry types re-checked (see `templates/claim-registry.md` — Detecting Mistyped Entries)
+- [ ] Contribution check done for each contribution (validation)
+- [ ] Coverage checked by section type (factual sections vs Discussion/Conclusion): Discussion sections typically have lower coverage and need claims on `claim:` grounds and normative claims registered, not only sourced statements
+- [ ] Grounds re-checked (see `templates/claim-registry.md`, "Checks → Recording grounds")
 - [ ] Coverage report generated (timestamped snapshot for co-author review)
 - [ ] Static checks pass (LaTeX compiles, BibTeX valid, DOIs resolve)
 - [ ] Anti-hallucination checklist run on all AI-introduced citations
@@ -355,7 +360,7 @@ These are manual cross-checks not covered by the automated static checks in Gate
 
 ### Gate 2.6: Reflexivity *(conditional — only when PROVOCATIONs are present)*
 
-For projects with PROVOCATION entries (see [DR-010](decisions/DR-010_provocation-unit-type.md)). Walk every PROVOCATION; confirm the required prose marker for its tier (GROUNDED / EXTRAPOLATED / PROVOCATIVE / CRITICAL) is visible in the manuscript itself, at every key moment — not only in the registry. Without the marker, authoritative-toned speculation can be misread as a claim. Entries failing this audit are rewritten or downgraded to EMERGING CLAIM with additional sources.
+For projects with PROVOCATION entries (see [DR-010](decisions/DR-010_provocation-unit-type.md)). Walk every PROVOCATION; confirm the required prose marker for its tier (GROUNDED / EXTRAPOLATED / PROVOCATIVE / CRITICAL) is visible in the manuscript itself, at every key moment — not only in the registry. Without the marker, authoritative-toned speculation can be misread as a claim. Entries failing this audit are rewritten, or registered as EMERGING claims with verified sources.
 
 ### Gate 2.7: Ethical Review *(conditional — only for contested topics)*
 
@@ -463,7 +468,7 @@ Fill-in templates in [`templates/`](templates/) — the files you copy, populate
 - **[`writing-guide.md`](templates/writing-guide.md)** — Confidence-to-language mapping, section-claim assignment
 - **[`decision-record.md`](templates/decision-record.md)** — Lightweight ADR for scope and methodology decisions
 - **[`anti-hallucination.md`](templates/anti-hallucination.md)** — Citation verification checklist
-- **[`glossary.md`](templates/glossary.md)** — Cross-domain terminology reference
+- **[`glossary.md`](templates/glossary.md)**: This paper's terms, linked to the framework glossary (mandatory, DR-028)
 - **[`cost-log.md`](templates/cost-log.md)** — Per-operation token-cost log; copy to your paper's `vv/cost-log.md`
 - **[`hypothesis-log.md`](templates/hypothesis-log.md)** — Provisional positions whose evidence lives in the future (`Position` / `Method` / `Revisit trigger` / `Review by`); resolves to closed or promoted to DR
 - **[`readability.md`](templates/readability.md)** — Two prompts against compressed, hard-to-read AI prose (*Explain like I'm 18*, *Write for a reader*) and a draft-then-check workflow
@@ -489,10 +494,10 @@ Optional Python CLIs in [`tools/`](tools/) — stdlib only, deterministic, CI-fr
 
 | Tool | Purpose | When to run |
 |------|---------|-------------|
-| [`coverage.py`](tools/coverage.py) | Parse a `claim_registry.md`; report P0/P1/P2 coverage by unit type, and separately the DR-002 P0 tier floor (every P0 entry SUPPORTED or ESTABLISHED) | Before phase gates; in CI with `--strict` to fail the build on missed thresholds or a failed P0 tier floor |
+| [`coverage.py`](tools/coverage.py) | Parse a `claim_registry.md`; report P0/P1/P2 coverage by what each claim says (descriptive, normative, contribution), and separately the DR-002 P0 tier floor (every P0 entry SUPPORTED or ESTABLISHED) | Before phase gates; in CI with `--strict` to fail the build on missed thresholds or a failed P0 tier floor |
 | [`check_dois.py`](tools/check_dois.py) | Extract DOIs; HEAD against `doi.org`; report unresolved | After any AI-assisted citation introduction; in CI; pair with the [Anti-Hallucination Checklist](#anti-hallucination-checklist) Step 0 |
 | [`check_metadata.py`](tools/check_metadata.py) | Compare the bibliographic **fields** against Crossref/DataCite — a resolving DOI is not a correct entry | After any AI-assisted citation introduction; in CI with `--strict`. ⚠️ `--offline` compares no fields, so it is refused together with `--strict` |
-| [`check_registry.py`](tools/check_registry.py) | Registry/manuscript internal consistency: anchors, tier agreement across the registry/anchor/table copies, type-conditional schema, premise graph, word budget | Before phase gates; checks *consistency*, never whether a tier is the right tier |
+| [`check_registry.py`](tools/check_registry.py) | Registry/manuscript internal consistency: anchors, tier agreement across the registry/anchor/table copies, DR-027 schema, premise graph, word budget, and with `--glossary` the paper's glossary | Before phase gates; checks *consistency*, never whether a tier is the right tier |
 
 Invoke as `python -m tools.coverage <registry.md>` or via Makefile (`make coverage` / `make check-dois` / `make verify-bib` / `make check-registry`) from the repo root. Known limits (no HTTPS proxy support, sequential HEAD scaling) are documented in [`tools/README.md`](tools/README.md).
 
@@ -521,23 +526,23 @@ See [`decisions/DR-006_publication-roadmap.md`](decisions/DR-006_publication-roa
 
 ## This README, registered
 
-Applying the framework to its own home document. The seven entries below are the README's key claims, arguments, and propositions — registered with priority, type, confidence tier, and source. Coverage is not 100%: a README is a guide, not a paper, and not every sentence is registered. The key ones are.
+Applying the framework to its own home document. The seven entries below are the README's key claims, registered with what each says, its priority, confidence tier and grounds. Coverage is not 100%: a README is a guide, not a paper, and not every sentence is registered. The key ones are.
 
-Tier vocabulary matches the [Confidence-to-Language Mapping](#confidence-to-language-mapping) above; type vocabulary matches the [Verification Registry](#verification-registry-the-foundation).
+Tier vocabulary matches the [Confidence-to-Language Mapping](#confidence-to-language-mapping) above; the Says vocabulary matches the [Verification Registry](#verification-registry-the-foundation).
 
-**Format note.** Simplified columns for README brevity: every row uses the CLAIM-style header (ID / Type / Priority / Confidence / Statement / Source / Anchor), with ARGUMENT- and PROPOSITION-specific fields (Toulmin Grounds / Warrant / Rebuttal; Whetten Constructs / Premises / Reasoning / Boundary conditions / Alternatives engaged) inlined into the Statement cell as "Warrant: …", "Boundary: …", and so on. Adopters maintaining actual paper registries should use the per-type sub-tables from [`templates/claim-registry.md`](templates/claim-registry.md); the single-table layout here is a compression for README readability, not the framework's normative form.
+**Format note.** Simplified columns for README brevity: one table, with Warrant, Rebuttal and boundary conditions inlined into the Statement cell as "Warrant: …", "Boundary: …", and the grounds in the Source column. Adopters maintaining actual paper registries should use the tables in [`templates/claim-registry.md`](templates/claim-registry.md); the single table here is a compression for README readability, not the framework's normative form.
 
-| ID | Type | Priority | Confidence | Statement | Source / Anchor | Where it appears |
+| ID | Says | Priority | Confidence | Statement | Grounds / Anchor | Where it appears |
 |----|------|----------|------------|-----------|------------------|------------------|
-| R-1 | PROPOSITION | P0 | EMERGING | Process-level verification infrastructure (templates + gates + decision records + registry) catches a class of AI-augmented-writing failure modes that tool-level checkers and model-level techniques do not fully address. Boundary: the four When-Worth-It tests; reduces to overhead for the When-Overkill cases. | Own use on three application classes (academic-paper, speculative-design, decision-support); Paper 1 (this repo) is the perspective article arguing the gap | [The Approach](#the-approach), [The Argument, Structurally](#the-argument-structurally) |
-| R-2 | ARGUMENT | P0 | SUPPORTED | The systems-engineering identity (claims-as-components, sources-as-tests, coverage-as-measurable) operationalises verification rather than just metaphorising it. Warrant: typed registry + tier-monotonic language calibration + per-priority coverage targets are each independently tractable. Rebuttal addressed: the mapping is most natural for argumentative/empirical non-fiction and stretches for purely literary or oral genres. | [DR-007](decisions/DR-007_se-identity-upgrade.md) | [The Approach → SE mapping](#the-approach) |
-| R-3 | CLAIM | P1 | SUPPORTED | LLMs introduce plausible-but-fabricated citations at rates high enough that unverified citations can survive into submission-ready drafts. | Hallucination literature as cited in [`templates/anti-hallucination.md`](templates/anti-hallucination.md) | [The Core Problem → Hallucinated citations](#the-core-problem), [Anti-Hallucination Checklist](#anti-hallucination-checklist) |
-| R-4 | CLAIM | P1 | EMERGING | Plausibility-based review of calculations misses arithmetic errors that mechanical reproduction catches. | [DR-009](decisions/DR-009_calculation-verification.md) (rationale; cites no external literature). Single observation, N=1, single-site — and model, prompt and inference mode varied together, so it does not isolate the mechanism. Not SUPPORTED: the only other support is the artifact the claim recommends, which would be circular. | [Verification Registry → CALCULATION](#verification-registry-the-foundation), [`agents/equation-checker.md`](agents/equation-checker.md) |
-| R-5 | PROPOSITION | P1 | EMERGING | A three-pass review pattern (intra-family small → intra-family large → cross-vendor) escapes biases a single pass cannot — sunk-cost-from-session, review-character convergence, training-prior alignment. Boundary: observed at code-tooling scale within one model family (N=2 within Claude); paper-scale prose and cross-family generality remain untested. | [DR-011](decisions/DR-011_multi-model-review-pattern.md) (Status: Proposed) | [Peer Review Simulation](#peer-review-simulation), [Tools → cost data](#tools) |
-| R-6 | CLAIM | P1 | SPECULATIVE | The numerical thresholds in Gate 2 (100% P0 / 90% P1 / 70% P2 / ≥85% overall) and Gate 3 (≥3.5/5.0 simulated peer review) are defensible defaults, not calibrated constants. | [`docs/THRESHOLDS.md`](docs/THRESHOLDS.md) (self-declared SPECULATIVE at top of file) | [Quality Gates](#quality-gates), [Measuring Success](#measuring-success) |
-| R-7 | PROPOSITION | P2 | EMERGING | Speculative-design / design-fiction work creates an "inverse hallucination" risk — designed speculation presented as if it had a citable source — which Steps 0–6 of the standard anti-hallucination checklist will not catch. Boundary: opt-in extension for PROVOCATION-using projects only; standard academic papers can ignore. | [DR-010](decisions/DR-010_provocation-unit-type.md) | [Verification Registry → PROVOCATION](#verification-registry-the-foundation), [Anti-Hallucination Checklist → Step Z](#anti-hallucination-checklist) |
+| R-1 | contribution | P0 | EMERGING | Process-level verification infrastructure (templates + gates + decision records + registry) catches a class of AI-augmented-writing failure modes that tool-level checkers and model-level techniques do not fully address. Boundary: the four When-Worth-It tests; reduces to overhead for the When-Overkill cases. | claim: R-2; claim: R-3; claim: R-4; claim: R-5; claim: R-7 | [The Approach](#the-approach), [The Argument, Structurally](#the-argument-structurally) |
+| R-2 | descriptive | P0 | SUPPORTED | The systems-engineering identity (claims-as-components, sources-as-tests, coverage-as-measurable) operationalises verification rather than just metaphorising it. Warrant: typed registry + tier-monotonic language calibration + per-priority coverage targets are each independently tractable. Rebuttal addressed: the mapping is most natural for argumentative/empirical non-fiction and stretches for purely literary or oral genres. | [DR-007](decisions/DR-007_se-identity-upgrade.md) | [The Approach → SE mapping](#the-approach) |
+| R-3 | descriptive | P1 | SUPPORTED | LLMs introduce plausible-but-fabricated citations at rates high enough that unverified citations can survive into submission-ready drafts. | Hallucination literature as cited in [`templates/anti-hallucination.md`](templates/anti-hallucination.md) | [The Core Problem → Hallucinated citations](#the-core-problem), [Anti-Hallucination Checklist](#anti-hallucination-checklist) |
+| R-4 | descriptive | P1 | EMERGING | Plausibility-based review of calculations misses arithmetic errors that mechanical reproduction catches. | [DR-009](decisions/DR-009_calculation-verification.md) (rationale; cites no external literature). Single observation, N=1, single-site — and model, prompt and inference mode varied together, so it does not isolate the mechanism. Not SUPPORTED: the only other support is the artifact the claim recommends, which would be circular. | [Verification Registry → CALCULATION](#verification-registry-the-foundation), [`agents/equation-checker.md`](agents/equation-checker.md) |
+| R-5 | descriptive | P1 | EMERGING | A three-pass review pattern (intra-family small → intra-family large → cross-vendor) escapes biases a single pass cannot — sunk-cost-from-session, review-character convergence, training-prior alignment. Boundary: observed at code-tooling scale within one model family (N=2 within Claude); paper-scale prose and cross-family generality remain untested. | [DR-011](decisions/DR-011_multi-model-review-pattern.md) (Status: Proposed) | [Peer Review Simulation](#peer-review-simulation), [Tools → cost data](#tools) |
+| R-6 | descriptive | P1 | SPECULATIVE | The numerical thresholds in Gate 2 (100% P0 / 90% P1 / 70% P2 / ≥85% overall) and Gate 3 (≥3.5/5.0 simulated peer review) are defensible defaults, not calibrated constants. | [`docs/THRESHOLDS.md`](docs/THRESHOLDS.md) (self-declared SPECULATIVE at top of file) | [Quality Gates](#quality-gates), [Measuring Success](#measuring-success) |
+| R-7 | descriptive | P2 | EMERGING | Speculative-design / design-fiction work creates an "inverse hallucination" risk — designed speculation presented as if it had a citable source — which Steps 0–6 of the standard anti-hallucination checklist will not catch. Boundary: opt-in extension for PROVOCATION-using projects only; standard academic papers can ignore. | [DR-010](decisions/DR-010_provocation-unit-type.md) | [Verification Registry → PROVOCATION](#verification-registry-the-foundation), [Anti-Hallucination Checklist → Step Z](#anti-hallucination-checklist) |
 
-**Coverage note.** Type cut: 3 CLAIMs / 1 ARGUMENT / 3 PROPOSITIONs. Tier cut: 0 ESTABLISHED / 2 SUPPORTED / 4 EMERGING / 1 SPECULATIVE. The absence of an ESTABLISHED tier is intentional — the README does not yet have validated claims about its own efficacy, and forcing one would be the exact confidence-inflation failure the framework is supposed to catch.
+**Coverage note.** Says cut: 1 contribution / 6 descriptive. Tier cut: 0 ESTABLISHED / 2 SUPPORTED / 4 EMERGING / 1 SPECULATIVE. The absence of an ESTABLISHED tier is intentional — the README does not yet have validated claims about its own efficacy, and forcing one would be the exact confidence-inflation failure the framework is supposed to catch.
 
 **Why this section exists.** Readers can audit the README's key claims with the apparatus the README proposes, and the exercise forces honest tiers: R-1 is EMERGING and R-6 SPECULATIVE, not SUPPORTED.
 

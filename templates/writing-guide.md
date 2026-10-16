@@ -1,8 +1,9 @@
 # Writing Guide: Registry-to-Section Mapping
 
-<!-- Maps verified registry entries (CLAIMs, ARGUMENTs, PROPOSITIONs) to
-     paper sections with language calibration. Consult before writing or
-     editing any section. -->
+<!-- Maps verified registry entries (claims, contributions, declared starting
+     points) to paper sections with language calibration. Consult before writing
+     or editing any section. Terms: the paper's glossary.md, which links to the
+     framework glossary (DR-027, DR-028). -->
 
 **Paper:** [Title]
 **Last Updated:** [date]
@@ -11,12 +12,13 @@
 
 ## How to Use This Guide
 
-1. **Before writing a section:** Check which registry entries apply (CLAIMs, ARGUMENTs, PROPOSITIONs)
-2. **For each entry:** Use the confidence tier to calibrate language
-3. **For CLAIMs:** Source details are in `claim_registry.md`
-4. **For ARGUMENTs:** Check that the warrant is explicit and grounds are verified CLAIMs
-5. **For PROPOSITIONs:** Check that reasoning is explicit and boundary conditions are stated
-6. **For quotes:** Keep a key quotes file for verbatim text
+1. **Before writing a section:** Check which registry entries apply (claims, the contribution, declared starting points)
+2. **For each claim:** Choose a qualifier its confidence tier permits
+3. **For `src:` grounds:** Source details are in `claim_registry.md`
+4. **For `claim:` grounds:** Make the warrant explicit; every claim it rests on must be checked
+5. **For normative claims:** Name the value and state the boundary conditions
+6. **For declared starting points:** State each one in the text; flag a contested one where a claim rests on it
+7. **For quotes:** Keep a key quotes file for verbatim text
 
 ---
 
@@ -31,23 +33,27 @@
 
 ### The Underlying Principle
 
-The rules in this guide are instances of one structural requirement: **the language tier used in the manuscript must be at most the confidence tier in the registry for the same claim.** Citation drift is the failure of that monotonicity — language climbing one or more tiers above what the evidence chain supports. The *Writing by Unit Type*, *Framework Component*, *Overclaiming*, and *Special Cases* sections below are domain-specific projections of the same rule. A reviewer's first check on any key claim is whether the language sits at or below the registered tier. If it does not, either the registry needs upgrading (with new evidence) or the language needs downshifting. The framing comes from `docs/category-theory-as-design-lens.md`; the operational rule is what carries, and category-theory vocabulary is not needed in this guide itself.
+The rules in this guide are instances of one structural requirement: **the language tier used in the manuscript must be at most the confidence tier in the registry for the same claim.** Citation drift is the failure of that monotonicity — language climbing one or more tiers above what the evidence chain supports. The *Writing a Claim*, *Framework Component*, *Overclaiming*, and *Special Cases* sections below are domain-specific projections of the same rule. A reviewer's first check on any key claim is whether the language sits at or below the registered tier. If it does not, either the registry needs upgrading (with new evidence) or the language needs downshifting. The framing comes from `docs/category-theory-as-design-lens.md`; the operational rule is what carries, and category-theory vocabulary is not needed in this guide itself.
 
-### Writing by Unit Type
+### Writing a Claim
 
-| Type | How to write it | Watch for |
-|------|----------------|-----------|
-| CLAIM | State the fact, cite the source, match language to tier | Overclaiming (confident language for EMERGING/SPECULATIVE) |
-| ARGUMENT | State the conclusion, present the evidence (grounds), make the warrant explicit | Implicit warrants that the reader won't share; missing counter-arguments |
-| PROPOSITION | State the recommendation, give the reasoning, specify where it applies | Overgeneralization; missing boundary conditions |
+The prose must get three things right for every claim: **what it says** (descriptive or normative), its **grounds** (what it rests on), and its **qualifier** (the hedge), which its **confidence tier** must permit.
 
-**ARGUMENT prose pattern:**
-> [Grounds — the evidence, citing verified CLAIMs]. [Warrant — why this evidence leads to the conclusion]. [Qualifier — hedging per confidence tier]. [Therefore, conclusion]. [Rebuttal — acknowledging the strongest counter-argument].
+| Grounds | How to write it | Watch for |
+|---------|----------------|-----------|
+| `src:` (sources) | State what the source reports, cite it, match the qualifier to the tier | Overclaiming (confident language for EMERGING/SPECULATIVE) |
+| `claim:` (other claims) | Present the grounds, make the warrant explicit, then state the claim | Implicit warrants the reader won't share; missing objections |
+| `decl:` (declared starting points) | State the assumption, definition or value as adopted, not argued | A contested starting point presented as settled |
+| `own:` (own work) | Say what was observed and how, so a reader could repeat it | One run or one site written as a stable result (Step Z) |
+| Normative claim (any grounds) | State the recommendation, name the value it serves, say where it applies | Overgeneralization; missing boundary conditions |
+
+**Prose pattern for a claim on `claim:` grounds:**
+> [Grounds: the claims it rests on, each checked]. [Warrant: why they lead to the claim]. [Qualifier: hedging per confidence tier]. [Therefore, the claim]. [Rebuttal: when the step fails, and the strongest objection].
 
 Example: "Manikin A produced force errors exceeding 15% across all test conditions (Table 2). Since clinical guidelines require feedback accuracy within 10% to support skill transfer [Author, Year], these errors are clinically significant. This **suggests** that current compression feedback in Manikin A is insufficient for competency-based training, although performance may differ under instructor-guided conditions."
 
-**PROPOSITION prose pattern:**
-> [Reasoning — why this recommendation follows from the arguments]. [Proposition — the recommendation itself]. [Boundary conditions — where it applies and where it doesn't].
+**Prose pattern for a normative claim:**
+> [Warrant: why the recommendation follows from its grounds and the value it serves]. [The recommendation itself]. [Boundary conditions: where it applies and where it doesn't].
 
 Example: "Given the systematic feedback errors documented above, we propose that CPR training programs should prioritize manikin feedback accuracy over anatomical realism when selecting training equipment. This applies to competency-based programs targeting measurable skill outcomes; instructor-led demonstration contexts, where visual realism may support engagement, fall outside this recommendation."
 
@@ -99,7 +105,7 @@ Certain claim categories are systematically overclaimed. Watch for these pattern
 
 ## Section → Registry Mapping
 
-### Worked Example (from a Proposition paper's Introduction)
+### Worked Example (from a recommendation paper's Introduction)
 
 <!-- This shows what a completed section mapping looks like. The example uses
      real data from a CPR manikin fidelity paper to illustrate how registry
@@ -110,12 +116,12 @@ Certain claim categories are systematically overclaimed. Watch for these pattern
 
 **Entries to use:**
 
-| ID | Statement | Type | Tier | Appropriate Language |
-|----|-----------|------|------|---------------------|
-| H1 | 5.6% calibration shift in-phantoma | CLAIM | SUPPORTED | "we observed" (own work under review) |
-| H2 | 120–130× datasheet deviation | CLAIM | SUPPORTED | "manufacturer specifications may not align" |
-| H5 | Manikin chest compliance exceeds human tissue stiffness | CLAIM | SUPPORTED | "commercial manikins may not faithfully replicate" |
-| F1 | Skill transfer depends on functional alignment, not visual resemblance | CLAIM | SUPPORTED | "Norman et al. argued" (attribution) |
+| ID | Statement | Says / Grounds | Tier | Appropriate Language |
+|----|-----------|----------------|------|---------------------|
+| H1 | 5.6% calibration shift in-phantoma | descriptive / `src:` (own, under review) | SUPPORTED | "we observed" (own work under review) |
+| H2 | 120–130× datasheet deviation | descriptive / `src:` | SUPPORTED | "manufacturer specifications may not align" |
+| H5 | Manikin chest compliance exceeds human tissue stiffness | descriptive / `src:` | SUPPORTED | "commercial manikins may not faithfully replicate" |
+| F1 | Skill transfer depends on functional alignment, not visual resemblance | descriptive / `src:` | SUPPORTED | "Norman et al. argued" (attribution) |
 
 **Key quotes ready:**
 - Norman 2012: "nearly all the studies showed no significant advantage of HFS over LFS, with average differences ranging from 1% to 2%" (p. 636)
@@ -133,9 +139,9 @@ Certain claim categories are systematically overclaimed. Watch for these pattern
 
 **Entries to use:**
 
-| ID | Statement | Type | Tier | Appropriate Language |
-|----|-----------|------|------|---------------------|
-| [ID] | [statement] | CLAIM | [tier] | [calibrated phrasing] |
+| ID | Statement | Says / Grounds | Tier | Appropriate Language |
+|----|-----------|----------------|------|---------------------|
+| [ID] | [statement] | descriptive / `src:` | [tier] | [calibrated phrasing] |
 
 **Key quotes ready:**
 - [Author Year]: "[exact quote]" (p. [N])
@@ -148,9 +154,9 @@ Certain claim categories are systematically overclaimed. Watch for these pattern
 
 **Entries to use:**
 
-| ID | Statement | Type | Tier | Appropriate Language |
-|----|-----------|------|------|---------------------|
-| [ID] | [statement] | CLAIM | [tier] | [calibrated phrasing] |
+| ID | Statement | Says / Grounds | Tier | Appropriate Language |
+|----|-----------|----------------|------|---------------------|
+| [ID] | [statement] | descriptive / `src:` | [tier] | [calibrated phrasing] |
 
 **Data to cite:**
 ```
@@ -163,21 +169,21 @@ Certain claim categories are systematically overclaimed. Watch for these pattern
 
 ### N. Discussion / Conclusion
 
-<!-- This is where ARGUMENTs and PROPOSITIONs typically appear -->
+<!-- Claims on claim: grounds, normative claims and the contribution typically appear here -->
 
 **Purpose:** [What this section argues and recommends]
 
 **Entries to use:**
 
-| ID | Statement | Type | Tier | Appropriate Language |
-|----|-----------|------|------|---------------------|
-| [ID] | [interpretive conclusion] | ARGUMENT | [tier] | [calibrated phrasing] |
-| [ID] | [recommendation] | PROPOSITION | [tier] | [calibrated phrasing] |
+| ID | Statement | Says / Grounds | Tier | Appropriate Language |
+|----|-----------|----------------|------|---------------------|
+| [ID] | [interpretive conclusion] | descriptive / `claim:` | [tier] | [calibrated phrasing] |
+| [ID] | [recommendation] | normative / `claim:` + `decl:` value | [tier] | [calibrated phrasing] |
 
-**Warrant check:** For each ARGUMENT, state the warrant explicitly:
-- [ID]: Warrant = [why the evidence supports this conclusion]
+**Warrant check:** For each claim on `claim:` grounds, state the warrant explicitly:
+- [ID]: Warrant = [why the grounds support this claim]
 
-**Boundary check:** For each PROPOSITION, state the limits:
+**Boundary check:** For each normative claim and the contribution, state the limits:
 - [ID]: Applies to [context]; does NOT apply to [exclusions]
 
 ---
@@ -188,53 +194,57 @@ Certain claim categories are systematically overclaimed. Watch for these pattern
 
 ### ESTABLISHED / SUPPORTED — Ready for Strong Statements
 
-| ID | Statement | Type | Tier | Best Source |
+| ID | Statement | Says | Tier | Best Source |
 |----|-----------|------|------|------------|
-| [ID] | [statement] | CLAIM | [tier] | [Author Year] |
+| [ID] | [statement] | descriptive | [tier] | [Author Year] |
 
 ### EMERGING — Appropriately Hedged
 
-| ID | Statement | Type | Tier | Hedging Language |
+| ID | Statement | Says | Tier | Hedging Language |
 |----|-----------|------|------|------------------|
-| [ID] | [statement] | CLAIM | EMERGING | [suggested phrasing] |
+| [ID] | [statement] | descriptive | EMERGING | [suggested phrasing] |
 
 ### SPECULATIVE — Requires Careful Framing
 
-| ID | Statement | Type | Tier | How to Frame |
+| ID | Statement | Says | Tier | How to Frame |
 |----|-----------|------|------|--------------|
-| [ID] | [statement] | CLAIM | SPECULATIVE | [framing approach] |
+| [ID] | [statement] | descriptive | SPECULATIVE | [framing approach] |
 
 ---
 
 ## Pre-Submission Checklist
 
-### CLAIMs
-- [ ] All P0 claims at SUPPORTED or ESTABLISHED (or explicitly framed as hypothesis)
+### Every claim
+- [ ] All P0 claims and the contribution at SUPPORTED or ESTABLISHED. Framing a claim as a hypothesis does not waive the P0 floor: the gate records the failure (DR-027 step 6)
 - [ ] Language matches confidence tiers throughout
 - [ ] All quotes verified against source
 - [ ] "Own work" claims clearly marked with status
 - [ ] Hypotheses distinguished from verified claims
 - [ ] No "demonstrates", "shows" or "confirms" below **ESTABLISHED** (per the DR-002 mapping above — the earlier wording said "for EMERGING or SPECULATIVE", which passed "demonstrates" at SUPPORTED, the exact defect the retrofit audit found in 6/22 entries)
 
-### ARGUMENTs
-- [ ] Each ARGUMENT has its warrant stated explicitly (not left implicit)
-- [ ] Grounds are verified CLAIMs in the registry (not unregistered assertions)
-- [ ] Qualifier matches the weakest evidence in the chain
-- [ ] Strongest counter-arguments acknowledged (not strawmen)
-- [ ] No ARGUMENT grounded solely in SPECULATIVE claims without flagging
+### Claims on `claim:` grounds
+- [ ] Each has its warrant stated explicitly (not left implicit)
+- [ ] Its grounds are checked claims in the registry (not unregistered assertions)
+- [ ] Qualifier matches the weakest grounds in the chain
+- [ ] Strongest objections acknowledged (not strawmen)
+- [ ] None rests solely on SPECULATIVE claims without flagging
 
-### PROPOSITIONs
-- [ ] Each PROPOSITION has boundary conditions stated
-- [ ] Key constructs are defined (not assumed)
+### Declared starting points
+- [ ] Each is stated in the text; definitions are also in the paper's glossary
+- [ ] A claim resting on a contested one says so
+
+### Normative claims and the contribution
+- [ ] Each has boundary conditions stated and names the value it serves
+- [ ] Key concepts are defined as declared starting points (not assumed)
 - [ ] Reasoning is explicit (not "it follows that..." without warrant)
-- [ ] Alternative explanations engaged with
-- [ ] Scope not overgeneralized beyond what the arguments support
+- [ ] Objections engaged with
+- [ ] Scope not overgeneralized beyond what its grounds support
 - [ ] Novel framework components written at EMERGING or lower (not ESTABLISHED/SUPPORTED unless validated)
 - [ ] No capability claims ("teachable", "assessable", "measurable") without empirical evidence
 
 ### General
 - [ ] Nuances and contradictions acknowledged
-- [ ] Discussion/Conclusion entries use the prose patterns (grounds → warrant → qualifier → conclusion → rebuttal)
+- [ ] Claims on `claim:` grounds use the prose pattern (grounds → warrant → qualifier → claim → rebuttal)
 - [ ] All entries traceable to registry IDs
 
 ---

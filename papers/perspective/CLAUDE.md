@@ -1,12 +1,12 @@
-# The Verification Gap: Why AI-Augmented Academic Writing Needs Reporting Guidelines for Reasoning
+# The Verification Gap: Checking the Reasoning in AI-Assisted Academic Writing
 
-This paper argues that the scholarly community lacks verification infrastructure for non-empirical papers written with AI assistance. Citation checkers and grounded generation address factual accuracy, but argument quality — warrant validity, confidence calibration, boundary conditions — has no structured reporting framework. EQUATOR covers empirical papers (~700 guidelines); nothing covers the rest.
+This commentary argues that AI-assisted non-empirical papers need their reasoning checked, not only their citations. EQUATOR lists about 700 reporting guidelines for empirical health research; no consensus checklist was found for verifying the reasoning of non-empirical papers.
 
-**Core Argument:** AI writing tools are proliferating and citation checkers exist, but the scholarly infrastructure for verifying *argument quality* — not just factual accuracy — is missing. We propose typed verification (CLAIM/ARGUMENT/PROPOSITION) with per-type checklists adapted from Toulmin and Whetten.
+**Core Argument:** The vocabulary for such a checklist already exists. Toulmin's layout treats every assertion as a claim resting on grounds through a warrant, with a qualifier; Whetten's criteria judge a theoretical contribution as a whole. The paper proposes: register each claim with what it rests on, check each item by its kind, and check the contribution once. It applies the procedure to itself and reports no evaluation.
 
-- **Target:** Learned Publishing (primary), Research Integrity and Peer Review (backup)
+- **Target:** Learned Publishing, Opinion (1,000–4,000 words; decided 2026-10-16 after four model reviews), Research Integrity and Peer Review Comment (backup)
 - **Deadline:** TBD
-- **Status:** Phase 3 — Writing (first draft complete)
+- **Status:** Phase 3 — Writing (draft 2 on branch `v5-migration`, 2026-10-16; draft 1 = tag `paper1-draft-1`)
 - **agent-ready-papers:** v4.3.0 <!-- A number, not a status. Bump deliberately after reading UPGRADING.md. v4.2.0 -> v4.3.0 reconciled 2026-10-12: no required item; the new tools are optional and the wording change alters no rule. Still not taken: the optional readability template and DR-019's Step Z scope line. v4.0.0's P0 floor is the known red gate (#38). Earlier reconciliation notes: git history. -->
 
 <!-- This paper lives inside the framework repo, so the pin above tracks the
@@ -17,9 +17,9 @@ This paper argues that the scholarly community lacks verification infrastructure
 
 ## Core Concept
 
-EQUATOR Network maintains ~700 reporting guidelines for empirical health research (CONSORT, STROBE, PRISMA, etc.). Essentially zero guidelines exist for non-empirical paper types — theoretical, design science, perspective, methodological. Gregor's (2006) five theory types include two (Type I: analytic, Type V: design) that are fundamentally non-empirical. For these papers, *argument quality* — not factual accuracy — is the primary verification challenge.
+The gap (S2-1, S2-2, EMERGING) is stated above. Gregor's (2006) five theory types include two (Type I: analytic, Type V: design) that are largely non-empirical (S2-3a/b). For these papers, *argument quality*, not factual accuracy, may be the primary verification challenge (S2-4, EMERGING).
 
-We propose a typed verification model: CLAIMs (source-verifiable facts), ARGUMENTs (Toulmin-verified reasoning chains), and PROPOSITIONs (Whetten-verified recommendations with boundary conditions). Each type has distinct verification procedures and confidence criteria. This paper uses the framework it describes.
+The proposal is DR-027's model. Every statement the paper puts forward and supports is a claim, recording what it says (descriptive or normative) and its grounds item by item: sources, other claims, declared starting points, own work. The checks follow the items (source check, warrant check), and the contribution is checked once with Whetten's questions (validation). This paper uses the framework it describes.
 
 ## Session Continuity
 
@@ -38,7 +38,7 @@ We propose a typed verification model: CLAIMs (source-verifiable facts), ARGUMEN
 
 | When | Read |
 |------|------|
-| Writing or editing prose | `writing-guide.md` — claim-to-section mapping with language calibration |
+| Writing or editing prose | `glossary.md` (this paper's terms; framework terms in `../../docs/glossary.md`, DR-027/028), then `writing-guide.md` — claim-to-section mapping with language calibration |
 | Writing or editing prose for a reader | The maintainer's private house-voice profile (maintainer-local; ask for it), then `make formula-scan` from the repo root (tier language in `writing-guide.md` still wins) |
 | Adding or verifying citations | `vv/claims/claim_registry.md` — all claims with priority and status |
 | Checking coverage or DOIs for this paper | From repo root: `python -m tools.coverage papers/perspective/vv/claims/claim_registry.md` and `python -m tools.check_dois papers/perspective/vv/claims/claim_registry.md` (or `make coverage` / `make check-dois`). Prefer the tool to manually counting P0/P1/P2 percentages or eyeballing DOIs in `references.bib`. See `../../tools/README.md` for flags and known limits. |
@@ -93,8 +93,8 @@ papers/perspective/
 ## Methodology
 
 This project uses the agent-ready-papers verification framework — the same framework this paper describes:
-- **Claims** registered and tracked with priority levels (P0/P1/P2)
-- **Typed verification:** CLAIMs (source check), ARGUMENTs (Toulmin), PROPOSITIONs (Whetten)
+- **Claims** registered with what they say and their typed grounds, tracked with priority levels (P0/P1/P2); declared starting points D1–D8 and contribution C1 in their own tables
+- **Checks by grounds** (DR-027): source check per `src:`, warrant check (Toulmin) for `claim:` grounds, contribution check (Whetten) for C1
 - **Confidence tiers** (ESTABLISHED / SUPPORTED / EMERGING / SPECULATIVE) mapped to language
 - **Anti-hallucination checklist** for all AI-introduced citations
 - **Decision records** for all scope/methodology choices

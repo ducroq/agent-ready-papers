@@ -35,3 +35,7 @@ Concrete touchpoints:
 ## Open Questions
 - Does the metric generalise to a manuscript's own arguments, or does it depend on review-comment structure? Determines "tool to adopt" versus "baseline to cite".
 - Is an implementation released? A usable warrant scorer would change `templates/vv-framework.md` §4 from wholly manual to partly mechanical, which is a larger change than a citation.
+
+## Update 2026-10-16 (S3-1 tier review)
+- Still a preprint: the arXiv record (v1) carries no venue or journal reference, and no ACL Anthology entry was found. It therefore does not count toward DR-002's peer-reviewed sources for S3-1.
+- Verified quote (PDF p. 1): "the presence of claim and evidence pairs alone does not ensure a comprehensive evaluation of the quality of review comments".

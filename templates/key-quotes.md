@@ -19,7 +19,7 @@
 - When a source uses **precise language** that would be weakened by paraphrasing
 - When a finding includes **exact numbers, effect sizes, or statistical results**
 - When an author states a position that your paper **agrees with or responds to**
-- When a quote will serve as **grounds for an ARGUMENT** in the Discussion
+- When a quote will serve as **`src:` grounds for a claim** in the Discussion, or as **backing** for a warrant
 
 ## How to Cite Page Numbers
 

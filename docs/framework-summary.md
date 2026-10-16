@@ -5,29 +5,32 @@
      calibration. Normative source remains the templates — this file
      summarises so CLAUDE.md doesn't have to. -->
 
-## Registry Unit Types
+## The Claim Model (DR-027)
 
-Three default types, each with a structured verification procedure:
+Every statement the paper puts forward and supports is a **claim**. Each records what it **says** (descriptive or normative) and its **grounds**, item by item; the checks follow the items. Terms: `docs/glossary.md`.
 
-| Type | Question | Framework |
-|------|----------|-----------|
-| CLAIM | Does the source say this? | Citation checking + anti-hallucination |
-| ARGUMENT | Is the reasoning valid? | Toulmin (claim, grounds, warrant, backing, qualifier, rebuttal) |
-| PROPOSITION | Are conditions specified? | Whetten (What/How/Why/Who-Where-When, boundary conditions) |
+| Grounds item | Check | Framework |
+|--------------|-------|-----------|
+| `src:` a source | Source check: it exists; it says what is attributed | Citation checking + anti-hallucination |
+| `claim:` another claim | Warrant check: does the step hold for the audience? | Toulmin (claim, grounds, warrant, backing, qualifier, rebuttal) |
+| `decl:` a declared starting point | Stated in the text, contestedness recorded | Assumption, definition or value |
+| `own:` own work | A method someone else could repeat | DR-008 |
 
-For papers with quantitative content, a fourth verification procedure (not a registry unit type):
+A normative claim also needs boundary conditions and a declared value. Each **contribution** is a root claim: P0, tier no higher than its weakest supporting claim, checked once by the **contribution check** (Whetten: What/How/Why/Who-Where-When). Per-claim checks are verification; the contribution check is validation. DR-004 registries (CLAIM / ARGUMENT / PROPOSITION sub-tables) are read as aliases through v5.x; removal no earlier than v6.0.0.
 
-| Type | Question | Framework |
-|------|----------|-----------|
-| CALCULATION | Does the result follow from the formula? | Numerical reproduction (equation-checker) |
+For claims whose grounds include a computation (a procedure, not a registry unit):
 
-For speculative-design / design-fiction / diegetic-prototype work, an opt-in fifth registry unit type (see DR-010):
+| Procedure | Question | Framework |
+|-----------|----------|-----------|
+| Calculation verification | Does the result follow from the formula? | Numerical reproduction (equation-checker) |
+
+For speculative-design / design-fiction / diegetic-prototype work, an opt-in table of provocations, which make no truth claim (see DR-010):
 
 | Type | Question | Framework |
 |------|----------|-----------|
 | PROVOCATION | Plausible, generative, reflexive, ethically held? | Auger 2013 four criteria; separate confidence axis (GROUNDED / EXTRAPOLATED / PROVOCATIVE / CRITICAL) with required prose markers |
 
-Normative source: `templates/vv-framework.md` §1 + §4.1; `templates/claim-registry.md` Unit Type Reference.
+Normative source: `templates/vv-framework.md` §1 + §4.1; `templates/claim-registry.md` Registry Conventions and Checks.
 
 ## Quality Gates
 
@@ -52,7 +55,7 @@ Normative source: `templates/vv-framework.md` §7.
 
 ## Confidence Tiers → Language
 
-For CLAIM / ARGUMENT / PROPOSITION:
+For claims and contributions (the qualifier must stay within the tier):
 
 | Tier | Language examples |
 |------|-----------------|
@@ -72,11 +75,11 @@ For PROVOCATION (separate axis — quality of speculation, not strength of evide
 
 Normative source: `templates/writing-guide.md` Language Calibration; `templates/claim-registry.md` Confidence Tier Reference.
 
-**Tier-monotonicity** is the one rule the table is an instance of: *prose language tier ≤ the registered confidence tier for the same entry.* Citation drift, overclaiming, and Step Z are all the same failure — language climbing above the evidence. Normative source: `templates/writing-guide.md` → "The Underlying Principle".
+**Tier-monotonicity** is the one rule the table is an instance of: *prose language tier ≤ the registered confidence tier for the same entry*; in the registry, a claim's tier ≤ its weakest `claim:` ground. Citation drift, overclaiming, and Step Z are all the same failure — language climbing above the evidence. Normative source: `templates/writing-guide.md` → "The Underlying Principle".
 
 ## Cross-Cutting Checks
 
-Two checks apply across unit types rather than to one type (both verification passes, not registry entries):
+Two checks apply to every entry, whatever its grounds (both verification passes, not registry entries):
 
 | Check | Question | Scope | Normative source |
 |-------|----------|-------|------------------|

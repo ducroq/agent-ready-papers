@@ -1,0 +1,12 @@
+E7	epmc_cited	TITLE_ABS:("reporting guideline" OR "reporting guidelines" OR "reporting checklist") AND TITLE_ABS:(conceptual OR theoretical OR perspective OR "position paper" OR argument OR reasoning OR opinion OR commentary OR editorial OR essay)
+E8	epmc_cited	TITLE_ABS:("reporting guideline" OR "reporting guidelines" OR checklist) AND TITLE_ABS:("non-empirical" OR "nonempirical" OR "theoretical papers" OR "conceptual papers" OR "opinion papers" OR "position papers" OR "perspective articles")
+E9	epmc_cited	TITLE_ABS:("text and opinion" OR "opinion papers" OR "expert opinion papers") AND TITLE_ABS:(appraisal OR checklist OR tool)
+E10	epmc_cited	TITLE_ABS:("narrative review" OR "narrative reviews") AND TITLE_ABS:("reporting guideline" OR "quality assessment" OR "appraisal tool" OR checklist OR "scale")
+E11	epmc_cited	TITLE_ABS:("concept analysis") AND TITLE_ABS:("reporting" OR checklist OR "quality appraisal" OR guideline)
+E12	epmc_cited	TITLE_ABS:(argument OR argumentation OR warrant OR "logical reasoning") AND TITLE_ABS:(checklist OR "reporting guideline" OR "appraisal tool") AND TITLE_ABS:(manuscript OR "scientific paper" OR "scholarly" OR "journal article")
+O6	openalex_title	conceptual papers||
+O7	openalex_title	theoretical papers||review OR evaluate OR criteria OR guidelines
+O8	openalex_title	reporting guideline||theoretical OR conceptual OR argument OR non-empirical
+O9	openalex_title	argument quality||manuscript OR paper OR review
+A1	arxiv	all:"reporting guideline" AND (all:argument OR all:reasoning OR all:conceptual OR all:theoretical)
+A2	arxiv	all:checklist AND all:argument AND (all:manuscript OR all:"scientific paper" OR all:"position paper")
