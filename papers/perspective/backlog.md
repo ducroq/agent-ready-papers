@@ -37,6 +37,9 @@ Tiers were re-derived from DR-002; the registry header states the consequence. D
 - [x] Writing guide cleaned of the scrubbed audits and the withdrawn S4-1/S4-2/S4-4 (2026-09-26)
 - [ ] S5-1 cites "AI writing amplifies the verification challenge" (manuscript §5 opening and appendix *Why*; registry Reasoning) with no registered premise behind it — register a Section 1 premise or drop the clause (pre-existing; surfaced by review 2026-09-26)
 
+### Draft 2 review (2026-10-16) → draft 3
+Four model referees reviewed `paper1-draft-2`. Their shared finding is a framework flaw: the counting rule caps every inference at Emerging, so every argument-based paper fails the P0 gate. Next: a DR that derives an inference's tier from its warrant check, then a narrower draft 3 (register makes reasoning visible; prior work and a comparison first; warrant check with content). Pilot with other users parked.
+
 ### Draft 1 feedback (maintainer, 2026-10-16, on `paper1-draft-1` = `e7e444d`)
 Source: `feedback/2026-10-16_e7e444d.txt` (gitignored: keep it local). Page numbers refer to the draft-1 PDF. Triaged by Claude; findings checked against the manuscript are marked *checked*.
 
