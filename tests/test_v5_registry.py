@@ -140,8 +140,9 @@ def test_a_row_whose_id_matches_no_pattern_is_reported_not_dropped(tmp_path, fir
     )
     report = check_registry(write(tmp_path, old))
     hits = [f for f in report.findings if "matches no entry-ID pattern" in f.message]
-    assert len(hits) == 1 and hits[0].severity == "finding"
-    assert report.ok is False
+    # A DR-004 table: reported as a note, so an unmigrated registry keeps master's exit code.
+    assert len(hits) == 1 and hits[0].severity == "note"
+    assert report.ok is True
 
 
 def test_unmatched_id_is_reported_in_new_tables_too(tmp_path):
@@ -451,7 +452,7 @@ def test_contribution_anchor_tier_disagreement_is_found(tmp_path):
     [
         (None, "not found"),
         ("  \n\n", "empty"),
-        ("# Glossary\n\n**Paper:** [Title]\n", "template placeholder"),
+        ("# Glossary\n\n**Paper:** [Title]\n", "template's placeholders"),
     ],
 )
 def test_glossary_missing_empty_or_template_is_a_finding(tmp_path, content, needle):

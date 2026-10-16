@@ -104,6 +104,7 @@ from tools.coverage import (
     _split_row,
     deprecation_notes,
     marker_kind,
+    near_miss_markers,
     says_unit_type,
 )
 
@@ -142,21 +143,47 @@ _TEX_MACRO_REGEX = re.compile(r"\\[a-zA-Z]+\*?(\[[^\]]*\])?")
 # Tier-carrying IDs only: a declared starting point has no tier to print.
 _ID_TOKEN_REGEX = re.compile(r"(?<![\w-])(?:S\d+-\d+[a-z]?|C\d+)(?![\w-])")
 ENTRY_ID_REGEX = re.compile(rf"^{_ID}$")
+DR004_KINDS = ("CLAIM", "ARGUMENT", "PROPOSITION")
 _INPUT_REGEX = re.compile(r"\\(input|include)(?:\s*\{([^{}]+)\}|\s+([^\s{}\\]+))")
 _INPUT_PATH_REGEX = re.compile(r"\\def\s*\\input@path\s*\{((?:\{[^{}]*\})+)\}")
-_PREMISE_ID_REGEX = re.compile(rf"(?<![\w-]){_ID}(?![\w-])")
+# DR-004 Grounds / Premises are free text: only S-IDs are references there, as
+# before v5.0.0 (`Smith's model C2` is not a premise). A suffix (`S2-3a`) is read
+# only when it ends the token, so every master match still matches.
+_PREMISE_ID_REGEX = re.compile(r"S\d+-\d+(?:[a-z](?!\w))?")
 # A DR-027 grounds / Rests-on item: `src: Author Year`, `claim: S1-2`, `decl: D1`,
 # or `own: <method or query>` (the author's own observation, experiment or measurement;
 # not a reference, not a graph edge, not a source).
 _GROUNDS_ITEM_REGEX = re.compile(r"^(src|claim|decl|own)\s*:\s*(.*)$", re.IGNORECASE | re.S)
 _MISSING_VALUES = {"", "-", "--", "—", "TBD", "N/A"}
+_TYPED_ITEM_START = re.compile(r"^\s*(src|claim|decl|own)\s*:", re.IGNORECASE)
 DR027 = "DR-027"
 DR004 = "DR-004"
 DECLARED_KINDS = ("assumption", "definition", "value")
 CONTESTEDNESS = ("accepted", "contested", "own")
 # The ID prefix each DR-027 table holds.
 _TABLE_ID_PREFIX = {CLAIMS_TABLE: "S", CONTRIBUTIONS_TABLE: "C", DECLARED_TABLE: "D"}
-GLOSSARY_PLACEHOLDER = "**Paper:** [Title]"
+# Placeholder tokens of templates/glossary.md (DR-028: a glossary that still
+# contains any of them was copied, not filled in). Prefixes where the template's
+# bracket carries an example (`[Domain 1]`, `[meaning in field A]`).
+GLOSSARY_PLACEHOLDERS = (
+    "[Title]",
+    "[e.g., metrology",
+    "[Domain ",
+    "[term]",
+    "[formal definition]",
+    "[VIM",
+    "[accessible explanation]",
+    "[definition]",
+    "[field]",
+    "[disambiguation",
+    "[notes]",
+    "[meaning in field",
+    "[which meaning",
+    "[abbr]",
+    "[full form]",
+    "[date]",
+    "[N]",
+)
 _VERIFIED_REGEX = re.compile(r"^\s*\[\s*x\s*\]", re.IGNORECASE)
 
 # Strongest first. A conclusion may not outrank its weakest premise.
@@ -369,15 +396,40 @@ def _walk_registry(content: str) -> tuple[tuple[Entry, ...], list[Finding]]:
     (`| **PART TWO** |`, nothing after its first cell) is the only row skipped.
     """
     entries: list[Entry] = []
-    unmatched: list[Finding] = []
+    unmatched: list[Finding] = [
+        Finding(
+            "schema",
+            "finding",
+            "",
+            f"registry line {n}: near-miss marker `{text}` — a known table name in marker shape that is not "
+            "a recognised marker, so its table is read by nothing",
+        )
+        for n, text in near_miss_markers(content)
+    ]
     unit_type: str | None = None
     header: list[str] | None = None
+    mixed_flagged = False
+
+    def dr027_under_dr004(lineno: int, why: str) -> None:
+        nonlocal mixed_flagged
+        if not mixed_flagged:
+            mixed_flagged = True
+            unmatched.append(
+                Finding(
+                    "schema",
+                    "finding",
+                    "",
+                    f"registry line {lineno}: DR-027 table under a DR-004 marker ({why}) — it is checked under "
+                    "DR-004's rules, so none of the DR-027 rules run; use `**Claims:**`",
+                )
+            )
 
     for lineno, line in enumerate(content.splitlines(), start=1):
         marker = _MARKER_REGEX.match(line)
         if marker:
             unit_type = marker_kind(marker)
             header = None
+            mixed_flagged = False
             continue
         if unit_type is None:
             continue
@@ -396,13 +448,34 @@ def _walk_registry(content: str) -> tuple[tuple[Entry, ...], list[Finding]]:
             continue
         if header is None:
             header = [c.lower() for c in cells]
+            if unit_type in DR004_KINDS:
+                dr027_cols = [c for c in ("says", "rests on", "contestedness") if c in header]
+                if dr027_cols:
+                    dr027_under_dr004(lineno, f"its header has {', '.join(dr027_cols)}")
+            continue
+        if len(cells) > len(header):
+            # As in tools.coverage: GFM discards the excess cells and every
+            # column read from this row would shift. Report, never mis-read.
+            unmatched.append(
+                Finding(
+                    "schema",
+                    "finding",
+                    cells[0][:40],
+                    f"registry line {lineno}: row has {len(cells)} cells but the header defines {len(header)} — "
+                    "an unescaped `|` (escape it as `\\|`, also inside backticks) shifts every column, so this "
+                    "row was NOT checked",
+                )
+            )
             continue
         if not cells or not ENTRY_ID_REGEX.match(cells[0]):
             if any(cells[1:]):
+                # DR-004 tables: a note, so an unmigrated registry keeps its exit
+                # code; DR-027 tables: a finding.
+                new_table = unit_type in _TABLE_ID_PREFIX
                 unmatched.append(
                     Finding(
                         "schema",
-                        "finding",
+                        "finding" if new_table else "note",
                         cells[0][:40],
                         f"registry line {lineno}: row has content but its ID `{cells[0][:40] or '(blank)'}` "
                         "matches no entry-ID pattern (S<n>-<n>, S<n>-<n>a, C<n>, D<n>), so no check reads it",
@@ -418,6 +491,8 @@ def _walk_registry(content: str) -> tuple[tuple[Entry, ...], list[Finding]]:
             entries.append(_new_schema_entry(cells[0], unit_type, columns, lineno))
             continue
         premise_text = columns.get("premises", "") or columns.get("grounds", "")
+        if unit_type in DR004_KINDS and any(_TYPED_ITEM_START.match(i) for i in premise_text.split(";")):
+            dr027_under_dr004(lineno, "its Grounds hold typed `src:` / `claim:` / `decl:` / `own:` items")
         entries.append(
             Entry(
                 entry_id=cells[0],
@@ -547,10 +622,48 @@ def _relocate(message: str, origins: list[tuple[str, int]]) -> str:
     return "`".join(_LINE_REF_REGEX.sub(_sub, p) if k % 2 == 0 else p for k, p in enumerate(parts))
 
 
+def _decl_anchor_findings(entries: tuple[Entry, ...], manuscript: str) -> list[Finding]:
+    """`% D1: label (KIND, CONTESTEDNESS)` must agree with the D row's Kind and Contestedness.
+
+    Compared by first word, case-insensitive, as the schema check reads them
+    (`accepted in the field` is `accepted`). An anchor without a two-part
+    trailing parenthesis is not compared, and not noted: D anchors carry no tier.
+    """
+    rows = {e.entry_id: e for e in entries if e.unit_type == DECLARED}
+    findings: list[Finding] = []
+    for lineno, line in enumerate(manuscript.split("\n"), start=1):
+        match = _ANCHOR_LINE_REGEX.match(line)
+        if not match or not match.group(1).startswith("D") or match.group(1) not in rows:
+            continue
+        entry_id, rest = match.groups()
+        parts: list[str] = []
+        for paren in _ANCHOR_PAREN_REGEX.finditer(rest):
+            candidate = [x.strip() for x in paren.group(1).split(",")]
+            if len(candidate) == 2 and _AFTER_ANCHOR_PAREN_REGEX.match(rest, paren.end()):
+                parts = candidate
+                break
+        if not parts:
+            continue
+        row = rows[entry_id]
+        for label, column, anchored_value in (("Kind", "kind", parts[0]), ("Contestedness", "contestedness", parts[1])):
+            registered_value = row.columns.get(column, "")
+            if _first_word(anchored_value) != _first_word(registered_value):
+                findings.append(
+                    Finding(
+                        "anchors",
+                        "finding",
+                        entry_id,
+                        f"manuscript anchor at line {lineno} gives {label} `{anchored_value}`, the registry row "
+                        f"`{registered_value.strip() or '(blank)'}` — the copies differ",
+                    )
+                )
+    return findings
+
+
 def _check_anchors(entries: tuple[Entry, ...], manuscript: str) -> tuple[list[Finding], int]:
     anchored = set(ANCHOR_REGEX.findall(manuscript))
     registered = {e.entry_id for e in entries}
-    findings: list[Finding] = []
+    findings: list[Finding] = _decl_anchor_findings(entries, manuscript)
 
     for entry_id in sorted(registered - anchored):
         findings.append(
@@ -852,11 +965,11 @@ def _schema_dr027(entry: Entry, by_id: dict[str, Entry]) -> list[str]:
             out.append(
                 f"{grounds_col} item `{value[:60]}` is untyped — prefix it with `src:`, `claim:`, `decl:` or `own:`"
             )
-        elif kind == "own":
+        elif kind == "own" and not is_contribution:
             if not value:
                 out.append("a bare `own:` item names no method or query — write e.g. `own: corpus count, query Q1`")
-        elif kind == "src" and is_contribution:
-            out.append(f"Rests on lists `src: {value[:60]}`; a contribution rests on `claim:` and `decl:` items")
+        elif kind in ("src", "own") and is_contribution:
+            out.append(f"Rests on lists `{kind}: {value[:60]}`; a contribution rests on `claim:` and `decl:` items")
         elif kind == "src" and not value:
             out.append("a bare `src:` item names no source")
         elif kind in ("claim", "decl") and not ENTRY_ID_REGEX.match(_clean_id(value)):
@@ -883,6 +996,20 @@ def _check_schema(entries: tuple[Entry, ...]) -> tuple[list[Finding], int]:
     findings: list[Finding] = []
     examined = 0
     by_id = {e.entry_id: e for e in entries}
+    seen: dict[str, int] = {}
+    for entry in entries:
+        if entry.entry_id in seen:
+            findings.append(
+                Finding(
+                    "schema",
+                    "finding",
+                    entry.entry_id,
+                    f"duplicate ID: registry lines {seen[entry.entry_id]} and {entry.line_number} — every "
+                    "reference to it, and every tier copy, is ambiguous",
+                )
+            )
+        else:
+            seen[entry.entry_id] = entry.line_number
     for entry in entries:
         if entry.schema == DR027:
             examined += 1
@@ -1097,13 +1224,16 @@ def _check_glossary(path: Path) -> list[Finding]:
         return [Finding("glossary", "finding", "", f"glossary file could not be read ({exc.__class__.__name__}): {path}")]
     if not text.strip():
         return [Finding("glossary", "finding", "", f"glossary file is empty: {path}")]
-    if GLOSSARY_PLACEHOLDER in text:
+    left = [token for token in GLOSSARY_PLACEHOLDERS if token in text]
+    if left:
         return [
             Finding(
                 "glossary",
                 "finding",
                 "",
-                f"glossary still carries the template placeholder `{GLOSSARY_PLACEHOLDER}` — it was copied, not filled in",
+                "glossary still contains the template's placeholders ("
+                + ", ".join(f"`{t}`" for t in left)
+                + ") — copied, not filled in",
             )
         ]
     return []
