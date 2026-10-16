@@ -20,7 +20,7 @@ were released — re-derive with `ls tools/*.py` rather than trusting the count 
 
 **Implemented and tested.** Both parsers landed and verified against the Paper 1 fixture (19 entries, 9 DOIs); pytest suite is green; live HEAD-against-`doi.org` confirms all 9 DOIs resolve. Two DR-011 review batteries applied (one for the scaffold, one for the parser). Closes [#17](https://github.com/ducroq/agent-ready-papers/issues/17).
 
-## Registry tables (DR-027, Proposed) and the DR-004 aliases
+## Registry tables (DR-027) and the DR-004 aliases
 
 Both parsers read a table only directly under a bold marker on its own line:
 

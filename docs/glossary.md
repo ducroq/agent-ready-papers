@@ -102,7 +102,7 @@ Whetten's seven reviewer questions (What's new? So what? Why so? Well done? Done
 | **gate** | A checkpoint a paper must pass before the next phase (`templates/vv-framework.md`). | Unchanged. |
 | **Step Z** | The check that a sentence's language does not outrun the tier its evidence actually supports, which also catches a wrongly registered tier (`templates/anti-hallucination.md`; scope: every surface that states claims, DR-019). | Unchanged. |
 
-## 7. From DR-004 terms to this glossary *(proposed, DR-027)*
+## 7. From DR-004 terms to this glossary (DR-027)
 
 | DR-004 term | Becomes | Why |
 |---|---|---|
