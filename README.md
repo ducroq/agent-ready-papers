@@ -153,6 +153,19 @@ The full template index is in the [Templates](#templates) section near the botto
 
 > **From here down: implementation detail.** The sections below explain how each piece works for adopters actually setting up.
 
+### What this repository does not ship
+
+These paths are gitignored or live outside the repository, so a clone does not have them:
+
+| Path | Why absent | For adopters |
+|------|-----------|--------------|
+| `.claude/review-profile.md` | Gitignored | Required if you use `/review-changes`. Copy agent-ready-projects' review-profile template and fill in *your* paths. An unmatched path is reported as unclassified, not LOW. |
+| `.claude/skills/release/` | Gitignored; project-local | Optional |
+| `~/.claude/skills/{curate,audit-context,update-drift,review-changes}/` | Outside this repo (user-global) | Install with agent-ready-projects' global-skills installer script. Install from a clone's `.claude/skills/<name>/SKILL.md`, never from `templates/<name>.md`, and never into your paper repo. A working install's first line is `---`. |
+| `memory/` | Maintainer state, gitignored | Keep your own; your paper's CLAUDE.md holds the equivalent state |
+| `audits/` <!-- placeholder --> | Reserved path, currently absent | Stays private if recreated: audits may critique named authors |
+| `docs/work-items/` | Gitignored; created on demand | Optional: savepoints for multi-session work |
+
 ## Verification Registry: The Foundation
 
 The registry follows one model ([DR-027](decisions/DR-027_toulmin-whetten-verification-model.md); terms in [`docs/glossary.md`](docs/glossary.md)). Every statement the paper puts forward and supports is a **claim**. Each claim records **what it says** (descriptive or normative) and its **grounds**, item by item. The checks follow the items:

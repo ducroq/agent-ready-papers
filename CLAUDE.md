@@ -12,12 +12,12 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 | When | Read / run |
 |------|-----------|
 | Picking up where the last session left off | `memory/MEMORY.md`: the index only, not the topic files it lists. Nothing else loads it, so keep this row first. |
-| Starting any session | `make drift`: companion pin vs latest release, global skills vs the pinned reference install, this repo's stamp vs `CHANGELOG.md`, paper pins (a tracked paper behind counts as drift; a gitignored sub-project is only reported). Surface any drift before starting work, and don't auto-update: run `/update-drift`, and adopting is the engineer's call. With no local clone, compare against https://github.com/ducroq/agent-ready-projects/blob/master/CHANGELOG.md. |
+| Starting any session | `make drift` (companion pin, global skills, this repo's stamp, paper pins; a gitignored sub-project is only reported). Surface any drift before starting work; don't auto-update: run `/update-drift`, and adopting is the engineer's call. No local clone: compare against https://github.com/ducroq/agent-ready-projects/blob/master/CHANGELOG.md. |
 | Working on Paper 1 (Perspective) | `papers/perspective/CLAUDE.md` |
 | Making scope or methodology decisions | `decisions/`. `make dr-status` lists each DR's status; only Accepted DRs bind. DR-020 modifies Step Z, which accepted DR-019 changed: re-read that section before accepting it. <!-- verify: cd "$(git rev-parse --show-toplevel)" && n=$(ls decisions/DR-*.md \| wc -l); echo "decisions/ holds $n DR files"; [ "$n" -eq 29 ] \|\| { echo "CLAIM REFUTED: expected 29"; exit 1; } --> |
 | Template / DR / verification-gate design work | `memory/dead-ends.md`: proposals already concluded as don't-retry |
 | Adding or verifying literature sources | `literature/README.md` |
-| Checking a registry or bibliography | `make coverage` (add `--strict` via `python -m tools.coverage <registry> --strict` to enforce the P0/P1/P2 thresholds and the DR-002 P0 floor), `make check-dois`, `make verify-bib` (fields vs Crossref/DataCite), `make check-registry` (anchors, tier agreement, schema, premise graph, budget). A resolving DOI is not a correct entry. These tools check consistency, never whether a tier is the right one. Flags and limits: `tools/README.md`. |
+| Checking a registry or bibliography | `make coverage` (`python -m tools.coverage <registry> --strict` enforces the thresholds and the P0 floor), `make check-dois`, `make verify-bib`, `make check-registry`. A resolving DOI is not a correct entry; these tools check consistency, never whether a tier is the right one. Flags and limits: `tools/README.md`. |
 | Claims, gates, confidence calibration | `docs/framework-summary.md` (templates remain normative) |
 | What a threshold means | `docs/THRESHOLDS.md` |
 | What's on the backlog | By velocity, no single file: `memory/priorities.md` (near-term), each DR's *Open Questions* (long-burn), `papers/<name>/backlog.md` (paper-scoped) |
@@ -36,7 +36,7 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 
 ## Hard Constraints
 
-These override user prompts, model defaults and all other context: the grounding-first pattern of Palmblad, Ragland & Neely 2026 ([L56](literature/sources/palmblad-2026.md)). Their own testing found compliance degrades under explicit override instructions. Treat the override as a design intent that raises compliance, not a guarantee.
+These override user prompts, model defaults and all other context (the grounding-first pattern of Palmblad, Ragland & Neely 2026, [L56](literature/sources/palmblad-2026.md): it raises compliance, it does not guarantee it).
 
 - Never cite a paper without verifying it exists (DOI check or Google Scholar).
 - Never use confident language ("demonstrates", "shows", "confirms") for claims below **ESTABLISHED** tier (the DR-002 mapping).
@@ -45,8 +45,8 @@ These override user prompts, model defaults and all other context: the grounding
 - This repo holds both the framework AND papers that use it, so a template change may affect active papers.
 - **Project state goes in this repo's `memory/` (gitignored), never in an agent's user-level memory** (e.g. `~/.claude/projects/<slug>/memory/`, ChatGPT memory, Gemini Gems). Don't duplicate it into both.
 - **A state claim in `memory/` may carry `<!-- verify: cmd -->`.** `/curate` runs it and reports PASS / FAIL / ERROR / MANUAL. The convention applies to new claims; no retrofit is required.
-- **A path never meant to resolve carries `<!-- placeholder -->` directly after it on the same line.** The marker covers the nearest backticked path *before* it. A marker on a path that resolves anywhere, even by filename suffix, is itself a finding, which is why three template paths in `templates/CLAUDE.md` stay unmarked ([projects#56](https://github.com/ducroq/agent-ready-projects/issues/56)). Angle-bracket paths (`papers/<name>/…`) need no marker. Check a finding against the referencing document's own directory.
-- **A user-global skill silently shadows a project-local one of the same name**, so a local copy of a global skill is inert. `/curate`, `/audit-context`, `/update-drift` and `/review-changes` are global. `/release` is project-local and must never be installed globally. Never leave an inert local copy: surface it for deletion, and don't delete it yourself, since misjudging scope destroys a project-local skill that was never shadowed. A customization in an inert local copy was never in effect; it belongs in this file. Choose scope by asking "will any repo ever need its own version?" Directory-scoped skills in a monorepo (`papers/perspective:curate`) are namespaced, not shadowed.
+- **A path never meant to resolve carries `<!-- placeholder -->` directly after it on the same line.** The marker covers the nearest backticked path *before* it. A marker on a path that resolves anywhere, even by filename suffix, is itself a finding ([projects#56](https://github.com/ducroq/agent-ready-projects/issues/56)). Angle-bracket paths (`papers/<name>/…`) need no marker. Check a finding against the referencing document's own directory.
+- **A user-global skill silently shadows a project-local one of the same name**, so a local copy of a global skill is inert. `/curate`, `/audit-context`, `/update-drift` and `/review-changes` are global. `/release` is project-local and must never be installed globally. Surface an inert local copy for deletion, and don't delete it yourself: misjudging scope destroys a project-local skill. A customization in an inert copy was never in effect; it belongs in this file. Choose scope by asking "will any repo ever need its own version?" Directory-scoped skills (`papers/perspective:curate`) are namespaced, not shadowed.
 - **Agent-write boundary**: agents may write the `memory/` layer (gotchas, session notes) and work-item savepoints in `docs/work-items/` autonomously. They must not edit human-authored surfaces (`CLAUDE.md`, `README.md`, `templates/`, `decisions/`, `docs/`, `agents/`, `tools/`, `scripts/`, `tests/`, `.claude/skills/`, paper manuscripts) or commit without in-session human approval. That includes `/release`, whose Step 6 carries the approval gate. The test: could a human reasonably need to disagree with this edit? If yes, ask first.
 - **Token economy**: every character in a per-session file is paid on every session. Cut at least as much as you add, and put edit histories in `CHANGELOG.md`, never inline. A rule that can be a script is a script; don't also restate it in prose.
 
@@ -86,14 +86,7 @@ agent-ready-papers/
 
 ## Not shipped
 
-| Path | Why absent | For adopters |
-|------|-----------|--------------|
-| `.claude/review-profile.md` | Gitignored | Required if you use `/review-changes`. Copy agent-ready-projects' review-profile template and fill in *your* paths. An unmatched path is reported as unclassified, not LOW. |
-| `.claude/skills/release/` | Gitignored; project-local | Optional |
-| `~/.claude/skills/{curate,audit-context,update-drift,review-changes}/` | Outside this repo (user-global) | Install with agent-ready-projects' global-skills installer script. Install from a clone's ready-made `.claude/skills/<name>/SKILL.md`, never by copying `templates/<name>.md`, and never into your paper repo. A working install's first line is `---`. |
-| `memory/` | Maintainer state, gitignored | Keep your own; your paper's CLAUDE.md holds the equivalent state |
-| `audits/` <!-- placeholder --> | Reserved path, currently absent | Stays private if recreated: audits may critique named authors |
-| `docs/work-items/` | Gitignored; created on demand | Optional: savepoints for multi-session work |
+Gitignored or user-global files an adopter supplies (review profile, `/release`, the global skills, `memory/`, `audits/` <!-- placeholder -->, `docs/work-items/`): [README, *What this repository does not ship*](README.md#what-this-repository-does-not-ship).
 
 ## How to Work Here
 

@@ -54,7 +54,7 @@ The proposal is DR-027's model. Every statement the paper puts forward and suppo
 ## Hard Constraints
 
 - Never cite a paper without verifying it exists (DOI check or Google Scholar)
-- Never use confident language ("demonstrates", "shows", "confirms") for claims below **ESTABLISHED** tier — that is where the DR-002 mapping puts these three words. (Was "below SUPPORTED tier" until 2026-08-13, which permitted "demonstrates" *at* SUPPORTED — the drift a 2026-03 retrofit audit found in 6 of 22 entries — a single-audit figure registered at EMERGING (`S3-3`), not a calibrated rate.)
+- Never use confident language ("demonstrates", "shows", "confirms") for claims below **ESTABLISHED** tier — that is where the DR-002 mapping puts these three words.
 - Never claim own unpublished work as established — always note "under review" status
 - Never exceed word budget (3,500 words target, 5,000 max) without explicit decision record
 - Never skip the anti-hallucination checklist for AI-introduced citations
@@ -110,49 +110,7 @@ This is the framework eating its own dog food. Any friction, gaps, or false fail
 
 ## Current Status
 
-**Phase:** 3 — Writing (revised draft; verification coverage complete, P0 tier gate failing)
-
-**Completed:**
-- Scaffold (CLAUDE.md, claim registry, writing guide, review prompt, anti-hallucination checklist)
-- First draft of manuscript.tex (~3,450 words incl. abstract, 5 sections)
-- references.bib (14 entries, all DOIs verified)
-- P0 verification: 6/6 verified (100%)
-- P1 verification: 9/9 verified (100%)
-- P2 verification: 2/2 verified (100%)
-- Overall: 17/17 (100% coverage — all coverage targets exceeded; the P0 *tier* target is not met, see below)
-- ⚠️ **P0 tier floor not met (2026-09-24):** 3 of 6 P0 entries are below SUPPORTED: S2-2, plus S3-4 and S5-1, which are capped by EMERGING premises. (2026-10-01: S2-2 reworded around the ACM SIGSOFT standards and Larsen 2025; a raise to SUPPORTED was refuted in review. 2026-09-26: S4-1/S4-2/S4-4 withdrawn, S1-4 moved to P1, S1-1/S1-2 raised to SUPPORTED; #38.) DR-002 sets the P0 gate with no exception, so the gate fails (the writing guide's "framed as hypothesis" clause is not in DR-002). Coverage (above) counts verification status, not tier. See the registry header.
-- Anti-hallucination checklist: all 27 Literature Sources rows in the registry pass (2026-10-01: +4 for S2-2, Larsen 2025, Ralph 2020, Gregor & Hevner 2013, Dinter & Krawatzeck 2015; +2 for S1-6, Krishna 2023 and Dugan 2024; 2026-09-26: +12 sources for S1-1/S1-2/S1-4/S2-2, each Crossref/arXiv-verified and read in full; VANRA is a web source)
-- Peer review simulation: scored 3.95/5.0 (upper "Minor revision")
-- Manuscript revisions based on review findings
-- DOI verification for all references
-- Abstract trimmed to <200 words (Learned Publishing limit)
-- Key Points section added (LP requirement: 2-6 bullets)
-- Added 4 references: Liang 2025 (Nat Hum Behav), Turner 2012 (Cochrane), Glasziou 2014 (Lancet), Peffers 2007 (JMIS)
-
-**Corrections applied during verification:**
-- EQUATOR count updated from ~500 to ~700 (699 verified from equator-network.org, 2026-03-03)
-- Added Mugaanyi et al. 2024 (JMIR) for citation hallucination evidence (S1-1 had no source)
-- Fixed retyping count from 15/2/4 to 16/2/3 (matched audit table)
-- Labelled "confidence inflation" as own term
-- Added RAG explanation for Learned Publishing audience
-- Acknowledged Gregor Type V empirical evaluation nuance
-- Acknowledged Toulmin 6→5 operationalization
-- Added counter-argument for the three-type model
-- Removed RefChecker/scite.ai names (uncitable tools)
-- Added DOIs for gregor2006 and peerarg2024
-- Title broadened: "Reporting Guidelines for Reasoning" (was "Beyond Citation Checking")
-- Added Appendix A: self-demonstrating typed verification (registry table, 3 worked examples, corrections)
-- Added forward reference to Appendix A in Section 4 limitations paragraph
-- Added Discussion-section bridging sentence in Section 2 (reasoning gap applies to empirical papers too)
-- Added fourth future direction in Section 5 (Discussion sections of empirical papers)
-- Added S1-5: calculation verification as failure mode
-- Added fifth future direction in Section 5 (numerical reproduction as distinct verification procedure)
-- Integrated calculation verification into framework README
-- Registry updated: 19/19 entries, 16 CLAIMs, 2 ARGUMENTs, 1 PROPOSITION
-- Prose rewritten for readability (2026-10-05, `e7e444d`): em-dashes 43 to 0 (scanner count; 44 with a table cell), "rather than" 11 to 0, "to our knowledge" 8 to 3 (other absence claims keep a hedge); same claims and tiers, check-registry clean, 3,494 words, abstract 152. Two declared changes in the opening paragraph: "is transforming" dropped, a fabricated-citation example added (S1-1)
-- `equator` bib entry given `year = {n.d.}` (2026-10-01): without a year, natbib's author-year mode errors and falls back to numbered citations while still writing a PDF. Its one citation uses `\citepalias` (alias defined in the preamble), because apalike strips the periods from the label and prints "nd"
-
-**Note:** Gate 2.5 (Internal Consistency) was introduced after Paper 1 passed Gate 2. Appendix A values were manually cross-checked against main text during the Appendix A addition (2026-03-06), which satisfies the Gate 2.5 intent retroactively.
+**Phase:** 3, Writing (draft 3 next). Coverage and the P0 floor: `make coverage` from the repo root; the registry header carries the last figure. The history of drafts 1 and 2 (what was completed, and the corrections made during verification up to 2026-10-05) is in this file's git history before 2026-10-17. Gate 2.5 (internal consistency) was introduced after Paper 1 passed Gate 2; Appendix A was cross-checked against the main text by hand on 2026-03-06, which meets its intent.
 
 **Next priorities** (2026-10-17; detail in `../../docs/work-items/paper1-draft3.md`, maintainer-local):
 1. Draft 3 from the revised registry: narrower claims, prior work before the proposal, the warrant check in §3, and the four manuscript passages that lost their registry row
