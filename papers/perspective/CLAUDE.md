@@ -6,7 +6,7 @@ This commentary argues that AI-assisted non-empirical papers need their reasonin
 
 - **Target:** Learned Publishing, Opinion (1,000–4,000 words; decided 2026-10-16 after four model reviews), Research Integrity and Peer Review Comment (backup)
 - **Deadline:** TBD
-- **Status:** Phase 3 — Writing (draft 2 on branch `v5-migration`, 2026-10-16; draft 1 = tag `paper1-draft-1`)
+- **Status:** Phase 3, Writing: draft 2 is tag `paper1-draft-2` (2026-10-16); the registry was revised for draft 3 on 2026-10-17 (DR-029 trial). Plan and gaps: `../../docs/work-items/paper1-draft3.md` (maintainer-local)
 - **agent-ready-papers:** v4.3.0 <!-- A number, not a status. Bump deliberately after reading UPGRADING.md. v4.2.0 -> v4.3.0 reconciled 2026-10-12: no required item; the new tools are optional and the wording change alters no rule. Still not taken: the optional readability template and DR-019's Step Z scope line. v4.0.0's P0 floor is the known red gate (#38). Earlier reconciliation notes: git history. -->
 
 <!-- This paper lives inside the framework repo, so the pin above tracks the
@@ -154,11 +154,12 @@ This is the framework eating its own dog food. Any friction, gaps, or false fail
 
 **Note:** Gate 2.5 (Internal Consistency) was introduced after Paper 1 passed Gate 2. Appendix A values were manually cross-checked against main text during the Appendix A addition (2026-03-06), which satisfies the Gate 2.5 intent retroactively.
 
-**Next priorities:**
-1. Decisions A and B taken 2026-10-09 (see `backlog.md`): gap claim stays broad at EMERGING; next, draft the DR scoped in `backlog.md`, and add a manuscript sentence stating the gate result until it is accepted. Gate 3 review: by the maintainer unless a co-author is found; it should still cover the title change, Appendix A, S1-5 and the 2026-10-05 rewrite
-2. Decide submission article type: "Original Article" or "Opinion" (LP uses "Opinion" for perspective-type pieces)
-3. Pre-submission enquiry to LP editor (optional)
+**Next priorities** (2026-10-17; detail in `../../docs/work-items/paper1-draft3.md`, maintainer-local):
+1. Draft 3 from the revised registry: narrower claims, prior work before the proposal, the warrant check in §3, and the four manuscript passages that lost their registry row
+2. One outside helper: a second screener for S2-2's search and a migration by another person for S3-4 (task drafted, recipient open)
+3. P0 floor 3 of 6 (C1, S2-2, S3-4 EMERGING); DR-029 (Proposed) keeps it at 3 of 6 for evidential reasons, not because they are inferences
+4. Gate 3 review before submission: by the maintainer unless a co-author is found
 
 ---
 
-*Last updated: 2026-10-09*
+*Last updated: 2026-10-17*

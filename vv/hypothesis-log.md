@@ -28,7 +28,7 @@
 
 ### [2026-10-16] DR-029 predictions: Paper 1's three below-floor P0 items stay EMERGING
 
-**Position (provisional):** Under DR-029 as committed (`63a05e8`), C1, S2-2 and S3-4 all stay at EMERGING. S2-2 and S3-4 get a `partial` warrant check (S2-2: the search and sources do not cover the absence claim across all four paper types; S3-4: one trial migration, no cross-author replication); C1 is capped by S3-4. Predicted by ChatGPT from a prompt holding only the rule and the registry rows, before any re-rating (confidence: high, high, medium). Gemini, given the same prompt separately, predicted the same three outcomes at the same confidence; its stated limiting point for S3-4 (S3-2) is not one of S3-4's grounds. Both answers: `docs/work-items/dr029-trial/` (maintainer-local).
+**Position (provisional):** Under DR-029 as committed (`63a05e8`), C1, S2-2 and S3-4 all stay at EMERGING. S2-2 and S3-4 get a `partial` warrant check (S2-2: the search and sources do not cover the absence claim across all four paper types; S3-4: one trial migration, no cross-author replication); C1 is capped by S3-4. Predicted by ChatGPT from a prompt holding only the rule and the registry rows, before any re-rating (confidence: high, high, medium). Gemini, given the same prompt separately, predicted the same three outcomes at the same confidence; its stated limiting point for S3-4 (S3-2) is not one of S3-4's grounds. Both answers: `docs/work-items/archive/2026-10-17-dr029-trial/` (maintainer-local).
 
 **Alternative:** The blind re-rating gives S2-2 or S3-4 a `pass`, or any of the three reaches SUPPORTED.
 
@@ -38,7 +38,7 @@
 
 **Review by:** 2026-12-31
 
-**Outcome so far (2026-10-17):** three blind re-ratings (`docs/work-items/dr029-trial/`, maintainer-local). Run 3, on the final rule and the registry revised for draft 3, matched both predictions exactly: C1, S2-2 and S3-4 EMERGING, with S2-2 and S3-4 `partial` (S2-2: one screener, coverage gaps left open; S3-4: no observed false failure among its grounds, trials by one agent). The P0 floor stays at 3 of 6; the maintainer agreed with all six P0 outcomes. Only conjunctions passed, so whether a sound inference can pass is not yet shown; DR-029's condition 3 now requires passes among syntheses. The rater was not consistent across runs: S1-2 and S2-2 passed in run 1 only. Stays open until a synthesis passes.
+**Outcome so far (2026-10-17):** three blind re-ratings (`docs/work-items/archive/2026-10-17-dr029-trial/`, maintainer-local). Run 3, on the final rule and the registry revised for draft 3, matched both predictions exactly: C1, S2-2 and S3-4 EMERGING, with S2-2 and S3-4 `partial` (S2-2: one screener, coverage gaps left open; S3-4: no observed false failure among its grounds, trials by one agent). The P0 floor stays at 3 of 6; the maintainer agreed with all six P0 outcomes. Only conjunctions passed, so whether a sound inference can pass is not yet shown; DR-029's condition 3 now requires passes among syntheses. The rater was not consistent across runs: S1-2 and S2-2 passed in run 1 only. Stays open until a synthesis passes.
 
 ### [2026-10-16] Recording grounds item by item surfaces inferences that type labels hide
 
