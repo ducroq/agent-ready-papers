@@ -7,7 +7,7 @@ This commentary argues that AI-assisted non-empirical papers need their reasonin
 - **Target:** Learned Publishing, Opinion (1,000–4,000 words; decided 2026-10-16 after four model reviews), Research Integrity and Peer Review Comment (backup)
 - **Deadline:** TBD
 - **Status:** Phase 3, Writing: draft 2 is tag `paper1-draft-2` (2026-10-16); the registry was revised for draft 3 on 2026-10-17 (DR-029 trial). Plan and gaps: `../../docs/work-items/paper1-draft3.md` (maintainer-local)
-- **agent-ready-papers:** v4.3.0 <!-- A number, not a status. Bump deliberately after reading UPGRADING.md. v4.2.0 -> v4.3.0 reconciled 2026-10-12: no required item; the new tools are optional and the wording change alters no rule. Still not taken: the optional readability template and DR-019's Step Z scope line. v4.0.0's P0 floor is the known red gate (#38). Earlier reconciliation notes: git history. -->
+- **agent-ready-papers:** v5.0.0 <!-- A number, not a status. Bump deliberately after reading UPGRADING.md. v4.3.0 -> v5.0.0 reconciled 2026-10-17: the registry is on the DR-027 schema and the paper has a glossary (DR-028), so both required items are met; DR-026 and DR-029 are Proposed. The P0 floor is the known red gate (#38). Earlier reconciliation notes: git history. -->
 
 <!-- This paper lives inside the framework repo, so the pin above tracks the
      framework's own version by construction. It is stated anyway: this is the

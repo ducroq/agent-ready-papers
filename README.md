@@ -8,7 +8,7 @@ Companion to [agent-ready-projects](https://github.com/ducroq/agent-ready-projec
 
 **Status:** A working framework we use on our own papers. Broader empirical validation across other authors and domains is an open question — adopt it as a structured starting point, not as a tested method.
 
-**Current release:** v4.3.0 (2026-10-12) — see [`CHANGELOG.md`](CHANGELOG.md). Pin your project with `agent-ready-papers: v4.3.0` in your CLAUDE.md and surface drift at session start; [`templates/CLAUDE.md`](templates/CLAUDE.md) carries that line for you.
+**Current release:** v5.0.0 (2026-10-17) — see [`CHANGELOG.md`](CHANGELOG.md). Pin your project with `agent-ready-papers: v5.0.0` in your CLAUDE.md and surface drift at session start; [`templates/CLAUDE.md`](templates/CLAUDE.md) carries that line for you.
 
 ## The Core Problem
 
@@ -131,7 +131,7 @@ The five steps above describe *what* gets set up. In practice you delegate four 
 
 **Bootstrap a new paper project** (once, at project start):
 
-> Start a paper project using the agent-ready-papers framework at `<framework>` (currently v4.3.0). Topic: [X]. Target journal: [Y]. Deadline: [Z]. Do this: (1) Create `papers/<name>/`. (2) Copy `<framework>/templates/CLAUDE.md`, `claim-registry.md`, `anti-hallucination.md`, `writing-guide.md`, `glossary.md` into it. (3) Fill `CLAUDE.md` with the paper identity and start `glossary.md`. (4) Initialise the registry with its Contributions and Declared starting points tables and an empty Claims table for each anticipated section. (5) Commit. From now on, read `papers/<name>/CLAUDE.md` at the start of every session.
+> Start a paper project using the agent-ready-papers framework at `<framework>` (currently v5.0.0). Topic: [X]. Target journal: [Y]. Deadline: [Z]. Do this: (1) Create `papers/<name>/`. (2) Copy `<framework>/templates/CLAUDE.md`, `claim-registry.md`, `anti-hallucination.md`, `writing-guide.md`, `glossary.md` into it. (3) Fill `CLAUDE.md` with the paper identity and start `glossary.md`. (4) Initialise the registry with its Contributions and Declared starting points tables and an empty Claims table for each anticipated section. (5) Commit. From now on, read `papers/<name>/CLAUDE.md` at the start of every session.
 
 **Register claims as I draft** (background companion mode for every writing session):
 

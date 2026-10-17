@@ -11,6 +11,22 @@ The full release notes are in [`CHANGELOG.md`](CHANGELOG.md). This file is the q
 - **PATCH** version bumps are docs-only / clarifications, or backward-compatible bug fixes (e.g. a tooling fix that changes no public interface). Usually no action required; a bug fix may be worth adopting if you hit the bug.
 - Every release entry in `CHANGELOG.md` includes an "Adopter notes" / "Adopter action" subsection. This file aggregates them per version for quick lookup.
 
+## v5.0.0 (2026-10-17)
+
+**From v4.3.0 — what to review when you bump your pin to v5.0.0:**
+
+| Change | Adopter action |
+|--------|-----------------|
+| **DR-027 accepted: the registry records each claim's Says and typed Grounds** (`src:`, `claim:`, `decl:`, `own:`), with Contributions and Declared starting points in their own tables; DR-004's CLAIM / ARGUMENT / PROPOSITION types are superseded | **None to keep working**: DR-004 tables are read as deprecated aliases with v4.3.0's exit codes and findings. **Migrate before v6.0.0** by hand, following `templates/claim-registry.md`, *Migrating from DR-004*. An adapted copy of the template is current if it contains `**Contributions:**`, `**Declared starting points:**` and `own:`; append those sections, don't re-copy over your adaptations. |
+| **Source Tier F retired** | On migration, a Tier-F row becomes a Warrant (an inference from other claims) or an `own:` item (the author's own observation). Until then it is read as before. |
+| **DR-028 accepted: a glossary per paper** | **Add** `glossary.md` to each paper (copy `templates/glossary.md`) and pass it to `python -m tools.check_registry <registry> --glossary <glossary.md>`. |
+| `docs/glossary.md` is normative | Read it when a term in your registry or prose is unclear; link to it from your paper's glossary. |
+| Templates (`CLAUDE.md`, `anti-hallucination.md`, `claim-registry.md`, `key-quotes.md`, `vv-framework.md`, `writing-guide.md`) in the new vocabulary | Review against your paper-local copies; port the wording you need. Don't re-copy over an adapted copy. |
+| DR-026 and DR-029 **Proposed**; Source Tier N (not peer-reviewed) proposed in DR-029 | None. Proposed DRs do not bind. |
+| The table of files the repository does not ship moved from `CLAUDE.md` to `README.md` (Quickstart) | None. |
+
+**Breaking changes:** the registry structure (DR-027) and DR-004's unit types, softened by the alias period: nothing stops working in v5.x.
+
 ## v4.3.0 (2026-10-12)
 
 **From v4.2.0 — what to review when you bump your pin to v4.3.0:**

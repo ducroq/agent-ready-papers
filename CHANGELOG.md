@@ -14,6 +14,45 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
      backward-compatible fix. Every entry has an "Adopter notes" or "Adopter action" subsection,
      saying "No adopter action required." when there is none. -->
 
+## v5.0.0 (2026-10-17)
+
+A new verification model. Every statement a paper puts forward is a **claim** that records what it says (descriptive or normative) and what it rests on, item by item; the checks follow from those items, and the paper's contribution is checked once with Whetten's questions (DR-027, accepted). Every paper also gets a glossary (DR-028, accepted). **MAJOR**: DR-004's three unit types are superseded and the registry structure changes; old registries keep working through deprecated aliases until v6.0.0.
+
+Forty-two commits since v4.3.0. The test suite went from 539 to 672. Companion pin unchanged (`agent-ready-projects` v1.49.2).
+
+### Decisions
+
+- **DR-027 accepted** (`decisions/DR-027_toulmin-whetten-verification-model.md`): one unit, two axes. A claim records **Says** (descriptive / normative) and typed **Grounds**: `src:` (a cited source), `claim:` (another claim, joined by a Warrant), `decl:` (a declared starting point: an assumption, definition or value) and `own:` (the author's own work, with its method). A contribution is a root claim, P0 by definition, in the P0 floor. Source Tier F ("logical inference") is retired: an inference is a Warrant, an own observation an `own:` item. DR-004 is partially superseded; DR-002, DR-008, DR-009, DR-010, DR-012 and DR-017 carry "Amended by DR-027" lines.
+- **DR-028 accepted** (`decisions/DR-028_mandatory-paper-glossary.md`): every paper keeps a `glossary.md` that defines its terms against the framework's. `docs/glossary.md` is the framework vocabulary and is now normative.
+- **Proposed, not binding:** DR-026 (a draft's version stamped on its title page), DR-029 (an inference's confidence tier comes from a warrant check on relevance and sufficiency; adds Source Tier N for work that is not peer-reviewed). DR-029 was trialled blind three times on two registries before this release; it stays Proposed until a synthesis, not only a conjunction, passes its check.
+
+### Tooling (adopter-facing)
+
+- **`tools/coverage.py` and `tools/check_registry.py` read the DR-027 schema**: the `**Contributions:**`, `**Declared starting points:**` and `**Claims:**` tables; IDs `C<n>` and `D<n>` besides `S<n>-<n>`; a row whose ID matches no pattern is reported, not skipped. Contributions count in the P0 floor with a tier no higher than their weakest supporting claim. `check_registry` adds schema rules (Says, typed Grounds, a Warrant for `claim:` grounds, a Rebuttal and a declared value for a normative claim, every reference resolves) and a `--glossary` check (DR-028).
+- **Deprecated aliases**: `**CLAIMs:**`, `**ARGUMENTs**` and `**PROPOSITIONs**` tables are still read, checked under DR-004's rules, and reported under their old labels with a deprecation note. On such a registry both tools give v4.3.0's exit codes, counts and findings (pinned by `tests/test_v5_parity.py`). Removal no earlier than v6.0.0.
+- `make paper1-pdf` builds Paper 1 with its version stamped on the title page (DR-026, Proposed). `make gotcha-stats` also reports entries without a `**Problem**` line (maintainer-local log).
+
+### Templates and docs
+
+- `templates/claim-registry.md`: the three DR-027 tables, typed grounds, the checks per kind of grounds, and *Migrating from DR-004*. `templates/glossary.md`: the per-paper glossary (DR-028). `templates/CLAUDE.md`, `anti-hallucination.md`, `key-quotes.md`, `vv-framework.md` and `writing-guide.md` use the new vocabulary.
+- New `docs/glossary.md` (normative, DR-027): each term with its source definition from Toulmin, Whetten and their home fields. `docs/framework-summary.md`, `docs/THRESHOLDS.md`, `tools/README.md` and `README.md` follow the new model. The adopter table of files the repository does not ship moved from `CLAUDE.md` to `README.md` (Quickstart).
+
+### Paper 1 and literature
+
+- Paper 1 (`papers/perspective/`) is the first paper on the DR-027 schema: its registry is migrated (the DR-004 version is frozen as a test fixture), it has a glossary, and draft 2 is tagged `paper1-draft-2`. Its P0 floor still fails (3 of 6; #38), and 10 claim rows written for draft 2 await a later check, so `coverage --strict` exits 1 on it: the paper's state, which the tools report correctly. The registry was revised for draft 3 after the DR-029 trial.
+- Fifteen new source notes in `literature/sources/` (Toulmin and Whetten full-text quotes, assurance cases, the JBI expert-opinion checklist and others).
+
+### Adopter notes
+
+- **New adopters** start on the DR-027 schema: copy `templates/claim-registry.md` and `templates/glossary.md`.
+- **Existing adopters: nothing breaks on upgrade.** A DR-004 registry reads as before, with deprecation notes. Migrate before v6.0.0 by hand: `templates/claim-registry.md`, *Migrating from DR-004*, maps each old column to the new one as a default to judge row by row. A current copy of the template contains the strings `**Contributions:**`, `**Declared starting points:**` and `own:`; an adapted copy can be checked for those.
+- **Add a `glossary.md`** to each paper (DR-028), and pass it to `check_registry --glossary`.
+- A Source Tier F in an old registry is read as before; on migration it becomes a Warrant (an inference) or an `own:` item (an observation).
+
+### Versioning rationale
+
+MAJOR under this repo's convention (CHANGELOG header: "MAJOR breaks template surfaces or DR semantics"): DR-004's unit types are superseded and the required registry structure changes. The release skill's first rule ("must an existing consumer act to keep working?") does not fire on its own, because the aliases keep old registries passing; the convention decides, as for v4.0.0, which changed what the tools enforce.
+
 ## v4.3.0 (2026-10-12)
 
 Three new tools for checks that were done by hand: whether a quote occurs in its source, a safe one-row registry edit, and an experiment registry whose numbers must trace to tracked evidence (DR-024, accepted). The maintainer also settled five open DRs: DR-003, DR-005 and DR-012 accepted, DR-014 and DR-021 withdrawn. **MINOR**: new tools and accepted DRs, with nothing an adopter must do.
