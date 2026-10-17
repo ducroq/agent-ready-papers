@@ -7,6 +7,7 @@
 - **Venue:** JBI Evidence Synthesis 23(5), 833–839
 - **DOI:** 10.11124/jbies-24-00293
 - **Checklist:** JBI, Checklist for Textual Evidence: Expert Opinion (May 2026 version, https://jbi.global/critical-appraisal-tools; docx in `pdfs/`, gitignored)
+- **Source Tier:** B (peer-reviewed methods paper in a journal series describing how the JBI tools were built; recorded 2026-10-17 from the venue and abstract only). It describes the same tool as the JBI checklist, so the two count once.
 - **Status:** PARTIAL (paper: abstract via Europe PMC; checklist: full text), 2026-10-16
 
 ## Summary
