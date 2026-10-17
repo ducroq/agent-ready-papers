@@ -38,6 +38,8 @@
 
 **Review by:** 2026-12-31
 
+**Outcome so far (2026-10-17):** three blind re-ratings (`docs/work-items/dr029-trial/`, maintainer-local). Run 3, on the final rule and the registry revised for draft 3, matched both predictions exactly: C1, S2-2 and S3-4 EMERGING, with S2-2 and S3-4 `partial` (S2-2: one screener, coverage gaps left open; S3-4: no observed false failure among its grounds, trials by one agent). The P0 floor stays at 3 of 6; the maintainer agreed with all six P0 outcomes. Only conjunctions passed, so whether a sound inference can pass is not yet shown; DR-029's condition 3 now requires passes among syntheses. The rater was not consistent across runs: S1-2 and S2-2 passed in run 1 only. Stays open until a synthesis passes.
+
 ### [2026-10-16] Recording grounds item by item surfaces inferences that type labels hide
 
 **Position (provisional):** Migrating a registry from DR-004's types to DR-027's grounds-based model exposes inferences that the old CLAIM label hid. In the Paper 1 trial, 9 of 17 rows that DR-004 typed as plain claims combined sources into a point none of them makes alone (`docs/work-items/archive/2026-10-16-v5-and-draft2/v5-trial/`, maintainer-local); the constructive-lenses trial found 3 more warrants. n=2 registries, both migrated by the framework's own agent.
