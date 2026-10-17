@@ -35,5 +35,5 @@ The closest prior art found. It falsifies S1-4 as originally worded and also the
 - It is calibrated only on empirical papers (ablations, baselines, RCTs)
 
 ## Caveats (tier discipline)
-- Preprint → tier **B**. Single author, self-evaluated; the contribution component is explicitly experimental.
+- Preprint → Source Tier **N** (not peer-reviewed; DR-029, Proposed, 2026-10-17; was recorded as B). Single author, self-evaluated; the contribution component is explicitly experimental.
 - Its framing sources (e.g. GPTZero's 100 fabricated citations in NeurIPS 2025, via Ansari 2026, arXiv:2602.05930) are secondary here and unverified.

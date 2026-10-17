@@ -29,7 +29,7 @@ This is independent convergence on the registry pattern: decompose prose into un
 Cuts both ways, and the manuscript should say both: it **narrows** the novelty claim in **S1-4** ("no process-level verification infrastructure exists"), and it **strengthens** the architectural bet, because an independent team converged on units-plus-evidence-plus-gates.
 
 ## Caveats (tier discipline)
-- Preprint → tier **B**.
+- Preprint → Source Tier **N** (not peer-reviewed; DR-029, Proposed, 2026-10-17; was recorded as B).
 - The 295/900 supported-claim routing rate is a real cost the abstract underplays; if Paper 1 cites this work as a baseline, cite that number too.
 
 ## Open Questions

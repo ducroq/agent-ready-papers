@@ -29,7 +29,7 @@ Architecturally the nearest neighbour found in this scan: registry-backed assemb
 **The distinction that survives:** this work audits *process and provenance* — which tool produced which artifact, and whether a number traces to a source. It does not assess whether an argument's warrant holds, whether a proposition states boundary conditions, or whether confidence language matches evidence strength. It answers *where did this come from*; the framework answers *is the reasoning sound and the confidence calibrated*.
 
 ## Caveats (tier discipline)
-- Preprint, single case study, self-applied → tier **B/F**. Its evidence posture is the same as this framework's own: a worked example, not a controlled evaluation. Do not cite it as demonstrating that auditable writing works.
+- Preprint, single case study, self-applied → Source Tier **N** (not peer-reviewed; DR-029, Proposed, 2026-10-17; was recorded as B/F). Its evidence posture is the same as this framework's own: a worked example, not a controlled evaluation. Do not cite it as demonstrating that auditable writing works.
 - ⚠ The abstract-level reading of scope (provenance only, not argument quality) rests on the abstract and listing. **Confirm against the full text before making the distinction in print** — this is the one prior-art claim where being wrong would be embarrassing.
 
 ## Open Questions
