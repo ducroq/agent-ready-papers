@@ -31,7 +31,9 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
   - Table 1 is now a parts matrix, and the appendix became Section 5.
   - Footnotes removed, a style pass, and conflict-of-interest, funding and ethics statements added.
   - New claim S1-8 (Rao & Callison-Burch 2026). S1-1, S1-2, S1-6 and S2-5 were narrowed to their sources' scope.
-  - `test_paper1_v5` now expects 20 premises findings (S1-8 is new; S1-1, S1-2 and S1-6 were reworded and await re-rating).
+  - The introduction names three errors, one for each of the register's checks: citation errors, confidence inflation, and a claim that says more than its correctly cited sources. The third is shown by the paper's own case (new claim S1-9).
+  - The detection paragraph now cites Jabarian & Imas 2025 and ICMJE 2026, replacing the 2023–24 studies. A detector's verdict on directed, AI-drafted text concerns the drafting, not whether the text holds.
+  - `test_paper1_v5` skips only the near-budget note, and expects 21 premises findings.
 
 ### Adopter notes
 No adopter action required.
