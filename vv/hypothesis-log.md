@@ -38,7 +38,19 @@
 
 **Review by:** 2026-12-31
 
-**Outcome so far (2026-10-17):** three blind re-ratings (`docs/work-items/archive/2026-10-17-dr029-trial/`, maintainer-local). Run 3, on the final rule and the registry revised for draft 3, matched both predictions exactly: C1, S2-2 and S3-4 EMERGING, with S2-2 and S3-4 `partial` (S2-2: one screener, coverage gaps left open; S3-4: no observed false failure among its grounds, trials by one agent). The P0 floor stays at 3 of 6; the maintainer agreed with all six P0 outcomes. Only conjunctions passed, so whether a sound inference can pass is not yet shown; DR-029's condition 3 now requires passes among syntheses. The rater was not consistent across runs: S1-2 and S2-2 passed in run 1 only. Stays open until a synthesis passes.
+**Outcome so far (2026-10-17):** three blind re-ratings (`docs/work-items/archive/2026-10-17-dr029-trial/`, maintainer-local). Run 3, on the final rule and the registry revised for draft 3, matched both predictions exactly: C1, S2-2 and S3-4 EMERGING, with S2-2 and S3-4 `partial` (S2-2: one screener, coverage gaps left open; S3-4: no observed false failure among its grounds, trials by one agent). The P0 floor stays at 3 of 6; the maintainer agreed with all six P0 outcomes. Only conjunctions passed, so whether a sound inference can pass is not yet shown; DR-029's condition 3 now requires passes among syntheses. The rater was not consistent across runs: S1-2 and S2-2 passed in run 1 only. Stays open until a synthesis passes. Draft 3 (2026-10-19, branch `paper1-draft3`): the rows new or reworded for it carry an empty Warrant check, so their blind re-rating is the next test of condition 3.
+
+### [2026-10-19] The register's novelty is a combination of parts that already have users
+
+**Position (provisional):** Each part of the claim register is used elsewhere: claims recorded with their support (assurance cases; micropublications, whose model is "grounded in Toulmin-Verheij", Clark et al. 2014), checking an argument inference by inference, drawing on Toulmin's model (Kane 2013, educational measurement, pp. 9, 11–12), criteria for a step (Wachsmuth et al. 2017) and wording tied to support (IPCC, GRADE). What is new is combining them for academic papers (Paper 1 draft 3, S4-9). Independent users of the parts make the register less idiosyncratic; they say nothing about whether the register works in someone else's hands (still one user).
+
+**Alternative:** A compared approach not read in full (an assurance-case confidence argument, a nanopublication review practice) already combines all three for papers, or referees read the combination as too thin to count as a contribution.
+
+**Method:** The four referees on draft 3 are asked whether the novelty claim holds; any approach they name that combines the three parts refutes S4-9.
+
+**Revisit trigger:** Referee reports on Paper 1 draft 3.
+
+**Review by:** 2027-01-31
 
 ### [2026-10-16] Recording grounds item by item surfaces inferences that type labels hide
 

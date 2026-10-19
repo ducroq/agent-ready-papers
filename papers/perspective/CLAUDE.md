@@ -6,7 +6,7 @@ This commentary argues that AI-assisted non-empirical papers need their reasonin
 
 - **Target:** Learned Publishing, Opinion (1,000–4,000 words; decided 2026-10-16 after four model reviews), Research Integrity and Peer Review Comment (backup)
 - **Deadline:** TBD
-- **Status:** Phase 3, Writing: draft 2 is tag `paper1-draft-2` (2026-10-16); the registry was revised for draft 3 on 2026-10-17 (DR-029 trial). Plan and gaps: `../../docs/work-items/paper1-draft3.md` (maintainer-local)
+- **Status:** Phase 3, Writing: draft 3 on master (2026-10-19; draft 2 is tag `paper1-draft-2`). Plan and next steps: `../../docs/work-items/paper1-draft3.md` (maintainer-local)
 - **agent-ready-papers:** v5.0.0 <!-- A number, not a status. Bump deliberately after reading UPGRADING.md. v4.3.0 -> v5.0.0 reconciled 2026-10-17: the registry is on the DR-027 schema and the paper has a glossary (DR-028), so both required items are met; DR-026 and DR-029 are Proposed. The P0 floor is the known red gate (#38). Earlier reconciliation notes: git history. -->
 
 <!-- This paper lives inside the framework repo, so the pin above tracks the
@@ -110,14 +110,10 @@ This is the framework eating its own dog food. Any friction, gaps, or false fail
 
 ## Current Status
 
-**Phase:** 3, Writing (draft 3 next). Coverage and the P0 floor: `make coverage` from the repo root; the registry header carries the last figure. The history of drafts 1 and 2 (what was completed, and the corrections made during verification up to 2026-10-05) is in this file's git history before 2026-10-17. Gate 2.5 (internal consistency) was introduced after Paper 1 passed Gate 2; Appendix A was cross-checked against the main text by hand on 2026-03-06, which meets its intent.
+**Phase:** 3, Writing (draft 3, 2026-10-19). Coverage and the P0 floor: `make coverage` from the repo root; the registry header carries the last figure (3 of 6). History of drafts 1 and 2: this file's git history before 2026-10-17.
 
-**Next priorities** (2026-10-17; detail in `../../docs/work-items/paper1-draft3.md`, maintainer-local):
-1. Draft 3 from the revised registry: narrower claims, prior work before the proposal, the warrant check in §3, and the four manuscript passages that lost their registry row
-2. One outside helper: a second screener for S2-2's search and a migration by another person for S3-4 (task drafted, recipient open)
-3. P0 floor 3 of 6 (C1, S2-2, S3-4 EMERGING); DR-029 (Proposed) keeps it at 3 of 6 for evidential reasons, not because they are inferences
-4. Gate 3 review before submission: by the maintainer unless a co-author is found
+**Next** (detail in the work item): the maintainer's read; a blind re-rating of the rows new or reworded for draft 3 (DR-029 condition 3); the appendix figures; four referees. Keep the draft under 3,800 words (`test_paper1_v5` fails on the near-budget warning).
 
 ---
 
-*Last updated: 2026-10-17*
+*Last updated: 2026-10-19*

@@ -30,5 +30,5 @@ def test_paper1_v5_consistency(paper1_v5_registry):
     for f in report.findings:
         by_check.setdefault(f.check, []).append(f.message)
     assert set(by_check) == {"premises"}, by_check
-    assert len(by_check["premises"]) == 6
+    assert len(by_check["premises"]) == 17  # draft 3: rows awaiting the blind re-rating
     assert all("which is not verified" in m for m in by_check["premises"])

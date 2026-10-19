@@ -226,6 +226,17 @@ Sources consulted during the development of this project, particularly for DR-00
 | L108 | Farias | 2015 | Reflections on Theoretical Contribution | BAR – Brazilian Administration Review (editorial) | [farias-2015-reflections-contribution](sources/farias-2015-reflections-contribution.md) | READ (full) |
 | L109 | McArthur et al.; JBI | 2025; 2026 | Critical appraisal of textual evidence; Checklist for Textual Evidence: Expert Opinion | JBI Evid Synth; JBI | [mcarthur-2025-jbi-textual-evidence](sources/mcarthur-2025-jbi-textual-evidence.md) | PARTIAL (paper abstract; checklist full text) |
 
+### Draft-3 sources (Paper 1)
+
+<!-- Seeded 2026-10-19. Full texts supplied by the maintainer (Kane closed access; Groth and Budescu past a challenge page).
+     Clark, Ciccarese & Goble 2014 and Moher et al. 2010 are also cited in draft 3 (read 2026-10-18) but have no note yet. -->
+
+| ID | Author(s) | Year | Title | Venue | File | Status |
+|----|-----------|------|-------|-------|------|--------|
+| L110 | Kane | 2013 | Validating the Interpretations and Uses of Test Scores | Journal of Educational Measurement | [kane-2013-argument-based-validation](sources/kane-2013-argument-based-validation.md) | READ (pp. 1–13, search of the rest) |
+| L111 | Groth, Gibson & Velterop | 2010 | The anatomy of a nanopublication | Information Services & Use | [groth-2010-nanopublication](sources/groth-2010-nanopublication.md) | READ (full) |
+| L112 | Budescu, Broomell & Por | 2009 | Improving Communication of Uncertainty in the Reports of the Intergovernmental Panel on Climate Change | Psychological Science | [budescu-2009-ipcc-uncertainty](sources/budescu-2009-ipcc-uncertainty.md) | READ (abstract, method, results, recommendations) |
+
 ### Readability, Engagement and Homogenisation
 
 <!-- Seeded 2026-09-27 from the readability half of the detector scan (work item point 3).
