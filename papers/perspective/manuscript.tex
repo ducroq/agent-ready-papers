@@ -74,20 +74,19 @@ AI-assisted draft can read as polished and complete while it contains
 errors that only checking would reveal.
 
 % S1-1: Citation hallucination (descriptive, P0, SUPPORTED)
-The most discussed of these errors is citation hallucination: a
-reference to a work that does not exist.
+The most discussed of these errors are citation errors: a reference to
+a work that does not exist, or to a real work with the wrong details.
 \citet{mugaanyi2024} found that 62--89\% of the digital object
 identifiers (DOIs) that ChatGPT (GPT-3.5) generated for natural-science
 and humanities topics were fabricated.  \citet{walters2023} found fabricated
 citations among the references of generated literature reviews, with
 fewer from the newer of the two models they tested.
 % S1-8: Search did not make citations reliable in one benchmark (descriptive, P2, EMERGING)
-Search did not make citations reliable in a 2026 benchmark.  Asked for the bibliographic
-entries of 931 named papers, three search-enabled models (GPT-5, Claude
-Sonnet 4.6 and Gemini 3 Flash) got only 50.9\% of the entries fully
-right; most errors were in single fields, but some were details of a
-different paper
-\citep[\S4]{rao2026bibtex}.
+A 2026 benchmark tested newer models that can search the web.  Asked
+for the bibliographic entries of 931 named papers, three of them
+(GPT-5, Claude Sonnet 4.6 and Gemini 3 Flash) got only 50.9\% of the
+entries fully right; most errors were in single fields, but some were
+details of a different paper \citep[\S4]{rao2026bibtex}.
 
 % S1-2: Confidence inflation (descriptive, P0, SUPPORTED)
 A second error cannot be caught by a lookup.  I call it \emph{confidence
@@ -102,19 +101,33 @@ corpus of applied-linguistics abstracts, ChatGPT used boosters such as
 ``demonstrates'' and ``suggests'' are meant to tell a reader how much
 weight a claim can bear.
 
+% S1-9: A claim can outrun correctly cited sources (descriptive, P1, EMERGING)
+A third error is harder to see, because each citation passes: the
+sources are real and say what is attributed to them, but the claim
+drawn from them says more.  This paper's own register first stated
+that LLMs ``invent plausible-sounding papers'', in the present tense,
+from two studies of ChatGPT models from 2023 and 2024.  Each study was
+cited correctly; the step from them to all current LLMs was not
+supported.  A reader caught it, not a citation check.  Checking the register's source-based claims against their sources' scope then found three more like it \citep{veen2026repo}.
+
 % S1-7: Citation checks alone pass weak reasoning (descriptive, P1, EMERGING)
 % D9: Citation check (definition, own)
-A citation check, as I use the term, asks whether a cited work exists
-and says what is attributed to it, so it catches invented sources and
-real ones cited wrongly.  It does not reach confidence inflation, or a
-step from real evidence to a claim the evidence does not carry, so a fluent paper can pass it with its
-reasoning unchecked.
+A citation check, as I use the term and as such checks are usually run, asks whether a cited work exists
+and says what is attributed to it, so it catches the first error.  It
+does not reach the second or the third (Section~4 addresses both): a claim can rest on correct
+citations and still say more than they carry, so a fluent paper can
+pass the check with its reasoning unchecked.
 
 % S1-6: Detection is no substitute (descriptive, P2, EMERGING)
 % D5: Detection vs verification (definition, own)
 Detecting AI-written text does not fill that gap.  Detection asks who
-wrote a text; verification asks whether it holds.  Detectors tested in 2023 and 2024 were also fragile: their accuracy varied with generation settings
-\citep{dugan2024}, and paraphrase could collapse it \citep{krishna2023}.
+wrote a text; verification asks whether it holds.  Detectors may now answer the first question well for pure cases: one 2025 working paper found that the best of three commercial detectors separated published human prose from fully generated text almost without error
+\citep{jabarian2025}.  Text that a person directs and an AI drafts,
+as this paper was, was not tested, and for such text ``who wrote it''
+has no clean answer.  But journal guidance now accepts AI help that authors disclose: the ICMJE recommendations ask authors to declare AI
+use and describe how they used it \citep{icmje2026}.  Once AI help is
+allowed and declared, the question that remains is whether the text
+holds.
 
 % ===============================================================
 % SECTION 2
@@ -362,16 +375,14 @@ layout to record the claims of (mainly biomedical) publications
 inferences from test scores to their uses with his model
 \citep[pp.~11--12]{kane2013}.  Two studies of university students' essays
 scored argument quality element by element, with two raters each
-\citep{yang2022,divya2026}.  The second study adapted the first one's
-rubric.  None of these uses checks a research paper's reasoning, so
+\citep{yang2022,divya2026}.    None of these uses checks a research paper's reasoning, so
 that application is a further step.
 
 \paragraph{Checks by kind of grounds.}
 In the register, each claim is recorded with its grounds item by item,
 and each kind of grounds gets its own check:
 \begin{itemize}
-\item a \textbf{source} is checked in two steps: the work exists, and it
-  says what the claim attributes to it;
+\item a \textbf{source} is checked in two steps: the work exists, and it says what the claim attributes to it, for the cases and period the claim covers;
 \item a \textbf{declared starting point} is checked for being stated,
   with a note on whether the field accepts or contests it;
 \item the author's \textbf{own work}, such as a search or a trial, is
