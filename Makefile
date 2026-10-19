@@ -1,4 +1,4 @@
-.PHONY: test lint format check coverage check-dois check-metadata verify-bib check-registry formula-scan preservation-check check-experiments drift dr-status gotcha-stats check-counts read-surface check-profile paper1-pdf
+.PHONY: test lint format check coverage check-dois check-metadata verify-bib check-registry formula-scan preservation-check check-experiments drift dr-status gotcha-stats check-counts read-surface check-profile paper1-pdf paper1-arxiv
 
 test:  ## Run tests
 	pytest tests/ -x -q
@@ -48,6 +48,9 @@ paper1-pdf:  ## Build Paper 1's PDF, stamped on the title page with `git describ
 	pdflatex -interaction=nonstopmode -jobname=manuscript "$$tex" && bibtex manuscript && \
 	pdflatex -interaction=nonstopmode -jobname=manuscript "$$tex" && \
 	pdflatex -interaction=nonstopmode -jobname=manuscript "$$tex"
+
+paper1-arxiv:  ## Build Paper 1's arXiv package (abstract, single spacing, .bbl) in papers/perspective/arxiv/
+	bash scripts/paper1-arxiv.sh
 
 check-experiments:  ## Experiment registry: schema, tracked artifacts, metric traceability (DR-024)
 	python -m tools.check_experiments

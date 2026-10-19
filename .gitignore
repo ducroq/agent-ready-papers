@@ -52,6 +52,7 @@ papers/*
 *.synctex.gz
 # Review feedback on Paper 1 drafts: authoring deliberations, kept private.
 /papers/perspective/feedback/
+/papers/perspective/arxiv/
 
 # Python (tools/, tests/)
 __pycache__/

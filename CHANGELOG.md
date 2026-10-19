@@ -14,6 +14,28 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
      backward-compatible fix. Every entry has an "Adopter notes" or "Adopter action" subsection,
      saying "No adopter action required." when there is none. -->
 
+## Unreleased
+
+### Decisions
+- **DR-030 Proposed, not binding** (`decisions/DR-030_claim-scope-and-as-of.md`):
+  - the source check holds a claim to the boundary conditions it states (Whetten's Who/Where/When);
+  - claims about fast-moving objects carry an `as of:` date.
+  - Evidence: a two-rater scope test on Paper 1's 21 source-grounded rows. Both raters found widenings beyond the seed case, in 4 and 8 rows.
+
+### Tooling
+- `make paper1-arxiv` (`scripts/paper1-arxiv.sh`) builds Paper 1's arXiv package in a gitignored directory. The package has the abstract, single spacing, the `.bbl` and a baked-in version stamp. Maintainer tooling; it doesn't affect adopters.
+
+### Paper 1
+- The maintainer's draft-3 feedback round:
+  - The abstract moved to `abstract.tex`, because Learned Publishing Opinion pieces have none; the preprint build includes it.
+  - Table 1 is now a parts matrix, and the appendix became Section 5.
+  - Footnotes removed, a style pass, and conflict-of-interest, funding and ethics statements added.
+  - New claim S1-8 (Rao & Callison-Burch 2026). S1-1, S1-2, S1-6 and S2-5 were narrowed to their sources' scope.
+  - `test_paper1_v5` now expects 20 premises findings (S1-8 is new; S1-1, S1-2 and S1-6 were reworded and await re-rating).
+
+### Adopter notes
+No adopter action required.
+
 ## v5.0.0 (2026-10-17)
 
 A new verification model. Every statement a paper puts forward is a **claim** that records what it says (descriptive or normative) and what it rests on, item by item; the checks follow from those items, and the paper's contribution is checked once with Whetten's questions (DR-027, accepted). Every paper also gets a glossary (DR-028, accepted). **MAJOR**: DR-004's three unit types are superseded and the registry structure changes; old registries keep working through deprecated aliases until v6.0.0.

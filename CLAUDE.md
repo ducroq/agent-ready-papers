@@ -14,7 +14,7 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 | Picking up where the last session left off | `memory/MEMORY.md`: the index only, not the topic files it lists. Nothing else loads it, so keep this row first. |
 | Starting any session | `make drift` (companion pin, global skills, this repo's stamp, paper pins; a gitignored sub-project is only reported). Surface any drift before starting work; don't auto-update: run `/update-drift`, and adopting is the engineer's call. No local clone: compare against https://github.com/ducroq/agent-ready-projects/blob/master/CHANGELOG.md. |
 | Working on Paper 1 (Perspective) | `papers/perspective/CLAUDE.md` |
-| Making scope or methodology decisions | `decisions/`. `make dr-status` lists each DR's status; only Accepted DRs bind. DR-020 modifies Step Z, which accepted DR-019 changed: re-read that section before accepting it. <!-- verify: cd "$(git rev-parse --show-toplevel)" && n=$(ls decisions/DR-*.md \| wc -l); echo "decisions/ holds $n DR files"; [ "$n" -eq 29 ] \|\| { echo "CLAIM REFUTED: expected 29"; exit 1; } --> |
+| Making scope or methodology decisions | `decisions/`. `make dr-status` lists each DR's status; only Accepted DRs bind. DR-020 modifies Step Z, which accepted DR-019 changed: re-read that section before accepting it. <!-- verify: cd "$(git rev-parse --show-toplevel)" && n=$(ls decisions/DR-*.md \| wc -l); echo "decisions/ holds $n DR files"; [ "$n" -eq 30 ] \|\| { echo "CLAIM REFUTED: expected 30"; exit 1; } --> |
 | Template / DR / verification-gate design work | `memory/dead-ends.md`: proposals already concluded as don't-retry |
 | Adding or verifying literature sources | `literature/README.md` |
 | Checking a registry or bibliography | `make coverage` (`python -m tools.coverage <registry> --strict` enforces the thresholds and the P0 floor), `make check-dois`, `make verify-bib`, `make check-registry`. A resolving DOI is not a correct entry; these tools check consistency, never whether a tier is the right one. Flags and limits: `tools/README.md`. |
@@ -93,6 +93,7 @@ Gitignored or user-global files an adopter supplies (review profile, `/release`,
 ```bash
 # from the repo root
 make paper1-pdf       # Paper 1 PDF, version-stamped on the title page (DR-026); plain pdflatex/bibtex still builds, unstamped
+make paper1-arxiv     # Paper 1 arXiv package (abstract, single spacing, .bbl) in papers/perspective/arxiv/
 make check            # lint + tests
 make drift            # session-start drift check (exit 0 none, 1 drift, 2 cannot verify)
 python -m tools.coverage papers/perspective/vv/claims/claim_registry.md --strict

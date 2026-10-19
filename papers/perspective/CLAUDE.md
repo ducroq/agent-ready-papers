@@ -1,12 +1,12 @@
 # The Verification Gap: Checking the Reasoning in AI-Assisted Academic Writing
 
-This commentary argues that AI-assisted non-empirical papers need their reasoning checked, not only their citations. EQUATOR lists about 700 reporting guidelines for empirical health research; no consensus checklist was found for verifying the reasoning of non-empirical papers.
+This paper argues that AI-assisted non-empirical papers need their reasoning checked, not only their citations. EQUATOR lists about 700 reporting guidelines for empirical health research; no consensus checklist was found for verifying the reasoning of non-empirical papers.
 
 **Core Argument:** The vocabulary for such a checklist already exists. Toulmin's layout treats every assertion as a claim resting on grounds through a warrant, with a qualifier; Whetten's criteria judge a theoretical contribution as a whole. The paper proposes: register each claim with what it rests on, check each item by its kind, and check the contribution once. It applies the procedure to itself and reports no evaluation.
 
-- **Target:** Learned Publishing, Opinion (1,000–4,000 words; decided 2026-10-16 after four model reviews), Research Integrity and Peer Review Comment (backup)
+- **Target:** Learned Publishing, Opinion (1,000–4,000 words, no abstract, no footnotes: rules at source in `../../memory/reference-learned-publishing-opinion.md`); arXiv cs.DL preprint first (`arxiv-submission.md`). Backup: Research Integrity and Peer Review, Comment
 - **Deadline:** TBD
-- **Status:** Phase 3, Writing: draft 3 on master (2026-10-19; draft 2 is tag `paper1-draft-2`). Plan and next steps: `../../docs/work-items/paper1-draft3.md` (maintainer-local)
+- **Status:** Phase 3, Writing: draft 3 plus the maintainer's feedback round (2026-10-19). Plan and next steps: `../../docs/work-items/paper1-draft3.md` (maintainer-local)
 - **agent-ready-papers:** v5.0.0 <!-- A number, not a status. Bump deliberately after reading UPGRADING.md. v4.3.0 -> v5.0.0 reconciled 2026-10-17: the registry is on the DR-027 schema and the paper has a glossary (DR-028), so both required items are met; DR-026 and DR-029 are Proposed. The P0 floor is the known red gate (#38). Earlier reconciliation notes: git history. -->
 
 <!-- This paper lives inside the framework repo, so the pin above tracks the
@@ -23,16 +23,7 @@ The proposal is DR-027's model. Every statement the paper puts forward and suppo
 
 ## Session Continuity
 
-### Starting a Session
-1. **Read this file** (CLAUDE.md) — you're doing this now
-2. **Read the backlog** (`backlog.md`) — current tasks and priorities
-3. **Check recent DRs** (`DR-*.md`) — any pending decisions?
-4. **Resume from last state** — don't restart completed work
-
-### Ending a Session
-1. Update `backlog.md` with progress
-2. Commit all changes
-3. Update this file if a major milestone was reached
+Start: this file, then the work item (its NEXT list is what "continue" means), then `backlog.md`. End: update both; `/curate` from the repo root.
 
 ## Before You Start
 
@@ -43,7 +34,7 @@ The proposal is DR-027's model. Every statement the paper puts forward and suppo
 | Adding or verifying citations | `vv/claims/claim_registry.md` — all claims with priority and status |
 | Checking coverage or DOIs for this paper | From repo root: `python -m tools.coverage papers/perspective/vv/claims/claim_registry.md` and `python -m tools.check_dois papers/perspective/vv/claims/claim_registry.md` (or `make coverage` / `make check-dois`). Prefer the tool to manually counting P0/P1/P2 percentages or eyeballing DOIs in `references.bib`. See `../../tools/README.md` for flags and known limits. |
 | Logging token cost of an operation | `vv/cost-log.md` — record `/status` deltas (or subagent `total_tokens`) after named, repeatable operations (review passes, `/curate`, `/audit-context`, batch verification, full Gate sweeps). Bootstrap data from 2026-06-08 already present. See `../../templates/cost-log.md` for the convention. |
-| Making scope or methodology decisions | Latest `DR-*.md` — decision records |
+| Making scope or methodology decisions | `../../decisions/` (`make dr-status`); DR-029 and DR-030 are Proposed and bear on this paper |
 | Reviewing before submission | `review-prompt.md` — structured peer review simulation |
 | Stuck or unsure about a claim | `anti-hallucination.md` — citation verification checklist |
 | Adding or verifying literature sources | `../../literature/README.md` — indexed sources by topic |
@@ -56,7 +47,7 @@ The proposal is DR-027's model. Every statement the paper puts forward and suppo
 - Never cite a paper without verifying it exists (DOI check or Google Scholar)
 - Never use confident language ("demonstrates", "shows", "confirms") for claims below **ESTABLISHED** tier — that is where the DR-002 mapping puts these three words.
 - Never claim own unpublished work as established — always note "under review" status
-- Never exceed word budget (3,500 words target, 5,000 max) without explicit decision record
+- Never exceed the word budget without a decision record: 4,000 is the venue limit, and `test_paper1_v5` fails above 3,800 (`make check-registry` counts; the abstract and tables don't count)
 - Never skip the anti-hallucination checklist for AI-introduced citations
 - **This paper uses the framework it describes** — all claims in this manuscript must be registered and verified using the same infrastructure presented as the contribution
 
@@ -64,31 +55,14 @@ The proposal is DR-027's model. Every statement the paper puts forward and suppo
 
 | File | Purpose |
 |------|---------|
-| `manuscript.tex` | LaTeX manuscript source |
+| `manuscript.tex` | LaTeX source: journal build `make paper1-pdf`, preprint build `make paper1-arxiv` (`\preprintmode` adds the abstract) |
+| `abstract.tex` | The abstract, used by the preprint build only |
 | `references.bib` | BibTeX references |
 | `vv/claims/claim_registry.md` | All claims with verification status |
-| `writing-guide.md` | Section-to-registry mapping with language calibration |
-| `review-prompt.md` | Peer review simulation (Variant B — non-empirical) |
-| `anti-hallucination.md` | Citation verification checklist |
-| `backlog.md` | Current tasks (created at first writing session) |
-| `DR-*.md` | Decision records (created as needed) |
-
-## Directory Structure
-
-```
-papers/perspective/
-├── CLAUDE.md                    <- This file (READ FIRST)
-├── manuscript.tex               <- LaTeX manuscript source
-├── references.bib               <- BibTeX references
-├── writing-guide.md             <- Section-to-registry mapping
-├── review-prompt.md             <- Peer review simulation
-├── anti-hallucination.md        <- Citation verification checklist
-├── backlog.md                   <- Task tracking (created during writing)
-├── DR-*.md                      <- Decision records (as needed)
-└── vv/
-    └── claims/
-        └── claim_registry.md    <- All claims with status
-```
+| `glossary.md` | This paper's terms (DR-028) |
+| `cover-letter.md`, `arxiv-submission.md` | Submission drafts: the LP cover letter, and the arXiv steps and form fields |
+| `writing-guide.md`, `review-prompt.md`, `anti-hallucination.md` | Writing calibration, peer-review simulation, citation checklist |
+| `backlog.md` | Paper-scoped tasks |
 
 ## Methodology
 
@@ -112,7 +86,7 @@ This is the framework eating its own dog food. Any friction, gaps, or false fail
 
 **Phase:** 3, Writing (draft 3, 2026-10-19). Coverage and the P0 floor: `make coverage` from the repo root; the registry header carries the last figure (3 of 6). History of drafts 1 and 2: this file's git history before 2026-10-17.
 
-**Next** (detail in the work item): the maintainer's read; a blind re-rating of the rows new or reworded for draft 3 (DR-029 condition 3); the appendix figures; four referees. Keep the draft under 3,800 words (`test_paper1_v5` fails on the near-budget warning).
+**Next:** the work item's NEXT list (friends' read, blind re-rating, scope follow-ups, preprint).
 
 ---
 

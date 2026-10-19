@@ -73,7 +73,7 @@ make check-dois    # DOI verification against Paper 1
 make check         # lint + tests
 ```
 
-Repo-maintenance checks are shell scripts in `scripts/`, not `tools/`: `make drift` (framework stamps, 0/1/2), `make dr-status`, `make gotcha-stats`, `make check-counts` (CHANGELOG counts, 0/1/2), `make read-surface` (`*.md` in maintainer-local `memory/` and `docs/work-items/` outside `archive/` vs a 100k-character budget, 0/1/2), `make check-profile` (the gitignored review profile's invariants, 0/1/2).
+Repo-maintenance checks are shell scripts in `scripts/`, not `tools/`: `make drift` (framework stamps, 0/1/2), `make dr-status`, `make gotcha-stats`, `make check-counts` (CHANGELOG counts, 0/1/2), `make read-surface` (`*.md` in maintainer-local `memory/` and `docs/work-items/` outside `archive/` vs a 100k-character budget, 0/1/2), `make check-profile` (the gitignored review profile's invariants, 0/1/2), `make paper1-arxiv` (Paper 1's arXiv source package in the gitignored `papers/perspective/arxiv/`, 0/1).
 
 ## Exit codes
 

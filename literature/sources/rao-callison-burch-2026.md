@@ -1,6 +1,6 @@
 # Rao & Callison-Burch 2026 — BibTeX citation errors in publishing agents (L58)
 
-**Reading status:** READ (abstract, 2026-09-14). Full text not read.
+**Reading status:** READ (abstract, 2026-09-14; full text §3.5–4.6 and Table 3, 2026-10-19). Cited in Paper 1 as S1-8. Note: models were given title and first author, so the study measures the details of real papers, not invention (field-level fabrication at most 2.2%, §4.2).
 
 ## Bibliographic Info
 - **Authors:** Delip Rao, Chris Callison-Burch

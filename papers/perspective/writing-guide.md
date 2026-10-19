@@ -205,7 +205,7 @@ Confidence progression for framework components:
 - Objection engaged: peer review already judges arguments. Response: a register would not replace it; it could help authors find weak steps before submission and help reviewers see where a paper's weight rests
 
 **Cautions:**
-- C1 fails the P0 tier floor (EMERGING); the appendix says so. Do not raise its language to compensate
+- C1 fails the P0 tier floor (EMERGING); Section 5 says so. Do not raise its language to compensate
 - Do NOT frame as "everyone must adopt this"; frame as "the community should develop this"
 - S5-2 is SPECULATIVE: "warrants investigation", not "should" or "will"
 
@@ -256,7 +256,7 @@ Confidence progression for framework components:
 ## Pre-Submission Checklist
 
 ### Every claim
-- [ ] All P0 claims and C1 at SUPPORTED or ESTABLISHED. Where not (C1, S2-2, S3-4 are EMERGING), the appendix says so and the gate records the failure; framing does not waive the floor
+- [ ] All P0 claims and C1 at SUPPORTED or ESTABLISHED. Where not (C1, S2-2, S3-4 are EMERGING), Section 5 says so and the gate records the failure; framing does not waive the floor
 - [ ] Language matches confidence tiers throughout
 - [ ] All quotes verified against source
 - [ ] "Own work" claims clearly marked with status

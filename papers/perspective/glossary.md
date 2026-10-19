@@ -13,6 +13,7 @@ This paper uses the framework's terms as defined in [`docs/glossary.md`](../../d
 
 | Term | Definition in this paper | Registry | Notes |
 |------|--------------------------|----------|-------|
+| **claim register** | The table, published with the paper, that records each claim with its grounds, check and confidence tier, and the contribution with its check. Toulmin's layout gives the claim rows; Whetten's account of a contribution gives the contribution row. | — | Defined in Box 1 from draft 3 (2026-10-19), after the maintainer's feedback that the paper never said what a register is. |
 | **generative AI tools** | Software that drafts or revises text with a large language model; "AI" in the paper means these. | — | Feedback #4: "AI" is defined once, then used. |
 | **AI-augmented writing** | Drafting and revision assisted by general-purpose large language models. | D4 | |
 | **non-empirical paper** | A paper whose main contribution is reasoning rather than new data: theoretical, conceptual, design-science and perspective papers are examples, not a closed list. | D3 (own) | The reviewers of draft 1 rejected the four types as a taxonomy (#10); draft 2 uses them as examples. |
@@ -36,7 +37,7 @@ This paper uses the framework's terms as defined in [`docs/glossary.md`](../../d
 | CONSORT | Consolidated Standards of Reporting Trials | Named as an EQUATOR example. |
 | DOI | Digital Object Identifier | |
 | EQUATOR | Enhancing the QUAlity and Transparency Of health Research (Network) | Draft 2 expands it at first use, abstract included (#5). |
-| ID | identifier (registry entries) | Appendix table. |
+| ID | identifier (registry entries) | Section 5 tables. |
 | GPT | Generative Pre-trained Transformer (OpenAI model family) | Only in reported study results. |
 | GRADE | Grading of Recommendations Assessment, Development and Evaluation | New in draft 2. |
 | IPCC | Intergovernmental Panel on Climate Change | New in draft 2. |
