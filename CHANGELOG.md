@@ -34,6 +34,11 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
   - The introduction names three errors, one for each of the register's checks: citation errors, confidence inflation, and a claim that says more than its correctly cited sources. The third is shown by the paper's own case (new claim S1-9).
   - The detection paragraph now cites Jabarian & Imas 2025 and ICMJE 2026, replacing the 2023–24 studies. A detector's verdict on directed, AI-drafted text concerns the drafting, not whether the text holds.
   - `test_paper1_v5` skips only the near-budget note, and expects 21 premises findings.
+- arXiv preparation (2026-10-20):
+  - `arxiv-submission.md` leaves the primary category open. Since 2025-10-31, arXiv CS has posted position papers only after peer review, and the exemption for research papers on societal impact does not obviously cover this one. The file lists the options.
+  - It also records a clean-compile check against arXiv's guidance.
+  - The PDF carries a title and author (`pdfusetitle`).
+  - `blog-draft.md` holds a companion blog post and a LinkedIn post.
 
 ### Adopter notes
 No adopter action required.

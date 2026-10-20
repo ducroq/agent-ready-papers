@@ -4,7 +4,7 @@ This paper argues that AI-assisted non-empirical papers need their reasoning che
 
 **Core Argument:** The vocabulary for such a checklist already exists. Toulmin's layout treats every assertion as a claim resting on grounds through a warrant, with a qualifier; Whetten's criteria judge a theoretical contribution as a whole. The paper proposes: register each claim with what it rests on, check each item by its kind, and check the contribution once. It applies the procedure to itself and reports no evaluation.
 
-- **Target:** Learned Publishing, Opinion (1,000–4,000 words, no abstract, no footnotes: rules at source in `../../memory/reference-learned-publishing-opinion.md`); arXiv cs.DL preprint first (`arxiv-submission.md`). Backup: Research Integrity and Peer Review, Comment
+- **Target:** Learned Publishing, Opinion (1,000–4,000 words, no abstract, no footnotes: rules at source in `../../memory/reference-learned-publishing-opinion.md`); arXiv preprint first, category undecided because of arXiv's CS position-paper rule (`arxiv-submission.md`). Backup: Research Integrity and Peer Review, Comment
 - **Deadline:** TBD
 - **Status:** Phase 3, Writing: draft 3 plus the maintainer's feedback round (2026-10-19). Plan and next steps: `../../docs/work-items/paper1-draft3.md` (maintainer-local)
 - **agent-ready-papers:** v5.0.0 <!-- A number, not a status. Bump deliberately after reading UPGRADING.md. v4.3.0 -> v5.0.0 reconciled 2026-10-17: the registry is on the DR-027 schema and the paper has a glossary (DR-028), so both required items are met; DR-026 and DR-029 are Proposed. The P0 floor is the known red gate (#38). Earlier reconciliation notes: git history. -->
@@ -47,7 +47,7 @@ Start: this file, then the work item (its NEXT list is what "continue" means), t
 - Never cite a paper without verifying it exists (DOI check or Google Scholar)
 - Never use confident language ("demonstrates", "shows", "confirms") for claims below **ESTABLISHED** tier — that is where the DR-002 mapping puts these three words.
 - Never claim own unpublished work as established — always note "under review" status
-- Never exceed the word budget without a decision record: 4,000 is the venue limit, and `test_paper1_v5` fails above 3,800 (`make check-registry` counts; the abstract and tables don't count)
+- Never exceed the word budget without a decision record: 4,000 is the venue limit, and `test_paper1_v5` fails above 4,000 (the preamble counts too) (`make check-registry` counts; the abstract and tables don't count)
 - Never skip the anti-hallucination checklist for AI-introduced citations
 - **This paper uses the framework it describes** — all claims in this manuscript must be registered and verified using the same infrastructure presented as the contribution
 
@@ -90,4 +90,4 @@ This is the framework eating its own dog food. Any friction, gaps, or false fail
 
 ---
 
-*Last updated: 2026-10-19*
+*Last updated: 2026-10-20*

@@ -1,6 +1,6 @@
 # Paper 1 — Backlog
 
-Last updated: 2026-10-19 (evening). The draft-3 plan and its next steps are in `../../docs/work-items/paper1-draft3.md` (maintainer-local), which comes first. Done items, the tier-remediation log, the draft-1 feedback triage (2026-10-16) and the Decision A/B record: this file's git history before 2026-10-19; draft 3 answers most of them (Toulmin's "claim", priority explained, acronyms, S1-5 dropped, Decision B became DR-029, venue chosen: Learned Publishing Opinion).
+Last updated: 2026-10-20. The draft-3 plan and its next steps are in `../../docs/work-items/paper1-draft3.md` (maintainer-local), which comes first. Done items, the tier-remediation log, the draft-1 feedback triage (2026-10-16) and the Decision A/B record: this file's git history before 2026-10-19; draft 3 answers most of them (Toulmin's "claim", priority explained, acronyms, S1-5 dropped, Decision B became DR-029, venue chosen: Learned Publishing Opinion).
 
 ## Active
 
@@ -10,7 +10,7 @@ Last updated: 2026-10-19 (evening). The draft-3 plan and its next steps are in `
 ## Maintainer decisions
 
 - [ ] Sole author, or seek co-authors (Gate 3 assumes none found)
-- [x] arXiv preprint (cs.DL) first or at submission, after the friends' read (2026-10-19). Steps: `arxiv-submission.md`
+- [ ] arXiv preprint after the friends' read; package prepared and checked 2026-10-20; category undecided (arXiv's CS position-paper rule). Steps: `arxiv-submission.md`
 - [ ] Pre-submission enquiry to the Learned Publishing editors
 - [ ] Gate 3 review before submission: by the maintainer unless a co-author is found
 
