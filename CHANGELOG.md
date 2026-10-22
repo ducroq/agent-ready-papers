@@ -39,6 +39,10 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
   - It also records a clean-compile check against arXiv's guidance.
   - The PDF carries a title and author (`pdfusetitle`).
   - `blog-draft.md` holds a companion blog post and a LinkedIn post.
+- `papers/perspective/CLAUDE.md` has a new hard constraint: reader feedback stays in the gitignored `feedback/` or `memory/`, and tracked files and commit messages refer to "a reader" or "a reviewer".
+
+### Literature
+- L113, Muller 2017, "What is an Analytic Summary?": a course handout on reconstructing a paper's argument (claims, arguments, objections, responses). It maps onto the DR-027 model. One open question is a possible independent check: a reader reconstructs the argument without the registry, and the two are compared. Unpublished, so not citable.
 
 ### Adopter notes
 No adopter action required.
