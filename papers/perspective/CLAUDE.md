@@ -33,7 +33,7 @@ Start: this file, then the work item (its NEXT list is what "continue" means), t
 | Writing or editing prose for a reader | The maintainer's private house-voice profile (maintainer-local; ask for it), then `make formula-scan` from the repo root (tier language in `writing-guide.md` still wins) |
 | Adding or verifying citations | `vv/claims/claim_registry.md` — all claims with priority and status |
 | Checking coverage or DOIs for this paper | From repo root: `python -m tools.coverage papers/perspective/vv/claims/claim_registry.md` and `python -m tools.check_dois papers/perspective/vv/claims/claim_registry.md` (or `make coverage` / `make check-dois`). Prefer the tool to manually counting P0/P1/P2 percentages or eyeballing DOIs in `references.bib`. See `../../tools/README.md` for flags and known limits. |
-| Logging token cost of an operation | `vv/cost-log.md` — record `/status` deltas (or subagent `total_tokens`) after named, repeatable operations (review passes, `/curate`, `/audit-context`, batch verification, full Gate sweeps). Bootstrap data from 2026-06-08 already present. See `../../templates/cost-log.md` for the convention. |
+| Logging token cost of an operation | `vv/cost-log.md` — record `/status` deltas (or subagent `total_tokens`) after named, repeatable operations (review passes, `/curate`, `/audit-context`, batch verification, full Gate sweeps). See `../../templates/cost-log.md` for the convention. |
 | Making scope or methodology decisions | `../../decisions/` (`make dr-status`); DR-029 and DR-030 are Proposed and bear on this paper |
 | Reviewing before submission | `review-prompt.md` — structured peer review simulation |
 | Stuck or unsure about a claim | `anti-hallucination.md` — citation verification checklist |
@@ -49,6 +49,7 @@ Start: this file, then the work item (its NEXT list is what "continue" means), t
 - Never claim own unpublished work as established — always note "under review" status
 - Never exceed the word budget without a decision record: 4,000 is the venue limit, and `test_paper1_v5` fails above 4,000 (the preamble counts too) (`make check-registry` counts; the abstract and tables don't count)
 - Never skip the anti-hallucination checklist for AI-introduced citations
+- **Reader feedback is private.** Responses stay in `feedback/` (gitignored) or `../../memory/`. Tracked files and commit messages say "a reader" or "a reviewer": no names, no quotes from private correspondence. Named thanks only with the person's consent.
 - **This paper uses the framework it describes** — all claims in this manuscript must be registered and verified using the same infrastructure presented as the contribution
 
 ## Key Files

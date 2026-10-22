@@ -237,6 +237,14 @@ Sources consulted during the development of this project, particularly for DR-00
 | L111 | Groth, Gibson & Velterop | 2010 | The anatomy of a nanopublication | Information Services & Use | [groth-2010-nanopublication](sources/groth-2010-nanopublication.md) | READ (full) |
 | L112 | Budescu, Broomell & Por | 2009 | Improving Communication of Uncertainty in the Reports of the Intergovernmental Panel on Climate Change | Psychological Science | [budescu-2009-ipcc-uncertainty](sources/budescu-2009-ipcc-uncertainty.md) | READ (abstract, method, results, recommendations) |
 
+### Argument reconstruction by the reader
+
+<!-- Seeded 2026-10-22. Unpublished teaching material, received from a personal contact: not citable, and not a ground for any claim. -->
+
+| ID | Author(s) | Year | Title | Venue | File | Status |
+|----|-----------|------|-------|-------|------|--------|
+| L113 | Muller | 2017 | What is an Analytic Summary? | Course handout (unpublished) | [muller-2017-analytic-summary](sources/muller-2017-analytic-summary.md) | READ (full, 1 page) |
+
 ### Readability, Engagement and Homogenisation
 
 <!-- Seeded 2026-09-27 from the readability half of the detector scan (work item point 3).
