@@ -61,3 +61,6 @@ __pycache__/
 .ruff_cache/
 .coverage
 htmlcov/
+
+# off-repo working data (~/lab/agent-ready-papers)
+/lab
