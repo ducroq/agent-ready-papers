@@ -70,7 +70,7 @@ editing, and such editing can be detected in every major discipline
 % D4: AI-augmented writing (definition, accepted)
 \citep{liang2025}.  In this paper ``generative AI tools'', or ``AI'' for
 short, means these assistants.  When a human author falls short, the text
-tends to show it, in awkward phrasing or gaps in coverage.  An
+can show it, in awkward phrasing or gaps in coverage.  An
 AI-assisted draft can read as polished and complete while it contains
 errors that only checking would reveal.
 
@@ -237,8 +237,8 @@ Claim register (Section~4) & Academic papers & yes & yes & yes & yes \\
 \textsuperscript{a}~Each claim is paired with an evidence packet
 \citep{chen2026}.
 \textsuperscript{b}~Whether the evidence supports the claim
-\citep{chen2026} or, on a sample, suffices \citep{zhou2026}; not whether
-the step holds for readers.
+\citep{chen2026} or, on a sample, suffices \citep{zhou2026}; not a
+check of each claim's step.
 \textsuperscript{c}~Causal wording checked against the study design
 \citep{samsonau2026}.
 \textsuperscript{d}~One question or item on the argument as a whole.
@@ -259,8 +259,10 @@ exist.  One linter also checks causal language against the study design
 author \citep{chen2026}, and a provenance discipline samples whether the
 evidence suffices \citep{zhou2026}.  A checklist for cited assertions in
 narrative reviews is in development \citep{vanra2026}.  As their authors describe them, each asks whether
-evidence exists and supports a claim; none describes a check of whether
-the step from grounds to claim holds for its readers.
+evidence exists and supports a claim; Zhou and Yu judge sufficiency on
+a sample, and their tiers rate metrics.  None describes a check, for
+each claim in the prose, of whether its grounds bear on it and justify
+its wording, and what would make the step fail.
 
 The appraisal tools come closer to the reasoning.  The evidence-synthesis
 organisation JBI has a consensus-based checklist for appraising expert
@@ -453,15 +455,18 @@ Emerging    & One peer-reviewed source; two or more that are not; or pilot data 
 Speculative & No source reports the point, or a single one that is not peer-reviewed & Failed & ``warrants investigation'' \\
 \bottomrule
 \end{tabular}
+
+\smallskip\raggedright A claim about what one source says may reach
+Established (this paper holds such claims at Supported); searches and design trials are rated by method (proposed rules).
 \end{table}
 
 \paragraph{Priority.}
 Every claim also carries a \emph{priority}, the author's answer to the
 question of what fails if the claim is wrong.  A P0 claim is one the
 paper fails without; P1 strengthens the argument; P2 gives context.
-Priority is guidance on how much checking a claim deserves.  It is not a
-gate: a paper whose central claims stay at Emerging is reporting how
-far its evidence goes, and the register makes that visible.
+Priority sets how much checking a claim deserves, and every P0 entry,
+the contribution included, should reach the Supported tier.  A paper whose central claims stay at
+Emerging falls short of that floor; the register makes this visible.
 
 % S3-2: Whetten as a check of the contribution (descriptive, P1, EMERGING)
 \paragraph{The contribution.}
@@ -594,7 +599,7 @@ formally to improve LLM review aggregation \citep{peerarg2024}.  Both
 are narrow tasks, so they suggest only that structure combined with
 LLMs may help with checking as well.
 
-The register asks work of authors; this paper's has 36 entries.
+The register asks work of authors; this paper's has 37 entries.
 A shorter form, the warrant check's questions for a reviewer to ask of
 the central claims, may suit many papers better.  Toulmin's and
 Whetten's frameworks come from Western academic traditions, and
@@ -661,9 +666,9 @@ glossary in sessions separate from the drafting: DeepSeek-V4-Pro,
 Gemini 3.1 Pro (preview), GPT-6 (OpenAI, through ChatGPT), and Claude
 Opus 5.5 and Claude Fable 5.1 (Anthropic).  Their reviews informed this version.  The author takes full responsibility for the content.
 This work received no specific funding.
-Verification record, run on this version on 19 October 2026: all 21
-DOIs in the claim register resolve; of the 42 bibliography entries
-with a DOI, 33 match their Crossref or DataCite record and 9 differ in
+Verification record, run on this version on 26 October 2026: all 22
+DOIs in the claim register resolve; of the 43 bibliography entries
+with a DOI, 34 match their Crossref or DataCite record and 9 differ in
 minor fields (such as an author list cut short with ``others''), with
 none failing; the register's consistency check finds no schema, anchor
 or tier errors, and eight claims rest on entries that await an independent

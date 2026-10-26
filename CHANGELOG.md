@@ -40,6 +40,13 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
   - The PDF carries a title and author (`pdfusetitle`).
   - `blog-draft.md` holds a companion blog post and a LinkedIn post.
 - `papers/perspective/CLAUDE.md` has a new hard constraint: reader feedback stays in the gitignored `feedback/` or `memory/`, and tracked files and commit messages refer to "a reader" or "a reviewer".
+- A second review by Codex CLI (2026-10-26) found six problems. All six held when checked against the sources, and all are fixed:
+  - Priority is no longer called "not a gate". DR-002's P0 floor applies to every P0 entry, the contribution included.
+  - The difference from Zhou & Yu is named: their sufficiency audit works on a sample and rates metrics. S1-4 still reads the four tools' own descriptions.
+  - A note under the tier table says how claims about one source, searches and design trials are rated.
+  - The human-shortfalls sentence is hedged ("can show").
+  - The register has 37 entries (was "36"). The verification record was rerun on 26 October: 22 register DOIs, and 43 bibliography entries with a DOI, of which 34 match.
+  - The manuscript is about 24 words over its 4,000-word budget, accepted while it is a draft.
 
 ### Literature
 - L113, Muller 2017, "What is an Analytic Summary?": a course handout on reconstructing a paper's argument (claims, arguments, objections, responses). It maps onto the DR-027 model. One open question is a possible independent check: a reader reconstructs the argument without the registry, and the two are compared. Unpublished, so not citable.
