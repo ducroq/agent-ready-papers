@@ -61,15 +61,16 @@ agent-ready-papers/
 ├── agents/                <- portable role prompts (equation-checker, review-prompt)
 ├── templates/             <- fill-in templates for new paper projects
 ├── decisions/             <- DR-001 … (status: `make dr-status`)
-├── extensions/            <- staged, not-yet-accepted surfaces (agent prompts, two tools, a template)
+├── extensions/            <- staged, not-yet-accepted surfaces
 ├── literature/            <- source registry; pdfs/ gitignored
 ├── docs/                  <- framework summary, thresholds, verification hooks; work-items/ on demand
-├── tools/                 <- Python registry tooling (coverage, DOIs, metadata, consistency); see tools/README.md
+├── tools/                 <- Python registry tooling; see tools/README.md
 ├── scripts/               <- shell mechanisation; listed in tools/README.md
 ├── tests/                 <- tests for tools/
 ├── papers/perspective/    <- Paper 1 "The Verification Gap"; other papers/* are gitignored sub-projects
-├── vv/                    <- framework self-application (cost log, hypothesis log, experiments, evidence)
-└── memory/                <- gitignored, local-only git history (no remote); archive/ for retired files
+├── vv/                    <- framework self-application (cost log, hypotheses, experiments, evidence)
+├── memory/                <- gitignored, local-only git (no remote); archive/ for retired files
+└── lab -> ~/lab/agent-ready-papers  <- gitignored symlink: off-repo working data (reviews)
 ```
 
 ## Key Paths
