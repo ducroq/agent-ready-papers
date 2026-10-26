@@ -107,6 +107,9 @@
 **Domain:** Review method (DR-011), reader panels
 **Status:** open (EXP-001 preregistered)
 
+**Evidence (2026-10-26):** a second review by another vendor's model (Codex CLI, GPT-6.1) on Paper 1 draft 3 found two method-level problems that the earlier rounds had not raised: the manuscript called priority "not a gate", against an accepted DR; and the distinction from the closest prior work was not stated in checkable terms. Its four other findings were counts and one unregistered sentence. All six held.
+
+
 ### [2026-08-16] The third-party ceiling lives in the interpretive layer, not the factual one
 
 **Position (provisional):** Successor to the split entry now in [`hypothesis-log-resolved.md`](hypothesis-log-resolved.md), carrying only the half that survived. **In any third-party audit, coverage of ARGUMENT and PROPOSITION units will be at or near 0%, whatever the CLAIM coverage turns out to be.** The mechanism is Toulmin item 2: an ARGUMENT is verified only when each of its grounds is `[x]`, and its grounds are the audited text's own units. Where those units are closeable by a reader — reproducible arithmetic, checkable references — the CLAIM layer can go high; the interpretive layer still cannot, because the audited author's *inferences* are not reproducible in the way their arithmetic is. Observed twice: 0 of 22 and 0 of 6. The documents share no subject matter — but they share the maintainer, the repo, the instruments, the registry template, the Toulmin criterion and a three-day window, which is everything that governs the measurement. And by the argument below, only the second observation is informative. **Read this as n=1 with a consistent n=2, not as a replication.**
