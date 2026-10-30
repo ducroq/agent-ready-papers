@@ -54,6 +54,7 @@ Start: this file, then the work item (its NEXT list is what "continue" means), t
 | `manuscript.tex` | LaTeX source: journal build `make paper1-pdf`, preprint build `make paper1-arxiv` (`\preprintmode` adds the abstract) |
 | `abstract.tex` | The abstract, used by the preprint build only |
 | `references.bib` | BibTeX references |
+| `figures/fig-register.tex` | Figure 1 source. Nothing rebuilds `fig-register.pdf`: run `pdflatex` in `figures/` after any edit. LP takes the PDF as a separate file |
 | `vv/claims/claim_registry.md` | All claims with verification status |
 | `glossary.md` | This paper's terms (DR-028) |
 | `cover-letter.md`, `arxiv-submission.md` | Submission drafts: the LP cover letter, and the arXiv steps and form fields |

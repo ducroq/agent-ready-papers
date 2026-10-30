@@ -8,7 +8,7 @@ Prepared 2026-10-19. Build the package with `make paper1-arxiv`; it writes `arxi
    The paper's Code and data availability section names that tag, and the title-page stamp reads it.
 2. `make paper1-arxiv`. The stamp must read `paper1-preprint-1`, not `…-dirty`. Check `arxiv/manuscript.pdf`.
 3. If you haven't posted in the chosen category before, arXiv may ask for an **endorsement**; since 2026-01-21 an institutional email no longer qualifies on its own. Request one early: it can take days.
-4. Upload `arxiv/paper1-arxiv.tar.gz` (or the three files in `arxiv/src/`), remove any extracted file arXiv flags as unnecessary, and fill in the form below. Read arXiv's generated PDF page by page before confirming: announced content is archival.
+4. Upload `arxiv/paper1-arxiv.tar.gz` (or the files in `arxiv/src/`, keeping the figure in `figures/`), remove any extracted file arXiv flags as unnecessary, and fill in the form below. Read arXiv's generated PDF page by page before confirming: announced content is archival.
 5. After the arXiv ID arrives: add it to the cover letter (prior posting) and to `backlog.md`. Declare it on submission to Learned Publishing.
 6. After acceptance: update the arXiv record with a link to the published version (Wiley's preprint policy).
 
@@ -31,7 +31,7 @@ Prepared 2026-10-19. Build the package with `make paper1-arxiv`; it writes `arxi
 
 Checked against arXiv's [whytex](https://info.arxiv.org/help/faq/whytex.html) and [common mistakes](https://info.arxiv.org/help/faq/mistakes.html) pages, [Campbell](https://trevorcampbell.me/html/arxiv.html) and [Huston](https://www.ianhuston.net/2011/03/checklist-for-arxiv-submission/), by compiling the extracted tarball in a clean folder with pdflatex only (no BibTeX), four passes:
 
-- Source, not PDF; three files, flat, relative paths, no `.git` or generated files; `.bbl` shipped, `.bib` not (plain BibTeX, so the biblatex `.bbl`-version issue does not apply).
+- Source, not PDF; three files and the figure (`figures/fig-register.pdf`, added 2026-10-30 after this check: compile the tarball in a clean folder again before uploading), relative paths, no `.git` or generated files; `.bbl` shipped, `.bib` not (plain BibTeX, so the biblatex `.bbl`-version issue does not apply).
 - No comments beyond the stamp line; no TODOs; no `\cite` in a caption; no custom `.sty`; Latin Modern, all fonts embedded.
 - No errors, undefined references or overfull boxes; text identical to the local build; spellcheck flags names and terms only.
 - PDF title and author set (`pdfusetitle` plus `\hypersetup{pdfauthor=…}`; they were empty). A full `\hypersetup` title cost 15 words on the budget counter, which counts the preamble.

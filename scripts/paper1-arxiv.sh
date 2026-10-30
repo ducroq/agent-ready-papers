@@ -40,6 +40,8 @@ strip_comments() { [ -s "$1" ] || { echo "missing or empty: $1" >&2; exit 1; }; 
 } >"$src/manuscript.tex"
 strip_comments "$paper/abstract.tex" >"$src/abstract.tex"
 cp "$paper/references.bib" "$out/references.bib"
+mkdir -p "$src/figures"
+cp "$paper/figures/fig-register.pdf" "$src/figures/"
 
 # Build once with BibTeX to make the .bbl. Each step is checked on its own line: set -e
 # is off inside a subshell on the left of ||, so that form would hide a failed step.

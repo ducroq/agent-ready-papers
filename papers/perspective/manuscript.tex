@@ -8,6 +8,7 @@
 \usepackage[pdfusetitle]{hyperref}
 \hypersetup{pdfauthor={Jeroen Veen}}
 \usepackage{booktabs}
+\usepackage{graphicx}
 \usepackage{array}
 \usepackage{url}
 \usepackage{setspace}
@@ -332,6 +333,13 @@ gives the contribution's row, checked once as a whole.  Box~1 gives the
 terms; the framework's glossary defines them from their sources
 \citep{veen2026repo}.
 
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{figures/fig-register.pdf}
+\caption{The claim register's checks.  Each kind of grounds gets its own check, so a claim gets the checks of the grounds it has; the contribution is checked once, as a whole.  Teal: checks of each claim; amber: the check of the contribution.}
+\label{fig:register}
+\end{figure}
+
 \begin{table}[htbp]
 \centering
 \caption*{\textbf{Box 1.} Terms used in this paper.}
@@ -382,7 +390,7 @@ scored argument quality element by element, with two raters each
 that application is a further step.
 
 \paragraph{Checks by kind of grounds.}
-In the register, each claim is recorded with its grounds item by item,
+In the register (Figure~\ref{fig:register}), each claim is recorded with its grounds item by item,
 and each kind of grounds gets its own check:
 \begin{itemize}
 \item a \textbf{source} is checked in two steps: the work exists, and it says what the claim attributes to it, for the cases and period the claim covers;
@@ -491,7 +499,7 @@ shows that a product ``accomplishes the intended purpose in the intended
 environment'' \citep[\S2.0]{nasa2016}.  Checking each claim against its
 grounds and warrant is verification in this sense; asking Whetten's
 questions of the contribution is closer to validation.  The mapping is
-mine.  The register then works as a traceability record, of the kind systems engineers keep for requirements.  Each link is
+mine.  The register then works as a traceability record, like those systems engineers keep for requirements.  Each link is
 written down, from the contribution to its claims, from a claim to its
 grounds and from grounds to their sources, so that someone else can
 follow and check it.  The IPCC asks its authors for a ``traceable account'' of
