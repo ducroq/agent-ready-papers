@@ -28,7 +28,7 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 | Running a portable agent-role prompt | `agents/` (equation checker, peer reviewer); works in any agent |
 | Using an agent other than Claude Code | `docs/non-claude-setup.md` |
 | Wiring a check into the edit loop | `docs/verification-hooks.md` |
-| Before committing | `/review-changes` (user-global). This repo's half is `.claude/review-profile.md`, and the skill stops without it. Every path in the profile's guarantee list must sit in its HIGH row. |
+| Before committing | `/review-changes` (user-global). This repo's half is `.claude/review-profile.md`, and the skill stops without it; `make check-profile` checks its invariants. |
 | Cutting a release | `/release` (project-local, user-invoked only). Writes the CHANGELOG and UPGRADING entries and both stamps, then stops before tagging. |
 | Ending a session | `/curate` (user-global) |
 | Monthly or after restructuring | `/audit-context` (user-global) |
@@ -97,10 +97,7 @@ make paper1-pdf       # Paper 1 PDF, version-stamped on the title page (DR-026);
 make paper1-arxiv     # Paper 1 arXiv package (abstract, single spacing, .bbl) in papers/perspective/arxiv/
 make check            # lint + tests
 make drift            # session-start drift check (exit 0 none, 1 drift, 2 cannot verify)
-python -m tools.coverage papers/perspective/vv/claims/claim_registry.md --strict
-make check-dois       # needs network
-make verify-bib
-make check-registry
 ```
+Registry and bibliography checks: the *Checking a registry* row above.
 
 Citation verification: the Step 0 + 6-step checklist in `papers/perspective/anti-hallucination.md`. Peer-review simulation: `papers/perspective/review-prompt.md`, three passes per DR-011.
