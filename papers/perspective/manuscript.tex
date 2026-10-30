@@ -505,15 +505,16 @@ check run by the author, or by the author's AI tools, can err in the
 author's favour, which is why only a check confirmed by someone else can
 reach the Established tier.
 
-% S3-4: Each claim needs the checks its grounds call for (descriptive, P0, EMERGING)
-The central argument of the proposal rests on these pieces.  A check
-that rates an inference by counting its sources does not look at the step from grounds to claim.  It cannot tell a sound inference from an
-unsound one, and it may fail a sound inference for the wrong reason.
-Recording each claim's grounds item by item, and letting the kind of
-grounds decide the check, may avoid such false failures.  The argument
-rests on design reasoning and on two trial registries kept by the
-framework's own tooling, and no such false failure has yet been documented in a paper
-written by someone else.
+% S3-4: Checks chosen by the kind of grounds may avoid false passes and false failures (descriptive, P0, EMERGING)
+The central argument of the proposal rests on these pieces.  A citation
+check, or a rating that counts sources, does not look at the step from
+grounds to claim: it can pass a claim that says more than its sources
+carry, and fail a sound inference with no source to count.  A check chosen
+by the kind of grounds (a source against the claim's scope, an inference
+against its qualifier) looks at that step and may avoid both errors.  In this
+paper's register a scope check found three overreaches after a reader
+found the first (Section~1); the remedy is untried on another author's
+paper.
 
 % ===============================================================
 % SECTION 5 (was the appendix; Learned Publishing takes appendices only as separate files)
@@ -564,7 +565,7 @@ Why   & Citation checks pass weak reasoning (S1-7), reporting guidelines check r
 Who, where, when & Papers whose contribution is an argument, and the interpretive parts of empirical papers; other writing, such as journalism, untested; frameworks from Western traditions. \\
 What's new & The combination: each part is used elsewhere (S4-6 to S4-8, S3-6), and none of the compared approaches combines them for academic papers (S4-9). \\
 Values & Published reasoning should be checkable (D1); a proposal should be tested before it is adopted (D7). \\
-Objections & Peer review already judges arguments: a register would support review, not replace it.  The register burdens authors: a shorter reviewer form is named as an option (Section~\ref{sec:limits}). \\
+Objections & Peer review already judges arguments: a register would support review, not replace it.  The register burdens authors: a shorter reviewer form is named as an option (Section~\ref{sec:limits}).  An AI can draft a register fluently: the register's author must check each entry by hand. \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -576,7 +577,7 @@ at Emerging: the gap claim (S2-2), the central argument (S3-4) and the
 contribution (C1), which rests on both.  Under the rule in
 Table~\ref{tab:confidence} they stay at Emerging for reasons that are
 named and could be removed: the search had one screener (S2-2), and the
-trial registries were kept by one author's tooling (S3-4).  A second
+remedy was tried only by one author (S3-4).  A second
 screener and a register kept by someone else are the evidence this
 paper still lacks.
 
@@ -586,20 +587,14 @@ paper still lacks.
 \section{Limitations}
 \label{sec:limits}
 
-% S4-3: Structure plus LLMs (descriptive, P1, EMERGING)
 Its parts have users elsewhere (Section~3), but the register itself
 has one so far: the author of this paper.  Whether it works in other
 hands is untested.  Its
-reviews came from five language models from four vendors, which read
-the first two drafts in sessions separate from the drafting.  They are independent of the drafting but not of the method, and no substitute
-for human reviewers.  Whether tools can carry part of the work is also
-open.  Structured prompting was reported to improve LLM argument
-extraction \citep{gupta2024}, and representing support and attack
-formally to improve LLM review aggregation \citep{peerarg2024}.  Both
-are narrow tasks, so they suggest only that structure combined with
-LLMs may help with checking as well.
+reviews came from five language models from four vendors, in sessions
+separate from the drafting.  They are independent of it but not of the method, and no substitute
+for human reviewers.
 
-The register asks work of authors; this paper's has 37 entries.
+The register asks work of authors; this paper's has 36 entries.
 A shorter form, the warrant check's questions for a reviewer to ask of
 the central claims, may suit many papers better.  Toulmin's and
 Whetten's frameworks come from Western academic traditions, and
@@ -609,7 +604,10 @@ assessed.
 
 The checks are also partly circular: the author who wrote the rules
 applies them, and the warrant check is a judgement, recorded with its
-reasons so that someone else can disagree with it.
+reasons so that someone else can disagree with it.  A register is
+itself text that an AI tool can draft fluently, as it drafted this
+paper's, so its author must check each entry by hand before others
+rely on it.
 
 % ===============================================================
 % SECTION 7
@@ -666,9 +664,9 @@ glossary in sessions separate from the drafting: DeepSeek-V4-Pro,
 Gemini 3.1 Pro (preview), GPT-6 (OpenAI, through ChatGPT), and Claude
 Opus 5.5 and Claude Fable 5.1 (Anthropic).  Their reviews informed this version.  The author takes full responsibility for the content.
 This work received no specific funding.
-Verification record, run on this version on 26 October 2026: all 22
-DOIs in the claim register resolve; of the 43 bibliography entries
-with a DOI, 34 match their Crossref or DataCite record and 9 differ in
+Verification record, run on this version on 30 October 2026: all 22
+DOIs in the claim register resolve; of the 43 entries with a DOI in the
+bibliography file, 34 match their Crossref or DataCite record and 9 differ in
 minor fields (such as an author list cut short with ``others''), with
 none failing; the register's consistency check finds no schema, anchor
 or tier errors, and eight claims rest on entries that await an independent

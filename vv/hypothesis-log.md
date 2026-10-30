@@ -26,6 +26,25 @@
 
 ## Open
 
+### [2026-10-30] A blind reader's analytic summary finds gaps the author's register does not record
+
+**Position (provisional):** A reader who reconstructs a paper's argument from its text alone, following Muller's analytic summary (L113), finds claims, warrants and objections that the author's own register misses. So the comparison is a check the register cannot run on itself. First trial, Paper 1 at `paper1-draft-3-13-ga7c9eeb`: two blind machine readers (a fresh Claude agent, and Codex given only the text in its prompt). Both recovered the central claims; recall against the register's 37 rows was not measured. Their findings:
+- the Claude reader only: a missing claim (the central argument, S3-4, argued only against false failures, while Section 1's problem is false passes) and an unengaged objection (an AI drafted the register, and a register can be as fluent and unsound as prose);
+- both readers, independently: the relevance test mishandles overlapping grounds, and how ratings combine or pass through argued claims is underspecified (Codex also: the tier thresholds are not argued).
+
+Draft 4 acts on the two Claude-only findings; the two shared ones stay open (work item). Raw output: `lab/reviews/` (maintainer-local).
+
+**Alternative:** Human blind summaries find nothing beyond what machine readers or the register already hold, or the disagreements are mostly misreadings rather than gaps. The comparison would then add cost without adding findings.
+
+**Method:** Compare the machine summaries with a human reader's analytic summary of the same draft, once one arrives. For each finding: did the register record it, did a machine reader find it, and did the author act on it? Two readers agreeing counts for more than one alone; a finding is held only after it is checked against the text.
+
+**Revisit trigger:** The first human analytic summary of Paper 1, or the first one of another author's paper.
+
+**Review by:** 2027-03-31
+
+**Domain:** Independent checking of the register; DR-029's `confirmed`; Paper 2 evaluation (DR-006)
+**Status:** open
+
 ### [2026-10-16] DR-029 predictions: Paper 1's three below-floor P0 items stay EMERGING
 
 **Position (provisional):** Under DR-029 as committed (`63a05e8`), C1, S2-2 and S3-4 all stay at EMERGING. S2-2 and S3-4 get a `partial` warrant check (S2-2: the search and sources do not cover the absence claim across all four paper types; S3-4: one trial migration, no cross-author replication); C1 is capped by S3-4. Predicted by ChatGPT from a prompt holding only the rule and the registry rows, before any re-rating (confidence: high, high, medium). Gemini, given the same prompt separately, predicted the same three outcomes at the same confidence; its stated limiting point for S3-4 (S3-2) is not one of S3-4's grounds. Both answers: `docs/work-items/archive/2026-10-17-dr029-trial/` (maintainer-local).

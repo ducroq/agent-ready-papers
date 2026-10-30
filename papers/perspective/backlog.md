@@ -5,6 +5,7 @@ Last updated: 2026-10-20. The draft-3 plan and its next steps are in `../../docs
 ## Active
 
 - [ ] Draft 3: friends' read, blind re-rating (DR-029 condition 3), Section 5 figures, scope follow-ups. The order is in the work item.
+- [ ] Refresh `writing-guide.md`'s claim mapping: it still lists S1-5 (dropped for draft 3) and S4-3 (cut for draft 4) as live claims.
 - [x] DR-025 slot 3: the verification record is filled from the 2026-10-19 tool runs. Rerun it at submission.
 
 ## Maintainer decisions
