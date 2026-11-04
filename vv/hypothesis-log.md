@@ -26,6 +26,22 @@
 
 ## Open
 
+### [2026-11-04] A row that passes says little about the sentences that restate it
+
+**Position (provisional):** Restatements of a claim drift from its register row even when the row passes its checks, and the drift gathers in summary surfaces such as tables. So a trace of central claims through their restatements finds problems the row checks cannot.
+
+**Evidence so far:** one paper, one pass by an AI reader, verdicts not yet confirmed by the author. Paper 1's six P0 entries gave 5 clear and 2 arguable mismatches, 4 of the 7 in summary tables; neither `make check-registry` nor `make formula-scan` flagged them (`papers/perspective/vv/traces/2026-11-04-p0-restatement-trace.md`, S3-8, #73).
+
+**Alternative:** The drift is a habit of this author's tooling, or of a paper edited through many drafts, and a first-draft paper by someone else has next to none.
+
+**Method:** Trace the P0 entries of a second paper, by another author if possible, with the same record. Holds if at least half the entries have a clear mismatch; refuted if no more than one does. Report how many sit in summary surfaces.
+
+**Revisit trigger:** A second paper's trace, or the author's confirmation changing the count.
+
+**Review by:** 2027-03-31
+
+---
+
 ### [2026-10-30] A blind reader's analytic summary finds gaps the author's register does not record
 
 **Position (provisional):** A reader who reconstructs a paper's argument from its text alone, following Muller's analytic summary (L113), finds claims, warrants and objections that the author's own register misses. So the comparison is a check the register cannot run on itself. First trial, Paper 1 at `paper1-draft-3-13-ga7c9eeb`: two blind machine readers (a fresh Claude agent, and Codex given only the text in its prompt). Both recovered the central claims; recall against the register's 37 rows was not measured. Their findings:

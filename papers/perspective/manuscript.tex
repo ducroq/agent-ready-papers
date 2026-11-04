@@ -123,13 +123,10 @@ pass the check with its reasoning unchecked.
 % S1-6: Detection is no substitute (descriptive, P2, EMERGING)
 % D5: Detection vs verification (definition, own)
 Detecting AI-written text does not fill that gap.  Detection asks who
-wrote a text; verification asks whether it holds.  Detectors may now answer the first question well for pure cases: one 2025 working paper found that the best of three commercial detectors separated published human prose from fully generated text almost without error
-\citep{jabarian2025}.  Text that a person directs and an AI drafts, as this paper was, was not
-tested; a detector still gives a verdict on such text, but the verdict
-concerns the drafting, not whether the text holds.  But journal guidance now accepts AI help that authors disclose: the ICMJE recommendations ask authors to declare AI
-use and describe how they used it \citep{icmje2026}.  Once AI help is
-allowed and declared, the question that remains is whether the text
-holds.
+wrote a text; verification asks whether it holds.  One 2025 working paper found that the best of three commercial detectors separated published human prose from fully generated text almost without error
+\citep{jabarian2025}; text that a person directs and an AI drafts was not
+tested.  A detector's verdict concerns the drafting.  Journal guidance now accepts AI help that authors disclose: the ICMJE recommendations ask authors to declare AI
+use and describe how they used it \citep{icmje2026}.
 
 % ===============================================================
 % SECTION 2
@@ -137,8 +134,7 @@ holds.
 \section{Reporting Guidelines}
 
 % S2-1: EQUATOR (descriptive, P0, SUPPORTED)
-The most developed infrastructure for checking academic writing is
-the EQUATOR Network's collection of about 700 reporting guidelines for
+The EQUATOR Network collects about 700 reporting guidelines for
 health research \citepalias{equator}.  Guidelines such as CONSORT for
 randomised trials and PRISMA for systematic reviews \citep{page2021}
 give authors a checklist to complete while they prepare a manuscript.  The GoodReports tool picks the checklist that fits a study type
@@ -513,6 +509,13 @@ check run by the author, or by the author's AI tools, can err in the
 author's favour, which is why only a check confirmed by someone else can
 reach the Established tier.
 
+% S3-8: A pass covers rows, not every restatement (descriptive, P1, EMERGING)
+Nor does a pass reach every sentence: a paper restates its
+claims.  An AI trace of this paper's six P0 entries through their restatements
+found five clear mismatches and two arguable ones, four of
+the seven in summary tables; neither automated check flagged them \citep{veen2026repo}.
+Central claims may need that trace as a further check.
+
 % S3-4: Checks chosen by the kind of grounds may avoid false passes and false failures (descriptive, P0, EMERGING)
 The central argument of the proposal rests on these pieces.  A citation
 check, or a rating that counts sources, does not look at the step from
@@ -546,9 +549,9 @@ and the contribution.
 \toprule
  & \textbf{S1-1} & \textbf{S2-2} & \textbf{C1 (contribution)} \\
 \midrule
-Statement & AI citation hallucination is a distinct failure mode. & No consensus checklist was found for checking the reasoning of non-empirical papers step by step. & A published register makes reasoning traceable; registers should be trialled before they are adopted. \\
+Statement & AI citation hallucination is a distinct failure mode: LLMs tested in 2023--24 invented plausible references. & No consensus checklist was found for checking the reasoning of non-empirical papers step by step. & A published register can make reasoning traceable; registers should be trialled before they are adopted. \\
 Says & descriptive & descriptive & normative \\
-Grounds & two sources: \citet{mugaanyi2024}, \citet{walters2023} & the author's documented search; gap statements for conceptual and design-science papers & four claims, two declared values, three declared definitions \\
+Grounds & two sources: \citet{mugaanyi2024}, \citet{walters2023} & the author's documented search; gap statements for conceptual and design-science papers & five claims, two declared values, three declared definitions \\
 Check & source check, both steps, for each source & method check of the search; warrant check, because absence is inferred from a search & Whetten's elements (Table~\ref{tab:whetten}); boundary conditions and values stated \\
 Priority & P0: the opening argument fails without it & P0: the gap the paper addresses & P0 by definition: it is what the paper contributes \\
 Tier & Supported & Emerging & Emerging \\
@@ -569,7 +572,7 @@ Qualifier in the text & reported findings (``found'') & ``I found none'' & ``I p
 \midrule
 What  & A claim register; non-empirical papers; AI-assisted writing (each a declared definition). \\
 How   & Publishing the register exposes each step from grounds to claim to readers and reviewers. \\
-Why   & Citation checks pass weak reasoning (S1-7), reporting guidelines check reporting (S2-5), no checklist was found for the reasoning (S2-2), and each claim needs the check its grounds call for (S3-4). \\
+Why   & Citation checks pass weak reasoning (S1-7), reporting guidelines check reporting (S2-5), no consensus checklist was found for checking reasoning step by step (S2-2), and a check chosen by the kind of grounds may avoid both false passes and false failures (S3-4). \\
 Who, where, when & Papers whose contribution is an argument, and the interpretive parts of empirical papers; other writing, such as journalism, untested; frameworks from Western traditions. \\
 What's new & The combination: each part is used elsewhere (S4-6 to S4-8, S3-6), and none of the compared approaches combines them for academic papers (S4-9). \\
 Values & Published reasoning should be checkable (D1); a proposal should be tested before it is adopted (D7). \\
@@ -602,7 +605,7 @@ reviews came from five language models from four vendors, in sessions
 separate from the drafting.  They are independent of it but not of the method, and no substitute
 for human reviewers.
 
-The register asks work of authors; this paper's has 36 entries.
+The register asks work of authors; this paper's has 37 entries.
 A shorter form, the warrant check's questions for a reviewer to ask of
 the central claims, may suit many papers better.  Toulmin's and
 Whetten's frameworks come from Western academic traditions, and
@@ -622,14 +625,14 @@ rely on it.
 % ===============================================================
 \section{Recommendations}
 
-% C1: A published register makes reasoning traceable; test it (contribution, P0, EMERGING)
+% C1: A published register can make reasoning traceable; test it (contribution, P0, EMERGING)
 % D1: Published reasoning should be checkable (value, accepted)
 % D2: Verification infrastructure (definition, own)
 % D7: A proposal should be tested before it is adopted (value, accepted)
 The value behind this proposal is that published reasoning should be
 checkable: readers and reviewers should be able to see what each claim
 rests on.  A claim register, published with a paper whose contribution
-is an argument, makes that reasoning visible and traceable.  I propose
+is an argument, can make that reasoning visible and traceable.  I propose
 two steps, in this order.  Authors and journals could publish registers
 as optional supplementary material, as this paper does, and trials
 should test whether reviewers who have a register find different
