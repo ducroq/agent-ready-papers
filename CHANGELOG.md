@@ -22,6 +22,9 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
   - claims about fast-moving objects carry an `as of:` date.
   - Evidence: a two-rater scope test on Paper 1's 21 source-grounded rows. Both raters found widenings beyond the seed case, in 4 and 8 rows.
 
+### Templates
+- `templates/CLAUDE.md` now asks for a **Main Question** above the Core Argument, and the Core Argument stays a hypothesis until the evidence is in. A sub-project paper started with a thesis and no question, and its contribution assumed the result it set out to find. No check can see that; two outside reviews did.
+
 ### Tooling
 - `make paper1-arxiv` (`scripts/paper1-arxiv.sh`) builds Paper 1's arXiv package in a gitignored directory. The package has the abstract, single spacing, the `.bbl` and a baked-in version stamp. Maintainer tooling; it doesn't affect adopters.
 
@@ -52,7 +55,7 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
 - L113, Muller 2017, "What is an Analytic Summary?": a course handout on reconstructing a paper's argument (claims, arguments, objections, responses). It maps onto the DR-027 model. One open question is a possible independent check: a reader reconstructs the argument without the registry, and the two are compared. Unpublished, so not citable.
 
 ### Adopter notes
-No adopter action required.
+No adopter action required. A paper may add the new Main Question line to its `CLAUDE.md`.
 
 ## v5.0.0 (2026-10-17)
 

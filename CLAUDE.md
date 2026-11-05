@@ -4,7 +4,7 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 
 - **Type**: Guide + templates + active paper projects
 - **Companion**: [agent-ready-projects](https://github.com/ducroq/agent-ready-projects) (for code)
-- **agent-ready-projects**: v1.51.0 <!-- A number, not a status: never write "current" beside it. Adoption record: memory/MEMORY.md Current State. Check with `make drift`. -->
+- **agent-ready-projects**: v1.52.0 <!-- A number, not a status: never write "current" beside it. Adoption record: memory/MEMORY.md Current State. Check with `make drift`. -->
 - **agent-ready-papers** (this repo): v5.0.0 <!-- Release notes: CHANGELOG.md. -->
 
 ## Before You Start
@@ -87,7 +87,7 @@ agent-ready-papers/
 
 ## Not shipped
 
-Gitignored or user-global files an adopter supplies (review profile, `/release`, the global skills, `memory/`, `audits/` <!-- placeholder -->, `docs/work-items/`): [README, *What this repository does not ship*](README.md#what-this-repository-does-not-ship).
+Gitignored or user-global files an adopter supplies (review profile, `/release`, the global skills, `memory/`, `audits/`, `docs/work-items/`): [README, *What this repository does not ship*](README.md#what-this-repository-does-not-ship).
 
 ## How to Work Here
 

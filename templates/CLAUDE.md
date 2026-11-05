@@ -2,7 +2,9 @@
 
 <!-- 3-5 lines: what this paper argues, target journal, deadline -->
 
-**Core Argument:** [One-sentence thesis]
+**Main Question:** [What the paper sets out to answer]
+
+**Core Argument:** [One-sentence thesis; a hypothesis until the evidence is in]
 
 - **Target:** [Journal name — special issue / track if applicable]
 - **Deadline:** [Submission date]
