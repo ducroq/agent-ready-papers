@@ -245,6 +245,23 @@ Sources consulted during the development of this project, particularly for DR-00
 |----|-----------|------|-------|-------|------|--------|
 | L113 | Muller | 2017 | What is an Analytic Summary? | Course handout (unpublished) | [muller-2017-analytic-summary](sources/muller-2017-analytic-summary.md) | READ (full, 1 page) |
 
+### Reliance on automation and AI
+
+<!-- Seeded 2026-11-08 from a reader's question on Paper 1: does a claim register replace the author's own thinking? Both open access. -->
+
+| ID | Author(s) | Year | Title | Venue | File | Status |
+|----|-----------|------|-------|-------|------|--------|
+| L114 | Lee, Sarkar, Tankelevitch et al. | 2025 | The Impact of Generative AI on Critical Thinking: Self-Reported Reductions in Cognitive Effort and Confidence Effects From a Survey of Knowledge Workers | CHI '25 | [lee-2025-genai-critical-thinking](sources/lee-2025-genai-critical-thinking.md) | PARTIAL (abstract, p. 9 discussion) |
+| L115 | Parasuraman & Manzey | 2010 | Complacency and Bias in Human Use of Automation: An Attentional Integration | Human Factors | [parasuraman-manzey-2010-automation-bias](sources/parasuraman-manzey-2010-automation-bias.md) | PARTIAL (abstract, pp. 391, 397) |
+
+### Citation chains and source origin
+
+<!-- Seeded 2026-11-08 for DR-031: whether a source found a point or relays it. -->
+
+| ID | Author(s) | Year | Title | Venue | File | Status |
+|----|-----------|------|-------|-------|------|--------|
+| L116 | Greenberg | 2009 | How citation distortions create unfounded authority: analysis of a citation network | BMJ | [greenberg-2009-citation-distortion](sources/greenberg-2009-citation-distortion.md) | READ (full body text) |
+
 ### Readability, Engagement and Homogenisation
 
 <!-- Seeded 2026-09-27 from the readability half of the detector scan (work item point 3).

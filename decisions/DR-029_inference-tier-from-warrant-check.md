@@ -19,6 +19,12 @@ Two smaller faults travel with these. DR-002's bands overlap: two agreeing sourc
 
 DR-027 left this open on purpose: "DR-002's counting rule: what replaces 'count agreeing independent sources' for argued claims, whose strength is the warrant's? (A later DR.)" This is that DR.
 
+**Added 2026-11-08: a human reader raised the peer-review side.** A reader of Paper 1 (build `paper1-draft-3-13-ga7c9eeb`) asked whether the register records how reliable a source is: "whether someone cites a newspaper article or a peer-reviewed journal stays out of view". The check behind this answer found:
+- **The template had drifted from DR-002**, which is Accepted. DR-002's SUPPORTED row requires "peer-reviewed sources" and its SPECULATIVE row includes a "single non-peer-reviewed source", but the template's tier rows said only "2-3 sources agree". Restored in `templates/claim-registry.md` on 2026-11-08 as a drift fix under DR-002's authority. What counts as peer-reviewed (Source Tier A or B) is still this DR's to define; until then the template uses DR-002's undefined term.
+- **Without letter N, the scale was misapplied.** Paper 1's S1-6 graded a not-peer-reviewed working paper (Jabarian & Imas 2025) as **C** ("Textbook / established reference", the second-highest weight) and the ICMJE recommendations as **B** (review). Both were regraded on 2026-11-08, to N and D. No tool checks the Source Tier column; the four `N` values in S1-4 predate this DR.
+
+Both strengthen the case for section 1's peer-review counting and for letter N.
+
 ## Options Considered
 
 ### Option A: Keep the counting rule and exempt argument-based papers from the P0 floor

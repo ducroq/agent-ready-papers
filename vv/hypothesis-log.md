@@ -249,6 +249,40 @@ Position holds if ≥3 load-bearing process-level findings remain that the RAG p
 **Domain:** Framework Warrant validity, process-layer-vs-model-layer competition
 **Status:** open
 
+### [2026-11-08] Relayed source items are common enough to justify an origin question in every source check
+
+**Position (provisional):** In registries other than Paper 1's, at least 1 in 20 source items relays the point attributed to it (the source cites another work for it), so DR-031's origin question earns its cost in every source check.
+
+**Alternative:** Relayed items are rarer than 1 in 20, and the question belongs on P0 rows only (DR-031, *Revisit If*).
+
+**Method:** Apply the origin question (own / synthesis / relays) to every `src:` item of a second registry, rated by someone other than the session agent. Count the relayed items. Paper 1's baseline: 3 of about 40 (`papers/perspective/vv/traces/2026-11-08-source-origin-trace.md`; agent pass, unconfirmed).
+
+**Revisit trigger:** The first source-origin pass on a registry other than Paper 1's.
+
+**Review by:** 2027-03-31.
+
+**Origin:** A human reader's comment on Paper 1 (2026-11-07): the register "stops at the claim the source makes".
+
+**Domain:** Source check design (DR-031)
+**Status:** open
+
+### [2026-11-08] Most "accepted" declared starting points have no source that shows acceptance
+
+**Position (provisional):** When DR-032's rule (`accepted` needs a source showing acceptance) is applied, more than half of the starting points currently marked `accepted` become `not known`. The label has so far recorded the author's impression, not a check.
+
+**Alternative:** Most `accepted` values find a source quickly, and the label was sound in practice.
+
+**Method:** Apply DR-032 to every `accepted` starting point in Paper 1 and one other registry, and count the outcomes. Paper 1's baseline: 0 of 3 sourced (D1, D4, D7 all not known; D4's category is sourced, not its definition). Agent pass, unconfirmed, and 3 is far too small a sample to settle the position.
+
+**Revisit trigger:** DR-032 applied to a second registry.
+
+**Review by:** 2027-03-31.
+
+**Origin:** A human reader's comment on Paper 1 (2026-11-07): whether the field accepts an assumption "is often impossible to answer".
+
+**Domain:** Declared starting points (DR-032)
+**Status:** open
+
 ## Resolved
 
 Resolved entries: [`hypothesis-log-resolved.md`](hypothesis-log-resolved.md). The third-party verification ceiling (2026-08-16, SPLIT) and the dsp-workshop pilot (2026-06-12, HELD) are there.

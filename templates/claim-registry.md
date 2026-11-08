@@ -297,9 +297,9 @@ If no marker is present in the prose: rewrite to add it, or register the stateme
 | Tier | Assign when... | Language |
 |------|---------------|----------|
 | **ESTABLISHED** | Sources: multiple independent sources. Claim grounds: warrant checked + fair engagement. Contribution: supporting claims checked + reasoning valid + tested | "demonstrates", "shows", "confirms" |
-| **SUPPORTED** | Sources: 2-3 sources agree. Claim grounds: warrant valid + grounds sufficient. Contribution: supporting claims checked + reasoning valid | "indicates", "supports", "evidence suggests" |
+| **SUPPORTED** | Sources: 2-3 peer-reviewed sources agree. Claim grounds: warrant valid + grounds sufficient. Contribution: supporting claims checked + reasoning valid | "indicates", "supports", "evidence suggests" |
 | **EMERGING** | Sources: 1-2 sources. Claim grounds: grounds partial or warrant debatable. Contribution: supporting claims plausible + reasoning sound | "may", "preliminary evidence", "initial findings suggest" |
-| **SPECULATIVE** | Sources: inference only: a warrant over other grounds (`claim:` or `decl:`), no source. Claim grounds: position stated, warrant incomplete. Contribution: conjectural | "warrants investigation", "remains unclear", "we hypothesize" |
+| **SPECULATIVE** | Sources: inference only: a warrant over other grounds (`claim:` or `decl:`), no source; or a single source that is not peer-reviewed. Claim grounds: position stated, warrant incomplete. Contribution: conjectural | "warrants investigation", "remains unclear", "we hypothesize" |
 
 The tier values and their wording are DR-002's and unchanged. Each kind of grounds feeds the tier in its own way (DR-027): tier monotonicity runs over `claim:` grounds (a claim's tier never exceeds its weakest `claim:` ground, and a contribution's never exceeds its weakest supporting claim); `src:` grounds feed the tier through DR-002's counting rule; `own:` grounds are judged by the rigour of the method (DR-008), not by counting.
 
@@ -311,7 +311,7 @@ The tier values and their wording are DR-002's and unchanged. Each kind of groun
 
 | Grounds | ESTABLISHED | SUPPORTED | EMERGING | SPECULATIVE |
 |---------|-------------|-----------|----------|-------------|
-| `src:` only | 3+ independent sources, textbook consensus | 2–3 sources agree, open questions | 1–2 sources, not replicated | Inference only: a warrant over other grounds (`claim:` or `decl:`), no source |
+| `src:` only | 3+ independent sources, textbook consensus | 2–3 peer-reviewed sources agree, open questions | 1–2 sources, not replicated | Inference only: a warrant over other grounds (`claim:` or `decl:`), no source; or a single source that is not peer-reviewed |
 | `claim:` (warrant check) | 5/5 warrant check, grounds ESTABLISHED | 4/5, grounds SUPPORTED+ | 3/5, grounds checked but conclusion untested | <3/5, or grounds unchecked |
 | Contribution (contribution check) | 5/5 Whetten, tested in practice | 4/5 Whetten, supporting claims checked | 3/5 Whetten, reasoning valid but untested | <3/5 Whetten, or missing boundary conditions |
 
