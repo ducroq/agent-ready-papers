@@ -50,6 +50,8 @@
 
 Draft 4 acts on the two Claude-only findings; the two shared ones stay open (work item). Raw output: `lab/reviews/` (maintainer-local).
 
+**Evidence 2026-11-08 (not the trigger):** the first human reader of the same build sent margin notes and an email, not an analytic summary. One note, on renaming *Relevance*, may match the relevance finding that both machine readers shared (#71); that reading is ours. Codex and Vibe then read the 7 passages behind his 8 later margin notes blind, with no hint of the notes, and re-found 5 of the 7 points they could test (one by each reviewer alone). They missed 2: a sentence that misleads about what was tested, and "why a checklist?". The 8th point could not be tested, because the passage that answered it was not in the packet. They also raised at least 8 points he did not. One case, not a rate.
+
 **Alternative:** Human blind summaries find nothing beyond what machine readers or the register already hold, or the disagreements are mostly misreadings rather than gaps. The comparison would then add cost without adding findings.
 
 **Method:** Compare the machine summaries with a human reader's analytic summary of the same draft, once one arrives. For each finding: did the register record it, did a machine reader find it, and did the author act on it? Two readers agreeing counts for more than one alone; a finding is held only after it is checked against the text.
