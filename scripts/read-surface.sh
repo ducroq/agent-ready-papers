@@ -2,12 +2,12 @@
 # The read surface: characters in every `*.md` under memory/ and docs/work-items/,
 # outside any archive/ folder. This is the set /curate Step 0 measures, so no document
 # has to restate the number. Prints the total and each file over 10,000 characters,
-# largest first. Budget: READ_SURFACE_BUDGET (default 100,000, the P25 target).
+# largest first. Budget: READ_SURFACE_BUDGET (default 75,000, the P25 target).
 # Unit: Unicode characters, line endings kept, as `wc -m` in a UTF-8 locale.
 # Usage: read-surface.sh [ROOT]   (default: this repo)
 set -euo pipefail
 root="${1:-$(CDPATH='' cd -- "$(dirname -- "$0")/.." >/dev/null && pwd -P)}"  # not git rev-parse: memory/ is its own repo
-budget="${READ_SURFACE_BUDGET:-100000}"
+budget="${READ_SURFACE_BUDGET:-75000}"
 case "$budget" in ''|*[!0-9]*) echo "CANNOT VERIFY: budget '$budget' is not a whole number" >&2; exit 2;; esac
 [ -d "$root/memory" ] || [ -d "$root/docs/work-items" ] ||
   { echo "CANNOT VERIFY: neither memory/ nor docs/work-items/ under $root" >&2; exit 2; }

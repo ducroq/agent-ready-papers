@@ -27,6 +27,7 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
 
 ### Tooling
 - `make paper1-arxiv` (`scripts/paper1-arxiv.sh`) builds Paper 1's arXiv package in a gitignored directory. The package has the abstract, single spacing, the `.bbl` and a baked-in version stamp. Maintainer tooling; it doesn't affect adopters.
+- `make drift` now also runs `scripts/read-surface.sh`: an over-budget read surface counts as drift (exit 1), and an unmeasurable one as cannot-verify (exit 2). It is skipped when neither `memory/` nor `docs/work-items/` exists. The default budget is now 75,000 characters, down from 100,000. A budget set below the current total turned `make drift` red (exit 1). Maintainer tooling; it doesn't affect adopters.
 
 ### Paper 1
 - The maintainer's draft-3 feedback round:

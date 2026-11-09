@@ -55,7 +55,7 @@ paper1-arxiv:  ## Build Paper 1's arXiv package (abstract, single spacing, .bbl)
 check-experiments:  ## Experiment registry: schema, tracked artifacts, metric traceability (DR-024)
 	python -m tools.check_experiments
 
-drift:  ## Session-start drift check: companion pin, global skills, self and paper stamps
+drift:  ## Session-start drift check: companion pin, global skills, self and paper stamps, read surface
 	bash scripts/drift.sh
 
 dr-status:  ## Decision records grouped by status (only Accepted binds)

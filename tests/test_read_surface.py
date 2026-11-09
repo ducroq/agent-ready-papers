@@ -69,8 +69,8 @@ def test_budget_boundary(tmp_path, budget, code):
     assert ("OVER BUDGET by 1" in r.stdout) == (code == 1)
 
 
-@pytest.mark.parametrize(("n", "code"), [(100000, 0), (100001, 1)])
-def test_default_budget_is_100k(tmp_path, n, code):
+@pytest.mark.parametrize(("n", "code"), [(75000, 0), (75001, 1)])
+def test_default_budget_is_75k(tmp_path, n, code):
     _seed(tmp_path, {"memory/a.md": "x" * n})
     assert _run(tmp_path).returncode == code
 

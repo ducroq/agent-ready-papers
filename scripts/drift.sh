@@ -4,8 +4,12 @@
 #   2. user-global skills byte-identical to the reference install AT THE PINNED TAG
 #   3. this repo's stamp vs CHANGELOG.md; a TRACKED paper's pin behind it counts as drift,
 #      an untracked sub-project's pin is only reported (a separate adopter's call)
+#   4. the read surface (scripts/read-surface.sh) against its budget: over budget counts as drift,
+#      so growth shows at every pickup; with neither memory/ nor docs/work-items/ as a real directory
+#      (a fresh clone) it is skipped. READ_SURFACE_BUDGET overrides the budget; the line prints it.
 # Triage stays with /update-drift; this only says whether there is anything to triage.
-# Exit: 0 no drift · 1 drift · 2 cannot verify (no clone, fetch failed, pin tag missing, no stamp).
+# Exit: 0 no drift · 1 drift · 2 cannot verify (no clone, fetch failed, pin tag missing, no stamp,
+#   read surface unmeasurable).
 set -uo pipefail
 R=$(CDPATH='' cd -- "$(dirname -- "$0")/.." >/dev/null && pwd -P) || exit 2  # not git rev-parse: memory/ is its own repo
 FRAMEWORK=${FRAMEWORK:-$HOME/repos/agent-ready-projects}
@@ -74,4 +78,10 @@ for f in "$R"/papers/*/CLAUDE.md; do
   elif [ "$kind" = tracked ]; then echo "paper $d (tracked): DRIFT pinned $p, framework $S"; flag 1
   else echo "paper $d (sub-project): pinned $p, framework $S — its own call"; fi
 done
+
+if { [ -d "$R/memory" ] && [ ! -L "$R/memory" ]; } || { [ -d "$R/docs/work-items" ] && [ ! -L "$R/docs/work-items" ]; }; then
+  out=$(bash "$R/scripts/read-surface.sh" "$R" 2>&1); rs=$?
+  printf '%s\n' "$out"
+  case $rs in 0) ;; 1) echo "           prune, thin or archive (P25)"; flag 1;; *) cant "read surface (exit $rs)";; esac
+else echo "read surface: no memory/ or docs/work-items/, not measured"; fi
 exit "$rc"
