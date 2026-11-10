@@ -6,7 +6,7 @@ This paper argues that AI-assisted non-empirical papers need their reasoning che
 
 - **Target:** Learned Publishing, Opinion (1,000–4,000 words, no abstract, no footnotes: rules at source in `../../memory/reference-learned-publishing-opinion.md`); arXiv preprint first, category undecided because of arXiv's CS position-paper rule (`arxiv-submission.md`). Backup: Research Integrity and Peer Review, Comment
 - **Deadline:** TBD
-- **Status:** Phase 3, Writing: draft 4 (`paper1-draft-4`, 2026-10-30). Plan and next steps: `../../docs/work-items/paper1-draft3.md` (maintainer-local)
+- **Status:** Phase 3, Writing: draft 4 (`paper1-draft-4`, 2026-10-30) plus the reader-feedback pass (2026-11-10, 3,998 words). Plan and next steps: `../../docs/work-items/paper1-draft3.md` (maintainer-local)
 - **agent-ready-papers:** v5.0.0 <!-- A number, not a status. Bump deliberately after reading UPGRADING.md; reconciliation notes: git history. -->
 
 <!-- Stated though it tracks the framework by construction: an exemplar that omits the pin teaches adopters to omit it. -->
@@ -53,6 +53,7 @@ Start: this file, then the work item (its NEXT list is what "continue" means), t
 |------|---------|
 | `manuscript.tex` | LaTeX source: journal build `make paper1-pdf`, preprint build `make paper1-arxiv` (`\preprintmode` adds the abstract) |
 | `abstract.tex` | The abstract, used by the preprint build only |
+| `supplement.tex` | How to read a claim register (Toulmin primer): Appendix A in the preprint build; `supplement-standalone.tex` builds LP's separate supporting-information file. Outside the word count; its claims still need register rows |
 | `references.bib` | BibTeX references |
 | `figures/fig-register.tex` | Figure 1 source. Nothing rebuilds `fig-register.pdf`: run `pdflatex` in `figures/` after any edit. LP takes the PDF as a separate file |
 | `vv/claims/claim_registry.md` | All claims with verification status |
@@ -80,4 +81,4 @@ The framework this paper describes (Core Concept above): claims P0/P1/P2, declar
 
 ---
 
-*Last updated: 2026-10-30*
+*Last updated: 2026-11-10*

@@ -52,7 +52,18 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
   - The register has 37 entries (was "36"). The verification record was rerun on 26 October: 22 register DOIs, and 43 bibliography entries with a DOI, of which 34 match.
   - The manuscript is about 24 words over its 4,000-word budget, accepted while it is a draft.
 
+- A reader's feedback round on draft 4 (18 points, 2026-11-07), applied 2026-11-10:
+  - §1 ends with the problem, two questions, a definition of the claim register and its scope: scholarly articles whose contribution is an argument are the starting case, other uses untested.
+  - The source check gains a third step, whether the source reports its own finding or relays one (Greenberg 2009; DR-031, Proposed), and records peer review; declared starting points record "not known" when acceptance has no source (DR-032, Proposed).
+  - The Toulmin introduction moved to a supplement (`supplement.tex`): the jurisprudence history, Toulmin's Harry example and row S1-1 read with the layout. §4 keeps a short definition and a pointer. The preprint build includes it as Appendix A; `supplement-standalone.tex` builds it as Learned Publishing's separate file. It replaces the Markdown draft `supplement-reading-a-register.md`.
+  - §6 gains a paragraph on who fills in a register (Parasuraman & Manzey 2010; Lee et al. 2025), with new claim S3-10: the author writes each warrant and qualifier.
+  - Box 1 rewords warrant, qualifier and rebuttal, and spells out P0–P2. The relevance question no longer uses a removal test.
+  - Back under the cap (3,996 words): repeated points cut, keeping each point's strongest instance (about 275 words); the verification record moved to `vv/verification-record.md`; the 2026 benchmark paragraph (S1-8, now Out of Scope), the writing-tools direction and the concept-analysis sentence cut.
+  - New register rows S3-9, S3-10 and D10. S1-7, S2-3b, S3-5, S5-2, D3, D8 and C1 are reworded, and S2-2 and S4-5 note their relayed sources. Table 2's note: sources that relay the same origin count as one (DR-031, Proposed).
+- `docs/glossary.md`: a warrant is "the general rule that licenses the step from grounds to claim", no longer "the step" itself (Toulmin pp. 91–92). DR-029 (Proposed): relevance is no longer tested by removing the ground, because that test fails a ground that helps without being required.
+
 ### Literature
+- L114 Lee et al. 2025, L115 Parasuraman & Manzey 2010, L116 Greenberg 2009, all from the reader round on Paper 1.
 - L113, Muller 2017, "What is an Analytic Summary?": a course handout on reconstructing a paper's argument (claims, arguments, objections, responses). It maps onto the DR-027 model. One open question is a possible independent check: a reader reconstructs the argument without the registry, and the two are compared. Unpublished, so not citable.
 
 ### Adopter notes

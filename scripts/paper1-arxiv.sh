@@ -39,6 +39,7 @@ strip_comments() { [ -s "$1" ] || { echo "missing or empty: $1" >&2; exit 1; }; 
   strip_comments "$paper/manuscript.tex"
 } >"$src/manuscript.tex"
 strip_comments "$paper/abstract.tex" >"$src/abstract.tex"
+strip_comments "$paper/supplement.tex" >"$src/supplement.tex"
 cp "$paper/references.bib" "$out/references.bib"
 mkdir -p "$src/figures"
 cp "$paper/figures/fig-register.pdf" "$src/figures/"

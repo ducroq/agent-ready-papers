@@ -25,6 +25,9 @@
 
 \bibliographystyle{apalike}
 \defcitealias{equator}{EQUATOR Network, n.d.}
+% The Toulmin primer is supplement.tex: an appendix in the preprint, a separate
+% supporting-information file for the journal (supplement-standalone.tex).
+\newcommand{\supplementref}{\ifdefined\preprintmode Appendix~\ref{app:reading}\else The supplementary material\fi}
 
 % ---------------------------------------------------------------
 \title{The Verification Gap: Checking the Reasoning\\
@@ -83,12 +86,6 @@ identifiers (DOIs) that ChatGPT (GPT-3.5) generated for natural-science
 and humanities topics were fabricated.  \citet{walters2023} found fabricated
 citations among the references of generated literature reviews, with
 fewer from the newer of the two models they tested.
-% S1-8: Search did not make citations reliable in one benchmark (descriptive, P2, EMERGING)
-A 2026 benchmark tested newer models that can search the web.  Asked
-for the bibliographic entries of 931 named papers, three of them
-(GPT-5, Claude Sonnet 4.6 and Gemini 3 Flash) got only 50.9\% of the
-entries fully right; most errors were in single fields, but some were
-details of a different paper \citep[\S4]{rao2026bibtex}.
 
 % S1-2: Confidence inflation (descriptive, P0, SUPPORTED)
 A second error cannot be caught by a lookup.  I call it \emph{confidence
@@ -106,27 +103,45 @@ weight a claim can bear.
 % S1-9: A claim can outrun correctly cited sources (descriptive, P1, EMERGING)
 A third error is harder to see, because each citation passes: the
 sources are real and say what is attributed to them, but the claim
-drawn from them says more.  This paper's own register first stated
+drawn from them says more.  This paper's own list of claims first stated
 that LLMs ``invent plausible-sounding papers'', in the present tense,
-from two studies of ChatGPT models from 2023 and 2024.  Each study was
-cited correctly; the step from them to all current LLMs was not
-supported.  A reader caught it, not a citation check.  Checking the register's source-based claims against their sources' scope then found three more like it \citep{veen2026repo}.
+from two studies of ChatGPT models from 2023 and 2024.  The step to all current LLMs was not supported.  A reader caught it, not a citation check.  Checking the register's source-based claims against their sources' scope then found three more like it \citep{veen2026repo}.
 
-% S1-7: Citation checks alone pass weak reasoning (descriptive, P1, EMERGING)
+% S1-7: Citation checks alone pass weak reasoning; AI may make this more pressing (descriptive, P1, EMERGING)
 % D9: Citation check (definition, own)
-A citation check, as I use the term and as such checks are usually run, asks whether a cited work exists
-and says what is attributed to it, so it catches the first error.  It
-does not reach the second or the third (Section~4 addresses both): a claim can rest on correct
-citations and still say more than they carry, so a fluent paper can
-pass the check with its reasoning unchecked.
+% S2-4: The reasoning carries the contribution (descriptive, P1, EMERGING)
+% S2-5: Reporting guidelines aim at complete reporting (descriptive, P1, EMERGING)
+A citation check asks whether a cited work exists and says what is
+attributed to it; a reporting guideline aims at complete reporting.
+Neither asks whether the step from evidence to claim holds.
+AI-assisted drafting may make this gap more pressing: a fluent draft
+can pass a citation check while a step in its reasoning is unsupported,
+as happened in this paper's own register.  In a paper whose contribution
+is an argument the reasoning carries the contribution, so the
+contribution itself may go unchecked.
 
 % S1-6: Detection is no substitute (descriptive, P2, EMERGING)
 % D5: Detection vs verification (definition, own)
-Detecting AI-written text does not fill that gap.  Detection asks who
-wrote a text; verification asks whether it holds.  One 2025 working paper found that the best of three commercial detectors separated published human prose from fully generated text almost without error
-\citep{jabarian2025}; text that a person directs and an AI drafts was not
-tested.  A detector's verdict concerns the drafting.  Journal guidance now accepts AI help that authors disclose: the ICMJE recommendations ask authors to declare AI
-use and describe how they used it \citep{icmje2026}.
+Detecting AI-written text does not fill that gap.  One 2025 working paper found that the best of three commercial detectors separated published human prose from fully generated text almost without error
+\citep{jabarian2025}; the study left out text that a person directs and
+an AI drafts.  Either way, a detector answers who drafted a text, not
+whether it holds.  Journal guidance instead asks authors to declare AI use and describe how they used it \citep{icmje2026}.
+
+% C1: A published register can make reasoning traceable; test it (contribution, P0, EMERGING)
+% D3: Non-empirical paper; scholarly articles as the starting case (definition, own)
+This paper asks two questions: is there a consensus checklist for
+checking such reasoning step by step, and if not, what could one be
+built from?  A documented search found none (Section~2).  I propose a candidate, a claim
+register: a table, published with the paper, that records each claim
+with what it rests on and how that was checked.  It builds on Toulmin's
+layout of arguments and Whetten's account of a theoretical
+contribution, and I apply it to this paper.  A consensus would need
+others to test and revise it.  I start from scholarly articles whose
+contribution is an argument, because that is where the gap was searched
+for and where reporting guidelines offer a comparison.  Other writing
+that asks readers to trust its reasoning, from student essays to
+journalism, might use the register too; whether it does is untested
+(Section~7).
 
 % ===============================================================
 % SECTION 2
@@ -147,9 +162,7 @@ guide authors in reporting a specific type of research''
 \citep{moher2010}.  For CONSORT, the measured effect is on completeness: journals endorsing CONSORT reported more completely on 25
 of 27 checklist items, significantly so for five \citep{turner2012}.
 Incomplete reporting is a recognised source of research waste
-\citep{glasziou2014}, so this is a real service.  However, the question
-it answers is not whether the reasoning holds.  That question applies
-to any paper, and matters most where a paper has little else to check.
+\citep{glasziou2014}, so this is a real service, but it does not ask whether the reasoning holds, which matters most where a paper has little else to check.
 
 % S2-3a: Gregor's five theory types (descriptive, P1, SUPPORTED)
 % S2-3b: Proposed theories have no earlier source (descriptive, P1, EMERGING)
@@ -157,22 +170,22 @@ to any paper, and matters most where a paper has little else to check.
 \citet{gregor2006} distinguishes five types of theory in
 information systems research, among them analytic theories (Type~I)
 and theories for design and action (Type~V).  When a paper of either
-type proposes a new theory, no earlier source states it, because the
-proposal is the contribution.  I call papers whose main contribution is
+type proposes a new theory, its parts may have earlier sources, but no
+earlier source states the whole, because the proposal is the
+contribution.  I call papers whose main contribution is
 reasoning \emph{non-empirical}: theoretical, conceptual, design-science
 and perspective papers are examples.
 
-% S2-4: The reasoning carries the contribution (descriptive, P1, EMERGING)
-In a non-empirical paper the reasoning carries the contribution.
-\citet{toulmin2003} places the step from evidence to claim in the
-warrant, and \citet[p.~491]{whetten1989} calls the reasoning of a theory
-``the theoretical glue that welds the model together''.  A check that
-stops at citations may therefore leave the paper's contribution unchecked.
+% S2-4: The reasoning carries the contribution: its grounds (descriptive, P1, EMERGING)
+In such a paper \citet{toulmin2003} places the step from evidence to
+claim in the warrant, and \citet[p.~491]{whetten1989} calls the
+reasoning of a theory ``the theoretical glue that welds the model
+together''.
 
 % S2-2: No consensus checklist for step-by-step reasoning (descriptive, P0, EMERGING)
-Guidance for papers without new data exists, but it is scattered.
-Conceptual papers lack ``commonly accepted templates''
-\citep[p.~18]{jaakkola2020}, although Jaakkola proposes four.
+Guidance for non-empirical papers exists, but it is scattered.
+Conceptual papers lack ``commonly accepted templates'', as Jaakkola
+puts it, following an editorial by Cornelissen \citep[p.~18]{jaakkola2020}, although Jaakkola proposes four.
 Design-science researchers have reported no agreed guidance on
 presenting their work \citep{gregor2013,dinter2015}, and validity in
 that field ``is neither well-understood nor consistently established''
@@ -180,26 +193,20 @@ that field ``is neither well-understood nor consistently established''
 methodological papers for ``clear, valid arguments'' but give no
 procedure for checking them \citep{ralph2020}.
 
-To look further, I searched for a consensus-based checklist that checks
-the reasoning of non-empirical papers step by step: whether each step
-from evidence to claim holds.  On 16 October 2026 I searched the EQUATOR
+To look further, I searched for a consensus-based checklist that checks the reasoning of non-empirical papers step by step.  On 16 October 2026 I searched the EQUATOR
 library (709 titles) and four bibliographic sources (Europe PMC,
 OpenAlex, Crossref and arXiv) with 28 queries, and I screened 701 titles alone.  I
 found none.  The search did not cover Scopus, Web of Science or
 humanities indexes, and a second screener has not yet checked
 it.  The protocol, queries and screened candidates are public
-\citep{veen2026repo}, so the search can be repeated.
+\citep{veen2026repo}.
 
 % ===============================================================
 % SECTION 3
 % ===============================================================
 \section{Related Approaches}
 
-The register proposed in Section~4 has four parts.  Each claim is
-recorded with its grounds, and each kind of grounds gets its own check.
-The step from grounds to claim is checked for relevance and sufficiency.
-The wording of a claim is tied to the strength of its support.  Several
-practices already have one or more of these parts (Table~\ref{tab:compare}).
+The claim register, set out in Section~4, has four parts: claims recorded with their grounds, a check for each kind of grounds, a check of the step, and wording tied to support.  Several practices already have one or more of them (Table~\ref{tab:compare}).
 
 \begin{table}[htbp]
 \centering
@@ -251,13 +258,13 @@ not a procedure for papers.
 
 % S1-4: Recent AI-writing checkers check evidence (descriptive, P1, EMERGING)
 Recent tools for AI-assisted writing go beyond checking that references
-exist.  One linter also checks causal language against the study design
+exist.  One automated checker also checks causal language against the study design
 \citep{samsonau2026}.  One workflow returns unsupported claims to the
 author \citep{chen2026}, and a provenance discipline samples whether the
 evidence suffices \citep{zhou2026}.  A checklist for cited assertions in
 narrative reviews is in development \citep{vanra2026}.  As their authors describe them, each asks whether
-evidence exists and supports a claim; Zhou and Yu judge sufficiency on
-a sample, and their tiers rate metrics.  None describes a check, for
+evidence exists and supports a claim; Zhou and Yu judge sufficiency only
+on a sample.  None describes a check, for
 each claim in the prose, of whether its grounds bear on it and justify
 its wording, and what would make the step fail.
 
@@ -268,8 +275,7 @@ demonstrate a logically defended argument to support the conclusions
 drawn?'' and refers reviewers to Toulmin's model
 \citep{mcarthur2025,jbi2026}.  SANRA, a scale for narrative reviews,
 scores scientific reasoning as one of its six items, and its authors
-call it ``not a reporting guideline'' \citep{baethge2019}.  Reporting items for concept analysis have only recently been collected
-\citep{nashwan2026}.  Both judge an argument as a whole.
+call it ``not a reporting guideline'' \citep{baethge2019}.  Both judge an argument as a whole.
 
 % S4-6: Assurance cases link claims, arguments and evidence (descriptive, P1, EMERGING)
 Two practices record the structure of an argument explicitly.  In safety engineering, an assurance case, or safety case, is ``a
@@ -321,11 +327,7 @@ section proposes.
 % ===============================================================
 \section{The Claim Register}
 
-This paper proposes a claim register: a table, published with the
-paper, with one row for each claim and one for the paper's
-contribution.  Toulmin's layout of arguments gives each claim's row and
-its step-by-step check; Whetten's account of a theoretical contribution
-gives the contribution's row, checked once as a whole.  Box~1 gives the
+The register has one row for each claim, built on Toulmin's layout, and one for the paper's contribution, built on Whetten's account.  Box~1 gives the
 terms; the framework's glossary defines them from their sources
 \citep{veen2026repo}.
 
@@ -347,11 +349,11 @@ terms; the framework's glossary defines them from their sources
 Claim register & The table, published with the paper, that records each claim with its grounds, check and tier, and the contribution with its check. \\
 Claim & Any assertion put forward for acceptance. \\
 Grounds & What a claim rests on: a source, other claims, a declared starting point, or the author's own work.  An extension of Toulmin's \emph{data}. \\
-Warrant & The step from grounds to claim. \\
-Qualifier & The hedge that states how strong the claim is. \\
-Rebuttal & Circumstances in which the step from grounds to claim no longer holds. \\
+Warrant & The general rule that licenses the step from grounds to claim. \\
+Qualifier & The word or phrase that states how strong the claim is, from ``shows'' to ``may''. \\
+Rebuttal & Circumstances in which the warrant would have to be set aside, so that the step no longer holds. \\
 Confidence tier & The rating (Established, Supported, Emerging, Speculative) that decides which qualifiers a claim may carry. \\
-Priority & How much the paper depends on a claim (P0 to P2). \\
+Priority & How much the paper depends on a claim: P0, the paper fails without it; P1, it strengthens the argument; P2, it gives context. \\
 Declared starting point & An assumption, definition or value the paper adopts without arguing for it. \\
 Contribution & What the paper adds; checked once, as a whole. \\
 Verification & Checking each claim against its grounds and warrant. \\
@@ -361,17 +363,11 @@ Validation & Checking that the contribution serves its readers and purpose. \\
 \end{table}
 
 % S3-5: Toulmin's layout and its origin (descriptive, P1, SUPPORTED)
-Toulmin modelled his layout of arguments on jurisprudence, calling
-logic ``generalised jurisprudence'' \citep[p.~7]{toulmin2003}.  In his account any assertion is a claim.  Its \emph{data} are ``the
-facts we appeal to as a foundation for the claim''.  Its warrant is one
-of the ``general, hypothetical statements, which can act as bridges''
-from data to claim.  A \emph{qualifier} indicates ``the strength conferred by the
-warrant on this step''; and a \emph{rebuttal} names ``circumstances in
-which the general authority of the warrant would have to be set aside''
-\citep[pp.~90--94]{toulmin2003}.  Toulmin later wrote that he had not
-had in mind an analytical model like the one that came to be called
-``the Toulmin model''; his concern ``was with twentieth-century
-epistemology, not informal logic'' \citep[p.~vii]{toulmin2003}.  Using
+In Toulmin's layout any assertion is a claim that rests on \emph{data} through a warrant, with a qualifier and a rebuttal \citep[pp.~90--94]{toulmin2003}; Box~1 defines the terms.
+\supplementref{} introduces the layout with Toulmin's own example and
+reads one row of this paper's register with it.  Toulmin later wrote
+that he had not had in mind an analytical model like the one that came
+to be called ``the Toulmin model'' \citep[p.~vii]{toulmin2003}; using
 his layout as a checklist is my adaptation, and it has to be judged on
 its own merits.
 
@@ -389,9 +385,19 @@ that application is a further step.
 In the register (Figure~\ref{fig:register}), each claim is recorded with its grounds item by item,
 and each kind of grounds gets its own check:
 \begin{itemize}
-\item a \textbf{source} is checked in two steps: the work exists, and it says what the claim attributes to it, for the cases and period the claim covers;
+% S3-9: Relayed points can gain unfounded authority (descriptive, P1, EMERGING)
+\item a \textbf{source} is checked in three steps: the work exists; it
+  says what the claim attributes to it, for the cases and period the
+  claim covers; and it reports the point as its own finding rather than
+  relaying another work's.  A point repeated from paper to paper can
+  gain authority no data gave it \citep{greenberg2009}, so a relayed
+  point is traced to its origin or recorded as relayed.  The check also
+  records whether the source is peer-reviewed, which
+  Table~\ref{tab:confidence} counts;
 \item a \textbf{declared starting point} is checked for being stated,
-  with a note on whether the field accepts or contests it;
+  and for whether it is the paper's own, contested, or accepted in the
+  field; `accepted' needs a source that shows it, and otherwise the
+  record says it is not known;
 \item the author's \textbf{own work}, such as a search or a trial, is
   checked for a method someone else could repeat;
 \item a step from \textbf{other claims}, or from several sources to a
@@ -399,18 +405,15 @@ and each kind of grounds gets its own check:
 \end{itemize}
 
 \paragraph{The warrant check.}
-The warrant check asks two questions, taken from Wachsmuth and
-colleagues' definition of a cogent argument.  \emph{Relevance}: does
-each ground bear on this claim, so that the claim would be less credible
-without it?  \emph{Sufficiency}: do the grounds together justify the
+The warrant check asks two questions, taken from the definition of a
+cogent argument that Wachsmuth and colleagues adopt from Johnson and
+Blair.  \emph{Relevance}: does each ground bear on this claim, giving a
+reader some reason to accept it?  \emph{Sufficiency}: do the grounds together justify the
 claim at the strength its qualifier states?  A sufficiency check names
 what is missing, such as a case not covered, a search not run or a
-premise that rests on one study.  The check also records the rebuttal,
-the circumstances in which the step would fail, and the strongest known
-objection with the answer to it.  Where a step follows a common pattern,
+premise that rests on one study.  The check also records the rebuttal, and the strongest known objection with the answer to it.  Where a step follows a common pattern,
 such as an argument from expert opinion or from the absence of search
-results, the questions proper to that pattern could be added.  I have not yet
-worked them out from the argumentation-schemes literature.
+results, the questions proper to that pattern could be added; they are not yet worked out (Section~7).
 
 The check has four outcomes: it passes, it passes and someone other than
 the author confirms it, it leaves a named gap open, or it fails.  A
@@ -461,35 +464,29 @@ Speculative & No source reports the point, or a single one that is not peer-revi
 \end{tabular}
 
 \smallskip\raggedright A claim about what one source says may reach
-Established (this paper holds such claims at Supported); searches and design trials are rated by method.
+Established (this paper holds such claims at Supported); searches and design trials are rated by method.  Sources that relay the same origin count as one.
 \end{table}
 
 \paragraph{Priority.}
 Every claim also carries a \emph{priority}, the author's answer to the
-question of what fails if the claim is wrong.  A P0 claim is one the
-paper fails without; P1 strengthens the argument; P2 gives context.
-Priority sets how much checking a claim deserves, and every P0 entry,
+question of what fails if the claim is wrong (Box~1).  Priority sets how much checking a claim deserves, and every P0 entry,
 the contribution included, should reach the Supported tier.  A paper whose central claims stay at
 Emerging falls short of that floor; the register makes this visible.
 
 % S3-2: Whetten as a check of the contribution (descriptive, P1, EMERGING)
 \paragraph{The contribution.}
-Besides its claims, the register has one entry for what the paper
-contributes, and that entry is checked differently: once, as a whole,
-rather than step by step.  The check comes from Whetten.  He set out what ``a
+The contribution's entry is checked with Whetten's account.  He set out what ``a
 complete theory must contain'': which factors (What), how they relate
-(How), why (``the theoretical glue that welds the model together''), and
+(How), why, and
 for whom, where and when it holds \citep[pp.~490--492]{whetten1989}.
 His seven reviewer questions, from ``What's new?'' to ``Who cares?'',
 answer ``What constitutes a publishable theory paper?''
-\citep[p.~494]{whetten1989}.  They judge a contribution as a whole, so
-they may serve as a check of a paper's central contribution, applied
-once.  For a contribution that is a recommendation, they fit less well:
+\citep[p.~494]{whetten1989}, so they may serve as the check of a paper's contribution.  For a contribution that is a recommendation, they fit less well:
 How tends to restate the thesis, and the check needs a declared value
 and the conditions under which the recommendation applies.
 
 % D8: Verification and validation mapping (assumption, own)
-These two levels map onto a distinction from systems engineering.
+These two levels map onto a distinction used across engineering.
 Verification is ``proof of compliance with requirements''; validation
 shows that a product ``accomplishes the intended purpose in the intended
 environment'' \citep[\S2.0]{nasa2016}.  Checking each claim against its
@@ -522,10 +519,7 @@ check, or a rating that counts sources, does not look at the step from
 grounds to claim: it can pass a claim that says more than its sources
 carry, and fail a sound inference with no source to count.  A check chosen
 by the kind of grounds (a source against the claim's scope, an inference
-against its qualifier) looks at that step and may avoid both errors.  In this
-paper's register a scope check found three overreaches after a reader
-found the first (Section~1); the remedy is untried on another author's
-paper.
+against its qualifier) looks at that step and may avoid both errors.  The remedy has been tried only on this paper (Section~1).
 
 % ===============================================================
 % SECTION 5 (was the appendix; Learned Publishing takes appendices only as separate files)
@@ -533,10 +527,7 @@ paper.
 \section{Applying the Register to This Paper}
 \label{sec:self}
 
-This paper was written with the procedure it proposes.  Its claim
-register, published with the paper \citep{veen2026repo}, records each claim's grounds, warrant, warrant check, qualifier,
-confidence tier and priority, plus the paper's declared starting points
-and its one contribution.  Table~\ref{tab:examples} shows three entries:
+This paper was written with the procedure it proposes, and its register is published with it \citep{veen2026repo}.  Table~\ref{tab:examples} shows three entries:
 a claim resting on sources, a claim resting on the author's own search,
 and the contribution.
 
@@ -552,7 +543,7 @@ and the contribution.
 Statement & AI citation hallucination is a distinct failure mode: LLMs tested in 2023--24 invented plausible references. & No consensus checklist was found for checking the reasoning of non-empirical papers step by step. & A published register can make reasoning traceable; registers should be trialled before they are adopted. \\
 Says & descriptive & descriptive & normative \\
 Grounds & two sources: \citet{mugaanyi2024}, \citet{walters2023} & the author's documented search; gap statements for conceptual and design-science papers & five claims, two declared values, three declared definitions \\
-Check & source check, both steps, for each source & method check of the search; warrant check, because absence is inferred from a search & Whetten's elements (Table~\ref{tab:whetten}); boundary conditions and values stated \\
+Check & source check, all three steps, for each source & method check of the search; warrant check, because absence is inferred from a search & Whetten's elements (Table~\ref{tab:whetten}); boundary conditions and values stated \\
 Priority & P0: the opening argument fails without it & P0: the gap the paper addresses & P0 by definition: it is what the paper contributes \\
 Tier & Supported & Emerging & Emerging \\
 How it was set & two independent peer-reviewed sources agree & one screener and no search of Scopus, Web of Science or humanities indexes; the warrant check names the same gap & no higher than its weakest supporting claim (S2-2 and S3-4 are Emerging) \\
@@ -573,23 +564,17 @@ Qualifier in the text & reported findings (``found'') & ``I found none'' & ``I p
 What  & A claim register; non-empirical papers; AI-assisted writing (each a declared definition). \\
 How   & Publishing the register exposes each step from grounds to claim to readers and reviewers. \\
 Why   & Citation checks pass weak reasoning (S1-7), reporting guidelines check reporting (S2-5), no consensus checklist was found for checking reasoning step by step (S2-2), and a check chosen by the kind of grounds may avoid both false passes and false failures (S3-4). \\
-Who, where, when & Papers whose contribution is an argument, and the interpretive parts of empirical papers; other writing, such as journalism, untested; frameworks from Western traditions. \\
+Who, where, when & Scholarly articles whose contribution is an argument, as the starting case; the interpretive parts of empirical papers, other writing such as journalism, and teaching, untested; frameworks from Western traditions. \\
 What's new & The combination: each part is used elsewhere (S4-6 to S4-8, S3-6), and none of the compared approaches combines them for academic papers (S4-9). \\
 Values & Published reasoning should be checkable (D1); a proposal should be tested before it is adopted (D7). \\
-Objections & Peer review already judges arguments: a register would support review, not replace it.  The register burdens authors: a shorter reviewer form is named as an option (Section~\ref{sec:limits}).  An AI can draft a register fluently: the register's author must check each entry by hand. \\
+Objections & Peer review already judges arguments: a register would support review, not replace it.  The register burdens authors: a shorter reviewer form is named as an option (Section~\ref{sec:limits}).  An AI can draft a register fluently: answered in part: the author is responsible for every entry, and should write each warrant and qualifier, an untested suggestion (Section~\ref{sec:limits}). \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \paragraph{What the register shows about this paper.}
 % TODO(draft 3): confirm these figures after the blind re-rating of the draft-3 register.
-Of the six P0 entries, three reach the Supported tier and three stay
-at Emerging: the gap claim (S2-2), the central argument (S3-4) and the
-contribution (C1), which rests on both.  Under the rule in
-Table~\ref{tab:confidence} they stay at Emerging for reasons that are
-named and could be removed: the search had one screener (S2-2), and the
-remedy was tried only by one author (S3-4).  A second
-screener and a register kept by someone else are the evidence this
+Of the six P0 entries, three reach the Supported tier.  The gap claim (S2-2), the central argument (S3-4) and the contribution (C1), which rests on both, stay at Emerging for named reasons that could be removed (Table~\ref{tab:examples}, Section~4).  A second screener and a register kept by someone else are the evidence this
 paper still lacks.
 
 % ===============================================================
@@ -598,14 +583,13 @@ paper still lacks.
 \section{Limitations}
 \label{sec:limits}
 
-Its parts have users elsewhere (Section~3), but the register itself
-has one so far: the author of this paper.  Whether it works in other
+The register has one user so far: the author of this paper.  Whether it works in other
 hands is untested.  Its
 reviews came from five language models from four vendors, in sessions
 separate from the drafting.  They are independent of it but not of the method, and no substitute
 for human reviewers.
 
-The register asks work of authors; this paper's has 37 entries.
+The register asks work of authors; this paper's has 39 entries.
 A shorter form, the warrant check's questions for a reviewer to ask of
 the central claims, may suit many papers better.  Toulmin's and
 Whetten's frameworks come from Western academic traditions, and
@@ -615,10 +599,31 @@ assessed.
 
 The checks are also partly circular: the author who wrote the rules
 applies them, and the warrant check is a judgement, recorded with its
-reasons so that someone else can disagree with it.  A register is
-itself text that an AI tool can draft fluently, as it drafted this
-paper's, so its author must check each entry by hand before others
-rely on it.
+reasons so that someone else can disagree with it.
+
+% S3-10: The author should write each warrant (normative, P1, SPECULATIVE)
+% D10: The author is responsible for every entry (value, own)
+Who fills in a register matters.  Its author is responsible for every
+entry.  An AI tool may draft entries, as it drafted this paper's, but a
+source check needs the source in hand: a tool that has not read the
+source produces only another claim to be checked.  Whether a register
+makes the author's reasoning explicit or replaces part of it may depend
+on who writes the warrant.  Writing a warrant asks the author to state
+the step, and a missing step shows as an empty cell; checking a warrant
+a tool wrote may ask less, and a filled cell looks like finished
+reasoning.  People relying on imperfect decision aids miss what the aid
+fails to flag, even when told to verify its advice
+\citep[pp.~391, 397]{parasuraman2010}, and knowledge workers more
+confident in generative AI report less critical thinking, shifted
+towards verifying the tool's output \citep[pp.~1, 9]{lee2025chi}.
+Writing this paper, I found that keeping the register made me think
+about each step throughout; yet an entry the AI drafted, which said
+more than its sources, still passed me until a reader caught it
+(Section~1): a warrant I had checked but not written.  I therefore
+suggest that a tool may draft an entry's grounds, but that the author
+writes its warrant and qualifier.  Which effect a register has is
+untested, and the trials proposed in Section~7 should compare warrants
+the author wrote with warrants a tool drafted.
 
 % ===============================================================
 % SECTION 7
@@ -644,10 +649,7 @@ register and the glossary, the checks for each kind of grounds, and
 tools that test a register against its manuscript (see Code and Data
 Availability).
 
-The proposal applies to papers whose contribution is an argument, and
-to the interpretive parts of empirical papers.  Other writing that asks
-readers to trust its reasoning, journalism among them, might use it too,
-but that is untested.  Peer review already judges arguments, and a
+The register's use beyond scholarly articles, for the interpretive parts of empirical papers, for journalism, or in teaching, where its checks might help students learn to argue, is untested.  Peer review already judges arguments, and a
 register would not replace it.  It could show reviewers where a paper's
 weight rests, and it could help authors find weak steps before
 submission; whether it does either is the question the trials should
@@ -657,8 +659,7 @@ answer.
 Several further directions warrant investigation.  The gap search needs
 a second screener and wider databases.  The questions proper to common
 patterns of argument need working out, and the checks need adapting to
-other fields.  The checks could also be built into writing tools, so
-that they run while an author drafts.
+other fields.
 
 % ===============================================================
 % ACKNOWLEDGEMENTS
@@ -675,14 +676,7 @@ glossary in sessions separate from the drafting: DeepSeek-V4-Pro,
 Gemini 3.1 Pro (preview), GPT-6 (OpenAI, through ChatGPT), and Claude
 Opus 5.5 and Claude Fable 5.1 (Anthropic).  Their reviews informed this version.  The author takes full responsibility for the content.
 This work received no specific funding.
-Verification record, run on this version on 30 October 2026: all 22
-DOIs in the claim register resolve; of the 43 entries with a DOI in the
-bibliography file, 34 match their Crossref or DataCite record and 9 differ in
-minor fields (such as an author list cut short with ``others''), with
-none failing; the register's consistency check finds no schema, anchor
-or tier errors, and eight claims rest on entries that await an independent
-re-rating; three of the six P0 entries reach the Supported tier
-(Section~\ref{sec:self}).
+A dated record of the checks run on this version (DOIs, bibliography, register) is in the repository \citep{veen2026repo}.
 
 
 \section*{Conflict of interest}
@@ -706,6 +700,9 @@ The version this paper describes is tagged
 % ===============================================================
 % REFERENCES
 % ===============================================================
+% Preprint only: the supplement as an appendix (\InputIfFileExists keeps it out of the word count).
+\ifdefined\preprintmode\appendix\InputIfFileExists{supplement.tex}{}{}\fi
+
 \bibliography{references}
 
 \end{document}

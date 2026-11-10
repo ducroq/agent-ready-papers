@@ -1,0 +1,97 @@
+% Supplementary material: how to read a claim register.
+% Body only. The preprint build (\preprintmode) includes it as an appendix of
+% manuscript.tex; supplement-standalone.tex builds it as the separate
+% supporting-information file Learned Publishing takes. Not counted against the
+% manuscript's word budget (\InputIfFileExists). Its claims are not yet registered.
+
+\section{How to read a claim register}
+\label{app:reading}
+
+The claim register builds each row on Toulmin's layout of arguments.  This
+supplement introduces the layout for readers who have not met it, and reads
+one row of this paper's register with it.
+
+\subsection{Toulmin's layout of an argument}
+
+Toulmin modelled his layout of arguments on jurisprudence, calling logic
+``generalised jurisprudence'' \citep[p.~7]{toulmin2003}.  He takes apart an
+everyday argument \citep[pp.~92--94]{toulmin2003}:
+
+\begin{center}
+\small
+\begin{tabular}{@{}c@{\quad}c@{\quad}c@{}}
+\textit{Harry was born in Bermuda} & $\longrightarrow$ & \textit{so, presumably, Harry is a British subject} \\
+(data) & & (qualifier, claim) \\[6pt]
+\multicolumn{3}{c}{the step holds \emph{since} \textit{a man born in Bermuda will generally be a British subject}\ (warrant)} \\[2pt]
+\multicolumn{3}{c}{\emph{unless} \textit{both his parents were aliens, or he has become a naturalised American}\ (rebuttal)} \\
+\end{tabular}
+\end{center}
+
+\begin{itemize}
+\item The \textbf{claim} is what the arguer asks us to accept.
+\item The \textbf{data} are ``the facts we appeal to as a foundation for
+  the claim'' \citep[p.~90]{toulmin2003}.  The register calls them
+  \emph{grounds}, because they can also be other claims, a declared
+  starting point or the author's own work.
+\item The \textbf{warrant} is one of the ``general, hypothetical statements,
+  which can act as bridges'' from data to claim \citep[p.~91]{toulmin2003}:
+  the general rule that licenses the step.  Its task is ``simply to register
+  explicitly the legitimacy of the step involved'', and ``data are appealed
+  to explicitly, warrants implicitly'' \citep[p.~92]{toulmin2003}.  In a
+  paper the warrant is often unstated, and that is where a weak step hides.
+\item The \textbf{qualifier} indicates ``the strength conferred by the warrant
+  on this step'' \citep[p.~94]{toulmin2003}: here, ``presumably''.
+\item The \textbf{rebuttal} names ``circumstances in which the general
+  authority of the warrant would have to be set aside''
+  \citep[p.~94]{toulmin2003}.
+\item The \textbf{backing} is what supports the warrant itself, such as the
+  statutes behind the rule about Bermuda.  The register records it only when
+  readers may not accept the warrant.
+\end{itemize}
+
+Toulmin compares the distinction between data and warrants to ``the
+distinction drawn in the law-courts between questions of fact and questions
+of law'' \citep[p.~92]{toulmin2003}: data are the facts of the case, and the
+warrant is the law applied to them.  He later wrote that he had not had in
+mind an analytical model like the one that came to be called ``the Toulmin
+model''; his concern ``was with twentieth-century epistemology, not informal
+logic'' \citep[p.~vii]{toulmin2003}.
+
+\subsection{One row of this paper's register}
+
+Table~\ref{tab:s1-1} reads row S1-1 with the layout.
+
+\begin{table}[htbp]
+\centering
+\caption{Register row S1-1 read with Toulmin's layout.}
+\label{tab:s1-1}
+\footnotesize
+\begin{tabular}{@{}p{2.6cm}p{9.4cm}p{2.0cm}@{}}
+\toprule
+\textbf{Register column} & \textbf{Content} & \textbf{Toulmin} \\
+\midrule
+Statement & LLMs tested in 2023--24 (ChatGPT on GPT-3.5 and GPT-4) invented plausible-sounding references and DOIs at substantial rates. & Claim \\
+Grounds & Two peer-reviewed sources, each reporting its own study \citep{mugaanyi2024,walters2023}. & Data \\
+Warrant & None needed: each source reports the claim's own point. & Warrant \\
+Confidence tier & Supported: two peer-reviewed sources agree, so the prose may say ``indicates'', not ``shows''. & Qualifier \\
+Rebuttal & As of 2023--24; one study found fewer fabrications from the newer model, so later models may fabricate less. & Rebuttal \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The first version of this row said that LLMs ``invent plausible-sounding
+papers'': present tense, all models.  Nothing in the grounds licensed the
+step from two studies of ChatGPT in 2023--24 to every current model.  In
+Toulmin's terms the row had an unstated warrant, and the warrant was false.
+A reader caught it, not a citation check.
+
+\subsection{Grounds that are not sources}
+
+A \textbf{declared starting point} is an assumption, definition or value that
+\emph{this paper} adopts without arguing for it, for example D9: a ``citation check'' is a check that a cited work exists and says what is attributed to it.  It is not a
+claim taken from a source.  A point that a source took from another source
+is still a source item, recorded as relayed (the source check, Section~4 of
+the paper).
+
+The full register, the glossary of terms and the tools that check them are
+in the public repository \citep{veen2026repo}.
