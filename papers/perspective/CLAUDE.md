@@ -6,7 +6,7 @@ This paper argues that AI-assisted non-empirical papers need their reasoning che
 
 - **Target:** Learned Publishing, Opinion (1,000–4,000 words, no abstract, no footnotes: rules at source in `../../memory/reference-learned-publishing-opinion.md`); arXiv preprint first, category undecided because of arXiv's CS position-paper rule (`arxiv-submission.md`). Backup: Research Integrity and Peer Review, Comment
 - **Deadline:** TBD
-- **Status:** Phase 3, Writing: draft 4 (`paper1-draft-4`, 2026-10-30) plus the reader-feedback pass (2026-11-10, 3,998 words). Plan and next steps: `../../docs/work-items/paper1-draft3.md` (maintainer-local)
+- **Status:** Phase 3, Writing: draft 4 (`paper1-draft-4`, 2026-10-30) plus the reader-feedback pass (2026-11-10); words: `make check-registry`. Plan and next steps: `../../docs/work-items/paper1-draft3.md` (maintainer-local)
 - **agent-ready-papers:** v5.0.0 <!-- A number, not a status. Bump deliberately after reading UPGRADING.md; reconciliation notes: git history. -->
 
 <!-- Stated though it tracks the framework by construction: an exemplar that omits the pin teaches adopters to omit it. -->
@@ -30,7 +30,7 @@ Start: this file, then the work item (its NEXT list is what "continue" means), t
 | Adding or verifying citations | `vv/claims/claim_registry.md` — all claims with priority and status |
 | Checking coverage or DOIs for this paper | `make coverage` / `make check-dois` from the repo root, never a hand count; flags and limits: `../../tools/README.md` |
 | Logging token cost of an operation | `vv/cost-log.md`; convention in `../../templates/cost-log.md` |
-| Making scope or methodology decisions | `../../decisions/` (`make dr-status`); DR-029 and DR-030 are Proposed and bear on this paper |
+| Making scope or methodology decisions | `../../decisions/`; which are Proposed: `make dr-status` (DR-029 to DR-032 bear on this paper) |
 | Reviewing before submission | `review-prompt.md` — structured peer review simulation |
 | Stuck or unsure about a claim | `anti-hallucination.md` — citation verification checklist |
 | Adding or verifying literature sources | `../../literature/README.md` — indexed sources by topic |
@@ -75,10 +75,8 @@ The framework this paper describes (Core Concept above): claims P0/P1/P2, declar
 
 ## Current Status
 
-**Phase:** 3, Writing (draft 4, 2026-10-30). Coverage and the P0 floor: `make coverage` from the repo root; the registry header carries the last figure (3 of 6). History of drafts 1 and 2: this file's git history before 2026-10-17.
-
-**Next:** the work item's NEXT list (friends' read, blind re-rating, scope follow-ups, preprint).
+Phase and next steps: the Status line above and the work item. Coverage and the P0 floor: `make coverage` from the repo root, never a hand count. History of drafts 1 and 2: this file's git history before 2026-10-17.
 
 ---
 
-*Last updated: 2026-11-10*
+*Last updated: 2026-11-11*

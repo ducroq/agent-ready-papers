@@ -4,7 +4,7 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 
 - **Type**: Guide + templates + active paper projects
 - **Companion**: [agent-ready-projects](https://github.com/ducroq/agent-ready-projects) (for code)
-- **agent-ready-projects**: v1.52.2 <!-- A number, not a status: never write "current" beside it. Adoption record: memory/MEMORY.md Current State. Check with `make drift`. -->
+- **agent-ready-projects**: v1.52.2 <!-- A number, not a status: never write "current" beside it. Check: `make drift`. Adoption record: memory/MEMORY.md. -->
 - **agent-ready-papers** (this repo): v5.0.0 <!-- Release notes: CHANGELOG.md. -->
 
 ## Before You Start
@@ -77,7 +77,6 @@ agent-ready-papers/
 
 | Path | What it is |
 |------|-----------|
-| `papers/perspective/CLAUDE.md` | Paper 1 context: start here for paper work |
 | `papers/perspective/manuscript.tex` | Paper 1 LaTeX source |
 | `papers/perspective/vv/claims/claim_registry.md` | Paper 1 claim registry |
 | `decisions/DR-027_toulmin-whetten-verification-model.md` | Most consequential DR: the verification model (claims recorded by what they say and rest on; supersedes DR-004's types) |
@@ -96,7 +95,6 @@ Gitignored or user-global files an adopter supplies (review profile, `/release`,
 make paper1-pdf       # Paper 1 PDF, version-stamped on the title page (DR-026); plain pdflatex/bibtex still builds, unstamped
 make paper1-arxiv     # Paper 1 arXiv package (abstract, single spacing, .bbl) in papers/perspective/arxiv/
 make check            # lint + tests
-make drift            # session-start drift check (exit 0 none, 1 drift, 2 cannot verify)
 ```
 Registry and bibliography checks: the *Checking a registry* row above.
 
