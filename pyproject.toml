@@ -1,8 +1,15 @@
 [project]
 name = "agent-ready-papers-tools"
 version = "0.1.0"
-description = "Registry-verification tooling for agent-ready-papers. Not a redistributable package; pinned to the repo's tools/ directory."
+description = "Registry-verification tooling for agent-ready-papers. Installable for pinned imports by adopters (e.g. `tools.check_quotes`); stdlib-only, not published to PyPI."
 requires-python = ">=3.10"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["tools"]
 
 [tool.ruff]
 target-version = "py310"
