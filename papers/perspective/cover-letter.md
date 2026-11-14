@@ -1,5 +1,7 @@
 # Cover letter: Paper 1, Learned Publishing (Opinion)
 
+> **Dormant since 2026-11-14 (DR-034):** Paper 1 goes out as a preprint; no journal submission is planned. Kept in case one returns.
+
 <!-- Draft 2026-10-19. Fill in the bracketed items at submission. LP asks for: why the paper suits the journal,
      its relevance to the readership, its contribution, plus a preprint declaration and suggested reviewers. -->
 
@@ -7,9 +9,9 @@ Dear Dr Dormer, <!-- Check the current Editor-in-Chief: the Wiley guide names Pi
 
 Please consider my Opinion piece, "The Verification Gap: Checking the Reasoning in AI-Assisted Academic Writing", for *Learned Publishing*.
 
-**Why it suits Learned Publishing.** Publishers and editors now face manuscripts drafted with generative AI. The current response checks whether cited works exist. That check catches invented references, but a paper can cite only real sources and still reason badly, or state its findings more confidently than the evidence allows. Reporting guidelines do not cover this either: they ask whether a study is reported completely, not whether its reasoning holds. The gap matters most for papers whose contribution is an argument, such as conceptual, theoretical and perspective papers. Few checks exist for these.
+**Why it suits Learned Publishing.** Publishers and editors now face manuscripts drafted with generative AI. The current response checks whether cited works exist. That check catches invented references, but a paper can cite only real sources and still reason badly, or state its findings more confidently than the evidence allows. Reporting guidelines do not cover this either: they ask whether a study is reported completely, not whether its reasoning holds. The gap matters most for non-empirical papers, whose main contribution is reasoning, such as conceptual, theoretical and perspective papers. Few checks exist for these.
 
-**Contribution.** The piece proposes a claim register: a table, published with a paper, that records what each claim rests on, checks each kind of grounds in its own way, and ties the wording of each claim to the strength of its support. Each part is already in use elsewhere: in safety engineering, scholarly data publishing, educational measurement and the calibrated reporting of certainty. None of the approaches I compared combines them for academic papers. The piece applies the register to itself and reports what it shows: three of its six central claims stay at the lowest tier but one, for reasons it names. I recommend that authors and journals publish registers as optional supplementary material, and that trials test them before any wider adoption. That recommendation is aimed at the journal's readers.
+**Contribution.** The piece proposes a claim register: a table, published with a paper, that records what each claim rests on, checks each kind of grounds in its own way, and ties the wording of each claim to the strength of its support. Each part is already in use elsewhere: in safety engineering, scholarly data publishing, educational measurement and the calibrated reporting of certainty. None of the approaches I compared combines them for academic papers. The piece applies the register to itself and reports what it shows: two of its six central claims stay at the lowest tier but one, for reasons it names. I recommend that authors and journals publish registers as optional supplementary material, and that trials test them before any wider adoption. That recommendation is aimed at the journal's readers.
 
 **Declarations.**
 - The manuscript is not under consideration elsewhere.

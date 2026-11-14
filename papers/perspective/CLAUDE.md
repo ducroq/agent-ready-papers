@@ -4,9 +4,9 @@ This paper argues that AI-assisted non-empirical papers need their reasoning che
 
 **Core Argument:** The vocabulary for such a checklist already exists. Toulmin's layout treats every assertion as a claim resting on grounds through a warrant, with a qualifier; Whetten's criteria judge a theoretical contribution as a whole. The paper proposes: register each claim with what it rests on, check each item by its kind, and check the contribution once. It applies the procedure to itself and reports no evaluation.
 
-- **Target:** Learned Publishing, Opinion (1,000–4,000 words, no abstract, no footnotes: rules at source in `../../memory/reference-learned-publishing-opinion.md`); arXiv preprint first, category undecided because of arXiv's CS position-paper rule (`arxiv-submission.md`). Backup: Research Integrity and Peer Review, Comment
+- **Target:** a preprint (decided 2026-11-14, DR-034); arXiv route: ask moderation first, because of arXiv's CS position-paper rule (`arxiv-submission.md`); fallback SocArXiv or Zenodo. No journal submission planned (Learned Publishing was the target until 2026-11-14).
 - **Deadline:** TBD
-- **Status:** Phase 3, Writing: draft 4 (`paper1-draft-4`, 2026-10-30) plus the reader-feedback pass (2026-11-10); words: `make check-registry`. Plan and next steps: `../../docs/work-items/paper1-draft3.md` (maintainer-local)
+- **Status:** Phase 3: draft 4 plus the 2026-11-14 round (feedback, blind register rating, P0-floor work); register checked by the author except S4-5, S1-9, S3-4 and S3-12; P0 floor 4 of 6. Words: `make check-registry`. Plan and next steps: `../../docs/work-items/paper1-preprint.md` (maintainer-local)
 - **agent-ready-papers:** v5.0.0 <!-- A number, not a status. Bump deliberately after reading UPGRADING.md; reconciliation notes: git history. -->
 
 <!-- Stated though it tracks the framework by construction: an exemplar that omits the pin teaches adopters to omit it. -->
@@ -42,7 +42,7 @@ Start: this file, then the work item (its NEXT list is what "continue" means), t
 - Never cite a paper without verifying it exists (DOI check or Google Scholar)
 - Never use confident language ("demonstrates", "shows", "confirms") for claims below **ESTABLISHED** tier — that is where the DR-002 mapping puts these three words.
 - Never claim own unpublished work as established — always note "under review" status
-- Never exceed the 4,000-word venue limit without a decision record (`test_paper1_v5` fails above it; `make check-registry` counts, the preamble included, the abstract and tables not)
+- Never exceed the word budget without a decision record: 5,000 words since DR-034 (the 4,000-word venue limit dropped with the journal); `test_paper1_v5` fails above it; `make check-registry` counts, the preamble included, the abstract and tables not
 - Never skip the anti-hallucination checklist for AI-introduced citations
 - **Reader feedback is private.** Responses stay in `feedback/` (gitignored) or `../../memory/`. Tracked files and commit messages say "a reader" or "a reviewer": no names, no quotes from private correspondence. Named thanks only with the person's consent.
 - **This paper uses the framework it describes** — all claims in this manuscript must be registered and verified using the same infrastructure presented as the contribution
@@ -51,14 +51,14 @@ Start: this file, then the work item (its NEXT list is what "continue" means), t
 
 | File | Purpose |
 |------|---------|
-| `manuscript.tex` | LaTeX source: journal build `make paper1-pdf`, preprint build `make paper1-arxiv` (`\preprintmode` adds the abstract) |
+| `manuscript.tex` | LaTeX source: plain build `make paper1-pdf` (`DRAFT=1` adds the analytic summary), preprint build `make paper1-arxiv` (`\preprintmode` adds the abstract) |
 | `abstract.tex` | The abstract, used by the preprint build only |
-| `supplement.tex` | How to read a claim register (Toulmin primer): Appendix A in the preprint build; `supplement-standalone.tex` builds LP's separate supporting-information file. Outside the word count; its claims still need register rows |
+| `supplement.tex` | How to read a claim register (Toulmin primer): Appendix A in the preprint build; `supplement-standalone.tex` builds it as a separate file, kept for a journal (DR-034). Outside the word count; its claims still need register rows |
 | `references.bib` | BibTeX references |
-| `figures/fig-register.tex` | Figure 1 source. Nothing rebuilds `fig-register.pdf`: run `pdflatex` in `figures/` after any edit. LP takes the PDF as a separate file |
+| `figures/fig-register.tex` | Figure 1 source. Nothing rebuilds `fig-register.pdf`: run `pdflatex` in `figures/` after any edit |
 | `vv/claims/claim_registry.md` | All claims with verification status |
 | `glossary.md` | This paper's terms (DR-028) |
-| `cover-letter.md`, `arxiv-submission.md` | Submission drafts: the LP cover letter, and the arXiv steps and form fields |
+| `cover-letter.md`, `arxiv-submission.md` | The arXiv steps and form fields; the Learned Publishing cover letter, dormant since DR-034 |
 | `writing-guide.md`, `review-prompt.md`, `anti-hallucination.md` | Writing calibration, peer-review simulation, citation checklist |
 | `backlog.md` | Paper-scoped tasks |
 
@@ -79,4 +79,4 @@ Phase and next steps: the Status line above and the work item. Coverage and the 
 
 ---
 
-*Last updated: 2026-11-11*
+*Last updated: 2026-11-14*

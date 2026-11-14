@@ -56,7 +56,7 @@ on real evidence that does not carry it, or be worded more certainly than its su
 allows. The paper proposes a claim register: each claim written down with what it rests
 on, each step from grounds to claim checked, and each claim's wording tied to how well it
 is supported. The paper applies the register to itself, and the result is not flattering:
-three of its six central claims stay at a tentative level (at the time of writing), for reasons it names.
+two of its six central claims stay at a tentative level (at the time of writing), for reasons it names.
 
 I should be clear about what the paper does not do. It does not test whether a register
 helps authors or reviewers find weak reasoning. That needs a trial, and I would like to
@@ -88,7 +88,7 @@ with you as the judge of the answers.
 I've just shared a paper that turns those questions into a checklist for academic
 writing: a claim register built on Toulmin's layout of arguments. Each claim is recorded
 with what it rests on, and its wording is tied to how well it is supported. Applied to
-itself, the paper (for now) leaves three of its six central claims at a tentative level.
+itself, the paper (for now) leaves two of its six central claims at a tentative level.
 
 Whether this helps people catch weak reasoning hasn't been tested yet. If you'd like to
 try it, or tear it apart, I'd love to hear from you.

@@ -20,19 +20,19 @@ GLOSSARY = REPO_ROOT / "papers" / "perspective" / "glossary.md"
 def test_paper1_v5_p0_floor(paper1_v5_registry):
     report = check_coverage(paper1_v5_registry)
     assert set(report.p0_ids) == {"S1-1", "S1-2", "S2-1", "S2-2", "S3-4", "C1"}
-    assert set(report.p0_below_floor) == {"C1", "S2-2", "S3-4"}
+    assert set(report.p0_below_floor) == {"C1", "S2-2"}
     assert not report.deprecations
 
 
 def test_paper1_v5_consistency(paper1_v5_registry):
-    report = check_registry(paper1_v5_registry, manuscript_path=MANUSCRIPT, budget=4000, glossary_path=GLOSSARY)
+    report = check_registry(paper1_v5_registry, manuscript_path=MANUSCRIPT, budget=5000, glossary_path=GLOSSARY)  # DR-034: preprint, venue limit dropped
     by_check = {}
     for f in report.findings:
         if f.check == "budget" and f.severity == "note":  # near the word budget: a heads-up; over budget is a finding
             continue
         by_check.setdefault(f.check, []).append(f.message)
     assert set(by_check) == {"premises"}, by_check
-    assert len(by_check["premises"]) == 23  # rows awaiting the blind re-rating (2026-11-04: C1 also rests on S4-9; 2026-10-19: S1-7 rests on S1-8 and S1-9, new, and on S1-1 and S1-2, reworded; draft 4, 2026-10-30: S3-4 rests on S1-9)
+    assert len(by_check["premises"]) == 7  # 2026-11-14: the author checked the register; what remains rests on S4-5 (Walton unread) and on the new or changed S1-9, S3-4, S3-12 awaiting confirmation
     assert all("which is not verified" in m for m in by_check["premises"])
 
 

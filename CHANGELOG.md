@@ -17,6 +17,8 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
 ## Unreleased
 
 ### Decisions
+- **DR-033 Proposed, not binding** (`decisions/DR-033_p0-floor-by-role.md`): the P0 floor by role. P0 claims still need SUPPORTED; a P0 contribution that proposes something to test may sit at EMERGING if it is worded at that tier, names its trials and the refuting result, and rests only on P0 claims that meet the floor. Both outside model reviewers (2026-11-14) rejected reprioritising and accepted only a general, prospective rule.
+- **DR-034 Accepted** (`decisions/DR-034_paper1-preprint-word-limit.md`): Paper 1 goes out as a preprint, with no journal submission planned; the 4,000-word venue limit no longer binds; the budget guard is 5,000.
 - **DR-030 Proposed, not binding** (`decisions/DR-030_claim-scope-and-as-of.md`):
   - the source check holds a claim to the boundary conditions it states (Whetten's Who/Where/When);
   - claims about fast-moving objects carry an `as of:` date.
@@ -26,6 +28,7 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
 - `templates/CLAUDE.md` now asks for a **Main Question** above the Core Argument, and the Core Argument stays a hypothesis until the evidence is in. A sub-project paper started with a thesis and no question, and its contribution assumed the result it set out to find. No check can see that; two outside reviews did.
 
 ### Tooling
+- `make check-registry` and `tests/test_paper1_v5.py`: Paper 1's word budget is 5,000 (DR-034). The test's expected P0-below-floor set and its pinned premises count follow the 2026-11-14 register (#72 still applies: it pins a count, not a set).
 - `make paper1-arxiv` (`scripts/paper1-arxiv.sh`) builds Paper 1's arXiv package in a gitignored directory. The package has the abstract, single spacing, the `.bbl` and a baked-in version stamp. Maintainer tooling; it doesn't affect adopters.
 - `make drift` now also runs `scripts/read-surface.sh`: an over-budget read surface counts as drift (exit 1), and an unmeasurable one as cannot-verify (exit 2). It is skipped when neither `memory/` nor `docs/work-items/` exists. The default character budget (`READ_SURFACE_BUDGET`) drops from 100,000 to 75,000. A budget set below the current total turned `make drift` red (exit 1). Maintainer tooling; it doesn't affect adopters.
 - `make gotcha-stats` reports a log with no open entries as clean (exit 0) when its `## Promoted` heading is there. Zero entries still exits 1 without that heading, or when something outside a `### ` entry looks like an entry in another shape: a `####` heading, a `## ` heading other than the log's known sections, or a `**Problem` line in any punctuation. HTML comments are now skipped, fence markers inside them included, so a template's example `### ` line in a header comment no longer counts as an entry (one fewer in 44 of the 287 logs measured on this machine). Pinned by the new `tests/test_gotcha_stats.py`. Maintainer tooling; it doesn't affect adopters.
@@ -33,6 +36,7 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
 - The root `CLAUDE.md` lost a Key Paths row that duplicated a Before You Start row and a `make drift` line; Paper 1's lost its stale word count and status text, keeping the template's `## Current Status` heading with pointers only.
 
 ### Paper 1
+- **2026-11-14 round**: the author's 36 notes and two readers' points applied; a blind rating of every register row by Codex and Mistral Vibe, checked against the text (14 fixes; suggested tier raises rejected under the paper's stricter reference-claim rule); the author checked the register row by row. S1-9 gained two published sources (Mogull 2017; Peters & Chin-Yee 2025) and reached SUPPORTED; S3-4 was split, with the untested remedy moved to the new S3-12 (P1, EMERGING), and reached SUPPORTED. The agent made these two raises; the author has not yet confirmed them (status `[ ]`). P0 floor: 4 of 6 (#38). "Non-empirical paper" is used throughout and defined in §1; Box 1 gains a Source row; the worked example is the register's own first wording of S1-1. A draft-only appendix (`analytic-summary.tex`, built with `make paper1-pdf DRAFT=1`).
 - Table 2: C1 rests on three declared values, not two (D10 was added 2026-11-10); found by the new count check.
 - The maintainer's draft-3 feedback round:
   - The abstract moved to `abstract.tex`, because Learned Publishing Opinion pieces have none; the preprint build includes it.
@@ -67,6 +71,7 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
 - `docs/glossary.md`: a warrant is "the general rule that licenses the step from grounds to claim", no longer "the step" itself (Toulmin pp. 91–92). DR-029 (Proposed): relevance is no longer tested by removing the ground, because that test fails a ground that helps without being required.
 
 ### Literature
+- L117 Linardon et al. 2025, L118 Seifi & Seyfi 2026 (invented references, 2025–26), L119 Mogull 2017 (quotation accuracy), L120 Peters & Chin-Yee 2025 (overgeneralisation in LLM summaries); L98 Santesso et al. 2020 now read in full.
 - L114 Lee et al. 2025, L115 Parasuraman & Manzey 2010, L116 Greenberg 2009, all from the reader round on Paper 1.
 - L113, Muller 2017, "What is an Analytic Summary?": a course handout on reconstructing a paper's argument (claims, arguments, objections, responses). It maps onto the DR-027 model. One open question is a possible independent check: a reader reconstructs the argument without the registry, and the two are compared. Unpublished, so not citable.
 

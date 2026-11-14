@@ -28,6 +28,7 @@ This paper uses the framework's terms as defined in [`docs/glossary.md`](../../d
 |------|-------------------|------------------|
 | **contribution** | Each contribution a paper makes (root claims). | One: C1 (registry), the call for verification infrastructure for non-empirical papers. |
 | **validation** | Checking that a contribution serves its audience and purpose. | Only the contribution check; the paper reports no user study. |
+| **rebuttal** | Toulmin's "circumstances in which the general authority of the warrant would have to be set aside". | Called the claim's **scope** in the prose: where the claim holds, and the conditions under which it does not, with Toulmin's term named where scope is introduced (Box 1, Section 3; author, 2026-11-14). The register column keeps "Rebuttal" (DR-027). |
 
 ## Abbreviations
 

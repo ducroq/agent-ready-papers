@@ -28,7 +28,7 @@ verify-bib:  ## Field-level verification of Paper 1 references.bib (the stronger
 
 check-registry:  ## Registry/manuscript internal consistency for Paper 1
 	python -m tools.check_registry papers/perspective/vv/claims/claim_registry.md \
-		--manuscript papers/perspective/manuscript.tex --budget 4000 \
+		--manuscript papers/perspective/manuscript.tex --budget 5000 \
 		--glossary papers/perspective/glossary.md
 
 HOUSE_WORDS ?= vv/house-words.txt
@@ -39,12 +39,12 @@ preservation-check:  ## Did a translation keep numbers and certainty? (PROPOSED,
 	@[ -n "$(SRC)" ] && [ -n "$(TRN)" ] || { echo "usage: make preservation-check SRC=<source> TRN=<translation> [LINK=<source link>]"; exit 2; }
 	python extensions/preservation_check.py "$(SRC)" "$(TRN)" $(if $(LINK),--link "$(LINK)")
 
-paper1-pdf:  ## Build Paper 1's PDF, stamped on the title page with `git describe` (draft tag, commits since, -dirty)
+paper1-pdf:  ## Build Paper 1's PDF, stamped on the title page with `git describe` (draft tag, commits since, -dirty); DRAFT=1 appends the blind analytic summary (draft copies only)
 	cd papers/perspective || exit 1; \
 	v=$$(git describe --tags --dirty --match 'paper1-*' 2>/dev/null) || \
 	  v="untagged $$(git describe --always --dirty --match 'paper1-*' 2>/dev/null)"; \
 	[ "$$v" != "untagged " ] || v='unversioned build'; \
-	tex="\\def\\paperversion{$$v}\\input{manuscript}"; \
+	tex="\\def\\paperversion{$$v}$(if $(filter 1,$(DRAFT)),\\def\\draftappendix{})\\input{manuscript}"; \
 	pdflatex -interaction=nonstopmode -jobname=manuscript "$$tex" && bibtex manuscript && \
 	pdflatex -interaction=nonstopmode -jobname=manuscript "$$tex" && \
 	pdflatex -interaction=nonstopmode -jobname=manuscript "$$tex"
