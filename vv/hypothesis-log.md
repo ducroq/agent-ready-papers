@@ -302,7 +302,7 @@ Position holds if ≥3 load-bearing process-level findings remain that the RAG p
 **Origin:** EXP-002's *What next* (a process arm with sources), 2026-11-15.
 
 **Domain:** Review method (DR-011), source checks. Tracking: [#84](https://github.com/ducroq/agent-ready-papers/issues/84)
-**Status:** open. 2026-11-15: EXP-003's 15 runs done, none contaminated, outputs blinded; not yet scored.
+**Status:** open. 2026-11-15: EXP-003's 15 runs done, none contaminated, outputs blinded. First scorer done blind (Claude, under Opus rather than the planned Fable: a recorded deviation); the second scorer (Vibe) is on hold until 2026-11-16 20:00 or later (engineer). Arms not yet unblinded.
 
 ## Resolved
 
