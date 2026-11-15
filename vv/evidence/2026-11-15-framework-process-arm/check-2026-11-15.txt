@@ -1,0 +1,4 @@
+entries 3   metrics checked 10   untraceable 0
+spend recorded: $0.00
+open preregistrations: EXP-001, EXP-003
+PASS
