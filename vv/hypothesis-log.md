@@ -302,7 +302,7 @@ Position holds if ≥3 load-bearing process-level findings remain that the RAG p
 **Origin:** EXP-002's *What next* (a process arm with sources), 2026-11-15.
 
 **Domain:** Review method (DR-011), source checks. Tracking: [#84](https://github.com/ducroq/agent-ready-papers/issues/84)
-**Status:** open (EXP-003 preregistered)
+**Status:** open. 2026-11-15: EXP-003's 15 runs done, none contaminated, outputs blinded; not yet scored.
 
 ## Resolved
 
