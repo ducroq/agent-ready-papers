@@ -285,6 +285,25 @@ Position holds if ≥3 load-bearing process-level findings remain that the RAG p
 **Domain:** Declared starting points (DR-032)
 **Status:** open
 
+### [2026-11-15] The framework earns its keep as a process with sources, not as a review prompt
+
+**Position (provisional):** Given the cited sources, a reviewer that follows the framework's process (register each claim and its grounds, check each cited claim against its source, then apply the rules) catches source-level faults that the same reviewer misses with a plain prompt and the same sources. The rules alone, used as a text-only review prompt, add little over a competent plain prompt.
+
+**Alternative:** With the sources in hand, a plain review finds the same source faults; the value lies in giving the reviewer the sources, not in the framework's process.
+
+**Method:** EXP-003, preregistered in [`evidence/2026-11-15-framework-process-arm/PREREGISTRATION.md`](evidence/2026-11-15-framework-process-arm/PREREGISTRATION.md): five arms on one model, 10 planted faults with a sealed key; primary comparison rules + process + sources vs plain + sources on source-only faults; rules + sources without the process isolates the process. Bars and the ordered decision rule are fixed there.
+
+**Revisit trigger:** EXP-003's runs are scored.
+
+**Review by:** 2026-12-15.
+
+**Evidence (2026-11-15, EXP-002, pilot):** on text-detectable planted faults the rule prompt tied a plain prompt (16/16 each, a ceiling) at lower precision (87.8% vs 100%); without the sources both found few source faults (2/12 vs 4/12), and the reviewer model mattered more than the prompt. This is consistent with the position's second sentence (a ceiling result) and leaves the first untested. Related: [2026-06-11] *Process-level verification infrastructure remains the locus of value*.
+
+**Origin:** EXP-002's *What next* (a process arm with sources), 2026-11-15.
+
+**Domain:** Review method (DR-011), source checks. Tracking: [#84](https://github.com/ducroq/agent-ready-papers/issues/84)
+**Status:** open (EXP-003 preregistered)
+
 ## Resolved
 
 Resolved entries: [`hypothesis-log-resolved.md`](hypothesis-log-resolved.md). The third-party verification ceiling (2026-08-16, SPLIT) and the dsp-workshop pilot (2026-06-12, HELD) are there.

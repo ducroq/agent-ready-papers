@@ -70,7 +70,7 @@ agent-ready-papers/
 ├── papers/perspective/    <- Paper 1 "The Verification Gap"; other papers/* are gitignored sub-projects
 ├── vv/                    <- framework self-application (cost log, hypotheses, experiments, evidence)
 ├── memory/                <- gitignored, local-only git (no remote); archive/ for retired files
-└── lab -> ~/lab/agent-ready-papers  <- gitignored symlink: off-repo working data (reviews)
+└── lab -> ~/lab/agent-ready-papers  <- gitignored symlink: off-repo working data (reviews, experiments)
 ```
 
 ## Key Paths

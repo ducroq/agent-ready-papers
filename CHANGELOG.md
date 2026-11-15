@@ -75,6 +75,10 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
 - L114 Lee et al. 2025, L115 Parasuraman & Manzey 2010, L116 Greenberg 2009, all from the reader round on Paper 1.
 - L113, Muller 2017, "What is an Analytic Summary?": a course handout on reconstructing a paper's argument (claims, arguments, objections, responses). It maps onto the DR-027 model. One open question is a possible independent check: a reader reconstructs the argument without the registry, and the two are compared. Unpublished, so not citable.
 
+### Self-application (vv/)
+- **EXP-002, rejected** (`vv/evidence/2026-11-15-framework-vs-plain-prompt/`): the framework rules used as a text-only review prompt, against a competent plain prompt, on an anonymised third-party essay with 7 planted faults. Tie on text-detectable faults (16/16 each, a ceiling), lower precision (87.8% vs 100%). Rejected for the DR-011 blind-pass use only; the process was not tested.
+- **EXP-003, preregistered** (`vv/evidence/2026-11-15-framework-process-arm/`): five arms on one model test whether the framework's process with sources beats a plain review with the same sources. Sealed answer key; bet registered in `vv/hypothesis-log.md`.
+
 ### Adopter notes
 No adopter action required. A paper may add the new Main Question line to its `CLAUDE.md`.
 
