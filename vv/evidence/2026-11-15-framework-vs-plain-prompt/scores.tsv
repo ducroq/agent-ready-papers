@@ -1,0 +1,9 @@
+blind_id	arm	model	rep	P1	P2	P3	P4	P5	P6	P7	text_P4-7	src_P1-3	findings	valid	invalid	natives_found	notes
+R771	framework	codex	r1	1	0	1	1	1	1	1	4	2	12	11	1	N2,N3,N4,N5	invalid: F08 denominators of IEA-sourced percentages
+R974	framework	codex	r2	0	0	0	1	1	1	1	4	0	11	9	2	N2,N3,N4,N5,N9	invalid: F8 denominators; F11 client-side tabs (not checkable)
+R795	plain	codex	r1	1	0	1	1	1	1	1	4	2	8	8	0	N2,N5	
+R528	plain	codex	r2	1	0	1	1	1	1	1	4	2	9	9	0	N2,N5,N9	
+R950	framework	vibe	r1	0	0	0	1	1	1	1	4	0	9	8	1	N2,N4	invalid: F6 denominators of IEA-sourced percentages
+R355	framework	vibe	r2	0	0	0	1	1	1	1	4	0	9	8	1	N2,N4,N5	invalid: F9 (lede restates 10x; body caveats it at once)
+R402	plain	vibe	r1	0.5p	0	0	1	1	1	1	4	0	5	5	0	-	P1 partial: flags ref 11 numbering, not existence (counted 0)
+R119	plain	vibe	r2	0	0	0	1	1	1	1	4	0	6	6	0	-	F5 flags 2009 input as legacy (not the indexing/training asymmetry, N1 not credited)
