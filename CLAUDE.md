@@ -1,5 +1,7 @@
 # Agent-Ready Papers
 
+**Status: development stopped 2026-11-17.** The engineer may still use the framework to write their own papers; reviewing others' papers was judged disappointing and is not pursued. The rows below for drift, releases, new hypotheses and DR decisions are suspended: `make drift` exits 1 by design (companion v1.53.0 not adopted), so report it and do not act on it. "Continue": `memory/MEMORY.md`, NEXT SESSION.
+
 Verification infrastructure for AI-augmented academic and structured non-fiction writing: templates, quality gates and session continuity that catch hallucinated citations, confidence inflation, argument-quality gaps and calculation errors. It covers academic papers, speculative-design / voice-driven non-fiction (DR-010) and decision-support artefacts (DR-012).
 
 - **Type**: Guide + templates + active paper projects
@@ -14,7 +16,7 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 | Picking up where the last session left off | `memory/MEMORY.md`: the index only, not the topic files it lists. Nothing else loads it, so keep this row first. |
 | Starting any session | `make drift` (companion pin, global skills, own stamp, paper pins, read surface; gitignored sub-projects only reported). Surface any drift before work; don't auto-update: run `/update-drift`, and adopting is the engineer's call. No local clone: compare against https://github.com/ducroq/agent-ready-projects/blob/master/CHANGELOG.md. |
 | Working on Paper 1 (Perspective) | `papers/perspective/CLAUDE.md` |
-| Making scope or methodology decisions | `decisions/`. `make dr-status` lists each DR's status; only Accepted DRs bind. DR-020 modifies Step Z, which accepted DR-019 changed: re-read that section before accepting it. <!-- verify: cd "$(git rev-parse --show-toplevel)" && n=$(ls decisions/DR-*.md \| wc -l); echo "decisions/ holds $n DR files"; [ "$n" -eq 34 ] \|\| { echo "CLAIM REFUTED: expected 34"; exit 1; } --> |
+| Making scope or methodology decisions | `decisions/`. `make dr-status` lists each DR's status; only Accepted DRs bind. <!-- verify: cd "$(git rev-parse --show-toplevel)" && n=$(ls decisions/DR-*.md \| wc -l); echo "decisions/ holds $n DR files"; [ "$n" -eq 34 ] \|\| { echo "CLAIM REFUTED: expected 34"; exit 1; } --> |
 | Template / DR / verification-gate design work | `memory/dead-ends.md`: proposals already concluded as don't-retry |
 | Adding or verifying literature sources | `literature/README.md` |
 | Checking a registry or bibliography | `make coverage` (`python -m tools.coverage <registry> --strict` enforces the thresholds and the P0 floor), `make check-dois`, `make verify-bib`, `make check-registry`. A resolving DOI is not a correct entry; these tools check consistency, never whether a tier is the right one. Flags and limits: `tools/README.md`. |
@@ -29,7 +31,6 @@ Verification infrastructure for AI-augmented academic and structured non-fiction
 | Using an agent other than Claude Code | `docs/non-claude-setup.md` |
 | Wiring a check into the edit loop | `docs/verification-hooks.md` |
 | Before committing | `/review-changes` (user-global). This repo's half is `.claude/review-profile.md`, and the skill stops without it; `make check-profile` checks its invariants. |
-| Cutting a release | `/release` (project-local, user-invoked only). Writes the CHANGELOG and UPGRADING entries and both stamps, then stops before tagging. |
 | Ending a session | `/curate` (user-global) |
 | Monthly or after restructuring | `/audit-context` (user-global) |
 | Evidence for [augmented-engineering](https://github.com/ducroq/augmented-engineering)'s four patterns (verification findings, context architecture, reproduce-don't-assess, LLM behaviour) | File an issue there: the pattern, quantified results, the claims it supports |

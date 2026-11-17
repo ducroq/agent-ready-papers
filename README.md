@@ -6,7 +6,7 @@ Automated citation checkers (RefChecker, scite.ai) and model-level solutions (RA
 
 Companion to [agent-ready-projects](https://github.com/ducroq/agent-ready-projects) (for code).
 
-**Status:** A working framework we use on our own papers. Broader empirical validation across other authors and domains is an open question — adopt it as a structured starting point, not as a tested method.
+**Status:** No longer developed (since 2026-11-17); v5.0.0 is the last release, and open issues are closed as not planned. The maintainer still uses it for writing papers. Used once to review a paper by others (a published clinical study), it found real errors, but in that case its own checks found less than general moves did: recomputing the numbers and a second, independent reader. Reviewing is therefore not a use we recommend. Its broader validation across other authors and domains was never done. If you adopt it, treat it as a structured starting point for writing, not as a tested method.
 
 **Current release:** v5.0.0 (2026-10-17) — see [`CHANGELOG.md`](CHANGELOG.md). Pin your project with `agent-ready-papers: v5.0.0` in your CLAUDE.md and surface drift at session start; [`templates/CLAUDE.md`](templates/CLAUDE.md) carries that line for you.
 
@@ -58,12 +58,12 @@ Stating the case in [Toulmin form](literature/sources/toulmin-1958.md) — *Clai
 | **Claim** | AI-augmented academic and structured non-fiction writing benefits from process-level verification infrastructure. |
 | **Grounds** | The five failure modes in [The Core Problem](#the-core-problem) — hallucinated citations, confidence inflation, scope creep, terminology drift, invisible verification gaps. Each is observable in agent output today. |
 | **Warrant** | Tool-level checkers (RefChecker, scite.ai) verify already-written citations; model-level techniques (RAG, [grounded generation](docs/framework-summary.md#terminology-note-grounding--grounded)) constrain what gets generated. Neither reaches the process layer where the failure modes originate — the templates, decision records, and registry discipline a writer brings *to* the session. |
-| **Qualifier** | **EMERGING.** We use this framework on our own papers; broader empirical validation across other authors and domains is an open question. |
+| **Qualifier** | **EMERGING.** We use this framework on our own papers; broader empirical validation across other authors and domains was not done before development stopped (2026-11-17). |
 | **Rebuttal** | The framework is overhead with no return in the cases listed in *[When It Is Overkill](#when-it-is-overkill)* below — one-shot prose, throwaway code, internal notes, and domains with their own established compliance audit conventions. |
 
 This Toulmin layout shows how the claim rests on its grounds through a warrant. R-1 in [*This README, registered*](#this-readme-registered) below registers the same case as the README's **contribution**, the root claim, which is checked once with [Whetten's elements](literature/sources/whetten-1989.md) (*What / How / Why / Who-Where-When*, from Whetten's *What Constitutes a Theoretical Contribution?*, AMR 1989). The warrant check verifies the reasoning; the contribution check validates what the whole adds. Six further entries (R-2…R-7) register supporting claims from the rest of this file. Terms: [`docs/glossary.md`](docs/glossary.md).
 
-**Dynamic counter to the Warrant.** A reasonable objection: "tool-level + model-level techniques are improving fast; RAG with citation-grounded generation plus reasoning-step verification could close most of the gap as capability rises." The Warrant above claims a **structural** distinction (process layer is the locus of the failure modes), not a **static** one (today's tools don't reach it). The structural claim is empirically open — registered as a falsifiable position in [`vv/hypothesis-log.md`](vv/hypothesis-log.md) with a Method (apply the framework's apparatus to a frontier-model-RAG-produced manuscript and count residual process-level findings) and a Revisit trigger (frontier-model RAG pipeline with reasoning-step verification becomes available, applied to a ≥5,000-word manuscript with ≥10 citations). Reading this and disagreeing? File an issue or contact the maintainer; "the position fails if residual process-level findings drop below 3" is concrete enough to test.
+**Dynamic counter to the Warrant.** A reasonable objection: "tool-level + model-level techniques are improving fast; RAG with citation-grounded generation plus reasoning-step verification could close most of the gap as capability rises." The Warrant above claims a **structural** distinction (process layer is the locus of the failure modes), not a **static** one (today's tools don't reach it). The structural claim is empirically open — registered as a falsifiable position in [`vv/hypothesis-log.md`](vv/hypothesis-log.md) with a Method (apply the framework's apparatus to a frontier-model-RAG-produced manuscript and count residual process-level findings) and a Revisit trigger (frontier-model RAG pipeline with reasoning-step verification becomes available, applied to a ≥5,000-word manuscript with ≥10 citations). Reading this and disagreeing? File an issue or contact the maintainer; "the position fails if residual process-level findings drop below 3" is concrete enough to test. (Since 2026-11-17 that position is closed unresolved and issues are closed: development stopped.)
 
 ## When This Framework Is Worth The Overhead
 
@@ -105,7 +105,7 @@ Not covered yet: how an argument is built across a paper (contribution statement
 
 **Will an AI-text detector flag my paper?** It may, and this framework will not stop that. It asks whether a text holds, not who wrote it, and no gate uses a detector. Independent evaluations indicate that detector accuracy depends heavily on conditions such as the generating model, decoding settings and threshold ([Dugan et al. 2024](literature/sources/dugan-2024-raid.md)), and that the accuracy of 2023 detectors dropped sharply under paraphrase ([Krishna et al. 2023](literature/sources/krishna-2023-paraphrase.md)). One 2025 working paper, not peer-reviewed, found one commercial detector robust to the rewriting tool it tested ([Jabarian & Imas 2025](literature/sources/jabarian-imas-2025.md)). In a 2023 pilot, seven detectors misclassified on average 61% of 91 essays by non-native English writers ([Liang et al. 2023](literature/sources/liang-2023-detector-bias.md)); whether current tools still do is untested. The publisher policies we read judge *disclosure*, not detector scores. ICMJE and COPE require you to disclose AI use and take responsibility for the content, and neither mentions detectors. Where a publisher does score submissions (Springer Nature), a high score leads to a human check ([policies](literature/sources/detector-policies-2026.md)). So: disclose AI use the way your target journal asks, keep your registry and verification record as your answer to a flag, and do not tune prose to pass a detector. How editors weigh a flag against a disclosure is not documented anywhere we found.
 
-**Has this been peer-reviewed?** Not yet. We use it on our own work; Paper 1 (in this repo) is the perspective article that argues for the gap this framework addresses. Adopt as a structured starting point, not as a tested method.
+**Has this been peer-reviewed?** No. Development stopped on 2026-11-17, and Paper 1 (in this repo), the perspective article that argues for the gap this framework addresses, was not posted. We use the framework on our own work. Adopt as a structured starting point, not as a tested method.
 
 ## Quickstart
 
@@ -568,7 +568,7 @@ Tier vocabulary matches the [Confidence-to-Language Mapping](#confidence-to-lang
 See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the full guidance. Short version:
 
 - **Adopters** — copy templates, pin a version in your project's CLAUDE.md, you're not expected to upstream changes.
-- **Collaborators** — open an issue describing the proposed change before investing in a PR; most framework changes land as Decision Records.
+- **Collaborators**: the framework is no longer developed (since 2026-11-17), so issues and pull requests are not taken up.
 
 Licence: CC BY 4.0 — see [`LICENSE`](LICENSE) and [`decisions/DR-013_license-choice.md`](decisions/DR-013_license-choice.md).
 

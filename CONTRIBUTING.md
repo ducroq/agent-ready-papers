@@ -15,7 +15,7 @@ If you want to apply the framework to your own paper, decision-support artefact,
 
 ### For collaborators
 
-If you want to propose changes to the framework itself:
+If you want to propose changes to the framework itself: **development stopped on 2026-11-17**, so the routes below describe how the project worked and are no longer taken up.
 
 - **Open an issue first** describing the proposed change. Most framework changes are recorded as Decision Records (DRs); the issue triggers a discussion before the DR is drafted.
 - The framework is *not* "design first, deploy later" — it is "apply, surface gaps, promote what survives." Pattern proposals that have not been applied somewhere are usually returned with a request for evidence.

@@ -16,6 +16,15 @@ All notable changes to `agent-ready-papers`. Adopters can check their paper proj
 
 ## Unreleased
 
+### Status
+- **Development stopped (2026-11-17).** The maintainer stopped developing agent-ready-papers and keeps using it for writing papers. In one review of a published clinical paper by others (2026-11-17), the framework found real errors, but general moves (recomputing, an independent second reader, a review of the review) found more than its own checks; reviewing is not a recommended use. v5.0.0 stays the last release; the open GitHub issues were closed as not planned, and the open hypotheses in `vv/hypothesis-log.md` were closed unresolved (some carry partial evidence). EXP-001 and EXP-003 stay listed as open preregistrations in `vv/experiments/registry.jsonl`: they were never concluded. Nothing below this line was released.
+
+### Literature
+- **L121–L123** (`literature/README.md`): Fan et al. 2025 on "metacognitive laziness", and two papers by Soudani and Hasibi (2025) on uncertainty estimation in retrieval-augmented generation, seeded from Radboud's ConfidAI project. Abstracts only; DOIs checked.
+
+### Adopter notes
+No adopter action required. Projects pinned to v5.0.0 keep working; there will be no further releases to compare against.
+
 ### Decisions
 - **DR-033 Proposed, not binding** (`decisions/DR-033_p0-floor-by-role.md`): the P0 floor by role. P0 claims still need SUPPORTED; a P0 contribution that proposes something to test may sit at EMERGING if it is worded at that tier, names its trials and the refuting result, and rests only on P0 claims that meet the floor. Both outside model reviewers (2026-11-14) rejected reprioritising and accepted only a general, prospective rule.
 - **DR-034 Accepted** (`decisions/DR-034_paper1-preprint-word-limit.md`): Paper 1 goes out as a preprint, with no journal submission planned; the 4,000-word venue limit no longer binds; the budget guard is 5,000.

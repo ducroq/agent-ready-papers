@@ -24,7 +24,9 @@
 **Repo:** agent-ready-papers
 **Started:** 2026-06-11
 
-## Open
+## Closed unresolved (2026-11-17; formerly Open)
+
+**Closed unresolved, 2026-11-17.** Development stopped; the framework stays in use for writing. One informal data point first: on reviewing others' papers, the maintainer's judgement after a full audit of a clinical paper (2026-11-17) was that it "is a bit disappointing", in line with the position that the framework is an authoring discipline, not a reviewer. The entries below were not resolved; some carry partial evidence. They are kept as a record of what the framework would have needed to show.
 
 ### [2026-11-04] A row that passes says little about the sentences that restate it
 
@@ -61,7 +63,7 @@ Draft 4 acts on the two Claude-only findings; the two shared ones stay open (wor
 **Review by:** 2027-03-31
 
 **Domain:** Independent checking of the register; DR-029's `confirmed`; Paper 2 evaluation (DR-006)
-**Status:** open
+**Status:** closed unresolved 2026-11-17 (development stopped); was open
 
 ### [2026-10-16] DR-029 predictions: Paper 1's three below-floor P0 items stay EMERGING
 
@@ -142,7 +144,7 @@ Draft 4 acts on the two Claude-only findings; the two shared ones stay open (wor
 **Origin:** Moved here, anonymised, from that paper's own log when DR-024 was accepted (2026-10-12). DR-011 makes Pass 3 (cross-vendor) opt-in and expects it to yield mostly style findings. If confirmed, making Pass 3 the default before a full draft goes to an outside reader, and adding a second-model reader to the panel template, needs a DR. Tracking: [#53](https://github.com/ducroq/agent-ready-papers/issues/53).
 
 **Domain:** Review method (DR-011), reader panels
-**Status:** open (EXP-001 preregistered)
+**Status:** closed unresolved 2026-11-17 (development stopped); was open (EXP-001 preregistered)
 
 **Evidence (2026-10-26):** a second review by another vendor's model (Codex CLI, GPT-6.1) on Paper 1 draft 3 found two method-level problems that the earlier rounds had not raised: the manuscript called priority "not a gate", against an accepted DR; and the distinction from the closest prior work was not stated in checkable terms. Its four other findings were counts and one unregistered sentence. All six held.
 
@@ -168,7 +170,7 @@ Draft 4 acts on the two Claude-only findings; the two shared ones stay open (wor
 **Origin:** Registered 2026-08-16 on the resolution of the entry now in [`hypothesis-log-resolved.md`](hypothesis-log-resolved.md), whose headline prediction and first mechanism were both refuted by a second audit the same day while this half replicated exactly.
 
 **Domain:** Coverage thresholds, third-party audit scope, Toulmin grounds constraint
-**Status:** open
+**Status:** closed unresolved 2026-11-17 (development stopped); was open
 
 ### [2026-08-16] Circular evidence is a recurring defect class with no shipped check
 
@@ -185,7 +187,7 @@ Draft 4 acts on the two Claude-only findings; the two shared ones stay open (wor
 **Origin:** n=2 — one in-repo registry row retiered 2026-08-13 by the `DR-019` sweep, and one external quantitative note audited 2026-08-16 (untracked, subject withheld). A first draft of `DR-020` claimed three instances and a general mechanical procedure; a DR-011 Pass 1 / Pass 2 battery established that two of the three were the same finding and that the proposed diagnostic was unsound — every defined constant vanishes under reduction to primitives, so "what cancels" would flag most of derived physics. Both corrections are recorded in that DR's *Draft history*.
 
 **Domain:** Step Z, equation-checker categories, evidential weight vs arithmetic correctness
-**Status:** open
+**Status:** closed unresolved 2026-11-17 (development stopped); was open
 
 ### [2026-08-16] Sentence-level calibration and whole-argument impression come apart, and only structural registration catches it
 
@@ -202,7 +204,7 @@ Draft 4 acts on the two Claude-only findings; the two shared ones stay open (wor
 **Origin:** Surfaced 2026-08-16 by a completed registry pass on a third-party document, where all 16 ARGUMENTs passed qualifier calibration (item 4) with none overclaiming, and four counter-argument gaps were nevertheless found — one of which was that a motif kept doing rhetorical work after the text had explicitly stated the constraint that should have stopped it. Neither the framework's tier-language mapping nor Step Z, both of which operate per-entry, has a place to record a defect that only exists between entries.
 
 **Domain:** Step Z, tier-monotonicity, argument-structure verification, AI-assisted writing failure modes
-**Status:** open
+**Status:** closed unresolved 2026-11-17 (development stopped); was open
 
 ### [2026-06-11] Named structural distinctions from defeasible-reasoning literature earn their place in the registry shape
 
@@ -225,7 +227,7 @@ Position holds if uptake ≥40% AND reviewer classification yield ≥60% non-mix
 **Origin:** Surfaced 2026-06-11 by an in-session literature survey of philosophical-logic patterns against the framework's current apparatus (Toulmin, Whetten, category theory). Six candidates assessed: Pollock's defeasible reasoning (HIGH FIT, LOW COST — became DR-015); dialogical logic / Lorenzen-Hintikka (HIGH FIT, MODERATE COST — deferred to a follow-up DR proposing an *Underlying Form* subsection for DR-011); Dung abstract argumentation frameworks (MID-HIGH FIT, cost scales with registry size — deferred until inter-entry conflicts accumulate past ~50 entries); Reiter default logic + epistemic logic (vocabulary-only relabeling — low payoff at current scale, noted but not pursued); classical proof theory + adaptive logic (over-formalisation — skipped). The bet here is the broader pattern that this kind of low-cost borrowing earns its keep; DR-015 is the concrete first instance.
 
 **Domain:** Registry-shape extension, ARGUMENT defeater typology, philosophical-logic borrowing pattern
-**Status:** open
+**Status:** closed unresolved 2026-11-17 (development stopped); was open
 
 ### [2026-06-11] Process-level verification infrastructure remains the locus of value as model-layer capability improves
 
@@ -249,7 +251,7 @@ Position holds if ≥3 load-bearing process-level findings remain that the RAG p
 **Origin:** Surfaced 2026-06-11 by DR-011 Pass 2 (Opus, intra-family large) reviewing v2.1.0–v2.1.2. Pass 2's finding (quoted): *"the Rebuttal row (README:60) deflects to *When It Is Overkill* (which addresses *who shouldn't use the framework*), not the Warrant's actual challenger"* — i.e., the README's central Warrant had no engaged counter for the dynamic case (capability rises over time). Logged here as a falsifiable bet rather than papered over in the Warrant itself, per the hypothesis-log convention. README's Toulmin block now points at this entry from a *Dynamic counter to the Warrant* note. Logged in `vv/cost-log.md` as the second of two findings from the 2026-06-11 DR-011 battery.
 
 **Domain:** Framework Warrant validity, process-layer-vs-model-layer competition
-**Status:** open
+**Status:** closed unresolved 2026-11-17 (development stopped); was open
 
 ### [2026-11-08] Relayed source items are common enough to justify an origin question in every source check
 
@@ -266,7 +268,7 @@ Position holds if ≥3 load-bearing process-level findings remain that the RAG p
 **Origin:** A human reader's comment on Paper 1 (2026-11-07): the register "stops at the claim the source makes".
 
 **Domain:** Source check design (DR-031)
-**Status:** open
+**Status:** closed unresolved 2026-11-17 (development stopped); was open
 
 ### [2026-11-08] Most "accepted" declared starting points have no source that shows acceptance
 
@@ -283,7 +285,7 @@ Position holds if ≥3 load-bearing process-level findings remain that the RAG p
 **Origin:** A human reader's comment on Paper 1 (2026-11-07): whether the field accepts an assumption "is often impossible to answer".
 
 **Domain:** Declared starting points (DR-032)
-**Status:** open
+**Status:** closed unresolved 2026-11-17 (development stopped); was open
 
 ### [2026-11-15] The framework earns its keep as a process with sources, not as a review prompt
 
@@ -302,7 +304,7 @@ Position holds if ≥3 load-bearing process-level findings remain that the RAG p
 **Origin:** EXP-002's *What next* (a process arm with sources), 2026-11-15.
 
 **Domain:** Review method (DR-011), source checks. Tracking: [#84](https://github.com/ducroq/agent-ready-papers/issues/84)
-**Status:** open. 2026-11-15: EXP-003's 15 runs done, none contaminated, outputs blinded. First scorer done blind (Claude, under Opus rather than the planned Fable: a recorded deviation); 2026-11-16: the engineer lifted the hold on the second scorer (Vibe); its 15 runs are staged and not yet run. Arms not yet unblinded.
+**Status:** closed unresolved 2026-11-17 (development stopped); was open. 2026-11-15: EXP-003's 15 runs done, none contaminated, outputs blinded. First scorer done blind (Claude, under Opus rather than the planned Fable: a recorded deviation); 2026-11-16: the engineer lifted the hold on the second scorer (Vibe); its 15 runs are staged and not yet run. Arms not yet unblinded.
 
 ## Resolved
 
